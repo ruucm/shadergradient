@@ -10,6 +10,7 @@ export function Gradient() {
     <FiberCanvas fiber={fiber}>
       <ambientLight />
       <pointLight position={[10, 10, 10]} />
+      <fiber.OrbitControls />
       <GradientMesh />
     </FiberCanvas>
   )

@@ -5,6 +5,7 @@ import Dom from '@/components/layout/dom'
 import Header from '@/config'
 import partition from '@/helpers/partition'
 import useStore from '@/helpers/store'
+import '@/tailwind.css'
 
 const LCanvas = dynamic(() => import('@/components/layout/canvas'), {
   ssr: false,

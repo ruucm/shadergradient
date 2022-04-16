@@ -1,0 +1,10 @@
+{
+  "name": "shadergradient",
+  "version": "0.1.4",
+  "main": "src/index.tsx",
+  "scripts": {
+    "serve": "yarn; node esmbuild/esmbuild serve ./src 8001",
+    "build": "yarn; node esmbuild/esmbuild build ./src dist",
+    "release": "yarn run build; mkdir -p release; cp -Rf dist release/$npm_package_name@$npm_package_version"
+  }
+}

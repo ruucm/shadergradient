@@ -32,7 +32,9 @@ import React, { useContext, createContext } from "react";
 function FiberCanvas({ fiber, children }) {
   const { Canvas } = fiber;
   const value = useContext(context);
-  return /* @__PURE__ */ React.createElement(Canvas, null, "w", /* @__PURE__ */ React.createElement(context.Provider, {
+  return /* @__PURE__ */ React.createElement(Canvas, {
+    resize: { offsetSize: true }
+  }, "w", /* @__PURE__ */ React.createElement(context.Provider, {
     value
   }, children));
 }

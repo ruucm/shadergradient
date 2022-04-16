@@ -7,7 +7,7 @@ export function FiberCanvas({ fiber, children }) {
   const value = useContext(context)
 
   return (
-    <Canvas>
+    <Canvas resize={{ offsetSize: true }}>
       {/* forward the context once more! */}w
       <context.Provider value={value}>{children}</context.Provider>
     </Canvas>

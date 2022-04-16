@@ -18,8 +18,8 @@ export const GradientMesh: React.FC<any> = () => {
       time: 0,
       color: new THREE.Color(0.05, 0.0, 0.025),
       uTime: { value: 0 }, // should be a object that has value to use in the shader
-      uNoiseDensity: 0,
-      uNoiseStrength: 0,
+      uNoiseDensity: 2,
+      uNoiseStrength: 3,
     },
     vertex,
     fragment

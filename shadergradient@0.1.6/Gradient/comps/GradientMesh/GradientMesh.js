@@ -24420,8 +24420,8 @@ var GradientMesh = () => {
     time: 0,
     color: new Color(0.05, 0, 0.025),
     uTime: { value: 0 },
-    uNoiseDensity: 2,
-    uNoiseStrength: 3
+    uNoiseDensity: 0,
+    uNoiseStrength: 0
   }, shader_default2, shader_default);
   extend({ ColorShiftMaterial });
   const material = useRef();

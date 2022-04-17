@@ -1,6 +1,6 @@
 {
   "name": "shadergradient",
-  "version": "0.1.8",
+  "version": "0.1.9",
   "main": "src/index.tsx",
   "scripts": {
     "serve": "yarn; node esmbuild/esmbuild serve ./src 8001",

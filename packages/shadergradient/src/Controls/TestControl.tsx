@@ -1,8 +1,8 @@
 import * as React from 'react'
-import { useQueryState } from '../hooks'
+import { useQueryState } from '../hooks/index'
 
 export function TestControl() {
-  const [uStrength, setUStrength] = useQueryState('uStrength')
+  const [, setUStrength] = useQueryState('uStrength')
 
   return (
     <input
@@ -10,6 +10,7 @@ export function TestControl() {
       onChange={(e) => {
         setUStrength(e.target.value)
       }}
+      style={{ border: '1px solid black' }}
     />
   )
 }

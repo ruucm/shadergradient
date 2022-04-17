@@ -24417,6 +24417,7 @@ var clock = new Clock();
 var GradientMesh = () => {
   const { useFrame, extend } = useFiber();
   const ColorShiftMaterial = shaderMaterial({
+    side: DoubleSide,
     time: 0,
     color: new Color(0.05, 0, 0.025),
     uTime: { value: 0 },

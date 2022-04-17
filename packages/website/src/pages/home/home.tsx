@@ -1,4 +1,4 @@
-import { GradientMesh, Button } from 'shadergradient'
+import { GradientMesh, Button, TestControl } from 'shadergradient'
 import styles from './Home.module.scss'
 
 // Dynamic import is used to prevent a payload when the website start that will include threejs r3f etc..
@@ -15,6 +15,7 @@ const DOM = () => {
     <div className={styles.wrap}>
       next.js (website)
       <Button />
+      <TestControl />
     </div>
   )
 }

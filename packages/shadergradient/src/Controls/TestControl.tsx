@@ -10,7 +10,7 @@ export function TestControl() {
       onChange={(e) => {
         setUStrength(e.target.value)
       }}
-      style={{ border: '1px solid black' }}
+      style={{ border: '1px solid black', fontSize: 24 }}
     />
   )
 }

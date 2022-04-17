@@ -43,7 +43,7 @@ export const GradientMesh: React.FC<any> = () => {
   })
 
   return (
-    <mesh rotation={[0.3, 0.3, 0]}>
+    <mesh>
       <planeGeometry args={[10, 10, meshCount, meshCount]} />
       {/* <boxGeometry args={[1, 1, 1]} /> */}
       {/* <meshStandardMaterial color={'gold'} /> */}

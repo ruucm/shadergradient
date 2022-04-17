@@ -19,8 +19,8 @@ export function CameraControl() {
   useEffect(() => {
     const control = ref.current
     if (control) {
-      control.dollyTo(20, true)
-      control.rotateTo(0, 0, 0, true)
+      control.dollyTo(10, true)
+      control.rotateTo(0, Math.PI / 2, 0, true)
     }
   }, [ref])
 

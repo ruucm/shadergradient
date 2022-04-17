@@ -192,6 +192,7 @@ var _lut = [];
 for (let i = 0; i < 256; i++) {
   _lut[i] = (i < 16 ? "0" : "") + i.toString(16);
 }
+var _seed = 1234567;
 var DEG2RAD = Math.PI / 180;
 var RAD2DEG = 180 / Math.PI;
 function generateUUID() {
@@ -208,15 +209,166 @@ function clamp(value, min, max) {
 function euclideanModulo(n, m) {
   return (n % m + m) % m;
 }
+function mapLinear(x, a1, a2, b1, b2) {
+  return b1 + (x - a1) * (b2 - b1) / (a2 - a1);
+}
+function inverseLerp(x, y, value) {
+  if (x !== y) {
+    return (value - x) / (y - x);
+  } else {
+    return 0;
+  }
+}
 function lerp(x, y, t) {
   return (1 - t) * x + t * y;
+}
+function damp(x, y, lambda, dt) {
+  return lerp(x, y, 1 - Math.exp(-lambda * dt));
+}
+function pingpong(x, length = 1) {
+  return length - Math.abs(euclideanModulo(x, length * 2) - length);
+}
+function smoothstep(x, min, max) {
+  if (x <= min)
+    return 0;
+  if (x >= max)
+    return 1;
+  x = (x - min) / (max - min);
+  return x * x * (3 - 2 * x);
+}
+function smootherstep(x, min, max) {
+  if (x <= min)
+    return 0;
+  if (x >= max)
+    return 1;
+  x = (x - min) / (max - min);
+  return x * x * x * (x * (x * 6 - 15) + 10);
+}
+function randInt(low, high) {
+  return low + Math.floor(Math.random() * (high - low + 1));
+}
+function randFloat(low, high) {
+  return low + Math.random() * (high - low);
+}
+function randFloatSpread(range) {
+  return range * (0.5 - Math.random());
+}
+function seededRandom(s) {
+  if (s !== void 0)
+    _seed = s;
+  let t = _seed += 1831565813;
+  t = Math.imul(t ^ t >>> 15, t | 1);
+  t ^= t + Math.imul(t ^ t >>> 7, t | 61);
+  return ((t ^ t >>> 14) >>> 0) / 4294967296;
+}
+function degToRad(degrees) {
+  return degrees * DEG2RAD;
+}
+function radToDeg(radians) {
+  return radians * RAD2DEG;
 }
 function isPowerOfTwo(value) {
   return (value & value - 1) === 0 && value !== 0;
 }
+function ceilPowerOfTwo(value) {
+  return Math.pow(2, Math.ceil(Math.log(value) / Math.LN2));
+}
 function floorPowerOfTwo(value) {
   return Math.pow(2, Math.floor(Math.log(value) / Math.LN2));
 }
+function setQuaternionFromProperEuler(q, a, b, c, order) {
+  const cos = Math.cos;
+  const sin = Math.sin;
+  const c2 = cos(b / 2);
+  const s2 = sin(b / 2);
+  const c13 = cos((a + c) / 2);
+  const s13 = sin((a + c) / 2);
+  const c1_3 = cos((a - c) / 2);
+  const s1_3 = sin((a - c) / 2);
+  const c3_1 = cos((c - a) / 2);
+  const s3_1 = sin((c - a) / 2);
+  switch (order) {
+    case "XYX":
+      q.set(c2 * s13, s2 * c1_3, s2 * s1_3, c2 * c13);
+      break;
+    case "YZY":
+      q.set(s2 * s1_3, c2 * s13, s2 * c1_3, c2 * c13);
+      break;
+    case "ZXZ":
+      q.set(s2 * c1_3, s2 * s1_3, c2 * s13, c2 * c13);
+      break;
+    case "XZX":
+      q.set(c2 * s13, s2 * s3_1, s2 * c3_1, c2 * c13);
+      break;
+    case "YXY":
+      q.set(s2 * c3_1, c2 * s13, s2 * s3_1, c2 * c13);
+      break;
+    case "ZYZ":
+      q.set(s2 * s3_1, s2 * c3_1, c2 * s13, c2 * c13);
+      break;
+    default:
+      console.warn("THREE.MathUtils: .setQuaternionFromProperEuler() encountered an unknown order: " + order);
+  }
+}
+function denormalize$1(value, array) {
+  switch (array.constructor) {
+    case Float32Array:
+      return value;
+    case Uint16Array:
+      return value / 65535;
+    case Uint8Array:
+      return value / 255;
+    case Int16Array:
+      return Math.max(value / 32767, -1);
+    case Int8Array:
+      return Math.max(value / 127, -1);
+    default:
+      throw new Error("Invalid component type.");
+  }
+}
+function normalize(value, array) {
+  switch (array.constructor) {
+    case Float32Array:
+      return value;
+    case Uint16Array:
+      return Math.round(value * 65535);
+    case Uint8Array:
+      return Math.round(value * 255);
+    case Int16Array:
+      return Math.round(value * 32767);
+    case Int8Array:
+      return Math.round(value * 127);
+    default:
+      throw new Error("Invalid component type.");
+  }
+}
+var MathUtils = /* @__PURE__ */ Object.freeze({
+  __proto__: null,
+  DEG2RAD,
+  RAD2DEG,
+  generateUUID,
+  clamp,
+  euclideanModulo,
+  mapLinear,
+  inverseLerp,
+  lerp,
+  damp,
+  pingpong,
+  smoothstep,
+  smootherstep,
+  randInt,
+  randFloat,
+  randFloatSpread,
+  seededRandom,
+  degToRad,
+  radToDeg,
+  isPowerOfTwo,
+  ceilPowerOfTwo,
+  floorPowerOfTwo,
+  setQuaternionFromProperEuler,
+  normalize,
+  denormalize: denormalize$1
+});
 var Vector2 = class {
   constructor(x = 0, y = 0) {
     this.x = x;
@@ -24402,6 +24554,7 @@ if (typeof window !== "undefined") {
 }
 
 // src/Gradient/comps/GradientMesh/GradientMesh.tsx
+import useQueryState from "../../../hooks/useQueryState.js";
 import { useFiber } from "../../../useFiber.js";
 
 // src/Gradient/comps/GradientMesh/glsl/shader.frag
@@ -24416,14 +24569,16 @@ var meshCount = 192;
 var clock = new Clock();
 var GradientMesh = () => {
   const { useFrame, extend } = useFiber();
+  const [uStrength] = useQueryState("uStrength");
   const ColorShiftMaterial = shaderMaterial({
     side: DoubleSide,
     time: 0,
     color: new Color(0.05, 0, 0.025),
     uTime: { value: 0 },
     uNoiseDensity: 2,
-    uNoiseStrength: 3
+    uNoiseStrength: uStrength
   }, shader_default2, shader_default);
+  ColorShiftMaterial.key = MathUtils.generateUUID();
   extend({ ColorShiftMaterial });
   const material = useRef();
   useFrame((state, delta) => {

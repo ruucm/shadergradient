@@ -16,6 +16,7 @@
     "deploy": "cd packages/shadergradient; yarn version; git push --tags; git push"
   },
   "dependencies": {
+    "camera-controls": "^1.34.2",
     "next": "12.1.4",
     "react": "^18.0.0",
     "react-dom": "18.0.0"

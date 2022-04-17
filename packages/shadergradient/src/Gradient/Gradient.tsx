@@ -1,7 +1,7 @@
 // @ts-nocheck
 import * as React from 'react'
 import { FiberCanvas, useFiber } from '../useFiber'
-import { GradientMesh } from './comps/GradientMesh/index'
+import { CameraControl, GradientMesh } from './index'
 
 export function Gradient() {
   const fiber = useFiber()
@@ -10,7 +10,8 @@ export function Gradient() {
     <FiberCanvas fiber={fiber}>
       <ambientLight />
       <pointLight position={[10, 10, 10]} />
-      <fiber.OrbitControls />
+      {/* <fiber.OrbitControls /> */}
+      <CameraControl />
       <GradientMesh />
     </FiberCanvas>
   )

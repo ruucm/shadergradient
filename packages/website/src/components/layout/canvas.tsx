@@ -29,9 +29,9 @@ const LCanvas = ({ children }) => {
       }}
       onCreated={(state) => state.events.connect(dom.current)}
     >
-      {/* <LControl /> */}
       <Preload all />
       <FiberContextProvider value={{ ...fiber, ...drei }}>
+        {/* <LControl /> */}
         <CameraControl />
         {children}
       </FiberContextProvider>

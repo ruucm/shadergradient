@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/link-passhref */
 import React, { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
 import Link from 'next/link'
@@ -52,7 +53,7 @@ const DOM = () => {
         <div className={styles.header}>
           <TextLogo
             color={mode !== 'full' ? '#FF430A' : PRESETS[activePreset].color}
-            size={isMobile === true ? 15 : 20}
+            size={isMobile === true ? 15 : 18}
           />
           <AboutBtn
             color={mode !== 'full' ? '#FF430A' : PRESETS[activePreset].color}
@@ -88,8 +89,8 @@ const DOM = () => {
           >
             All visuals are created with ShaderGradient,
             <br /> a new way of creating beautiful, moving gradients. <br />
-            Its made with lines of codes, so you can create your own with just a
-            few clicks.
+            It's made with lines of codes, so you can create your own with just
+            a few clicks.
           </div>
         </div>
         <div
@@ -105,7 +106,7 @@ const DOM = () => {
               }}
             >
               <TextHover
-                fontSize={isMobile === true ? 15 : 20}
+                fontSize={isMobile === true ? 15 : 18}
                 color={PRESETS[activePreset].color}
                 content={'Try it by yourself →'}
                 delay={0}

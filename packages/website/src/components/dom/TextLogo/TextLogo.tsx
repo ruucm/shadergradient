@@ -2,7 +2,7 @@ import * as React from 'react'
 import Link from 'next/link'
 import { TextHover } from '../TextAnimation'
 
-export function TextLogo({ color = 'white', size = 20 }) {
+export function TextLogo({ color = 'white', size = 18 }) {
   return (
     <div
       style={{

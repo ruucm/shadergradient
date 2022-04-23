@@ -33,8 +33,7 @@ const R3F = () => {
   return (
     <>
       {/* <Shader /> */}
-      <ambientLight />
-      <pointLight position={[10, 10, 10]} />
+      <ambientLight intensity={1} />
       <GradientMesh />
     </>
   )

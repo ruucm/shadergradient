@@ -2,6 +2,7 @@
 import * as React from 'react'
 import { useRef } from 'react'
 import * as THREE from 'three'
+import { usePostProcessing } from '../../../hooks/usePostProcessing/index'
 import useQueryState from '../../../hooks/useQueryState'
 import { useFiber } from '../../../useFiber'
 import fragment from './glsl/shader.frag'
@@ -40,6 +41,12 @@ export const GradientMesh: React.FC<any> = () => {
   useFrame((state, delta) => {
     // mesh.current.rotation.x += 0.01
     material.current.uniforms.uTime.value = clock.getElapsedTime()
+  })
+
+  usePostProcessing({
+    on: true,
+    grain: true,
+    //  grain === 'on'
   })
 
   return (

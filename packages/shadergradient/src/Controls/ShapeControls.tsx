@@ -16,6 +16,13 @@ export function ShapeControls() {
       />
       <Radio
         name='shader'
+        value='blueMix'
+        setValue={setShader}
+        check={shader === 'blueMix'}
+        label='BlueMix'
+      />
+      <Radio
+        name='shader'
         value='snakeHalftone'
         setValue={setShader}
         check={shader === 'snakeHalftone'}

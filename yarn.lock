@@ -4931,6 +4931,19 @@ globule@^1.0.0:
     lodash "~4.17.10"
     minimatch "~3.0.2"
 
+glsl-aastep@^1.0.0:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/glsl-aastep/-/glsl-aastep-1.0.1.tgz#eeaf16961e472c9b8b3d965d080ab8ec1d4c6bb8"
+  integrity sha1-7q8Wlh5HLJuLPZZdCAq47B1Ma7g=
+
+glsl-halftone@^1.0.4:
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/glsl-halftone/-/glsl-halftone-1.0.4.tgz#a60700d11852db3ebc0cc9ee78bf0ae9a2e7aff6"
+  integrity sha1-pgcA0RhS2z68DMnueL8K6aLnr/Y=
+  dependencies:
+    glsl-aastep "^1.0.0"
+    glsl-noise "0.0.0"
+
 glsl-inject-defines@^1.0.1:
   version "1.0.3"
   resolved "https://registry.npmjs.org/glsl-inject-defines/-/glsl-inject-defines-1.0.3.tgz"
@@ -4940,7 +4953,7 @@ glsl-inject-defines@^1.0.1:
     glsl-token-string "^1.0.1"
     glsl-tokenizer "^2.0.2"
 
-glsl-noise@^0.0.0:
+glsl-noise@0.0.0, glsl-noise@^0.0.0:
   version "0.0.0"
   resolved "https://registry.npmjs.org/glsl-noise/-/glsl-noise-0.0.0.tgz"
   integrity sha1-NndF86MzgsDu7Ey1S36Zz8HXZws=

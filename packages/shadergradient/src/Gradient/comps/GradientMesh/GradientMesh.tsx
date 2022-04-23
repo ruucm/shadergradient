@@ -5,17 +5,24 @@ import * as THREE from 'three'
 import { usePostProcessing } from '../../../hooks/usePostProcessing/index'
 import useQueryState from '../../../hooks/useQueryState'
 import { useFiber } from '../../../useFiber'
-import fragment from './glsl/shader.frag'
-import vertex from './glsl/shader.vert'
 import { shaderMaterial } from './shaderMaterial'
+import * as shaders from './shaders'
 
 const meshCount = 192
 const clock = new THREE.Clock()
+
+const type = 'plane'
 
 export const GradientMesh: React.FC<any> = () => {
   const { useFrame, extend } = useFiber()
 
   const [uStrength] = useQueryState('uStrength')
+  const [shader] = useQueryState('shader')
+
+  let sceneShader = shaders.defaults[type ?? 'plane'] // default type is plane
+  if (shader && shader !== 'defaults') sceneShader = shaders[shader]
+
+  // console.log('sceneShader', sceneShader)
 
   const ColorShiftMaterial = shaderMaterial(
     {
@@ -26,8 +33,8 @@ export const GradientMesh: React.FC<any> = () => {
       uNoiseDensity: 2,
       uNoiseStrength: uStrength,
     },
-    vertex,
-    fragment
+    sceneShader.vertex,
+    sceneShader.fragment
   )
 
   // This is the 🔑 that HMR will renew if this file is edited

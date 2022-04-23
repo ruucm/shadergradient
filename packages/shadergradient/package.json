@@ -6,5 +6,10 @@
     "serve": "yarn install && node esmbuild/esmbuild serve ./src 8001",
     "build": "yarn install && node esmbuild/esmbuild build ./src dist",
     "release": "yarn run build && mkdir -p release && cp -Rf dist release/$npm_package_name@$npm_package_version"
+  },
+  "dependencies": {
+    "classnames": "^2.3.1",
+    "react-feather": "^2.0.9",
+    "react-slider": "^2.0.0"
   }
 }

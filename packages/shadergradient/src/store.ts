@@ -1,5 +1,7 @@
 import * as qs from 'query-string'
 import create from 'zustand'
+import { combine } from 'zustand/middleware'
+import { initialActivePreset } from './consts'
 
 // without embedMode
 // it renders without the dom & other gradient controls at first, and add it after the first updateGradientState() excuted.
@@ -32,3 +34,15 @@ function parseState(search = defaultPreset) {
 export const useDomStore = create(() => {
   return { dom: null }
 })
+
+export const useUIStore = create(
+  combine(
+    { activePreset: initialActivePreset, mode: 'full', loadingPercentage: 0 },
+    (set) => ({
+      setActivePreset: (by: number) => set((state) => ({ activePreset: by })),
+      setMode: (data: any) => set((state) => ({ ...state, mode: data })),
+      setLoadingPercentage: (data: any) =>
+        set((state) => ({ ...state, loadingPercentage: data })),
+    })
+  )
+)

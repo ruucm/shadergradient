@@ -1,6 +1,5 @@
 import * as React from 'react'
-// import cx from 'classnames'
-// import { motion } from 'framer-motion'
+import cx from 'classnames'
 
 type ControlTypeTitlePropsT = {
   content?: string
@@ -17,7 +16,7 @@ export const IconHoverBox: React.FC<ControlTypeTitlePropsT> = ({
 }) => {
   return (
     <div
-      //   className={cx('text-sm font-medium text-white')}
+      className={cx('text-sm font-medium text-white')}
       style={{
         position: 'absolute',
         display: 'flex',
@@ -26,7 +25,6 @@ export const IconHoverBox: React.FC<ControlTypeTitlePropsT> = ({
         marginBottom: isHovered ? 85 : 75,
         transitionDuration: '0.3s',
         opacity: isHovered ? 1 : 0,
-        color: 'white',
       }}
     >
       <div
@@ -36,10 +34,9 @@ export const IconHoverBox: React.FC<ControlTypeTitlePropsT> = ({
         }}
       >
         <div
-          //   className={cx('bg-primary')}
+          className={cx('bg-primary')}
           style={{
             position: 'absolute',
-            background: 'rgb(255, 67, 10)',
             width: '100%',
             height: '100%',
             borderRadius: 3,
@@ -51,7 +48,7 @@ export const IconHoverBox: React.FC<ControlTypeTitlePropsT> = ({
           }}
         >
           <div
-            // className={cx('bg-primary')}
+            className={cx('bg-primary')}
             style={{
               width: 17,
               height: 17,

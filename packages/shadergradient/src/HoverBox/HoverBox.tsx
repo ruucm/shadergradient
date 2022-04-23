@@ -1,6 +1,5 @@
 import * as React from 'react'
 import cx from 'classnames'
-// import { motion } from 'framer-motion'
 
 type ControlTypeTitlePropsT = {
   content?: string
@@ -24,7 +23,6 @@ export const HoverBox: React.FC<ControlTypeTitlePropsT> = ({
         marginLeft: -10,
         zIndex: 20,
         visibility: isHovered ? 'visible' : 'hidden',
-        color: 'white',
         marginTop: isHovered ? 10 : 0,
         transitionDuration: '0.3s',
         opacity: isHovered ? 1 : 0,
@@ -40,7 +38,6 @@ export const HoverBox: React.FC<ControlTypeTitlePropsT> = ({
         <div
           className={cx('bg-primary')}
           style={{
-            background: 'rgb(255, 67, 10)',
             position: 'absolute',
             width: '100%',
             height: '100%',

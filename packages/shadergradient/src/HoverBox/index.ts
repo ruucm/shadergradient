@@ -1,2 +1,2 @@
-export * from './HoverBox'
-export * from './IconHoverBox'
+export { HoverBox } from './HoverBox'
+export { IconHoverBox } from './IconHoverBox'

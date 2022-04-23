@@ -9,7 +9,6 @@
   },
   "dependencies": {
     "classnames": "^2.3.1",
-    "react-feather": "^2.0.9",
-    "react-slider": "^2.0.0"
+    "react-feather": "^2.0.9"
   }
 }

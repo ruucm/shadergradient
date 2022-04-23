@@ -1,7 +1,7 @@
 import * as React from 'react'
 import cx from 'classnames'
 import { usePropertyStore } from '../store'
-import { IconButton } from './IconButton'
+import { IconButtons } from './IconButtons'
 
 type ControlTypeTitlePropsT = {
   title?: string
@@ -27,9 +27,6 @@ export const ToolsBox: React.FC<ControlTypeTitlePropsT> = ({
         darkMode && 'bg-controls-sub-panel'
       )}
       style={{
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
         gap: 6,
         width: 'fit-content',
         height: 'fit-content',
@@ -37,8 +34,8 @@ export const ToolsBox: React.FC<ControlTypeTitlePropsT> = ({
         borderRadius: 40,
       }}
     >
-      <IconButton icon='CornerUpLeft' content='undo' />
-      <IconButton
+      <IconButtons icon='CornerUpLeft' content='undo' />
+      <IconButtons
         icon='Box'
         content='3d axis'
         active={toggleAxis}
@@ -46,7 +43,7 @@ export const ToolsBox: React.FC<ControlTypeTitlePropsT> = ({
           usePropertyStore.setState({ toggleAxis: !toggleAxis })
         }}
       />
-      <IconButton
+      <IconButtons
         icon='Minimize2'
         content='zoom out'
         active={toggleZoom}
@@ -54,7 +51,7 @@ export const ToolsBox: React.FC<ControlTypeTitlePropsT> = ({
           usePropertyStore.setState({ toggleZoom: !toggleZoom })
         }}
       />
-      <IconButton
+      <IconButtons
         icon='Copy'
         content={copyUrlText}
         onClick={async () => {

@@ -1,3 +1,3 @@
-export { IconButton } from './IconButton'
-export { Feather } from './Feather'
 export { ToolsBox } from './ToolsBox'
+export { IconButtons } from './IconButtons'
+export { Feather } from './Feather'

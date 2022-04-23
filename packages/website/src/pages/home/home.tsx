@@ -1,4 +1,10 @@
-import { GradientMesh, Button, TestControl, NumberInput } from 'shadergradient'
+import {
+  GradientMesh,
+  Button,
+  TestControl,
+  NumberInput,
+  ShapeControls,
+} from 'shadergradient'
 import styles from './Home.module.scss'
 
 // Dynamic import is used to prevent a payload when the website start that will include threejs r3f etc..
@@ -17,6 +23,7 @@ const DOM = () => {
       <Button />
       <TestControl />
       <NumberInput />
+      <ShapeControls />
     </div>
   )
 }

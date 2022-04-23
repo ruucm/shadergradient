@@ -516,16 +516,16 @@ Ensure the default browser behavior of the `hidden` attribute.
   width: 16px;
 }
 
+.w-full {
+  width: 100%;
+}
+
 .w-2 {
   width: 12px;
 }
 
 .w-control-number-input {
   width: 53px;
-}
-
-.w-full {
-  width: 100%;
 }
 
 .transform {
@@ -581,12 +581,12 @@ Ensure the default browser behavior of the `hidden` attribute.
   font-size: 1rem;
 }
 
-.font-semibold {
-  font-weight: 600;
-}
-
 .font-medium {
   font-weight: 500;
+}
+
+.font-semibold {
+  font-weight: 600;
 }
 
 .text-primary {

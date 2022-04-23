@@ -1,7 +1,11 @@
-import * as React from 'react'
-import { GradientMesh, useUIStore } from 'shadergradient'
+import React, { useState, useEffect } from 'react'
+import { GradientMesh, useUIStore, PRESETS } from 'shadergradient'
 import styles from '../home/Home.module.scss'
 import { Controls } from './comps/Controls'
+import { AboutBtn } from '@/components/dom/AboutBtn'
+import { PresetTitle } from '@/components/dom/PresetTitle'
+import { PreviewBtn, PreviewWrapper } from '@/components/dom/PreviewBtn'
+import { TextLogo } from '@/components/dom/TextLogo'
 
 // Dynamic import is used to prevent a payload when the website start that will include threejs r3f etc..
 // WARNING ! errors might get obfuscated by using dynamic import.
@@ -15,47 +19,83 @@ import { Controls } from './comps/Controls'
 const DOM = () => {
   const mode = useUIStore((state: any) => state.mode)
   const setMode = useUIStore((state: any) => state.setMode)
-  const activePreset = useUIStore((state: any) => state.activePreset)
-
-  const setActivePreset = useUIStore((state: any) => state.setActivePreset)
   const loadingPercentage = useUIStore((state: any) => state.loadingPercentage)
-
-  const [isMobile, setIsMobile] = React.useState(false)
-  const [activeTab, setActiveTab] = React.useState('none')
+  const activePreset = useUIStore((state) => state.activePreset)
+  const [isMobile, setIsMobile] = useState(false)
+  const [activeTab, setActiveTab] = useState('none')
 
   //choose the screen size
   const handleResize = () => {
     if (window.innerWidth < 641) {
       setIsMobile(true)
-      setActiveTab('shape')
     } else {
       setIsMobile(false)
     }
   }
-  const appHeight = () => {
-    const doc = document.documentElement
-    doc.style.setProperty('--app-height', `${window.innerHeight}px`)
-  }
 
   // create an event listener
-  React.useEffect(() => {
+  useEffect(() => {
     handleResize()
-    appHeight()
-
     window.addEventListener('resize', handleResize)
-    window.addEventListener('resize', appHeight)
     setMode('full')
   }, [])
+  // const [embedMode] = useQueryState('embedMode')
+
+  console.log('loadingPercentage', loadingPercentage)
 
   return (
-    <div className={styles.wrap}>
-      customize
-      <Controls
-        isMobile={isMobile}
-        activeTab={activeTab}
-        setActiveTab={setActiveTab}
-      />
-    </div>
+    <>
+      <PreviewWrapper mode={mode} setMode={setMode} />
+
+      <div className={styles.contentWrapper}>
+        <div className={styles.header}>
+          <TextLogo
+            color={mode !== 'full' ? '#FF430A' : PRESETS[activePreset].color}
+            size={15}
+          />
+          <AboutBtn
+            color={mode !== 'full' ? '#FF430A' : PRESETS[activePreset].color}
+          />
+        </div>
+        <div className={styles.content}>
+          <div
+            className={styles.presetTitleWrapper}
+            style={{ display: mode === 'full' ? 'block' : 'none' }}
+          >
+            {PRESETS.map((item, index) => {
+              return (
+                <PresetTitle
+                  index={index}
+                  color={item.color}
+                  key={index}
+                  title={
+                    index < 10
+                      ? '0' + index.toString() + ' ' + item.title
+                      : index.toString() + ' ' + item.title
+                  }
+                  description={''}
+                  fontSize={50}
+                  isMobile={isMobile}
+                ></PresetTitle>
+              )
+            })}
+          </div>
+          <Controls
+            isMobile={isMobile}
+            activeTab={activeTab}
+            setActiveTab={setActiveTab}
+          />
+        </div>
+
+        <div className={styles.footer}>
+          <PreviewBtn
+            mode={mode}
+            setMode={setMode}
+            color={mode !== 'full' ? '#FF430A' : PRESETS[activePreset].color}
+          />
+        </div>
+      </div>
+    </>
   )
 }
 
@@ -76,7 +116,7 @@ const Page = () => {
     <>
       <DOM />
       {/* @ts-ignore */}
-      <R3F r3f />
+      {/* <R3F r3f /> */}
     </>
   )
 }

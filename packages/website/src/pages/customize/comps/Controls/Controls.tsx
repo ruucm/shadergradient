@@ -1,16 +1,20 @@
 import React, { useRef } from 'react'
 import { motion } from 'framer-motion'
-import { useUIStore, PropertyControls, ControlTypeTitles } from 'shadergradient'
+import {
+  ControlTabTitles,
+  ControlTypeTitles,
+  PropertyControls,
+  ToolsBox,
+  useUIStore,
+} from 'shadergradient'
 import styles from './Controls.module.scss'
+// import { MenuWrapper } from '@/components/dom/MenuWrapper'
+import { HorizontalControl } from '@/components/dom/HorizontalControl'
 import { useOnClickOutside } from '@/components/hooks/use-onclick-outside'
-// import { MenuWrapper } from '@/components/ui/MenuWrapper'
-// import { PreviewSwitch } from '@/components/dom/PreviewSwitch'
-
 type Props = {
   // All other props
   [x: string]: any
 }
-
 export const Controls: React.FC<Props> = ({
   isMobile,
   activeTab,
@@ -25,14 +29,13 @@ export const Controls: React.FC<Props> = ({
   const children = (
     <>
       {!isMobile && (
-        <ControlTypeTitles activeTab={activeTab} setActiveTab={setActiveTab} />
-      )}
-      <PropertyControls activeTab={activeTab} setActiveTab={setActiveTab} />
-      {!isMobile && (
-        <div className='absolute left-3.5 bottom-3.5'>
-          {/* <PreviewSwitch mode={mode} setMode={setMode} /> */}
+        <div style={{ width: '100%', display: 'flex', alignItems: 'center' }}>
+          <ControlTabTitles activeTab={activeTab} setActiveTab={setActiveTab} />
+          <ToolsBox darkMode={false} />
         </div>
       )}
+      <PropertyControls activeTab={activeTab} setActiveTab={setActiveTab} />
+
       {isMobile && (
         <ControlTypeTitles activeTab={activeTab} setActiveTab={setActiveTab} />
       )}
@@ -63,16 +66,14 @@ export const Controls: React.FC<Props> = ({
           {children}
         </div>
       ) : (
-        <div>{children}</div>
-        // <MenuWrapper
-        //   mode={mode}
-        //   setMode={setMode}
-        //   activeTab={activeTab}
-        //   setActiveTab={setActiveTab}
-        //   className='min-h-[336px]' // shape control's height
-        // >
-        //   {children}
-        // </MenuWrapper>
+        <HorizontalControl
+          mode={mode}
+          setMode={setMode}
+          activeTab={activeTab}
+          setActiveTab={setActiveTab}
+        >
+          {children}
+        </HorizontalControl>
       )}
     </div>
   )

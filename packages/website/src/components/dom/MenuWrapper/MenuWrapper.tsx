@@ -47,9 +47,9 @@ export function MenuWrapper({
       style={{
         width: '600px',
         height: 'fit-content',
-        gridTemplateColumns: '130px 370px',
-        top: '34px',
-        right: '-470px',
+        // gridTemplateColumns: '130px 370px',
+        // top: '34px',
+        // right: '-470px',
 
         boxShadow:
           mode === 'mobile' || mode === 'web'
@@ -57,9 +57,9 @@ export function MenuWrapper({
             : 'none',
         background: mode === 'about' ? '#141414' : 'white',
       }}
-      initial={{ right: '-600px' }}
+      // initial={{ right: '-600px' }}
       transition={{ type: 'spring', damping: 12, stiffness: 200, delay: 2 }}
-      animate={menuAnim}
+      // animate={menuAnim}
     >
       {children}
     </motion.div>

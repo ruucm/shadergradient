@@ -615,6 +615,10 @@ html,
   height: 31px;
 }
 
+.h-\[58px\] {
+  height: 58px;
+}
+
 .min-h-\[336px\] {
   min-height: 336px;
 }
@@ -667,6 +671,12 @@ html,
   width: 47px;
 }
 
+.w-\[fit-content\] {
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+}
+
 .flex-shrink-0 {
   flex-shrink: 0;
 }
@@ -686,6 +696,10 @@ html,
 
 .resize {
   resize: both;
+}
+
+.flex-row {
+  flex-direction: row;
 }
 
 .flex-col {
@@ -935,6 +949,10 @@ input[type='number'] {
 
   .md\:w-\[470px\] {
     width: 470px;
+  }
+
+  .md\:flex-row {
+    flex-direction: row;
   }
 
   .md\:flex-col {

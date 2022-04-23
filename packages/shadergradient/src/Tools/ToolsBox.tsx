@@ -23,7 +23,7 @@ export const ToolsBox: React.FC<ControlTypeTitlePropsT> = ({
   return (
     <div
       className={cx(
-        'flex bg-controls-panel items-center justify-center',
+        'flex items-center justify-center',
         darkMode && 'bg-controls-sub-panel'
       )}
       style={{

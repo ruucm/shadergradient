@@ -6,7 +6,7 @@ import { usePostProcessing } from '../../../hooks/usePostProcessing/index'
 import useQueryState from '../../../hooks/useQueryState'
 import { useFiber } from '../../../useFiber'
 import { shaderMaterial } from './shaderMaterial'
-import * as shaders from './shaders'
+import * as shaders from './shaders/index'
 
 const meshCount = 192
 const clock = new THREE.Clock()

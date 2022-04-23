@@ -3,7 +3,7 @@ import { motion } from 'framer-motion'
 import { useUIStore, PropertyControls, ControlTypeTitles } from 'shadergradient'
 import styles from './Controls.module.scss'
 import { useOnClickOutside } from '@/components/hooks/use-onclick-outside'
-import { MenuWrapper } from '@/components/ui/MenuWrapper'
+// import { MenuWrapper } from '@/components/ui/MenuWrapper'
 // import { PreviewSwitch } from '@/components/dom/PreviewSwitch'
 
 type Props = {
@@ -63,15 +63,16 @@ export const Controls: React.FC<Props> = ({
           {children}
         </div>
       ) : (
-        <MenuWrapper
-          mode={mode}
-          setMode={setMode}
-          activeTab={activeTab}
-          setActiveTab={setActiveTab}
-          className='min-h-[336px]' // shape control's height
-        >
-          {children}
-        </MenuWrapper>
+        <div>{children}</div>
+        // <MenuWrapper
+        //   mode={mode}
+        //   setMode={setMode}
+        //   activeTab={activeTab}
+        //   setActiveTab={setActiveTab}
+        //   className='min-h-[336px]' // shape control's height
+        // >
+        //   {children}
+        // </MenuWrapper>
       )}
     </div>
   )

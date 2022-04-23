@@ -19,7 +19,7 @@ import styles from './Home.module.scss'
 
 // dom components goes here
 const DOM = () => {
-  const [activeTab, setActiveTab] = React.useState('none')
+  const [activeTab, setActiveTab] = React.useState('shape')
 
   return (
     <div className={styles.wrap}>

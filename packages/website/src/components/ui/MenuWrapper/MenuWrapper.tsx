@@ -1,5 +1,5 @@
 import * as React from 'react'
-import cx from 'classnames'
+// import cx from 'classnames'
 import { useAnimation, motion } from 'framer-motion'
 
 export function MenuWrapper({
@@ -43,7 +43,7 @@ export function MenuWrapper({
 
   return (
     <motion.div
-      className={cx('absolute z-10 overflow-hidden rounded-md grid', className)}
+      // className={cx('absolute z-10 overflow-hidden rounded-md grid', className)}
       style={{
         width: '600px',
         height: 'fit-content',

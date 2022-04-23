@@ -1,16 +1,29 @@
-import React from 'react'
-import { motion } from 'framer-motion'
-import styles from './Button.module.scss'
+import * as React from 'react'
+import cx from 'classnames'
 
-export function Button({ title = 'Title' }) {
+type ButtonPropsT = {
+  kind?: 'primary' | 'secondary'
+} & React.DetailedHTMLProps<
+  React.ButtonHTMLAttributes<HTMLButtonElement>,
+  HTMLButtonElement
+>
+
+const ButtonKind = {
+  primary: 'bg-primary text-white',
+  secondary: 'ring-1 ring-primary text-primary',
+}
+
+export const Button: React.FC<ButtonPropsT> = ({
+  kind = 'primary',
+  children,
+  ...rest
+}) => {
   return (
-    <motion.button
-      className={styles.button}
-      whileHover={{ scale: 0.9 }}
-      whileTap={{ scale: 0.7 }}
+    <button
+      className={cx('h-button font-medium rounded w-full', ButtonKind[kind])}
+      {...rest}
     >
-      {title}
-      <span>👀</span>
-    </motion.button>
+      {children}
+    </button>
   )
 }

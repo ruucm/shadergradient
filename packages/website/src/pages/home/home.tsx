@@ -1,9 +1,11 @@
+import * as React from 'react'
 import {
   GradientMesh,
   Button,
   TestControl,
   NumberInput,
   ToolsBox,
+  PropertyControls,
 } from 'shadergradient'
 import styles from './Home.module.scss'
 
@@ -17,6 +19,8 @@ import styles from './Home.module.scss'
 
 // dom components goes here
 const DOM = () => {
+  const [activeTab, setActiveTab] = React.useState('none')
+
   return (
     <div className={styles.wrap}>
       next.js (website)
@@ -24,6 +28,7 @@ const DOM = () => {
       <TestControl />
       <NumberInput />
       <ToolsBox />
+      <PropertyControls activeTab={activeTab} setActiveTab={setActiveTab} />
     </div>
   )
 }

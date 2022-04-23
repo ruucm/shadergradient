@@ -24,11 +24,7 @@ object-assign@^4.1.1:
   resolved "https://registry.yarnpkg.com/object-assign/-/object-assign-4.1.1.tgz#2109adc7965887cfc05cbbd442cac8bfbb360863"
   integrity sha1-IQmtx5ZYh8/AXLvUQsrIv7s2CGM=
 
-<<<<<<< Updated upstream
 prop-types@^15.7.2, prop-types@^15.8.1:
-=======
-prop-types@^15.7.2:
->>>>>>> Stashed changes
   version "15.8.1"
   resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.8.1.tgz#67d87bf1a694f48435cf332c24af10214a3140b5"
   integrity sha512-oj87CgZICdulUohogVAR7AjlC0327U4el4L6eAvOqCeudMDVU0NThNaV+b9Df4dXgSP1gXMTnPdhfe/2qDH5cg==
@@ -48,7 +44,6 @@ react-is@^16.13.1:
   version "16.13.1"
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.13.1.tgz#789729a4dc36de2999dc156dd6c1d9c18cea56a4"
   integrity sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==
-<<<<<<< Updated upstream
 
 react-slider@^2.0.0:
   version "2.0.0"
@@ -56,5 +51,3 @@ react-slider@^2.0.0:
   integrity sha512-r2Z4VkGvtQXbmiANEYzYdCnb4SnTRpgog1QZa++Wl1x1n5vRL3QOufyf52VVkcaLQCLk5m0WPMwGNvRqcBDtmw==
   dependencies:
     prop-types "^15.8.1"
-=======
->>>>>>> Stashed changes

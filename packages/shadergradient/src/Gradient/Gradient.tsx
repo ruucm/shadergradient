@@ -8,8 +8,8 @@ export function Gradient() {
 
   return (
     <FiberCanvas fiber={fiber}>
-      <ambientLight />
-      <pointLight position={[10, 10, 10]} />
+      <ambientLight intensity={1} />
+      {/* <pointLight position={[10, 10, 10]} /> */}
       {/* <fiber.OrbitControls /> */}
       <CameraControl />
       <GradientMesh />

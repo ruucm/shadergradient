@@ -492,12 +492,28 @@ html,
   --tw-backdrop-sepia:  ;
 }
 
+.static {
+  position: static;
+}
+
 .absolute {
   position: absolute;
 }
 
 .relative {
   position: relative;
+}
+
+.top-0 {
+  top: 0px;
+}
+
+.left-0 {
+  left: 0px;
+}
+
+.z-10 {
+  z-index: 10;
 }
 
 .flex {
@@ -534,6 +550,10 @@ html,
 
 .items-center {
   align-items: center;
+}
+
+.overflow-hidden {
+  overflow: hidden;
 }
 
 .rounded {

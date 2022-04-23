@@ -1,7 +1,10 @@
 module.exports = {
   mode: 'jit',
-  purge: ['./packages/shadergradient/src/**/*.{js,jsx,ts,tsx,vue}'],
-  darkMode: false, // or 'media' or 'class'
+  purge: [
+    './packages/shadergradient/src/**/*.{js,jsx,ts,tsx,vue}',
+    './packages/website/src/**/*.{js,jsx,ts,tsx,vue}',
+  ],
+  darkMode: 'media', // or 'media' or 'class'
   theme: {
     extend: {
       colors: {

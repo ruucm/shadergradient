@@ -10,6 +10,7 @@
     "shadergradient-build": "lerna run --scope shadergradient --stream build",
     "shadergradient-release": "lerna run --scope shadergradient --stream release",
     "website-build": "lerna run --scope website --stream build",
+    "tailwind:start": "npx tailwindcss -i tailwind.css -o ./packages/shadergradient/src/tailwind-compiled.css --watch",
     "start": "run-p --print-label package:*",
     "build": "lerna run --parallel build",
     "eslint": "eslint --fix \"./packages/shadergradient/src/**/*.{js,jsx,ts,tsx}\" \"./packages/website/src/**/*.{js,jsx,ts,tsx}\"",

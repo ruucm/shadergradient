@@ -12,25 +12,24 @@ type RadioPropsT = {
 >
 
 export const Radio = React.forwardRef<HTMLInputElement, RadioPropsT>(
-  ({ label, check, setValue, ...inputProps }: RadioPropsT, ref) => {
+  ({ label, check, setValue, value, name }: RadioPropsT, ref) => {
     return (
       <label
         className={cx(
           'flex justify-center items-center w-full h-input text-primary rounded cursor-pointer bg-primary hover:bg-opacity-10',
           check ? 'bg-opacity-10' : 'bg-opacity-0'
         )}
-        htmlFor={inputProps.value}
+        htmlFor={value}
       >
         <input
+          name={name}
+          value={value}
           type='radio'
-          id={inputProps.value} // for htmlFor focusing
+          id={value} // for htmlFor focusing
           className='absolute inline-block opacity-0 cursor-pointer'
           onChange={(e) => setValue(e.target.value)}
-          // {...inputProps} // value, name
         />
-        <span className='text-base font-medium'>
-          {label || inputProps.value}
-        </span>
+        <span className='text-base font-medium'>{label || value}</span>
       </label>
     )
   }

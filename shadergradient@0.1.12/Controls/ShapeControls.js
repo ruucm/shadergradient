@@ -12,6 +12,12 @@ function ShapeControls() {
     label: "Defaults"
   }), /* @__PURE__ */ React.createElement(Radio, {
     name: "shader",
+    value: "blueMix",
+    setValue: setShader,
+    check: shader === "blueMix",
+    label: "BlueMix"
+  }), /* @__PURE__ */ React.createElement(Radio, {
+    name: "shader",
     value: "snakeHalftone",
     setValue: setShader,
     check: shader === "snakeHalftone",

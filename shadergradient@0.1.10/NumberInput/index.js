@@ -1,2 +1,5 @@
 // src/NumberInput/index.ts
-export * from "./NumberInput.js";
+import { NumberInput } from "./NumberInput.js";
+export {
+  NumberInput
+};

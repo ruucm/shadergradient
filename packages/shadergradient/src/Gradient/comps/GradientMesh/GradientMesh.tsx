@@ -2,7 +2,7 @@
 import * as React from 'react'
 import { useRef } from 'react'
 import * as THREE from 'three'
-import { usePostProcessing } from '../../../hooks/usePostProcessing/index'
+import { usePostProcessing } from '../../../hooks/index'
 import useQueryState from '../../../hooks/useQueryState'
 import { useFiber } from '../../../useFiber'
 import { shaderMaterial } from './shaderMaterial'
@@ -22,16 +22,17 @@ export const GradientMesh: React.FC<any> = () => {
   let sceneShader = shaders.defaults[type ?? 'plane'] // default type is plane
   if (shader && shader !== 'defaults') sceneShader = shaders[shader]
 
-  // console.log('sceneShader', sceneShader)
-
   const ColorShiftMaterial = shaderMaterial(
     {
-      side: THREE.DoubleSide,
-      time: 0,
-      color: new THREE.Color(0.05, 0.0, 0.025),
-      uTime: { value: 0 }, // should be a object that has value to use in the shader
+      colors: ['#ff5005', '#779bca', '#d9b03f'],
+      uTime: 0.5, // should be a object that has value to use in the shader
+      uSpeed: 0.1,
+
       uNoiseDensity: 2,
       uNoiseStrength: uStrength,
+      uFrequency: 5.5,
+      uAmplitude: 0.5,
+      uIntensity: 0.3,
     },
     sceneShader.vertex,
     sceneShader.fragment
@@ -47,7 +48,7 @@ export const GradientMesh: React.FC<any> = () => {
   const material = useRef()
   useFrame((state, delta) => {
     // mesh.current.rotation.x += 0.01
-    material.current.uniforms.uTime.value = clock.getElapsedTime()
+    material.current.userData.uTime.value = clock.getElapsedTime()
   })
 
   usePostProcessing({
@@ -62,11 +63,7 @@ export const GradientMesh: React.FC<any> = () => {
       {/* <boxGeometry args={[1, 1, 1]} /> */}
       {/* <meshStandardMaterial color={'gold'} /> */}
       {/* @ts-ignore */}
-      <colorShiftMaterial
-        key={ColorShiftMaterial.key}
-        time={3}
-        ref={material}
-      />
+      <colorShiftMaterial key={ColorShiftMaterial.key} ref={material} />
     </mesh>
   )
 }

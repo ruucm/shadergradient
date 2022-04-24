@@ -312,19 +312,16 @@ video {
 .hidden {
   display: none;
 }
-.h-\[58px\] {
-  height: 58px;
-}
-.h-\[fit-content\] {
-  height: -webkit-fit-content;
-  height: -moz-fit-content;
-  height: fit-content;
-}
 .h-3 {
   height: 16px;
 }
 .h-button {
   height: 55px;
+}
+.h-\[fit-content\] {
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
 }
 .h-input {
   height: 34px;
@@ -338,19 +335,14 @@ video {
 .h-thumb {
   height: 16px;
 }
+.h-\[58px\] {
+  height: 58px;
+}
 .h-full {
   height: 100%;
 }
 .h-\[31px\] {
   height: 31px;
-}
-.w-\[fit-content\] {
-  width: -webkit-fit-content;
-  width: -moz-fit-content;
-  width: fit-content;
-}
-.w-screen {
-  width: 100vw;
 }
 .w-2 {
   width: 12px;
@@ -364,6 +356,9 @@ video {
 .w-3 {
   width: 16px;
 }
+.w-screen {
+  width: 100vw;
+}
 .w-4 {
   width: 26px;
 }
@@ -372,6 +367,11 @@ video {
 }
 .w-thumb {
   width: 16px;
+}
+.w-\[fit-content\] {
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
 }
 .w-\[90px\] {
   width: 90px;
@@ -416,6 +416,12 @@ video {
 .justify-between {
   justify-content: space-between;
 }
+.gap-3\.5 {
+  gap: 20px;
+}
+.gap-3 {
+  gap: 16px;
+}
 .gap-2 {
   gap: 12px;
 }
@@ -424,12 +430,6 @@ video {
 }
 .gap-0 {
   gap: 0px;
-}
-.gap-3\.5 {
-  gap: 20px;
-}
-.gap-3 {
-  gap: 16px;
 }
 .gap-1\.5 {
   gap: 10px;
@@ -479,17 +479,14 @@ video {
 .bg-opacity-80 {
   --tw-bg-opacity: 0.8;
 }
-.p-3 {
-  padding: 16px;
-}
 .p-3\.5 {
   padding: 20px;
 }
+.p-3 {
+  padding: 16px;
+}
 .text-center {
   text-align: center;
-}
-.text-xl {
-  font-size: 1.25rem;
 }
 .text-sm {
   font-size: .875rem;
@@ -497,11 +494,14 @@ video {
 .text-base {
   font-size: 1rem;
 }
-.font-medium {
-  font-weight: 500;
+.text-xl {
+  font-size: 1.25rem;
 }
 .font-semibold {
   font-weight: 600;
+}
+.font-medium {
+  font-weight: 500;
 }
 .text-primary {
   --tw-text-opacity: 1;
@@ -608,11 +608,11 @@ input[type=number] {
   .md\:h-full {
     height: 100%;
   }
-  .md\:w-full {
-    width: 100%;
-  }
   .md\:w-\[470px\] {
     width: 470px;
+  }
+  .md\:w-full {
+    width: 100%;
   }
   .md\:flex-row {
     flex-direction: row;

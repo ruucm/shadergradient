@@ -10,14 +10,22 @@ import {
   Tools,
   ToolsBox,
   IconButtons,
-  Feather
+  Feather,
+  ControlTabTitles,
+  ControlTypeTitle,
+  ControlTypeTitles
 } from "./Controls/index.js";
 import { PropertyControls } from "./PropertyControls.js";
 import { HoverBox, IconHoverBox } from "./HoverBox/index.js";
+import { Button } from "./Button.js";
 export {
   BackgroundControls,
+  Button,
   ColorControls,
   ColorInput,
+  ControlTabTitles,
+  ControlTypeTitle,
+  ControlTypeTitles,
   EffectControls,
   Feather,
   HoverBox,

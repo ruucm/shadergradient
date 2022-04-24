@@ -10,6 +10,9 @@ export {
   ToolsBox,
   IconButtons,
   Feather,
+  ControlTabTitles,
+  ControlTypeTitle,
+  ControlTypeTitles,
 } from './Controls/index'
 export { PropertyControls } from './PropertyControls'
 

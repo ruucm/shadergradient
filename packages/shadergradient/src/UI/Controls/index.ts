@@ -7,4 +7,12 @@ export { ColorControls } from './ColorControls'
 export { EffectControls } from './EffectControls'
 export { ViewControls } from './ViewControls'
 export { BackgroundControls } from './BackgroundControls'
-export { Tools, ToolsBox, IconButtons, Feather } from './Tools/index'
+export {
+  Tools,
+  ToolsBox,
+  IconButtons,
+  Feather,
+  ControlTabTitles,
+  ControlTypeTitle,
+  ControlTypeTitles,
+} from './Tools/index'

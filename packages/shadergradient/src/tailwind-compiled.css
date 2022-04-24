@@ -525,22 +525,18 @@ Ensure the default browser behavior of the `hidden` attribute.
   display: none;
 }
 
-.h-\[58px\] {
-  height: 58px;
-}
-
-.h-\[fit-content\] {
-  height: -webkit-fit-content;
-  height: -moz-fit-content;
-  height: fit-content;
-}
-
 .h-3 {
   height: 16px;
 }
 
 .h-button {
   height: 55px;
+}
+
+.h-\[fit-content\] {
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
 }
 
 .h-input {
@@ -559,22 +555,16 @@ Ensure the default browser behavior of the `hidden` attribute.
   height: 16px;
 }
 
+.h-\[58px\] {
+  height: 58px;
+}
+
 .h-full {
   height: 100%;
 }
 
 .h-\[31px\] {
   height: 31px;
-}
-
-.w-\[fit-content\] {
-  width: -webkit-fit-content;
-  width: -moz-fit-content;
-  width: fit-content;
-}
-
-.w-screen {
-  width: 100vw;
 }
 
 .w-2 {
@@ -593,6 +583,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   width: 16px;
 }
 
+.w-screen {
+  width: 100vw;
+}
+
 .w-4 {
   width: 26px;
 }
@@ -603,6 +597,12 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .w-thumb {
   width: 16px;
+}
+
+.w-\[fit-content\] {
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
 }
 
 .w-\[90px\] {
@@ -662,6 +662,14 @@ Ensure the default browser behavior of the `hidden` attribute.
   justify-content: space-between;
 }
 
+.gap-3\.5 {
+  gap: 20px;
+}
+
+.gap-3 {
+  gap: 16px;
+}
+
 .gap-2 {
   gap: 12px;
 }
@@ -672,14 +680,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .gap-0 {
   gap: 0px;
-}
-
-.gap-3\.5 {
-  gap: 20px;
-}
-
-.gap-3 {
-  gap: 16px;
 }
 
 .gap-1\.5 {
@@ -745,20 +745,16 @@ Ensure the default browser behavior of the `hidden` attribute.
   --tw-bg-opacity: 0.8;
 }
 
-.p-3 {
-  padding: 16px;
-}
-
 .p-3\.5 {
   padding: 20px;
 }
 
-.text-center {
-  text-align: center;
+.p-3 {
+  padding: 16px;
 }
 
-.text-xl {
-  font-size: 1.25rem;
+.text-center {
+  text-align: center;
 }
 
 .text-sm {
@@ -769,12 +765,16 @@ Ensure the default browser behavior of the `hidden` attribute.
   font-size: 1rem;
 }
 
-.font-medium {
-  font-weight: 500;
+.text-xl {
+  font-size: 1.25rem;
 }
 
 .font-semibold {
   font-weight: 600;
+}
+
+.font-medium {
+  font-weight: 500;
 }
 
 .text-primary {
@@ -877,12 +877,12 @@ input[type='number'] {
     height: 100%;
   }
 
-  .md\:w-full {
-    width: 100%;
-  }
-
   .md\:w-\[470px\] {
     width: 470px;
+  }
+
+  .md\:w-full {
+    width: 100%;
   }
 
   .md\:flex-row {

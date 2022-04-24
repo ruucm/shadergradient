@@ -4,7 +4,7 @@ import { useRef } from 'react'
 import * as THREE from 'three'
 import { usePostProcessing } from '../../../hooks/index'
 import useQueryState from '../../../hooks/useQueryState'
-import { useFiber } from '../../../useFiber'
+import { useFiber } from '../../../utils/index'
 import { shaderMaterial } from './shaderMaterial'
 import * as shaders from './shaders/index'
 

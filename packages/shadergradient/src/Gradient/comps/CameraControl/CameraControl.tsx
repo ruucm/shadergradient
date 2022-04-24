@@ -1,7 +1,7 @@
 import { useRef, useEffect } from 'react'
 import CameraControls from 'camera-controls'
 import * as THREE from 'three'
-import { useFiber } from '../../../useFiber'
+import { useFiber } from '../../../utils/index'
 
 export function CameraControl() {
   const { extend, useThree, useFrame } = useFiber()

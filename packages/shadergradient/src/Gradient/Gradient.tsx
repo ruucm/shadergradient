@@ -1,6 +1,6 @@
 // @ts-nocheck
 import * as React from 'react'
-import { FiberCanvas, useFiber } from '../useFiber'
+import { FiberCanvas, useFiber } from '../utils/index'
 import { CameraControl, GradientMesh } from './index'
 
 export function Gradient() {

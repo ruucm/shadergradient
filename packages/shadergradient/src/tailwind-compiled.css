@@ -567,14 +567,6 @@ Ensure the default browser behavior of the `hidden` attribute.
   height: 31px;
 }
 
-.w-2 {
-  width: 12px;
-}
-
-.w-\[50\%\] {
-  width: 50%;
-}
-
 .w-full {
   width: 100%;
 }
@@ -585,6 +577,14 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .w-3 {
   width: 16px;
+}
+
+.w-2 {
+  width: 12px;
+}
+
+.w-\[50\%\] {
+  width: 50%;
 }
 
 .w-4 {
@@ -662,12 +662,12 @@ Ensure the default browser behavior of the `hidden` attribute.
   justify-content: space-between;
 }
 
-.gap-3\.5 {
-  gap: 20px;
-}
-
 .gap-3 {
   gap: 16px;
+}
+
+.gap-3\.5 {
+  gap: 20px;
 }
 
 .gap-2 {
@@ -769,22 +769,22 @@ Ensure the default browser behavior of the `hidden` attribute.
   font-size: 1.25rem;
 }
 
-.font-semibold {
-  font-weight: 600;
-}
-
 .font-medium {
   font-weight: 500;
 }
 
-.text-primary {
-  --tw-text-opacity: 1;
-  color: rgb(255 67 10 / var(--tw-text-opacity));
+.font-semibold {
+  font-weight: 600;
 }
 
 .text-white {
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity));
+}
+
+.text-primary {
+  --tw-text-opacity: 1;
+  color: rgb(255 67 10 / var(--tw-text-opacity));
 }
 
 .text-opacity-20 {

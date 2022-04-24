@@ -1,5 +1,5 @@
 import { useEffect, useMemo } from 'react'
-import { useFiber } from '../../useFiber'
+import { useFiber } from '../../utils/index'
 import { EffectComposer as EffectComposerImpl } from './lib/pp/from-threejs/postprocessing/EffectComposer'
 import { RenderPass } from './lib/pp/from-threejs/postprocessing/RenderPass'
 import { HalftonePass } from './lib/pp/HalftonePass'

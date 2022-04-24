@@ -2,7 +2,7 @@ import * as React from 'react'
 import { useQueryState } from '../hooks/index'
 import { InputPanel } from '../InputPanel'
 import { Slider } from '../Slider/index'
-import { NumberInput } from './NumberInput/index'
+import { NumberInput } from '../UI/index'
 
 type ViewControlsPropsT = React.DetailedHTMLProps<
   React.HTMLAttributes<HTMLDivElement>,

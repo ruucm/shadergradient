@@ -605,12 +605,12 @@ Ensure the default browser behavior of the `hidden` attribute.
   width: 16px;
 }
 
-.w-control-number-input {
-  width: 53px;
-}
-
 .w-\[90px\] {
   width: 90px;
+}
+
+.w-control-number-input {
+  width: 53px;
 }
 
 .w-\[17px\] {

@@ -11,3 +11,4 @@ export {
   IconButtons,
   Feather,
 } from './Controls/index'
+export { PropertyControls } from './PropertyControls'

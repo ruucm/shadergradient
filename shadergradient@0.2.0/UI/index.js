@@ -19,6 +19,7 @@ import { PropertyControls } from "./PropertyControls.js";
 import { HoverBox, IconHoverBox } from "./HoverBox/index.js";
 import { Button } from "./Button.js";
 import { Spacing } from "./Spacing.js";
+import { TextAnimation, TextHover } from "./TextAnimation.js";
 export {
   BackgroundControls,
   Button,
@@ -39,6 +40,8 @@ export {
   Slider,
   Spacing,
   TestControl,
+  TextAnimation,
+  TextHover,
   Tools,
   ToolsBox,
   ViewControls

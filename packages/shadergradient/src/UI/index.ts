@@ -21,3 +21,4 @@ export { Button } from './Button'
 export { Spacing } from './Spacing'
 
 export { TextAnimation, TextHover } from './TextAnimation/index'
+export { PreviewBtn, PreviewWrapper } from './PreviewBtn/index'

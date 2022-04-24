@@ -555,16 +555,16 @@ Ensure the default browser behavior of the `hidden` attribute.
   height: 16px;
 }
 
+.h-\[31px\] {
+  height: 31px;
+}
+
 .h-\[58px\] {
   height: 58px;
 }
 
 .h-full {
   height: 100%;
-}
-
-.h-\[31px\] {
-  height: 31px;
 }
 
 .w-full {
@@ -599,6 +599,14 @@ Ensure the default browser behavior of the `hidden` attribute.
   width: 16px;
 }
 
+.w-\[17px\] {
+  width: 17px;
+}
+
+.w-\[47px\] {
+  width: 47px;
+}
+
 .w-\[fit-content\] {
   width: -webkit-fit-content;
   width: -moz-fit-content;
@@ -611,14 +619,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .w-control-number-input {
   width: 53px;
-}
-
-.w-\[17px\] {
-  width: 17px;
-}
-
-.w-\[47px\] {
-  width: 47px;
 }
 
 .flex-shrink-0 {
@@ -670,6 +670,14 @@ Ensure the default browser behavior of the `hidden` attribute.
   gap: 20px;
 }
 
+.gap-1\.5 {
+  gap: 10px;
+}
+
+.gap-1 {
+  gap: 8px;
+}
+
 .gap-2 {
   gap: 12px;
 }
@@ -680,14 +688,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .gap-0 {
   gap: 0px;
-}
-
-.gap-1\.5 {
-  gap: 10px;
-}
-
-.gap-1 {
-  gap: 8px;
 }
 
 .overflow-hidden {

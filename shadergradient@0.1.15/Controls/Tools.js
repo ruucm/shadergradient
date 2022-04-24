@@ -1,8 +1,8 @@
 // src/Controls/Tools.tsx
 import * as React from "react";
-import { Radio } from "../Controls/index.js";
 import { useQueryState } from "../hooks/index.js";
 import { InputPanel } from "../InputPanel.js";
+import { Radio } from "../UI/index.js";
 var Tools = () => {
   const [wireframe, setWireframe] = useQueryState("wireframe");
   const [axesHelper, setAxesHelper] = useQueryState("axesHelper");

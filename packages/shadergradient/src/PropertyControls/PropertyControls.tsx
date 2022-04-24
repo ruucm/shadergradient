@@ -6,7 +6,7 @@ import {
   EffectControls,
   ViewControls,
   BackgroundControls,
-} from '../Controls/index'
+} from '../UI/index'
 
 type Props = {
   // All other props

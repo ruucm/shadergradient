@@ -1,8 +1,8 @@
 import * as React from 'react'
-import { useQueryState } from '../hooks/index'
-import { InputPanel } from '../InputPanel'
-import { usePropertyStore } from '../store'
-import { ColorInput } from '../UI/index'
+import { useQueryState } from '../../hooks/index'
+import { InputPanel } from '../../InputPanel'
+import { usePropertyStore } from '../../store'
+import { ColorInput } from '../../UI/index'
 
 type ColorControlsPropsT = {
   hoverState?: number

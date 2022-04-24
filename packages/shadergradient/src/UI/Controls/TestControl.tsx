@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { useQueryState } from '../hooks/index'
+import { useQueryState } from '../../hooks/index'
 
 export function TestControl() {
   const [, setUStrength] = useQueryState('uStrength')

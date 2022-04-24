@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 
 import { motion } from 'framer-motion'
 import Link from 'next/link'
-import { GradientMesh, PRESETS, useUIStore } from 'shadergradient'
+import { Gradient, PRESETS, useUIStore } from 'shadergradient'
 
 import styles from './Home.module.scss'
 import { AboutBtn } from '@/components/dom/AboutBtn'
@@ -133,13 +133,7 @@ const DOM = () => {
 
 // canvas components goes here
 const R3F = () => {
-  return (
-    <>
-      {/* <Shader /> */}
-      <ambientLight intensity={1} />
-      <GradientMesh />
-    </>
-  )
+  return <Gradient />
 }
 
 const Page = () => {

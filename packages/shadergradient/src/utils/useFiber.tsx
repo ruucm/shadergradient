@@ -2,7 +2,7 @@
 
 import React, { useContext, createContext } from 'react'
 
-export function FiberCanvas({ fiber, children }) {
+export function FramerCanvas({ fiber, children }) {
   const { Canvas } = fiber
   const value = useContext(context)
 

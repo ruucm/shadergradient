@@ -329,9 +329,6 @@ video {
 .h-input {
   height: 34px;
 }
-.h-full {
-  height: 100%;
-}
 .h-slider {
   height: 2px;
 }
@@ -340,6 +337,9 @@ video {
 }
 .h-thumb {
   height: 16px;
+}
+.h-full {
+  height: 100%;
 }
 .h-\[31px\] {
   height: 31px;
@@ -364,9 +364,6 @@ video {
 .w-3 {
   width: 16px;
 }
-.w-\[90px\] {
-  width: 90px;
-}
 .w-4 {
   width: 26px;
 }
@@ -375,6 +372,9 @@ video {
 }
 .w-thumb {
   width: 16px;
+}
+.w-\[90px\] {
+  width: 90px;
 }
 .w-control-number-input {
   width: 53px;

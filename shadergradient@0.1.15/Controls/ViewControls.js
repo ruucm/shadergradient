@@ -3,7 +3,7 @@ import * as React from "react";
 import { useQueryState } from "../hooks/index.js";
 import { InputPanel } from "../InputPanel.js";
 import { Slider } from "../Slider/index.js";
-import { NumberInput } from "./NumberInput/index.js";
+import { NumberInput } from "../UI/index.js";
 var ViewControls = () => {
   const [cDistance, setCdistance] = useQueryState("cDistance");
   const [cameraZoom, setCameraZoom] = useQueryState("cameraZoom");

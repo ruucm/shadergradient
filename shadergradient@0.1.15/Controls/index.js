@@ -1,6 +1,6 @@
 // src/Controls/index.ts
 import { TestControl } from "./TestControl.js";
-import { NumberInput } from "./NumberInput/index.js";
+import { NumberInput } from "../UI/index.js";
 import { Radio } from "./Radio.js";
 import { ShapeControls } from "./ShapeControls.js";
 import { ColorControls } from "./ColorControls.js";

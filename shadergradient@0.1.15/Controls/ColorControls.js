@@ -1,9 +1,9 @@
 // src/Controls/ColorControls.tsx
 import * as React from "react";
-import { ColorInput } from "../ColorInput/index.js";
 import { useQueryState } from "../hooks/index.js";
 import { InputPanel } from "../InputPanel.js";
 import { usePropertyStore } from "../store.js";
+import { ColorInput } from "../UI/index.js";
 var ColorControls = () => {
   const [color1, setColor1] = useQueryState("color1");
   const [color2, setColor2] = useQueryState("color2");

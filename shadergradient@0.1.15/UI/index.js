@@ -7,18 +7,24 @@ import {
   EffectControls,
   ViewControls,
   BackgroundControls,
-  Tools
+  Tools,
+  ToolsBox,
+  IconButtons,
+  Feather
 } from "./Controls/index.js";
 export {
   BackgroundControls,
   ColorControls,
   ColorInput,
   EffectControls,
+  Feather,
+  IconButtons,
   NumberInput,
   Radio,
   ShapeControls,
   Slider,
   TestControl,
   Tools,
+  ToolsBox,
   ViewControls
 };

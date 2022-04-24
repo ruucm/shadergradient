@@ -104,8 +104,8 @@ const R3F = () => {
   return (
     <>
       {/* <Shader /> */}
-      <ambientLight />
-      <pointLight position={[10, 10, 10]} />
+      <ambientLight intensity={1} />
+      {/* <pointLight position={[10, 10, 10]} /> */}
       <GradientMesh />
     </>
   )
@@ -116,7 +116,7 @@ const Page = () => {
     <>
       <DOM />
       {/* @ts-ignore */}
-      {/* <R3F r3f /> */}
+      <R3F r3f />
     </>
   )
 }

@@ -6,18 +6,6 @@ var __getOwnPropSymbols = Object.getOwnPropertySymbols;
 var __getProtoOf = Object.getPrototypeOf;
 var __hasOwnProp = Object.prototype.hasOwnProperty;
 var __propIsEnum = Object.prototype.propertyIsEnumerable;
-var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
-var __spreadValues = (a, b) => {
-  for (var prop in b || (b = {}))
-    if (__hasOwnProp.call(b, prop))
-      __defNormalProp(a, prop, b[prop]);
-  if (__getOwnPropSymbols)
-    for (var prop of __getOwnPropSymbols(b)) {
-      if (__propIsEnum.call(b, prop))
-        __defNormalProp(a, prop, b[prop]);
-    }
-  return a;
-};
 var __objRest = (source, exclude) => {
   var target = {};
   for (var prop in source)
@@ -93,27 +81,26 @@ var require_classnames = __commonJS({
   }
 });
 
-// src/Button/Button.tsx
+// src/ControlTypeTitle.tsx
 var import_classnames = __toESM(require_classnames());
 import * as React from "react";
-var ButtonKind = {
-  primary: "bg-primary text-white",
-  secondary: "ring-1 ring-primary text-primary"
-};
-var Button = (_a) => {
+var ControlTypeTitle = (_a) => {
   var _b = _a, {
-    kind = "primary",
-    children
+    title,
+    active,
+    onClick
   } = _b, rest = __objRest(_b, [
-    "kind",
-    "children"
+    "title",
+    "active",
+    "onClick"
   ]);
-  return /* @__PURE__ */ React.createElement("button", __spreadValues({
-    className: (0, import_classnames.default)("h-button font-medium rounded w-full", ButtonKind[kind])
-  }, rest), children);
+  return /* @__PURE__ */ React.createElement("div", {
+    className: (0, import_classnames.default)("text-xl font-medium text-primary text-opacity-20 cursor-pointer", active && "text-opacity-100"),
+    onClick
+  }, title);
 };
 export {
-  Button
+  ControlTypeTitle
 };
 /*!
   Copyright (c) 2018 Jed Watson.

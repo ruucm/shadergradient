@@ -2,34 +2,8 @@ var __create = Object.create;
 var __defProp = Object.defineProperty;
 var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
 var __getOwnPropNames = Object.getOwnPropertyNames;
-var __getOwnPropSymbols = Object.getOwnPropertySymbols;
 var __getProtoOf = Object.getPrototypeOf;
 var __hasOwnProp = Object.prototype.hasOwnProperty;
-var __propIsEnum = Object.prototype.propertyIsEnumerable;
-var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
-var __spreadValues = (a, b) => {
-  for (var prop in b || (b = {}))
-    if (__hasOwnProp.call(b, prop))
-      __defNormalProp(a, prop, b[prop]);
-  if (__getOwnPropSymbols)
-    for (var prop of __getOwnPropSymbols(b)) {
-      if (__propIsEnum.call(b, prop))
-        __defNormalProp(a, prop, b[prop]);
-    }
-  return a;
-};
-var __objRest = (source, exclude) => {
-  var target = {};
-  for (var prop in source)
-    if (__hasOwnProp.call(source, prop) && exclude.indexOf(prop) < 0)
-      target[prop] = source[prop];
-  if (source != null && __getOwnPropSymbols)
-    for (var prop of __getOwnPropSymbols(source)) {
-      if (exclude.indexOf(prop) < 0 && __propIsEnum.call(source, prop))
-        target[prop] = source[prop];
-    }
-  return target;
-};
 var __commonJS = (cb, mod) => function __require() {
   return mod || (0, cb[__getOwnPropNames(cb)[0]])((mod = { exports: {} }).exports, mod), mod.exports;
 };
@@ -93,27 +67,29 @@ var require_classnames = __commonJS({
   }
 });
 
-// src/Button/Button.tsx
+// src/PropertyControls/PropertyControls.tsx
 var import_classnames = __toESM(require_classnames());
 import * as React from "react";
-var ButtonKind = {
-  primary: "bg-primary text-white",
-  secondary: "ring-1 ring-primary text-primary"
-};
-var Button = (_a) => {
-  var _b = _a, {
-    kind = "primary",
-    children
-  } = _b, rest = __objRest(_b, [
-    "kind",
-    "children"
-  ]);
-  return /* @__PURE__ */ React.createElement("button", __spreadValues({
-    className: (0, import_classnames.default)("h-button font-medium rounded w-full", ButtonKind[kind])
-  }, rest), children);
+import {
+  ShapeControls,
+  ColorControls,
+  EffectControls,
+  ViewControls,
+  BackgroundControls
+} from "../Controls/index.js";
+var PropertyControls = ({
+  activeTab,
+  setActiveTab
+}) => {
+  return /* @__PURE__ */ React.createElement("div", {
+    className: (0, import_classnames.default)("w-screen h-[fit-content] overflow-y-scroll bg-controls-panel-mobile text-primary mx-auto p-3.5 md:bg-controls-panel md:w-[470px] md:h-full md:p-4 relative"),
+    style: {
+      paddingBottom: activeTab === "shape" ? 55 : 20
+    }
+  }, activeTab === "shape" && /* @__PURE__ */ React.createElement(ShapeControls, null), activeTab === "colors" && /* @__PURE__ */ React.createElement(ColorControls, null), activeTab === "effects" && /* @__PURE__ */ React.createElement(EffectControls, null), activeTab === "view" && /* @__PURE__ */ React.createElement(ViewControls, null), activeTab === "background" && /* @__PURE__ */ React.createElement(BackgroundControls, null));
 };
 export {
-  Button
+  PropertyControls
 };
 /*!
   Copyright (c) 2018 Jed Watson.

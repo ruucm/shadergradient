@@ -93,27 +93,25 @@ var require_classnames = __commonJS({
   }
 });
 
-// src/Button/Button.tsx
+// src/Radio/Radio.tsx
 var import_classnames = __toESM(require_classnames());
 import * as React from "react";
-var ButtonKind = {
-  primary: "bg-primary text-white",
-  secondary: "ring-1 ring-primary text-primary"
-};
-var Button = (_a) => {
-  var _b = _a, {
-    kind = "primary",
-    children
-  } = _b, rest = __objRest(_b, [
-    "kind",
-    "children"
-  ]);
-  return /* @__PURE__ */ React.createElement("button", __spreadValues({
-    className: (0, import_classnames.default)("h-button font-medium rounded w-full", ButtonKind[kind])
-  }, rest), children);
-};
+var Radio = React.forwardRef((_a, ref) => {
+  var _b = _a, { label, check, setValue } = _b, inputProps = __objRest(_b, ["label", "check", "setValue"]);
+  return /* @__PURE__ */ React.createElement("label", {
+    className: (0, import_classnames.default)("flex justify-center items-center w-full h-input text-primary rounded cursor-pointer bg-primary hover:bg-opacity-10", check ? "bg-opacity-10" : "bg-opacity-0"),
+    htmlFor: inputProps.value
+  }, /* @__PURE__ */ React.createElement("input", __spreadValues({
+    type: "radio",
+    id: inputProps.value,
+    className: "absolute inline-block opacity-0 cursor-pointer",
+    onChange: (e) => setValue(e.target.value)
+  }, inputProps)), /* @__PURE__ */ React.createElement("span", {
+    className: "text-base font-medium"
+  }, label || inputProps.value));
+});
 export {
-  Button
+  Radio
 };
 /*!
   Copyright (c) 2018 Jed Watson.

@@ -6,18 +6,6 @@ var __getOwnPropSymbols = Object.getOwnPropertySymbols;
 var __getProtoOf = Object.getPrototypeOf;
 var __hasOwnProp = Object.prototype.hasOwnProperty;
 var __propIsEnum = Object.prototype.propertyIsEnumerable;
-var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
-var __spreadValues = (a, b) => {
-  for (var prop in b || (b = {}))
-    if (__hasOwnProp.call(b, prop))
-      __defNormalProp(a, prop, b[prop]);
-  if (__getOwnPropSymbols)
-    for (var prop of __getOwnPropSymbols(b)) {
-      if (__propIsEnum.call(b, prop))
-        __defNormalProp(a, prop, b[prop]);
-    }
-  return a;
-};
 var __objRest = (source, exclude) => {
   var target = {};
   for (var prop in source)
@@ -93,27 +81,63 @@ var require_classnames = __commonJS({
   }
 });
 
-// src/Button/Button.tsx
+// src/Tools/IconButton.tsx
 var import_classnames = __toESM(require_classnames());
 import * as React from "react";
-var ButtonKind = {
-  primary: "bg-primary text-white",
-  secondary: "ring-1 ring-primary text-primary"
-};
-var Button = (_a) => {
+import { IconHoverBox } from "../HoverBox/IconHoverBox.js";
+import { Feather } from "./Feather.js";
+var IconButton = (_a) => {
   var _b = _a, {
-    kind = "primary",
-    children
+    icon,
+    content,
+    active,
+    onClick
   } = _b, rest = __objRest(_b, [
-    "kind",
-    "children"
+    "icon",
+    "content",
+    "active",
+    "onClick"
   ]);
-  return /* @__PURE__ */ React.createElement("button", __spreadValues({
-    className: (0, import_classnames.default)("h-button font-medium rounded w-full", ButtonKind[kind])
-  }, rest), children);
+  const [isHovered, setIsHovered] = React.useState(false);
+  const backgroundOpacity = (active2, isHovered2) => {
+    if (active2 === true) {
+      return 1;
+    } else if (isHovered2 === true && active2 !== true) {
+      return 0.1;
+    } else
+      return 0;
+  };
+  return /* @__PURE__ */ React.createElement("div", {
+    className: (0, import_classnames.default)("text-sm font-medium cursor-pointer flex justify-center items-center", active && "bg-primary"),
+    style: {
+      justifyContent: "center",
+      cursor: "pointer",
+      display: "flex",
+      alignItems: "center",
+      borderRadius: 15,
+      width: 30,
+      height: 30,
+      transitionDuration: "0.3s",
+      background: "rgba(255,67,10," + backgroundOpacity(active, isHovered) + ")"
+    },
+    onMouseEnter: () => {
+      setIsHovered(true);
+    },
+    onMouseLeave: () => {
+      setIsHovered(false);
+    },
+    onClick
+  }, /* @__PURE__ */ React.createElement(Feather, {
+    name: icon,
+    size: 20,
+    color: active ? "white" : "rgb(255,67,10)"
+  }), /* @__PURE__ */ React.createElement(IconHoverBox, {
+    content,
+    isHovered
+  }));
 };
 export {
-  Button
+  IconButton
 };
 /*!
   Copyright (c) 2018 Jed Watson.

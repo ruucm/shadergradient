@@ -1,6 +1,8 @@
 var __create = Object.create;
 var __defProp = Object.defineProperty;
+var __defProps = Object.defineProperties;
 var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropDescs = Object.getOwnPropertyDescriptors;
 var __getOwnPropNames = Object.getOwnPropertyNames;
 var __getOwnPropSymbols = Object.getOwnPropertySymbols;
 var __getProtoOf = Object.getPrototypeOf;
@@ -18,6 +20,7 @@ var __spreadValues = (a, b) => {
     }
   return a;
 };
+var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
 var __commonJS = (cb, mod) => function __require() {
   return mod || (0, cb[__getOwnPropNames(cb)[0]])((mod = { exports: {} }).exports, mod), mod.exports;
 };
@@ -614,7 +617,11 @@ function create(createState) {
   return useStore;
 }
 
+// ../../node_modules/zustand/esm/middleware.mjs
+var combine = (initialState, create2) => (set, get, api) => Object.assign({}, initialState, create2(set, get, api));
+
 // src/store.ts
+import { initialActivePreset } from "./consts.js";
 var defaultPreset = "?pixelDensity=1";
 var useGradientStore = create((set) => __spreadValues({}, parseState()));
 var usePropertyStore = create((set) => ({
@@ -636,10 +643,16 @@ function parseState(search = defaultPreset) {
 var useDomStore = create(() => {
   return { dom: null };
 });
+var useUIStore = create(combine({ activePreset: initialActivePreset, mode: "full", loadingPercentage: 0 }, (set) => ({
+  setActivePreset: (by) => set((state) => ({ activePreset: by })),
+  setMode: (data) => set((state) => __spreadProps(__spreadValues({}, state), { mode: data })),
+  setLoadingPercentage: (data) => set((state) => __spreadProps(__spreadValues({}, state), { loadingPercentage: data }))
+})));
 export {
   defaultPreset,
   updateGradientState,
   useDomStore,
   useGradientStore,
-  usePropertyStore
+  usePropertyStore,
+  useUIStore
 };

@@ -6,18 +6,6 @@ var __getOwnPropSymbols = Object.getOwnPropertySymbols;
 var __getProtoOf = Object.getPrototypeOf;
 var __hasOwnProp = Object.prototype.hasOwnProperty;
 var __propIsEnum = Object.prototype.propertyIsEnumerable;
-var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
-var __spreadValues = (a, b) => {
-  for (var prop in b || (b = {}))
-    if (__hasOwnProp.call(b, prop))
-      __defNormalProp(a, prop, b[prop]);
-  if (__getOwnPropSymbols)
-    for (var prop of __getOwnPropSymbols(b)) {
-      if (__propIsEnum.call(b, prop))
-        __defNormalProp(a, prop, b[prop]);
-    }
-  return a;
-};
 var __objRest = (source, exclude) => {
   var target = {};
   for (var prop in source)
@@ -42,6 +30,26 @@ var __copyProps = (to, from, except, desc) => {
   return to;
 };
 var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __async = (__this, __arguments, generator) => {
+  return new Promise((resolve, reject) => {
+    var fulfilled = (value) => {
+      try {
+        step(generator.next(value));
+      } catch (e) {
+        reject(e);
+      }
+    };
+    var rejected = (value) => {
+      try {
+        step(generator.throw(value));
+      } catch (e) {
+        reject(e);
+      }
+    };
+    var step = (x) => x.done ? resolve(x.value) : Promise.resolve(x.value).then(fulfilled, rejected);
+    step((generator = generator.apply(__this, __arguments)).next());
+  });
+};
 
 // node_modules/classnames/index.js
 var require_classnames = __commonJS({
@@ -93,27 +101,62 @@ var require_classnames = __commonJS({
   }
 });
 
-// src/Button/Button.tsx
+// src/Tools/ToolsBox.tsx
 var import_classnames = __toESM(require_classnames());
 import * as React from "react";
-var ButtonKind = {
-  primary: "bg-primary text-white",
-  secondary: "ring-1 ring-primary text-primary"
-};
-var Button = (_a) => {
+import { usePropertyStore } from "../store.js";
+import { IconButtons } from "./IconButtons.js";
+var ToolsBox = (_a) => {
   var _b = _a, {
-    kind = "primary",
-    children
+    title,
+    darkMode
   } = _b, rest = __objRest(_b, [
-    "kind",
-    "children"
+    "title",
+    "darkMode"
   ]);
-  return /* @__PURE__ */ React.createElement("button", __spreadValues({
-    className: (0, import_classnames.default)("h-button font-medium rounded w-full", ButtonKind[kind])
-  }, rest), children);
+  const toggleZoom = usePropertyStore((state) => state.toggleZoom);
+  const toggleAxis = usePropertyStore((state) => state.toggleAxis);
+  const [copyUrlText, setCopyUrl] = React.useState("copy url");
+  return /* @__PURE__ */ React.createElement("div", {
+    className: (0, import_classnames.default)("flex items-center justify-center", darkMode && "bg-controls-sub-panel"),
+    style: {
+      gap: 6,
+      width: "fit-content",
+      height: "fit-content",
+      padding: 8,
+      borderRadius: 40
+    }
+  }, /* @__PURE__ */ React.createElement(IconButtons, {
+    icon: "CornerUpLeft",
+    content: "undo"
+  }), /* @__PURE__ */ React.createElement(IconButtons, {
+    icon: "Box",
+    content: "3d axis",
+    active: toggleAxis,
+    onClick: () => {
+      usePropertyStore.setState({ toggleAxis: !toggleAxis });
+    }
+  }), /* @__PURE__ */ React.createElement(IconButtons, {
+    icon: "Minimize2",
+    content: "zoom out",
+    active: toggleZoom,
+    onClick: () => {
+      usePropertyStore.setState({ toggleZoom: !toggleZoom });
+    }
+  }), /* @__PURE__ */ React.createElement(IconButtons, {
+    icon: "Copy",
+    content: copyUrlText,
+    onClick: () => __async(void 0, null, function* () {
+      window.navigator.clipboard.writeText(window.location.href);
+      setCopyUrl("copied!");
+      yield setTimeout(() => {
+        setCopyUrl("copy url");
+      }, 1e3);
+    })
+  }));
 };
 export {
-  Button
+  ToolsBox
 };
 /*!
   Copyright (c) 2018 Jed Watson.

@@ -5,6 +5,7 @@ import Link from 'next/link'
 import {
   Gradient,
   PRESETS,
+  PresetTitle,
   PreviewBtn,
   PreviewWrapper,
   TextHover,
@@ -14,7 +15,6 @@ import {
 import styles from './Home.module.scss'
 import { AboutBtn } from '@/components/dom/AboutBtn'
 import { Links } from '@/components/dom/Links'
-import { PresetTitle } from '@/components/dom/PresetTitle'
 import { TextLogo } from '@/components/dom/TextLogo'
 
 // Dynamic import is ussed to prevent a payload when the website start that will include threejs r3f etc..

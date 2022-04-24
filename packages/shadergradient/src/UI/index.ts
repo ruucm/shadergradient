@@ -20,5 +20,7 @@ export { HoverBox, IconHoverBox } from './HoverBox/index'
 export { Button } from './Button'
 export { Spacing } from './Spacing'
 
-export { TextAnimation, TextHover } from './TextAnimation/index'
 export { PreviewBtn, PreviewWrapper } from './PreviewBtn/index'
+export { PresetTitle } from './PresetTitle/index'
+
+export { TextAnimation, TextHover } from './TextAnimation/index'

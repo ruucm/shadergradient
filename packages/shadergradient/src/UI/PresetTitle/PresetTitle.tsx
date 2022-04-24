@@ -1,13 +1,14 @@
 import * as React from 'react'
 import { motion } from 'framer-motion'
-import { PRESETS, useUIStore, TextAnimation } from 'shadergradient'
+import { PRESETS } from '../../presets'
+import { useUIStore } from '../../store'
+import { TextAnimation } from '../../UI/index'
 import styles from './PresetTitle.module.scss'
 
 export function PresetTitle({
-  color,
-  title,
-  description,
-  index,
+  color = '#FF430A',
+  title = 'title',
+  index = 0,
   fontSize = 120,
   isMobile = false,
 }) {

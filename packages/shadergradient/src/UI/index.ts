@@ -1,1 +1,1 @@
-export { ColorInput, NumberInput } from './Inputs/index'
+export { ColorInput, NumberInput, Slider } from './Inputs/index'

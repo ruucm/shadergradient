@@ -2,7 +2,7 @@ import * as React from 'react'
 import { Radio } from '../Controls/index'
 import { useQueryState } from '../hooks/index'
 import { InputPanel } from '../InputPanel'
-import { Slider } from '../Slider/index'
+import { Slider } from '../UI/index'
 
 type EffectControlsPropsT = React.DetailedHTMLProps<
   React.HTMLAttributes<HTMLDivElement>,

@@ -16,7 +16,7 @@ var __objRest = (source, exclude) => {
 
 // src/UI/Inputs/NumberInput/NumberInput.tsx
 import React from "react";
-import { Spacing } from "../../../Spacing.js";
+import { Spacing } from "../../../UI/index.js";
 var NumberInput = React.forwardRef((_a, ref) => {
   var _b = _a, {
     label = "label",

@@ -328,8 +328,7 @@ p.displayName = "ReactSlider", p.defaultProps = { min: 0, max: 100, step: 1, pag
 var u = p;
 
 // src/UI/Inputs/Slider.tsx
-import { Spacing } from "../../Spacing.js";
-import { NumberInput } from "../../UI/index.js";
+import { NumberInput, Spacing } from "../../UI/index.js";
 var Slider = React.forwardRef(({ defaultValue, setValue, step, min, max }, ref) => {
   const [sharedValue, setSharedValue] = useState(defaultValue);
   useEffect(() => {

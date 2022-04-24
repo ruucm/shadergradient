@@ -312,9 +312,6 @@ video {
 .hidden {
   display: none;
 }
-.h-3 {
-  height: 16px;
-}
 .h-button {
   height: 55px;
 }
@@ -322,6 +319,9 @@ video {
   height: -webkit-fit-content;
   height: -moz-fit-content;
   height: fit-content;
+}
+.h-3 {
+  height: 16px;
 }
 .h-input {
   height: 34px;
@@ -353,11 +353,11 @@ video {
 .w-full {
   width: 100%;
 }
-.w-3 {
-  width: 16px;
-}
 .w-screen {
   width: 100vw;
+}
+.w-3 {
+  width: 16px;
 }
 .w-4 {
   width: 26px;

@@ -886,8 +886,7 @@ Info.displayName = "Info";
 var info_default = Info;
 
 // src/InputPanel.tsx
-import { Spacing } from "./Spacing.js";
-import { HoverBox } from "./UI/index.js";
+import { HoverBox, Spacing } from "./UI/index.js";
 var InputPanel = (_a) => {
   var _b = _a, {
     title,

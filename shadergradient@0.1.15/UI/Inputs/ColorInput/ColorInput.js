@@ -1,7 +1,7 @@
 // src/UI/Inputs/ColorInput/ColorInput.tsx
 import * as React from "react";
 import { useEffect, useState } from "react";
-import { Spacing } from "../../../Spacing.js";
+import { Spacing } from "../../../UI/index.js";
 var ColorInput = React.forwardRef(({ label = "", defaultValue, setValue }, ref) => {
   const [sharedValue, setSharedValue] = useState(defaultValue);
   useEffect(() => {

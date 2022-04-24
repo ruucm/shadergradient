@@ -21,6 +21,6 @@ export { Button } from './Button'
 export { Spacing } from './Spacing'
 
 export { PreviewBtn, PreviewWrapper } from './PreviewBtn/index'
-export { PresetTitle } from './PresetTitle/index'
+export { PresetTitle, PresetTitles } from './PresetTitle/index'
 
 export { TextAnimation, TextHover } from './TextAnimation/index'

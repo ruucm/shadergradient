@@ -5,7 +5,7 @@ import Link from 'next/link'
 import {
   Gradient,
   PRESETS,
-  PresetTitle,
+  PresetTitles,
   PreviewBtn,
   PreviewWrapper,
   TextHover,
@@ -69,23 +69,7 @@ const DOM = () => {
           style={{ display: mode === 'full' ? 'block' : 'none' }}
         >
           <div className={styles.presetTitleWrapper}>
-            {PRESETS.map((item, index) => {
-              return (
-                <PresetTitle
-                  index={index}
-                  color={item.color}
-                  key={index}
-                  title={
-                    index < 10
-                      ? '0' + index.toString() + ' ' + item.title
-                      : index.toString() + ' ' + item.title
-                  }
-                  description={''}
-                  isMobile={isMobile}
-                  fontSize={isMobile ? 90 : 120}
-                ></PresetTitle>
-              )
-            })}
+            <PresetTitles isMobile={isMobile} />
           </div>
 
           <div

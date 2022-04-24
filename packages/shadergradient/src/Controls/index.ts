@@ -1,5 +1,5 @@
 export * from './TestControl'
-export * from './NumberInput/index'
+export * from './NumberInput'
 export * from './Radio'
 export * from './ShapeControls'
 export { ShapeControls } from './ShapeControls'

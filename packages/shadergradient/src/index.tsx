@@ -1,4 +1,4 @@
-export { Button } from './Button/index' // example component
+export { Button } from './Button' // example component
 export * from './useFiber'
 export * from './Gradient/index'
 export * from './Controls/index'

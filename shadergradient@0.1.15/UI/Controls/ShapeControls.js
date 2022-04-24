@@ -1,8 +1,8 @@
 // src/UI/Controls/ShapeControls.tsx
 import * as React from "react";
 import { useQueryState } from "../../hooks/index.js";
-import { InputPanel } from "../../InputPanel.js";
 import { Radio, Slider } from "../../UI/index.js";
+import { InputPanel } from "./InputPanel.js";
 var ShapeControls = () => {
   const [type, setType] = useQueryState("type");
   const [shader, setShader] = useQueryState("shader");

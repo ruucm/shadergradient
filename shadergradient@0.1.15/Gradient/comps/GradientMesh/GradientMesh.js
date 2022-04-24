@@ -24556,7 +24556,7 @@ if (typeof window !== "undefined") {
 // src/Gradient/comps/GradientMesh/GradientMesh.tsx
 import { usePostProcessing } from "../../../hooks/index.js";
 import useQueryState from "../../../hooks/useQueryState.js";
-import { useFiber } from "../../../useFiber.js";
+import { useFiber } from "../../../utils/index.js";
 import { shaderMaterial } from "./shaderMaterial.js";
 import * as shaders from "./shaders/index.js";
 var meshCount = 192;

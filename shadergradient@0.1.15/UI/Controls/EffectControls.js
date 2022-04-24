@@ -1,8 +1,8 @@
 // src/UI/Controls/EffectControls.tsx
 import * as React from "react";
 import { useQueryState } from "../../hooks/index.js";
-import { InputPanel } from "../../InputPanel.js";
 import { Radio, Slider } from "../../UI/index.js";
+import { InputPanel } from "./InputPanel.js";
 var EffectControls = () => {
   const [grain, setGrain] = useQueryState("grain");
   const [lightType, setLightType] = useQueryState("lightType");

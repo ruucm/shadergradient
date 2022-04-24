@@ -1,8 +1,8 @@
 // src/UI/Controls/ViewControls.tsx
 import * as React from "react";
 import { useQueryState } from "../../hooks/index.js";
-import { InputPanel } from "../../InputPanel.js";
 import { NumberInput, Slider } from "../../UI/index.js";
+import { InputPanel } from "./InputPanel.js";
 var ViewControls = () => {
   const [cDistance, setCdistance] = useQueryState("cDistance");
   const [cameraZoom, setCameraZoom] = useQueryState("cameraZoom");

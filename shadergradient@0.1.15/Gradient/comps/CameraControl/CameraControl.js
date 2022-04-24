@@ -30546,7 +30546,7 @@ if (typeof window !== "undefined") {
 }
 
 // src/Gradient/comps/CameraControl/CameraControl.tsx
-import { useFiber } from "../../../useFiber.js";
+import { useFiber } from "../../../utils/index.js";
 function CameraControl() {
   const { extend, useThree, useFrame } = useFiber();
   CameraControls.install({ THREE: three_module_exports });

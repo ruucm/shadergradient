@@ -1,6 +1,6 @@
 // src/hooks/usePostProcessing/usePostProcessing.ts
 import { useEffect, useMemo } from "react";
-import { useFiber } from "../../useFiber.js";
+import { useFiber } from "../../utils/index.js";
 import { EffectComposer as EffectComposerImpl } from "./lib/pp/from-threejs/postprocessing/EffectComposer.js";
 import { RenderPass } from "./lib/pp/from-threejs/postprocessing/RenderPass.js";
 import { HalftonePass } from "./lib/pp/HalftonePass.js";

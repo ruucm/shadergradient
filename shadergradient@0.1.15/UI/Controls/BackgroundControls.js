@@ -1,8 +1,8 @@
 // src/UI/Controls/BackgroundControls.tsx
 import * as React from "react";
 import { useQueryState } from "../../hooks/index.js";
-import { InputPanel } from "../../InputPanel.js";
 import { ColorInput } from "../../UI/index.js";
+import { InputPanel } from "./InputPanel.js";
 var BackgroundControls = () => {
   const [bgColor1, setBgColor1] = useQueryState("bgColor1");
   const [bgColor2, setBgColor2] = useQueryState("bgColor2");

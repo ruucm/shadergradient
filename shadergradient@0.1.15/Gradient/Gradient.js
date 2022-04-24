@@ -1,6 +1,6 @@
 // src/Gradient/Gradient.tsx
 import * as React from "react";
-import { FiberCanvas, useFiber } from "../useFiber.js";
+import { FiberCanvas, useFiber } from "../utils/index.js";
 import { CameraControl, GradientMesh } from "./index.js";
 function Gradient() {
   const fiber = useFiber();

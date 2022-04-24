@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { useEffect, useState } from 'react'
 import ReactSlider from 'react-slider'
-import { NumberInput } from '../Controls'
+import { NumberInput } from '../Controls/index'
 import { Spacing } from '../Spacing'
 
 type SliderPropsT = {

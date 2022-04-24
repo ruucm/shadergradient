@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { ColorInput } from '../ColorInput'
+import { ColorInput } from '../ColorInput/index'
 import { useQueryState } from '../hooks/index'
 import { InputPanel } from '../InputPanel'
 

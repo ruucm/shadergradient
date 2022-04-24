@@ -1,8 +1,8 @@
 import * as React from 'react'
+import { Radio } from '../Controls/index'
 import { useQueryState } from '../hooks/index'
 import { InputPanel } from '../InputPanel'
-import { Radio } from '../Radio'
-import { Slider } from '../Slider'
+import { Slider } from '../Slider/index'
 
 type EffectControlsPropsT = React.DetailedHTMLProps<
   React.HTMLAttributes<HTMLDivElement>,

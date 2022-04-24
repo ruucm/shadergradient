@@ -1,6 +1,6 @@
 import * as React from 'react'
 import cx from 'classnames'
-import { IconHoverBox } from '../HoverBox'
+import { IconHoverBox } from '../HoverBox/index'
 import { Feather } from './Feather'
 
 type ControlTypeTitlePropsT = {

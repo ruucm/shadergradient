@@ -1,1 +1,1 @@
-export * from './usePostProcessing'
+export { usePostProcessing } from './usePostProcessing'

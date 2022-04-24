@@ -7,7 +7,7 @@ import partition from '@/helpers/partition'
 import useStore from '@/helpers/store'
 import 'shadergradient/src/tailwind-compiled.css'
 
-const LCanvas = dynamic(() => import('@/components/layout/canvas'), {
+const NextJsCanvas = dynamic(() => import('@/components/layout/canvas'), {
   ssr: false,
 })
 
@@ -17,7 +17,7 @@ const Balance = ({ child }) => {
   return (
     <>
       <Dom>{dom}</Dom>
-      <LCanvas>{r3f}</LCanvas>
+      <NextJsCanvas>{r3f}</NextJsCanvas>
     </>
   )
 }

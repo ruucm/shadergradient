@@ -12,3 +12,5 @@ export {
   Feather,
 } from './Controls/index'
 export { PropertyControls } from './PropertyControls'
+
+export { HoverBox, IconHoverBox } from './HoverBox/index'

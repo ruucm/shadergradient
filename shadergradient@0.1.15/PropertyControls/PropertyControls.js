@@ -76,7 +76,7 @@ import {
   EffectControls,
   ViewControls,
   BackgroundControls
-} from "../Controls/index.js";
+} from "../UI/index.js";
 var PropertyControls = ({
   activeTab,
   setActiveTab

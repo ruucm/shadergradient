@@ -29,7 +29,7 @@ var __objRest = (source, exclude) => {
 
 // src/utils/useFiber.tsx
 import React, { useContext, createContext } from "react";
-function FiberCanvas({ fiber, children }) {
+function FramerCanvas({ fiber, children }) {
   const { Canvas } = fiber;
   const value = useContext(context);
   return /* @__PURE__ */ React.createElement(Canvas, {
@@ -53,7 +53,7 @@ var useFiber = () => {
   return ctx;
 };
 export {
-  FiberCanvas,
   FiberContextProvider,
+  FramerCanvas,
   useFiber
 };

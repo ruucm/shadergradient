@@ -1,10 +1,10 @@
 // src/Gradient/GradientWithCanvas.tsx
 import * as React from "react";
-import { FiberCanvas, useFiber } from "../utils/index.js";
+import { FramerCanvas, useFiber } from "../utils/index.js";
 import { Gradient } from "./Gradient.js";
 function GradientWithCanvas() {
   const fiber = useFiber();
-  return /* @__PURE__ */ React.createElement(FiberCanvas, {
+  return /* @__PURE__ */ React.createElement(FramerCanvas, {
     fiber
   }, /* @__PURE__ */ React.createElement(Gradient, null));
 }

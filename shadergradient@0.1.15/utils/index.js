@@ -1,9 +1,9 @@
 // src/utils/index.ts
-import { FiberCanvas, FiberContextProvider, useFiber } from "./useFiber.js";
+import { FramerCanvas, FiberContextProvider, useFiber } from "./useFiber.js";
 var cx = (...classes) => classes.filter((a) => !!a).join(" ");
 export {
-  FiberCanvas,
   FiberContextProvider,
+  FramerCanvas,
   cx,
   useFiber
 };

@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { useQueryState } from '../../hooks/index'
-import { InputPanel } from '../../InputPanel'
 import { ColorInput } from '../../UI/index'
+import { InputPanel } from './InputPanel'
 
 type BackgroundControlsPropsT = {
   hoverState?: number

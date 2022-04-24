@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { useQueryState } from '../../../hooks/index'
-import { InputPanel } from '../../../InputPanel'
 import { Radio } from '../../../UI/index'
+import { InputPanel } from '../InputPanel'
 
 type ToolsPropsT = React.DetailedHTMLProps<
   React.HTMLAttributes<HTMLDivElement>,

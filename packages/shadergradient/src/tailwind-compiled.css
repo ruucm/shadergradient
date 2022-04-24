@@ -761,12 +761,12 @@ Ensure the default browser behavior of the `hidden` attribute.
   font-size: 1.25rem;
 }
 
-.text-base {
-  font-size: 1rem;
-}
-
 .text-sm {
   font-size: .875rem;
+}
+
+.text-base {
+  font-size: 1rem;
 }
 
 .font-medium {

@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { cx } from '../utils'
+import { cx } from '../../utils'
 
 type RadioPropsT = {
   value: string

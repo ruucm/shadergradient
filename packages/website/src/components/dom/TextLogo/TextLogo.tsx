@@ -1,6 +1,6 @@
 import * as React from 'react'
 import Link from 'next/link'
-import { TextHover } from '../TextAnimation'
+import { TextHover } from 'shadergradient'
 
 export function TextLogo({ color = 'white', size = 18 }) {
   return (

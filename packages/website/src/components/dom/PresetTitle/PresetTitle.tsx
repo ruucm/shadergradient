@@ -1,7 +1,6 @@
 import * as React from 'react'
 import { motion } from 'framer-motion'
-import { PRESETS, useUIStore } from 'shadergradient'
-import { TextAnimation } from '../TextAnimation'
+import { PRESETS, useUIStore, TextAnimation } from 'shadergradient'
 import styles from './PresetTitle.module.scss'
 
 export function PresetTitle({

@@ -2,14 +2,13 @@ import React, { useEffect, useState } from 'react'
 
 import { motion } from 'framer-motion'
 import Link from 'next/link'
-import { Gradient, PRESETS, useUIStore } from 'shadergradient'
+import { Gradient, PRESETS, TextHover, useUIStore } from 'shadergradient'
 
 import styles from './Home.module.scss'
 import { AboutBtn } from '@/components/dom/AboutBtn'
 import { Links } from '@/components/dom/Links'
 import { PresetTitle } from '@/components/dom/PresetTitle'
 import { PreviewBtn, PreviewWrapper } from '@/components/dom/PreviewBtn'
-import { TextHover } from '@/components/dom/TextAnimation'
 import { TextLogo } from '@/components/dom/TextLogo'
 
 // Dynamic import is ussed to prevent a payload when the website start that will include threejs r3f etc..

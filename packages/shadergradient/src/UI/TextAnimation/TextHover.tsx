@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import React, { useState } from 'react'
 import { motion, useAnimation, AnimatePresence } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
 
@@ -46,7 +46,7 @@ export function TextHover({
   color,
   referer = '',
   content,
-  delay,
+  delay = 0,
   width = null,
   font = null,
 }) {

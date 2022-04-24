@@ -20,4 +20,4 @@ export { HoverBox, IconHoverBox } from './HoverBox/index'
 export { Button } from './Button'
 export { Spacing } from './Spacing'
 
-export { TextAnimation, TextHover } from './TextAnimation'
+export { TextAnimation, TextHover } from './TextAnimation/index'

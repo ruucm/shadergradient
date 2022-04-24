@@ -1,11 +1,12 @@
-export { Button } from './Button/index' // example component
+export * from './Button/index' // example component
 export * from './useFiber'
 export * from './Gradient/index'
 export * from './Controls/index'
+export * from './UI/index'
 export * from './hooks/index'
-export { ToolsBox } from './Tools/index'
-export { PropertyControls } from './PropertyControls/index'
-export { ControlTypeTitles } from './ControlTypeTitles'
-export { ControlTabTitles } from './ControlTabTitles'
+export * from './Tools/index'
+export * from './PropertyControls/index'
+export * from './ControlTypeTitles'
+export * from './ControlTabTitles'
 export * from './store'
 export * from './presets'

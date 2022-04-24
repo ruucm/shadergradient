@@ -547,10 +547,6 @@ Ensure the default browser behavior of the `hidden` attribute.
   height: 34px;
 }
 
-.h-full {
-  height: 100%;
-}
-
 .h-slider {
   height: 2px;
 }
@@ -561,6 +557,10 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .h-thumb {
   height: 16px;
+}
+
+.h-full {
+  height: 100%;
 }
 
 .h-\[31px\] {
@@ -593,10 +593,6 @@ Ensure the default browser behavior of the `hidden` attribute.
   width: 16px;
 }
 
-.w-\[90px\] {
-  width: 90px;
-}
-
 .w-4 {
   width: 26px;
 }
@@ -611,6 +607,10 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .w-control-number-input {
   width: 53px;
+}
+
+.w-\[90px\] {
+  width: 90px;
 }
 
 .w-\[17px\] {

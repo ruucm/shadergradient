@@ -1,0 +1,32 @@
+@import url('https://fonts.googleapis.com/css2?family=Lora:wght@500&display=swap');
+
+.presetWrapper {
+    width:100vw;
+    height:fit-content;
+}
+
+
+.presetTitle{
+    width:100vw;
+    height:fit-content;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Lora', serif;
+    font-weight: 500;
+
+}
+
+.slideBtns{
+    display: flex;
+    font-family: 'Inter', sans-serif;
+}
+
+.slideBtn{
+border-radius: 100px;
+display:flex;
+justify-content: center;
+align-items: center;
+cursor:pointer;
+margin-right:-5px;
+}

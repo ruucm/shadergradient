@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
 import Link from 'next/link'
-import { PRESETS, useUIStore, GradientMesh } from 'shadergradient'
+import { PRESETS, useUIStore, Gradient } from 'shadergradient'
 import styles from '../home/Home.module.scss'
 import { AboutBtn } from '@/components/dom/AboutBtn'
 import { TextLogo } from '@/components/dom/TextLogo'
@@ -83,20 +83,14 @@ const DOM = () => {
   )
 }
 const R3F = () => {
-  return (
-    <>
-      {/* <Shader /> */}
-      <ambientLight />
-      <pointLight position={[10, 10, 10]} />
-      <GradientMesh />
-    </>
-  )
+  return <Gradient toggleZoom />
 }
 const Page = () => {
   return (
     <>
       <DOM />
-      {/* <R3F r3f /> */}
+      {/* @ts-ignore */}
+      <R3F r3f />
     </>
   )
 }

@@ -12,6 +12,7 @@ import {
   IconButtons,
   Feather
 } from "./Controls/index.js";
+import { PropertyControls } from "./PropertyControls.js";
 export {
   BackgroundControls,
   ColorControls,
@@ -20,6 +21,7 @@ export {
   Feather,
   IconButtons,
   NumberInput,
+  PropertyControls,
   Radio,
   ShapeControls,
   Slider,

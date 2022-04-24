@@ -1,8 +1,7 @@
 import * as React from 'react'
 import { useEffect, useState } from 'react'
 import ReactSlider from 'react-slider'
-import { Spacing } from '../../Spacing'
-import { NumberInput } from '../../UI/index'
+import { NumberInput, Spacing } from '../../UI/index'
 
 type SliderPropsT = {
   defaultValue: number

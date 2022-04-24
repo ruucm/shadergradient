@@ -1,5 +1,5 @@
 import React from 'react'
-import { Spacing } from '../../../Spacing'
+import { Spacing } from '../../../UI/index'
 
 type NumberInputPropsT = {
   label?: string

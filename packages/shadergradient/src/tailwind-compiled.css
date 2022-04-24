@@ -525,10 +525,6 @@ Ensure the default browser behavior of the `hidden` attribute.
   display: none;
 }
 
-.h-3 {
-  height: 16px;
-}
-
 .h-button {
   height: 55px;
 }
@@ -537,6 +533,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   height: -webkit-fit-content;
   height: -moz-fit-content;
   height: fit-content;
+}
+
+.h-3 {
+  height: 16px;
 }
 
 .h-input {
@@ -579,12 +579,12 @@ Ensure the default browser behavior of the `hidden` attribute.
   width: 100%;
 }
 
-.w-3 {
-  width: 16px;
-}
-
 .w-screen {
   width: 100vw;
+}
+
+.w-3 {
+  width: 16px;
 }
 
 .w-4 {

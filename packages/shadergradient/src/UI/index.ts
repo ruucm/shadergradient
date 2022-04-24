@@ -18,3 +18,4 @@ export { PropertyControls } from './PropertyControls'
 
 export { HoverBox, IconHoverBox } from './HoverBox/index'
 export { Button } from './Button'
+export { Spacing } from './Spacing'

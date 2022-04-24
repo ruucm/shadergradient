@@ -1,7 +1,6 @@
 import * as React from 'react'
 import { Info } from 'react-feather'
-import { Spacing } from './Spacing'
-import { HoverBox } from './UI/index'
+import { HoverBox, Spacing } from './UI/index'
 
 type InputPanelPropsT = {
   title?: string

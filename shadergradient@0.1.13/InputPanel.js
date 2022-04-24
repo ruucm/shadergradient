@@ -43,9 +43,9 @@ var __copyProps = (to, from, except, desc) => {
 };
 var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
 
-// node_modules/react-is/cjs/react-is.development.js
+// ../../node_modules/react-is/cjs/react-is.development.js
 var require_react_is_development = __commonJS({
-  "node_modules/react-is/cjs/react-is.development.js"(exports) {
+  "../../node_modules/react-is/cjs/react-is.development.js"(exports) {
     "use strict";
     if (true) {
       (function() {
@@ -197,9 +197,9 @@ var require_react_is_development = __commonJS({
   }
 });
 
-// node_modules/react-is/index.js
+// ../../node_modules/react-is/index.js
 var require_react_is = __commonJS({
-  "node_modules/react-is/index.js"(exports, module) {
+  "../../node_modules/react-is/index.js"(exports, module) {
     "use strict";
     if (false) {
       module.exports = null;
@@ -209,9 +209,9 @@ var require_react_is = __commonJS({
   }
 });
 
-// node_modules/object-assign/index.js
+// ../../node_modules/object-assign/index.js
 var require_object_assign = __commonJS({
-  "node_modules/object-assign/index.js"(exports, module) {
+  "../../node_modules/object-assign/index.js"(exports, module) {
     "use strict";
     var getOwnPropertySymbols = Object.getOwnPropertySymbols;
     var hasOwnProperty = Object.prototype.hasOwnProperty;
@@ -279,25 +279,25 @@ var require_object_assign = __commonJS({
   }
 });
 
-// node_modules/prop-types/lib/ReactPropTypesSecret.js
+// ../../node_modules/prop-types/lib/ReactPropTypesSecret.js
 var require_ReactPropTypesSecret = __commonJS({
-  "node_modules/prop-types/lib/ReactPropTypesSecret.js"(exports, module) {
+  "../../node_modules/prop-types/lib/ReactPropTypesSecret.js"(exports, module) {
     "use strict";
     var ReactPropTypesSecret = "SECRET_DO_NOT_PASS_THIS_OR_YOU_WILL_BE_FIRED";
     module.exports = ReactPropTypesSecret;
   }
 });
 
-// node_modules/prop-types/lib/has.js
+// ../../node_modules/prop-types/lib/has.js
 var require_has = __commonJS({
-  "node_modules/prop-types/lib/has.js"(exports, module) {
+  "../../node_modules/prop-types/lib/has.js"(exports, module) {
     module.exports = Function.call.bind(Object.prototype.hasOwnProperty);
   }
 });
 
-// node_modules/prop-types/checkPropTypes.js
+// ../../node_modules/prop-types/checkPropTypes.js
 var require_checkPropTypes = __commonJS({
-  "node_modules/prop-types/checkPropTypes.js"(exports, module) {
+  "../../node_modules/prop-types/checkPropTypes.js"(exports, module) {
     "use strict";
     var printWarning = function() {
     };
@@ -355,9 +355,9 @@ var require_checkPropTypes = __commonJS({
   }
 });
 
-// node_modules/prop-types/factoryWithTypeCheckers.js
+// ../../node_modules/prop-types/factoryWithTypeCheckers.js
 var require_factoryWithTypeCheckers = __commonJS({
-  "node_modules/prop-types/factoryWithTypeCheckers.js"(exports, module) {
+  "../../node_modules/prop-types/factoryWithTypeCheckers.js"(exports, module) {
     "use strict";
     var ReactIs = require_react_is();
     var assign = require_object_assign();
@@ -782,9 +782,9 @@ var require_factoryWithTypeCheckers = __commonJS({
   }
 });
 
-// node_modules/prop-types/index.js
+// ../../node_modules/prop-types/index.js
 var require_prop_types = __commonJS({
-  "node_modules/prop-types/index.js"(exports, module) {
+  "../../node_modules/prop-types/index.js"(exports, module) {
     if (true) {
       ReactIs = require_react_is();
       throwOnDirectAccess = true;
@@ -800,7 +800,7 @@ var require_prop_types = __commonJS({
 // src/InputPanel.tsx
 import * as React2 from "react";
 
-// node_modules/react-feather/dist/icons/info.js
+// ../../node_modules/react-feather/dist/icons/info.js
 var import_prop_types = __toESM(require_prop_types());
 import React, { forwardRef } from "react";
 function _extends() {

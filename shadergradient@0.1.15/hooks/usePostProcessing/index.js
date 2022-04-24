@@ -1,2 +1,5 @@
 // src/hooks/usePostProcessing/index.ts
-export * from "./usePostProcessing.js";
+import { usePostProcessing } from "./usePostProcessing.js";
+export {
+  usePostProcessing
+};

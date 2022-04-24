@@ -27,37 +27,29 @@ var __objRest = (source, exclude) => {
   return target;
 };
 
-// src/utils/useFiber.tsx
-import React, { useContext, createContext } from "react";
+// src/Gradient/LCanvas.tsx
+import React, { useContext } from "react";
 import { canvasProps } from "../consts.js";
 import { useQueryState } from "../hooks/index.js";
-function FramerCanvas({ fiber, children }) {
+import { FiberContextProvider, fiberContext } from "../utils/index.js";
+function LCanvas(_a) {
+  var _b = _a, {
+    children,
+    importedFiber = null
+  } = _b, rest = __objRest(_b, [
+    "children",
+    "importedFiber"
+  ]);
+  const framerFiber = useContext(fiberContext);
+  const fiber = importedFiber || framerFiber;
   const { Canvas } = fiber;
-  const value = useContext(fiberContext);
   const [pixelDensity] = useQueryState("pixelDensity");
-  return /* @__PURE__ */ React.createElement(Canvas, __spreadValues({
+  return /* @__PURE__ */ React.createElement(Canvas, __spreadValues(__spreadValues({
     resize: { offsetSize: true }
-  }, canvasProps(pixelDensity)), "w", /* @__PURE__ */ React.createElement(fiberContext.Provider, {
-    value
+  }, canvasProps(pixelDensity)), rest), /* @__PURE__ */ React.createElement(FiberContextProvider, {
+    value: fiber
   }, children));
 }
-var fiberContext = createContext(null);
-var FiberContextProvider = (_a) => {
-  var _b = _a, { value } = _b, props = __objRest(_b, ["value"]);
-  return /* @__PURE__ */ React.createElement(fiberContext.Provider, __spreadValues({
-    value
-  }, props));
-};
-var useFiber = () => {
-  const ctx = useContext(fiberContext);
-  if (ctx === void 0) {
-    throw new Error(`useFiber must be used within a FiberContextProvider.`);
-  }
-  return ctx;
-};
 export {
-  FiberContextProvider,
-  FramerCanvas,
-  fiberContext,
-  useFiber
+  LCanvas
 };

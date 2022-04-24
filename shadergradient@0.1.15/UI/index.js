@@ -13,13 +13,16 @@ import {
   Feather
 } from "./Controls/index.js";
 import { PropertyControls } from "./PropertyControls.js";
+import { HoverBox, IconHoverBox } from "./HoverBox/index.js";
 export {
   BackgroundControls,
   ColorControls,
   ColorInput,
   EffectControls,
   Feather,
+  HoverBox,
   IconButtons,
+  IconHoverBox,
   NumberInput,
   PropertyControls,
   Radio,

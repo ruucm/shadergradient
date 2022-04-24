@@ -81,59 +81,64 @@ var require_classnames = __commonJS({
   }
 });
 
-// src/UI/Controls/Tools/IconButtons.tsx
+// src/UI/HoverBox/HoverBox.tsx
 var import_classnames = __toESM(require_classnames());
 import * as React from "react";
-import { IconHoverBox } from "../../../UI/index.js";
-import { Feather } from "./Feather.js";
-var IconButtons = (_a) => {
+var HoverBox = (_a) => {
   var _b = _a, {
-    icon,
     content,
-    active,
-    onClick
-  } = _b, rest = __objRest(_b, [
-    "icon",
-    "content",
-    "active",
-    "onClick"
-  ]);
-  const [isHovered, setIsHovered] = React.useState(false);
-  const backgroundOpacity = (active2, isHovered2) => {
-    if (active2 === true) {
-      return 1;
-    } else if (isHovered2 === true && active2 !== true) {
-      return 0.1;
-    } else
-      return 0;
-  };
-  return /* @__PURE__ */ React.createElement("div", {
-    className: (0, import_classnames.default)("text-sm font-medium cursor-pointer flex justify-center items-center", active && "bg-primary"),
-    style: {
-      borderRadius: 15,
-      width: 30,
-      height: 30,
-      transitionDuration: "0.3s",
-      background: "rgba(255,67,10," + backgroundOpacity(active, isHovered) + ")"
-    },
-    onMouseEnter: () => {
-      setIsHovered(true);
-    },
-    onMouseLeave: () => {
-      setIsHovered(false);
-    },
-    onClick
-  }, /* @__PURE__ */ React.createElement(Feather, {
-    name: icon,
-    size: 20,
-    color: active ? "white" : "rgb(255,67,10)"
-  }), /* @__PURE__ */ React.createElement(IconHoverBox, {
-    content,
+    onClick,
     isHovered
-  }));
+  } = _b, rest = __objRest(_b, [
+    "content",
+    "onClick",
+    "isHovered"
+  ]);
+  return /* @__PURE__ */ React.createElement("div", {
+    className: (0, import_classnames.default)("text-sm font-medium text-white"),
+    style: {
+      position: "absolute",
+      marginLeft: -10,
+      zIndex: 20,
+      visibility: isHovered ? "visible" : "hidden",
+      marginTop: isHovered ? 10 : 0,
+      transitionDuration: "0.3s",
+      opacity: isHovered ? 1 : 0
+    }
+  }, /* @__PURE__ */ React.createElement("div", {
+    style: {
+      maxWidth: 230,
+      width: "fit-content",
+      height: "fit-content"
+    }
+  }, /* @__PURE__ */ React.createElement("div", {
+    className: (0, import_classnames.default)("bg-primary"),
+    style: {
+      position: "absolute",
+      width: "100%",
+      height: "100%",
+      borderRadius: 3,
+      opacity: 0.8,
+      zIndex: 0
+    }
+  }, /* @__PURE__ */ React.createElement("div", {
+    className: (0, import_classnames.default)("bg-primary"),
+    style: {
+      width: 17,
+      height: 17,
+      background: "rgb(255, 67, 10)",
+      transform: "rotate(45deg)",
+      position: "absolute",
+      left: 12,
+      top: -7,
+      borderRadius: 3
+    }
+  })), /* @__PURE__ */ React.createElement("p", {
+    style: { padding: 8, zIndex: 20, position: "relative" }
+  }, content)));
 };
 export {
-  IconButtons
+  HoverBox
 };
 /*!
   Copyright (c) 2018 Jed Watson.

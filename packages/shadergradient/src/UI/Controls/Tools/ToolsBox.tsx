@@ -1,6 +1,6 @@
 import * as React from 'react'
 import cx from 'classnames'
-import { usePropertyStore } from '../store'
+import { usePropertyStore } from '../../../store'
 import { IconButtons } from './IconButtons'
 
 type ControlTypeTitlePropsT = {

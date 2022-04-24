@@ -7,4 +7,7 @@ export {
   ViewControls,
   BackgroundControls,
   Tools,
+  ToolsBox,
+  IconButtons,
+  Feather,
 } from './Controls/index'

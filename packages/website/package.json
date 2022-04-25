@@ -8,6 +8,6 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "shadergradient": "^0.1.0"
+    "shadergradient": "^0.2.0"
   }
 }

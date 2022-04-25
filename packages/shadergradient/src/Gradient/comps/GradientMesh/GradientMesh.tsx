@@ -12,8 +12,6 @@ import * as shaders from './shaders/index'
 const meshCount = 192
 const clock = new THREE.Clock()
 
-const type = 'plane'
-
 export const GradientMesh: React.FC<any> = () => {
   const { useFrame, extend } = useFiber()
 
@@ -109,9 +107,14 @@ export const GradientMesh: React.FC<any> = () => {
       position={[positionX, positionY, positionZ]}
       rotation={dToRArr([rotationX, rotationY, rotationZ])}
     >
-      <planeGeometry args={[10, 10, 1, meshCount]} />
-      {/* <boxGeometry args={[1, 1, 1]} /> */}
-      {/* <meshStandardMaterial color={'gold'} /> */}
+      {type === 'plane' && <planeGeometry args={[10, 10, 1, meshCount]} />}
+      {type === 'sphere' && (
+        <icosahedronBufferGeometry args={[1, meshCount / 3]} />
+      )}
+      {type === 'waterPlane' && (
+        <planeGeometry args={[10, 10, meshCount, meshCount]} />
+      )}
+
       {/* @ts-ignore */}
       <colorShiftMaterial key={ColorShiftMaterial.key} ref={material} />
     </mesh>

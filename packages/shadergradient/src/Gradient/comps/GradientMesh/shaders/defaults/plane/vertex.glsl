@@ -92,6 +92,8 @@ float cnoise(vec3 P)
   return 2.2 * n_xyz;
 }
 
+//-------- start here ------------
+
 mat3 rotation3dY(float angle) {
   float s = sin(angle);
   float c = cos(angle);

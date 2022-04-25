@@ -1,4 +1,7 @@
 // #pragma glslify: cnoise3 = require(glsl-noise/classic/3d) 
+
+// noise source from https://github.com/hughsk/glsl-noise/blob/master/periodic/3d.glsl
+
 vec3 mod289(vec3 x)
 {
   return x - floor(x * (1.0 / 289.0)) * 289.0;

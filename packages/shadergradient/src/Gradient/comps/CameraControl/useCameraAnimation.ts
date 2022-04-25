@@ -20,6 +20,13 @@ export function useCameraAnimation() {
 
   const [type] = useQueryState('type')
 
+  // init the camera
+  useEffect(() => {
+    const control = ref.current
+    control && control.dollyTo(cDistance, true)
+  }, [ref])
+
+  // update the camera
   useEffect(() => {
     const control = ref.current
 
@@ -27,7 +34,8 @@ export function useCameraAnimation() {
     if (control && hoverState === 0 && toggleZoom === false) {
       // control.rotateTo(dToR(cAzimuthAngle), dToR(cPolarAngle), true)
       // if (type === 'sphere') control.zoomTo(cameraZoom, true)
-      // else control.dollyTo(cDistance, true)
+      // else
+      control.dollyTo(cDistance, true)
     } else if (hoverState !== 0 || toggleZoom === true) {
       control.dollyTo(20, true)
     }

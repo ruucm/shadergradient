@@ -1,3 +1,5 @@
+export const DEFAUlT_PRESET = '?pixelDensity=1&cDistance=1'
+
 export const PRESETS = [
   {
     title: 'Halo',

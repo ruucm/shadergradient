@@ -7,7 +7,7 @@ import { TextLogo } from './TextLogo'
 export function Header({
   mode,
   activePreset,
-  isMobile,
+  isMobile = false,
   inAbout = false,
   onLogoClick = () => void 0,
   onAboutClick = () => void 0,

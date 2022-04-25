@@ -49,7 +49,7 @@ export function TextHover({
   delay = 0,
   width = null,
   font = null,
-  onClick,
+  onClick = () => void 0,
 }) {
   //   const splitted = referer?.split('/') || []
   const [ref, inView] = useInView()

@@ -63,11 +63,7 @@ const DOM = () => {
             color={mode !== 'full' ? '#FF430A' : PRESETS[activePreset].color}
           />
         </div> */}
-        <Header
-          mode={mode}
-          activePreset={activePreset}
-          logoSize={isMobile === true ? 15 : 18}
-        />
+        <Header mode={mode} activePreset={activePreset} />
         <div
           className={styles.content}
           style={{ display: mode === 'full' ? 'block' : 'none' }}

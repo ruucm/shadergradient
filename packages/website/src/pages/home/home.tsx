@@ -5,6 +5,7 @@ import Link from 'next/link'
 import {
   Gradient,
   Header,
+  Links,
   PRESETS,
   PresetTitles,
   PreviewBtn,
@@ -14,7 +15,6 @@ import {
 } from 'shadergradient'
 
 import styles from './Home.module.scss'
-import { Links } from '@/components/dom/Links'
 
 // Dynamic import is ussed to prevent a payload when the website start that will include threejs r3f etc..
 // WARNING ! errors might get obfuscated by using dynamic import.
@@ -103,9 +103,7 @@ const DOM = () => {
             </motion.div>
           </Link>
         </div>
-        {isMobile === true ? null : (
-          <Links color={PRESETS[activePreset].color} />
-        )}
+        {isMobile === true ? null : <Links />}
         {isMobile === true ? null : (
           <div className={styles.footer}>
             <PreviewBtn

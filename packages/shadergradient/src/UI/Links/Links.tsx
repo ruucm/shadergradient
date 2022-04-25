@@ -1,10 +1,15 @@
-import * as React from 'react'
+import React from 'react'
 import { motion, useAnimation } from 'framer-motion'
 import { Framer, GitHub, Figma } from 'react-feather'
+import { links } from '../../consts'
+import { PRESETS } from '../../presets'
+import { useUIStore } from '../../store'
 import styles from './Links.module.scss'
-import { links } from '@/consts'
 
-export function Links({ color }) {
+export function Links() {
+  const activePreset = useUIStore((state) => state.activePreset)
+  const color = PRESETS[activePreset].color
+
   const iconSize = 30
   const iconStrokeWidth = 1.5
 
@@ -61,7 +66,7 @@ export function Links({ color }) {
   }
   return (
     <div className={styles.LinksWrapper} style={{ color: color }}>
-      <p>Also available from</p>
+      <p style={{ textAlign: 'center' }}>Also available from</p>
       <div className={styles.iconWrapper}>
         <IconWrapper link={links[2].link} title='Framer'>
           <Framer color={color} size={iconSize} strokeWidth={iconStrokeWidth} />

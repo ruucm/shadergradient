@@ -26,3 +26,4 @@ export { PresetTitle, PresetTitles } from './PresetTitle/index'
 export { TextAnimation, TextHover } from './TextAnimation/index'
 
 export { Header } from './Header/index'
+export { Links } from './Links/index'

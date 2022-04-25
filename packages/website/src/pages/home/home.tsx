@@ -54,15 +54,6 @@ const DOM = () => {
       <PreviewWrapper mode={mode} setMode={setMode} />
 
       <div className={styles.contentWrapper}>
-        {/* <div className={styles.header}>
-          <TextLogo
-            color={mode !== 'full' ? '#FF430A' : PRESETS[activePreset].color}
-            size={isMobile === true ? 15 : 18}
-          />
-          <AboutBtn
-            color={mode !== 'full' ? '#FF430A' : PRESETS[activePreset].color}
-          />
-        </div> */}
         <Header mode={mode} activePreset={activePreset} aboutBtn />
         <div
           className={styles.content}

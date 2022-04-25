@@ -3,9 +3,9 @@ import {
   GradientMesh,
   useUIStore,
   PRESETS,
-  PresetTitle,
   PreviewBtn,
   PreviewWrapper,
+  PresetTitles,
 } from 'shadergradient'
 import styles from '../home/Home.module.scss'
 import { Controls } from './comps/Controls'
@@ -67,23 +67,7 @@ const DOM = () => {
             className={styles.presetTitleWrapper}
             style={{ display: mode === 'full' ? 'block' : 'none' }}
           >
-            {PRESETS.map((item, index) => {
-              return (
-                <PresetTitle
-                  index={index}
-                  color={item.color}
-                  key={index}
-                  title={
-                    index < 10
-                      ? '0' + index.toString() + ' ' + item.title
-                      : index.toString() + ' ' + item.title
-                  }
-                  description={''}
-                  fontSize={50}
-                  isMobile={isMobile}
-                ></PresetTitle>
-              )
-            })}
+            <PresetTitles isMobile={isMobile} fontSize={50} />
           </div>
           <Controls
             isMobile={isMobile}

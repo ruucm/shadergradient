@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import { motion, useAnimation, AnimatePresence } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
+import { PRESETS } from '../../presets'
+import { useUIStore } from '../../store'
 
 const letterContainerVariants = {
   initial: { transition: { staggerChildren: 0.015 } },
@@ -50,11 +52,13 @@ export function TextHover({
   width = null,
   font = null,
   onClick = () => void 0,
+  border = false,
 }) {
   //   const splitted = referer?.split('/') || []
   const [ref, inView] = useInView()
   const controls = useAnimation()
   const [currentInView, setCurrentInView] = useState(false)
+  const activePreset = useUIStore((state) => state.activePreset)
 
   setTimeout(() => {
     setCurrentInView(true)
@@ -68,6 +72,9 @@ export function TextHover({
           width: width,
           fontFamily: '"Inter", san-serif',
           cursor: 'pointer',
+          display: 'flex',
+          flexDirection: 'column',
+          color: PRESETS[activePreset].color,
         }}
         onClick={onClick}
       >
@@ -77,8 +84,9 @@ export function TextHover({
           initial={'initial'}
           animate={'default'}
           whileHover={'hover'}
-
           // transition={{ delay: delay }}
+
+          style={{ padding: '2px 5px' }}
         >
           <div style={{ textAlign: 'left', fontSize: fontSize, color: color }}>
             {content.split(' ').map((word: string, wordI: number) => (
@@ -108,6 +116,10 @@ export function TextHover({
             ))}
           </div>
         </motion.h1>
+        {/* border */}
+        {border && (
+          <div style={{ background: 'white', height: 2, width: '100%' }} />
+        )}
       </motion.div>
     </AnimatePresence>
   )

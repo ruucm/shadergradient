@@ -87,18 +87,13 @@ const DOM = () => {
           style={{ display: mode === 'full' ? 'flex' : 'none' }}
         >
           <Link href='/customize'>
-            <motion.div
-              className={styles.customizeBtn}
-              style={{
-                color: PRESETS[activePreset].color,
-                borderBottom: '2px solid ' + PRESETS[activePreset].color,
-              }}
-            >
+            <motion.div className={styles.customizeBtn}>
               <TextHover
                 fontSize={isMobile === true ? 15 : 18}
                 color={PRESETS[activePreset].color}
                 content={'Try it by yourself →'}
                 delay={0}
+                border
               />
             </motion.div>
           </Link>

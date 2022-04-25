@@ -14,7 +14,9 @@ import {
   ControlTypeTitle,
   ControlTypeTitles
 } from "./Tools/index.js";
+import { AllControls } from "./AllControls/index.js";
 export {
+  AllControls,
   BackgroundControls,
   ColorControls,
   ControlTabTitles,

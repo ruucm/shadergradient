@@ -13,7 +13,8 @@ import {
   Feather,
   ControlTabTitles,
   ControlTypeTitle,
-  ControlTypeTitles
+  ControlTypeTitles,
+  AllControls
 } from "./Controls/index.js";
 import { PropertyControls } from "./PropertyControls.js";
 import { HoverBox, IconHoverBox } from "./HoverBox/index.js";
@@ -25,6 +26,7 @@ import { TextAnimation, TextHover } from "./TextAnimation/index.js";
 import { Header } from "./Header/index.js";
 import { Links } from "./Links/index.js";
 export {
+  AllControls,
   BackgroundControls,
   Button,
   ColorControls,

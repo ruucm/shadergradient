@@ -19,7 +19,10 @@ export const GradientMesh: React.FC<any> = () => {
   const activePreset = useUIStore((state: any) => state.activePreset)
   useEffect(() => {
     let gradientURL = PRESETS[activePreset].url
-    if (activePreset === initialActivePreset && window.location.search)
+    if (
+      activePreset === initialActivePreset &&
+      window.location.search?.includes('pixelDensity') // not valid for the Framer Preview search (?target=preview-web)
+    )
       gradientURL = window.location.search // use search params at the first load.
 
     updateGradientState(gradientURL)

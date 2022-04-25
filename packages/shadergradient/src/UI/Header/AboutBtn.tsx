@@ -1,10 +1,10 @@
-import * as React from 'react'
+import React from 'react'
 import { motion } from 'framer-motion'
-import Link from 'next/link'
-import { useRouter } from 'next/router'
+// import Link from 'next/link'
+// import { useRouter } from 'next/router'
 
-export function AboutBtn({ inAbout = false, color = 'white' }) {
-  const router = useRouter()
+export function AboutBtn({ inAbout = false, color = 'white', onClick }) {
+  // const router = useRouter()
 
   return (
     <motion.div
@@ -19,24 +19,25 @@ export function AboutBtn({ inAbout = false, color = 'white' }) {
       whileHover={{
         borderBottom: '1.5px solid ' + color,
       }}
+      onClick={onClick}
     >
       {inAbout === true ? (
         <div
           style={{ display: 'flex' }}
-          onClick={() => {
-            router.back()
-          }}
+          // onClick={() => {
+          // router.back()
+          // }}
         >
           <p style={{ transform: 'rotate(-135deg)' }}>↑</p>
           <p> back</p>
         </div>
       ) : (
-        <Link href='/about'>
-          <div style={{ display: 'flex' }}>
-            <p>about </p>
-            <p style={{ transform: 'rotate(45deg)' }}>↑</p>
-          </div>
-        </Link>
+        // <Link href='/about'>
+        <div style={{ display: 'flex' }}>
+          <p>about </p>
+          <p style={{ transform: 'rotate(45deg)' }}>↑</p>
+        </div>
+        // </Link>
       )}
     </motion.div>
   )

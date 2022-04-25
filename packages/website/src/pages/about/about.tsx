@@ -1,10 +1,8 @@
 import { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
 import Link from 'next/link'
-import { PRESETS, useUIStore, Gradient } from 'shadergradient'
+import { useUIStore, Gradient, Header } from 'shadergradient'
 import styles from '../home/Home.module.scss'
-import { AboutBtn } from '@/components/dom/AboutBtn'
-import { TextLogo } from '@/components/dom/TextLogo'
 
 const DOM = () => {
   const mode = useUIStore((state: any) => state.mode)
@@ -32,13 +30,12 @@ const DOM = () => {
   return (
     <>
       <div className={styles.contentWrapper}>
-        <div className={styles.header}>
-          <TextLogo color='#FF430A' size={15} />
-          <AboutBtn
-            inAbout={true}
-            color={mode !== 'full' ? '#FF430A' : PRESETS[activePreset].color}
-          />
-        </div>
+        <Header
+          mode={mode}
+          activePreset={activePreset}
+          isMobile={isMobile}
+          inAbout
+        />
       </div>
       <div className={styles.modalWrapper}>
         <motion.div className={styles.aboutModal}>

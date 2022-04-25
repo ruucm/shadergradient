@@ -24,3 +24,5 @@ export { PreviewBtn, PreviewWrapper } from './PreviewBtn/index'
 export { PresetTitle, PresetTitles } from './PresetTitle/index'
 
 export { TextAnimation, TextHover } from './TextAnimation/index'
+
+export { Header } from './Header/index'

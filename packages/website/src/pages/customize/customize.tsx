@@ -6,11 +6,10 @@ import {
   PreviewBtn,
   PreviewWrapper,
   PresetTitles,
+  Header,
 } from 'shadergradient'
 import styles from '../home/Home.module.scss'
 import { Controls } from './comps/Controls'
-import { AboutBtn } from '@/components/dom/AboutBtn'
-import { TextLogo } from '@/components/dom/TextLogo'
 
 // Dynamic import is used to prevent a payload when the website start that will include threejs r3f etc..
 // WARNING ! errors might get obfuscated by using dynamic import.
@@ -53,15 +52,8 @@ const DOM = () => {
       <PreviewWrapper mode={mode} setMode={setMode} />
 
       <div className={styles.contentWrapper}>
-        <div className={styles.header}>
-          <TextLogo
-            color={mode !== 'full' ? '#FF430A' : PRESETS[activePreset].color}
-            size={15}
-          />
-          <AboutBtn
-            color={mode !== 'full' ? '#FF430A' : PRESETS[activePreset].color}
-          />
-        </div>
+        <Header mode={mode} activePreset={activePreset} isMobile={isMobile} />
+
         <div className={styles.content}>
           <div
             className={styles.presetTitleWrapper}

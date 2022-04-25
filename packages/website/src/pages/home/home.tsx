@@ -4,6 +4,7 @@ import { motion } from 'framer-motion'
 import Link from 'next/link'
 import {
   Gradient,
+  Header,
   PRESETS,
   PresetTitles,
   PreviewBtn,
@@ -13,9 +14,7 @@ import {
 } from 'shadergradient'
 
 import styles from './Home.module.scss'
-import { AboutBtn } from '@/components/dom/AboutBtn'
 import { Links } from '@/components/dom/Links'
-import { TextLogo } from '@/components/dom/TextLogo'
 
 // Dynamic import is ussed to prevent a payload when the website start that will include threejs r3f etc..
 // WARNING ! errors might get obfuscated by using dynamic import.
@@ -55,7 +54,7 @@ const DOM = () => {
       <PreviewWrapper mode={mode} setMode={setMode} />
 
       <div className={styles.contentWrapper}>
-        <div className={styles.header}>
+        {/* <div className={styles.header}>
           <TextLogo
             color={mode !== 'full' ? '#FF430A' : PRESETS[activePreset].color}
             size={isMobile === true ? 15 : 18}
@@ -63,7 +62,12 @@ const DOM = () => {
           <AboutBtn
             color={mode !== 'full' ? '#FF430A' : PRESETS[activePreset].color}
           />
-        </div>
+        </div> */}
+        <Header
+          mode={mode}
+          activePreset={activePreset}
+          logoSize={isMobile === true ? 15 : 18}
+        />
         <div
           className={styles.content}
           style={{ display: mode === 'full' ? 'block' : 'none' }}

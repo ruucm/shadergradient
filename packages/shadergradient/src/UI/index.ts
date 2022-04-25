@@ -13,6 +13,7 @@ export {
   ControlTabTitles,
   ControlTypeTitle,
   ControlTypeTitles,
+  AllControls,
 } from './Controls/index'
 export { PropertyControls } from './PropertyControls'
 

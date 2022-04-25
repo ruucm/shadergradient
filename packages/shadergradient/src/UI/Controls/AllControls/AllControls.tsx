@@ -1,21 +1,18 @@
 import React, { useRef } from 'react'
 import { motion } from 'framer-motion'
-import {
-  ControlTabTitles,
-  ControlTypeTitles,
-  PropertyControls,
-  ToolsBox,
-  useUIStore,
-} from 'shadergradient'
-import styles from './Controls.module.scss'
+import { useOnClickOutside } from '../../../hooks/index'
+import { useUIStore } from '../../../store'
+import { PropertyControls } from '../../PropertyControls'
+import { ControlTabTitles, ToolsBox, ControlTypeTitles } from '../Tools'
+import styles from './AllControls.module.scss'
 // import { MenuWrapper } from '@/components/dom/MenuWrapper'
-import { HorizontalControl } from '@/components/dom/HorizontalControl'
-import { useOnClickOutside } from '@/components/hooks/use-onclick-outside'
+import { HorizontalControl } from './HorizontalControl'
+
 type Props = {
   // All other props
   [x: string]: any
 }
-export const Controls: React.FC<Props> = ({
+export const AllControls: React.FC<Props> = ({
   isMobile,
   activeTab,
   setActiveTab,

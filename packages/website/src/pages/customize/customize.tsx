@@ -7,9 +7,9 @@ import {
   PreviewWrapper,
   PresetTitles,
   Header,
+  AllControls,
 } from 'shadergradient'
 import styles from '../home/Home.module.scss'
-import { Controls } from './comps/Controls'
 
 // Dynamic import is used to prevent a payload when the website start that will include threejs r3f etc..
 // WARNING ! errors might get obfuscated by using dynamic import.
@@ -61,7 +61,7 @@ const DOM = () => {
           >
             <PresetTitles isMobile={isMobile} fontSize={50} />
           </div>
-          <Controls
+          <AllControls
             isMobile={isMobile}
             activeTab={activeTab}
             setActiveTab={setActiveTab}

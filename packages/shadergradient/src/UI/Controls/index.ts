@@ -16,3 +16,5 @@ export {
   ControlTypeTitle,
   ControlTypeTitles,
 } from './Tools/index'
+
+export { AllControls } from './AllControls/index'

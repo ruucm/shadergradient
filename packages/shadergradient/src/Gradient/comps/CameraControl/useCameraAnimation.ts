@@ -1,8 +1,7 @@
 import { useEffect, useRef } from 'react'
 import { useQueryState } from '../../../hooks/index'
 import { usePropertyStore } from '../../../store'
-import { useFiber } from '../../../utils/index'
-// import { dToR } from '../../../utils/index'
+import { dToR, useFiber } from '../../../utils/index'
 
 export function useCameraAnimation() {
   const { useFrame } = useFiber()
@@ -10,6 +9,7 @@ export function useCameraAnimation() {
 
   useFrame((state, delta) => ref.current.update(delta)) // sync r3f delta with 'camera-controls'
 
+  // ----------------------------- Params to Camera Animation ---------------------------------
   const [cAzimuthAngle] = useQueryState('cAzimuthAngle')
   const [cPolarAngle] = useQueryState('cPolarAngle')
   const [cDistance] = useQueryState('cDistance')
@@ -32,10 +32,9 @@ export function useCameraAnimation() {
 
     // basic camera animations
     if (control && hoverState === 0 && toggleZoom === false) {
-      // control.rotateTo(dToR(cAzimuthAngle), dToR(cPolarAngle), true)
-      // if (type === 'sphere') control.zoomTo(cameraZoom, true)
-      // else
-      control.dollyTo(cDistance, true)
+      control.rotateTo(dToR(cAzimuthAngle), dToR(cPolarAngle), true)
+      if (type === 'sphere') control.zoomTo(cameraZoom, true)
+      else control.dollyTo(cDistance, true)
     } else if (hoverState !== 0 || toggleZoom === true) {
       control.dollyTo(20, true)
     }

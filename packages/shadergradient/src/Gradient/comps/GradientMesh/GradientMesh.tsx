@@ -1,10 +1,11 @@
-// @ts-nocheck
-import * as React from 'react'
+import React, { useEffect } from 'react'
 import { useRef } from 'react'
 import * as THREE from 'three'
-import { usePostProcessing } from '../../../hooks/index'
-import useQueryState from '../../../hooks/useQueryState'
-import { useFiber } from '../../../utils/index'
+import { initialActivePreset } from '../../../consts'
+import { usePostProcessing, useQueryState } from '../../../hooks/index'
+import { PRESETS } from '../../../presets'
+import { useUIStore, updateGradientState } from '../../../store'
+import { dToRArr, useFiber } from '../../../utils/index'
 import { shaderMaterial } from './shaderMaterial'
 import * as shaders from './shaders/index'
 
@@ -16,7 +17,53 @@ const type = 'plane'
 export const GradientMesh: React.FC<any> = () => {
   const { useFrame, extend } = useFiber()
 
+  // ----------------------------- Params to Custom Material ---------------------------------
+  const activePreset = useUIStore((state: any) => state.activePreset)
+  useEffect(() => {
+    let gradientURL = PRESETS[activePreset].url
+    if (activePreset === initialActivePreset && window.location.search)
+      gradientURL = window.location.search // use search params at the first load.
+
+    updateGradientState(gradientURL)
+  }, [activePreset])
+
+  // shape
+  const [type] = useQueryState('type')
+  const [animate] = useQueryState('animate')
+  const [uTime] = useQueryState('uTime')
+  const [uSpeed] = useQueryState('uSpeed')
   const [uStrength] = useQueryState('uStrength')
+  const [uDensity] = useQueryState('uDensity')
+  const [uFrequency] = useQueryState('uFrequency')
+  const [uAmplitude] = useQueryState('uAmplitude')
+  const [positionX] = useQueryState('positionX')
+  const [positionY] = useQueryState('positionY')
+  const [positionZ] = useQueryState('positionZ')
+  const [rotationX] = useQueryState('rotationX')
+  const [rotationY] = useQueryState('rotationY')
+  const [rotationZ] = useQueryState('rotationZ')
+
+  // colors
+  const [color1] = useQueryState('color1')
+  const [color2] = useQueryState('color2')
+  const [color3] = useQueryState('color3')
+  // const hoverStateColor = getHoverColor(hoverState, [color1, color2, color3])
+
+  // effects
+  const [grain] = useQueryState('grain')
+  const [lightType] = useQueryState('lightType')
+  const [envPreset] = useQueryState('envPreset')
+  const [reflection] = useQueryState('reflection')
+  const [brightness] = useQueryState('brightness')
+
+  // camera
+  const [cameraPositionX] = useQueryState('cameraPositionX')
+  const [cameraPositionY] = useQueryState('cameraPositionY')
+  const [cameraPositionZ] = useQueryState('cameraPositionZ')
+
+  const [wireframe] = useQueryState('wireframe')
+
+  // shader
   const [shader] = useQueryState('shader')
 
   let sceneShader = shaders.defaults[type ?? 'plane'] // default type is plane
@@ -24,15 +71,15 @@ export const GradientMesh: React.FC<any> = () => {
 
   const ColorShiftMaterial = shaderMaterial(
     {
-      colors: ['#ff5005', '#779bca', '#d9b03f'],
-      uTime: 0.5, // should be a object that has value to use in the shader
-      uSpeed: 0.1,
+      colors: [color1, color2, color3],
+      uTime,
+      uSpeed,
 
-      uNoiseDensity: 2,
+      uNoiseDensity: uDensity,
       uNoiseStrength: uStrength,
-      uFrequency: 5.5,
-      uAmplitude: 0.5,
-      uIntensity: 0.3,
+      uFrequency,
+      uAmplitude,
+      uIntensity: 0.5,
     },
     sceneShader.vertex,
     sceneShader.fragment
@@ -45,7 +92,7 @@ export const GradientMesh: React.FC<any> = () => {
 
   extend({ ColorShiftMaterial })
 
-  const material = useRef()
+  const material: any = useRef()
   useFrame((state, delta) => {
     // mesh.current.rotation.x += 0.01
     material.current.userData.uTime.value = clock.getElapsedTime()
@@ -58,8 +105,11 @@ export const GradientMesh: React.FC<any> = () => {
   })
 
   return (
-    <mesh>
-      <planeGeometry args={[10, 10, meshCount, meshCount]} />
+    <mesh
+      position={[positionX, positionY, positionZ]}
+      rotation={dToRArr([rotationX, rotationY, rotationZ])}
+    >
+      <planeGeometry args={[10, 10, 1, meshCount]} />
       {/* <boxGeometry args={[1, 1, 1]} /> */}
       {/* <meshStandardMaterial color={'gold'} /> */}
       {/* @ts-ignore */}

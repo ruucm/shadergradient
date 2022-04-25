@@ -51,7 +51,12 @@ const DOM = () => {
       <PreviewWrapper mode={mode} setMode={setMode} />
 
       <div className={styles.contentWrapper}>
-        <Header mode={mode} activePreset={activePreset} isMobile={isMobile} />
+        <Header
+          mode={mode}
+          activePreset={activePreset}
+          isMobile={isMobile}
+          aboutBtn
+        />
 
         <div className={styles.content}>
           <div

@@ -9,6 +9,7 @@ export function Header({
   activePreset,
   isMobile = false,
   inAbout = false,
+  aboutBtn = false,
   onLogoClick = () => void 0,
   onAboutClick = () => void 0,
 }) {
@@ -21,7 +22,9 @@ export function Header({
         size={isMobile === true ? 15 : 18}
         onClick={onLogoClick}
       />
-      <AboutBtn inAbout={inAbout} color={color} onClick={onAboutClick} />
+      {aboutBtn && (
+        <AboutBtn inAbout={inAbout} color={color} onClick={onAboutClick} />
+      )}
     </div>
   )
 }

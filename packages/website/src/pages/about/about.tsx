@@ -35,6 +35,7 @@ const DOM = () => {
           activePreset={activePreset}
           isMobile={isMobile}
           inAbout
+          aboutBtn
         />
       </div>
       <div className={styles.modalWrapper}>

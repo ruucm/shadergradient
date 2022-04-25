@@ -63,7 +63,7 @@ const DOM = () => {
             color={mode !== 'full' ? '#FF430A' : PRESETS[activePreset].color}
           />
         </div> */}
-        <Header mode={mode} activePreset={activePreset} />
+        <Header mode={mode} activePreset={activePreset} aboutBtn />
         <div
           className={styles.content}
           style={{ display: mode === 'full' ? 'block' : 'none' }}

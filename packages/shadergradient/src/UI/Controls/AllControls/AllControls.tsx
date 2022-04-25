@@ -1,9 +1,9 @@
-import React, { useRef } from 'react'
+import React, { useRef, useState } from 'react'
 import { motion } from 'framer-motion'
 import { useOnClickOutside } from '../../../hooks/index'
 import { useUIStore } from '../../../store'
 import { PropertyControls } from '../../PropertyControls'
-import { ControlTabTitles, ToolsBox, ControlTypeTitles } from '../Tools'
+import { ControlTabTitles, ToolsBox, ControlTypeTitles } from '../Tools/index'
 import styles from './AllControls.module.scss'
 // import { MenuWrapper } from '@/components/dom/MenuWrapper'
 import { HorizontalControl } from './HorizontalControl'
@@ -12,11 +12,9 @@ type Props = {
   // All other props
   [x: string]: any
 }
-export const AllControls: React.FC<Props> = ({
-  isMobile,
-  activeTab,
-  setActiveTab,
-}) => {
+export const AllControls: React.FC<Props> = ({ isMobile }) => {
+  const [activeTab, setActiveTab] = useState('none')
+
   const mode = useUIStore((state: any) => state.mode)
   const setMode = useUIStore((state: any) => state.setMode)
 

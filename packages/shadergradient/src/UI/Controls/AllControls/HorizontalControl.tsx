@@ -36,7 +36,7 @@ export function HorizontalControl({
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
-        position: 'absolute',
+        // position: 'absolute',
         zIndex: 2,
         bottom: 30,
       }}

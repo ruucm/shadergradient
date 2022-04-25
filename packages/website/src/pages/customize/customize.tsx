@@ -26,7 +26,6 @@ const DOM = () => {
   const loadingPercentage = useUIStore((state: any) => state.loadingPercentage)
   const activePreset = useUIStore((state) => state.activePreset)
   const [isMobile, setIsMobile] = useState(false)
-  const [activeTab, setActiveTab] = useState('none')
 
   //choose the screen size
   const handleResize = () => {
@@ -61,11 +60,7 @@ const DOM = () => {
           >
             <PresetTitles isMobile={isMobile} fontSize={50} />
           </div>
-          <AllControls
-            isMobile={isMobile}
-            activeTab={activeTab}
-            setActiveTab={setActiveTab}
-          />
+          <AllControls isMobile={isMobile} />
         </div>
 
         <div className={styles.footer}>

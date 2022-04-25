@@ -49,6 +49,7 @@ export function TextHover({
   delay = 0,
   width = null,
   font = null,
+  onClick,
 }) {
   //   const splitted = referer?.split('/') || []
   const [ref, inView] = useInView()
@@ -68,6 +69,7 @@ export function TextHover({
           fontFamily: '"Inter", san-serif',
           cursor: 'pointer',
         }}
+        onClick={onClick}
       >
         <motion.h1
           variants={letterContainerVariants}

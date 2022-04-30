@@ -2,12 +2,13 @@
 import { useEffect, useRef } from "react";
 import { useQueryState } from "../../../hooks/index.js";
 import { usePropertyStore } from "../../../store.js";
-import { useFiber } from "../../../utils/index.js";
+import { dToR, useFiber } from "../../../utils/index.js";
 var defaultDistance = 10;
 var defaultZoom = 1;
 function useCameraAnimation() {
   const { useFrame } = useFiber();
   const ref = useRef();
+  const control = ref.current;
   useFrame((state, delta) => ref.current.update(delta));
   const [cAzimuthAngle] = useQueryState("cAzimuthAngle");
   const [cPolarAngle] = useQueryState("cPolarAngle");
@@ -17,24 +18,25 @@ function useCameraAnimation() {
   const zoomOut = usePropertyStore((state) => state.zoomOut);
   const [type] = useQueryState("type");
   useEffect(() => {
-    const control = ref.current;
-    control && control.dollyTo(cDistance, true);
-  }, [ref]);
+    control == null ? void 0 : control.dollyTo(cDistance, true);
+  }, [control]);
   useEffect(() => {
-    const control = ref.current;
+    control == null ? void 0 : control.rotateTo(dToR(cAzimuthAngle), dToR(cPolarAngle), true);
+  }, [control, cAzimuthAngle, cPolarAngle]);
+  useEffect(() => {
     if (zoomOut) {
-      control.dollyTo(defaultDistance, true);
-      control.zoomTo(defaultZoom, true);
+      control == null ? void 0 : control.dollyTo(defaultDistance, true);
+      control == null ? void 0 : control.zoomTo(defaultZoom, true);
     } else {
       if (type === "sphere") {
-        control.zoomTo(cameraZoom, true);
-        control.dollyTo(defaultDistance, true);
+        control == null ? void 0 : control.zoomTo(cameraZoom, true);
+        control == null ? void 0 : control.dollyTo(defaultDistance, true);
       } else {
-        control.dollyTo(cDistance, true);
-        control.zoomTo(defaultZoom, true);
+        control == null ? void 0 : control.dollyTo(cDistance, true);
+        control == null ? void 0 : control.zoomTo(defaultZoom, true);
       }
     }
-  }, [ref, zoomOut, type]);
+  }, [control, zoomOut, type]);
   return ref;
 }
 export {

@@ -2,7 +2,7 @@ import { useEffect } from 'react'
 import dynamic from 'next/dynamic'
 import { useRouter } from 'next/router'
 import Dom from '@/components/layout/dom'
-import Header from '@/config'
+import NextHeader from '@/config'
 import partition from '@/helpers/partition'
 import useStore from '@/helpers/store'
 import 'shadergradient/src/tailwind-compiled.css'
@@ -33,7 +33,7 @@ function App({ Component, pageProps = { title: 'index' } }) {
 
   return (
     <>
-      <Header title={pageProps.title} />
+      <NextHeader title={pageProps.title} />
       <Balance child={child} />
     </>
   )

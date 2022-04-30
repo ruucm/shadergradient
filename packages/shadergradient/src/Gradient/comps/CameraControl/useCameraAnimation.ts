@@ -1,7 +1,10 @@
 import { useEffect, useRef } from 'react'
 import { useQueryState } from '../../../hooks/index'
 import { usePropertyStore } from '../../../store'
-import { dToR, useFiber } from '../../../utils/index'
+import { useFiber } from '../../../utils/index'
+
+const defaultDistance = 10
+const defaultZoom = 1
 
 export function useCameraAnimation() {
   const { useFrame } = useFiber()
@@ -26,32 +29,23 @@ export function useCameraAnimation() {
     control && control.dollyTo(cDistance, true)
   }, [ref])
 
-  // update the camera
+  // zoom-out tool
   useEffect(() => {
     const control = ref.current
 
-    // basic camera animations
-    if (control && hoverState === 0 && toggleZoom === false) {
-      control.rotateTo(dToR(cAzimuthAngle), dToR(cPolarAngle), true)
-      if (type === 'sphere') control.zoomTo(cameraZoom, true)
-      else control.dollyTo(cDistance, true)
-    } else if (hoverState !== 0 || toggleZoom === true) {
-      control.dollyTo(20, true)
+    if (toggleZoom) {
+      control.dollyTo(defaultDistance, true)
+      control.zoomTo(defaultZoom, true)
+    } else {
+      if (type === 'sphere') {
+        control.zoomTo(cameraZoom, true)
+        control.dollyTo(defaultDistance, true)
+      } else {
+        control.dollyTo(cDistance, true)
+        control.zoomTo(defaultZoom, true)
+      }
     }
-
-    // reset dolly & zoom for each types
-    // if (type === 'sphere') control.dollyTo(10, true)
-    // else control.zoomTo(1, true)
-  }, [
-    ref,
-    cAzimuthAngle,
-    cPolarAngle,
-    cDistance,
-    cameraZoom,
-    hoverState,
-    toggleZoom,
-    type,
-  ])
+  }, [ref, toggleZoom, type])
 
   return ref
 }

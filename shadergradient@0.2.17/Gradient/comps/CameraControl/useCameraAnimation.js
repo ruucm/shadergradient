@@ -2,7 +2,9 @@
 import { useEffect, useRef } from "react";
 import { useQueryState } from "../../../hooks/index.js";
 import { usePropertyStore } from "../../../store.js";
-import { dToR, useFiber } from "../../../utils/index.js";
+import { useFiber } from "../../../utils/index.js";
+var defaultDistance = 10;
+var defaultZoom = 1;
 function useCameraAnimation() {
   const { useFrame } = useFiber();
   const ref = useRef();
@@ -20,25 +22,19 @@ function useCameraAnimation() {
   }, [ref]);
   useEffect(() => {
     const control = ref.current;
-    if (control && hoverState === 0 && toggleZoom === false) {
-      control.rotateTo(dToR(cAzimuthAngle), dToR(cPolarAngle), true);
-      if (type === "sphere")
+    if (toggleZoom) {
+      control.dollyTo(defaultDistance, true);
+      control.zoomTo(defaultZoom, true);
+    } else {
+      if (type === "sphere") {
         control.zoomTo(cameraZoom, true);
-      else
+        control.dollyTo(defaultDistance, true);
+      } else {
         control.dollyTo(cDistance, true);
-    } else if (hoverState !== 0 || toggleZoom === true) {
-      control.dollyTo(20, true);
+        control.zoomTo(defaultZoom, true);
+      }
     }
-  }, [
-    ref,
-    cAzimuthAngle,
-    cPolarAngle,
-    cDistance,
-    cameraZoom,
-    hoverState,
-    toggleZoom,
-    type
-  ]);
+  }, [ref, toggleZoom, type]);
   return ref;
 }
 export {

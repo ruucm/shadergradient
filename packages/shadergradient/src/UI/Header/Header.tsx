@@ -1,18 +1,19 @@
 import React from 'react'
 import { PRESETS } from '../../presets'
+import { useUIStore } from '../../store'
 import { AboutBtn } from './AboutBtn'
 import styles from './Header.module.scss'
 import { TextLogo } from './TextLogo'
 
 export function Header({
-  mode,
-  activePreset,
+  mode = 'full',
   isMobile = false,
   inAbout = false,
   aboutBtn = false,
   onLogoClick = () => void 0,
   onAboutClick = () => void 0,
 }) {
+  const activePreset = useUIStore((state: any) => state.activePreset)
   const color = mode !== 'full' ? '#FF430A' : PRESETS[activePreset].color
 
   return (

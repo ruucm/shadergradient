@@ -4,7 +4,6 @@ import { motion } from 'framer-motion'
 import Link from 'next/link'
 import {
   Gradient,
-  Header,
   Links,
   PRESETS,
   PresetTitles,
@@ -54,7 +53,6 @@ const DOM = () => {
       <PreviewWrapper mode={mode} setMode={setMode} />
 
       <div className={styles.contentWrapper}>
-        <Header mode={mode} activePreset={activePreset} aboutBtn />
         <div
           className={styles.content}
           style={{ display: mode === 'full' ? 'block' : 'none' }}

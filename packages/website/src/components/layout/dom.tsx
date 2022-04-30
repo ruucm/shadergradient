@@ -1,4 +1,6 @@
 import { useEffect, useRef } from 'react'
+import { useRouter } from 'next/router'
+import { Header } from 'shadergradient'
 import useStore from '@/helpers/store'
 
 const Dom = ({ children }) => {
@@ -6,6 +8,7 @@ const Dom = ({ children }) => {
   useEffect(() => {
     useStore.setState({ dom: ref })
   }, [])
+  const router = useRouter()
 
   return (
     <div
@@ -13,6 +16,11 @@ const Dom = ({ children }) => {
       ref={ref}
     >
       {children}
+      <Header
+        onLogoClick={() => router.push('/')}
+        aboutBtn
+        onAboutClick={() => router.push('/about')}
+      />
     </div>
   )
 }

@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
 import Link from 'next/link'
-import { useUIStore, Gradient, Header } from 'shadergradient'
+import { useUIStore, Gradient } from 'shadergradient'
 import styles from '../home/Home.module.scss'
 
 const DOM = () => {
@@ -29,15 +29,7 @@ const DOM = () => {
 
   return (
     <>
-      <div className={styles.contentWrapper}>
-        <Header
-          mode={mode}
-          activePreset={activePreset}
-          isMobile={isMobile}
-          inAbout
-          aboutBtn
-        />
-      </div>
+      <div className={styles.contentWrapper}></div>
       <div className={styles.modalWrapper}>
         <motion.div className={styles.aboutModal}>
           <div className={styles.title}>

@@ -5,7 +5,6 @@ import {
   PreviewBtn,
   PreviewWrapper,
   PresetTitles,
-  Header,
   AllControls,
   Gradient,
 } from 'shadergradient'
@@ -51,13 +50,6 @@ const DOM = () => {
       <PreviewWrapper mode={mode} setMode={setMode} />
 
       <div className={styles.contentWrapper}>
-        <Header
-          mode={mode}
-          activePreset={activePreset}
-          isMobile={isMobile}
-          aboutBtn
-        />
-
         <div className={styles.content}>
           <div
             className={styles.presetTitleWrapper}

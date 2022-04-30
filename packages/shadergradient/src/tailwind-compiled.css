@@ -573,44 +573,8 @@ Ensure the default browser behavior of the `hidden` attribute.
   height: fit-content;
 }
 
-.h-0 {
-  height: 0px;
-}
-
 .h-\[50\%\] {
   height: 50%;
-}
-
-.h-\[30\%\] {
-  height: 30%;
-}
-
-.h-\[5px\] {
-  height: 5px;
-}
-
-.h-\[100\%\] {
-  height: 100%;
-}
-
-.h-\[50px\] {
-  height: 50px;
-}
-
-.h-\[20\%\] {
-  height: 20%;
-}
-
-.h-\[40\%\] {
-  height: 40%;
-}
-
-.h-\[\] {
-  height: ;
-}
-
-.h-\[80\%\] {
-  height: 80%;
 }
 
 .w-full {
@@ -817,14 +781,6 @@ Ensure the default browser behavior of the `hidden` attribute.
   padding: 16px;
 }
 
-.p-4 {
-  padding: 26px;
-}
-
-.p-2 {
-  padding: 12px;
-}
-
 .text-center {
   text-align: center;
 }
@@ -978,11 +934,11 @@ input[type='number'] {
     padding: 26px;
   }
 
-  .md\:p-3 {
-    padding: 16px;
-  }
-
   .md\:p-3\.5 {
     padding: 20px;
+  }
+
+  .md\:p-3 {
+    padding: 16px;
   }
 }

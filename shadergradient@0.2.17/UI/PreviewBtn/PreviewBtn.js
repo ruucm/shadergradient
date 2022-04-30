@@ -71,16 +71,15 @@ var require_classnames = __commonJS({
 var import_classnames = __toESM(require_classnames());
 import * as React from "react";
 import { motion } from "framer-motion";
-function PreviewBtn({
-  mode = "mobile",
-  setMode = void 0,
-  display = true,
-  color = "white"
-}) {
+import { useUIStore } from "../../store.js";
+function PreviewBtn({ display = true, color = "white" }) {
+  const mode = useUIStore((state) => state.mode);
+  const setMode = useUIStore((state) => state.setMode);
   return /* @__PURE__ */ React.createElement("div", {
     style: { display: display ? "block" : "none" }
   }, /* @__PURE__ */ React.createElement("div", {
-    className: "flex gap-1.5"
+    className: "flex gap-1.5",
+    style: { display: "flex" }
   }, /* @__PURE__ */ React.createElement(motion.div, {
     className: (0, import_classnames.default)("rounded-sm cursor-pointer w-[17px] h-[31px]"),
     onClick: () => {
@@ -92,7 +91,7 @@ function PreviewBtn({
     },
     style: {
       overflow: "hidden",
-      border: "2px solid " + color,
+      border: mode !== "full" ? "2px solid #FF430A" : "2px solid " + color,
       display: "flex",
       justifyContent: "center",
       alignItems: "center"
@@ -102,7 +101,7 @@ function PreviewBtn({
       width: "100%",
       height: "100%",
       padding: 20,
-      background: color
+      background: mode !== "full" ? "#FF430A" : color
     },
     whileHover: {
       opacity: mode === "mobile" ? 1 : 0.4
@@ -121,7 +120,7 @@ function PreviewBtn({
     },
     style: {
       overflow: "hidden",
-      border: "2px solid " + color,
+      border: mode !== "full" ? "2px solid #FF430A" : "2px solid " + color,
       display: "flex",
       justifyContent: "center",
       alignItems: "center"
@@ -131,7 +130,7 @@ function PreviewBtn({
       width: "100%",
       height: "100%",
       padding: 20,
-      background: color
+      background: mode !== "full" ? "#FF430A" : color
     },
     whileHover: {
       opacity: mode === "web" ? 1 : 0.4

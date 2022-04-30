@@ -13,7 +13,7 @@ var ColorInput = React.forwardRef(({ label = "", defaultValue, setValue }, ref) 
   return /* @__PURE__ */ React.createElement("div", {
     className: "flex items-center"
   }, label && /* @__PURE__ */ React.createElement(React.Fragment, null, /* @__PURE__ */ React.createElement("label", {
-    className: "font-semibold text-primary"
+    className: "font-semibold text-primary text-base"
   }, label), /* @__PURE__ */ React.createElement(Spacing, {
     className: "w-2"
   })), /* @__PURE__ */ React.createElement("div", {
@@ -31,7 +31,7 @@ var ColorInput = React.forwardRef(({ label = "", defaultValue, setValue }, ref) 
     type: "text",
     value: sharedValue,
     onChange: (e) => setSharedValue(e.target.value),
-    className: "font-medium text-primary bg-primary bg-opacity-10 rounded h-input w-[90px] text-center outline-none"
+    className: "font-medium text-primary bg-primary bg-opacity-10 rounded h-input w-[90px] text-center outline-none text-base"
   })));
 });
 export {

@@ -82,10 +82,7 @@ var PropertyControls = ({
   setActiveTab
 }) => {
   return /* @__PURE__ */ React.createElement("div", {
-    className: (0, import_classnames.default)("w-screen h-[fit-content] overflow-y-scroll bg-controls-panel-mobile text-primary mx-auto p-3.5 md:bg-controls-panel md:w-[470px] md:h-full md:p-4 relative"),
-    style: {
-      paddingBottom: activeTab === "shape" ? 55 : 20
-    }
+    className: (0, import_classnames.default)("w-full h-[fit-content] overflow-y-scroll bg-controls-panel-mobile text-primary mx-auto p-3.5 md:bg-controls-panel md:h-full md:p-3.5 relative")
   }, activeTab === "shape" && /* @__PURE__ */ React.createElement(ShapeControls, null), activeTab === "colors" && /* @__PURE__ */ React.createElement(ColorControls, null), activeTab === "effects" && /* @__PURE__ */ React.createElement(EffectControls, null), activeTab === "view" && /* @__PURE__ */ React.createElement(ViewControls, null), activeTab === "background" && /* @__PURE__ */ React.createElement(BackgroundControls, null));
 };
 export {

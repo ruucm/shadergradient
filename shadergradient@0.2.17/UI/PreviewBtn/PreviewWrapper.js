@@ -1,10 +1,12 @@
 // src/UI/PreviewBtn/PreviewWrapper.tsx
 import * as React from "react";
 import { motion, useAnimation } from "framer-motion";
-function PreviewWrapper({ mode = "mobile", setMode = void 0 }) {
+import { useUIStore } from "../../store.js";
+function PreviewWrapper() {
   const previewAnim = useAnimation();
   const [wWidth, setwWidth] = React.useState(0);
   const [wHeight, setwHeight] = React.useState(0);
+  const mode = useUIStore((state) => state.mode);
   const handleResize = () => {
     setwWidth(window.innerWidth);
     setwHeight(window.innerHeight);

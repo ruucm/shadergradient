@@ -118,12 +118,11 @@ var ToolsBox = (_a) => {
   const toggleAxis = usePropertyStore((state) => state.toggleAxis);
   const [copyUrlText, setCopyUrl] = React.useState("copy url");
   return /* @__PURE__ */ React.createElement("div", {
-    className: (0, import_classnames.default)("flex items-center justify-center", darkMode && "bg-controls-sub-panel"),
+    className: (0, import_classnames.default)("flex items-center justify-center p-3", darkMode && "bg-controls-sub-panel"),
     style: {
       gap: 6,
       width: "fit-content",
       height: "fit-content",
-      padding: 8,
       borderRadius: 40
     }
   }, /* @__PURE__ */ React.createElement(IconButtons, {

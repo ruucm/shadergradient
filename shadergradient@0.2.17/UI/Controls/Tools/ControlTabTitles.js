@@ -26,7 +26,7 @@ var ControlTabTitles = (_a) => {
     "setActiveTab"
   ]);
   return /* @__PURE__ */ React.createElement("div", {
-    className: "flex justify-between flex-row gap-2 w-[fit-content] h-[58px] p-3 cursor-pointer md:w-full md:h-full md:flex-row md:justify-start",
+    className: "flex justify-between flex-row gap-3 w-[fit-content] h-[58px] p-3 cursor-pointer md:w-full md:h-full md:flex-row md:justify-start",
     onClick: () => setActiveTab("shape")
   }, /* @__PURE__ */ React.createElement(ControlTypeTitle, {
     title: "Shape",

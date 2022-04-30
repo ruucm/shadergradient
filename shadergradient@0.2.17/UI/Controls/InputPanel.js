@@ -910,7 +910,7 @@ var InputPanel = (_a) => {
   return /* @__PURE__ */ React2.createElement("div", __spreadValues({
     className: "flex justify-between items-center gap-3.5"
   }, rest), /* @__PURE__ */ React2.createElement("span", {
-    className: "font-semibold text-primary w-[50%]"
+    className: "font-semibold text-primary w-[50%] text-base"
   }, title, " ", /* @__PURE__ */ React2.createElement("span", {
     className: "cursor-pointer",
     style: { display: "inline-block", opacity: 0.6 },

@@ -52,48 +52,56 @@ var ViewControls = () => {
     label: "azimuth",
     step: 10,
     value: cAzimuthAngle,
-    setValue: setCazimuthAngle
+    setValue: setCazimuthAngle,
+    arrow: true
   }), /* @__PURE__ */ React.createElement(NumberInput, {
     label: "polar",
     step: 10,
     min: 0,
     max: 180,
     value: cPolarAngle,
-    setValue: setCpolarAngle
+    setValue: setCpolarAngle,
+    arrow: true
   })), /* @__PURE__ */ React.createElement(InputPanel, {
     title: "Object Position"
   }, /* @__PURE__ */ React.createElement(NumberInput, {
     label: "x",
     step: 0.1,
     value: positionX,
-    setValue: setPositionX
+    setValue: setPositionX,
+    arrow: true
   }), /* @__PURE__ */ React.createElement(NumberInput, {
     label: "y",
     step: 0.1,
     value: positionY,
-    setValue: setPositionY
+    setValue: setPositionY,
+    arrow: true
   }), /* @__PURE__ */ React.createElement(NumberInput, {
     label: "z",
     step: 0.1,
     value: positionZ,
-    setValue: setPositionZ
+    setValue: setPositionZ,
+    arrow: true
   })), /* @__PURE__ */ React.createElement(InputPanel, {
     title: "Object Rotation"
   }, /* @__PURE__ */ React.createElement(NumberInput, {
     label: "x",
     step: 10,
     value: rotationX,
-    setValue: setRotationX
+    setValue: setRotationX,
+    arrow: true
   }), /* @__PURE__ */ React.createElement(NumberInput, {
     label: "y",
     step: 10,
     value: rotationY,
-    setValue: setRotationY
+    setValue: setRotationY,
+    arrow: true
   }), /* @__PURE__ */ React.createElement(NumberInput, {
     label: "z",
     step: 10,
     value: rotationZ,
-    setValue: setRotationZ
+    setValue: setRotationZ,
+    arrow: true
   })));
 };
 export {

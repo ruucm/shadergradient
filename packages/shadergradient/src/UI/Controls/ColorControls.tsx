@@ -16,6 +16,8 @@ export const ColorControls: React.FC<ColorControlsPropsT> = () => {
   const [color1, setColor1] = useQueryState('color1')
   const [color2, setColor2] = useQueryState('color2')
   const [color3, setColor3] = useQueryState('color3')
+  const [bgColor1, setBgColor1] = useQueryState('bgColor1')
+  const [bgColor2, setBgColor2] = useQueryState('bgColor2')
   const hoverState = usePropertyStore((state: any) => state.hoverState)
 
   return (
@@ -55,6 +57,18 @@ export const ColorControls: React.FC<ColorControlsPropsT> = () => {
         }}
       >
         <ColorInput defaultValue={color3} setValue={setColor3} />
+      </InputPanel>
+      <InputPanel title='Bg Color 1' info={true}>
+        <ColorInput
+          defaultValue={bgColor1 === null ? '#000000' : bgColor1}
+          setValue={setBgColor1}
+        />
+      </InputPanel>
+      <InputPanel title='Bg Color 2' info={true}>
+        <ColorInput
+          defaultValue={bgColor2 === null ? '#000000' : bgColor2}
+          setValue={setBgColor2}
+        />
       </InputPanel>
     </div>
   )

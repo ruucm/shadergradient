@@ -1,10 +1,12 @@
 import * as React from 'react'
 import { motion, useAnimation } from 'framer-motion'
+import { useUIStore } from '../../store'
 
-export function PreviewWrapper({ mode = 'mobile', setMode = void 0 }) {
+export function PreviewWrapper() {
   const previewAnim = useAnimation()
   const [wWidth, setwWidth] = React.useState(0)
   const [wHeight, setwHeight] = React.useState(0)
+  const mode = useUIStore((state: any) => state.mode)
 
   const handleResize = () => {
     setwWidth(window.innerWidth)

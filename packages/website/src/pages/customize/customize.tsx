@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
 import {
-  GradientMesh,
   useUIStore,
   PRESETS,
   PreviewBtn,
@@ -8,6 +7,7 @@ import {
   PresetTitles,
   Header,
   AllControls,
+  Gradient,
 } from 'shadergradient'
 import styles from '../home/Home.module.scss'
 
@@ -82,14 +82,7 @@ const DOM = () => {
 
 // canvas components goes here
 const R3F = () => {
-  return (
-    <>
-      {/* <Shader /> */}
-      <ambientLight intensity={1} />
-      {/* <pointLight position={[10, 10, 10]} /> */}
-      <GradientMesh />
-    </>
-  )
+  return <Gradient />
 }
 
 const Page = () => {

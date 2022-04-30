@@ -1,9 +1,10 @@
 // src/UI/Header/Header.tsx
 import React from "react";
 import { PRESETS } from "../../presets.js";
+import { useUIStore } from "../../store.js";
 import { AboutBtn } from "./AboutBtn.js";
 
-// esbuild-css-modules-plugin-namespace:/tmp/tmp-1910-1y81BDr7Z1KH/shadergradient/src/UI/Header/Header.module.css.js
+// esbuild-css-modules-plugin-namespace:/tmp/tmp-1878-CcD8rgU7caq1/shadergradient/src/UI/Header/Header.module.css.js
 var digest = "16d8a650634e2174dd4fe653f92543df201f1fe2d89ee90bc7c974ff19aee1b9";
 var css = `._header_fvc3v_1 {
   width: 100vw;
@@ -25,14 +26,14 @@ var Header_module_css_default = { "header": "_header_fvc3v_1" };
 // src/UI/Header/Header.tsx
 import { TextLogo } from "./TextLogo.js";
 function Header({
-  mode,
-  activePreset,
+  mode = "full",
   isMobile = false,
   inAbout = false,
   aboutBtn = false,
   onLogoClick = () => void 0,
   onAboutClick = () => void 0
 }) {
+  const activePreset = useUIStore((state) => state.activePreset);
   const color = mode !== "full" ? "#FF430A" : PRESETS[activePreset].color;
   return /* @__PURE__ */ React.createElement("div", {
     className: Header_module_css_default.header

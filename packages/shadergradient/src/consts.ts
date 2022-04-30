@@ -28,3 +28,5 @@ export const defaultDistance = 10
 export const defaultZoom = 1
 
 export const hdrBase = 'https://shadergradient-beige.vercel.app'
+
+export const brightnessDiff = 0.2 // weirdly it have difference between the shadergradient-old

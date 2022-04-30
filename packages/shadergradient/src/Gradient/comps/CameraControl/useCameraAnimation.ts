@@ -24,11 +24,6 @@ export function useCameraAnimation() {
 
   const [type] = useQueryState('type')
 
-  // init the camera
-  useEffect(() => {
-    control?.dollyTo(cDistance, true)
-  }, [control])
-
   // rorate the camera
   useEffect(() => {
     control?.rotateTo(dToR(cAzimuthAngle), dToR(cPolarAngle), true)

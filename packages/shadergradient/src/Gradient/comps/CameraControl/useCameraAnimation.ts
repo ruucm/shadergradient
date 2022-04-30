@@ -1,10 +1,8 @@
 import { useEffect, useRef } from 'react'
+import { defaultDistance, defaultZoom } from '../../../consts'
 import { useQueryState } from '../../../hooks/index'
 import { usePropertyStore } from '../../../store'
 import { dToR, useFiber } from '../../../utils/index'
-
-const defaultDistance = 10
-const defaultZoom = 1
 
 export function useCameraAnimation() {
   const { useFrame } = useFiber()

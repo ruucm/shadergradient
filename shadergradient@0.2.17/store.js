@@ -626,7 +626,7 @@ import { DEFAUlT_PRESET } from "./presets.js";
 var useGradientStore = create((set) => __spreadValues({}, parseState()));
 var usePropertyStore = create((set) => ({
   hoverState: 0,
-  toggleZoom: false,
+  zoomOut: false,
   toggleAxis: false
 }));
 var updateGradientState = (querystate) => {

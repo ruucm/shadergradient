@@ -114,7 +114,7 @@ var ToolsBox = (_a) => {
     "title",
     "darkMode"
   ]);
-  const toggleZoom = usePropertyStore((state) => state.toggleZoom);
+  const zoomOut = usePropertyStore((state) => state.zoomOut);
   const toggleAxis = usePropertyStore((state) => state.toggleAxis);
   const [copyUrlText, setCopyUrl] = React.useState("copy url");
   return /* @__PURE__ */ React.createElement("div", {
@@ -139,9 +139,9 @@ var ToolsBox = (_a) => {
   }), /* @__PURE__ */ React.createElement(IconButtons, {
     icon: "Minimize2",
     content: "zoom out",
-    active: toggleZoom,
+    active: zoomOut,
     onClick: () => {
-      usePropertyStore.setState({ toggleZoom: !toggleZoom });
+      usePropertyStore.setState({ zoomOut: !zoomOut });
     }
   }), /* @__PURE__ */ React.createElement(IconButtons, {
     icon: "Copy",

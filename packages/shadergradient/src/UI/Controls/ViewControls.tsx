@@ -105,6 +105,7 @@ export const ViewControls: React.FC<ViewControlsPropsT> = () => {
           step={10}
           value={cAzimuthAngle}
           setValue={setCazimuthAngle}
+          arrow={true}
         />
         <NumberInput
           label='polar'
@@ -113,6 +114,7 @@ export const ViewControls: React.FC<ViewControlsPropsT> = () => {
           max={180}
           value={cPolarAngle}
           setValue={setCpolarAngle}
+          arrow={true}
         />
       </InputPanel>
 
@@ -123,18 +125,21 @@ export const ViewControls: React.FC<ViewControlsPropsT> = () => {
           step={0.1}
           value={positionX}
           setValue={setPositionX}
+          arrow={true}
         />
         <NumberInput
           label='y'
           step={0.1}
           value={positionY}
           setValue={setPositionY}
+          arrow={true}
         />
         <NumberInput
           label='z'
           step={0.1}
           value={positionZ}
           setValue={setPositionZ}
+          arrow={true}
         />
       </InputPanel>
 
@@ -144,18 +149,21 @@ export const ViewControls: React.FC<ViewControlsPropsT> = () => {
           step={10}
           value={rotationX}
           setValue={setRotationX}
+          arrow={true}
         />
         <NumberInput
           label='y'
           step={10}
           value={rotationY}
           setValue={setRotationY}
+          arrow={true}
         />
         <NumberInput
           label='z'
           step={10}
           value={rotationZ}
           setValue={setRotationZ}
+          arrow={true}
         />
       </InputPanel>
     </div>

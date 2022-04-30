@@ -26,7 +26,9 @@ export const ColorInput = React.forwardRef<HTMLInputElement, ColorInputPropsT>(
       <div className='flex items-center'>
         {label && (
           <>
-            <label className='font-semibold text-primary'>{label}</label>
+            <label className='font-semibold text-primary text-base'>
+              {label}
+            </label>
             <Spacing className='w-2' />
           </>
         )}
@@ -48,7 +50,7 @@ export const ColorInput = React.forwardRef<HTMLInputElement, ColorInputPropsT>(
             type='text'
             value={sharedValue}
             onChange={(e) => setSharedValue(e.target.value)}
-            className='font-medium text-primary bg-primary bg-opacity-10 rounded h-input w-[90px] text-center outline-none'
+            className='font-medium text-primary bg-primary bg-opacity-10 rounded h-input w-[90px] text-center outline-none text-base'
           />
         </div>
       </div>

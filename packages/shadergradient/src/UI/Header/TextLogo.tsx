@@ -1,8 +1,11 @@
 import React from 'react'
+import { useUIStore } from '../../store'
 // import Link from 'next/link'
 import { TextHover } from '../TextAnimation/index'
 
 export function TextLogo({ color = 'white', size = 18, onClick }) {
+  const mode = useUIStore((state: any) => state.mode)
+  const setMode = useUIStore((state: any) => state.setMode)
   return (
     <div
       style={{
@@ -19,12 +22,13 @@ export function TextLogo({ color = 'white', size = 18, onClick }) {
         style={{
           width: 'fit-content',
           padding: '2px 5px',
-          borderBottom: '2px solid ' + color,
+          borderBottom:
+            mode !== 'full' ? '2px solid #FF430A' : '2px solid ' + color,
         }}
       >
         <TextHover
           fontSize={size}
-          color={color}
+          color={mode !== 'full' ? '#FF430A' : color}
           content='ShaderGradient'
           delay={0}
         />

@@ -17,7 +17,7 @@ export const ControlTabTitles: React.FC<ControlTabTitlesPropsT> = ({
   return (
     <div
       className={
-        'flex justify-between flex-row gap-2 w-[fit-content] h-[58px] p-3 cursor-pointer md:w-full md:h-full md:flex-row md:justify-start'
+        'flex justify-between flex-row gap-3 w-[fit-content] h-[58px] p-3 cursor-pointer md:w-full md:h-full md:flex-row md:justify-start'
       }
       onClick={() => setActiveTab('shape')}
     >
@@ -60,8 +60,6 @@ export const ControlTabTitles: React.FC<ControlTabTitlesPropsT> = ({
           activeTab === 'view' ? setActiveTab('none') : setActiveTab('view')
         }}
       />
-
-      {/* <PreviewSwitch mode={mode} setMode={setMode} display={!isMobile} /> */}
     </div>
   )
 }

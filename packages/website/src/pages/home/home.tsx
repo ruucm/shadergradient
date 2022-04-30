@@ -91,8 +91,6 @@ const DOM = () => {
         {isMobile === true ? null : (
           <div className={styles.footer}>
             <PreviewBtn
-              mode={mode}
-              setMode={setMode}
               color={mode !== 'full' ? '#FF430A' : PRESETS[activePreset].color}
             />
           </div>

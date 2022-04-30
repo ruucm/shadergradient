@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { useRef } from 'react'
 import * as THREE from 'three'
 import { initialActivePreset } from '../../../consts'
-import { usePostProcessing, useQueryState } from '../../../hooks/index'
+import { useQueryState } from '../../../hooks/index'
 import { PRESETS } from '../../../presets'
 import { useUIStore, updateGradientState } from '../../../store'
 import { dToRArr, useFiber } from '../../../utils/index'
@@ -50,13 +50,6 @@ export const GradientMesh: React.FC<any> = () => {
   const [color3] = useQueryState('color3')
   // const hoverStateColor = getHoverColor(hoverState, [color1, color2, color3])
 
-  // effects
-  const [grain] = useQueryState('grain')
-  const [lightType] = useQueryState('lightType')
-  const [envPreset] = useQueryState('envPreset')
-  const [reflection] = useQueryState('reflection')
-  const [brightness] = useQueryState('brightness')
-
   // camera
   const [cameraPositionX] = useQueryState('cameraPositionX')
   const [cameraPositionY] = useQueryState('cameraPositionY')
@@ -97,12 +90,6 @@ export const GradientMesh: React.FC<any> = () => {
   useFrame((state, delta) => {
     // mesh.current.rotation.x += 0.01
     material.current.userData.uTime.value = clock.getElapsedTime()
-  })
-
-  usePostProcessing({
-    on: true,
-    grain: true,
-    //  grain === 'on'
   })
 
   return (

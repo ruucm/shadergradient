@@ -26,3 +26,5 @@ export const links = [
 // useCameraAnimation
 export const defaultDistance = 10
 export const defaultZoom = 1
+
+export const hdrBase = 'https://shadergradient-beige.vercel.app'

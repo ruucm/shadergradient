@@ -44,6 +44,7 @@ export const NumberInput = React.forwardRef<
             ref={ref}
             value={value}
             onChange={(e) => setValue(e.target.value)}
+            step={step}
             // {...inputProps} // step.. etc
           />
           {arrow === true && (

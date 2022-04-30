@@ -47,7 +47,7 @@ const DOM = () => {
 
   return (
     <>
-      <PreviewWrapper mode={mode} setMode={setMode} />
+      <PreviewWrapper />
 
       <div className={styles.contentWrapper}>
         <div className={styles.content}>

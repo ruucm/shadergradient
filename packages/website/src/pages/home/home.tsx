@@ -50,7 +50,7 @@ const DOM = () => {
   console.log('loadingPercentage', loadingPercentage)
   return (
     <>
-      <PreviewWrapper mode={mode} setMode={setMode} />
+      <PreviewWrapper />
 
       <div className={styles.contentWrapper}>
         <div

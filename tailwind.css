@@ -2,6 +2,12 @@
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
 
+@layer base {
+  html {
+    font-size: 14px;
+  }
+}
+
 html,
 body {
   text-rendering: optimizeLegibility;

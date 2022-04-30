@@ -423,6 +423,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   display: none;
 }
 
+html {
+  font-size: 14px;
+}
+
 *, ::before, ::after {
   --tw-translate-x: 0;
   --tw-translate-y: 0;
@@ -581,10 +585,6 @@ Ensure the default browser behavior of the `hidden` attribute.
   width: 100%;
 }
 
-.w-screen {
-  width: 100vw;
-}
-
 .w-3 {
   width: 16px;
 }
@@ -623,18 +623,22 @@ Ensure the default browser behavior of the `hidden` attribute.
   width: fit-content;
 }
 
-.w-\[90px\] {
-  width: 90px;
+.w-screen {
+  width: 100vw;
 }
 
-.w-control-number-input {
-  width: 53px;
+.w-\[90px\] {
+  width: 90px;
 }
 
 .w-fit {
   width: -webkit-fit-content;
   width: -moz-fit-content;
   width: fit-content;
+}
+
+.w-control-number-input {
+  width: 53px;
 }
 
 .w-1 {
@@ -702,16 +706,16 @@ Ensure the default browser behavior of the `hidden` attribute.
   gap: 8px;
 }
 
-.gap-2 {
-  gap: 12px;
-}
-
 .gap-0\.2 {
   gap: 3.5px;
 }
 
 .gap-0 {
   gap: 0px;
+}
+
+.gap-2 {
+  gap: 12px;
 }
 
 .overflow-hidden {
@@ -785,12 +789,12 @@ Ensure the default browser behavior of the `hidden` attribute.
   text-align: center;
 }
 
-.text-sm {
-  font-size: .875rem;
-}
-
 .text-base {
   font-size: 1rem;
+}
+
+.text-sm {
+  font-size: .875rem;
 }
 
 .text-xl {
@@ -905,10 +909,6 @@ input[type='number'] {
     height: 100%;
   }
 
-  .md\:w-\[470px\] {
-    width: 470px;
-  }
-
   .md\:w-full {
     width: 100%;
   }
@@ -928,10 +928,6 @@ input[type='number'] {
   .md\:bg-controls-panel {
     --tw-bg-opacity: 1;
     background-color: rgb(246 248 248 / var(--tw-bg-opacity));
-  }
-
-  .md\:p-4 {
-    padding: 26px;
   }
 
   .md\:p-3\.5 {

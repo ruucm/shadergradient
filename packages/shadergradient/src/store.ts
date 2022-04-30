@@ -13,7 +13,7 @@ export const useGradientStore = create((set) => ({
 
 export const usePropertyStore = create((set) => ({
   hoverState: 0,
-  toggleZoom: false,
+  zoomOut: false,
   toggleAxis: false,
 }))
 

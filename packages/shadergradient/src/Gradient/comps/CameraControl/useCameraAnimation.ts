@@ -19,7 +19,7 @@ export function useCameraAnimation() {
   const [cameraZoom] = useQueryState('cameraZoom')
 
   const hoverState = usePropertyStore((state: any) => state.hoverState)
-  const toggleZoom = usePropertyStore((state: any) => state.toggleZoom)
+  const zoomOut = usePropertyStore((state: any) => state.zoomOut)
 
   const [type] = useQueryState('type')
 
@@ -33,7 +33,7 @@ export function useCameraAnimation() {
   useEffect(() => {
     const control = ref.current
 
-    if (toggleZoom) {
+    if (zoomOut) {
       control.dollyTo(defaultDistance, true)
       control.zoomTo(defaultZoom, true)
     } else {
@@ -45,7 +45,7 @@ export function useCameraAnimation() {
         control.zoomTo(defaultZoom, true)
       }
     }
-  }, [ref, toggleZoom, type])
+  }, [ref, zoomOut, type])
 
   return ref
 }

@@ -73,7 +73,7 @@ const DOM = () => {
   )
 }
 const R3F = () => {
-  return <Gradient toggleZoom />
+  return <Gradient zoomOut />
 }
 const Page = () => {
   return (

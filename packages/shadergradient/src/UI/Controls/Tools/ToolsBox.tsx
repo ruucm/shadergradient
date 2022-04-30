@@ -16,7 +16,7 @@ export const ToolsBox: React.FC<ControlTypeTitlePropsT> = ({
   darkMode,
   ...rest
 }) => {
-  const toggleZoom = usePropertyStore((state: any) => state.toggleZoom)
+  const zoomOut = usePropertyStore((state: any) => state.zoomOut)
   const toggleAxis = usePropertyStore((state: any) => state.toggleAxis)
   const [copyUrlText, setCopyUrl] = React.useState('copy url')
 
@@ -46,9 +46,9 @@ export const ToolsBox: React.FC<ControlTypeTitlePropsT> = ({
       <IconButtons
         icon='Minimize2'
         content='zoom out'
-        active={toggleZoom}
+        active={zoomOut}
         onClick={() => {
-          usePropertyStore.setState({ toggleZoom: !toggleZoom })
+          usePropertyStore.setState({ zoomOut: !zoomOut })
         }}
       />
       <IconButtons

@@ -18,9 +18,6 @@ function useCameraAnimation() {
   const zoomOut = usePropertyStore((state) => state.zoomOut);
   const [type] = useQueryState("type");
   useEffect(() => {
-    control == null ? void 0 : control.dollyTo(cDistance, true);
-  }, [control]);
-  useEffect(() => {
     control == null ? void 0 : control.rotateTo(dToR(cAzimuthAngle), dToR(cPolarAngle), true);
   }, [control, cAzimuthAngle, cPolarAngle]);
   useEffect(() => {

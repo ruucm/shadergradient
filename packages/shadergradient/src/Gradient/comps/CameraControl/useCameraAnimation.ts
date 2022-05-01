@@ -30,9 +30,11 @@ export function useCameraAnimation() {
   // zoom-out tool
   useEffect(() => {
     if (zoomOut) {
+      // fixed distance & zoom
       control?.dollyTo(defaultDistance, true)
       control?.zoomTo(defaultZoom, true)
     } else {
+      // control distance & zoom
       if (type === 'sphere') {
         control?.zoomTo(cameraZoom, true)
         control?.dollyTo(defaultDistance, true)
@@ -41,7 +43,7 @@ export function useCameraAnimation() {
         control?.zoomTo(defaultZoom, true)
       }
     }
-  }, [control, zoomOut, type])
+  }, [control, zoomOut, type, cameraZoom, cDistance])
 
   return ref
 }

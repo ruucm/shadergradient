@@ -9,4 +9,4 @@ export function dToRArr(degrees) {
 }
 
 export { FiberContextProvider, useFiber } from './useFiber'
-export { useRealtimeComponent } from './useRealtimeComponent/index'
+// export { useRealtimeComponent } from './useRealtimeComponent/index' // this export make website(next.js) error

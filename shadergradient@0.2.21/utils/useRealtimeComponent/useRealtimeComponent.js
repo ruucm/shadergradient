@@ -31,7 +31,8 @@ function useRealtimeComponent(originalComponent, componentName) {
       console.log(`[framer-live-esm] Build complete, refreshing ${componentName}`);
       const response = yield import(
         // `http://127.0.0.1:8001/${componentName}.js?${updateCount.current}`
-        `http://127.0.0.1:8001/UI/Inputs/Radio.js?${updateCount.current}`
+        // `http://localhost:8001/UI/Controls/ShapeControls.js?${updateCount.current}` // should be direct path of the component (or it cached by Framer, so it won't be updated)
+        `http://localhost:8001/UI/Inputs/Radio.js?${updateCount.current}`
       );
       updateCount.current++;
       const comp = response[componentName];

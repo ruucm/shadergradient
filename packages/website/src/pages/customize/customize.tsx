@@ -57,7 +57,9 @@ const DOM = () => {
           >
             <PresetTitles isMobile={isMobile} fontSize={50} />
           </div>
-          <AllControls isMobile={isMobile} />
+          <div className='fixed bottom-0'>
+            <AllControls isMobile={isMobile} />
+          </div>
         </div>
 
         <div className={styles.footer}>

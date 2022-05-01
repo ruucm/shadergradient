@@ -9,3 +9,4 @@ export function dToRArr(degrees) {
 }
 
 export { FiberContextProvider, useFiber } from './useFiber'
+export { useRealtimeComponent } from './useRealtimeComponent/index'

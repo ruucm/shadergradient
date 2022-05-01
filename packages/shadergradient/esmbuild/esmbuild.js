@@ -1,7 +1,9 @@
+const http = require('http')
 const { join, resolve } = require('path')
 const esbuild = require('esbuild')
 const { glsl } = require('esbuild-plugin-glsl')
 const globby = require('globby')
+const { Server: SocketIO } = require('socket.io')
 const { cssPlugin } = require('./plugin.css')
 const { esmPlugin } = require('./plugin.esm')
 
@@ -47,8 +49,32 @@ async function serve(path = defaultPath, port = 8000) {
     console.log(line)
   }
 
+  const socketServer = http.createServer()
+  const io = new SocketIO(socketServer, {
+    cors: {
+      origin: '*',
+      credentials: true,
+      methods: ['GET', 'POST', 'OPTIONS', 'PUT', 'PATCH', 'DELETE', 'HEAD'],
+    },
+  })
+  socketServer.listen(8002, '0.0.0.0')
+
   await esbuild.serve({ port, onRequest }, await getBuildOptions(path))
+  /**
+   * onEnd isn't being triggered when serving (https://github.com/evanw/esbuild/issues/1384) so we need to setup a regular build to get a callback whenever a build is completed
+   */
+  await esbuild.build({
+    outdir: resolve(defaultOutdir),
+    ...(await getBuildOptions(path)),
+    watch: {
+      onRebuild(error, result) {
+        io.emit('build')
+      },
+    },
+  })
+
   console.log(`Server listening at http://127.0.0.1:${port}`)
+  console.log(`Socket server listening at http://127.0.0.1:8002`)
 }
 
 let [a, b, command, path, option] = process.argv

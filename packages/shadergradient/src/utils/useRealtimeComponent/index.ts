@@ -1,0 +1,1 @@
+export { useRealtimeComponent } from './useRealtimeComponent'

@@ -1,7 +1,6 @@
 import * as React from 'react'
 import { useQueryState } from '../../hooks/index'
-import { Radio } from '../../Radio'
-import { Slider } from '../../UI/index'
+import { Slider, Radio } from '../../UI/index'
 import { InputPanel } from './InputPanel'
 
 type ShapeControlsPropsT = React.DetailedHTMLProps<

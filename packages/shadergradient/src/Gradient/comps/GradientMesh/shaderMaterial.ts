@@ -52,6 +52,7 @@ export function shaderMaterial(
       }, {})
 
       super({
+        metalness: 0.2, // similar effects reducing -0.2 intensity of the ambient light
         userData: uniformValues, // sync uniform and userData to update uniforms from outside (MeshPhysicalMaterial)
         side: THREE.DoubleSide,
         onBeforeCompile: (shader) => {

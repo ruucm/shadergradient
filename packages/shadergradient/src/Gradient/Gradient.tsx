@@ -1,5 +1,5 @@
 import React, { Suspense, useEffect } from 'react'
-import { brightnessDiff, hdrBase } from '../consts'
+import { hdrBase } from '../consts'
 import { usePostProcessing, useQueryState } from '../hooks/index'
 import { usePropertyStore } from '../store'
 import { Environment } from './comps/Environment/index'
@@ -30,9 +30,7 @@ export function Gradient({ zoomOut = false }) {
           />
         </Suspense>
       )}
-      {lightType === '3d' && (
-        <ambientLight intensity={brightness - brightnessDiff || 1} />
-      )}
+      {lightType === '3d' && <ambientLight intensity={brightness || 1} />}
       <CameraControl />
       <GradientMesh />
     </>

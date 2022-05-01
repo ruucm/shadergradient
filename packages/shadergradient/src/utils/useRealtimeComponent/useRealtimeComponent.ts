@@ -16,10 +16,13 @@ export function useRealtimeComponent(
       )
 
       const response = await import(
-        `http://127.0.0.1:8001/${componentName}.js?${updateCount.current}`
+        // `http://127.0.0.1:8001/${componentName}.js?${updateCount.current}`
+        `http://127.0.0.1:8001/UI/Inputs/Radio.js?${updateCount.current}` // should be direct path of the component (or it cached by Framer, so it won't be updated)
       )
       updateCount.current++
-      updatedInstance.current = response[componentName]
+      const comp = response[componentName]
+      console.log('comp', comp)
+      updatedInstance.current = comp
       setForceRerender(updateCount.current)
     }
 

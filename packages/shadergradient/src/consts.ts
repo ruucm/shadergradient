@@ -27,4 +27,4 @@ export const links = [
 export const defaultDistance = 10
 export const defaultZoom = 1
 
-export const hdrBase = 'https://shadergradient-beige.vercel.app'
+export const hdrBase = 'https://shadergradient.vercel.app'

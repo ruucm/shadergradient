@@ -88,9 +88,12 @@ export const GradientMesh: React.FC<any> = () => {
 
   const material: any = useRef()
   useFrame((state, delta) => {
-    // mesh.current.rotation.x += 0.01
-    material.current.userData.uTime.value = clock.getElapsedTime()
+    if (animate === 'on')
+      material.current.userData.uTime.value = clock.getElapsedTime()
   })
+  useEffect(() => {
+    material.current.userData.uTime.value = uTime
+  }, [uTime])
 
   return (
     <mesh

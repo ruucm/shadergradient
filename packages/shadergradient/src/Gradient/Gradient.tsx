@@ -5,14 +5,14 @@ import { usePropertyStore } from '../store'
 import { Environment } from './comps/Environment/index'
 import { CameraControl, GradientMesh } from './index'
 
-export function Gradient({ zoomOut = false }) {
+export function Gradient({ zoomOut = false, animate }) {
   useEffect(() => usePropertyStore.setState({ zoomOut }), [zoomOut])
+  usePropsToStore({ animate })
 
+  // effects
   const [lightType] = useQueryState('lightType')
   const [brightness] = useQueryState('brightness')
   const [envPreset] = useQueryState('envPreset')
-
-  // effects
   const [grain] = useQueryState('grain')
   const [reflection] = useQueryState('reflection')
 
@@ -35,4 +35,12 @@ export function Gradient({ zoomOut = false }) {
       <GradientMesh />
     </>
   )
+}
+
+function usePropsToStore({ animate }) {
+  const [, setAnimate] = useQueryState('animate')
+
+  useEffect(() => {
+    setAnimate(animate)
+  }, [animate])
 }

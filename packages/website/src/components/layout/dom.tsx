@@ -1,10 +1,7 @@
-<<<<<<< Updated upstream
-import { useEffect, useRef } from 'react'
-=======
 import { useEffect, useRef, useState } from 'react'
-import router from 'next/router'
+
+import { useRouter } from 'next/router'
 import { Header } from 'shadergradient'
->>>>>>> Stashed changes
 import useStore from '@/helpers/store'
 
 const Dom = ({ children }) => {
@@ -16,6 +13,7 @@ const Dom = ({ children }) => {
       setInAbout(true)
     }
   }, [])
+  const router = useRouter()
 
   return (
     <div
@@ -23,15 +21,13 @@ const Dom = ({ children }) => {
       ref={ref}
     >
       {children}
-<<<<<<< Updated upstream
-=======
+
       <Header
         onLogoClick={() => router.push('/')}
         aboutBtn
         onAboutClick={() => router.push('/about')}
         inAbout={inAbout}
       />
->>>>>>> Stashed changes
     </div>
   )
 }

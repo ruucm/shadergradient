@@ -1,6 +1,4 @@
 export const initialActivePreset = 0
-<<<<<<< Updated upstream
-=======
 
 export const canvasProps = (pixelDensity: number) => ({
   dpr: pixelDensity, //device pixel ratio - 1 default and fast, 2 detailed and slow
@@ -26,6 +24,7 @@ export const links = [
 ]
 
 // useCameraAnimation
+
 export const defaultDistance = 14
 export const defaultZoom = 1
 export const aboutAngles = [190, 130]
@@ -33,4 +32,3 @@ export const aboutPositions = [0, 11, 0]
 export const aboutRotations = [0, 10, 50]
 
 export const hdrBase = 'https://shadergradient.vercel.app'
->>>>>>> Stashed changes

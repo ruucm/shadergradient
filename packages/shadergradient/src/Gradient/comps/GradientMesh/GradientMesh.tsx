@@ -1,17 +1,10 @@
-// @ts-nocheck
-import * as React from 'react'
+import React, { useEffect } from 'react'
 import { useRef } from 'react'
 import * as THREE from 'three'
-<<<<<<< Updated upstream
-import useQueryState from '../../../hooks/useQueryState'
-import { useFiber } from '../../../useFiber'
-import fragment from './glsl/shader.frag'
-import vertex from './glsl/shader.vert'
-=======
 import {
+  initialActivePreset,
   aboutPositions,
   aboutRotations,
-  initialActivePreset,
 } from '../../../consts'
 import { useQueryState } from '../../../hooks/index'
 import { PRESETS } from '../../../presets'
@@ -21,8 +14,8 @@ import {
   usePropertyStore,
 } from '../../../store'
 import { dToRArr, useFiber } from '../../../utils/index'
->>>>>>> Stashed changes
 import { shaderMaterial } from './shaderMaterial'
+import * as shaders from './shaders/index'
 
 const meshCount = 192
 const clock = new THREE.Clock()
@@ -30,19 +23,68 @@ const clock = new THREE.Clock()
 export const GradientMesh: React.FC<any> = () => {
   const { useFrame, extend } = useFiber()
 
+  // ----------------------------- Params to Custom Material ---------------------------------
+  const activePreset = useUIStore((state: any) => state.activePreset)
+  useEffect(() => {
+    let gradientURL = PRESETS[activePreset].url
+    if (
+      activePreset === initialActivePreset &&
+      window.location.search?.includes('pixelDensity') // checking just window.location.search existing is not valid for the Framer Preview search (?target=preview-web)
+    )
+      gradientURL = window.location.search // use search params at the first load.
+
+    updateGradientState(gradientURL)
+  }, [activePreset])
+
+  // shape
+  const [type] = useQueryState('type')
+  const [animate] = useQueryState('animate')
+  const [uTime] = useQueryState('uTime')
+  const [uSpeed] = useQueryState('uSpeed')
   const [uStrength] = useQueryState('uStrength')
+  const [uDensity] = useQueryState('uDensity')
+  const [uFrequency] = useQueryState('uFrequency')
+  const [uAmplitude] = useQueryState('uAmplitude')
+  const [positionX] = useQueryState('positionX')
+  const [positionY] = useQueryState('positionY')
+  const [positionZ] = useQueryState('positionZ')
+  const [rotationX] = useQueryState('rotationX')
+  const [rotationY] = useQueryState('rotationY')
+  const [rotationZ] = useQueryState('rotationZ')
+
+  // colors
+  const [color1] = useQueryState('color1')
+  const [color2] = useQueryState('color2')
+  const [color3] = useQueryState('color3')
+  // const hoverStateColor = getHoverColor(hoverState, [color1, color2, color3])
+
+  // camera
+  const [cameraPositionX] = useQueryState('cameraPositionX')
+  const [cameraPositionY] = useQueryState('cameraPositionY')
+  const [cameraPositionZ] = useQueryState('cameraPositionZ')
+
+  const [wireframe] = useQueryState('wireframe')
+
+  // shader
+  const [shader] = useQueryState('shader')
+
+  let sceneShader = shaders.defaults[type ?? 'plane'] // default type is plane
+  if (shader && shader !== 'defaults') sceneShader = shaders[shader]
 
   const ColorShiftMaterial = shaderMaterial(
     {
-      side: THREE.DoubleSide,
-      time: 0,
-      color: new THREE.Color(0.05, 0.0, 0.025),
-      uTime: { value: 0 }, // should be a object that has value to use in the shader
-      uNoiseDensity: 2,
+      colors: [color1, color2, color3],
+      uTime,
+      uSpeed,
+
+      uNoiseDensity: uDensity,
       uNoiseStrength: uStrength,
+      uFrequency,
+      uAmplitude,
+      uIntensity: 0.5,
     },
-    vertex,
-    fragment
+    sceneShader.vertex,
+    sceneShader.fragment
   )
 
   // change position/rotation for about page
@@ -55,19 +97,16 @@ export const GradientMesh: React.FC<any> = () => {
 
   extend({ ColorShiftMaterial })
 
-  const material = useRef()
+  const material: any = useRef()
   useFrame((state, delta) => {
-    // mesh.current.rotation.x += 0.01
-    material.current.uniforms.uTime.value = clock.getElapsedTime()
+    if (animate === 'on')
+      material.current.userData.uTime.value = clock.getElapsedTime()
   })
+  useEffect(() => {
+    material.current.userData.uTime.value = uTime
+  }, [uTime])
 
   return (
-<<<<<<< Updated upstream
-    <mesh>
-      <planeGeometry args={[10, 10, meshCount, meshCount]} />
-      {/* <boxGeometry args={[1, 1, 1]} /> */}
-      {/* <meshStandardMaterial color={'gold'} /> */}
-=======
     <mesh
       position={
         inAbout === true
@@ -88,13 +127,8 @@ export const GradientMesh: React.FC<any> = () => {
         <planeGeometry args={[10, 10, meshCount, meshCount]} />
       )}
 
->>>>>>> Stashed changes
       {/* @ts-ignore */}
-      <colorShiftMaterial
-        key={ColorShiftMaterial.key}
-        time={3}
-        ref={material}
-      />
+      <colorShiftMaterial key={ColorShiftMaterial.key} ref={material} />
     </mesh>
   )
 }

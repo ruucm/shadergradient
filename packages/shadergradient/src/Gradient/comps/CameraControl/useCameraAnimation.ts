@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react'
-import { defaultDistance, defaultZoom, aboutAngles } from '../../../consts'
+import { aboutAngles, defaultDistance, defaultZoom } from '../../../consts'
 import { useQueryState } from '../../../hooks/index'
 import { usePropertyStore } from '../../../store'
 import { dToR, useFiber } from '../../../utils/index'
@@ -20,6 +20,7 @@ export function useCameraAnimation() {
   const hoverState = usePropertyStore((state: any) => state.hoverState)
   const zoomOut = usePropertyStore((state: any) => state.zoomOut)
   const inAbout = usePropertyStore((state: any) => state.inAbout)
+
   const [type] = useQueryState('type')
 
   // rorate the camera

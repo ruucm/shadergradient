@@ -1,19 +1,11 @@
 import { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
-<<<<<<< Updated upstream
-import Link from 'next/link'
-import { PRESETS, useUIStore, GradientMesh } from 'shadergradient'
-import styles from '../home/Home.module.scss'
-import { AboutBtn } from '@/components/dom/AboutBtn'
-import { TextLogo } from '@/components/dom/TextLogo'
-=======
 import {
   useUIStore,
   Gradient,
   TextAnimation,
   TextHoverBox,
 } from 'shadergradient'
->>>>>>> Stashed changes
 
 const DOM = () => {
   const mode = useUIStore((state: any) => state.mode)
@@ -40,54 +32,6 @@ const DOM = () => {
 
   return (
     <>
-<<<<<<< Updated upstream
-      <div className={styles.contentWrapper}>
-        <div className={styles.header}>
-          <TextLogo color='#FF430A' size={15} />
-          <AboutBtn
-            inAbout={true}
-            color={mode !== 'full' ? '#FF430A' : PRESETS[activePreset].color}
-          />
-        </div>
-      </div>
-      <div className={styles.modalWrapper}>
-        <motion.div className={styles.aboutModal}>
-          <div className={styles.title}>
-            <motion.h1
-              animate={{ opacity: 1 }}
-              transition={{ duration: 1 }}
-              initial={{ opacity: 0 }}
-            >
-              A shader is a set of instructions that calculates and draws every
-              single pixel on the screen. The gradients are the part of the 3d
-              object drawn by our custom shaders. The shaders create a natural
-              movement and expression of the gradient that can make your digital
-              products vibrant and lively. <br />
-            </motion.h1>
-
-            <motion.h1
-              animate={{ opacity: 1 }}
-              transition={{ duration: 1 }}
-              initial={{ opacity: 0 }}
-            >
-              You can control properties related to shape, color, effects, and
-              camera. The three colors you pick are connected to the very top
-              left, very top right, and the very bottom of the fluctuating
-              plane. Explore more about properties by experimenting with them at{' '}
-              <Link href='/customize'>→ customize</Link> page.
-            </motion.h1>
-            <motion.h1
-              animate={{ opacity: 1 }}
-              transition={{ duration: 1 }}
-              initial={{ opacity: 0 }}
-            >
-              Made by two creatives,
-              <br /> <a href=''>→ Ruucm</a>{' '}
-              <a href='https://seungmee-lee.com'>→ stone.skipper</a> with 17
-              Sunday afternoons.
-            </motion.h1>
-          </div>
-=======
       <div
         style={{
           width: '100%',
@@ -129,7 +73,6 @@ const DOM = () => {
             tag='Or got any idea? Let us know'
           />{' '}
           that you’re changing.
->>>>>>> Stashed changes
         </motion.div>
       </div>
       <div
@@ -193,24 +136,15 @@ const DOM = () => {
   )
 }
 const R3F = () => {
-<<<<<<< Updated upstream
-  return (
-    <>
-      {/* <Shader /> */}
-      <ambientLight />
-      <pointLight position={[10, 10, 10]} />
-      <GradientMesh />
-    </>
-  )
-=======
-  return <Gradient zoomOut animate={true} inAbout={true} />
->>>>>>> Stashed changes
+  return <Gradient zoomOut={true} animate={true} inAbout={true} />
 }
+
 const Page = () => {
   return (
     <>
       <DOM />
-      {/* <R3F r3f /> */}
+      {/* @ts-ignore */}
+      <R3F r3f />
     </>
   )
 }

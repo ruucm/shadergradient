@@ -1,9 +1,8 @@
 import { useEffect, useRef } from 'react'
-import { OrbitControls, Preload } from '@react-three/drei'
+import { OrbitControls } from '@react-three/drei'
 import * as drei from '@react-three/drei'
 import * as fiber from '@react-three/fiber'
-import { Canvas } from '@react-three/fiber'
-import { CameraControl, FiberContextProvider } from 'shadergradient'
+import { LCanvas } from 'shadergradient'
 import useStore from '@/helpers/store'
 
 const LControl = () => {
@@ -18,25 +17,22 @@ const LControl = () => {
   // @ts-ignore
   return <OrbitControls ref={control} domElement={dom.current} />
 }
-const LCanvas = ({ children }) => {
+
+// export default LCanvas
+const NextJsCanvas = ({ children }) => {
   const dom = useStore((state) => state.dom)
 
   return (
-    <Canvas
+    <LCanvas
+      importedFiber={{ ...fiber, ...drei }}
+      onCreated={(state) => state.events.connect(dom.current)}
       style={{
         position: 'absolute',
         top: 0,
       }}
-      onCreated={(state) => state.events.connect(dom.current)}
     >
-      <Preload all />
-      <FiberContextProvider value={{ ...fiber, ...drei }}>
-        {/* <LControl /> */}
-        <CameraControl />
-        {children}
-      </FiberContextProvider>
-    </Canvas>
+      {children}
+    </LCanvas>
   )
 }
-
-export default LCanvas
+export default NextJsCanvas

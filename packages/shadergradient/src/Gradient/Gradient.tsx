@@ -1,16 +1,15 @@
-// @ts-nocheck
-import * as React from 'react'
-import { FiberCanvas, useFiber } from '../useFiber'
+import React, { Suspense, useEffect } from 'react'
+import { hdrBase } from '../consts'
+import { usePostProcessing, useQueryState } from '../hooks/index'
+import { usePropertyStore } from '../store'
+import { useFiber } from '../utils/useFiber'
+import { Environment } from './comps/Environment/index'
 import { CameraControl, GradientMesh } from './index'
 
-<<<<<<< Updated upstream
-export function Gradient() {
-  const fiber = useFiber()
-=======
 export function Gradient({ zoomOut = false, animate, inAbout = false }) {
   useEffect(() => usePropertyStore.setState({ zoomOut }), [zoomOut])
   useEffect(() => usePropertyStore.setState({ inAbout }), [inAbout])
-  usePropsToStore({ animate })
+  const fiber = useFiber()
 
   // effects
   const [lightType] = useQueryState('lightType')
@@ -20,15 +19,30 @@ export function Gradient({ zoomOut = false, animate, inAbout = false }) {
   const [reflection] = useQueryState('reflection')
 
   usePostProcessing({ on: true, grain: grain === 'on' })
->>>>>>> Stashed changes
 
   return (
-    <FiberCanvas fiber={fiber}>
-      <ambientLight />
-      <pointLight position={[10, 10, 10]} />
-      {/* <fiber.OrbitControls /> */}
+    <>
+      {lightType === 'env' && (
+        <Suspense fallback='Load Failed'>
+          <Environment
+            // preset={envPreset}
+            files={`${hdrBase}/hdr/${envPreset}.hdr`} // use instead of preset, cause rawCdn is not stable on many requests.
+            background={true}
+            // loadingCallback={loadingCallback}
+          />
+        </Suspense>
+      )}
+      {lightType === '3d' && <ambientLight intensity={brightness || 1} />}
       <CameraControl />
       <GradientMesh />
-    </FiberCanvas>
+    </>
   )
+}
+
+function usePropsToStore({ animate }) {
+  const [, setAnimate] = useQueryState('animate')
+
+  useEffect(() => {
+    setAnimate(animate)
+  }, [animate])
 }

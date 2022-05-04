@@ -2,10 +2,10 @@ import * as qs from 'query-string'
 import create from 'zustand'
 import { combine } from 'zustand/middleware'
 import { initialActivePreset } from './consts'
+import { DEFAUlT_PRESET } from './presets'
 
 // without embedMode
 // it renders without the dom & other gradient controls at first, and add it after the first updateGradientState() excuted.
-export const defaultPreset = '?pixelDensity=1'
 
 export const useGradientStore = create((set) => ({
   ...parseState(),
@@ -13,7 +13,7 @@ export const useGradientStore = create((set) => ({
 
 export const usePropertyStore = create((set) => ({
   hoverState: 0,
-  toggleZoom: false,
+  zoomOut: false,
   toggleAxis: false,
   inAbout: false,
 }))
@@ -24,7 +24,7 @@ export const updateGradientState = (querystate: any) => {
 }
 
 // defaultGradient could be replaced by window.location.search
-function parseState(search = defaultPreset) {
+function parseState(search = DEFAUlT_PRESET) {
   return qs.parse(search, {
     parseNumbers: true,
     parseBooleans: true,

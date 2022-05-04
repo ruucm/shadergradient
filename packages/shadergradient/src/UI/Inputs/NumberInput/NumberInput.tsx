@@ -49,11 +49,11 @@ export const NumberInput = React.forwardRef<
           />
           {arrow === true && (
             <div
-              className='h-input flex flex-col text-primary justify-center items-center w-1 text-xl'
+              className='h-input flex flex-col text-primary justify-start items-center w-1'
               style={{ marginRight: 8, marginLeft: -5 }}
             >
               <div
-                className='h-[40%] w-fit cursor-pointer flex items-center'
+                className='h-[50%] w-fit cursor-pointer flex items-center'
                 onClick={() => {
                   setValue(value + step)
                 }}
@@ -61,7 +61,7 @@ export const NumberInput = React.forwardRef<
                 ▴
               </div>
               <div
-                className='h-[40%] w-fit cursor-pointer flex items-center'
+                className='h-[50%] w-fit cursor-pointer flex items-center'
                 onClick={() => {
                   setValue(value - step)
                 }}

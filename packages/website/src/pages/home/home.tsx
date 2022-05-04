@@ -1,16 +1,19 @@
-/* eslint-disable @next/next/link-passhref */
 import React, { useEffect, useState } from 'react'
+
 import { motion } from 'framer-motion'
 import Link from 'next/link'
-import { GradientMesh, PRESETS, useUIStore } from 'shadergradient'
+import {
+  Gradient,
+  Links,
+  PRESETS,
+  PresetTitles,
+  PreviewBtn,
+  PreviewWrapper,
+  TextHover,
+  useUIStore,
+} from 'shadergradient'
 
 import styles from './Home.module.scss'
-import { AboutBtn } from '@/components/dom/AboutBtn'
-import { Links } from '@/components/dom/Links'
-import { PresetTitle } from '@/components/dom/PresetTitle'
-import { PreviewBtn, PreviewWrapper } from '@/components/dom/PreviewBtn'
-import { TextHover } from '@/components/dom/TextAnimation'
-import { TextLogo } from '@/components/dom/TextLogo'
 
 // Dynamic import is ussed to prevent a payload when the website start that will include threejs r3f etc..
 // WARNING ! errors might get obfuscated by using dynamic import.
@@ -47,40 +50,15 @@ const DOM = () => {
   console.log('loadingPercentage', loadingPercentage)
   return (
     <>
-      <PreviewWrapper mode={mode} setMode={setMode} />
+      <PreviewWrapper />
 
       <div className={styles.contentWrapper}>
-        <div className={styles.header}>
-          <TextLogo
-            color={mode !== 'full' ? '#FF430A' : PRESETS[activePreset].color}
-            size={isMobile === true ? 15 : 18}
-          />
-          <AboutBtn
-            color={mode !== 'full' ? '#FF430A' : PRESETS[activePreset].color}
-          />
-        </div>
         <div
           className={styles.content}
           style={{ display: mode === 'full' ? 'block' : 'none' }}
         >
           <div className={styles.presetTitleWrapper}>
-            {PRESETS.map((item, index) => {
-              return (
-                <PresetTitle
-                  index={index}
-                  color={item.color}
-                  key={index}
-                  title={
-                    index < 10
-                      ? '0' + index.toString() + ' ' + item.title
-                      : index.toString() + ' ' + item.title
-                  }
-                  description={''}
-                  isMobile={isMobile}
-                  fontSize={isMobile ? 90 : 120}
-                ></PresetTitle>
-              )
-            })}
+            <PresetTitles isMobile={isMobile} />
           </div>
 
           <div
@@ -89,8 +67,8 @@ const DOM = () => {
           >
             All visuals are created with ShaderGradient,
             <br /> a new way of creating beautiful, moving gradients. <br />
-            It's made with lines of codes, so you can create your own with just
-            a few clicks.
+            {`It's made with lines of codes, so you can create your own with just
+            a few clicks.`}
           </div>
         </div>
         <div
@@ -98,30 +76,21 @@ const DOM = () => {
           style={{ display: mode === 'full' ? 'flex' : 'none' }}
         >
           <Link href='/customize'>
-            <motion.div
-              className={styles.customizeBtn}
-              style={{
-                color: PRESETS[activePreset].color,
-                borderBottom: '2px solid ' + PRESETS[activePreset].color,
-              }}
-            >
+            <motion.div className={styles.customizeBtn}>
               <TextHover
                 fontSize={isMobile === true ? 15 : 18}
                 color={PRESETS[activePreset].color}
                 content={'Try it by yourself →'}
                 delay={0}
+                border
               />
             </motion.div>
           </Link>
         </div>
-        {isMobile === true ? null : (
-          <Links color={PRESETS[activePreset].color} />
-        )}
+        {isMobile === true ? null : <Links />}
         {isMobile === true ? null : (
           <div className={styles.footer}>
             <PreviewBtn
-              mode={mode}
-              setMode={setMode}
               color={mode !== 'full' ? '#FF430A' : PRESETS[activePreset].color}
             />
           </div>
@@ -133,18 +102,7 @@ const DOM = () => {
 
 // canvas components goes here
 const R3F = () => {
-<<<<<<< Updated upstream
-  return (
-    <>
-      {/* <Shader /> */}
-      <ambientLight />
-      <pointLight position={[10, 10, 10]} />
-      <GradientMesh />
-    </>
-  )
-=======
   return <Gradient animate={true} />
->>>>>>> Stashed changes
 }
 
 const Page = () => {
@@ -152,7 +110,7 @@ const Page = () => {
     <>
       <DOM />
       {/* @ts-ignore */}
-      {/* <R3F r3f /> */}
+      <R3F r3f />
     </>
   )
 }

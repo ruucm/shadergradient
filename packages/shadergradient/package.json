@@ -1,6 +1,6 @@
 {
   "name": "shadergradient",
-  "version": "0.1.10",
+  "version": "0.2.25",
   "main": "src/index.tsx",
   "scripts": {
     "serve": "yarn install && node esmbuild/esmbuild serve ./src 8001",
@@ -8,8 +8,6 @@
     "release": "yarn run build && mkdir -p release && cp -Rf dist release/$npm_package_name@$npm_package_version"
   },
   "dependencies": {
-    "classnames": "^2.3.1",
-    "react-feather": "^2.0.9",
     "react-slider": "^2.0.0"
   }
 }

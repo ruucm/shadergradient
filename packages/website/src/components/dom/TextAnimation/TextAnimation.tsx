@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { motion, useAnimation, AnimatePresence } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
 
@@ -38,6 +38,7 @@ export function TextAnimation({
   delay,
   width = null,
   font = null,
+  textCenter = false,
 }) {
   //   const splitted = referer?.split('/') || []
   const [ref, inView] = useInView()

@@ -101,6 +101,7 @@ const DOM = () => {
 
 // canvas components goes here
 const R3F = () => {
+<<<<<<< Updated upstream
   return (
     <>
       {/* <Shader /> */}
@@ -109,6 +110,9 @@ const R3F = () => {
       <GradientMesh />
     </>
   )
+=======
+  return <Gradient animate />
+>>>>>>> Stashed changes
 }
 
 const Page = () => {

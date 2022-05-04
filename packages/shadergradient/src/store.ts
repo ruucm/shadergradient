@@ -15,6 +15,7 @@ export const usePropertyStore = create((set) => ({
   hoverState: 0,
   toggleZoom: false,
   toggleAxis: false,
+  inAbout: false,
 }))
 
 export const updateGradientState = (querystate: any) => {

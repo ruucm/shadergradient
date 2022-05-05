@@ -30,14 +30,15 @@ export function PresetTitle({
           color={color}
           fontSize={fontSize}
           //default 120, for mobile title 80, for customize 50
-          content={isMobile === true ? title.substring(2) : title}
+          content={isMobile === true ? title.substring(3) : title}
         />
         <div
           className={styles.slideBtns}
           style={{
             color: color,
             fontSize: isMobile === true ? 22 : 30,
-            transform: isMobile === true ? 'rotate(90deg)' : null,
+            display: isMobile === true ? 'none' : 'flex',
+            // transform: isMobile === true ? 'rotate(90deg)' : null,
           }}
         >
           <motion.div

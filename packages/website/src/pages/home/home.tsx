@@ -58,12 +58,18 @@ const DOM = () => {
           style={{ display: mode === 'full' ? 'block' : 'none' }}
         >
           <div className={styles.presetTitleWrapper}>
-            <PresetTitles isMobile={isMobile} />
+            <PresetTitles
+              isMobile={isMobile}
+              fontSize={isMobile === true ? 70 : 120}
+            />
           </div>
 
           <div
             className={styles.paragraph}
-            style={{ color: PRESETS[activePreset].color }}
+            style={{
+              color: PRESETS[activePreset].color,
+              display: isMobile === true ? 'none' : 'block',
+            }}
           >
             All visuals are created with ShaderGradient,
             <br /> a new way of creating beautiful, moving gradients. <br />
@@ -73,7 +79,9 @@ const DOM = () => {
         </div>
         <div
           className={styles.customizeBtnWrapper}
-          style={{ display: mode === 'full' ? 'flex' : 'none' }}
+          style={{
+            display: mode === 'full' && isMobile !== true ? 'flex' : 'none',
+          }}
         >
           <Link href='/customize'>
             <motion.div className={styles.customizeBtn}>

@@ -105,7 +105,7 @@ const DOM = () => {
               link='https://seungmee-lee.com'
               tag='say hi 👋'
             />
-            <br /> as a toy project
+            <br /> reach us out for any inquiry
           </div>
         </div>
         <div className='flex gap-6'>

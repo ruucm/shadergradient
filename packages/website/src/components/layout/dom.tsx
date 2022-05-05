@@ -7,7 +7,19 @@ import useStore from '@/helpers/store'
 const Dom = ({ children }) => {
   const [inAbout, setInAbout] = useState(false)
   const ref = useRef(null)
+  const [isMobile, setIsMobile] = useState(false)
+
+  //choose the screen size
+  const handleResize = () => {
+    if (window.innerWidth < 641) {
+      setIsMobile(true)
+    } else {
+      setIsMobile(false)
+    }
+  }
   useEffect(() => {
+    handleResize()
+    window.addEventListener('resize', handleResize)
     useStore.setState({ dom: ref })
     if (router.pathname === '/about') {
       setInAbout(true)
@@ -27,6 +39,7 @@ const Dom = ({ children }) => {
         aboutBtn
         onAboutClick={() => router.push('/about')}
         inAbout={inAbout}
+        isMobile={isMobile}
       />
     </div>
   )

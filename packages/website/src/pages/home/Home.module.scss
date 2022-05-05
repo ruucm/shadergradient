@@ -9,7 +9,7 @@
     display: flex;
     top: 5vh;
     height: 90vh;
-    justify-content: space-between;
+    justify-content: center;
     flex-direction: column;
   }
 }
@@ -18,7 +18,9 @@
   width: 100vw;
   height: fit-content;
   @media (max-width: 640px) {
-    transform: rotate(90deg);
+    // transform: rotate(90deg);
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
   }
 }
 
@@ -38,7 +40,7 @@
 .presetTitleWrapper {
   margin-top: 15vh;
   @media (max-width: 640px) {
-    margin-top: 10vh;
+    margin-top: 0;
   }
 }
 

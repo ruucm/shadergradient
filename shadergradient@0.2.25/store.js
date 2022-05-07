@@ -623,7 +623,7 @@ var combine = (initialState, create2) => (set, get, api) => Object.assign({}, in
 // src/store.ts
 import { initialActivePreset } from "./consts.js";
 import { DEFAUlT_PRESET } from "./presets.js";
-var useGradientStore = create((set) => __spreadValues({}, parseState()));
+var useQueryStore = create((set) => __spreadValues({}, parseState()));
 var usePropertyStore = create((set) => ({
   hoverState: 0,
   zoomOut: false,
@@ -631,7 +631,7 @@ var usePropertyStore = create((set) => ({
 }));
 var updateGradientState = (querystate) => {
   const state = parseState(querystate);
-  useGradientStore.setState(state, true);
+  useQueryStore.setState(state, true);
 };
 function parseState(search = DEFAUlT_PRESET) {
   return qs.parse(search, {
@@ -651,7 +651,7 @@ var useUIStore = create(combine({ activePreset: initialActivePreset, mode: "full
 export {
   updateGradientState,
   useDomStore,
-  useGradientStore,
   usePropertyStore,
+  useQueryStore,
   useUIStore
 };

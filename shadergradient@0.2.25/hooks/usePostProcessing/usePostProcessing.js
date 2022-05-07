@@ -4,7 +4,7 @@ import { useFiber } from "../../utils/index.js";
 import { EffectComposer as EffectComposerImpl } from "./lib/pp/from-threejs/postprocessing/EffectComposer.js";
 import { RenderPass } from "./lib/pp/from-threejs/postprocessing/RenderPass.js";
 import { HalftonePass } from "./lib/pp/HalftonePass.js";
-function usePostProcessing({ on = false, grain = false }) {
+function usePostProcessing(disable) {
   const { useThree, useFrame } = useFiber();
   const { gl, scene, camera, size } = useThree();
   const composer = useMemo(() => {
@@ -20,14 +20,14 @@ function usePostProcessing({ on = false, grain = false }) {
       blending: 1,
       blendingMode: 1,
       greyscale: false,
-      disable: !grain
+      disable
     };
     const halftonePass = new HalftonePass(size.width, size.height, halftoneParams);
     effectComposer.addPass(halftonePass);
     return effectComposer;
-  }, [gl, scene, camera, size, grain]);
+  }, [gl, scene, camera, size]);
   useEffect(() => composer == null ? void 0 : composer.setSize(size.width, size.height), [composer, size]);
-  useFrame((_, delta) => void (gl.autoClear = true, on && composer.render(delta)), 1);
+  useFrame((_, delta) => void (gl.autoClear = true, composer.render(delta)), 1);
 }
 export {
   usePostProcessing

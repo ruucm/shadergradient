@@ -491,12 +491,12 @@ var require_query_string = __commonJS({
 // src/hooks/useQueryState.ts
 var qs = __toESM(require_query_string());
 import { useCallback } from "react";
-import { useGradientStore } from "../store.js";
+import { useQueryStore } from "../store.js";
 var useQueryState = (propName, defaultValue = null) => {
   const selector = useCallback((state) => typeof state[propName] !== "undefined" ? state[propName] : defaultValue, [propName, defaultValue]);
-  const globalValue = useGradientStore(selector);
-  const _setGlobalValue = useCallback((valueFun) => useGradientStore.setState({
-    [propName]: valueFun(useGradientStore.getState()[propName])
+  const globalValue = useQueryStore(selector);
+  const _setGlobalValue = useCallback((valueFun) => useQueryStore.setState({
+    [propName]: valueFun(useQueryStore.getState()[propName])
   }), [propName]);
   const setQueryValue = useCallback((newVal) => {
     _setGlobalValue((currentState) => {
@@ -507,7 +507,7 @@ var useQueryState = (propName, defaultValue = null) => {
         newVal = parseFloat(newVal.toFixed(2));
       }
       setTimeout(() => {
-        const query = useGradientStore.getState();
+        const query = useQueryStore.getState();
         updateHistory(qs.stringifyUrl({ url: window.location.pathname, query }, { skipNull: true, arrayFormat: "index" }));
       }, 0);
       return newVal;

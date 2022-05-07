@@ -24134,10 +24134,7 @@ if (typeof window !== "undefined") {
 }
 
 // src/Gradient/comps/GradientMesh/GradientMesh.tsx
-import { initialActivePreset } from "../../../consts.js";
 import { useQueryState } from "../../../hooks/index.js";
-import { PRESETS } from "../../../presets.js";
-import { useUIStore, updateGradientState } from "../../../store.js";
 import { dToRArr, useFiber } from "../../../utils/index.js";
 import { shaderMaterial } from "./shaderMaterial.js";
 import * as shaders from "./shaders/index.js";
@@ -24145,14 +24142,6 @@ var meshCount = 192;
 var clock = new Clock();
 var GradientMesh = () => {
   const { useFrame, extend } = useFiber();
-  const activePreset = useUIStore((state) => state.activePreset);
-  useEffect(() => {
-    var _a;
-    let gradientURL = PRESETS[activePreset].url;
-    if (activePreset === initialActivePreset && ((_a = window.location.search) == null ? void 0 : _a.includes("pixelDensity")))
-      gradientURL = window.location.search;
-    updateGradientState(gradientURL);
-  }, [activePreset]);
   const [type] = useQueryState("type");
   const [animate] = useQueryState("animate");
   const [uTime] = useQueryState("uTime");

@@ -1,10 +1,7 @@
 import React, { useEffect } from 'react'
 import { useRef } from 'react'
 import * as THREE from 'three'
-import { initialActivePreset } from '../../../consts'
 import { useQueryState } from '../../../hooks/index'
-import { PRESETS } from '../../../presets'
-import { useUIStore, updateGradientState } from '../../../store'
 import { dToRArr, useFiber } from '../../../utils/index'
 import { shaderMaterial } from './shaderMaterial'
 import * as shaders from './shaders/index'
@@ -14,19 +11,6 @@ const clock = new THREE.Clock()
 
 export const GradientMesh: React.FC<any> = () => {
   const { useFrame, extend } = useFiber()
-
-  // ----------------------------- Params to Custom Material ---------------------------------
-  const activePreset = useUIStore((state: any) => state.activePreset)
-  useEffect(() => {
-    let gradientURL = PRESETS[activePreset].url
-    if (
-      activePreset === initialActivePreset &&
-      window.location.search?.includes('pixelDensity') // checking just window.location.search existing is not valid for the Framer Preview search (?target=preview-web)
-    )
-      gradientURL = window.location.search // use search params at the first load.
-
-    updateGradientState(gradientURL)
-  }, [activePreset])
 
   // shape
   const [type] = useQueryState('type')

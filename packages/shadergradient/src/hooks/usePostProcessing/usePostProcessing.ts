@@ -4,7 +4,7 @@ import { EffectComposer as EffectComposerImpl } from './lib/pp/from-threejs/post
 import { RenderPass } from './lib/pp/from-threejs/postprocessing/RenderPass'
 import { HalftonePass } from './lib/pp/HalftonePass'
 
-export function usePostProcessing({ on = false, grain = false }) {
+export function usePostProcessing(disable) {
   const { useThree, useFrame } = useFiber()
 
   const { gl, scene, camera, size } = useThree()
@@ -26,7 +26,7 @@ export function usePostProcessing({ on = false, grain = false }) {
       blending: 1,
       blendingMode: 1,
       greyscale: false,
-      disable: !grain,
+      disable,
     }
     const halftonePass = new HalftonePass(
       size.width,
@@ -36,11 +36,11 @@ export function usePostProcessing({ on = false, grain = false }) {
     effectComposer.addPass(halftonePass)
 
     return effectComposer
-  }, [gl, scene, camera, size, grain])
+  }, [gl, scene, camera, size])
 
   useEffect(() => composer?.setSize(size.width, size.height), [composer, size])
   useFrame(
-    (_, delta) => void ((gl.autoClear = true), on && composer.render(delta)),
+    (_, delta) => void ((gl.autoClear = true), composer.render(delta)),
     1
   )
 }

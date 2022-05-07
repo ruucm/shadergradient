@@ -1,13 +1,19 @@
 import React, { Suspense, useEffect } from 'react'
-import { hdrBase } from '../consts'
+import { hdrBase, initialActivePreset } from '../consts'
 import { usePostProcessing, useQueryState } from '../hooks/index'
-import { usePropertyStore } from '../store'
+import { PRESETS } from '../presets'
+import {
+  updateGradientState,
+  usePropertyStore,
+  useQueryStore,
+  useUIStore,
+} from '../store'
 import { Environment } from './comps/Environment/index'
 import { CameraControl, GradientMesh } from './index'
 
-export function Gradient({ zoomOut = false, animate }) {
-  useEffect(() => usePropertyStore.setState({ zoomOut }), [zoomOut])
-  usePropsToStore({ animate })
+export function Gradient(props) {
+  usePropsToStore(props)
+  usePresetToStore()
 
   // effects
   const [lightType] = useQueryState('lightType')
@@ -16,7 +22,7 @@ export function Gradient({ zoomOut = false, animate }) {
   const [grain] = useQueryState('grain')
   const [reflection] = useQueryState('reflection')
 
-  usePostProcessing({ on: true, grain: grain === 'on' })
+  usePostProcessing(grain === 'off')
 
   return (
     <>
@@ -37,10 +43,22 @@ export function Gradient({ zoomOut = false, animate }) {
   )
 }
 
-function usePropsToStore({ animate }) {
-  const [, setAnimate] = useQueryState('animate')
+function usePropsToStore({ zoomOut = false, ...queryProps }) {
+  useEffect(() => usePropertyStore.setState({ zoomOut }), [zoomOut])
+  useEffect(() => useQueryStore.setState(queryProps), [queryProps])
+}
 
+function usePresetToStore() {
+  // ----------------------------- Preset to Custom Material ---------------------------------
+  const activePreset = useUIStore((state: any) => state.activePreset)
   useEffect(() => {
-    setAnimate(animate)
-  }, [animate])
+    let gradientURL = PRESETS[activePreset].url
+    if (
+      activePreset === initialActivePreset &&
+      window.location.search?.includes('pixelDensity') // checking just window.location.search existing is not valid for the Framer Preview search (?target=preview-web)
+    )
+      gradientURL = window.location.search // use search params at the first load.
+
+    updateGradientState(gradientURL)
+  }, [activePreset])
 }

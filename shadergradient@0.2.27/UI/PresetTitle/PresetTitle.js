@@ -5,14 +5,17 @@ import { PRESETS } from "../../presets.js";
 import { useUIStore } from "../../store.js";
 import { TextAnimation } from "../../UI/index.js";
 
-// esbuild-css-modules-plugin-namespace:/tmp/tmp-1909-EHPEFRIMFZj6/shadergradient/src/UI/PresetTitle/PresetTitle.module.css.js
-var digest = "da3e53b4e4fb90a08bf3864f4d776d9c50badae01bf0d2447c59a056ca2d3922";
+// esbuild-css-modules-plugin-namespace:/tmp/tmp-2010-GV57w04YSg3P/shadergradient/src/UI/PresetTitle/PresetTitle.module.css.js
+var digest = "5053ea25582ee4b7b56500c75cc77a9ae1a23ab33da3787d9ddb941ce8558804";
 var css = `@import url("https://fonts.googleapis.com/css2?family=Lora:wght@500&display=swap");
-._presetWrapper_1sw6l_2 {
+._presetWrapper_1qj0w_2 {
   width: 100vw;
   height: fit-content; }
+  @media (max-width: 640px) {
+    ._presetWrapper_1qj0w_2 {
+      width: fit-content; } }
 
-._presetTitle_1sw6l_6 {
+._presetTitle_1qj0w_9 {
   width: 100vw;
   height: fit-content;
   display: flex;
@@ -21,11 +24,11 @@ var css = `@import url("https://fonts.googleapis.com/css2?family=Lora:wght@500&d
   font-family: 'Lora', serif;
   font-weight: 500; }
 
-._slideBtns_1sw6l_15 {
+._slideBtns_1qj0w_18 {
   display: flex;
   font-family: 'Inter', sans-serif; }
 
-._slideBtn_1sw6l_15 {
+._slideBtn_1qj0w_18 {
   border-radius: 100px;
   display: flex;
   justify-content: center;
@@ -41,7 +44,7 @@ var css = `@import url("https://fonts.googleapis.com/css2?family=Lora:wght@500&d
     document.head.appendChild(ele);
   }
 })();
-var PresetTitle_module_css_default = { "presetWrapper": "_presetWrapper_1sw6l_2", "presetTitle": "_presetTitle_1sw6l_6", "slideBtns": "_slideBtns_1sw6l_15", "slideBtn": "_slideBtn_1sw6l_15" };
+var PresetTitle_module_css_default = { "presetWrapper": "_presetWrapper_1qj0w_2", "presetTitle": "_presetTitle_1qj0w_9", "slideBtns": "_slideBtns_1qj0w_18", "slideBtn": "_slideBtn_1qj0w_18" };
 
 // src/UI/PresetTitle/PresetTitle.tsx
 function PresetTitle({
@@ -66,13 +69,13 @@ function PresetTitle({
     font: '"Lora", serif',
     color,
     fontSize,
-    content: isMobile === true ? title.substring(2) : title
+    content: isMobile === true ? title.substring(3) : title
   }), /* @__PURE__ */ React.createElement("div", {
     className: PresetTitle_module_css_default.slideBtns,
     style: {
       color,
       fontSize: isMobile === true ? 22 : 30,
-      transform: isMobile === true ? "rotate(90deg)" : null
+      display: isMobile === true ? "none" : "flex"
     }
   }, /* @__PURE__ */ React.createElement(motion.div, {
     className: PresetTitle_module_css_default.slideBtn,

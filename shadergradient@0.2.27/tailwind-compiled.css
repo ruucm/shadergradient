@@ -272,6 +272,34 @@ html {
   --tw-backdrop-saturate: ;
   --tw-backdrop-sepia: ;
 }
+.container {
+  width: 100%;
+}
+@media (min-width: 640px) {
+  .container {
+    max-width: 640px;
+  }
+}
+@media (min-width: 768px) {
+  .container {
+    max-width: 768px;
+  }
+}
+@media (min-width: 1024px) {
+  .container {
+    max-width: 1024px;
+  }
+}
+@media (min-width: 1280px) {
+  .container {
+    max-width: 1280px;
+  }
+}
+@media (min-width: 1536px) {
+  .container {
+    max-width: 1536px;
+  }
+}
 .visible {
   visibility: visible;
 }
@@ -302,6 +330,9 @@ html {
 .z-10 {
   z-index: 10;
 }
+.m-4 {
+  margin: 26px;
+}
 .mx-auto {
   margin-left: auto;
   margin-right: auto;
@@ -312,8 +343,14 @@ html {
 .inline-block {
   display: inline-block;
 }
+.inline {
+  display: inline;
+}
 .flex {
   display: flex;
+}
+.inline-flex {
+  display: inline-flex;
 }
 .grid {
   display: grid;
@@ -465,6 +502,9 @@ html {
 .gap-2 {
   gap: 12px;
 }
+.gap-6 {
+  gap: 48px;
+}
 .overflow-hidden {
   overflow: hidden;
 }
@@ -525,8 +565,14 @@ html {
 .text-sm {
   font-size: .875rem;
 }
+.text-xs {
+  font-size: .75rem;
+}
 .text-xl {
   font-size: 1.25rem;
+}
+.text-lg {
+  font-size: 1.125rem;
 }
 .font-medium {
   font-weight: 500;
@@ -547,6 +593,10 @@ html {
 }
 .text-opacity-100 {
   --tw-text-opacity: 1;
+}
+.underline {
+  -webkit-text-decoration-line: underline;
+  text-decoration-line: underline;
 }
 .opacity-0 {
   opacity: 0;
@@ -617,9 +667,11 @@ body {
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  height: var(--app-height);
 }
 :root {
   --guide-opacity: 0;
+  --app-height: 100%;
 }
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {

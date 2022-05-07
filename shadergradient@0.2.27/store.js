@@ -627,7 +627,8 @@ var useQueryStore = create((set) => __spreadValues({}, parseState()));
 var usePropertyStore = create((set) => ({
   hoverState: 0,
   zoomOut: false,
-  toggleAxis: false
+  toggleAxis: false,
+  inAbout: false
 }));
 var updateGradientState = (querystate) => {
   const state = parseState(querystate);

@@ -17,10 +17,16 @@ var links = [
     link: "https://framer.com/projects/ShaderGradient--7fmA9c0AApv3vyjCPpS3-emceg"
   }
 ];
-var defaultDistance = 10;
+var defaultDistance = 14;
 var defaultZoom = 1;
+var aboutAngles = [190, 130];
+var aboutPositions = [0, 11, 0];
+var aboutRotations = [0, 10, 50];
 var hdrBase = "https://shadergradient.vercel.app";
 export {
+  aboutAngles,
+  aboutPositions,
+  aboutRotations,
   canvasProps,
   defaultDistance,
   defaultZoom,

@@ -1,9 +1,9 @@
 // src/UI/TextAnimation/TextAnimation.tsx
-import { useState as useState2, useEffect as useEffect2 } from "react";
+import React2, { useState as useState2, useEffect as useEffect2 } from "react";
 import { motion, useAnimation, AnimatePresence } from "framer-motion";
 
 // ../../node_modules/react-intersection-observer/react-intersection-observer.m.js
-import * as React2 from "react";
+import * as React from "react";
 var observerMap = /* @__PURE__ */ new Map();
 var RootIds = /* @__PURE__ */ new WeakMap();
 var rootId = 0;
@@ -96,11 +96,11 @@ function observe(element, callback, options, fallbackInView) {
 }
 function useInView(_temp) {
   var _ref = _temp === void 0 ? {} : _temp, threshold = _ref.threshold, delay = _ref.delay, trackVisibility = _ref.trackVisibility, rootMargin = _ref.rootMargin, root = _ref.root, triggerOnce = _ref.triggerOnce, skip = _ref.skip, initialInView = _ref.initialInView, fallbackInView = _ref.fallbackInView;
-  var unobserve = React2.useRef();
-  var _React$useState = React2.useState({
+  var unobserve = React.useRef();
+  var _React$useState = React.useState({
     inView: !!initialInView
   }), state = _React$useState[0], setState = _React$useState[1];
-  var setRef = React2.useCallback(function(node) {
+  var setRef = React.useCallback(function(node) {
     if (unobserve.current !== void 0) {
       unobserve.current();
       unobserve.current = void 0;
@@ -135,7 +135,7 @@ function useInView(_temp) {
     fallbackInView,
     delay
   ]);
-  React2.useEffect(function() {
+  React.useEffect(function() {
     if (!unobserve.current && state.entry && !triggerOnce && !skip) {
       setState({
         inView: !!initialInView
@@ -183,7 +183,8 @@ function TextAnimation({
   content,
   delay,
   width = null,
-  font = null
+  font = null,
+  textCenter = false
 }) {
   const [ref, inView] = useInView();
   const controls = useAnimation();
@@ -198,25 +199,25 @@ function TextAnimation({
   setTimeout(() => {
     setActivePresetInView(true);
   }, delay);
-  return /* @__PURE__ */ React.createElement(AnimatePresence, null, activePresetInView && /* @__PURE__ */ React.createElement(motion.div, {
+  return /* @__PURE__ */ React2.createElement(AnimatePresence, null, activePresetInView && /* @__PURE__ */ React2.createElement(motion.div, {
     style: {
       position: "relative",
       wordBreak: "break-word",
       width
     }
-  }, /* @__PURE__ */ React.createElement(motion.h1, {
+  }, /* @__PURE__ */ React2.createElement(motion.h1, {
     variants: letterContainerVariants,
     ref,
     initial: "before",
     animate: controls
-  }, /* @__PURE__ */ React.createElement("div", {
+  }, /* @__PURE__ */ React2.createElement("div", {
     style: { textAlign: "left", fontSize, color }
-  }, content.split(" ").map((word, wordI) => /* @__PURE__ */ React.createElement("div", {
+  }, content.split(" ").map((word, wordI) => /* @__PURE__ */ React2.createElement("div", {
     key: `word-${word}-${wordI}`,
     style: {
       display: "inline-block"
     }
-  }, Array.from(word).map((letter, index) => /* @__PURE__ */ React.createElement(motion.span, {
+  }, Array.from(word).map((letter, index) => /* @__PURE__ */ React2.createElement(motion.span, {
     key: `${index}-${letter}`,
     style: {
       position: "relative",

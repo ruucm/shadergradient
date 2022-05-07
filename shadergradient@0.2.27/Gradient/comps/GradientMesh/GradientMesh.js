@@ -24134,6 +24134,13 @@ if (typeof window !== "undefined") {
 }
 
 // src/Gradient/comps/GradientMesh/GradientMesh.tsx
+import {
+  aboutPositions,
+  aboutRotations
+} from "../../../consts.js";
+import {
+  usePropertyStore
+} from "../../../store.js";
 import { dToRArr, useFiber } from "../../../utils/index.js";
 import { shaderMaterial } from "./shaderMaterial.js";
 import * as shaders from "./shaders/index.js";
@@ -24177,6 +24184,7 @@ var GradientMesh = ({
     uAmplitude,
     uIntensity: 0.5
   }, sceneShader.vertex, sceneShader.fragment);
+  const inAbout = usePropertyStore((state) => state.inAbout);
   ColorShiftMaterial.key = MathUtils.generateUUID();
   extend({ ColorShiftMaterial });
   const material = useRef();
@@ -24188,8 +24196,8 @@ var GradientMesh = ({
     material.current.userData.uTime.value = uTime;
   }, [uTime]);
   return /* @__PURE__ */ React.createElement("mesh", {
-    position: [positionX, positionY, positionZ],
-    rotation: dToRArr([rotationX, rotationY, rotationZ])
+    position: inAbout === true ? [aboutPositions[0], aboutPositions[1], aboutPositions[2]] : [positionX, positionY, positionZ],
+    rotation: inAbout === true ? dToRArr([aboutRotations[0], aboutRotations[1], aboutRotations[2]]) : dToRArr([rotationX, rotationY, rotationZ])
   }, type === "plane" && /* @__PURE__ */ React.createElement("planeGeometry", {
     args: [10, 10, 1, meshCount]
   }), type === "sphere" && /* @__PURE__ */ React.createElement("icosahedronBufferGeometry", {

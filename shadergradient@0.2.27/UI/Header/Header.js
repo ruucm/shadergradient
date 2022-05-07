@@ -4,14 +4,17 @@ import { PRESETS } from "../../presets.js";
 import { useUIStore } from "../../store.js";
 import { AboutBtn } from "./AboutBtn.js";
 
-// esbuild-css-modules-plugin-namespace:/tmp/tmp-1909-EHPEFRIMFZj6/shadergradient/src/UI/Header/Header.module.css.js
-var digest = "9b32982b686a89bd95708372c3699d080f454c3b1f648c4273a8335d5571e9e8";
-var css = `._header_fvc3v_1 {
+// esbuild-css-modules-plugin-namespace:/tmp/tmp-2010-GV57w04YSg3P/shadergradient/src/UI/Header/Header.module.css.js
+var digest = "6306ff1065d9c09b793b3fc6f445c4d90763e9aeebc1289215aa9a6964aca4a4";
+var css = `._header_bdl6a_1 {
   width: 100vw;
   height: 8vh;
   display: flex;
   justify-content: center;
-  align-items: center; }
+  align-items: center;
+  position: fixed;
+  top: 0;
+  z-index: 10; }
 `;
 (function() {
   if (!document.getElementById(digest)) {
@@ -21,7 +24,7 @@ var css = `._header_fvc3v_1 {
     document.head.appendChild(ele);
   }
 })();
-var Header_module_css_default = { "header": "_header_fvc3v_1" };
+var Header_module_css_default = { "header": "_header_bdl6a_1" };
 
 // src/UI/Header/Header.tsx
 import { TextLogo } from "./TextLogo.js";
@@ -37,7 +40,7 @@ function Header({
   const color = mode !== "full" ? "#FF430A" : PRESETS[activePreset].color;
   return /* @__PURE__ */ React.createElement("div", {
     className: Header_module_css_default.header
-  }, /* @__PURE__ */ React.createElement(TextLogo, {
+  }, inAbout !== true && /* @__PURE__ */ React.createElement(TextLogo, {
     color,
     size: isMobile === true ? 15 : 18,
     onClick: onLogoClick

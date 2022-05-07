@@ -1,6 +1,6 @@
 // src/Gradient/comps/CameraControl/useCameraAnimation.ts
 import { useEffect, useRef } from "react";
-import { defaultDistance, defaultZoom } from "../../../consts.js";
+import { aboutAngles, defaultDistance, defaultZoom } from "../../../consts.js";
 import { useQueryState } from "../../../hooks/index.js";
 import { usePropertyStore } from "../../../store.js";
 import { dToR, useFiber } from "../../../utils/index.js";
@@ -15,10 +15,14 @@ function useCameraAnimation() {
   const [cameraZoom] = useQueryState("cameraZoom");
   const hoverState = usePropertyStore((state) => state.hoverState);
   const zoomOut = usePropertyStore((state) => state.zoomOut);
+  const inAbout = usePropertyStore((state) => state.inAbout);
   const [type] = useQueryState("type");
   useEffect(() => {
     control == null ? void 0 : control.rotateTo(dToR(cAzimuthAngle), dToR(cPolarAngle), true);
-  }, [control, cAzimuthAngle, cPolarAngle]);
+    if (inAbout === true) {
+      control == null ? void 0 : control.rotateTo(dToR(aboutAngles[0]), dToR(aboutAngles[1]), true);
+    }
+  }, [control, cAzimuthAngle, cPolarAngle, inAbout]);
   useEffect(() => {
     if (zoomOut) {
       control == null ? void 0 : control.dollyTo(defaultDistance, true);

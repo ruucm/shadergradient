@@ -17,7 +17,7 @@ import {
   AllControls
 } from "./Controls/index.js";
 import { PropertyControls } from "./PropertyControls.js";
-import { HoverBox, IconHoverBox } from "./HoverBox/index.js";
+import { HoverBox, IconHoverBox, TextHoverBox } from "./HoverBox/index.js";
 import { Button } from "./Button.js";
 import { Spacing } from "./Spacing.js";
 import { PreviewBtn, PreviewWrapper } from "./PreviewBtn/index.js";
@@ -54,6 +54,7 @@ export {
   TestControl,
   TextAnimation,
   TextHover,
+  TextHoverBox,
   Tools,
   ToolsBox,
   ViewControls

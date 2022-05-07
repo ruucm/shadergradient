@@ -2,17 +2,13 @@ import React, { Suspense, useEffect } from 'react'
 import { hdrBase, initialActivePreset } from '../consts'
 import { usePostProcessing, useQueryState } from '../hooks/index'
 import { PRESETS } from '../presets'
-import {
-  updateGradientState,
-  usePropertyStore,
-  useQueryStore,
-  useUIStore,
-} from '../store'
+import { updateGradientState, usePropertyStore, useUIStore } from '../store'
 import { Environment } from './comps/Environment/index'
 import { CameraControl, GradientMesh } from './index'
 
-export function Gradient(props) {
-  usePropsToStore(props)
+export function Gradient({ zoomOut = false, ...queryProps }) {
+  useEffect(() => usePropertyStore.setState({ zoomOut }), [zoomOut])
+
   usePresetToStore()
 
   // effects
@@ -38,14 +34,9 @@ export function Gradient(props) {
       )}
       {lightType === '3d' && <ambientLight intensity={brightness || 1} />}
       <CameraControl />
-      <GradientMesh />
+      <GradientMesh {...queryProps} />
     </>
   )
-}
-
-function usePropsToStore({ zoomOut = false, ...queryProps }) {
-  useEffect(() => usePropertyStore.setState({ zoomOut }), [zoomOut])
-  useEffect(() => useQueryStore.setState(queryProps), [queryProps])
 }
 
 function usePresetToStore() {

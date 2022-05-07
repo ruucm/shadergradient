@@ -1,7 +1,7 @@
 import React from 'react'
 import { motion } from 'framer-motion'
-import Link from 'next/link'
-import router from 'next/router'
+// import Link from 'next/link'
+// import router from 'next/router'
 import { useUIStore } from '../../store'
 
 export function AboutBtn({ inAbout = false, color = 'white', onClick }) {
@@ -27,19 +27,19 @@ export function AboutBtn({ inAbout = false, color = 'white', onClick }) {
         <div
           style={{ display: 'flex' }}
           onClick={() => {
-            router.back()
+            // router.back()
           }}
         >
           <p style={{ transform: 'rotate(-135deg)' }}>↑</p>
           <p> back</p>
         </div>
       ) : (
-        <Link href='/about'>
-          <div style={{ display: 'flex' }}>
-            <p>about </p>
-            <p style={{ transform: 'rotate(45deg)' }}>↑</p>
-          </div>
-        </Link>
+        // <Link href='/about'>
+        <div style={{ display: 'flex' }}>
+          <p>about </p>
+          <p style={{ transform: 'rotate(45deg)' }}>↑</p>
+        </div>
+        // </Link>
       )}
     </motion.div>
   )

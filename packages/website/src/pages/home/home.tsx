@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react'
 
-import { motion } from 'framer-motion'
+import { motion, useAnimation } from 'framer-motion'
 import Link from 'next/link'
+import { ChevronDown } from 'react-feather'
 import {
   Gradient,
   Links,
@@ -14,6 +15,7 @@ import {
 } from 'shadergradient'
 
 import styles from './Home.module.scss'
+import { MobileSwiper } from '@/components/dom/MobileUI'
 
 // Dynamic import is ussed to prevent a payload when the website start that will include threejs r3f etc..
 // WARNING ! errors might get obfuscated by using dynamic import.
@@ -30,7 +32,7 @@ const DOM = () => {
   const loadingPercentage = useUIStore((state: any) => state.loadingPercentage)
   const activePreset = useUIStore((state) => state.activePreset)
   const [isMobile, setIsMobile] = useState(false)
-
+  const swipeArrowAnim = useAnimation()
   //choose the screen size
   const handleResize = () => {
     if (window.innerWidth < 641) {
@@ -40,16 +42,46 @@ const DOM = () => {
     }
   }
 
+  // for safari
+  const appHeight = () => {
+    const doc = document.documentElement
+    doc.style.setProperty('--app-height', `${window.innerHeight}px`)
+  }
+
   // create an event listener
   useEffect(() => {
     handleResize()
     window.addEventListener('resize', handleResize)
+    window.addEventListener('appHeight', appHeight)
+    appHeight()
     setMode('full')
+    swipeArrowAnim.start({
+      y: 10,
+      opacity: 0,
+      transition: {
+        repeat: Infinity,
+        duration: 1,
+        repeatType: 'loop',
+      },
+    })
   }, [])
 
   console.log('loadingPercentage', loadingPercentage)
   return (
     <>
+      {isMobile && <MobileSwiper />}
+      {isMobile && (
+        <motion.div
+          className={styles.swipe}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+        >
+          swipe
+          <motion.div initial={{ y: 0, opacity: 1 }} animate={swipeArrowAnim}>
+            <ChevronDown color={PRESETS[activePreset].color} size={18} />
+          </motion.div>
+        </motion.div>
+      )}
       <PreviewWrapper />
 
       <div className={styles.contentWrapper}>
@@ -58,12 +90,18 @@ const DOM = () => {
           style={{ display: mode === 'full' ? 'block' : 'none' }}
         >
           <div className={styles.presetTitleWrapper}>
-            <PresetTitles isMobile={isMobile} />
+            <PresetTitles
+              isMobile={isMobile}
+              fontSize={isMobile === true ? 70 : 120}
+            />
           </div>
 
           <div
             className={styles.paragraph}
-            style={{ color: PRESETS[activePreset].color }}
+            style={{
+              color: PRESETS[activePreset].color,
+              display: isMobile === true ? 'none' : 'block',
+            }}
           >
             All visuals are created with ShaderGradient,
             <br /> a new way of creating beautiful, moving gradients. <br />
@@ -73,7 +111,9 @@ const DOM = () => {
         </div>
         <div
           className={styles.customizeBtnWrapper}
-          style={{ display: mode === 'full' ? 'flex' : 'none' }}
+          style={{
+            display: mode === 'full' && isMobile !== true ? 'flex' : 'none',
+          }}
         >
           <Link href='/customize'>
             <motion.div className={styles.customizeBtn}>
@@ -102,7 +142,7 @@ const DOM = () => {
 
 // canvas components goes here
 const R3F = () => {
-  return <Gradient />
+  return <Gradient animate={true} />
 }
 
 const Page = () => {

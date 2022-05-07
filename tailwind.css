@@ -13,6 +13,7 @@ body {
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  height: var(--app-height);
 }
 
 /**
@@ -20,6 +21,7 @@ body {
  */
 :root {
   --guide-opacity: 0;
+  --app-height: 100%;
 }
 
 /*

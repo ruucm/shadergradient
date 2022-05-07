@@ -2,14 +2,14 @@
   width: 100vw;
   height: 100vh;
   // z-index: 10;
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   @media (max-width: 640px) {
     display: flex;
     top: 5vh;
     height: 90vh;
-    justify-content: space-between;
+    justify-content: center;
     flex-direction: column;
   }
 }
@@ -18,7 +18,9 @@
   width: 100vw;
   height: fit-content;
   @media (max-width: 640px) {
-    transform: rotate(90deg);
+    // transform: rotate(90deg);
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
   }
 }
 
@@ -38,8 +40,20 @@
 .presetTitleWrapper {
   margin-top: 15vh;
   @media (max-width: 640px) {
-    margin-top: 10vh;
+    margin-top: 0;
   }
+}
+.swipe {
+  color: white;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  width: 100%;
+  height: fit-content;
+  bottom: 5vh;
 }
 
 .paragraph {

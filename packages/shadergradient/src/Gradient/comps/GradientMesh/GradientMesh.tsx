@@ -1,6 +1,18 @@
 import React, { useEffect } from 'react'
 import { useRef } from 'react'
 import * as THREE from 'three'
+import {
+  initialActivePreset,
+  aboutPositions,
+  aboutRotations,
+} from '../../../consts'
+import { useQueryState } from '../../../hooks/index'
+import { PRESETS } from '../../../presets'
+import {
+  useUIStore,
+  updateGradientState,
+  usePropertyStore,
+} from '../../../store'
 import { dToRArr, useFiber } from '../../../utils/index'
 import { shaderMaterial } from './shaderMaterial'
 import * as shaders from './shaders/index'
@@ -53,6 +65,9 @@ export const GradientMesh: React.FC<any> = ({
     sceneShader.fragment
   )
 
+  // change position/rotation for about page
+  const inAbout = usePropertyStore((state: any) => state.inAbout)
+
   // This is the 🔑 that HMR will renew if this file is edited
   // It works for THREE.ShaderMaterial as well as for drei/shaderMaterial
   // @ts-ignore
@@ -71,8 +86,16 @@ export const GradientMesh: React.FC<any> = ({
 
   return (
     <mesh
-      position={[positionX, positionY, positionZ]}
-      rotation={dToRArr([rotationX, rotationY, rotationZ])}
+      position={
+        inAbout === true
+          ? [aboutPositions[0], aboutPositions[1], aboutPositions[2]]
+          : [positionX, positionY, positionZ]
+      }
+      rotation={
+        inAbout === true
+          ? dToRArr([aboutRotations[0], aboutRotations[1], aboutRotations[2]])
+          : dToRArr([rotationX, rotationY, rotationZ])
+      }
     >
       {type === 'plane' && <planeGeometry args={[10, 10, 1, meshCount]} />}
       {type === 'sphere' && (

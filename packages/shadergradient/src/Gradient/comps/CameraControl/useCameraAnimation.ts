@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react'
-import { defaultDistance, defaultZoom } from '../../../consts'
+import { aboutAngles, defaultDistance, defaultZoom } from '../../../consts'
 import { useQueryState } from '../../../hooks/index'
 import { usePropertyStore } from '../../../store'
 import { dToR, useFiber } from '../../../utils/index'
@@ -19,13 +19,17 @@ export function useCameraAnimation() {
 
   const hoverState = usePropertyStore((state: any) => state.hoverState)
   const zoomOut = usePropertyStore((state: any) => state.zoomOut)
+  const inAbout = usePropertyStore((state: any) => state.inAbout)
 
   const [type] = useQueryState('type')
 
   // rorate the camera
   useEffect(() => {
     control?.rotateTo(dToR(cAzimuthAngle), dToR(cPolarAngle), true)
-  }, [control, cAzimuthAngle, cPolarAngle])
+    if (inAbout === true) {
+      control?.rotateTo(dToR(aboutAngles[0]), dToR(aboutAngles[1]), true)
+    }
+  }, [control, cAzimuthAngle, cPolarAngle, inAbout])
 
   // zoom-out tool
   useEffect(() => {

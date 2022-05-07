@@ -29,6 +29,8 @@ export function MobileSwiper() {
         width: '100%',
         height: '100%',
         position: 'fixed',
+        bottom: 0,
+        zIndex: 1,
       }}
     ></div>
   )

@@ -1,27 +1,24 @@
 import { useEffect, useRef } from 'react'
 import { aboutAngles, defaultDistance, defaultZoom } from '../../../consts'
-import { useQueryState } from '../../../hooks/index'
 import { usePropertyStore } from '../../../store'
 import { dToR, useFiber } from '../../../utils/index'
 
-export function useCameraAnimation() {
+export function useCameraAnimation({
+  type,
+  cAzimuthAngle,
+  cPolarAngle,
+  cDistance,
+  cameraZoom,
+}) {
   const { useFrame } = useFiber()
   const ref: any = useRef()
   const control = ref.current
 
   useFrame((state, delta) => ref.current.update(delta)) // sync r3f delta with 'camera-controls'
 
-  // ----------------------------- Params to Camera Animation ---------------------------------
-  const [cAzimuthAngle] = useQueryState('cAzimuthAngle')
-  const [cPolarAngle] = useQueryState('cPolarAngle')
-  const [cDistance] = useQueryState('cDistance')
-  const [cameraZoom] = useQueryState('cameraZoom')
-
   const hoverState = usePropertyStore((state: any) => state.hoverState)
   const zoomOut = usePropertyStore((state: any) => state.zoomOut)
   const inAbout = usePropertyStore((state: any) => state.inAbout)
-
-  const [type] = useQueryState('type')
 
   // rorate the camera
   useEffect(() => {

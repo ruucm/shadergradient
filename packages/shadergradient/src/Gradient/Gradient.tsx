@@ -11,8 +11,7 @@ export function Gradient({ zoomOut = false, ...props }) {
 
   useEffect(() => usePropertyStore.setState({ zoomOut }), [zoomOut])
 
-  const { lightType, envPreset, brightness, ...meshValues } =
-    useQueryOrProps(props)
+  const { lightType, envPreset, brightness, ...others } = useQueryOrProps(props)
 
   return (
     <>
@@ -27,8 +26,8 @@ export function Gradient({ zoomOut = false, ...props }) {
         </Suspense>
       )}
       {lightType === '3d' && <ambientLight intensity={brightness || 1} />}
-      <CameraControl />
-      <GradientMesh {...meshValues} />
+      <CameraControl {...others} />
+      <GradientMesh {...others} />
     </>
   )
 }
@@ -76,6 +75,12 @@ function useQueryOrProps(props) {
   const [cameraPositionY] = useQueryState('cameraPositionY')
   const [cameraPositionZ] = useQueryState('cameraPositionZ')
 
+  // ----------------------------- Params to Camera Animation ---------------------------------
+  const [cAzimuthAngle] = useQueryState('cAzimuthAngle')
+  const [cPolarAngle] = useQueryState('cPolarAngle')
+  const [cDistance] = useQueryState('cDistance')
+  const [cameraZoom] = useQueryState('cameraZoom')
+
   const [wireframe] = useQueryState('wireframe')
 
   // shader
@@ -111,6 +116,10 @@ function useQueryOrProps(props) {
     cameraPositionX,
     cameraPositionY,
     cameraPositionZ,
+    cAzimuthAngle,
+    cPolarAngle,
+    cDistance,
+    cameraZoom,
     wireframe,
     shader,
     lightType,

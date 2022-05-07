@@ -3,7 +3,7 @@ import * as THREE from 'three'
 import { useFiber } from '../../../utils/index'
 import { useCameraAnimation } from './useCameraAnimation'
 
-export function CameraControl() {
+export function CameraControl(props) {
   const { extend, useThree, useFrame } = useFiber()
 
   CameraControls.install({ THREE })
@@ -13,7 +13,7 @@ export function CameraControl() {
   const gl = useThree((state) => state.gl)
 
   // const ref: any = useRef()
-  const ref = useCameraAnimation()
+  const ref = useCameraAnimation(props)
 
   useFrame((state, delta) => ref.current.update(delta)) // sync r3f delta with 'camera-controls'
 

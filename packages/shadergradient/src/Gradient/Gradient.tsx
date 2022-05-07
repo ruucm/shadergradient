@@ -11,7 +11,9 @@ export function Gradient({ zoomOut = false, ...props }) {
 
   useEffect(() => usePropertyStore.setState({ zoomOut }), [zoomOut])
 
-  const { lightType, envPreset, brightness, ...others } = useQueryOrProps(props)
+  const { lightType, envPreset, brightness, grain, ...others } =
+    useQueryOrProps(props)
+  usePostProcessing(grain === 'off')
 
   return (
     <>
@@ -87,8 +89,6 @@ function useQueryOrProps(props) {
   const [envPreset] = useQueryState('envPreset')
   const [grain] = useQueryState('grain')
   const [reflection] = useQueryState('reflection')
-
-  usePostProcessing(grain === 'off')
 
   return {
     type,

@@ -28,6 +28,7 @@ export const GradientMesh: React.FC<any> = ({
   color1,
   color2,
   color3,
+  reflection,
   wireframe,
   shader,
 }) => {
@@ -69,7 +70,8 @@ export const GradientMesh: React.FC<any> = ({
   })
   useEffect(() => {
     material.current.userData.uTime.value = uTime
-  }, [uTime])
+    material.current.roughness = 1 - reflection
+  }, [uTime, reflection])
 
   return (
     <mesh

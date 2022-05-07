@@ -30051,13 +30051,13 @@ if (typeof window !== "undefined") {
 // src/Gradient/comps/CameraControl/CameraControl.tsx
 import { useFiber } from "../../../utils/index.js";
 import { useCameraAnimation } from "./useCameraAnimation.js";
-function CameraControl() {
+function CameraControl(props) {
   const { extend, useThree, useFrame } = useFiber();
   CameraControls.install({ THREE: three_module_exports });
   extend({ CameraControls });
   const camera = useThree((state) => state.camera);
   const gl = useThree((state) => state.gl);
-  const ref = useCameraAnimation();
+  const ref = useCameraAnimation(props);
   useFrame((state, delta) => ref.current.update(delta));
   return /* @__PURE__ */ React.createElement("cameraControls", {
     ref,

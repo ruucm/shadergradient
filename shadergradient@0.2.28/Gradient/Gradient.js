@@ -39,7 +39,7 @@ function Gradient(_a) {
   var _b = _a, { zoomOut = false } = _b, props = __objRest(_b, ["zoomOut"]);
   usePresetToStore();
   useEffect(() => usePropertyStore.setState({ zoomOut }), [zoomOut]);
-  const _a2 = useQueryOrProps(props), { lightType, envPreset, brightness } = _a2, meshValues = __objRest(_a2, ["lightType", "envPreset", "brightness"]);
+  const _a2 = useQueryOrProps(props), { lightType, envPreset, brightness } = _a2, others = __objRest(_a2, ["lightType", "envPreset", "brightness"]);
   return /* @__PURE__ */ React.createElement(React.Fragment, null, lightType === "env" && /* @__PURE__ */ React.createElement(Suspense, {
     fallback: "Load Failed"
   }, /* @__PURE__ */ React.createElement(Environment, {
@@ -47,7 +47,7 @@ function Gradient(_a) {
     background: true
   })), lightType === "3d" && /* @__PURE__ */ React.createElement("ambientLight", {
     intensity: brightness || 1
-  }), /* @__PURE__ */ React.createElement(CameraControl, null), /* @__PURE__ */ React.createElement(GradientMesh, __spreadValues({}, meshValues)));
+  }), /* @__PURE__ */ React.createElement(CameraControl, __spreadValues({}, others)), /* @__PURE__ */ React.createElement(GradientMesh, __spreadValues({}, others)));
 }
 function usePresetToStore() {
   const activePreset = useUIStore((state) => state.activePreset);
@@ -80,6 +80,10 @@ function useQueryOrProps(props) {
   const [cameraPositionX] = useQueryState("cameraPositionX");
   const [cameraPositionY] = useQueryState("cameraPositionY");
   const [cameraPositionZ] = useQueryState("cameraPositionZ");
+  const [cAzimuthAngle] = useQueryState("cAzimuthAngle");
+  const [cPolarAngle] = useQueryState("cPolarAngle");
+  const [cDistance] = useQueryState("cDistance");
+  const [cameraZoom] = useQueryState("cameraZoom");
   const [wireframe] = useQueryState("wireframe");
   const [shader] = useQueryState("shader");
   const [lightType] = useQueryState("lightType");
@@ -109,6 +113,10 @@ function useQueryOrProps(props) {
     cameraPositionX,
     cameraPositionY,
     cameraPositionZ,
+    cAzimuthAngle,
+    cPolarAngle,
+    cDistance,
+    cameraZoom,
     wireframe,
     shader,
     lightType,

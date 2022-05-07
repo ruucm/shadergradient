@@ -1007,7 +1007,7 @@ import { links } from "../../consts.js";
 import { PRESETS } from "../../presets.js";
 import { useUIStore } from "../../store.js";
 
-// esbuild-css-modules-plugin-namespace:/tmp/tmp-1892-mbAw9rfZYYm5/shadergradient/src/UI/Links/Links.module.css.js
+// esbuild-css-modules-plugin-namespace:/tmp/tmp-1947-JdX27rQIQ2zA/shadergradient/src/UI/Links/Links.module.css.js
 var digest = "0b8ff9793374c04d3455c8b7097901f7d3f4d0bdf3066fa185b67f06d4ef2f90";
 var css = `._LinksWrapper_1hkxt_1 {
   width: 100vw;

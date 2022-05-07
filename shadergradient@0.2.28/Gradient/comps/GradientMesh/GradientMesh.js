@@ -24134,13 +24134,8 @@ if (typeof window !== "undefined") {
 }
 
 // src/Gradient/comps/GradientMesh/GradientMesh.tsx
-import {
-  aboutPositions,
-  aboutRotations
-} from "../../../consts.js";
-import {
-  usePropertyStore
-} from "../../../store.js";
+import { aboutPositions, aboutRotations } from "../../../consts.js";
+import { usePropertyStore } from "../../../store.js";
 import { dToRArr, useFiber } from "../../../utils/index.js";
 import { shaderMaterial } from "./shaderMaterial.js";
 import * as shaders from "./shaders/index.js";

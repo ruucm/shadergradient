@@ -28,9 +28,6 @@ export const GradientMesh: React.FC<any> = ({
   color1,
   color2,
   color3,
-  cameraPositionX,
-  cameraPositionY,
-  cameraPositionZ,
   wireframe,
   shader,
 }) => {

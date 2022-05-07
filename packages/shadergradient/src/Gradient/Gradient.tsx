@@ -71,11 +71,6 @@ function useQueryOrProps(props) {
   // const hoverStateColor = getHoverColor(hoverState, [color1, color2, color3])
 
   // camera
-  const [cameraPositionX] = useQueryState('cameraPositionX')
-  const [cameraPositionY] = useQueryState('cameraPositionY')
-  const [cameraPositionZ] = useQueryState('cameraPositionZ')
-
-  // ----------------------------- Params to Camera Animation ---------------------------------
   const [cAzimuthAngle] = useQueryState('cAzimuthAngle')
   const [cPolarAngle] = useQueryState('cPolarAngle')
   const [cDistance] = useQueryState('cDistance')
@@ -113,9 +108,6 @@ function useQueryOrProps(props) {
     color1,
     color2,
     color3,
-    cameraPositionX,
-    cameraPositionY,
-    cameraPositionZ,
     cAzimuthAngle,
     cPolarAngle,
     cDistance,

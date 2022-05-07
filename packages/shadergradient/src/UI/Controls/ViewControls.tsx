@@ -12,10 +12,6 @@ export const ViewControls: React.FC<ViewControlsPropsT> = () => {
   const [cDistance, setCdistance] = useQueryState('cDistance')
   const [cameraZoom, setCameraZoom] = useQueryState('cameraZoom')
 
-  const [cameraPositionX, setCameraPositionX] = useQueryState('cameraPositionX')
-  const [cameraPositionY, setCameraPositionY] = useQueryState('cameraPositionY')
-  const [cameraPositionZ, setCameraPositionZ] = useQueryState('cameraPositionZ')
-
   const [cAzimuthAngle, setCazimuthAngle] = useQueryState('cAzimuthAngle')
   const [cPolarAngle, setCpolarAngle] = useQueryState('cPolarAngle')
 
@@ -55,37 +51,6 @@ export const ViewControls: React.FC<ViewControlsPropsT> = () => {
           />
         </InputPanel>
       )}
-
-      {/* Positions */}
-      {/* <InputPanel title="Position X">
-        <Slider
-          defaultValue={cameraPositionX}
-          setValue={setCameraPositionX}
-          step={0.1}
-          min={-5}
-          max={5}
-        />
-      </InputPanel>
-
-      <InputPanel title="Position Y">
-        <Slider
-          defaultValue={cameraPositionY}
-          setValue={setCameraPositionY}
-          step={0.1}
-          min={-5}
-          max={5}
-        />
-      </InputPanel>
-
-      <InputPanel title="Position Z">
-        <Slider
-          defaultValue={cameraPositionZ}
-          setValue={setCameraPositionZ}
-          step={0.1}
-          min={-5}
-          max={5}
-        />
-      </InputPanel> */}
 
       {/* rotateTo (camera-controls) */}
       <InputPanel

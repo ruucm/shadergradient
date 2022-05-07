@@ -1,18 +1,8 @@
 import React, { useEffect } from 'react'
 import { useRef } from 'react'
 import * as THREE from 'three'
-import {
-  initialActivePreset,
-  aboutPositions,
-  aboutRotations,
-} from '../../../consts'
-import { useQueryState } from '../../../hooks/index'
-import { PRESETS } from '../../../presets'
-import {
-  useUIStore,
-  updateGradientState,
-  usePropertyStore,
-} from '../../../store'
+import { aboutPositions, aboutRotations } from '../../../consts'
+import { usePropertyStore } from '../../../store'
 import { dToRArr, useFiber } from '../../../utils/index'
 import { shaderMaterial } from './shaderMaterial'
 import * as shaders from './shaders/index'

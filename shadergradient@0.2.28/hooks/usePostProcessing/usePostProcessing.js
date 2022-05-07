@@ -25,7 +25,7 @@ function usePostProcessing(disable) {
     const halftonePass = new HalftonePass(size.width, size.height, halftoneParams);
     effectComposer.addPass(halftonePass);
     return effectComposer;
-  }, [gl, scene, camera, size]);
+  }, [gl, scene, camera, size, disable]);
   useEffect(() => composer == null ? void 0 : composer.setSize(size.width, size.height), [composer, size]);
   useFrame((_, delta) => void (gl.autoClear = true, composer.render(delta)), 1);
 }

@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react'
 
-import { motion } from 'framer-motion'
+import { motion, useAnimation } from 'framer-motion'
 import Link from 'next/link'
+import { ChevronDown } from 'react-feather'
 import {
   Gradient,
   Links,
@@ -31,7 +32,7 @@ const DOM = () => {
   const loadingPercentage = useUIStore((state: any) => state.loadingPercentage)
   const activePreset = useUIStore((state) => state.activePreset)
   const [isMobile, setIsMobile] = useState(false)
-
+  const swipeArrowAnim = useAnimation()
   //choose the screen size
   const handleResize = () => {
     if (window.innerWidth < 641) {
@@ -46,12 +47,33 @@ const DOM = () => {
     handleResize()
     window.addEventListener('resize', handleResize)
     setMode('full')
+    swipeArrowAnim.start({
+      y: 10,
+      opacity: 0,
+      transition: {
+        repeat: Infinity,
+        duration: 1,
+        repeatType: 'loop',
+      },
+    })
   }, [])
 
   console.log('loadingPercentage', loadingPercentage)
   return (
     <>
       {isMobile && <MobileSwiper />}
+      {isMobile && (
+        <motion.div
+          className={styles.swipe}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+        >
+          swipe
+          <motion.div initial={{ y: 0, opacity: 1 }} animate={swipeArrowAnim}>
+            <ChevronDown color={PRESETS[activePreset].color} size={18} />
+          </motion.div>
+        </motion.div>
+      )}
       <PreviewWrapper />
 
       <div className={styles.contentWrapper}>

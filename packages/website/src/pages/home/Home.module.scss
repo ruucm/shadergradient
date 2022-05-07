@@ -43,6 +43,18 @@
     margin-top: 0;
   }
 }
+.swipe {
+  color: white;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  width: 100%;
+  height: fit-content;
+  bottom: 5vh;
+}
 
 .paragraph {
   margin-top: 3vh;

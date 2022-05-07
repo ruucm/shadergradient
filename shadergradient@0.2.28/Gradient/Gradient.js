@@ -77,9 +77,6 @@ function useQueryOrProps(props) {
   const [color1] = useQueryState("color1");
   const [color2] = useQueryState("color2");
   const [color3] = useQueryState("color3");
-  const [cameraPositionX] = useQueryState("cameraPositionX");
-  const [cameraPositionY] = useQueryState("cameraPositionY");
-  const [cameraPositionZ] = useQueryState("cameraPositionZ");
   const [cAzimuthAngle] = useQueryState("cAzimuthAngle");
   const [cPolarAngle] = useQueryState("cPolarAngle");
   const [cDistance] = useQueryState("cDistance");
@@ -110,9 +107,6 @@ function useQueryOrProps(props) {
     color1,
     color2,
     color3,
-    cameraPositionX,
-    cameraPositionY,
-    cameraPositionZ,
     cAzimuthAngle,
     cPolarAngle,
     cDistance,

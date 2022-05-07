@@ -6,9 +6,6 @@ import { InputPanel } from "./InputPanel.js";
 var ViewControls = () => {
   const [cDistance, setCdistance] = useQueryState("cDistance");
   const [cameraZoom, setCameraZoom] = useQueryState("cameraZoom");
-  const [cameraPositionX, setCameraPositionX] = useQueryState("cameraPositionX");
-  const [cameraPositionY, setCameraPositionY] = useQueryState("cameraPositionY");
-  const [cameraPositionZ, setCameraPositionZ] = useQueryState("cameraPositionZ");
   const [cAzimuthAngle, setCazimuthAngle] = useQueryState("cAzimuthAngle");
   const [cPolarAngle, setCpolarAngle] = useQueryState("cPolarAngle");
   const [positionX, setPositionX] = useQueryState("positionX");

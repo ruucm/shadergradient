@@ -5,7 +5,7 @@ var fragment_default = "#pragma glslify: halftone = require('glsl-halftone')\nun
 var vertex_default = "#pragma glslify: cnoise3 = require(glsl-noise/classic/3d)\nuniform float uTime;uniform float uSpeed;uniform float uNoiseDensity;uniform float uNoiseStrength;uniform float uFrequency;uniform float uAmplitude;varying vec3 vNormal;varying float vDistort;varying vec3 vPos;mat3 rotation3dY(float angle){float s=sin(angle);float c=cos(angle);return mat3(c,0.0,-s,0.0,1.0,0.0,s,0.0,c);}vec3 rotateY(vec3 v,float angle){return rotation3dY(angle)*v;}void main(){float t=uTime*uSpeed;float distortion=cnoise3((normal+t)*uNoiseDensity)*uNoiseStrength;vec3 pos=position+(normal*distortion);float angle=sin(uv.y*uFrequency+t)*uAmplitude;pos=rotateY(pos,angle);vNormal=normal;vDistort=distortion;vPos=pos;gl_Position=projectionMatrix*modelViewMatrix*vec4(pos,1.);}";
 
 // src/Gradient/comps/GradientMesh/shaders/tests/colorMix01/index.ts
-var url = "?animate=on&brightness=0.8&cameraPositionX=0&cameraPositionY=0&cameraPositionZ=4.1&cameraZoom=0.8&color1=%23ff0000&color2=%2300ff00&color3=%230000ff&embedMode=off&envPreset=dawn&grain=off&lightType=3d&pixelDensity=1&positionX=0&positionY=0&positionZ=0&reflection=0.5&rotationX=90&rotationY=380&rotationZ=40&type=sphere&uDensity=0.1&uSpeed=0.2&uStrength=0.2&uTime=0.2";
+var url = "?animate=on&brightness=0.8&cameraZoom=0.8&color1=%23ff0000&color2=%2300ff00&color3=%230000ff&embedMode=off&envPreset=dawn&grain=off&lightType=3d&pixelDensity=1&positionX=0&positionY=0&positionZ=0&reflection=0.5&rotationX=90&rotationY=380&rotationZ=40&type=sphere&uDensity=0.1&uSpeed=0.2&uStrength=0.2&uTime=0.2";
 export {
   fragment_default as fragment,
   url,

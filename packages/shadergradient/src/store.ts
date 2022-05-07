@@ -7,7 +7,7 @@ import { DEFAUlT_PRESET } from './presets'
 // without embedMode
 // it renders without the dom & other gradient controls at first, and add it after the first updateGradientState() excuted.
 
-export const useGradientStore = create((set) => ({
+export const useQueryStore = create((set) => ({
   ...parseState(),
 }))
 
@@ -19,7 +19,7 @@ export const usePropertyStore = create((set) => ({
 
 export const updateGradientState = (querystate: any) => {
   const state = parseState(querystate)
-  useGradientStore.setState(state, true)
+  useQueryStore.setState(state, true)
 }
 
 // defaultGradient could be replaced by window.location.search

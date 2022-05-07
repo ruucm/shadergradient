@@ -13,10 +13,7 @@ export function Header({
   onAboutClick = () => void 0,
 }) {
   const activePreset = useUIStore((state: any) => state.activePreset)
-  const color =
-    mode !== 'full' || isMobile === true
-      ? '#FF430A'
-      : PRESETS[activePreset].color
+  const color = mode !== 'full' ? '#FF430A' : PRESETS[activePreset].color
 
   return (
     <div className={styles.header}>

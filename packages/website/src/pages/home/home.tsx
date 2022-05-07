@@ -14,6 +14,7 @@ import {
 } from 'shadergradient'
 
 import styles from './Home.module.scss'
+import { MobileSwiper } from '@/components/dom/MobileUI'
 
 // Dynamic import is ussed to prevent a payload when the website start that will include threejs r3f etc..
 // WARNING ! errors might get obfuscated by using dynamic import.
@@ -50,6 +51,7 @@ const DOM = () => {
   console.log('loadingPercentage', loadingPercentage)
   return (
     <>
+      {isMobile && <MobileSwiper />}
       <PreviewWrapper />
 
       <div className={styles.contentWrapper}>

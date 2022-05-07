@@ -39,3 +39,5 @@ yarn-error.log*
 
 dist
 release
+
+test.page.tsx

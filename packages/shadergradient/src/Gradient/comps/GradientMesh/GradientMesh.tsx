@@ -20,53 +20,31 @@ import * as shaders from './shaders/index'
 const meshCount = 192
 const clock = new THREE.Clock()
 
-export const GradientMesh: React.FC<any> = () => {
+export const GradientMesh: React.FC<any> = ({
+  type,
+  animate,
+  uTime,
+  uSpeed,
+  uStrength,
+  uDensity,
+  uFrequency,
+  uAmplitude,
+  positionX,
+  positionY,
+  positionZ,
+  rotationX,
+  rotationY,
+  rotationZ,
+  color1,
+  color2,
+  color3,
+  cameraPositionX,
+  cameraPositionY,
+  cameraPositionZ,
+  wireframe,
+  shader,
+}) => {
   const { useFrame, extend } = useFiber()
-
-  // ----------------------------- Params to Custom Material ---------------------------------
-  const activePreset = useUIStore((state: any) => state.activePreset)
-  useEffect(() => {
-    let gradientURL = PRESETS[activePreset].url
-    if (
-      activePreset === initialActivePreset &&
-      window.location.search?.includes('pixelDensity') // checking just window.location.search existing is not valid for the Framer Preview search (?target=preview-web)
-    )
-      gradientURL = window.location.search // use search params at the first load.
-
-    updateGradientState(gradientURL)
-  }, [activePreset])
-
-  // shape
-  const [type] = useQueryState('type')
-  const [animate] = useQueryState('animate')
-  const [uTime] = useQueryState('uTime')
-  const [uSpeed] = useQueryState('uSpeed')
-  const [uStrength] = useQueryState('uStrength')
-  const [uDensity] = useQueryState('uDensity')
-  const [uFrequency] = useQueryState('uFrequency')
-  const [uAmplitude] = useQueryState('uAmplitude')
-  const [positionX] = useQueryState('positionX')
-  const [positionY] = useQueryState('positionY')
-  const [positionZ] = useQueryState('positionZ')
-  const [rotationX] = useQueryState('rotationX')
-  const [rotationY] = useQueryState('rotationY')
-  const [rotationZ] = useQueryState('rotationZ')
-
-  // colors
-  const [color1] = useQueryState('color1')
-  const [color2] = useQueryState('color2')
-  const [color3] = useQueryState('color3')
-  // const hoverStateColor = getHoverColor(hoverState, [color1, color2, color3])
-
-  // camera
-  const [cameraPositionX] = useQueryState('cameraPositionX')
-  const [cameraPositionY] = useQueryState('cameraPositionY')
-  const [cameraPositionZ] = useQueryState('cameraPositionZ')
-
-  const [wireframe] = useQueryState('wireframe')
-
-  // shader
-  const [shader] = useQueryState('shader')
 
   let sceneShader = shaders.defaults[type ?? 'plane'] // default type is plane
   if (shader && shader !== 'defaults') sceneShader = shaders[shader]

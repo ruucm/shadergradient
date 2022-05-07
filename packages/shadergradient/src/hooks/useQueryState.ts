@@ -1,6 +1,6 @@
 import { useCallback } from 'react'
 import * as qs from 'query-string'
-import { useGradientStore } from '../store'
+import { useQueryStore } from '../store'
 
 export const useQueryState = (propName: any, defaultValue: any = null) => {
   const selector = useCallback(
@@ -8,11 +8,11 @@ export const useQueryState = (propName: any, defaultValue: any = null) => {
       typeof state[propName] !== 'undefined' ? state[propName] : defaultValue,
     [propName, defaultValue]
   )
-  const globalValue = useGradientStore(selector)
+  const globalValue = useQueryStore(selector)
   const _setGlobalValue = useCallback(
     (valueFun) =>
-      useGradientStore.setState({
-        [propName]: valueFun(useGradientStore.getState()[propName]),
+      useQueryStore.setState({
+        [propName]: valueFun(useQueryStore.getState()[propName]),
       }),
     [propName]
   )
@@ -29,7 +29,7 @@ export const useQueryState = (propName: any, defaultValue: any = null) => {
 
         // defer update of URL
         setTimeout(() => {
-          const query = useGradientStore.getState()
+          const query = useQueryStore.getState()
           updateHistory(
             qs.stringifyUrl(
               // @ts-ignore

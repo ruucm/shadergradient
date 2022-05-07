@@ -1,6 +1,6 @@
 import * as React from 'react'
-import { useSwipeable } from 'react-swipeable'
 import { useUIStore, PRESETS } from 'shadergradient'
+import { useSwipeable } from '../../../lib/react-swipeable'
 
 export function MobileSwiper() {
   const activePreset = useUIStore((state) => state.activePreset)

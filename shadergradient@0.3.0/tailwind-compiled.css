@@ -668,6 +668,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   height: var(--app-height);
+  background: black;
 }
 :root {
   --guide-opacity: 0;

@@ -29,6 +29,7 @@ const NextJsCanvas = ({ children }) => {
       style={{
         position: 'absolute',
         top: 0,
+        borderRadius: 36,
       }}
     >
       {children}

@@ -1,0 +1,11 @@
+{
+  "name": "figma-plugin",
+  "version": "0.1.0",
+  "scripts": {
+    "start": "webpack --config ./webpack.config.js --mode development --watch",
+    "build": "webpack --config ./webpack.config.js --mode production"
+  },
+  "dependencies": {
+    "shadergradient": "^0.3.0"
+  }
+}

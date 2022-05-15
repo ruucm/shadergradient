@@ -3,6 +3,7 @@ module.exports = {
   purge: [
     './packages/shadergradient/src/**/*.{js,jsx,ts,tsx,vue}',
     './packages/website/src/**/*.{js,jsx,ts,tsx,vue}',
+    './packages/figma-plugin/src/**/*.{js,jsx,ts,tsx,vue}',
   ],
   darkMode: 'media', // or 'media' or 'class'
   theme: {

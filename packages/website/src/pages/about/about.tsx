@@ -46,8 +46,9 @@ const DOM = () => {
           flexDirection: 'column',
           justifyContent: 'center',
           alignItems: 'center',
-          position: 'absolute',
-          top: '28%',
+          position: isMobile === true ? 'static' : 'absolute',
+          marginTop: isMobile === true ? '55%' : '28%',
+          // top: '28%',
         }}
       >
         {isMobile !== true && (
@@ -93,20 +94,23 @@ const DOM = () => {
         className='text-sm text-primary'
         style={{
           width: isMobile === true ? '80%' : '90%',
-          borderTop: isMobile ? 'none' : '1.5px solid #ff340A',
-          position: 'absolute',
+          borderTop: isMobile === true ? 'none' : '1.5px solid #ff340A',
+          position: isMobile === true ? 'static' : 'absolute',
           bottom: 0,
           margin: isMobile === true ? '10%' : '5%',
           paddingTop: 10,
           height: 'fit-content',
           display: 'flex',
-          flexDirection: isMobile ? 'column' : 'row',
+          flexDirection: isMobile === true ? 'column' : 'row',
           justifyContent: 'space-between',
-          rowGap: 30,
+          rowGap: 25,
         }}
       >
         <div
-          className={cx('flex gap-6', isMobile ? 'w-[100%]' : 'w-[50%]')}
+          className={cx(
+            'flex gap-6',
+            isMobile === true ? 'w-[100%]' : 'w-[50%]'
+          )}
           style={{
             borderTop: isMobile && '1.5px solid #ff340A',
             paddingTop: isMobile && 10,

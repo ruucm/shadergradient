@@ -52,7 +52,7 @@ function updateHistory(path: string) {
   window.history.pushState(
     {
       prevUrls: [
-        ...(window.history.state.prevUrls || []),
+        ...(window.history.state?.prevUrls || []),
         window.location.origin + path,
       ],
     },

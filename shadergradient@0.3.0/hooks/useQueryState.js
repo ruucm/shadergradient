@@ -516,9 +516,10 @@ var useQueryState = (propName, defaultValue = null) => {
   return [globalValue, setQueryValue];
 };
 function updateHistory(path) {
+  var _a;
   window.history.pushState({
     prevUrls: [
-      ...window.history.state.prevUrls || [],
+      ...((_a = window.history.state) == null ? void 0 : _a.prevUrls) || [],
       window.location.origin + path
     ]
   }, document.title, path);

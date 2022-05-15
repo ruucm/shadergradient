@@ -53,8 +53,8 @@ const DOM = () => {
   useEffect(() => {
     handleResize()
     window.addEventListener('resize', handleResize)
-    window.addEventListener('appHeight', appHeight)
-    appHeight()
+    // window.addEventListener('appHeight', appHeight)
+    // appHeight()
     setMode('full')
     swipeArrowAnim.start({
       y: 10,

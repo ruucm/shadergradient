@@ -37,7 +37,13 @@ const DOM = () => {
   }, [])
 
   return (
-    <>
+    <div
+      style={{
+        width: '100%',
+        height: '100%',
+        overflowY: 'scroll',
+      }}
+    >
       <div
         style={{
           width: '100%',
@@ -47,7 +53,7 @@ const DOM = () => {
           justifyContent: 'center',
           alignItems: 'center',
           position: isMobile === true ? 'static' : 'absolute',
-          marginTop: isMobile === true ? '55%' : '28%',
+          marginTop: isMobile === true ? '45%' : '28%',
           // top: '28%',
         }}
       >
@@ -118,12 +124,12 @@ const DOM = () => {
         >
           <p
             style={{
-              width: isMobile && '30%',
+              width: isMobile && '35%',
             }}
           >
             made by
           </p>
-          <div style={{ display: 'inline', width: isMobile && '70%' }}>
+          <div style={{ display: 'inline', width: isMobile && '65%' }}>
             <TextHoverBox
               content='developer'
               text='ruucm'
@@ -147,8 +153,8 @@ const DOM = () => {
             paddingTop: isMobile && 10,
           }}
         >
-          <p style={{ width: isMobile && '30%' }}>available from</p>
-          <div style={{ display: 'inline', width: isMobile && '70%' }}>
+          <p style={{ width: isMobile && '35%' }}>available from</p>
+          <div style={{ display: 'inline', width: isMobile && '65%' }}>
             {isMobile ? (
               <Links isMobile={true} />
             ) : (
@@ -176,7 +182,7 @@ const DOM = () => {
           </div>
         </div>
       </div>
-    </>
+    </div>
   )
 }
 const R3F = () => {

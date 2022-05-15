@@ -11,6 +11,7 @@ export function Header({
   aboutBtn = false,
   onLogoClick = () => void 0,
   onAboutClick = () => void 0,
+  onBackClick = () => void 0,
 }) {
   const activePreset = useUIStore((state: any) => state.activePreset)
   const color = mode !== 'full' ? '#FF430A' : PRESETS[activePreset].color
@@ -29,7 +30,8 @@ export function Header({
         <AboutBtn
           inAbout={inAbout}
           color={color}
-          onClick={onAboutClick}
+          onAboutClick={onAboutClick}
+          onBackClick={onBackClick}
           isMobile={isMobile}
         />
       )}

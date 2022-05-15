@@ -8,7 +8,8 @@ import { useUIStore } from '../../store'
 export function AboutBtn({
   inAbout = false,
   color = 'white',
-  onClick,
+  onAboutClick,
+  onBackClick,
   isMobile,
 }) {
   const mode = useUIStore((state: any) => state.mode)
@@ -27,15 +28,9 @@ export function AboutBtn({
         borderBottom:
           mode !== 'full' ? '1.5px solid #ff430A' : '1.5px solid ' + color,
       }}
-      onClick={onClick}
     >
       {inAbout === true ? (
-        <div
-          style={{ display: 'flex' }}
-          onClick={() => {
-            // router.back()
-          }}
-        >
+        <div style={{ display: 'flex' }} onClick={onBackClick}>
           {isMobile === true ? (
             <ArrowDownLeft color='#ff430A' />
           ) : (
@@ -46,8 +41,7 @@ export function AboutBtn({
           )}
         </div>
       ) : (
-        // <Link href='/about'>
-        <div style={{ display: 'flex' }}>
+        <div style={{ display: 'flex' }} onClick={onAboutClick}>
           {isMobile === true ? (
             <Info color={color} />
           ) : (
@@ -57,7 +51,6 @@ export function AboutBtn({
             </>
           )}
         </div>
-        // </Link>
       )}
     </motion.div>
   )

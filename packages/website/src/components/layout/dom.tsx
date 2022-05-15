@@ -38,6 +38,7 @@ const Dom = ({ children }) => {
         onLogoClick={() => router.push('/')}
         aboutBtn
         onAboutClick={() => router.push('/about')}
+        onBackClick={() => router.back()}
         inAbout={inAbout}
         isMobile={isMobile}
       />

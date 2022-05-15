@@ -43,6 +43,7 @@ class HalftonePass extends Pass {
 
   render(renderer, writeBuffer, readBuffer /*, deltaTime, maskActive*/) {
     this.material.uniforms['tDiffuse'].value = readBuffer.texture
+    // renderer.setClearColor('#FFFFFF', 0.2)
 
     if (this.renderToScreen) {
       renderer.setRenderTarget(null)

@@ -5,7 +5,10 @@ import {
   Gradient,
   TextAnimation,
   TextHoverBox,
+  aboutPositions,
+  aboutRotations,
 } from 'shadergradient'
+import { aboutAngles } from 'shadergradient'
 
 const DOM = () => {
   const mode = useUIStore((state: any) => state.mode)
@@ -136,7 +139,20 @@ const DOM = () => {
   )
 }
 const R3F = () => {
-  return <Gradient zoomOut={true} animate={true} inAbout={true} />
+  return (
+    <Gradient
+      zoomOut={true}
+      animate={true}
+      cAzimuthAngle={aboutAngles[0]}
+      cPolarAngle={aboutAngles[1]}
+      positionX={aboutPositions[0]}
+      positionY={aboutPositions[1]}
+      positionZ={aboutPositions[2]}
+      rotationX={aboutRotations[0]}
+      rotationY={aboutRotations[1]}
+      rotationZ={aboutRotations[2]}
+    />
+  )
 }
 
 const Page = () => {

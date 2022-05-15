@@ -26,7 +26,12 @@ export function Header({
       )}
 
       {aboutBtn && (
-        <AboutBtn inAbout={inAbout} color={color} onClick={onAboutClick} />
+        <AboutBtn
+          inAbout={inAbout}
+          color={color}
+          onClick={onAboutClick}
+          isMobile={isMobile}
+        />
       )}
     </div>
   )

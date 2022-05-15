@@ -2,9 +2,15 @@ import React from 'react'
 import { motion } from 'framer-motion'
 // import Link from 'next/link'
 // import router from 'next/router'
+import { Info, ArrowDownLeft } from 'react-feather'
 import { useUIStore } from '../../store'
 
-export function AboutBtn({ inAbout = false, color = 'white', onClick }) {
+export function AboutBtn({
+  inAbout = false,
+  color = 'white',
+  onClick,
+  isMobile,
+}) {
   const mode = useUIStore((state: any) => state.mode)
 
   return (
@@ -30,14 +36,26 @@ export function AboutBtn({ inAbout = false, color = 'white', onClick }) {
             // router.back()
           }}
         >
-          <p style={{ transform: 'rotate(-135deg)' }}>↑</p>
-          <p> back</p>
+          {isMobile === true ? (
+            <ArrowDownLeft color='#ff430A' />
+          ) : (
+            <>
+              <p style={{ transform: 'rotate(-135deg)' }}>↑</p>
+              <p> back</p>
+            </>
+          )}
         </div>
       ) : (
         // <Link href='/about'>
         <div style={{ display: 'flex' }}>
-          <p>about </p>
-          <p style={{ transform: 'rotate(45deg)' }}>↑</p>
+          {isMobile === true ? (
+            <Info color={color} />
+          ) : (
+            <>
+              <p>about </p>
+              <p style={{ transform: 'rotate(45deg)' }}>↑</p>
+            </>
+          )}
         </div>
         // </Link>
       )}

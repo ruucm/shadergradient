@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react'
+import cx from 'classnames'
 import { motion } from 'framer-motion'
+
 import {
   useUIStore,
   Gradient,
@@ -7,8 +9,9 @@ import {
   TextHoverBox,
   aboutPositions,
   aboutRotations,
+  aboutAngles,
+  Links,
 } from 'shadergradient'
-import { aboutAngles } from 'shadergradient'
 
 const DOM = () => {
   const mode = useUIStore((state: any) => state.mode)
@@ -47,17 +50,25 @@ const DOM = () => {
           top: '28%',
         }}
       >
-        <TextAnimation
-          fontSize={80}
-          color='#ff340A'
-          delay={0}
-          content='ShaderGradient'
-        />
+        {isMobile !== true && (
+          <TextAnimation
+            fontSize={80}
+            color='#ff340A'
+            delay={0}
+            content='ShaderGradient'
+          />
+        )}
         <motion.div
           initial={{ y: 10, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ delay: 1, duration: 0.5 }}
-          className='m-4 text-lg text-center text-primary'
+          className={cx(
+            'm-4 text-center text-primary',
+            isMobile === true ? 'text-sm w-[80%]' : 'text-lg'
+          )}
+          style={{
+            paddingTop: isMobile && 60,
+          }}
         >
           This project has started while we were exploring the realm of creative
           coding,
@@ -81,20 +92,34 @@ const DOM = () => {
       <div
         className='text-sm text-primary'
         style={{
-          width: '95%',
-          borderTop: '1.5px solid #ff340A',
+          width: isMobile === true ? '80%' : '90%',
+          borderTop: isMobile ? 'none' : '1.5px solid #ff340A',
           position: 'absolute',
           bottom: 0,
-          margin: 40,
+          margin: isMobile === true ? '10%' : '5%',
           paddingTop: 10,
           height: 'fit-content',
-          display: 'grid',
-          gridTemplateColumns: '50% 50%',
+          display: 'flex',
+          flexDirection: isMobile ? 'column' : 'row',
+          justifyContent: 'space-between',
+          rowGap: 30,
         }}
       >
-        <div className='flex gap-6'>
-          <p>made by</p>
-          <div style={{ display: 'inline' }}>
+        <div
+          className={cx('flex gap-6', isMobile ? 'w-[100%]' : 'w-[50%]')}
+          style={{
+            borderTop: isMobile && '1.5px solid #ff340A',
+            paddingTop: isMobile && 10,
+          }}
+        >
+          <p
+            style={{
+              width: isMobile && '30%',
+            }}
+          >
+            made by
+          </p>
+          <div style={{ display: 'inline', width: isMobile && '70%' }}>
             <TextHoverBox
               content='developer'
               text='ruucm'
@@ -111,27 +136,39 @@ const DOM = () => {
             <br /> reach us out for any inquiry
           </div>
         </div>
-        <div className='flex gap-6'>
-          <p>available from</p>
-          <div style={{ display: 'inline' }}>
-            For designers,{' '}
-            <TextHoverBox
-              content='Enjoy the maximum potential of ShaderGradient!'
-              text='Framer Package'
-              link=''
-            />{' '}
-            &{' '}
-            <TextHoverBox
-              content='For now, it only supports static gradient. GIF export on the way!'
-              text='Figma Plugin (beta)'
-              link='https://seungmee-lee.com'
-            />
-            <br /> For developers,{' '}
-            <TextHoverBox
-              content='import from NPM. Create yours from the website, and use "Copy as Code" feature'
-              text='React Component'
-              link=''
-            />
+        <div
+          className={cx('flex gap-6', isMobile ? 'w-[100%]' : 'w-[50%]')}
+          style={{
+            borderTop: isMobile && '1.5px solid #ff340A',
+            paddingTop: isMobile && 10,
+          }}
+        >
+          <p style={{ width: isMobile && '30%' }}>available from</p>
+          <div style={{ display: 'inline', width: isMobile && '70%' }}>
+            {isMobile ? (
+              <Links isMobile={true} />
+            ) : (
+              <>
+                For designers,{' '}
+                <TextHoverBox
+                  content='Enjoy the maximum potential of ShaderGradient!'
+                  text='Framer Package'
+                  link=''
+                />{' '}
+                &{' '}
+                <TextHoverBox
+                  content='For now, it only supports static gradient. GIF export on the way!'
+                  text='Figma Plugin (beta)'
+                  link='https://seungmee-lee.com'
+                />
+                <br /> For developers,{' '}
+                <TextHoverBox
+                  content='import from NPM. Create yours from the website, and use "Copy as Code" feature'
+                  text='React Component'
+                  link=''
+                />
+              </>
+            )}
           </div>
         </div>
       </div>

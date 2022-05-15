@@ -33,6 +33,7 @@ const DOM = () => {
   const activePreset = useUIStore((state) => state.activePreset)
   const [isMobile, setIsMobile] = useState(false)
   const swipeArrowAnim = useAnimation()
+
   //choose the screen size
   const handleResize = () => {
     if (window.innerWidth < 641) {

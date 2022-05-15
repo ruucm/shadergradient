@@ -550,10 +550,6 @@ html {
   margin: 26px;
 }
 
-.m-7 {
-  margin: 1.75rem;
-}
-
 .mx-auto {
   margin-left: auto;
   margin-right: auto;
@@ -703,24 +699,12 @@ html {
   width: 8px;
 }
 
-.w-28 {
-  width: 7rem;
-}
-
-.w-\[\] {
-  width: ;
-}
-
-.w-\[70\%\] {
-  width: 70%;
+.w-\[80\%\] {
+  width: 80%;
 }
 
 .w-\[100\%\] {
   width: 100%;
-}
-
-.w-\[80\%\] {
-  width: 80%;
 }
 
 .flex-shrink-0 {
@@ -798,14 +782,6 @@ html {
 
 .gap-6 {
   gap: 48px;
-}
-
-.gap-10 {
-  gap: 2.5rem;
-}
-
-.gap-20 {
-  gap: 5rem;
 }
 
 .overflow-hidden {
@@ -967,7 +943,8 @@ body {
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  height: var(--app-height);
+  /* height: var(--app-height); */
+  height: -webkit-fill-available;
   background: black;
 }
 

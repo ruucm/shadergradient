@@ -50,23 +50,25 @@ export const AllControls: React.FC<Props> = ({ isMobile, isFigma = false }) => {
     <div ref={ref}>
       {isMobile === true ? (
         <div className={styles.controlMobile}>
-          <motion.div className={styles.floating}>
-            <motion.div
-              className={styles.hideBtn}
-              onClick={() => {
-                setActiveTab('none')
-              }}
-              animate={{
-                opacity: activeTab === 'none' ? 0 : 1,
-                marginTop: activeTab === 'none' ? '5px' : '-35px',
-                transition: { duration: 0.5 },
-              }}
-            >
-              <div>
-                <p>✕</p>
-              </div>
+          {!isFigma && (
+            <motion.div className={styles.floating}>
+              <motion.div
+                className={styles.hideBtn}
+                onClick={() => {
+                  setActiveTab('none')
+                }}
+                animate={{
+                  opacity: activeTab === 'none' ? 0 : 1,
+                  marginTop: activeTab === 'none' ? '5px' : '-35px',
+                  transition: { duration: 0.5 },
+                }}
+              >
+                <div>
+                  <p>✕</p>
+                </div>
+              </motion.div>
             </motion.div>
-          </motion.div>
+          )}
           {children}
         </div>
       ) : (

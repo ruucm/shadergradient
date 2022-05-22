@@ -677,10 +677,6 @@ html {
   width: fit-content;
 }
 
-.w-screen {
-  width: 100vw;
-}
-
 .w-\[90px\] {
   width: 90px;
 }
@@ -774,14 +770,6 @@ html {
 
 .gap-1 {
   gap: 8px;
-}
-
-.gap-0\.2 {
-  gap: 3.5px;
-}
-
-.gap-0 {
-  gap: 0px;
 }
 
 .gap-2 {
@@ -1003,16 +991,8 @@ input[type='number'] {
     width: 100%;
   }
 
-  .md\:flex-row {
-    flex-direction: row;
-  }
-
-  .md\:flex-col {
-    flex-direction: column;
-  }
-
-  .md\:justify-start {
-    justify-content: flex-start;
+  .md\:justify-between {
+    justify-content: space-between;
   }
 
   .md\:justify-between {
@@ -1021,7 +1001,7 @@ input[type='number'] {
 
   .md\:bg-controls-panel {
     --tw-bg-opacity: 1;
-    background-color: rgb(246 248 248 / var(--tw-bg-opacity));
+    background-color: rgb(255 255 255 / var(--tw-bg-opacity));
   }
 
   .md\:bg-white {

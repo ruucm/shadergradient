@@ -6,6 +6,7 @@ export const canvasProps = (pixelDensity: number) => ({
   // camera: { fov: 45 }, // could be replaced with zoom or distance?
   // linear: true, //sRGBEncoding
   // flat: true, //ACESFilmicToneMapping
+  gl: { preserveDrawingBuffer: true }, // to capture the canvas (Figma Plugin)
 })
 
 export const links = [

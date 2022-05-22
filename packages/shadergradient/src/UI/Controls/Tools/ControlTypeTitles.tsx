@@ -4,6 +4,7 @@ import { ControlTypeTitle } from './ControlTypeTitle'
 type ControlTypeTitlePropsT = {
   activeTab: any
   setActiveTab: any
+  isMobile: boolean
 } & React.DetailedHTMLProps<
   React.HTMLAttributes<HTMLDivElement>,
   HTMLDivElement
@@ -12,13 +13,20 @@ type ControlTypeTitlePropsT = {
 export const ControlTypeTitles: React.FC<ControlTypeTitlePropsT> = ({
   activeTab,
   setActiveTab,
+  isMobile,
   ...rest
 }) => {
   return (
     <div
       className={
-        'flex justify-between gap-0.2 w-screen h-[fit-content] p-3.5 cursor-pointer md:w-full md:h-full md:flex-col md:justify-start'
+        'flex flex-row justify-start gap-3 w-[fit-content] h-[58px] p-3 cursor-pointer md:w-full md:h-full md:justify-between md:bg-white'
       }
+      style={{
+        width: isMobile === false ? 'fit-content' : '100%',
+        height: isMobile === false ? 58 : '100%',
+        justifyContent: isMobile === false ? 'flex-start' : 'space-between',
+        background: isMobile === false ? 'transparent' : 'white',
+      }}
       onClick={() => setActiveTab('shape')}
     >
       <ControlTypeTitle
@@ -60,7 +68,7 @@ export const ControlTypeTitles: React.FC<ControlTypeTitlePropsT> = ({
           activeTab === 'view' ? setActiveTab('none') : setActiveTab('view')
         }}
       />
-
+      {/* 
       <ControlTypeTitle
         title='Background'
         active={activeTab === 'background'}
@@ -71,7 +79,7 @@ export const ControlTypeTitles: React.FC<ControlTypeTitlePropsT> = ({
             ? setActiveTab('none')
             : setActiveTab('background')
         }}
-      />
+      /> */}
     </div>
   )
 }

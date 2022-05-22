@@ -5,7 +5,6 @@ import {
   ColorControls,
   EffectControls,
   ViewControls,
-  BackgroundControls,
 } from '../UI/index'
 
 type Props = {
@@ -21,14 +20,14 @@ export const PropertyControls: React.FC<Props> = ({
   return (
     <div
       className={cx(
-        'w-full h-[fit-content] overflow-y-scroll bg-controls-panel-mobile text-primary mx-auto p-3.5 md:bg-controls-panel md:h-full md:p-3.5 relative'
+        'w-full h-[fit-content] overflow-y-scroll bg-controls-panel-mobile text-primary mx-auto p-3.5 md:h-full md:p-3.5 relative'
       )}
+      style={{ display: activeTab === 'none' ? 'none' : 'block' }}
     >
       {activeTab === 'shape' && <ShapeControls />}
       {activeTab === 'colors' && <ColorControls />}
       {activeTab === 'effects' && <EffectControls />}
       {activeTab === 'view' && <ViewControls />}
-      {activeTab === 'background' && <BackgroundControls />}
     </div>
   )
 }

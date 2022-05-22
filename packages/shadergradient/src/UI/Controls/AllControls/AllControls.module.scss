@@ -1,28 +1,21 @@
 .controlMobile {
   width: 100vw;
   height: fit-content;
-  // position: absolute;
-  // bottom: 0;
-  // left: 0;
-  // z-index: 10;
-  @apply bg-white;
 
   .hideBtn {
     width: 100vw;
     color: #ff430a;
-    // position: absolute;
-    margin-top: -35px;
 
     div {
-      margin: 0 auto;
+      margin: 10px auto;
       display: flex;
-      height: 2em;
-      width: 2em;
+      height: 1.8em;
+      width: 1.8em;
       border-radius: 100%;
       background-color: white;
     }
     p {
-      line-height: 2em;
+      line-height: 1.8em;
       width: 100%;
       text-align: center;
     }

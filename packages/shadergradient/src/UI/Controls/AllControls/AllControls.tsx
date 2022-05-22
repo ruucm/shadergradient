@@ -3,16 +3,15 @@ import { motion } from 'framer-motion'
 import { useOnClickOutside } from '../../../hooks/index'
 import { useUIStore } from '../../../store'
 import { PropertyControls } from '../../PropertyControls'
-import { ControlTabTitles, ToolsBox, ControlTypeTitles } from '../Tools/index'
+import { ToolsBox, ControlTypeTitles } from '../Tools/index'
 import styles from './AllControls.module.scss'
-// import { MenuWrapper } from '@/components/dom/MenuWrapper'
 import { HorizontalControl } from './HorizontalControl'
 
 type Props = {
   // All other props
   [x: string]: any
 }
-export const AllControls: React.FC<Props> = ({ isMobile }) => {
+export const AllControls: React.FC<Props> = ({ isMobile, isFigma = false }) => {
   const [activeTab, setActiveTab] = useState('none')
 
   const mode = useUIStore((state: any) => state.mode)
@@ -22,19 +21,29 @@ export const AllControls: React.FC<Props> = ({ isMobile }) => {
   useOnClickOutside(ref, () => setActiveTab('none'))
 
   const children = (
-    <>
-      {!isMobile && (
-        <div style={{ width: '100%', display: 'flex', alignItems: 'center' }}>
-          <ControlTabTitles activeTab={activeTab} setActiveTab={setActiveTab} />
-          <ToolsBox darkMode={false} />
-        </div>
-      )}
+    <div
+      style={{
+        display: 'flex',
+        flexDirection: isFigma === true ? 'column-reverse' : 'column',
+      }}
+    >
       <PropertyControls activeTab={activeTab} setActiveTab={setActiveTab} />
-
-      {isMobile && (
-        <ControlTypeTitles activeTab={activeTab} setActiveTab={setActiveTab} />
-      )}
-    </>
+      <div
+        style={{
+          width: '100%',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+        }}
+      >
+        <ControlTypeTitles
+          activeTab={activeTab}
+          setActiveTab={setActiveTab}
+          isMobile={isMobile}
+        />
+        {isMobile === false && <ToolsBox darkMode={false} />}
+      </div>
+    </div>
   )
 
   return (

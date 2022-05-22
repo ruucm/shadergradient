@@ -5,7 +5,6 @@ import { Header } from 'shadergradient'
 import useStore from '@/helpers/store'
 
 const Dom = ({ children }) => {
-  const [inAbout, setInAbout] = useState(false)
   const ref = useRef(null)
   const [isMobile, setIsMobile] = useState(false)
 
@@ -17,15 +16,14 @@ const Dom = ({ children }) => {
       setIsMobile(false)
     }
   }
+  const router = useRouter()
+  const { asPath } = useRouter()
+
   useEffect(() => {
     handleResize()
     window.addEventListener('resize', handleResize)
     useStore.setState({ dom: ref })
-    if (router.pathname === '/about') {
-      setInAbout(true)
-    }
   }, [])
-  const router = useRouter()
 
   return (
     <div
@@ -38,7 +36,8 @@ const Dom = ({ children }) => {
         onLogoClick={() => router.push('/')}
         aboutBtn
         onAboutClick={() => router.push('/about')}
-        inAbout={inAbout}
+        onBackClick={() => router.back()}
+        inAbout={asPath === '/about' ? true : false}
         isMobile={isMobile}
       />
     </div>

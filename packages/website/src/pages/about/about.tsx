@@ -1,10 +1,16 @@
 import { useEffect, useState } from 'react'
+import cx from 'classnames'
 import { motion } from 'framer-motion'
+
 import {
   useUIStore,
   Gradient,
   TextAnimation,
   TextHoverBox,
+  aboutPositions,
+  aboutRotations,
+  aboutAngles,
+  Links,
 } from 'shadergradient'
 
 const DOM = () => {
@@ -31,7 +37,13 @@ const DOM = () => {
   }, [])
 
   return (
-    <>
+    <div
+      style={{
+        width: '100%',
+        height: '100%',
+        overflowY: 'scroll',
+      }}
+    >
       <div
         style={{
           width: '100%',
@@ -40,21 +52,30 @@ const DOM = () => {
           flexDirection: 'column',
           justifyContent: 'center',
           alignItems: 'center',
-          position: 'absolute',
-          top: '28%',
+          position: isMobile === true ? 'static' : 'absolute',
+          marginTop: isMobile === true ? '45%' : '28%',
+          // top: '28%',
         }}
       >
-        <TextAnimation
-          fontSize={80}
-          color='#ff340A'
-          delay={0}
-          content='ShaderGradient'
-        />
+        {isMobile !== true && (
+          <TextAnimation
+            fontSize={80}
+            color='#ff340A'
+            delay={0}
+            content='ShaderGradient'
+          />
+        )}
         <motion.div
           initial={{ y: 10, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ delay: 1, duration: 0.5 }}
-          className='m-4 text-lg text-center text-primary'
+          className={cx(
+            'm-4 text-center text-primary',
+            isMobile === true ? 'text-sm w-[80%]' : 'text-lg'
+          )}
+          style={{
+            paddingTop: isMobile && 60,
+          }}
         >
           This project has started while we were exploring the realm of creative
           coding,
@@ -78,20 +99,37 @@ const DOM = () => {
       <div
         className='text-sm text-primary'
         style={{
-          width: '95%',
-          borderTop: '1.5px solid #ff340A',
-          position: 'absolute',
+          width: isMobile === true ? '80%' : '90%',
+          borderTop: isMobile === true ? 'none' : '1.5px solid #ff340A',
+          position: isMobile === true ? 'static' : 'absolute',
           bottom: 0,
-          margin: 40,
+          margin: isMobile === true ? '10%' : '5%',
           paddingTop: 10,
           height: 'fit-content',
-          display: 'grid',
-          gridTemplateColumns: '50% 50%',
+          display: 'flex',
+          flexDirection: isMobile === true ? 'column' : 'row',
+          justifyContent: 'space-between',
+          rowGap: 25,
         }}
       >
-        <div className='flex gap-6'>
-          <p>made by</p>
-          <div style={{ display: 'inline' }}>
+        <div
+          className={cx(
+            'flex gap-6',
+            isMobile === true ? 'w-[100%]' : 'w-[50%]'
+          )}
+          style={{
+            borderTop: isMobile && '1.5px solid #ff340A',
+            paddingTop: isMobile && 10,
+          }}
+        >
+          <p
+            style={{
+              width: isMobile && '35%',
+            }}
+          >
+            made by
+          </p>
+          <div style={{ display: 'inline', width: isMobile && '65%' }}>
             <TextHoverBox
               content='developer'
               text='ruucm'
@@ -108,35 +146,60 @@ const DOM = () => {
             <br /> reach us out for any inquiry
           </div>
         </div>
-        <div className='flex gap-6'>
-          <p>available from</p>
-          <div style={{ display: 'inline' }}>
-            For designers,{' '}
-            <TextHoverBox
-              content='Enjoy the maximum potential of ShaderGradient!'
-              text='Framer Package'
-              link=''
-            />{' '}
-            &{' '}
-            <TextHoverBox
-              content='For now, it only supports static gradient. GIF export on the way!'
-              text='Figma Plugin (beta)'
-              link='https://seungmee-lee.com'
-            />
-            <br /> For developers,{' '}
-            <TextHoverBox
-              content='import from NPM. Create yours from the website, and use "Copy as Code" feature'
-              text='React Component'
-              link=''
-            />
+        <div
+          className={cx('flex gap-6', isMobile ? 'w-[100%]' : 'w-[50%]')}
+          style={{
+            borderTop: isMobile && '1.5px solid #ff340A',
+            paddingTop: isMobile && 10,
+          }}
+        >
+          <p style={{ width: isMobile && '35%' }}>available from</p>
+          <div style={{ display: 'inline', width: isMobile && '65%' }}>
+            {isMobile ? (
+              <Links isMobile={true} />
+            ) : (
+              <>
+                For designers,{' '}
+                <TextHoverBox
+                  content='Enjoy the maximum potential of ShaderGradient!'
+                  text='Framer Package'
+                  link=''
+                />{' '}
+                &{' '}
+                <TextHoverBox
+                  content='For now, it only supports static gradient. GIF export on the way!'
+                  text='Figma Plugin (beta)'
+                  link='https://seungmee-lee.com'
+                />
+                <br /> For developers,{' '}
+                <TextHoverBox
+                  content='import from NPM. Create yours from the website, and use "Copy as Code" feature'
+                  text='React Component'
+                  link=''
+                />
+              </>
+            )}
           </div>
         </div>
       </div>
-    </>
+    </div>
   )
 }
 const R3F = () => {
-  return <Gradient zoomOut={true} animate={true} inAbout={true} />
+  return (
+    <Gradient
+      zoomOut={true}
+      animate={true}
+      cAzimuthAngle={aboutAngles[0]}
+      cPolarAngle={aboutAngles[1]}
+      positionX={aboutPositions[0]}
+      positionY={aboutPositions[1]}
+      positionZ={aboutPositions[2]}
+      rotationX={aboutRotations[0]}
+      rotationY={aboutRotations[1]}
+      rotationZ={aboutRotations[2]}
+    />
+  )
 }
 
 const Page = () => {

@@ -6,12 +6,14 @@ import { PRESETS } from '../../presets'
 import { useUIStore } from '../../store'
 import styles from './Links.module.scss'
 
-export function Links() {
+export function Links({ isMobile = false }) {
   const activePreset = useUIStore((state) => state.activePreset)
   const color = PRESETS[activePreset].color
 
   const iconSize = 30
+  const mobileIconSize = 24
   const iconStrokeWidth = 1.5
+  const keycolor = '#ff430A'
 
   const IconWrapper = ({ children, link, title }) => {
     const hoverTitle = useAnimation()
@@ -64,20 +66,75 @@ export function Links() {
       </motion.div>
     )
   }
+
+  const MobileIconWrapper = ({ children, link }) => {
+    return (
+      <motion.div
+        onClick={() => {
+          window.open(link)
+        }}
+        style={{
+          cursor: 'pointer',
+        }}
+      >
+        {children}
+      </motion.div>
+    )
+  }
   return (
-    <div className={styles.LinksWrapper} style={{ color: color }}>
-      <p style={{ textAlign: 'center' }}>Also available from</p>
-      <div className={styles.iconWrapper}>
-        <IconWrapper link={links[2].link} title='Framer'>
-          <Framer color={color} size={iconSize} strokeWidth={iconStrokeWidth} />
-        </IconWrapper>
-        <IconWrapper link={links[2].link} title='Github'>
-          <GitHub color={color} size={iconSize} strokeWidth={iconStrokeWidth} />
-        </IconWrapper>
-        <IconWrapper link={links[0].link} title='Figma'>
-          <Figma color={color} size={iconSize} strokeWidth={iconStrokeWidth} />
-        </IconWrapper>
-      </div>
-    </div>
+    <>
+      {isMobile ? (
+        <div className={styles.mobileIconWrapper}>
+          <MobileIconWrapper link={links[2].link}>
+            <Framer
+              color={keycolor}
+              size={mobileIconSize}
+              strokeWidth={iconStrokeWidth}
+            />
+          </MobileIconWrapper>
+          <MobileIconWrapper link={links[1].link}>
+            <GitHub
+              color={keycolor}
+              size={mobileIconSize}
+              strokeWidth={iconStrokeWidth}
+            />
+          </MobileIconWrapper>
+          <MobileIconWrapper link={links[0].link}>
+            <Figma
+              color={keycolor}
+              size={mobileIconSize}
+              strokeWidth={iconStrokeWidth}
+            />
+          </MobileIconWrapper>
+        </div>
+      ) : (
+        <div className={styles.LinksWrapper} style={{ color: color }}>
+          <p style={{ textAlign: 'center' }}>Also available from</p>
+          <div className={styles.iconWrapper}>
+            <IconWrapper link={links[2].link} title='Framer'>
+              <Framer
+                color={color}
+                size={iconSize}
+                strokeWidth={iconStrokeWidth}
+              />
+            </IconWrapper>
+            <IconWrapper link={links[1].link} title='Github'>
+              <GitHub
+                color={color}
+                size={iconSize}
+                strokeWidth={iconStrokeWidth}
+              />
+            </IconWrapper>
+            <IconWrapper link={links[0].link} title='Figma'>
+              <Figma
+                color={color}
+                size={iconSize}
+                strokeWidth={iconStrokeWidth}
+              />
+            </IconWrapper>
+          </div>
+        </div>
+      )}
+    </>
   )
 }

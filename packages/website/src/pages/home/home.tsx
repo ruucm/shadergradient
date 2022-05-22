@@ -33,6 +33,7 @@ const DOM = () => {
   const activePreset = useUIStore((state) => state.activePreset)
   const [isMobile, setIsMobile] = useState(false)
   const swipeArrowAnim = useAnimation()
+
   //choose the screen size
   const handleResize = () => {
     if (window.innerWidth < 641) {
@@ -42,18 +43,11 @@ const DOM = () => {
     }
   }
 
-  // for safari
-  const appHeight = () => {
-    const doc = document.documentElement
-    doc.style.setProperty('--app-height', `${window.innerHeight}px`)
-  }
-
   // create an event listener
   useEffect(() => {
     handleResize()
     window.addEventListener('resize', handleResize)
-    window.addEventListener('appHeight', appHeight)
-    appHeight()
+
     setMode('full')
     swipeArrowAnim.start({
       y: 10,

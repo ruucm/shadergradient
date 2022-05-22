@@ -1,18 +1,25 @@
-.LinksWrapper{
-    width:100vw;
-    height:fit-content;
-    margin-top:12vh;
-    p{
-        width:100%;
-    text-align: center;  
-font-size: 12px;
-margin-bottom: 16px;  }
+.LinksWrapper {
+  width: 100vw;
+  height: fit-content;
+  margin-top: 12vh;
+  p {
+    width: 100%;
+    text-align: center;
+    font-size: 12px;
+    margin-bottom: 16px;
+  }
 }
 
-.iconWrapper{
-    margin:0 auto;
-    display: flex;
-    align-items: center;
-    gap:8px;
-width:fit-content;
+.iconWrapper {
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: fit-content;
+}
+
+.mobileIconWrapper {
+  display: flex;
+  justify-content: flex-start;
+  column-gap: 10px;
 }

@@ -53,7 +53,10 @@ const DOM = () => {
         <div className={styles.content}>
           <div
             className={styles.presetTitleWrapper}
-            style={{ display: mode === 'full' ? 'block' : 'none' }}
+            style={{
+              display: mode === 'full' ? 'block' : 'none',
+              marginTop: isMobile === true ? '-35vh' : null,
+            }}
           >
             <PresetTitles isMobile={isMobile} fontSize={50} />
           </div>

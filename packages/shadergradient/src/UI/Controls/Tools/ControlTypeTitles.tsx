@@ -19,7 +19,7 @@ export const ControlTypeTitles: React.FC<ControlTypeTitlePropsT> = ({
   return (
     <div
       className={
-        'flex flex-row justify-start gap-3 w-[fit-content] h-[58px] p-3 cursor-pointer md:w-full md:h-full md:justify-between md:bg-white'
+        'flex flex-row justify-start w-[fit-content] h-[58px] cursor-pointer'
       }
       style={{
         width: isMobile === false ? 'fit-content' : '100%',

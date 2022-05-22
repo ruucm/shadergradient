@@ -11,6 +11,7 @@ export function PresetTitle({
   index = 0,
   fontSize = 120,
   isMobile = false,
+  arrowOn = true,
 }) {
   const activePreset = useUIStore((state) => state.activePreset)
   const setActivePreset = useUIStore((state) => state.setActivePreset)
@@ -22,6 +23,7 @@ export function PresetTitle({
         style={{
           display: index === activePreset ? 'flex' : 'none',
           gap: 25,
+          flexDirection: isMobile === true ? 'column' : 'row',
         }}
       >
         <TextAnimation
@@ -37,7 +39,7 @@ export function PresetTitle({
           style={{
             color: color,
             fontSize: isMobile === true ? 22 : 30,
-            display: isMobile === true ? 'none' : 'flex',
+            display: arrowOn === false ? 'none' : 'flex',
             // transform: isMobile === true ? 'rotate(90deg)' : null,
           }}
         >

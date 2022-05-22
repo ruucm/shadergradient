@@ -68,6 +68,7 @@ const DOM = () => {
             <PresetTitles
               isMobile={isMobile}
               fontSize={isMobile === true ? 70 : 120}
+              arrowOn={isMobile === true ? false : true}
             />
           </div>
 

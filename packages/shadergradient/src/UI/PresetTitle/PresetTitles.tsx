@@ -2,7 +2,11 @@ import React from 'react'
 import { PRESETS } from '../../presets'
 import { PresetTitle } from './PresetTitle'
 
-export function PresetTitles({ isMobile = false, fontSize = 120 }) {
+export function PresetTitles({
+  isMobile = false,
+  fontSize = 120,
+  arrowOn = true,
+}) {
   return (
     <>
       {PRESETS.map((item, index) => {
@@ -17,6 +21,7 @@ export function PresetTitles({ isMobile = false, fontSize = 120 }) {
                 : index.toString() + ' ' + item.title
             }
             isMobile={isMobile}
+            arrowOn={arrowOn}
             fontSize={fontSize}
           ></PresetTitle>
         )

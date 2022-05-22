@@ -28,7 +28,7 @@ var ControlTypeTitles = (_a) => {
     "isMobile"
   ]);
   return /* @__PURE__ */ React.createElement("div", {
-    className: "flex flex-row justify-start gap-3 w-[fit-content] h-[58px] p-3 cursor-pointer md:w-full md:h-full md:justify-between md:bg-white",
+    className: "flex flex-row justify-start w-[fit-content] h-[58px] cursor-pointer",
     style: {
       width: isMobile === false ? "fit-content" : "100%",
       height: isMobile === false ? 58 : "100%",

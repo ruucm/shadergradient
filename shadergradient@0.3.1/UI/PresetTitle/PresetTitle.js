@@ -5,7 +5,7 @@ import { PRESETS } from "../../presets.js";
 import { useUIStore } from "../../store.js";
 import { TextAnimation } from "../../UI/index.js";
 
-// esbuild-css-modules-plugin-namespace:/tmp/tmp-2001-uaqwwZsKqNg6/shadergradient/src/UI/PresetTitle/PresetTitle.module.css.js
+// esbuild-css-modules-plugin-namespace:/tmp/tmp-1927-03oViBU5l1H8/shadergradient/src/UI/PresetTitle/PresetTitle.module.css.js
 var digest = "8c9cbb24b61977e36f8b81ad63f435aca8cdf95cd1b797f60daefc579ea1c0b6";
 var css = `@import url("https://fonts.googleapis.com/css2?family=Lora:wght@500&display=swap");
 ._presetWrapper_1qj0w_2 {
@@ -52,7 +52,8 @@ function PresetTitle({
   title = "title",
   index = 0,
   fontSize = 120,
-  isMobile = false
+  isMobile = false,
+  arrowOn = true
 }) {
   const activePreset = useUIStore((state) => state.activePreset);
   const setActivePreset = useUIStore((state) => state.setActivePreset);
@@ -62,7 +63,8 @@ function PresetTitle({
     className: PresetTitle_module_css_default.presetTitle,
     style: {
       display: index === activePreset ? "flex" : "none",
-      gap: 25
+      gap: 25,
+      flexDirection: isMobile === true ? "column" : "row"
     }
   }, /* @__PURE__ */ React.createElement(TextAnimation, {
     delay: 0,
@@ -75,7 +77,7 @@ function PresetTitle({
     style: {
       color,
       fontSize: isMobile === true ? 22 : 30,
-      display: isMobile === true ? "none" : "flex"
+      display: arrowOn === false ? "none" : "flex"
     }
   }, /* @__PURE__ */ React.createElement(motion.div, {
     className: PresetTitle_module_css_default.slideBtn,

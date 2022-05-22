@@ -95,7 +95,7 @@ var ControlTypeTitle = (_a) => {
     "onClick"
   ]);
   return /* @__PURE__ */ React.createElement("div", {
-    className: (0, import_classnames.default)("text-xl font-medium text-primary text-opacity-20 cursor-pointer", active && "text-opacity-100"),
+    className: (0, import_classnames.default)("text-xl font-medium text-primary text-opacity-20 cursor-pointer p-3 w-[25%] text-center", active && "text-opacity-100"),
     onClick
   }, title);
 };

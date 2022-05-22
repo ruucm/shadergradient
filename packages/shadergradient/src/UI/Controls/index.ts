@@ -12,7 +12,6 @@ export {
   ToolsBox,
   IconButtons,
   Feather,
-  ControlTabTitles,
   ControlTypeTitle,
   ControlTypeTitles,
 } from './Tools/index'

@@ -707,6 +707,14 @@ html {
   width: 100%;
 }
 
+.w-\[\] {
+  width: ;
+}
+
+.w-\[25\%\] {
+  width: 25%;
+}
+
 .flex-shrink-0 {
   flex-shrink: 0;
 }

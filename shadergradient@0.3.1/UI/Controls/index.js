@@ -10,6 +10,7 @@ import {
   ToolsBox,
   IconButtons,
   Feather,
+  ControlTabTitles,
   ControlTypeTitle,
   ControlTypeTitles
 } from "./Tools/index.js";
@@ -18,6 +19,7 @@ export {
   AllControls,
   BackgroundControls,
   ColorControls,
+  ControlTabTitles,
   ControlTypeTitle,
   ControlTypeTitles,
   EffectControls,

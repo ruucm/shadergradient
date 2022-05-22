@@ -11,6 +11,7 @@ import {
   ToolsBox,
   IconButtons,
   Feather,
+  ControlTabTitles,
   ControlTypeTitle,
   ControlTypeTitles,
   AllControls
@@ -30,6 +31,7 @@ export {
   Button,
   ColorControls,
   ColorInput,
+  ControlTabTitles,
   ControlTypeTitle,
   ControlTypeTitles,
   EffectControls,

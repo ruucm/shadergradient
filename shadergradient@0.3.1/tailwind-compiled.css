@@ -709,16 +709,9 @@ input[type=number] {
   .md\:justify-start {
     justify-content: flex-start;
   }
-  .md\:justify-between {
-    justify-content: space-between;
-  }
   .md\:bg-controls-panel {
     --tw-bg-opacity: 1;
     background-color: rgb(246 248 248 / var(--tw-bg-opacity));
-  }
-  .md\:bg-white {
-    --tw-bg-opacity: 1;
-    background-color: rgb(255 255 255 / var(--tw-bg-opacity));
   }
   .md\:p-3\.5 {
     padding: 20px;

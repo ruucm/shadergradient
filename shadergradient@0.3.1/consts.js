@@ -1,7 +1,8 @@
 // src/consts.ts
 var initialActivePreset = 0;
 var canvasProps = (pixelDensity) => ({
-  dpr: pixelDensity
+  dpr: pixelDensity,
+  gl: { preserveDrawingBuffer: true }
 });
 var links = [
   {

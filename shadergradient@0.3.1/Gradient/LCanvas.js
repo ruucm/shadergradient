@@ -43,6 +43,7 @@ function LCanvas(_a) {
   const { Canvas } = importedFiber;
   const [pixelDensity] = useQueryState("pixelDensity");
   return /* @__PURE__ */ React.createElement(Canvas, __spreadValues(__spreadValues({
+    id: "gradientCanvas",
     resize: { offsetSize: true }
   }, canvasProps(pixelDensity)), rest), /* @__PURE__ */ React.createElement(FiberContextProvider, {
     value: importedFiber

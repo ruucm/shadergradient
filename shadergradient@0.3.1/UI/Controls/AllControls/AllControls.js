@@ -6,8 +6,8 @@ import { useUIStore } from "../../../store.js";
 import { PropertyControls } from "../../PropertyControls.js";
 import { ToolsBox, ControlTypeTitles } from "../Tools/index.js";
 
-// esbuild-css-modules-plugin-namespace:/tmp/tmp-1899-iugcG41ZDeFv/shadergradient/src/UI/Controls/AllControls/AllControls.module.css.js
-var digest = "f41cf4803bb96ca95ae89e8f109b26d668fc40aadf1107a2dd065596ed13df8b";
+// esbuild-css-modules-plugin-namespace:/tmp/tmp-1882-aflEi7sjpSqQ/shadergradient/src/UI/Controls/AllControls/AllControls.module.css.js
+var digest = "a71f45f058388be1d49fd500051d74b7c735d4fcc8d5830e88d107cff4231372";
 var css = `._controlMobile_1dm53_1 {
   width: 100vw;
   height: fit-content; }
@@ -70,7 +70,7 @@ var AllControls = ({ isMobile, isFigma = false }) => {
     ref
   }, isMobile === true ? /* @__PURE__ */ React.createElement("div", {
     className: AllControls_module_css_default.controlMobile
-  }, /* @__PURE__ */ React.createElement(motion.div, {
+  }, !isFigma && /* @__PURE__ */ React.createElement(motion.div, {
     className: AllControls_module_css_default.floating
   }, /* @__PURE__ */ React.createElement(motion.div, {
     className: AllControls_module_css_default.hideBtn,

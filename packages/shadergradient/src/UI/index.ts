@@ -10,7 +10,6 @@ export {
   ToolsBox,
   IconButtons,
   Feather,
-  ControlTabTitles,
   ControlTypeTitle,
   ControlTypeTitles,
   AllControls,

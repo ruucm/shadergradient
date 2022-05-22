@@ -447,6 +447,12 @@ html {
 .w-1 {
   width: 8px;
 }
+.w-\[80\%\] {
+  width: 80%;
+}
+.w-\[100\%\] {
+  width: 100%;
+}
 .flex-shrink-0 {
   flex-shrink: 0;
 }
@@ -667,12 +673,11 @@ body {
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  height: var(--app-height);
+  height: -webkit-fill-available;
   background: black;
 }
 :root {
   --guide-opacity: 0;
-  --app-height: 100%;
 }
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {

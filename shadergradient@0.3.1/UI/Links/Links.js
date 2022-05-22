@@ -1007,24 +1007,29 @@ import { links } from "../../consts.js";
 import { PRESETS } from "../../presets.js";
 import { useUIStore } from "../../store.js";
 
-// esbuild-css-modules-plugin-namespace:/tmp/tmp-1904-WzyJTzEvgf3x/shadergradient/src/UI/Links/Links.module.css.js
+// esbuild-css-modules-plugin-namespace:/tmp/tmp-1898-9Sndc8mMZAA1/shadergradient/src/UI/Links/Links.module.css.js
 var digest = "0b8ff9793374c04d3455c8b7097901f7d3f4d0bdf3066fa185b67f06d4ef2f90";
-var css = `._LinksWrapper_1hkxt_1 {
+var css = `._LinksWrapper_6zqs1_1 {
   width: 100vw;
   height: fit-content;
   margin-top: 12vh; }
-  ._LinksWrapper_1hkxt_1 p {
+  ._LinksWrapper_6zqs1_1 p {
     width: 100%;
     text-align: center;
     font-size: 12px;
     margin-bottom: 16px; }
 
-._iconWrapper_1hkxt_11 {
+._iconWrapper_6zqs1_11 {
   margin: 0 auto;
   display: flex;
   align-items: center;
   gap: 8px;
   width: fit-content; }
+
+._mobileIconWrapper_6zqs1_18 {
+  display: flex;
+  justify-content: flex-start;
+  column-gap: 10px; }
 `;
 (function() {
   if (!document.getElementById(digest)) {
@@ -1034,14 +1039,16 @@ var css = `._LinksWrapper_1hkxt_1 {
     document.head.appendChild(ele);
   }
 })();
-var Links_module_css_default = { "linksWrapper": "_LinksWrapper_1hkxt_1", "iconWrapper": "_iconWrapper_1hkxt_11" };
+var Links_module_css_default = { "linksWrapper": "_LinksWrapper_6zqs1_1", "iconWrapper": "_iconWrapper_6zqs1_11", "mobileIconWrapper": "_mobileIconWrapper_6zqs1_18" };
 
 // src/UI/Links/Links.tsx
-function Links() {
+function Links({ isMobile = false }) {
   const activePreset = useUIStore((state) => state.activePreset);
   const color = PRESETS[activePreset].color;
   const iconSize = 30;
+  const mobileIconSize = 24;
   const iconStrokeWidth = 1.5;
+  const keycolor = "#ff430A";
   const IconWrapper = ({ children, link, title }) => {
     const hoverTitle = useAnimation();
     return /* @__PURE__ */ React4.createElement(motion.div, {
@@ -1086,7 +1093,37 @@ function Links() {
       animate: hoverTitle
     }, title));
   };
-  return /* @__PURE__ */ React4.createElement("div", {
+  const MobileIconWrapper = ({ children, link }) => {
+    return /* @__PURE__ */ React4.createElement(motion.div, {
+      onClick: () => {
+        window.open(link);
+      },
+      style: {
+        cursor: "pointer"
+      }
+    }, children);
+  };
+  return /* @__PURE__ */ React4.createElement(React4.Fragment, null, isMobile ? /* @__PURE__ */ React4.createElement("div", {
+    className: Links_module_css_default.mobileIconWrapper
+  }, /* @__PURE__ */ React4.createElement(MobileIconWrapper, {
+    link: links[2].link
+  }, /* @__PURE__ */ React4.createElement(framer_default, {
+    color: keycolor,
+    size: mobileIconSize,
+    strokeWidth: iconStrokeWidth
+  })), /* @__PURE__ */ React4.createElement(MobileIconWrapper, {
+    link: links[1].link
+  }, /* @__PURE__ */ React4.createElement(github_default, {
+    color: keycolor,
+    size: mobileIconSize,
+    strokeWidth: iconStrokeWidth
+  })), /* @__PURE__ */ React4.createElement(MobileIconWrapper, {
+    link: links[0].link
+  }, /* @__PURE__ */ React4.createElement(figma_default, {
+    color: keycolor,
+    size: mobileIconSize,
+    strokeWidth: iconStrokeWidth
+  }))) : /* @__PURE__ */ React4.createElement("div", {
     className: Links_module_css_default.LinksWrapper,
     style: { color }
   }, /* @__PURE__ */ React4.createElement("p", {
@@ -1101,7 +1138,7 @@ function Links() {
     size: iconSize,
     strokeWidth: iconStrokeWidth
   })), /* @__PURE__ */ React4.createElement(IconWrapper, {
-    link: links[2].link,
+    link: links[1].link,
     title: "Github"
   }, /* @__PURE__ */ React4.createElement(github_default, {
     color,
@@ -1114,7 +1151,7 @@ function Links() {
     color,
     size: iconSize,
     strokeWidth: iconStrokeWidth
-  }))));
+  })))));
 }
 export {
   Links

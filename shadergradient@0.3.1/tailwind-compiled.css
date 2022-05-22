@@ -450,9 +450,6 @@ html {
 .w-\[100\%\] {
   width: 100%;
 }
-.w-\[\] {
-  width:;
-}
 .w-\[25\%\] {
   width: 25%;
 }
@@ -699,13 +696,6 @@ input[type=number] {
   }
   .md\:justify-between {
     justify-content: space-between;
-  }
-  .md\:justify-between {
-    justify-content: space-between;
-  }
-  .md\:bg-controls-panel {
-    --tw-bg-opacity: 1;
-    background-color: rgb(255 255 255 / var(--tw-bg-opacity));
   }
   .md\:bg-white {
     --tw-bg-opacity: 1;

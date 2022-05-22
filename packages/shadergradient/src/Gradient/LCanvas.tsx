@@ -13,6 +13,7 @@ export function LCanvas({
 
   return (
     <Canvas
+      id='gradientCanvas'
       resize={{ offsetSize: true }}
       {...canvasProps(pixelDensity)}
       {...rest}

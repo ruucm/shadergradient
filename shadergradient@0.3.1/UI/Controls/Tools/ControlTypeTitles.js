@@ -20,13 +20,21 @@ import { ControlTypeTitle } from "./ControlTypeTitle.js";
 var ControlTypeTitles = (_a) => {
   var _b = _a, {
     activeTab,
-    setActiveTab
+    setActiveTab,
+    isMobile
   } = _b, rest = __objRest(_b, [
     "activeTab",
-    "setActiveTab"
+    "setActiveTab",
+    "isMobile"
   ]);
   return /* @__PURE__ */ React.createElement("div", {
-    className: "flex justify-between gap-0.2 w-screen h-[fit-content] p-3.5 cursor-pointer md:w-full md:h-full md:flex-col md:justify-start",
+    className: "flex flex-row justify-start gap-3 w-[fit-content] h-[58px] p-3 cursor-pointer md:w-full md:h-full md:justify-between md:bg-white",
+    style: {
+      width: isMobile === false ? "fit-content" : "100%",
+      height: isMobile === false ? 58 : "100%",
+      justifyContent: isMobile === false ? "flex-start" : "space-between",
+      background: isMobile === false ? "transparent" : "white"
+    },
     onClick: () => setActiveTab("shape")
   }, /* @__PURE__ */ React.createElement(ControlTypeTitle, {
     title: "Shape",
@@ -54,13 +62,6 @@ var ControlTypeTitles = (_a) => {
     onClick: (e) => {
       e.stopPropagation();
       activeTab === "view" ? setActiveTab("none") : setActiveTab("view");
-    }
-  }), /* @__PURE__ */ React.createElement(ControlTypeTitle, {
-    title: "Background",
-    active: activeTab === "background",
-    onClick: (e) => {
-      e.stopPropagation();
-      activeTab === "background" ? setActiveTab("none") : setActiveTab("background");
     }
   }));
 };

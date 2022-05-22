@@ -4,27 +4,25 @@ import { motion } from "framer-motion";
 import { useOnClickOutside } from "../../../hooks/index.js";
 import { useUIStore } from "../../../store.js";
 import { PropertyControls } from "../../PropertyControls.js";
-import { ControlTabTitles, ToolsBox, ControlTypeTitles } from "../Tools/index.js";
+import { ToolsBox, ControlTypeTitles } from "../Tools/index.js";
 
-// esbuild-css-modules-plugin-namespace:/tmp/tmp-1931-E7NzltIjghCa/shadergradient/src/UI/Controls/AllControls/AllControls.module.css.js
+// esbuild-css-modules-plugin-namespace:/tmp/tmp-1899-iugcG41ZDeFv/shadergradient/src/UI/Controls/AllControls/AllControls.module.css.js
 var digest = "f41cf4803bb96ca95ae89e8f109b26d668fc40aadf1107a2dd065596ed13df8b";
-var css = `._controlMobile_jnbyg_1 {
+var css = `._controlMobile_1dm53_1 {
   width: 100vw;
-  height: fit-content;
-  @apply bg-white; }
-  ._controlMobile_jnbyg_1 ._hideBtn_jnbyg_5 {
+  height: fit-content; }
+  ._controlMobile_1dm53_1 ._hideBtn_1dm53_4 {
     width: 100vw;
-    color: #ff430a;
-    margin-top: -35px; }
-    ._controlMobile_jnbyg_1 ._hideBtn_jnbyg_5 div {
-      margin: 0 auto;
+    color: #ff430a; }
+    ._controlMobile_1dm53_1 ._hideBtn_1dm53_4 div {
+      margin: 10px auto;
       display: flex;
-      height: 2em;
-      width: 2em;
+      height: 1.8em;
+      width: 1.8em;
       border-radius: 100%;
       background-color: white; }
-    ._controlMobile_jnbyg_1 ._hideBtn_jnbyg_5 p {
-      line-height: 2em;
+    ._controlMobile_1dm53_1 ._hideBtn_1dm53_4 p {
+      line-height: 1.8em;
       width: 100%;
       text-align: center; }
 `;
@@ -36,30 +34,38 @@ var css = `._controlMobile_jnbyg_1 {
     document.head.appendChild(ele);
   }
 })();
-var AllControls_module_css_default = { "controlMobile": "_controlMobile_jnbyg_1", "hideBtn": "_hideBtn_jnbyg_5" };
+var AllControls_module_css_default = { "controlMobile": "_controlMobile_1dm53_1", "hideBtn": "_hideBtn_1dm53_4" };
 
 // src/UI/Controls/AllControls/AllControls.tsx
 import { HorizontalControl } from "./HorizontalControl.js";
-var AllControls = ({ isMobile }) => {
+var AllControls = ({ isMobile, isFigma = false }) => {
   const [activeTab, setActiveTab] = useState("none");
   const mode = useUIStore((state) => state.mode);
   const setMode = useUIStore((state) => state.setMode);
   const ref = useRef(null);
   useOnClickOutside(ref, () => setActiveTab("none"));
-  const children = /* @__PURE__ */ React.createElement(React.Fragment, null, !isMobile && /* @__PURE__ */ React.createElement("div", {
-    style: { width: "100%", display: "flex", alignItems: "center" }
-  }, /* @__PURE__ */ React.createElement(ControlTabTitles, {
+  const children = /* @__PURE__ */ React.createElement("div", {
+    style: {
+      display: "flex",
+      flexDirection: isFigma === true ? "column-reverse" : "column"
+    }
+  }, /* @__PURE__ */ React.createElement(PropertyControls, {
     activeTab,
     setActiveTab
-  }), /* @__PURE__ */ React.createElement(ToolsBox, {
+  }), /* @__PURE__ */ React.createElement("div", {
+    style: {
+      width: "100%",
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "space-between"
+    }
+  }, /* @__PURE__ */ React.createElement(ControlTypeTitles, {
+    activeTab,
+    setActiveTab,
+    isMobile
+  }), isMobile === false && /* @__PURE__ */ React.createElement(ToolsBox, {
     darkMode: false
-  })), /* @__PURE__ */ React.createElement(PropertyControls, {
-    activeTab,
-    setActiveTab
-  }), isMobile && /* @__PURE__ */ React.createElement(ControlTypeTitles, {
-    activeTab,
-    setActiveTab
-  }));
+  })));
   return /* @__PURE__ */ React.createElement("div", {
     ref
   }, isMobile === true ? /* @__PURE__ */ React.createElement("div", {

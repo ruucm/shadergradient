@@ -38,7 +38,9 @@ export function HorizontalControl({
         alignItems: 'center',
         zIndex: 2,
         bottom: 30,
+        cursor: 'pointer',
       }}
+      onClick={() => setActiveTab('shape')}
     >
       <motion.div
         className={cx('z-10 overflow-hidden rounded-sm', className)}

@@ -18,7 +18,8 @@ export const AllControls: React.FC<Props> = ({ isMobile, isFigma = false }) => {
   const setMode = useUIStore((state: any) => state.setMode)
 
   const ref = useRef(null)
-  useOnClickOutside(ref, () => setActiveTab('none'))
+  const isWeb = !isMobile && !isFigma
+  useOnClickOutside(ref, () => isWeb && setActiveTab('none'))
 
   const children = (
     <div

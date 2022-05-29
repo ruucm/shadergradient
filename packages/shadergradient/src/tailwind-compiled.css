@@ -671,6 +671,10 @@ html {
   width: 47px;
 }
 
+.w-\[25\%\] {
+  width: 25%;
+}
+
 .w-\[fit-content\] {
   width: -webkit-fit-content;
   width: -moz-fit-content;
@@ -701,10 +705,6 @@ html {
 
 .w-\[100\%\] {
   width: 100%;
-}
-
-.w-\[25\%\] {
-  width: 25%;
 }
 
 .flex-shrink-0 {
@@ -981,19 +981,6 @@ input[type='number'] {
 @media (min-width: 768px) {
   .md\:h-full {
     height: 100%;
-  }
-
-  .md\:w-full {
-    width: 100%;
-  }
-
-  .md\:justify-between {
-    justify-content: space-between;
-  }
-
-  .md\:bg-white {
-    --tw-bg-opacity: 1;
-    background-color: rgb(255 255 255 / var(--tw-bg-opacity));
   }
 
   .md\:p-3\.5 {

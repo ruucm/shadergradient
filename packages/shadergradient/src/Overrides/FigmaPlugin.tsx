@@ -2,6 +2,7 @@ import React from 'react'
 import type { ComponentType } from 'react'
 import { PRESETS } from '../presets'
 import { useUIStore } from '../store'
+import { cx } from '../utils/index'
 import {
   figma,
   postFigmaMessage,
@@ -84,4 +85,11 @@ export function ActiveTitle(Component): ComponentType {
 
     return <Component {...props} text={PRESETS[activePreset].title} />
   }
+}
+
+// styles
+export function HideScrollBar(Component): ComponentType {
+  return ({ className, ...props }: any) => (
+    <Component {...props} className={cx('hide-scrollbar', className)} />
+  )
 }

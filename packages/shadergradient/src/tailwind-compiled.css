@@ -930,6 +930,15 @@ html {
   transition-duration: 150ms;
 }
 
+.hide-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
 html,
 body {
   text-rendering: optimizeLegibility;

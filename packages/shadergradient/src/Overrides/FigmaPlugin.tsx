@@ -1,7 +1,7 @@
 import React from 'react'
 import type { ComponentType } from 'react'
 import { PRESETS } from '../presets'
-import { useUIStore } from '../store'
+import { usePropertyStore, useUIStore } from '../store'
 import { cx } from '../utils/index'
 import {
   figma,
@@ -84,6 +84,53 @@ export function ActiveTitle(Component): ComponentType {
     const activePreset = useUIStore((state) => state.activePreset)
 
     return <Component {...props} text={PRESETS[activePreset].title} />
+  }
+}
+
+// ToolsBox
+export function Tool3dAxis(Component): ComponentType {
+  return ({ style, ...props }: any) => {
+    const toggleAxis = usePropertyStore((state: any) => state.toggleAxis)
+
+    return (
+      <Component
+        {...props}
+        style={{ ...style, cursor: 'pointer' }}
+        onClick={() => usePropertyStore.setState({ toggleAxis: !toggleAxis })}
+      />
+    )
+  }
+}
+export function ToolZoomOut(Component): ComponentType {
+  return ({ style, ...props }: any) => {
+    const zoomOut = usePropertyStore((state: any) => state.zoomOut)
+
+    return (
+      <Component
+        {...props}
+        style={{ ...style, cursor: 'pointer' }}
+        onClick={() => usePropertyStore.setState({ zoomOut: !zoomOut })}
+      />
+    )
+  }
+}
+export function ToolCopy(Component): ComponentType {
+  return ({ style, ...props }: any) => {
+    const [copyUrlText, setCopyUrl] = React.useState('copy url')
+
+    return (
+      <Component
+        {...props}
+        style={{ ...style, cursor: 'pointer' }}
+        onClick={async () => {
+          window.navigator.clipboard.writeText(window.location.href)
+          setCopyUrl('copied!')
+          await setTimeout(() => {
+            setCopyUrl('copy url')
+          }, 1000)
+        }}
+      />
+    )
   }
 }
 

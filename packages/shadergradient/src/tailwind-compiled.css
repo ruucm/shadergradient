@@ -526,6 +526,11 @@ html {
   position: relative;
 }
 
+.sticky {
+  position: -webkit-sticky;
+  position: sticky;
+}
+
 .top-1\/2 {
   top: 50%;
 }

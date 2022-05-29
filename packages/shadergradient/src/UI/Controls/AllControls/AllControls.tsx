@@ -37,6 +37,7 @@ export const AllControls: React.FC<Props> = ({ isMobile, isFigma = false }) => {
           justifyContent: 'space-between',
           cursor: 'pointer',
         }}
+        className={isFigma ? 'sticky top-0' : ''}
         onClick={() => setActiveTab('shape')}
       >
         <ControlTypeTitles

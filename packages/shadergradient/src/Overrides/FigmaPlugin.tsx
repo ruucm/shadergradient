@@ -1,5 +1,7 @@
 import React from 'react'
 import type { ComponentType } from 'react'
+import { PRESETS } from '../presets'
+import { useUIStore } from '../store'
 import {
   figma,
   postFigmaMessage,
@@ -32,5 +34,54 @@ export function insertCanvasAsImage(Component): ComponentType {
         onClick={() => postFigmaMessageForSnapShot(() => void 0)}
       />
     )
+  }
+}
+
+export function ArrowLeft(Component): ComponentType {
+  return ({ style, ...props }: any) => {
+    const activePreset = useUIStore((state) => state.activePreset)
+    const setActivePreset = useUIStore((state) => state.setActivePreset)
+
+    return (
+      <Component
+        {...props}
+        style={{ ...style, cursor: 'pointer' }}
+        onClick={() => {
+          if (activePreset !== 0) {
+            setActivePreset(activePreset - 1)
+          } else {
+            setActivePreset(PRESETS.length - 1)
+          }
+        }}
+      />
+    )
+  }
+}
+export function ArrowRight(Component): ComponentType {
+  return ({ style, ...props }: any) => {
+    const activePreset = useUIStore((state) => state.activePreset)
+    const setActivePreset = useUIStore((state) => state.setActivePreset)
+
+    return (
+      <Component
+        {...props}
+        style={{ ...style, cursor: 'pointer' }}
+        onClick={() => {
+          if (activePreset !== PRESETS.length - 1) {
+            setActivePreset(activePreset + 1)
+          } else {
+            setActivePreset(0)
+          }
+        }}
+      />
+    )
+  }
+}
+
+export function ActiveTitle(Component): ComponentType {
+  return (props) => {
+    const activePreset = useUIStore((state) => state.activePreset)
+
+    return <Component {...props} text={PRESETS[activePreset].title} />
   }
 }

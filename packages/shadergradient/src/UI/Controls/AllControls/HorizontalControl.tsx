@@ -38,9 +38,7 @@ export function HorizontalControl({
         alignItems: 'center',
         zIndex: 2,
         bottom: 30,
-        cursor: 'pointer',
       }}
-      onClick={() => setActiveTab('shape')}
     >
       <motion.div
         className={cx('z-10 overflow-hidden rounded-sm', className)}
@@ -56,6 +54,7 @@ export function HorizontalControl({
         }}
         transition={{ type: 'spring', damping: 12, stiffness: 200, delay: 2 }}
         animate={menuAnim}
+        // onClick={(e) => e.stopPropagation()}
       >
         {children}
       </motion.div>

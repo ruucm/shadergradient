@@ -35,7 +35,9 @@ export const AllControls: React.FC<Props> = ({ isMobile, isFigma = false }) => {
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
+          cursor: 'pointer',
         }}
+        onClick={() => setActiveTab('shape')}
       >
         <ControlTypeTitles
           activeTab={activeTab}

@@ -52,6 +52,8 @@ var __async = (__this, __arguments, generator) => {
 
 // src/Overrides/FigmaPlugin.tsx
 import React from "react";
+import { PRESETS } from "../presets.js";
+import { useUIStore } from "../store.js";
 import {
   figma,
   postFigmaMessage,
@@ -78,7 +80,52 @@ function insertCanvasAsImage(Component) {
     }));
   };
 }
+function ArrowLeft(Component) {
+  return (_a) => {
+    var _b = _a, { style } = _b, props = __objRest(_b, ["style"]);
+    const activePreset = useUIStore((state) => state.activePreset);
+    const setActivePreset = useUIStore((state) => state.setActivePreset);
+    return /* @__PURE__ */ React.createElement(Component, __spreadProps(__spreadValues({}, props), {
+      style: __spreadProps(__spreadValues({}, style), { cursor: "pointer" }),
+      onClick: () => {
+        if (activePreset !== 0) {
+          setActivePreset(activePreset - 1);
+        } else {
+          setActivePreset(PRESETS.length - 1);
+        }
+      }
+    }));
+  };
+}
+function ArrowRight(Component) {
+  return (_a) => {
+    var _b = _a, { style } = _b, props = __objRest(_b, ["style"]);
+    const activePreset = useUIStore((state) => state.activePreset);
+    const setActivePreset = useUIStore((state) => state.setActivePreset);
+    return /* @__PURE__ */ React.createElement(Component, __spreadProps(__spreadValues({}, props), {
+      style: __spreadProps(__spreadValues({}, style), { cursor: "pointer" }),
+      onClick: () => {
+        if (activePreset !== PRESETS.length - 1) {
+          setActivePreset(activePreset + 1);
+        } else {
+          setActivePreset(0);
+        }
+      }
+    }));
+  };
+}
+function ActiveTitle(Component) {
+  return (props) => {
+    const activePreset = useUIStore((state) => state.activePreset);
+    return /* @__PURE__ */ React.createElement(Component, __spreadProps(__spreadValues({}, props), {
+      text: PRESETS[activePreset].title
+    }));
+  };
+}
 export {
+  ActiveTitle,
+  ArrowLeft,
+  ArrowRight,
   createRectangle,
   insertCanvasAsImage
 };

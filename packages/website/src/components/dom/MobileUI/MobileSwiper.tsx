@@ -72,9 +72,11 @@ export function MobileSwiper() {
         initial={{ opacity: 0, rotate: -4, y: 150 }}
         animate={{ opacity: 1, y: 0 }}
       >
-        All visuals <br />
-        created with <br /> ShaderGradient
-        {/* <br />a new way of creating beautiful, moving gradients */}
+        All visuals
+        <br />
+        created with
+        <br />
+        ShaderGradient
       </motion.div>
       <motion.div
         style={{

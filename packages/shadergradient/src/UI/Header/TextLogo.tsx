@@ -21,8 +21,6 @@ export function TextLogo({ color = 'white', size = 18, onClick }) {
         style={{
           width: 'fit-content',
           padding: '2px 5px',
-          borderBottom:
-            mode !== 'full' ? '2px solid #FF430A' : '2px solid ' + color,
         }}
       >
         <TextHover
@@ -30,6 +28,7 @@ export function TextLogo({ color = 'white', size = 18, onClick }) {
           color={mode !== 'full' ? '#FF430A' : color}
           content='ShaderGradient'
           delay={0}
+          border={true}
         />
       </div>
       {/* </Link> */}

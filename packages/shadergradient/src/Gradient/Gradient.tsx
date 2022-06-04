@@ -99,7 +99,6 @@ function useQueryOrProps(props) {
   const [reflection] = useQueryState('reflection')
 
   return {
-    ...props, // props could be overwritten by query params
     type,
     animate,
     uTime,
@@ -128,5 +127,6 @@ function useQueryOrProps(props) {
     envPreset,
     grain,
     reflection,
+    ...props, // props could be overwritten by query params
   }
 }

@@ -30,9 +30,9 @@ const DOM = () => {
   const setMode = useUIStore((state: any) => state.setMode)
   const loadingPercentage = useUIStore((state: any) => state.loadingPercentage)
   const activePreset = useUIStore((state) => state.activePreset)
-  const [isMobile, setIsMobile] = useState(false)
+  const [isMobile, setIsMobile] = useState(null)
 
-  //choose the screen size
+  // //choose the screen size
   const handleResize = () => {
     if (window.innerWidth < 641) {
       setIsMobile(true)
@@ -45,7 +45,6 @@ const DOM = () => {
   useEffect(() => {
     handleResize()
     window.addEventListener('resize', handleResize)
-
     setMode('full')
   }, [])
 
@@ -56,11 +55,13 @@ const DOM = () => {
 
       <PreviewWrapper />
 
-      <div className={styles.contentWrapper}>
+      <div
+        className={styles.contentWrapper}
+        style={{ display: mode === 'full' ? 'flex' : 'none' }}
+      >
         <div
           className={styles.content}
           style={{
-            display: mode === 'full' ? 'block' : 'none',
             writingMode: isMobile === true ? 'vertical-rl' : null,
           }}
         >
@@ -72,8 +73,10 @@ const DOM = () => {
             />
           </div>
 
-          <div
+          <motion.div
             className={styles.paragraph}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
             style={{
               color: PRESETS[activePreset].color,
               display: isMobile === true ? 'none' : 'block',
@@ -83,35 +86,35 @@ const DOM = () => {
             <br /> a new way of creating beautiful, moving gradients. <br />
             {`It's made with lines of codes, so you can create your own with just
             a few clicks.`}
+          </motion.div>
+          <div
+            className={styles.customizeBtnWrapper}
+            style={{
+              display: isMobile === false ? 'flex' : 'none',
+            }}
+          >
+            <Link href='/customize'>
+              <motion.div className={styles.customizeBtn}>
+                <TextHover
+                  fontSize={isMobile === true ? 15 : 18}
+                  color={PRESETS[activePreset].color}
+                  content={'Try it by yourself →'}
+                  delay={0}
+                  border
+                />
+              </motion.div>
+            </Link>
           </div>
+          {isMobile === false && <Links />}
         </div>
-        <div
-          className={styles.customizeBtnWrapper}
-          style={{
-            display: mode === 'full' && isMobile !== true ? 'flex' : 'none',
-          }}
-        >
-          <Link href='/customize'>
-            <motion.div className={styles.customizeBtn}>
-              <TextHover
-                fontSize={isMobile === true ? 15 : 18}
-                color={PRESETS[activePreset].color}
-                content={'Try it by yourself →'}
-                delay={0}
-                border
-              />
-            </motion.div>
-          </Link>
-        </div>
-        {isMobile === true ? null : <Links />}
-        {isMobile === true ? null : (
-          <div className={styles.footer}>
-            <PreviewBtn
-              color={mode !== 'full' ? '#FF430A' : PRESETS[activePreset].color}
-            />
-          </div>
-        )}
       </div>
+      {isMobile === false && (
+        <div className={styles.footer}>
+          <PreviewBtn
+            color={mode !== 'full' ? '#FF430A' : PRESETS[activePreset].color}
+          />
+        </div>
+      )}
     </>
   )
 }

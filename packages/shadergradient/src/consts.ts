@@ -31,5 +31,6 @@ export const defaultZoom = 1
 export const aboutAngles = [190, 130]
 export const aboutPositions = [0, 11, 0]
 export const aboutRotations = [0, 10, 50]
+export const aboutMobilePositions = [0, 20, 0]
 
 export const hdrBase = 'https://shadergradient.vercel.app'

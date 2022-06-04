@@ -62,13 +62,13 @@ export function PresetTitle({
             <motion.div
               className={styles.clickOnTitle}
               style={{ opacity: 0 }}
-              whileHover={{ opacity: 0.1 }}
+              whileHover={{ opacity: 0.2 }}
               onClick={activeUp}
             ></motion.div>
             <motion.div
               className={styles.clickOnTitle}
               style={{ opacity: 0 }}
-              whileHover={{ opacity: 0.1 }}
+              whileHover={{ opacity: 0.2 }}
               onClick={activeDown}
             ></motion.div>
           </div>

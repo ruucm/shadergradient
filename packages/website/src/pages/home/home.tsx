@@ -62,7 +62,6 @@ const DOM = () => {
         <div
           className={styles.content}
           style={{
-            // display: mode === 'full' ? 'block' : 'none',
             writingMode: isMobile === true ? 'vertical-rl' : null,
           }}
         >

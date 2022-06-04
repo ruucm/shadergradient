@@ -6,14 +6,25 @@ import { updateGradientState, usePropertyStore, useUIStore } from '../store'
 import { Environment } from './comps/Environment/index'
 import { CameraControl, GradientMesh } from './index'
 
-export function Gradient({ zoomOut = false, ...props }) {
+type Props = {
+  zoomOut?: boolean
+  control?: 'query' | 'props'
+  [x: string]: any
+}
+
+export function Gradient({
+  zoomOut = false,
+  control = 'props',
+  ...props
+}: Props) {
   usePresetToStore()
 
-  useEffect(() => usePropertyStore.setState({ zoomOut }), [zoomOut])
-
   const { lightType, envPreset, brightness, grain, ...others } =
-    useQueryOrProps(props)
+    useControlValues(control, props)
+
   usePostProcessing(grain === 'off')
+
+  useEffect(() => usePropertyStore.setState({ zoomOut }), [zoomOut])
 
   return (
     <>
@@ -57,7 +68,7 @@ function usePresetToStore() {
   }, [activePreset])
 }
 
-function useQueryOrProps(props) {
+function useControlValues(control, props) {
   // shape
   const [type] = useQueryState('type')
   const [animate] = useQueryState('animate')
@@ -98,7 +109,7 @@ function useQueryOrProps(props) {
   const [grain] = useQueryState('grain')
   const [reflection] = useQueryState('reflection')
 
-  return {
+  const queryProps = {
     type,
     animate,
     uTime,
@@ -127,6 +138,10 @@ function useQueryOrProps(props) {
     envPreset,
     grain,
     reflection,
-    ...props, // props could be overwritten by query params
+  }
+
+  if (control === 'props') return { ...queryProps, ...props }
+  else if (control === 'query') {
+    return queryProps
   }
 }

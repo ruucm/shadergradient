@@ -1,5 +1,5 @@
 import React, { Suspense, useEffect } from 'react'
-import { hdrBase, initialActivePreset } from '../consts'
+import { hdrBase } from '../consts'
 import { usePostProcessing, useQueryState } from '../hooks/index'
 import { PRESETS } from '../presets'
 import { updateGradientState, usePropertyStore, useUIStore } from '../store'
@@ -34,18 +34,22 @@ export function Gradient({ zoomOut = false, ...props }) {
   )
 }
 
+let pageLoaded = false
+
 function usePresetToStore() {
   // ----------------------------- Preset to Custom Material ---------------------------------
   const activePreset = useUIStore((state: any) => state.activePreset)
   useEffect(() => {
     let gradientURL = PRESETS[activePreset].url
     if (
-      activePreset === initialActivePreset &&
+      !pageLoaded &&
       window.location.search?.includes('pixelDensity') // checking just window.location.search existing is not valid for the Framer Preview search (?target=preview-web)
     )
       gradientURL = window.location.search // use search params at the first load.
 
     updateGradientState(gradientURL)
+
+    pageLoaded = true
   }, [activePreset])
 }
 

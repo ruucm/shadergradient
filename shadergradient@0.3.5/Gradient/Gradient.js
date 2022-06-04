@@ -1,6 +1,4 @@
 var __defProp = Object.defineProperty;
-var __defProps = Object.defineProperties;
-var __getOwnPropDescs = Object.getOwnPropertyDescriptors;
 var __getOwnPropSymbols = Object.getOwnPropertySymbols;
 var __hasOwnProp = Object.prototype.hasOwnProperty;
 var __propIsEnum = Object.prototype.propertyIsEnumerable;
@@ -16,7 +14,6 @@ var __spreadValues = (a, b) => {
     }
   return a;
 };
-var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
 var __objRest = (source, exclude) => {
   var target = {};
   for (var prop in source)
@@ -92,7 +89,7 @@ function useQueryOrProps(props) {
   const [envPreset] = useQueryState("envPreset");
   const [grain] = useQueryState("grain");
   const [reflection] = useQueryState("reflection");
-  return __spreadProps(__spreadValues({}, props), {
+  return __spreadValues({
     type,
     animate,
     uTime,
@@ -121,7 +118,7 @@ function useQueryOrProps(props) {
     envPreset,
     grain,
     reflection
-  });
+  }, props);
 }
 export {
   Gradient

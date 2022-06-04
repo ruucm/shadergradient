@@ -23,9 +23,11 @@ var defaultZoom = 1;
 var aboutAngles = [190, 130];
 var aboutPositions = [0, 11, 0];
 var aboutRotations = [0, 10, 50];
+var aboutMobilePositions = [0, 20, 0];
 var hdrBase = "https://shadergradient.vercel.app";
 export {
   aboutAngles,
+  aboutMobilePositions,
   aboutPositions,
   aboutRotations,
   canvasProps,

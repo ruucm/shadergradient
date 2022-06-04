@@ -940,6 +940,7 @@ var info_default = Info;
 
 // src/UI/Header/AboutBtn.tsx
 import { useUIStore } from "../../store.js";
+import { TextHover } from "../TextAnimation.js";
 function AboutBtn({
   inAbout = false,
   color = "white",
@@ -954,11 +955,8 @@ function AboutBtn({
       color: mode !== "full" ? "#ff430a" : color,
       position: "absolute",
       right: 0,
-      marginRight: "2vw",
+      marginRight: isMobile === true ? "4vw" : "2vw",
       borderBottom: "1.5px solid transparent"
-    },
-    whileHover: {
-      borderBottom: mode !== "full" ? "1.5px solid #ff430A" : "1.5px solid " + color
     }
   }, inAbout === true ? /* @__PURE__ */ React3.createElement("div", {
     style: { display: "flex" },
@@ -972,9 +970,12 @@ function AboutBtn({
     onClick: onAboutClick
   }, isMobile === true ? /* @__PURE__ */ React3.createElement(info_default, {
     color
-  }) : /* @__PURE__ */ React3.createElement(React3.Fragment, null, /* @__PURE__ */ React3.createElement("p", null, "about "), /* @__PURE__ */ React3.createElement("p", {
-    style: { transform: "rotate(45deg)" }
-  }, "\u2191"))));
+  }) : /* @__PURE__ */ React3.createElement(React3.Fragment, null, /* @__PURE__ */ React3.createElement(TextHover, {
+    content: "about",
+    fontSize: 14,
+    border: false,
+    color
+  }))));
 }
 export {
   AboutBtn

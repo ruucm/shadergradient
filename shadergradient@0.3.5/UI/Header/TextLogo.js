@@ -16,14 +16,14 @@ function TextLogo({ color = "white", size = 18, onClick }) {
   }, /* @__PURE__ */ React.createElement("div", {
     style: {
       width: "fit-content",
-      padding: "2px 5px",
-      borderBottom: mode !== "full" ? "2px solid #FF430A" : "2px solid " + color
+      padding: "2px 5px"
     }
   }, /* @__PURE__ */ React.createElement(TextHover, {
     fontSize: size,
     color: mode !== "full" ? "#FF430A" : color,
     content: "ShaderGradient",
-    delay: 0
+    delay: 0,
+    border: true
   })));
 }
 export {

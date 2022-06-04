@@ -242,8 +242,10 @@ function TextHover({
     },
     variants: letterVariants,
     transition: { duration: 0.5 }
-  }, letter === " " ? "\xA0" : letter)), wordI !== content.split(" ").length - 1 ? "\xA0" : null)))), border && /* @__PURE__ */ React2.createElement("div", {
-    style: { background: "white", height: 2, width: "100%" }
+  }, letter === " " ? "\xA0" : letter)), wordI !== content.split(" ").length - 1 ? "\xA0" : null)))), border && /* @__PURE__ */ React2.createElement(motion.div, {
+    style: { background: color, height: 2 },
+    initial: { width: 0 },
+    animate: { width: "100%" }
   })));
 }
 export {

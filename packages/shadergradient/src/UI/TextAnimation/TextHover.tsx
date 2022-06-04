@@ -118,7 +118,11 @@ export function TextHover({
         </motion.h1>
         {/* border */}
         {border && (
-          <div style={{ background: 'white', height: 2, width: '100%' }} />
+          <motion.div
+            style={{ background: color, height: 2 }}
+            initial={{ width: 0 }}
+            animate={{ width: '100%' }}
+          />
         )}
       </motion.div>
     </AnimatePresence>

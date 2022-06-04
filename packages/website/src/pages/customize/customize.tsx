@@ -78,7 +78,7 @@ const DOM = () => {
 
 // canvas components goes here
 const R3F = () => {
-  return <Gradient animate />
+  return <Gradient animate='on' />
 }
 
 const Page = () => {

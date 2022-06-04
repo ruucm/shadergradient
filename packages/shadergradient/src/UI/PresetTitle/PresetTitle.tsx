@@ -16,6 +16,22 @@ export function PresetTitle({
   const activePreset = useUIStore((state) => state.activePreset)
   const setActivePreset = useUIStore((state) => state.setActivePreset)
 
+  const activeUp = () => {
+    if (activePreset !== PRESETS.length - 1) {
+      setActivePreset(activePreset + 1)
+    } else {
+      setActivePreset(0)
+    }
+  }
+
+  const activeDown = () => {
+    if (activePreset !== 0) {
+      setActivePreset(activePreset - 1)
+    } else {
+      setActivePreset(PRESETS.length - 1)
+    }
+  }
+
   return (
     <div className={styles.presetWrapper}>
       <div
@@ -26,21 +42,51 @@ export function PresetTitle({
           flexDirection: isMobile === true ? 'column' : 'row',
         }}
       >
-        <TextAnimation
-          delay={0}
-          font='"Lora", serif'
-          color={color}
-          fontSize={fontSize}
-          //default 120, for mobile title 80, for customize 50
-          content={isMobile === true ? title.substring(3) : title}
-        />
+        <div
+          style={{
+            width: 'fit-content',
+            height: 'fit-content',
+            position: 'relative',
+          }}
+        >
+          <div
+            style={{
+              width: '100%',
+              height: '100%',
+              position: 'absolute',
+              display: 'flex',
+              flexDirection: 'column',
+              zIndex: 10,
+            }}
+          >
+            <motion.div
+              className={styles.clickOnTitle}
+              style={{ opacity: 0 }}
+              whileHover={{ opacity: 0.2 }}
+              onClick={activeUp}
+            ></motion.div>
+            <motion.div
+              className={styles.clickOnTitle}
+              style={{ opacity: 0 }}
+              whileHover={{ opacity: 0.2 }}
+              onClick={activeDown}
+            ></motion.div>
+          </div>
+          <TextAnimation
+            delay={0}
+            font='"Lora", serif'
+            color={color}
+            fontSize={fontSize}
+            //default 120, for mobile title 80, for customize 50
+            content={isMobile === true ? title.substring(3) : title}
+          />
+        </div>
         <div
           className={styles.slideBtns}
           style={{
             color: color,
             fontSize: isMobile === true ? 22 : 30,
             display: arrowOn === false ? 'none' : 'flex',
-            // transform: isMobile === true ? 'rotate(90deg)' : null,
           }}
         >
           <motion.div
@@ -50,13 +96,7 @@ export function PresetTitle({
             whileHover={{
               backgroundColor: 'rgba(255,255,255,0.15)',
             }}
-            onClick={() => {
-              if (activePreset !== 0) {
-                setActivePreset(activePreset - 1)
-              } else {
-                setActivePreset(PRESETS.length - 1)
-              }
-            }}
+            onClick={activeDown}
             style={{ width: isMobile ? 35 : 40, height: isMobile ? 35 : 40 }}
           >
             ↓
@@ -68,13 +108,7 @@ export function PresetTitle({
             }}
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
-            onClick={() => {
-              if (activePreset !== PRESETS.length - 1) {
-                setActivePreset(activePreset + 1)
-              } else {
-                setActivePreset(0)
-              }
-            }}
+            onClick={activeUp}
             style={{
               width: isMobile === true ? 35 : 40,
               height: isMobile === true ? 35 : 40,

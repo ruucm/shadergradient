@@ -18,7 +18,7 @@ export function Header({
 
   return (
     <div className={styles.header}>
-      {inAbout !== true && (
+      {(inAbout !== true || isMobile === true) && (
         <TextLogo
           color={color}
           size={isMobile === true ? 15 : 18}

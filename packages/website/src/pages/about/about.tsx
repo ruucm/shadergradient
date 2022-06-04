@@ -53,7 +53,7 @@ const DOM = () => {
           justifyContent: 'center',
           alignItems: 'center',
           position: isMobile === true ? 'static' : 'absolute',
-          marginTop: isMobile === true ? '45%' : '28%',
+          marginTop: isMobile === true ? '45%' : 220,
           // top: '28%',
         }}
       >
@@ -189,7 +189,7 @@ const R3F = () => {
   return (
     <Gradient
       zoomOut={true}
-      animate={true}
+      animate={'on'}
       cAzimuthAngle={aboutAngles[0]}
       cPolarAngle={aboutAngles[1]}
       positionX={aboutPositions[0]}

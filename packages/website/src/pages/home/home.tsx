@@ -121,7 +121,7 @@ const DOM = () => {
 
 // canvas components goes here
 const R3F = () => {
-  return <Gradient />
+  return <Gradient control='query' />
 }
 
 const Page = () => {

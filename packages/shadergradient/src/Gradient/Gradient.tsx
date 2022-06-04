@@ -141,7 +141,5 @@ function useControlValues(control, props) {
   }
 
   if (control === 'props') return { ...queryProps, ...props }
-  else if (control === 'query') {
-    return queryProps
-  }
+  else if (control === 'query') return queryProps
 }

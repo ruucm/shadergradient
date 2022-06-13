@@ -30,6 +30,7 @@ export function Gradient({ zoomOut = false, ...props }) {
       {lightType === '3d' && <ambientLight intensity={brightness || 1} />}
       <CameraControl {...others} />
       <GradientMesh {...others} />
+      {/* <LineMesh {...others} /> */}
     </>
   )
 }

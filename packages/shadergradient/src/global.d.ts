@@ -7,6 +7,8 @@ declare global {
       mesh: ReactThreeFiber.MeshProps
       planeGeometry: ReactThreeFiber.PlaneGeometryProps
       icosahedronBufferGeometry: ReactThreeFiber.IcosahedronBufferGeometryProps
+      group: ReactThreeFiber.GrouopProps
+      lineSegments: ReactThreeFiber.LineSegmentsProps
     }
   }
 }

@@ -5,8 +5,8 @@ import { PRESETS } from "../../presets.js";
 import { useUIStore } from "../../store.js";
 import { TextAnimation } from "../../UI/index.js";
 
-// esbuild-css-modules-plugin-namespace:/tmp/tmp-1945-LEmh86CmnzNl/shadergradient/src/UI/PresetTitle/PresetTitle.module.css.js
-var digest = "5f469f1646e1862156ac750c52eba7f1a4a9ffd1d423c46fdaa541d25d669416";
+// esbuild-css-modules-plugin-namespace:/tmp/tmp-2065-RK9JBMZvwWhE/shadergradient/src/UI/PresetTitle/PresetTitle.module.css.js
+var digest = "8c9cbb24b61977e36f8b81ad63f435aca8cdf95cd1b797f60daefc579ea1c0b6";
 var css = `@import url("https://fonts.googleapis.com/css2?family=Lora:wght@500&display=swap");
 ._presetWrapper_nbez8_2 {
   width: 100vw;

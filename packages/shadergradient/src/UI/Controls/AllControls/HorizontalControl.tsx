@@ -37,7 +37,6 @@ export function HorizontalControl({
         justifyContent: 'center',
         alignItems: 'center',
         zIndex: 2,
-        bottom: 30,
       }}
     >
       <motion.div
@@ -51,6 +50,9 @@ export function HorizontalControl({
               ? '0px 0px 20px 0px rgba(0, 0, 0, 0.1)'
               : 'none',
           background: mode === 'about' ? '#141414' : 'white',
+          originY: 1,
+          justifyContent: 'flex-end',
+          marginBottom: 20,
         }}
         transition={{ type: 'spring', damping: 12, stiffness: 200, delay: 2 }}
         animate={menuAnim}

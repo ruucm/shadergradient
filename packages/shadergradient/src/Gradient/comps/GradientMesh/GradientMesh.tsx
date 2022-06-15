@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react'
 import { useRef } from 'react'
 import * as THREE from 'three'
-import { MeshLine, MeshLineMaterial } from 'three.meshline'
 import { usePropertyStore } from '../../../store'
 import { dToRArr, useFiber } from '../../../utils/index'
 import { lineMaterial } from './lineMaterial'
@@ -89,8 +88,6 @@ export const GradientMesh: React.FC<any> = ({
   HoveredLineMaterial.key = THREE.MathUtils.generateUUID()
 
   extend({ HoveredLineMaterial })
-
-  extend({ MeshLine, MeshLineMaterial })
 
   const material: any = useRef()
   const linemat: any = useRef()

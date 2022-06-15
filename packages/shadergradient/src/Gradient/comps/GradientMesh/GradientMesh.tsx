@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { useRef } from 'react'
 import * as THREE from 'three'
-import { aboutPositions, aboutRotations } from '../../../consts'
+import { MeshLine, MeshLineMaterial } from 'three.meshline'
 import { usePropertyStore } from '../../../store'
 import { dToRArr, useFiber } from '../../../utils/index'
 import { lineMaterial } from './lineMaterial'
@@ -39,15 +39,10 @@ export const GradientMesh: React.FC<any> = ({
 
   // when color is hovered
   const hoverState = usePropertyStore((state: any) => state.hoverState)
-  const meshCount = hoverState !== 0 ? 48 : 192
+  const meshCount = 192
+  const meshLineCount = 36
 
-  // const [meshCount, setMeshCount] = useState(48)
   useEffect(() => {
-    // if (hoverState !== 0) {
-    //   setMeshCount(48)
-    // } else {
-    //   setMeshCount(192)
-    // }
     if (hoverState !== 0) {
       usePropertyStore.setState({ zoomOut: true })
     } else {
@@ -95,9 +90,9 @@ export const GradientMesh: React.FC<any> = ({
 
   extend({ HoveredLineMaterial })
 
-  const mesh: any = useRef()
+  extend({ MeshLine, MeshLineMaterial })
+
   const material: any = useRef()
-  const linemesh: any = useRef()
   const linemat: any = useRef()
 
   useFrame((state, delta) => {
@@ -118,29 +113,13 @@ export const GradientMesh: React.FC<any> = ({
     material.current.roughness = 1 - reflection
   }, [uTime, reflection])
 
-  useEffect(() => {
-    if (mesh.current !== undefined && linemesh.current !== undefined) {
-      console.log(linemesh.current)
-    }
-  }, [mesh.current])
-
   // change position/rotation for about page
-  const inAbout = usePropertyStore((state: any) => state.inAbout)
 
   return (
     <group>
       <mesh
-        ref={mesh}
-        position={
-          inAbout === true
-            ? [aboutPositions[0], aboutPositions[1], aboutPositions[2]]
-            : [positionX, positionY, positionZ]
-        }
-        rotation={
-          inAbout === true
-            ? dToRArr([aboutRotations[0], aboutRotations[1], aboutRotations[2]])
-            : dToRArr([rotationX, rotationY, rotationZ])
-        }
+        position={[positionX, positionY, positionZ]}
+        rotation={dToRArr([rotationX, rotationY, rotationZ])}
       >
         {type === 'plane' && <planeGeometry args={[10, 10, 1, meshCount]} />}
         {type === 'sphere' && (
@@ -152,32 +131,24 @@ export const GradientMesh: React.FC<any> = ({
         {/* @ts-ignore */}
         <colorShiftMaterial key={ColorShiftMaterial.key} ref={material} />
       </mesh>
+
+      {/* show the line mesh when color is hovered */}
       <mesh>
         <lineSegments
-          ref={linemesh}
           renderOrder={1}
-          position={
-            inAbout === true
-              ? [aboutPositions[0], aboutPositions[1], aboutPositions[2]]
-              : [positionX, positionY, positionZ]
-          }
-          rotation={
-            inAbout === true
-              ? dToRArr([
-                  aboutRotations[0],
-                  aboutRotations[1],
-                  aboutRotations[2],
-                ])
-              : dToRArr([rotationX, rotationY, rotationZ])
-          }
+          position={[positionX, positionY, positionZ]}
+          rotation={dToRArr([rotationX, rotationY, rotationZ])}
           visible={hoverState !== 0 ? true : false}
-          // geometry={mesh.current.geometry}
         >
-          {type === 'plane' && <planeGeometry args={[10, 10, 1, 48]} />}
-          {type === 'sphere' && (
-            <icosahedronBufferGeometry args={[1, 48 / 3]} />
+          {type === 'plane' && (
+            <planeGeometry args={[10, 10, 1, meshLineCount]} />
           )}
-          {type === 'waterPlane' && <planeGeometry args={[10, 10, 48, 48]} />}
+          {type === 'sphere' && (
+            <icosahedronBufferGeometry args={[1, meshLineCount / 3]} />
+          )}
+          {type === 'waterPlane' && (
+            <planeGeometry args={[10, 10, meshLineCount, meshLineCount]} />
+          )}
           {/* @ts-ignore */}
           <hoveredLineMaterial key={HoveredLineMaterial.key} ref={linemat} />
         </lineSegments>

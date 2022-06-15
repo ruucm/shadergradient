@@ -37,7 +37,7 @@ export function lineMaterial(
 
       super({
         color: '#ffffff',
-        lineWidth: 5,
+        linewidth: 5,
         userData: uniformValues, // sync uniform and userData to update uniforms from outside (MeshPhysicalMaterial)
         onBeforeCompile: (shader) => {
           shader.uniforms = {

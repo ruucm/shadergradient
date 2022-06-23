@@ -9,7 +9,7 @@ export const PRESETS = [
   {
     title: 'Pensive',
     color: 'white',
-    url: '?animate=on&axesHelper=off&brightness=1.7&cAzimuthAngle=250&cDistance=1.6&cPolarAngle=140&cameraZoom=12&color1=%23809bd6&color2=%23910aff&color3=%23af38ff&embedMode=off&envPreset=city&gizmoHelper=hide&grain=on&lightType=3d&pixelDensity=1&positionX=0&positionY=0&positionZ=0&reflection=0.5&rotationX=0&rotationY=0&rotationZ=140&shader=defaults&type=sphere&uAmplitude=7&uDensity=0.8&uFrequency=5.5&uSpeed=0.3&uStrength=0.4&uTime=0&wireframe=false',
+    url: '?animate=on&axesHelper=off&brightness=1.7&cAzimuthAngle=250&cDistance=1.5&cPolarAngle=140&cameraZoom=12&color1=%23809bd6&color2=%23910aff&color3=%23af38ff&embedMode=off&envPreset=city&gizmoHelper=hide&grain=on&lightType=3d&pixelDensity=1&positionX=0&positionY=0&positionZ=0&reflection=0.5&rotationX=0&rotationY=0&rotationZ=140&shader=defaults&type=sphere&uAmplitude=7&uDensity=0.8&uFrequency=5.5&uSpeed=0.3&uStrength=0.4&uTime=0&wireframe=false',
   },
   {
     title: 'Mint',

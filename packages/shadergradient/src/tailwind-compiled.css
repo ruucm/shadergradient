@@ -991,12 +991,4 @@ input[type='number'] {
   .md\:h-full {
     height: 100%;
   }
-
-  .md\:p-3\.5 {
-    padding: 20px;
-  }
-
-  .md\:p-3 {
-    padding: 16px;
-  }
 }

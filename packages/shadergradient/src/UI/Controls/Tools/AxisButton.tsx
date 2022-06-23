@@ -1,7 +1,6 @@
 import * as React from 'react'
 import cx from 'classnames'
-import { IconHoverBox } from '../HoverBox/index/IconHoverBox'
-import { Feather } from './Feather'
+import { IconHoverBox } from '../../index'
 
 type ControlTypeTitlePropsT = {
   icon?: string
@@ -12,8 +11,7 @@ type ControlTypeTitlePropsT = {
   HTMLDivElement
 >
 
-export const IconButton: React.FC<ControlTypeTitlePropsT> = ({
-  icon,
+export const AxisButton: React.FC<ControlTypeTitlePropsT> = ({
   content,
   active,
   onClick,
@@ -34,10 +32,6 @@ export const IconButton: React.FC<ControlTypeTitlePropsT> = ({
         active && 'bg-primary'
       )}
       style={{
-        justifyContent: 'center',
-        cursor: 'pointer',
-        display: 'flex',
-        alignItems: 'center',
         borderRadius: 15,
         width: 30,
         height: 30,
@@ -53,12 +47,36 @@ export const IconButton: React.FC<ControlTypeTitlePropsT> = ({
       }}
       onClick={onClick}
     >
-      <Feather
-        /* @ts-ignore */
+      {/* <Feather
         name={icon}
         size={20}
         color={active ? 'white' : 'rgb(255,67,10)'}
-      />
+      /> */}
+      <svg xmlns='http://www.w3.org/2000/svg' width='24' height='24'>
+        <path
+          d='M 0 0 L 0 8.5'
+          transform='translate(8 12) rotate(60 0.5 4.25)'
+          fill='transparent'
+          strokeWidth='1.8'
+          stroke={active ? 'white' : 'rgb(255,67,10)'}
+          strokeLinecap='round'
+        ></path>
+        <path
+          d='M 0 0 L 0 8.5'
+          transform='translate(15 12) rotate(120 0.5 4.25)'
+          fill='transparent'
+          strokeWidth='1.8'
+          stroke={active ? 'white' : 'rgb(255,67,10)'}
+          strokeLinecap='round'
+        ></path>
+        <path
+          d='M 12 5 L 12 13.5'
+          fill='transparent'
+          strokeWidth='1.8'
+          stroke={active ? 'white' : 'rgb(255,67,10)'}
+          strokeLinecap='round'
+        ></path>
+      </svg>
       <IconHoverBox content={content} isHovered={isHovered} />
     </div>
   )

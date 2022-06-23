@@ -557,6 +557,9 @@ html {
 .p-3 {
   padding: 16px;
 }
+.p-3\.5 {
+  padding: 20px;
+}
 .text-center {
   text-align: center;
 }
@@ -701,5 +704,11 @@ input[type=number] {
 @media (min-width: 768px) {
   .md\:h-full {
     height: 100%;
+  }
+  .md\:p-3\.5 {
+    padding: 20px;
+  }
+  .md\:p-3 {
+    padding: 16px;
   }
 }

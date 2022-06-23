@@ -2,6 +2,8 @@
 var initialActivePreset = 0;
 var canvasProps = (pixelDensity) => ({
   dpr: pixelDensity,
+  linear: true,
+  flat: true,
   gl: { preserveDrawingBuffer: true }
 });
 var links = [

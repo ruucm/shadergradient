@@ -17,6 +17,10 @@ export function Gradient({
   control = 'props',
   ...props
 }: Props) {
+  const setLoadingPercentage = useUIStore(
+    (state: any) => state.setLoadingPercentage
+  )
+
   usePresetToStore()
 
   const { lightType, envPreset, brightness, grain, ...others } =
@@ -34,7 +38,7 @@ export function Gradient({
             // preset={envPreset}
             files={`${hdrBase}/hdr/${envPreset}.hdr`} // use instead of preset, cause rawCdn is not stable on many requests.
             background={true}
-            // loadingCallback={loadingCallback}
+            loadingCallback={setLoadingPercentage}
           />
         </Suspense>
       )}

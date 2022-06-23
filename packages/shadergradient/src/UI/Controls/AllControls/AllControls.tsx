@@ -26,6 +26,7 @@ export const AllControls: React.FC<Props> = ({ isMobile, isFigma = false }) => {
       style={{
         display: 'flex',
         flexDirection: isFigma === true ? 'column-reverse' : 'column',
+        justifyContent: 'flex-end',
       }}
     >
       <PropertyControls activeTab={activeTab} setActiveTab={setActiveTab} />
@@ -36,6 +37,7 @@ export const AllControls: React.FC<Props> = ({ isMobile, isFigma = false }) => {
           alignItems: 'center',
           justifyContent: 'space-between',
           cursor: 'pointer',
+          height: 58,
         }}
         className={isFigma ? 'sticky top-0' : ''}
         onClick={() => setActiveTab('shape')}

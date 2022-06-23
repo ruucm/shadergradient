@@ -1,6 +1,7 @@
 import * as React from 'react'
 import cx from 'classnames'
 import { updateGradientState, usePropertyStore } from '../../../store'
+import { AxisButton } from './AxisButton'
 import { IconButtons } from './IconButtons'
 
 type ControlTypeTitlePropsT = {
@@ -50,8 +51,8 @@ export const ToolsBox: React.FC<ControlTypeTitlePropsT> = ({
           } else alert('no history')
         }}
       />
-      <IconButtons
-        icon='Box'
+
+      <AxisButton
         content='3d axis'
         active={toggleAxis}
         onClick={() => {

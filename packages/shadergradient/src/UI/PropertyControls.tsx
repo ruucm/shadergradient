@@ -1,5 +1,6 @@
 import * as React from 'react'
 import cx from 'classnames'
+import { motion } from 'framer-motion'
 import { useQueryState } from '../hooks/index'
 import {
   ShapeControls,
@@ -23,16 +24,23 @@ export const PropertyControls: React.FC<Props> = ({
   if (!type) return null
 
   return (
-    <div
+    <motion.div
       className={cx(
-        'w-full h-[fit-content] overflow-y-scroll bg-controls-panel-mobile text-primary mx-auto p-3.5 md:h-full md:p-3.5 relative hide-scrollbar'
+        'w-full h-[fit-content] overflow-y-scroll bg-controls-panel-mobile text-primary mx-auto md:h-full relative hide-scrollbar'
       )}
-      style={{ display: activeTab === 'none' ? 'none' : 'block' }}
+      style={{
+        // display: activeTab === 'none' ? 'none' : 'block',
+        originY: 1,
+      }}
+      animate={{
+        height: activeTab === 'none' ? 0 : 'fit-content',
+        padding: activeTab === 'none' ? 0 : 20,
+      }}
     >
       {activeTab === 'shape' && <ShapeControls />}
       {activeTab === 'colors' && <ColorControls />}
       {activeTab === 'effects' && <EffectControls />}
       {activeTab === 'view' && <ViewControls />}
-    </div>
+    </motion.div>
   )
 }

@@ -28,7 +28,6 @@ import { MobileSwiper } from '@/components/dom/MobileUI'
 const DOM = () => {
   const mode = useUIStore((state: any) => state.mode)
   const setMode = useUIStore((state: any) => state.setMode)
-  const loadingPercentage = useUIStore((state: any) => state.loadingPercentage)
   const activePreset = useUIStore((state) => state.activePreset)
   const [isMobile, setIsMobile] = useState(null)
 
@@ -48,7 +47,6 @@ const DOM = () => {
     setMode('full')
   }, [])
 
-  console.log('loadingPercentage', loadingPercentage)
   return (
     <>
       {isMobile && <MobileSwiper />}
@@ -121,6 +119,20 @@ const DOM = () => {
 
 // canvas components goes here
 const R3F = () => {
+  const loadingPercentage = useUIStore((state: any) => state.loadingPercentage)
+  console.log('loadingPercentage', loadingPercentage)
+
+  if (loadingPercentage < 100)
+    return (
+      <Gradient
+        cDistance={28}
+        rotationX={0}
+        rotationY={0}
+        rotationZ={0}
+        uStrength={0}
+        uDensity={0}
+      />
+    )
   return <Gradient control='query' />
 }
 

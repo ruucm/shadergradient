@@ -15,6 +15,7 @@ import {
 
 import styles from './Home.module.scss'
 import { MobileSwiper } from '@/components/dom/MobileUI'
+import { useInterval } from '@/hooks'
 
 // Dynamic import is ussed to prevent a payload when the website start that will include threejs r3f etc..
 // WARNING ! errors might get obfuscated by using dynamic import.
@@ -24,8 +25,10 @@ import { MobileSwiper } from '@/components/dom/MobileUI'
 //   ssr: false,
 // })
 
+const indexDuration = 3
+
 // dom components goes here
-const DOM = () => {
+const DOM = ({ time }) => {
   const mode = useUIStore((state: any) => state.mode)
   const setMode = useUIStore((state: any) => state.setMode)
   const activePreset = useUIStore((state) => state.activePreset)
@@ -46,6 +49,8 @@ const DOM = () => {
     window.addEventListener('resize', handleResize)
     setMode('full')
   }, [])
+
+  if (time < indexDuration) return <></>
 
   return (
     <>
@@ -118,11 +123,11 @@ const DOM = () => {
 }
 
 // canvas components goes here
-const R3F = () => {
+const R3F = ({ time }) => {
   const loadingPercentage = useUIStore((state: any) => state.loadingPercentage)
   console.log('loadingPercentage', loadingPercentage)
 
-  if (loadingPercentage < 100)
+  if (time < indexDuration)
     return (
       <Gradient
         cDistance={28}
@@ -137,11 +142,16 @@ const R3F = () => {
 }
 
 const Page = () => {
+  const [time, setTime] = useState(0)
+  useInterval(() => {
+    setTime(time + 1)
+  }, 1000)
+
   return (
     <>
-      <DOM />
+      <DOM time={time} />
       {/* @ts-ignore */}
-      <R3F r3f />
+      <R3F r3f time={time} />
     </>
   )
 }

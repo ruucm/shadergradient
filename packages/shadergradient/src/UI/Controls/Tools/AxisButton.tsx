@@ -57,24 +57,24 @@ export const AxisButton: React.FC<ControlTypeTitlePropsT> = ({
           d='M 0 0 L 0 8.5'
           transform='translate(8 12) rotate(60 0.5 4.25)'
           fill='transparent'
-          stroke-width='1.8'
+          strokeWidth='1.8'
           stroke={active ? 'white' : 'rgb(255,67,10)'}
-          stroke-linecap='round'
+          strokeLinecap='round'
         ></path>
         <path
           d='M 0 0 L 0 8.5'
           transform='translate(15 12) rotate(120 0.5 4.25)'
           fill='transparent'
-          stroke-width='1.8'
+          strokeWidth='1.8'
           stroke={active ? 'white' : 'rgb(255,67,10)'}
-          stroke-linecap='round'
+          strokeLinecap='round'
         ></path>
         <path
           d='M 12 5 L 12 13.5'
           fill='transparent'
-          stroke-width='1.8'
+          strokeWidth='1.8'
           stroke={active ? 'white' : 'rgb(255,67,10)'}
-          stroke-linecap='round'
+          strokeLinecap='round'
         ></path>
       </svg>
       <IconHoverBox content={content} isHovered={isHovered} />

@@ -1,5 +1,10 @@
 import { useEffect, useRef } from 'react'
-import { aboutAngles, defaultDistance, defaultZoom } from '../../../consts'
+import {
+  aboutAngles,
+  defaultDistance,
+  defaultZoom,
+  sphereZoomOut,
+} from '../../../consts'
 import { usePropertyStore } from '../../../store'
 import { dToR, useFiber } from '../../../utils/index'
 
@@ -32,8 +37,13 @@ export function useCameraAnimation({
   useEffect(() => {
     if (zoomOut) {
       // fixed distance & zoom
-      control?.dollyTo(defaultDistance, true)
-      control?.zoomTo(defaultZoom, true)
+      if (type === 'sphere') {
+        control?.dollyTo(defaultDistance, true)
+        control?.zoomTo(sphereZoomOut, true)
+      } else {
+        control?.dollyTo(defaultDistance, true)
+        control?.zoomTo(defaultZoom, true)
+      }
     } else {
       // control distance & zoom
       if (type === 'sphere') {

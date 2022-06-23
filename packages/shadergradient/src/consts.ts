@@ -3,7 +3,7 @@ export const initialActivePreset = 0
 export const canvasProps = (pixelDensity: number) => ({
   dpr: pixelDensity, //device pixel ratio - 1 default and fast, 2 detailed and slow
   // mode: 'concurrent' as 'legacy' | 'blocking' | 'concurrent',
-  // camera: { fov: 45 }, // could be replaced with zoom or distance?
+  camera: { fov: 45 }, // could be replaced with zoom or distance?
   // linear: true, //sRGBEncoding
   // flat: true, //ACESFilmicToneMapping
   gl: { preserveDrawingBuffer: true }, // to capture the canvas (Figma Plugin)
@@ -28,6 +28,7 @@ export const links = [
 
 export const defaultDistance = 14
 export const defaultZoom = 1
+export const sphereZoomOut = 5
 export const aboutAngles = [190, 130]
 export const aboutPositions = [0, 11, 0]
 export const aboutRotations = [0, 10, 50]

@@ -14,6 +14,8 @@ type Props = {
   [x: string]: any
 }
 
+const tabHeights = { shape: 324, colors: 274, effects: 174, view: 224 }
+
 export const PropertyControls: React.FC<Props> = ({
   // isMobile,
   activeTab,
@@ -26,16 +28,17 @@ export const PropertyControls: React.FC<Props> = ({
   return (
     <motion.div
       className={cx(
-        'w-full h-[fit-content] overflow-y-scroll bg-controls-panel-mobile text-primary mx-auto md:h-full relative hide-scrollbar'
+        'w-full overflow-y-scroll bg-controls-panel-mobile text-primary mx-auto md:h-full relative hide-scrollbar'
       )}
       style={{
         // display: activeTab === 'none' ? 'none' : 'block',
         originY: 1,
       }}
       animate={{
-        height: activeTab === 'none' ? 0 : 'fit-content',
+        height: activeTab === 'none' ? 0 : tabHeights[activeTab],
         padding: activeTab === 'none' ? 0 : 20,
       }}
+      transition={{ duration: 0.72 }}
     >
       {activeTab === 'shape' && <ShapeControls />}
       {activeTab === 'colors' && <ColorControls />}

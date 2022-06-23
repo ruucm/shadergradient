@@ -1,6 +1,19 @@
-// src/Gradient/comps/GradientMesh/GradientMesh.tsx
-import React, { useEffect } from "react";
-import { useRef } from "react";
+var __defProp = Object.defineProperty;
+var __getOwnPropSymbols = Object.getOwnPropertySymbols;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __propIsEnum = Object.prototype.propertyIsEnumerable;
+var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
+var __spreadValues = (a, b) => {
+  for (var prop in b || (b = {}))
+    if (__hasOwnProp.call(b, prop))
+      __defNormalProp(a, prop, b[prop]);
+  if (__getOwnPropSymbols)
+    for (var prop of __getOwnPropSymbols(b)) {
+      if (__propIsEnum.call(b, prop))
+        __defNormalProp(a, prop, b[prop]);
+    }
+  return a;
+};
 
 // ../../node_modules/three/build/three.module.js
 var REVISION = "135";
@@ -212,7 +225,6 @@ var _lut = [];
 for (let i = 0; i < 256; i++) {
   _lut[i] = (i < 16 ? "0" : "") + i.toString(16);
 }
-var _seed = 1234567;
 var DEG2RAD = Math.PI / 180;
 var RAD2DEG = 180 / Math.PI;
 function generateUUID() {
@@ -229,130 +241,15 @@ function clamp(value, min, max) {
 function euclideanModulo(n, m) {
   return (n % m + m) % m;
 }
-function mapLinear(x, a1, a2, b1, b2) {
-  return b1 + (x - a1) * (b2 - b1) / (a2 - a1);
-}
-function inverseLerp(x, y, value) {
-  if (x !== y) {
-    return (value - x) / (y - x);
-  } else {
-    return 0;
-  }
-}
 function lerp(x, y, t) {
   return (1 - t) * x + t * y;
-}
-function damp(x, y, lambda, dt) {
-  return lerp(x, y, 1 - Math.exp(-lambda * dt));
-}
-function pingpong(x, length = 1) {
-  return length - Math.abs(euclideanModulo(x, length * 2) - length);
-}
-function smoothstep(x, min, max) {
-  if (x <= min)
-    return 0;
-  if (x >= max)
-    return 1;
-  x = (x - min) / (max - min);
-  return x * x * (3 - 2 * x);
-}
-function smootherstep(x, min, max) {
-  if (x <= min)
-    return 0;
-  if (x >= max)
-    return 1;
-  x = (x - min) / (max - min);
-  return x * x * x * (x * (x * 6 - 15) + 10);
-}
-function randInt(low, high) {
-  return low + Math.floor(Math.random() * (high - low + 1));
-}
-function randFloat(low, high) {
-  return low + Math.random() * (high - low);
-}
-function randFloatSpread(range) {
-  return range * (0.5 - Math.random());
-}
-function seededRandom(s) {
-  if (s !== void 0)
-    _seed = s % 2147483647;
-  _seed = _seed * 16807 % 2147483647;
-  return (_seed - 1) / 2147483646;
-}
-function degToRad(degrees) {
-  return degrees * DEG2RAD;
-}
-function radToDeg(radians) {
-  return radians * RAD2DEG;
 }
 function isPowerOfTwo(value) {
   return (value & value - 1) === 0 && value !== 0;
 }
-function ceilPowerOfTwo(value) {
-  return Math.pow(2, Math.ceil(Math.log(value) / Math.LN2));
-}
 function floorPowerOfTwo(value) {
   return Math.pow(2, Math.floor(Math.log(value) / Math.LN2));
 }
-function setQuaternionFromProperEuler(q, a, b, c, order) {
-  const cos = Math.cos;
-  const sin = Math.sin;
-  const c2 = cos(b / 2);
-  const s2 = sin(b / 2);
-  const c13 = cos((a + c) / 2);
-  const s13 = sin((a + c) / 2);
-  const c1_3 = cos((a - c) / 2);
-  const s1_3 = sin((a - c) / 2);
-  const c3_1 = cos((c - a) / 2);
-  const s3_1 = sin((c - a) / 2);
-  switch (order) {
-    case "XYX":
-      q.set(c2 * s13, s2 * c1_3, s2 * s1_3, c2 * c13);
-      break;
-    case "YZY":
-      q.set(s2 * s1_3, c2 * s13, s2 * c1_3, c2 * c13);
-      break;
-    case "ZXZ":
-      q.set(s2 * c1_3, s2 * s1_3, c2 * s13, c2 * c13);
-      break;
-    case "XZX":
-      q.set(c2 * s13, s2 * s3_1, s2 * c3_1, c2 * c13);
-      break;
-    case "YXY":
-      q.set(s2 * c3_1, c2 * s13, s2 * s3_1, c2 * c13);
-      break;
-    case "ZYZ":
-      q.set(s2 * s3_1, s2 * c3_1, c2 * s13, c2 * c13);
-      break;
-    default:
-      console.warn("THREE.MathUtils: .setQuaternionFromProperEuler() encountered an unknown order: " + order);
-  }
-}
-var MathUtils = /* @__PURE__ */ Object.freeze({
-  __proto__: null,
-  DEG2RAD,
-  RAD2DEG,
-  generateUUID,
-  clamp,
-  euclideanModulo,
-  mapLinear,
-  inverseLerp,
-  lerp,
-  damp,
-  pingpong,
-  smoothstep,
-  smootherstep,
-  randInt,
-  randFloat,
-  randFloatSpread,
-  seededRandom,
-  degToRad,
-  radToDeg,
-  isPowerOfTwo,
-  ceilPowerOfTwo,
-  floorPowerOfTwo,
-  setQuaternionFromProperEuler
-});
 var Vector2 = class {
   constructor(x = 0, y = 0) {
     this.x = x;
@@ -9223,7 +9120,7 @@ function _setViewport(target, x, y, width, height) {
 function _getBlurShader(maxSamples) {
   const weights = new Float32Array(maxSamples);
   const poleAxis = new Vector3(0, 1, 0);
-  const shaderMaterial2 = new RawShaderMaterial({
+  const shaderMaterial = new RawShaderMaterial({
     name: "SphericalGaussianBlur",
     defines: { "n": maxSamples },
     uniforms: {
@@ -9307,11 +9204,11 @@ function _getBlurShader(maxSamples) {
     depthTest: false,
     depthWrite: false
   });
-  return shaderMaterial2;
+  return shaderMaterial;
 }
 function _getEquirectShader() {
   const texelSize = new Vector2(1, 1);
-  const shaderMaterial2 = new RawShaderMaterial({
+  const shaderMaterial = new RawShaderMaterial({
     name: "EquirectangularToCubeUV",
     uniforms: {
       "envMap": { value: null },
@@ -9363,10 +9260,10 @@ function _getEquirectShader() {
     depthTest: false,
     depthWrite: false
   });
-  return shaderMaterial2;
+  return shaderMaterial;
 }
 function _getCubemapShader() {
-  const shaderMaterial2 = new RawShaderMaterial({
+  const shaderMaterial = new RawShaderMaterial({
     name: "CubemapToCubeUV",
     uniforms: {
       "envMap": { value: null },
@@ -9397,7 +9294,7 @@ function _getCubemapShader() {
     depthTest: false,
     depthWrite: false
   });
-  return shaderMaterial2;
+  return shaderMaterial;
 }
 function _getCommonVertexShader() {
   return `
@@ -21270,47 +21167,6 @@ var AmbientLightProbe = class extends LightProbe {
   }
 };
 AmbientLightProbe.prototype.isAmbientLightProbe = true;
-var Clock = class {
-  constructor(autoStart = true) {
-    this.autoStart = autoStart;
-    this.startTime = 0;
-    this.oldTime = 0;
-    this.elapsedTime = 0;
-    this.running = false;
-  }
-  start() {
-    this.startTime = now();
-    this.oldTime = this.startTime;
-    this.elapsedTime = 0;
-    this.running = true;
-  }
-  stop() {
-    this.getElapsedTime();
-    this.running = false;
-    this.autoStart = false;
-  }
-  getElapsedTime() {
-    this.getDelta();
-    return this.elapsedTime;
-  }
-  getDelta() {
-    let diff = 0;
-    if (this.autoStart && !this.running) {
-      this.start();
-      return 0;
-    }
-    if (this.running) {
-      const newTime = now();
-      diff = (newTime - this.oldTime) / 1e3;
-      this.oldTime = newTime;
-      this.elapsedTime += diff;
-    }
-    return diff;
-  }
-};
-function now() {
-  return (typeof performance === "undefined" ? Date : performance).now();
-}
 var Audio = class extends Object3D {
   constructor(listener) {
     super();
@@ -22313,15 +22169,15 @@ var AnimationAction = class {
     return this.warp(this._effectiveTimeScale, 0, duration);
   }
   warp(startTimeScale, endTimeScale, duration) {
-    const mixer = this._mixer, now2 = mixer.time, timeScale = this.timeScale;
+    const mixer = this._mixer, now = mixer.time, timeScale = this.timeScale;
     let interpolant = this._timeScaleInterpolant;
     if (interpolant === null) {
       interpolant = mixer._lendControlInterpolant();
       this._timeScaleInterpolant = interpolant;
     }
     const times = interpolant.parameterPositions, values = interpolant.sampleValues;
-    times[0] = now2;
-    times[1] = now2 + duration;
+    times[0] = now;
+    times[1] = now + duration;
     values[0] = startTimeScale / timeScale;
     values[1] = endTimeScale / timeScale;
     return this;
@@ -22524,16 +22380,16 @@ var AnimationAction = class {
     }
   }
   _scheduleFading(duration, weightNow, weightThen) {
-    const mixer = this._mixer, now2 = mixer.time;
+    const mixer = this._mixer, now = mixer.time;
     let interpolant = this._weightInterpolant;
     if (interpolant === null) {
       interpolant = mixer._lendControlInterpolant();
       this._weightInterpolant = interpolant;
     }
     const times = interpolant.parameterPositions, values = interpolant.sampleValues;
-    times[0] = now2;
+    times[0] = now;
     values[0] = weightNow;
-    times[1] = now2 + duration;
+    times[1] = now + duration;
     values[1] = weightThen;
     return this;
   }
@@ -24133,129 +23989,35 @@ if (typeof window !== "undefined") {
   }
 }
 
-// src/Gradient/comps/GradientMesh/GradientMesh.tsx
-import { usePropertyStore } from "../../../store.js";
-import { dToRArr, useFiber } from "../../../utils/index.js";
-import { lineMaterial } from "./lineMaterial.js";
-import { shaderMaterial } from "./shaderMaterial.js";
-import * as shaders from "./shaders/index.js";
-var clock = new Clock();
-var GradientMesh = ({
-  type,
-  animate,
-  uTime,
-  uSpeed,
-  uStrength,
-  uDensity,
-  uFrequency,
-  uAmplitude,
-  positionX,
-  positionY,
-  positionZ,
-  rotationX,
-  rotationY,
-  rotationZ,
-  color1,
-  color2,
-  color3,
-  reflection,
-  wireframe,
-  shader
-}) => {
-  const { useFrame, extend } = useFiber();
-  let sceneShader = shaders.defaults[type != null ? type : "plane"];
-  if (shader && shader !== "defaults")
-    sceneShader = shaders[shader];
-  const hoverState = usePropertyStore((state) => state.hoverState);
-  const meshCount = 192;
-  const meshLineCount = 36;
-  useEffect(() => {
-    if (hoverState !== 0) {
-      usePropertyStore.setState({ zoomOut: true });
-    } else {
-      usePropertyStore.setState({ zoomOut: false });
+// src/Gradient/comps/GradientMesh/lineMaterial.ts
+function lineMaterial(uniforms, vertexShader, onInit) {
+  return class extends LineBasicMaterial {
+    constructor() {
+      const entries = Object.entries(uniforms);
+      const uniformValues = entries.reduce((acc, [name, value]) => {
+        const uniform = UniformsUtils.clone({ [name]: { value } });
+        return __spreadValues(__spreadValues({}, acc), uniform);
+      }, {});
+      super({
+        color: "#ffffff",
+        linewidth: 5,
+        userData: uniformValues,
+        onBeforeCompile: (shader) => {
+          shader.uniforms = __spreadValues(__spreadValues({}, shader.uniforms), uniformValues);
+          shader.vertexShader = vertexShader;
+        }
+      });
+      entries.forEach(([name]) => Object.defineProperty(this, name, {
+        get: () => this.uniforms[name].value,
+        set: (v) => this.uniforms[name].value = v
+      }));
+      if (onInit)
+        onInit(this);
     }
-  }, [hoverState]);
-  const ColorShiftMaterial = shaderMaterial({
-    colors: getHoverColor(hoverState, [color1, color2, color3]),
-    uTime,
-    uSpeed,
-    uNoiseDensity: uDensity,
-    uNoiseStrength: uStrength,
-    uFrequency,
-    uAmplitude,
-    uIntensity: 0.5
-  }, sceneShader.vertex, sceneShader.fragment);
-  const HoveredLineMaterial = lineMaterial({
-    uTime,
-    uSpeed,
-    uNoiseDensity: uDensity,
-    uNoiseStrength: uStrength,
-    uFrequency,
-    uAmplitude,
-    uIntensity: 0.5
-  }, sceneShader.vertex);
-  ColorShiftMaterial.key = MathUtils.generateUUID();
-  extend({ ColorShiftMaterial });
-  HoveredLineMaterial.key = MathUtils.generateUUID();
-  extend({ HoveredLineMaterial });
-  const material = useRef();
-  const linemat = useRef();
-  useFrame((state, delta) => {
-    if (animate === "on") {
-      material.current.userData.uTime.value = clock.getElapsedTime();
-      if (linemat.current !== void 0) {
-        linemat.current.userData.uTime.value = clock.getElapsedTime();
-      }
-    }
-  });
-  useEffect(() => {
-    material.current.userData.uTime.value = uTime;
-    if (linemat.current !== void 0) {
-      linemat.current.userData.uTime.value = uTime;
-    }
-    material.current.roughness = 1 - reflection;
-  }, [uTime, reflection]);
-  return /* @__PURE__ */ React.createElement("group", null, /* @__PURE__ */ React.createElement("mesh", {
-    position: [positionX, positionY, positionZ],
-    rotation: dToRArr([rotationX, rotationY, rotationZ])
-  }, type === "plane" && /* @__PURE__ */ React.createElement("planeGeometry", {
-    args: [10, 10, 1, meshCount]
-  }), type === "sphere" && /* @__PURE__ */ React.createElement("icosahedronBufferGeometry", {
-    args: [1, meshCount / 3]
-  }), type === "waterPlane" && /* @__PURE__ */ React.createElement("planeGeometry", {
-    args: [10, 10, meshCount, meshCount]
-  }), /* @__PURE__ */ React.createElement("colorShiftMaterial", {
-    key: ColorShiftMaterial.key,
-    ref: material
-  })), /* @__PURE__ */ React.createElement("mesh", null, /* @__PURE__ */ React.createElement("lineSegments", {
-    renderOrder: 1,
-    position: [positionX, positionY, positionZ],
-    rotation: dToRArr([rotationX, rotationY, rotationZ]),
-    visible: hoverState !== 0 ? true : false
-  }, type === "plane" && /* @__PURE__ */ React.createElement("planeGeometry", {
-    args: [10, 10, 1, meshLineCount]
-  }), type === "sphere" && /* @__PURE__ */ React.createElement("icosahedronBufferGeometry", {
-    args: [1, meshLineCount / 3]
-  }), type === "waterPlane" && /* @__PURE__ */ React.createElement("planeGeometry", {
-    args: [10, 10, meshLineCount, meshLineCount]
-  }), /* @__PURE__ */ React.createElement("hoveredLineMaterial", {
-    key: HoveredLineMaterial.key,
-    ref: linemat
-  }))));
-};
-function getHoverColor(hoverState, colors) {
-  if (hoverState === 1)
-    return [colors[0], "#000000", "#000000"];
-  else if (hoverState === 2)
-    return ["#000000", colors[1], "#000000"];
-  else if (hoverState === 3)
-    return ["#000000", "#000000", colors[2]];
-  else
-    return [colors[0], colors[1], colors[2]];
+  };
 }
 export {
-  GradientMesh
+  lineMaterial
 };
 /**
  * @license

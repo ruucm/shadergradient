@@ -10,6 +10,7 @@ import {
   Tools,
   ToolsBox,
   IconButtons,
+  AxisButton,
   Feather,
   ControlTypeTitle,
   ControlTypeTitles,
@@ -26,6 +27,7 @@ import { Header } from "./Header/index.js";
 import { Links } from "./Links/index.js";
 export {
   AllControls,
+  AxisButton,
   BackgroundControls,
   Button,
   ColorControls,

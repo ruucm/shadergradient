@@ -2,8 +2,22 @@ var __create = Object.create;
 var __defProp = Object.defineProperty;
 var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
 var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getOwnPropSymbols = Object.getOwnPropertySymbols;
 var __getProtoOf = Object.getPrototypeOf;
 var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __propIsEnum = Object.prototype.propertyIsEnumerable;
+var __objRest = (source, exclude) => {
+  var target = {};
+  for (var prop in source)
+    if (__hasOwnProp.call(source, prop) && exclude.indexOf(prop) < 0)
+      target[prop] = source[prop];
+  if (source != null && __getOwnPropSymbols)
+    for (var prop of __getOwnPropSymbols(source)) {
+      if (exclude.indexOf(prop) < 0 && __propIsEnum.call(source, prop))
+        target[prop] = source[prop];
+    }
+  return target;
+};
 var __commonJS = (cb, mod) => function __require() {
   return mod || (0, cb[__getOwnPropNames(cb)[0]])((mod = { exports: {} }).exports, mod), mod.exports;
 };
@@ -67,39 +81,76 @@ var require_classnames = __commonJS({
   }
 });
 
-// src/UI/PropertyControls.tsx
+// src/UI/Controls/Tools/AxisButton.tsx
 var import_classnames = __toESM(require_classnames());
 import * as React from "react";
-import { motion } from "framer-motion";
-import { useQueryState } from "../hooks/index.js";
-import {
-  ShapeControls,
-  ColorControls,
-  EffectControls,
-  ViewControls
-} from "../UI/index.js";
-var tabHeights = { shape: 324, colors: 274, effects: 174, view: 224 };
-var PropertyControls = ({
-  activeTab,
-  setActiveTab
-}) => {
-  const [type] = useQueryState("type");
-  if (!type)
-    return null;
-  return /* @__PURE__ */ React.createElement(motion.div, {
-    className: (0, import_classnames.default)("w-full overflow-y-scroll bg-controls-panel-mobile text-primary mx-auto md:h-full relative hide-scrollbar"),
+import { IconHoverBox } from "../../index.js";
+var AxisButton = (_a) => {
+  var _b = _a, {
+    content,
+    active,
+    onClick
+  } = _b, rest = __objRest(_b, [
+    "content",
+    "active",
+    "onClick"
+  ]);
+  const [isHovered, setIsHovered] = React.useState(false);
+  const backgroundOpacity = (active2, isHovered2) => {
+    if (active2 === true) {
+      return 1;
+    } else if (isHovered2 === true && active2 !== true) {
+      return 0.1;
+    } else
+      return 0;
+  };
+  return /* @__PURE__ */ React.createElement("div", {
+    className: (0, import_classnames.default)("text-sm font-medium cursor-pointer flex justify-center items-center", active && "bg-primary"),
     style: {
-      originY: 1
+      borderRadius: 15,
+      width: 30,
+      height: 30,
+      transitionDuration: "0.3s",
+      background: "rgba(255,67,10," + backgroundOpacity(active, isHovered) + ")"
     },
-    animate: {
-      height: activeTab === "none" ? 0 : tabHeights[activeTab],
-      padding: activeTab === "none" ? 0 : 20
+    onMouseEnter: () => {
+      setIsHovered(true);
     },
-    transition: { duration: 0.72 }
-  }, activeTab === "shape" && /* @__PURE__ */ React.createElement(ShapeControls, null), activeTab === "colors" && /* @__PURE__ */ React.createElement(ColorControls, null), activeTab === "effects" && /* @__PURE__ */ React.createElement(EffectControls, null), activeTab === "view" && /* @__PURE__ */ React.createElement(ViewControls, null));
+    onMouseLeave: () => {
+      setIsHovered(false);
+    },
+    onClick
+  }, /* @__PURE__ */ React.createElement("svg", {
+    xmlns: "http://www.w3.org/2000/svg",
+    width: "24",
+    height: "24"
+  }, /* @__PURE__ */ React.createElement("path", {
+    d: "M 0 0 L 0 8.5",
+    transform: "translate(8 12) rotate(60 0.5 4.25)",
+    fill: "transparent",
+    strokeWidth: "1.8",
+    stroke: active ? "white" : "rgb(255,67,10)",
+    strokeLinecap: "round"
+  }), /* @__PURE__ */ React.createElement("path", {
+    d: "M 0 0 L 0 8.5",
+    transform: "translate(15 12) rotate(120 0.5 4.25)",
+    fill: "transparent",
+    strokeWidth: "1.8",
+    stroke: active ? "white" : "rgb(255,67,10)",
+    strokeLinecap: "round"
+  }), /* @__PURE__ */ React.createElement("path", {
+    d: "M 12 5 L 12 13.5",
+    fill: "transparent",
+    strokeWidth: "1.8",
+    stroke: active ? "white" : "rgb(255,67,10)",
+    strokeLinecap: "round"
+  })), /* @__PURE__ */ React.createElement(IconHoverBox, {
+    content,
+    isHovered
+  }));
 };
 export {
-  PropertyControls
+  AxisButton
 };
 /*!
   Copyright (c) 2018 Jed Watson.

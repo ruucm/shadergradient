@@ -105,6 +105,7 @@ var require_classnames = __commonJS({
 var import_classnames = __toESM(require_classnames());
 import * as React from "react";
 import { updateGradientState, usePropertyStore } from "../../../store.js";
+import { AxisButton } from "./AxisButton.js";
 import { IconButtons } from "./IconButtons.js";
 var ToolsBox = (_a) => {
   var _b = _a, {
@@ -139,8 +140,7 @@ var ToolsBox = (_a) => {
       } else
         alert("no history");
     }
-  }), /* @__PURE__ */ React.createElement(IconButtons, {
-    icon: "Box",
+  }), /* @__PURE__ */ React.createElement(AxisButton, {
     content: "3d axis",
     active: toggleAxis,
     onClick: () => {

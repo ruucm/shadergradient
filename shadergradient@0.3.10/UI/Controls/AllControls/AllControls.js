@@ -6,7 +6,7 @@ import { useUIStore } from "../../../store.js";
 import { PropertyControls } from "../../PropertyControls.js";
 import { ToolsBox, ControlTypeTitles } from "../Tools/index.js";
 
-// esbuild-css-modules-plugin-namespace:/tmp/tmp-1931-Jh5Sh1UGMC0o/shadergradient/src/UI/Controls/AllControls/AllControls.module.css.js
+// esbuild-css-modules-plugin-namespace:/tmp/tmp-1923-t9KZClV4f62Y/shadergradient/src/UI/Controls/AllControls/AllControls.module.css.js
 var digest = "f41cf4803bb96ca95ae89e8f109b26d668fc40aadf1107a2dd065596ed13df8b";
 var css = `._controlMobile_1dm53_1 {
   width: 100vw;
@@ -48,7 +48,8 @@ var AllControls = ({ isMobile, isFigma = false }) => {
   const children = /* @__PURE__ */ React.createElement("div", {
     style: {
       display: "flex",
-      flexDirection: isFigma === true ? "column-reverse" : "column"
+      flexDirection: isFigma === true ? "column-reverse" : "column",
+      justifyContent: "flex-end"
     }
   }, /* @__PURE__ */ React.createElement(PropertyControls, {
     activeTab,
@@ -59,7 +60,8 @@ var AllControls = ({ isMobile, isFigma = false }) => {
       display: "flex",
       alignItems: "center",
       justifyContent: "space-between",
-      cursor: "pointer"
+      cursor: "pointer",
+      height: 58
     },
     className: isFigma ? "sticky top-0" : "",
     onClick: () => setActiveTab("shape")

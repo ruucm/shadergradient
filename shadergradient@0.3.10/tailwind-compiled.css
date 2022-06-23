@@ -554,9 +554,6 @@ html {
 .bg-opacity-80 {
   --tw-bg-opacity: 0.8;
 }
-.p-3\.5 {
-  padding: 20px;
-}
 .p-3 {
   padding: 16px;
 }
@@ -704,11 +701,5 @@ input[type=number] {
 @media (min-width: 768px) {
   .md\:h-full {
     height: 100%;
-  }
-  .md\:p-3\.5 {
-    padding: 20px;
-  }
-  .md\:p-3 {
-    padding: 16px;
   }
 }

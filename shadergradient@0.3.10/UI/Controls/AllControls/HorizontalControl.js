@@ -102,8 +102,7 @@ function HorizontalControl({
       display: "flex",
       justifyContent: "center",
       alignItems: "center",
-      zIndex: 2,
-      bottom: 30
+      zIndex: 2
     }
   }, /* @__PURE__ */ React.createElement(motion.div, {
     className: (0, import_classnames.default)("z-10 overflow-hidden rounded-sm", className),
@@ -112,7 +111,10 @@ function HorizontalControl({
       display: "flex",
       flexDirection: "column",
       boxShadow: mode === "mobile" || mode === "web" ? "0px 0px 20px 0px rgba(0, 0, 0, 0.1)" : "none",
-      background: mode === "about" ? "#141414" : "white"
+      background: mode === "about" ? "#141414" : "white",
+      originY: 1,
+      justifyContent: "flex-end",
+      marginBottom: 20
     },
     transition: { type: "spring", damping: 12, stiffness: 200, delay: 2 },
     animate: menuAnim

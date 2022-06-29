@@ -5,6 +5,7 @@ import Link from 'next/link'
 import {
   Gradient,
   Links,
+  mainLoading,
   PRESETS,
   PresetTitles,
   PreviewBtn,
@@ -24,8 +25,6 @@ import { useInterval } from '@/hooks'
 // const Shader = dynamic(() => import('@/components/canvas/Shader/Shader'), {
 //   ssr: false,
 // })
-
-const indexDuration = 3
 
 // dom components goes here
 const DOM = ({ time }) => {
@@ -50,7 +49,7 @@ const DOM = ({ time }) => {
     setMode('full')
   }, [])
 
-  if (time < indexDuration) return <></>
+  if (time < mainLoading.start) return <></>
 
   return (
     <>
@@ -127,7 +126,8 @@ const R3F = ({ time }) => {
   const loadingPercentage = useUIStore((state: any) => state.loadingPercentage)
   console.log('loadingPercentage', loadingPercentage)
 
-  if (time < indexDuration)
+  if (time < mainLoading.delay) return null
+  else if (time < mainLoading.start)
     return (
       <Gradient
         cDistance={28}

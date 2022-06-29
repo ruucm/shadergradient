@@ -592,12 +592,6 @@ html {
   height: 55px;
 }
 
-.h-\[fit-content\] {
-  height: -webkit-fit-content;
-  height: -moz-fit-content;
-  height: fit-content;
-}
-
 .h-3 {
   height: 16px;
 }
@@ -844,10 +838,6 @@ html {
   padding: 16px;
 }
 
-.p-3\.5 {
-  padding: 20px;
-}
-
 .text-center {
   text-align: center;
 }
@@ -999,13 +989,5 @@ input[type='number'] {
 @media (min-width: 768px) {
   .md\:h-full {
     height: 100%;
-  }
-
-  .md\:p-3\.5 {
-    padding: 20px;
-  }
-
-  .md\:p-3 {
-    padding: 16px;
   }
 }

@@ -64,6 +64,7 @@ export function TextHover({
     setCurrentInView(true)
   }, delay)
   return (
+    // @ts-ignore
     <AnimatePresence>
       <motion.div
         style={{

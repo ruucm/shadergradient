@@ -24,7 +24,8 @@ export const PropertyControls: React.FC<Props> = ({
         'w-full h-[fit-content] overflow-y-scroll bg-controls-panel-mobile text-primary mx-auto md:h-full relative'
       )}
       style={{
-        // display: activeTab === 'none' ? 'none' : 'block',
+        // overflow: 'visible',
+        // overflow: activeTab !== 'none' ? 'visible' : 'hidden',
         originY: 1,
       }}
       animate={{

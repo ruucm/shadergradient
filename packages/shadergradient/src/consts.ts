@@ -40,3 +40,6 @@ export const mainLoading = {
   ready: 1,
   start: 3,
 }
+
+// environment hdr
+export const envBasePath = 'https://shadergradient.vercel.app/hdr/'

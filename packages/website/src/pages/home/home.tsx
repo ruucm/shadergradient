@@ -49,7 +49,7 @@ const DOM = ({ time }) => {
     setMode('full')
   }, [])
 
-  if (time < mainLoading.start) return <></>
+  if (time <= mainLoading.start) return <></>
 
   return (
     <>
@@ -126,8 +126,8 @@ const R3F = ({ time }) => {
   const loadingPercentage = useUIStore((state: any) => state.loadingPercentage)
   console.log('loadingPercentage', loadingPercentage)
 
-  if (time < mainLoading.delay) return null
-  else if (time < mainLoading.start)
+  if (time <= mainLoading.ready) return null
+  else if (time > mainLoading.ready && time <= mainLoading.start)
     return (
       <Gradient
         cDistance={28}
@@ -138,7 +138,7 @@ const R3F = ({ time }) => {
         uDensity={0}
       />
     )
-  return <Gradient control='query' />
+  else if (time > mainLoading.start) return <Gradient control='query' />
 }
 
 const Page = () => {

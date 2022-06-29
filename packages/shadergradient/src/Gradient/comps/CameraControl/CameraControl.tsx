@@ -3,11 +3,9 @@ import * as THREE from 'three'
 import { useFiber } from '../../../utils/index'
 import { useCameraAnimation } from './useCameraAnimation'
 
-export function CameraControl(props) {
+export function CameraControl({ dampingFactor, ...props }: any) {
   const { extend, useThree, useFrame } = useFiber()
-
   CameraControls.install({ THREE })
-  // CameraControls.dampingFactor = 1
   extend({ CameraControls })
 
   const camera = useThree((state) => state.camera)
@@ -23,7 +21,7 @@ export function CameraControl(props) {
     <cameraControls
       ref={ref}
       args={[camera, gl.domElement]}
-      dampingFactor={0.03}
+      dampingFactor={dampingFactor}
     />
   )
 }

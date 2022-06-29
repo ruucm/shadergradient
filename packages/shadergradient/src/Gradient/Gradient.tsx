@@ -15,6 +15,7 @@ type Props = {
 export function Gradient({
   zoomOut = false,
   control = 'props',
+  dampingFactor,
   ...props
 }: Props) {
   const setLoadingPercentage = useUIStore(
@@ -43,7 +44,7 @@ export function Gradient({
         </Suspense>
       )}
       {lightType === '3d' && <ambientLight intensity={brightness || 1} />}
-      <CameraControl {...others} />
+      <CameraControl dampingFactor={dampingFactor} {...others} />
       <GradientMesh {...others} />
     </>
   )

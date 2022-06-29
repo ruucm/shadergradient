@@ -140,9 +140,11 @@ const R3F = () => {
         rotationZ={0}
         uStrength={0}
         uDensity={0}
+        dampingFactor={1}
       />
     )
-  else if (time > mainLoading.start) return <Gradient control='query' />
+  else if (time > mainLoading.start)
+    return <Gradient control='query' dampingFactor={0.03} />
 }
 
 const Page = () => {

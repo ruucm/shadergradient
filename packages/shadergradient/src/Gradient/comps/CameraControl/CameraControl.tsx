@@ -3,7 +3,10 @@ import * as THREE from 'three'
 import { useFiber } from '../../../utils/index'
 import { useCameraAnimation } from './useCameraAnimation'
 
-export function CameraControl({ dampingFactor, ...props }: any) {
+export function CameraControl({
+  dampingFactor = 0.05, // default dampingFactor of "camera-conrols"
+  ...props
+}: any) {
   const { extend, useThree, useFrame } = useFiber()
   CameraControls.install({ THREE })
   extend({ CameraControls })

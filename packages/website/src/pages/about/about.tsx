@@ -198,6 +198,7 @@ const R3F = () => {
       rotationX={aboutRotations[0]}
       rotationY={aboutRotations[1]}
       rotationZ={aboutRotations[2]}
+      dampingFactor={0.05} // default dampingFactor
     />
   )
 }

@@ -140,6 +140,7 @@ const R3F = () => {
         rotationZ={0}
         uStrength={0}
         uDensity={0}
+        cAzimuthAngle={0}
         dampingFactor={1}
       />
     )

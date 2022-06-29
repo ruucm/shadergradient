@@ -7,6 +7,7 @@ export function CameraControl(props) {
   const { extend, useThree, useFrame } = useFiber()
 
   CameraControls.install({ THREE })
+  // CameraControls.dampingFactor = 1
   extend({ CameraControls })
 
   const camera = useThree((state) => state.camera)
@@ -17,6 +18,12 @@ export function CameraControl(props) {
 
   useFrame((state, delta) => ref.current.update(delta)) // sync r3f delta with 'camera-controls'
 
-  // @ts-ignore
-  return <cameraControls ref={ref} args={[camera, gl.domElement]} />
+  return (
+    // @ts-ignore
+    <cameraControls
+      ref={ref}
+      args={[camera, gl.domElement]}
+      dampingFactor={0.03}
+    />
+  )
 }

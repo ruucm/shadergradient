@@ -26,11 +26,13 @@ export const links = [
 
 // useCameraAnimation
 
-export const defaultDistance = 14
-export const defaultZoom = 1
-export const sphereZoomOut = 5
-export const aboutAngles = [190, 130]
-export const aboutPositions = [0, 11, 0]
+export const defaultPlanesZoom = 1
+export const defaultSphereDistance = 14
+export const zoomOutPlanes = { zoom: 1, distance: 14 }
+export const zoomOutSphere = { zoom: 5, distance: 14 }
+
+export const aboutAngles = [190, 140]
+export const aboutPositions = [0, 10, 0]
 export const aboutRotations = [0, 10, 50]
 export const aboutMobilePositions = [0, 20, 0]
 

@@ -1,9 +1,9 @@
 import { useEffect, useRef } from 'react'
 import {
-  aboutAngles,
-  defaultDistance,
-  defaultZoom,
-  sphereZoomOut,
+  zoomOutPlanes,
+  zoomOutSphere,
+  defaultPlanesZoom,
+  defaultSphereDistance,
 } from '../../../consts'
 import { usePropertyStore } from '../../../store'
 import { dToR, useFiber } from '../../../utils/index'
@@ -21,37 +21,32 @@ export function useCameraAnimation({
 
   useFrame((state, delta) => ref.current.update(delta)) // sync r3f delta with 'camera-controls'
 
-  const hoverState = usePropertyStore((state: any) => state.hoverState)
   const zoomOut = usePropertyStore((state: any) => state.zoomOut)
-  const inAbout = usePropertyStore((state: any) => state.inAbout)
 
   // rorate the camera
   useEffect(() => {
     control?.rotateTo(dToR(cAzimuthAngle), dToR(cPolarAngle), true)
-    if (inAbout === true) {
-      control?.rotateTo(dToR(aboutAngles[0]), dToR(aboutAngles[1]), true)
-    }
-  }, [control, cAzimuthAngle, cPolarAngle, inAbout])
+  }, [control, cAzimuthAngle, cPolarAngle])
 
   // zoom-out tool
   useEffect(() => {
     if (zoomOut) {
       // fixed distance & zoom
       if (type === 'sphere') {
-        control?.dollyTo(defaultDistance, true)
-        control?.zoomTo(sphereZoomOut, true)
+        control?.dollyTo(zoomOutSphere.distance, true)
+        control?.zoomTo(zoomOutSphere.zoom, true)
       } else {
-        control?.dollyTo(defaultDistance, true)
-        control?.zoomTo(defaultZoom, true)
+        control?.dollyTo(zoomOutPlanes.distance, true)
+        control?.zoomTo(zoomOutPlanes.zoom, true)
       }
     } else {
-      // control distance & zoom
+      // control distance for planes & zoom for sphere
       if (type === 'sphere') {
         control?.zoomTo(cameraZoom, true)
-        control?.dollyTo(defaultDistance, true)
+        control?.dollyTo(defaultSphereDistance, true)
       } else {
         control?.dollyTo(cDistance, true)
-        control?.zoomTo(defaultZoom, true)
+        control?.zoomTo(defaultPlanesZoom, true)
       }
     }
   }, [control, zoomOut, type, cameraZoom, cDistance])

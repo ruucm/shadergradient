@@ -2,7 +2,7 @@ import * as React from 'react'
 import { cx } from '../../utils/index'
 
 type RadioPropsT = {
-  value: any
+  value: string
   label?: string
   check?: boolean
   setValue?: any

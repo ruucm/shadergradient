@@ -14,6 +14,7 @@ var ViewControls = () => {
   const [rotationX, setRotationX] = useQueryState("rotationX");
   const [rotationY, setRotationY] = useQueryState("rotationY");
   const [rotationZ, setRotationZ] = useQueryState("rotationZ");
+  const [fov, setFov] = useQueryState("fov");
   const [isHovered, setIsHovered] = React.useState("");
   const [type] = useQueryState("type");
   return /* @__PURE__ */ React.createElement("div", {
@@ -99,6 +100,14 @@ var ViewControls = () => {
     value: rotationZ,
     setValue: setRotationZ,
     arrow: true
+  })), /* @__PURE__ */ React.createElement(InputPanel, {
+    title: "Field of view"
+  }, /* @__PURE__ */ React.createElement(Slider, {
+    defaultValue: fov,
+    setValue: setFov,
+    step: 10,
+    min: 0,
+    max: 180
   })));
 };
 export {

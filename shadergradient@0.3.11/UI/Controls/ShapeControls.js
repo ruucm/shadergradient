@@ -13,6 +13,7 @@ var ShapeControls = () => {
   const [uDensity, setUDensity] = useQueryState("uDensity");
   const [uFrequency, setUFrequency] = useQueryState("uFrequency");
   const [uAmplitude, setUAmplitude] = useQueryState("uAmplitude");
+  const [pixelDensity, setPixelDensity] = useQueryState("pixelDensity");
   const [isHovered, setIsHovered] = React.useState("");
   return /* @__PURE__ */ React.createElement("div", {
     className: "flex flex-col gap-3"
@@ -128,6 +129,14 @@ var ShapeControls = () => {
     step: 0.1,
     min: 0,
     max: 7
+  })), /* @__PURE__ */ React.createElement(InputPanel, {
+    title: "pixelDensity"
+  }, /* @__PURE__ */ React.createElement(Slider, {
+    defaultValue: pixelDensity,
+    setValue: setPixelDensity,
+    step: 0.1,
+    min: 0,
+    max: 3
   })));
 };
 export {

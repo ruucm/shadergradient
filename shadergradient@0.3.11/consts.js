@@ -1,8 +1,8 @@
 // src/consts.ts
 var initialActivePreset = 0;
-var canvasProps = (pixelDensity) => ({
+var canvasProps = (pixelDensity, fov) => ({
   dpr: pixelDensity,
-  camera: { fov: 45 },
+  camera: { fov },
   linear: true,
   flat: true,
   gl: { preserveDrawingBuffer: true }

@@ -37,3 +37,12 @@ export const aboutRotations = [0, 10, 50]
 export const aboutMobilePositions = [0, 20, 0]
 
 export const hdrBase = 'https://shadergradient.vercel.app'
+
+// loading animations
+export const mainLoading = {
+  ready: 1,
+  start: 3,
+}
+
+// environment hdr
+export const envBasePath = 'https://shadergradient.vercel.app/hdr/'

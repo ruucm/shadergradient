@@ -4,7 +4,7 @@ import { motion } from 'framer-motion'
 // import router from 'next/router'
 import { Info, ArrowDownLeft } from 'react-feather'
 import { useUIStore } from '../../store'
-import { TextHover } from '../TextAnimation'
+import { TextHover } from '../TextAnimation/index'
 
 export function AboutBtn({
   inAbout = false,

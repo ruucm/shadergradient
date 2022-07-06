@@ -28,7 +28,7 @@ export const ColorControls: React.FC<ColorControlsPropsT> = () => {
     } else {
       setCustomBgColor('off')
     }
-  }, [bgColor1, bgColor2, customBgColor])
+  }, [bgColor1, bgColor2])
 
   return (
     <div className='flex flex-col gap-3'>

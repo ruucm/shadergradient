@@ -56,6 +56,7 @@ export function HorizontalControl({
         }}
         transition={{ type: 'spring', damping: 12, stiffness: 200, delay: 2 }}
         animate={menuAnim}
+        // onClick={(e) => e.stopPropagation()}
       >
         {children}
       </motion.div>

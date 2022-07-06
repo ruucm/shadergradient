@@ -609,8 +609,9 @@ html {
   position: relative;
 }
 
-.bottom-0 {
-  bottom: 0px;
+.sticky {
+  position: -webkit-sticky;
+  position: sticky;
 }
 
 .top-1\/2 {
@@ -623,6 +624,10 @@ html {
 
 .left-0 {
   left: 0px;
+}
+
+.bottom-0 {
+  bottom: 0px;
 }
 
 .z-10 {
@@ -861,16 +866,16 @@ html {
   overflow-y: scroll;
 }
 
-.rounded-sm {
-  border-radius: 4px;
-}
-
 .rounded {
   border-radius: 9px;
 }
 
 .rounded-full {
   border-radius: 9999px;
+}
+
+.rounded-sm {
+  border-radius: 4px;
 }
 
 .rounded-md {
@@ -881,11 +886,6 @@ html {
   border-width: 1px;
 }
 
-.bg-controls-sub-panel {
-  --tw-bg-opacity: 1;
-  background-color: rgb(56 56 56 / var(--tw-bg-opacity));
-}
-
 .bg-primary {
   --tw-bg-opacity: 1;
   background-color: rgb(255 67 10 / var(--tw-bg-opacity));
@@ -894,6 +894,11 @@ html {
 .bg-controls-panel-mobile {
   --tw-bg-opacity: 1;
   background-color: rgb(246 248 248 / var(--tw-bg-opacity));
+}
+
+.bg-controls-sub-panel {
+  --tw-bg-opacity: 1;
+  background-color: rgb(56 56 56 / var(--tw-bg-opacity));
 }
 
 .bg-transparent {
@@ -1007,6 +1012,15 @@ html {
   transition-duration: 150ms;
 }
 
+.hide-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
 html,
 body {
   text-rendering: optimizeLegibility;
@@ -1014,7 +1028,6 @@ body {
   -moz-osx-font-smoothing: grayscale;
   /* height: var(--app-height); */
   height: -webkit-fill-available;
-  background: black;
 }
 
 /**

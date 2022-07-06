@@ -130,8 +130,7 @@ const R3F = () => {
 
   const time = useTimer()
 
-  if (time <= mainLoading.ready) return null
-  else if (time > mainLoading.ready && time <= mainLoading.start)
+  if (time <= mainLoading.start)
     return (
       <Gradient
         cDistance={28}

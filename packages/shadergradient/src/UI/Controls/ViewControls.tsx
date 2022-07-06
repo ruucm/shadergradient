@@ -21,6 +21,8 @@ export const ViewControls: React.FC<ViewControlsPropsT> = () => {
   const [rotationX, setRotationX] = useQueryState('rotationX')
   const [rotationY, setRotationY] = useQueryState('rotationY')
   const [rotationZ, setRotationZ] = useQueryState('rotationZ')
+  const [fov, setFov] = useQueryState('fov')
+
   const [isHovered, setIsHovered] = React.useState('')
 
   const [type] = useQueryState('type')
@@ -129,6 +131,17 @@ export const ViewControls: React.FC<ViewControlsPropsT> = () => {
           value={rotationZ}
           setValue={setRotationZ}
           arrow={true}
+        />
+      </InputPanel>
+
+      {/* Camera frustum vertical field of view, from bottom to top of view, in degrees */}
+      <InputPanel title='Field of view'>
+        <Slider
+          defaultValue={fov}
+          setValue={setFov}
+          step={10}
+          min={0}
+          max={180}
         />
       </InputPanel>
     </div>

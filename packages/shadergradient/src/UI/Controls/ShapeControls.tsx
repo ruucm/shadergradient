@@ -18,6 +18,8 @@ export const ShapeControls: React.FC<ShapeControlsPropsT> = () => {
   const [uDensity, setUDensity] = useQueryState('uDensity')
   const [uFrequency, setUFrequency] = useQueryState('uFrequency')
   const [uAmplitude, setUAmplitude] = useQueryState('uAmplitude')
+  const [pixelDensity, setPixelDensity] = useQueryState('pixelDensity')
+
   const [isHovered, setIsHovered] = React.useState('')
 
   return (
@@ -164,6 +166,17 @@ export const ShapeControls: React.FC<ShapeControlsPropsT> = () => {
           />
         </InputPanel>
       )}
+
+      {/* Pixel-ratio */}
+      <InputPanel title='pixelDensity'>
+        <Slider
+          defaultValue={pixelDensity}
+          setValue={setPixelDensity}
+          step={0.1}
+          min={0}
+          max={3}
+        />
+      </InputPanel>
     </div>
   )
 }

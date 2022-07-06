@@ -19417,11 +19417,11 @@ var LineDashedMaterial = class extends LineBasicMaterial {
 };
 LineDashedMaterial.prototype.isLineDashedMaterial = true;
 var AnimationUtils = {
-  arraySlice: function(array, from, to) {
+  arraySlice: function(array, from, to2) {
     if (AnimationUtils.isTypedArray(array)) {
-      return new array.constructor(array.subarray(from, to !== void 0 ? to : array.length));
+      return new array.constructor(array.subarray(from, to2 !== void 0 ? to2 : array.length));
     }
-    return array.slice(from, to);
+    return array.slice(from, to2);
   },
   convertArray: function(array, type, forceClone) {
     if (!array || !forceClone && array.constructor === type)
@@ -19884,22 +19884,22 @@ var KeyframeTrack = class {
   }
   trim(startTime, endTime) {
     const times = this.times, nKeys = times.length;
-    let from = 0, to = nKeys - 1;
+    let from = 0, to2 = nKeys - 1;
     while (from !== nKeys && times[from] < startTime) {
       ++from;
     }
-    while (to !== -1 && times[to] > endTime) {
-      --to;
+    while (to2 !== -1 && times[to2] > endTime) {
+      --to2;
     }
-    ++to;
-    if (from !== 0 || to !== nKeys) {
-      if (from >= to) {
-        to = Math.max(to, 1);
-        from = to - 1;
+    ++to2;
+    if (from !== 0 || to2 !== nKeys) {
+      if (from >= to2) {
+        to2 = Math.max(to2, 1);
+        from = to2 - 1;
       }
       const stride = this.getValueSize();
-      this.times = AnimationUtils.arraySlice(times, from, to);
-      this.values = AnimationUtils.arraySlice(this.values, from * stride, to * stride);
+      this.times = AnimationUtils.arraySlice(times, from, to2);
+      this.values = AnimationUtils.arraySlice(this.values, from * stride, to2 * stride);
     }
     return this;
   }
@@ -20049,10 +20049,10 @@ var VectorKeyframeTrack = class extends KeyframeTrack {
 };
 VectorKeyframeTrack.prototype.ValueTypeName = "vector";
 var AnimationClip = class {
-  constructor(name, duration = -1, tracks, blendMode = NormalAnimationBlendMode) {
+  constructor(name, duration2 = -1, tracks, blendMode = NormalAnimationBlendMode) {
     this.name = name;
     this.tracks = tracks;
-    this.duration = duration;
+    this.duration = duration2;
     this.blendMode = blendMode;
     this.uuid = generateUUID();
     if (this.duration < 0) {
@@ -20154,7 +20154,7 @@ var AnimationClip = class {
     const clipName = animation.name || "default";
     const fps = animation.fps || 30;
     const blendMode = animation.blendMode;
-    let duration = animation.length || -1;
+    let duration2 = animation.length || -1;
     const hierarchyTracks = animation.hierarchy || [];
     for (let h = 0; h < hierarchyTracks.length; h++) {
       const animationKeys = hierarchyTracks[h].keys;
@@ -20180,7 +20180,7 @@ var AnimationClip = class {
           }
           tracks.push(new NumberKeyframeTrack(".morphTargetInfluence[" + morphTargetName + "]", times, values));
         }
-        duration = morphTargetNames.length * (fps || 1);
+        duration2 = morphTargetNames.length * (fps || 1);
       } else {
         const boneName = ".bones[" + bones[h].name + "]";
         addNonemptyTrack(VectorKeyframeTrack, boneName + ".position", animationKeys, "pos", tracks);
@@ -20191,17 +20191,17 @@ var AnimationClip = class {
     if (tracks.length === 0) {
       return null;
     }
-    const clip = new this(clipName, duration, tracks, blendMode);
+    const clip = new this(clipName, duration2, tracks, blendMode);
     return clip;
   }
   resetDuration() {
     const tracks = this.tracks;
-    let duration = 0;
+    let duration2 = 0;
     for (let i = 0, n = tracks.length; i !== n; ++i) {
       const track = this.tracks[i];
-      duration = Math.max(duration, track.times[track.times.length - 1]);
+      duration2 = Math.max(duration2, track.times[track.times.length - 1]);
     }
-    this.duration = duration;
+    this.duration = duration2;
     return this;
   }
   trim() {
@@ -22265,24 +22265,24 @@ var AnimationAction = class {
   getEffectiveWeight() {
     return this._effectiveWeight;
   }
-  fadeIn(duration) {
-    return this._scheduleFading(duration, 0, 1);
+  fadeIn(duration2) {
+    return this._scheduleFading(duration2, 0, 1);
   }
-  fadeOut(duration) {
-    return this._scheduleFading(duration, 1, 0);
+  fadeOut(duration2) {
+    return this._scheduleFading(duration2, 1, 0);
   }
-  crossFadeFrom(fadeOutAction, duration, warp) {
-    fadeOutAction.fadeOut(duration);
-    this.fadeIn(duration);
+  crossFadeFrom(fadeOutAction, duration2, warp) {
+    fadeOutAction.fadeOut(duration2);
+    this.fadeIn(duration2);
     if (warp) {
       const fadeInDuration = this._clip.duration, fadeOutDuration = fadeOutAction._clip.duration, startEndRatio = fadeOutDuration / fadeInDuration, endStartRatio = fadeInDuration / fadeOutDuration;
-      fadeOutAction.warp(1, startEndRatio, duration);
-      this.warp(endStartRatio, 1, duration);
+      fadeOutAction.warp(1, startEndRatio, duration2);
+      this.warp(endStartRatio, 1, duration2);
     }
     return this;
   }
-  crossFadeTo(fadeInAction, duration, warp) {
-    return fadeInAction.crossFadeFrom(this, duration, warp);
+  crossFadeTo(fadeInAction, duration2, warp) {
+    return fadeInAction.crossFadeFrom(this, duration2, warp);
   }
   stopFading() {
     const weightInterpolant = this._weightInterpolant;
@@ -22300,8 +22300,8 @@ var AnimationAction = class {
   getEffectiveTimeScale() {
     return this._effectiveTimeScale;
   }
-  setDuration(duration) {
-    this.timeScale = this._clip.duration / duration;
+  setDuration(duration2) {
+    this.timeScale = this._clip.duration / duration2;
     return this.stopWarping();
   }
   syncWith(action) {
@@ -22309,10 +22309,10 @@ var AnimationAction = class {
     this.timeScale = action.timeScale;
     return this.stopWarping();
   }
-  halt(duration) {
-    return this.warp(this._effectiveTimeScale, 0, duration);
+  halt(duration2) {
+    return this.warp(this._effectiveTimeScale, 0, duration2);
   }
-  warp(startTimeScale, endTimeScale, duration) {
+  warp(startTimeScale, endTimeScale, duration2) {
     const mixer = this._mixer, now2 = mixer.time, timeScale = this.timeScale;
     let interpolant = this._timeScaleInterpolant;
     if (interpolant === null) {
@@ -22321,7 +22321,7 @@ var AnimationAction = class {
     }
     const times = interpolant.parameterPositions, values = interpolant.sampleValues;
     times[0] = now2;
-    times[1] = now2 + duration;
+    times[1] = now2 + duration2;
     values[0] = startTimeScale / timeScale;
     values[1] = endTimeScale / timeScale;
     return this;
@@ -22420,7 +22420,7 @@ var AnimationAction = class {
     return timeScale;
   }
   _updateTime(deltaTime) {
-    const duration = this._clip.duration;
+    const duration2 = this._clip.duration;
     const loop = this.loop;
     let time = this.time + deltaTime;
     let loopCount = this._loopCount;
@@ -22428,7 +22428,7 @@ var AnimationAction = class {
     if (deltaTime === 0) {
       if (loopCount === -1)
         return time;
-      return pingPong && (loopCount & 1) === 1 ? duration - time : time;
+      return pingPong && (loopCount & 1) === 1 ? duration2 - time : time;
     }
     if (loop === LoopOnce) {
       if (loopCount === -1) {
@@ -22436,8 +22436,8 @@ var AnimationAction = class {
         this._setEndings(true, true, false);
       }
       handle_stop: {
-        if (time >= duration) {
-          time = duration;
+        if (time >= duration2) {
+          time = duration2;
         } else if (time < 0) {
           time = 0;
         } else {
@@ -22464,9 +22464,9 @@ var AnimationAction = class {
           this._setEndings(this.repetitions === 0, true, pingPong);
         }
       }
-      if (time >= duration || time < 0) {
-        const loopDelta = Math.floor(time / duration);
-        time -= duration * loopDelta;
+      if (time >= duration2 || time < 0) {
+        const loopDelta = Math.floor(time / duration2);
+        time -= duration2 * loopDelta;
         loopCount += Math.abs(loopDelta);
         const pending = this.repetitions - loopCount;
         if (pending <= 0) {
@@ -22474,7 +22474,7 @@ var AnimationAction = class {
             this.paused = true;
           else
             this.enabled = false;
-          time = deltaTime > 0 ? duration : 0;
+          time = deltaTime > 0 ? duration2 : 0;
           this.time = time;
           this._mixer.dispatchEvent({
             type: "finished",
@@ -22500,7 +22500,7 @@ var AnimationAction = class {
         this.time = time;
       }
       if (pingPong && (loopCount & 1) === 1) {
-        return duration - time;
+        return duration2 - time;
       }
     }
     return time;
@@ -22523,7 +22523,7 @@ var AnimationAction = class {
       }
     }
   }
-  _scheduleFading(duration, weightNow, weightThen) {
+  _scheduleFading(duration2, weightNow, weightThen) {
     const mixer = this._mixer, now2 = mixer.time;
     let interpolant = this._weightInterpolant;
     if (interpolant === null) {
@@ -22533,7 +22533,7 @@ var AnimationAction = class {
     const times = interpolant.parameterPositions, values = interpolant.sampleValues;
     times[0] = now2;
     values[0] = weightNow;
-    times[1] = now2 + duration;
+    times[1] = now2 + duration2;
     values[1] = weightThen;
     return this;
   }
@@ -24140,6 +24140,9 @@ import { lineMaterial } from "./lineMaterial.js";
 import { shaderMaterial } from "./shaderMaterial.js";
 import * as shaders from "./shaders/index.js";
 var clock = new Clock();
+var duration = 1.2;
+var to = 1;
+var speed = to / duration;
 var GradientMesh = ({
   type,
   animate,
@@ -24180,6 +24183,7 @@ var GradientMesh = ({
     colors: getHoverColor(hoverState, [color1, color2, color3]),
     uTime,
     uSpeed,
+    uLoadingTime: 0,
     uNoiseDensity: uDensity,
     uNoiseStrength: uStrength,
     uFrequency,
@@ -24202,6 +24206,10 @@ var GradientMesh = ({
   const material = useRef();
   const linemat = useRef();
   useFrame((state, delta) => {
+    if (clock.getElapsedTime() < duration)
+      material.current.userData.uLoadingTime.value = clock.getElapsedTime() * speed;
+    else
+      material.current.userData.uLoadingTime.value = to;
     if (animate === "on") {
       material.current.userData.uTime.value = clock.getElapsedTime();
       if (linemat.current !== void 0) {

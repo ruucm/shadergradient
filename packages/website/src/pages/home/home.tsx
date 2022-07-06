@@ -5,6 +5,7 @@ import Link from 'next/link'
 import {
   Gradient,
   Links,
+  mainLoading,
   PRESETS,
   PresetTitles,
   PreviewBtn,
@@ -15,6 +16,7 @@ import {
 
 import styles from './Home.module.scss'
 import { MobileSwiper } from '@/components/dom/MobileUI'
+import { useTimer } from '@/hooks/useTimer'
 
 // Dynamic import is ussed to prevent a payload when the website start that will include threejs r3f etc..
 // WARNING ! errors might get obfuscated by using dynamic import.
@@ -28,9 +30,10 @@ import { MobileSwiper } from '@/components/dom/MobileUI'
 const DOM = () => {
   const mode = useUIStore((state: any) => state.mode)
   const setMode = useUIStore((state: any) => state.setMode)
-  const loadingPercentage = useUIStore((state: any) => state.loadingPercentage)
   const activePreset = useUIStore((state) => state.activePreset)
   const [isMobile, setIsMobile] = useState(null)
+
+  const time = useTimer(true)
 
   // //choose the screen size
   const handleResize = () => {
@@ -48,7 +51,8 @@ const DOM = () => {
     setMode('full')
   }, [])
 
-  console.log('loadingPercentage', loadingPercentage)
+  if (time <= mainLoading.start) return <></>
+
   return (
     <>
       {isMobile && <MobileSwiper />}
@@ -121,7 +125,27 @@ const DOM = () => {
 
 // canvas components goes here
 const R3F = () => {
-  return <Gradient control='query' />
+  const loadingPercentage = useUIStore((state: any) => state.loadingPercentage)
+  console.log('loadingPercentage', loadingPercentage)
+
+  const time = useTimer()
+
+  if (time <= mainLoading.ready) return null
+  else if (time > mainLoading.ready && time <= mainLoading.start)
+    return (
+      <Gradient
+        cDistance={28}
+        rotationX={0}
+        rotationY={0}
+        rotationZ={0}
+        uStrength={0}
+        uDensity={0}
+        cAzimuthAngle={0}
+        dampingFactor={1}
+      />
+    )
+  else if (time > mainLoading.start)
+    return <Gradient control='query' dampingFactor={0.03} />
 }
 
 const Page = () => {

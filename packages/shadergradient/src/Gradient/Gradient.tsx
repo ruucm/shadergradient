@@ -1,9 +1,10 @@
-import React, { Suspense, useEffect } from 'react'
-import { hdrBase } from '../consts'
+import React, { useEffect } from 'react'
+import { envBasePath } from '../consts'
 import { usePostProcessing, useQueryState } from '../hooks/index'
 import { PRESETS } from '../presets'
 import { updateGradientState, usePropertyStore, useUIStore } from '../store'
-import { Environment } from './comps/Environment/index'
+import { EnvironmentMap } from './comps/Environment/EnvironmentMap'
+import { useRGBELoader } from './useRGBELoader'
 import { CameraControl, GradientMesh } from './index'
 
 type Props = {
@@ -15,8 +16,13 @@ type Props = {
 export function Gradient({
   zoomOut = false,
   control = 'props',
+  dampingFactor,
   ...props
 }: Props) {
+  const setLoadingPercentage = useUIStore(
+    (state: any) => state.setLoadingPercentage
+  )
+
   usePresetToStore()
 
   const { lightType, envPreset, brightness, grain, ...others } =
@@ -26,20 +32,22 @@ export function Gradient({
 
   useEffect(() => usePropertyStore.setState({ zoomOut }), [zoomOut])
 
+  const city = useRGBELoader('city.hdr', { path: envBasePath })
+  const dawn = useRGBELoader('dawn.hdr', { path: envBasePath })
+  const lobby = useRGBELoader('lobby.hdr', { path: envBasePath })
+  const textures = { city, dawn, lobby }
+
   return (
     <>
       {lightType === 'env' && (
-        <Suspense fallback='Load Failed'>
-          <Environment
-            // preset={envPreset}
-            files={`${hdrBase}/hdr/${envPreset}.hdr`} // use instead of preset, cause rawCdn is not stable on many requests.
-            background={true}
-            // loadingCallback={loadingCallback}
-          />
-        </Suspense>
+        <EnvironmentMap
+          background={true}
+          map={textures[envPreset]}
+          loadingCallback={setLoadingPercentage}
+        />
       )}
       {lightType === '3d' && <ambientLight intensity={brightness || 1} />}
-      <CameraControl {...others} />
+      <CameraControl dampingFactor={dampingFactor} {...others} />
       <GradientMesh {...others} />
     </>
   )

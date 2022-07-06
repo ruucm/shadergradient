@@ -135,12 +135,9 @@ const R3F = () => {
     return (
       <Gradient
         cDistance={28}
-        rotationX={0}
-        rotationY={0}
-        rotationZ={0}
-        uStrength={0}
-        uDensity={0}
+        // rotationZ={0}
         cAzimuthAngle={0}
+        animate='off'
         dampingFactor={1}
       />
     )

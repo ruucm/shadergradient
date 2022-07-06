@@ -115,6 +115,9 @@ varying vec2 vUv;
 
 uniform float uTime;
 uniform float uSpeed;
+
+uniform float uLoadingTime;
+
 uniform float uNoiseDensity;
 uniform float uNoiseStrength;
 
@@ -175,7 +178,7 @@ void main() {
   // Create a sine wave from top to bottom of the sphere
   float distortion = 0.75 * cnoise(0.43 * position * uNoiseDensity + t);
 
-  vec3 pos = position + normal * distortion * uNoiseStrength;
+  vec3 pos = position + normal * distortion * uNoiseStrength * uLoadingTime;
   vPos = pos;
 
   gl_Position = projectionMatrix * modelViewMatrix * vec4(pos, 1.);

@@ -10,12 +10,15 @@ export function LCanvas({
 }) {
   const { Canvas } = importedFiber
   const [pixelDensity] = useQueryState('pixelDensity')
+  const [fov] = useQueryState('fov')
 
   return (
     <Canvas
       id='gradientCanvas'
+      key={`${pixelDensity}-${fov}`}
+      // key={fov}
       resize={{ offsetSize: true }}
-      {...canvasProps(pixelDensity)}
+      {...canvasProps(pixelDensity, fov)}
       {...rest}
     >
       {/* forward the context once more! */}

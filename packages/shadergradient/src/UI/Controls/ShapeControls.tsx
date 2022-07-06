@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { useQueryState } from '../../hooks/index'
-import { Slider, Radio } from '../../UI/index'
+import { Slider, Radio, NumberInput } from '../../UI/index'
 import { InputPanel } from './InputPanel'
 
 type ShapeControlsPropsT = React.DetailedHTMLProps<
@@ -19,6 +19,7 @@ export const ShapeControls: React.FC<ShapeControlsPropsT> = () => {
   const [uFrequency, setUFrequency] = useQueryState('uFrequency')
   const [uAmplitude, setUAmplitude] = useQueryState('uAmplitude')
   const [isHovered, setIsHovered] = React.useState('')
+  const [pixelDensity, setPixelDensity] = useQueryState('pixelDensity')
 
   return (
     <div className='flex flex-col gap-3'>
@@ -164,6 +165,30 @@ export const ShapeControls: React.FC<ShapeControlsPropsT> = () => {
           />
         </InputPanel>
       )}
+
+      {/* Pixel-ratio */}
+      {/* <InputPanel title='pixelDensity'>
+        <Slider
+          defaultValue={pixelDensity}
+          setValue={setPixelDensity}
+          step={0.1}
+          min={1}
+          max={2}
+        />
+      </InputPanel> */}
+
+      {/* Pixel-ratio */}
+      <InputPanel title='pixelDensity'>
+        <NumberInput
+          // label='pixelDensity'
+          step={0.1}
+          min={1}
+          max={2}
+          value={pixelDensity}
+          setValue={setPixelDensity}
+          arrow={true}
+        />
+      </InputPanel>
     </div>
   )
 }

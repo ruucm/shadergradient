@@ -12,13 +12,14 @@ type Props = {
   [x: string]: any
 }
 export const AllControls: React.FC<Props> = ({ isMobile, isFigma = false }) => {
-  const [activeTab, setActiveTab] = useState('none')
+  const isWeb = !isMobile && !isFigma
+  const [activeTab, setActiveTab] = useState(isWeb ? 'none' : 'shape')
 
   const mode = useUIStore((state: any) => state.mode)
   const setMode = useUIStore((state: any) => state.setMode)
 
   const ref = useRef(null)
-  useOnClickOutside(ref, () => setActiveTab('none'))
+  useOnClickOutside(ref, () => isWeb && setActiveTab('none'))
 
   const children = (
     <div
@@ -35,8 +36,11 @@ export const AllControls: React.FC<Props> = ({ isMobile, isFigma = false }) => {
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
+          cursor: 'pointer',
           height: 58,
         }}
+        className={isFigma ? 'sticky top-0' : ''}
+        onClick={() => setActiveTab('shape')}
       >
         <ControlTypeTitles
           activeTab={activeTab}

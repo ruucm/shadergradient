@@ -1,3 +1,5 @@
+const plugin = require('tailwindcss/plugin')
+
 module.exports = {
   mode: 'jit',
   purge: [
@@ -66,5 +68,25 @@ module.exports = {
   variants: {
     extend: {},
   },
-  plugins: [],
+  plugins: [
+    plugin(function ({ addUtilities }) {
+      addUtilities({
+        '.hide-scrollbar': {
+          '-ms-overflow-style': 'none' /* for Internet Explorer, Edge */,
+          'scrollbar-width': 'none' /* for Firefox */,
+        },
+        '.hide-scrollbar::-webkit-scrollbar': {
+          display: 'none' /* for Chrome, Safari, and Opera */,
+        },
+        '.hide-arrow::-webkit-outer-spin-button': {
+          '-webkit-appearance': 'none',
+          margin: '0',
+        },
+        '.hide-arrow::-webkit-inner-spin-button': {
+          '-webkit-appearance': 'none',
+          margin: '0',
+        },
+      })
+    }),
+  ],
 }

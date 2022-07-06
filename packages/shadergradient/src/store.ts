@@ -18,6 +18,7 @@ export const usePropertyStore = create((set) => ({
   inAbout: false,
 }))
 
+// querystate should be a search string
 export const updateGradientState = (querystate: any) => {
   const state = parseState(querystate)
   useQueryStore.setState(state, true)

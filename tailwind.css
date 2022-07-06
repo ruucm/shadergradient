@@ -15,7 +15,6 @@ body {
   -moz-osx-font-smoothing: grayscale;
   /* height: var(--app-height); */
   height: -webkit-fill-available;
-  background: black;
 }
 
 /**

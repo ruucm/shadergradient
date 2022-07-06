@@ -13,9 +13,9 @@ import {
   useUIStore,
 } from 'shadergradient'
 
+import { useCursorStore } from '../../helpers/cursorStore'
 import styles from './Home.module.scss'
 import { MobileSwiper } from '@/components/dom/MobileUI'
-
 // Dynamic import is ussed to prevent a payload when the website start that will include threejs r3f etc..
 // WARNING ! errors might get obfuscated by using dynamic import.
 // If something goes wrong go back to a static import to show the error.
@@ -91,6 +91,12 @@ const DOM = () => {
             className={styles.customizeBtnWrapper}
             style={{
               display: isMobile === false ? 'flex' : 'none',
+            }}
+            onMouseEnter={() => {
+              useCursorStore.setState({ hover: 'button' })
+            }}
+            onMouseLeave={() => {
+              useCursorStore.setState({ hover: 'default' })
             }}
           >
             <Link href='/customize'>

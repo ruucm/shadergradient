@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 
 import { useRouter } from 'next/router'
 import { Header } from 'shadergradient'
+import { Cursor } from '../dom/Cursor'
 import useStore from '@/helpers/store'
 
 const Dom = ({ children }) => {
@@ -29,6 +30,7 @@ const Dom = ({ children }) => {
     <div
       className='absolute top-0 left-0 z-10 w-full h-full overflow-hidden dom'
       ref={ref}
+      // style={{ cursor: 'none' }}
     >
       {children}
 
@@ -40,6 +42,7 @@ const Dom = ({ children }) => {
         inAbout={asPath === '/about' ? true : false}
         isMobile={isMobile}
       />
+      <Cursor />
     </div>
   )
 }

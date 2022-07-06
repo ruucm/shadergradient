@@ -2,6 +2,7 @@
 var initialActivePreset = 0;
 var canvasProps = (pixelDensity) => ({
   dpr: pixelDensity,
+  camera: { fov: 45 },
   linear: true,
   flat: true,
   gl: { preserveDrawingBuffer: true }
@@ -20,10 +21,12 @@ var links = [
     link: "https://framer.com/projects/ShaderGradient--7fmA9c0AApv3vyjCPpS3-emceg"
   }
 ];
-var defaultDistance = 14;
-var defaultZoom = 1;
-var aboutAngles = [190, 130];
-var aboutPositions = [0, 11, 0];
+var defaultPlanesZoom = 1;
+var defaultSphereDistance = 14;
+var zoomOutPlanes = { zoom: 1, distance: 14 };
+var zoomOutSphere = { zoom: 5, distance: 14 };
+var aboutAngles = [190, 140];
+var aboutPositions = [0, 10, 0];
 var aboutRotations = [0, 10, 50];
 var aboutMobilePositions = [0, 20, 0];
 var hdrBase = "https://shadergradient.vercel.app";
@@ -38,11 +41,13 @@ export {
   aboutPositions,
   aboutRotations,
   canvasProps,
-  defaultDistance,
-  defaultZoom,
+  defaultPlanesZoom,
+  defaultSphereDistance,
   envBasePath,
   hdrBase,
   initialActivePreset,
   links,
-  mainLoading
+  mainLoading,
+  zoomOutPlanes,
+  zoomOutSphere
 };

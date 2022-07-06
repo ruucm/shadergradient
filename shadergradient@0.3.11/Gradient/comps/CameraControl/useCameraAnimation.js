@@ -1,6 +1,11 @@
 // src/Gradient/comps/CameraControl/useCameraAnimation.ts
 import { useEffect, useRef } from "react";
-import { aboutAngles, defaultDistance, defaultZoom } from "../../../consts.js";
+import {
+  zoomOutPlanes,
+  zoomOutSphere,
+  defaultPlanesZoom,
+  defaultSphereDistance
+} from "../../../consts.js";
 import { usePropertyStore } from "../../../store.js";
 import { dToR, useFiber } from "../../../utils/index.js";
 function useCameraAnimation({
@@ -14,26 +19,26 @@ function useCameraAnimation({
   const ref = useRef();
   const control = ref.current;
   useFrame((state, delta) => ref.current.update(delta));
-  const hoverState = usePropertyStore((state) => state.hoverState);
   const zoomOut = usePropertyStore((state) => state.zoomOut);
-  const inAbout = usePropertyStore((state) => state.inAbout);
   useEffect(() => {
     control == null ? void 0 : control.rotateTo(dToR(cAzimuthAngle), dToR(cPolarAngle), true);
-    if (inAbout === true) {
-      control == null ? void 0 : control.rotateTo(dToR(aboutAngles[0]), dToR(aboutAngles[1]), true);
-    }
-  }, [control, cAzimuthAngle, cPolarAngle, inAbout]);
+  }, [control, cAzimuthAngle, cPolarAngle]);
   useEffect(() => {
     if (zoomOut) {
-      control == null ? void 0 : control.dollyTo(defaultDistance, true);
-      control == null ? void 0 : control.zoomTo(defaultZoom, true);
+      if (type === "sphere") {
+        control == null ? void 0 : control.dollyTo(zoomOutSphere.distance, true);
+        control == null ? void 0 : control.zoomTo(zoomOutSphere.zoom, true);
+      } else {
+        control == null ? void 0 : control.dollyTo(zoomOutPlanes.distance, true);
+        control == null ? void 0 : control.zoomTo(zoomOutPlanes.zoom, true);
+      }
     } else {
       if (type === "sphere") {
         control == null ? void 0 : control.zoomTo(cameraZoom, true);
-        control == null ? void 0 : control.dollyTo(defaultDistance, true);
+        control == null ? void 0 : control.dollyTo(defaultSphereDistance, true);
       } else {
         control == null ? void 0 : control.dollyTo(cDistance, true);
-        control == null ? void 0 : control.zoomTo(defaultZoom, true);
+        control == null ? void 0 : control.zoomTo(defaultPlanesZoom, true);
       }
     }
   }, [control, zoomOut, type, cameraZoom, cDistance]);

@@ -97,9 +97,8 @@ var HoverBox = (_a) => {
   return /* @__PURE__ */ React.createElement("div", {
     className: (0, import_classnames.default)("text-sm font-medium text-white"),
     style: {
-      position: "absolute",
+      position: "fixed",
       marginLeft: -10,
-      zIndex: 20,
       visibility: isHovered ? "visible" : "hidden",
       marginTop: isHovered ? 10 : 0,
       transitionDuration: "0.3s",

@@ -9,6 +9,10 @@ import * as shaders from './shaders/index'
 
 const clock = new THREE.Clock()
 
+const duration = 1.2
+const to = 1
+const speed = to / duration
+
 export const GradientMesh: React.FC<any> = ({
   type,
   animate,
@@ -55,6 +59,8 @@ export const GradientMesh: React.FC<any> = ({
       uTime,
       uSpeed,
 
+      uLoadingTime: 0,
+
       uNoiseDensity: uDensity,
       uNoiseStrength: uStrength,
       uFrequency,
@@ -93,6 +99,13 @@ export const GradientMesh: React.FC<any> = ({
   const linemat: any = useRef()
 
   useFrame((state, delta) => {
+    // loading animation
+    if (clock.getElapsedTime() < duration)
+      material.current.userData.uLoadingTime.value =
+        clock.getElapsedTime() * speed
+    else material.current.userData.uLoadingTime.value = to
+
+    // loop animation
     if (animate === 'on') {
       material.current.userData.uTime.value = clock.getElapsedTime()
       if (linemat.current !== undefined) {

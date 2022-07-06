@@ -402,8 +402,9 @@ html {
 .relative {
   position: relative;
 }
-.bottom-0 {
-  bottom: 0px;
+.sticky {
+  position: -webkit-sticky;
+  position: sticky;
 }
 .top-1\/2 {
   top: 50%;
@@ -413,6 +414,9 @@ html {
 }
 .left-0 {
   left: 0px;
+}
+.bottom-0 {
+  bottom: 0px;
 }
 .z-10 {
   z-index: 10;
@@ -593,24 +597,20 @@ html {
 .overflow-y-scroll {
   overflow-y: scroll;
 }
-.rounded-sm {
-  border-radius: 4px;
-}
 .rounded {
   border-radius: 9px;
 }
 .rounded-full {
   border-radius: 9999px;
 }
+.rounded-sm {
+  border-radius: 4px;
+}
 .rounded-md {
   border-radius: 11px;
 }
 .border {
   border-width: 1px;
-}
-.bg-controls-sub-panel {
-  --tw-bg-opacity: 1;
-  background-color: rgb(56 56 56 / var(--tw-bg-opacity));
 }
 .bg-primary {
   --tw-bg-opacity: 1;
@@ -619,6 +619,10 @@ html {
 .bg-controls-panel-mobile {
   --tw-bg-opacity: 1;
   background-color: rgb(246 248 248 / var(--tw-bg-opacity));
+}
+.bg-controls-sub-panel {
+  --tw-bg-opacity: 1;
+  background-color: rgb(56 56 56 / var(--tw-bg-opacity));
 }
 .bg-transparent {
   background-color: transparent;
@@ -744,13 +748,19 @@ html {
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 150ms;
 }
+.hide-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
 html,
 body {
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   height: -webkit-fill-available;
-  background: black;
 }
 :root {
   --guide-opacity: 0;

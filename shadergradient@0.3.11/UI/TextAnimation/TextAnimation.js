@@ -2,7 +2,7 @@
 import React2, { useState as useState2, useEffect as useEffect2 } from "react";
 import { motion, useAnimation, AnimatePresence } from "framer-motion";
 
-// ../../node_modules/react-intersection-observer/react-intersection-observer.m.js
+// ../../node_modules/react-intersection-observer/react-intersection-observer.modern.mjs
 import * as React from "react";
 var observerMap = /* @__PURE__ */ new Map();
 var RootIds = /* @__PURE__ */ new WeakMap();
@@ -18,28 +18,24 @@ function getRootId(root) {
   return RootIds.get(root);
 }
 function optionsToId(options) {
-  return Object.keys(options).sort().filter(function(key) {
-    return options[key] !== void 0;
-  }).map(function(key) {
-    return key + "_" + (key === "root" ? getRootId(options.root) : options[key]);
+  return Object.keys(options).sort().filter((key) => options[key] !== void 0).map((key) => {
+    return `${key}_${key === "root" ? getRootId(options.root) : options[key]}`;
   }).toString();
 }
 function createObserver(options) {
-  var id = optionsToId(options);
-  var instance = observerMap.get(id);
+  let id = optionsToId(options);
+  let instance = observerMap.get(id);
   if (!instance) {
-    var elements = /* @__PURE__ */ new Map();
-    var thresholds;
-    var observer = new IntersectionObserver(function(entries) {
-      entries.forEach(function(entry) {
+    const elements = /* @__PURE__ */ new Map();
+    let thresholds;
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
         var _elements$get;
-        var inView = entry.isIntersecting && thresholds.some(function(threshold) {
-          return entry.intersectionRatio >= threshold;
-        });
+        const inView = entry.isIntersecting && thresholds.some((threshold) => entry.intersectionRatio >= threshold);
         if (options.trackVisibility && typeof entry.isVisible === "undefined") {
           entry.isVisible = inView;
         }
-        (_elements$get = elements.get(entry.target)) == null ? void 0 : _elements$get.forEach(function(callback) {
+        (_elements$get = elements.get(entry.target)) == null ? void 0 : _elements$get.forEach((callback) => {
           callback(inView, entry);
         });
       });
@@ -54,15 +50,9 @@ function createObserver(options) {
   }
   return instance;
 }
-function observe(element, callback, options, fallbackInView) {
-  if (options === void 0) {
-    options = {};
-  }
-  if (fallbackInView === void 0) {
-    fallbackInView = unsupportedValue;
-  }
+function observe(element, callback, options = {}, fallbackInView = unsupportedValue) {
   if (typeof window.IntersectionObserver === "undefined" && fallbackInView !== void 0) {
-    var bounds = element.getBoundingClientRect();
+    const bounds = element.getBoundingClientRect();
     callback(fallbackInView, {
       isIntersecting: fallbackInView,
       target: element,
@@ -72,11 +62,15 @@ function observe(element, callback, options, fallbackInView) {
       intersectionRect: bounds,
       rootBounds: bounds
     });
-    return function() {
+    return () => {
     };
   }
-  var _createObserver = createObserver(options), id = _createObserver.id, observer = _createObserver.observer, elements = _createObserver.elements;
-  var callbacks = elements.get(element) || [];
+  const {
+    id,
+    observer,
+    elements
+  } = createObserver(options);
+  let callbacks = elements.get(element) || [];
   if (!elements.has(element)) {
     elements.set(element, callbacks);
   }
@@ -85,22 +79,34 @@ function observe(element, callback, options, fallbackInView) {
   return function unobserve() {
     callbacks.splice(callbacks.indexOf(callback), 1);
     if (callbacks.length === 0) {
-      elements["delete"](element);
+      elements.delete(element);
       observer.unobserve(element);
     }
     if (elements.size === 0) {
       observer.disconnect();
-      observerMap["delete"](id);
+      observerMap.delete(id);
     }
   };
 }
-function useInView(_temp) {
-  var _ref = _temp === void 0 ? {} : _temp, threshold = _ref.threshold, delay = _ref.delay, trackVisibility = _ref.trackVisibility, rootMargin = _ref.rootMargin, root = _ref.root, triggerOnce = _ref.triggerOnce, skip = _ref.skip, initialInView = _ref.initialInView, fallbackInView = _ref.fallbackInView;
-  var unobserve = React.useRef();
-  var _React$useState = React.useState({
+function useInView({
+  threshold,
+  delay,
+  trackVisibility,
+  rootMargin,
+  root,
+  triggerOnce,
+  skip,
+  initialInView,
+  fallbackInView,
+  onChange
+} = {}) {
+  const unobserve = React.useRef();
+  const callback = React.useRef();
+  const [state, setState] = React.useState({
     inView: !!initialInView
-  }), state = _React$useState[0], setState = _React$useState[1];
-  var setRef = React.useCallback(function(node) {
+  });
+  callback.current = onChange;
+  const setRef = React.useCallback((node) => {
     if (unobserve.current !== void 0) {
       unobserve.current();
       unobserve.current = void 0;
@@ -108,11 +114,13 @@ function useInView(_temp) {
     if (skip)
       return;
     if (node) {
-      unobserve.current = observe(node, function(inView, entry) {
+      unobserve.current = observe(node, (inView, entry) => {
         setState({
           inView,
           entry
         });
+        if (callback.current)
+          callback.current(inView, entry);
         if (entry.isIntersecting && triggerOnce && unobserve.current) {
           unobserve.current();
           unobserve.current = void 0;
@@ -135,14 +143,14 @@ function useInView(_temp) {
     fallbackInView,
     delay
   ]);
-  React.useEffect(function() {
+  React.useEffect(() => {
     if (!unobserve.current && state.entry && !triggerOnce && !skip) {
       setState({
         inView: !!initialInView
       });
     }
   });
-  var result = [setRef, state.inView, state.entry];
+  const result = [setRef, state.inView, state.entry];
   result.ref = result[0];
   result.inView = result[1];
   result.entry = result[2];

@@ -28,33 +28,42 @@ var __objRest = (source, exclude) => {
 };
 
 // src/Gradient/Gradient.tsx
-import React, { Suspense, useEffect } from "react";
-import { hdrBase } from "../consts.js";
+import React, { useEffect } from "react";
+import { envBasePath } from "../consts.js";
 import { usePostProcessing, useQueryState } from "../hooks/index.js";
 import { PRESETS } from "../presets.js";
 import { updateGradientState, usePropertyStore, useUIStore } from "../store.js";
-import { Environment } from "./comps/Environment/index.js";
+import { EnvironmentMap } from "./comps/Environment/EnvironmentMap.js";
+import { useRGBELoader } from "./useRGBELoader.js";
 import { CameraControl, GradientMesh } from "./index.js";
 function Gradient(_a) {
   var _b = _a, {
     zoomOut = false,
-    control = "props"
+    control = "props",
+    dampingFactor
   } = _b, props = __objRest(_b, [
     "zoomOut",
-    "control"
+    "control",
+    "dampingFactor"
   ]);
+  const setLoadingPercentage = useUIStore((state) => state.setLoadingPercentage);
   usePresetToStore();
   const _a2 = useControlValues(control, props), { lightType, envPreset, brightness, grain } = _a2, others = __objRest(_a2, ["lightType", "envPreset", "brightness", "grain"]);
   usePostProcessing(grain === "off");
   useEffect(() => usePropertyStore.setState({ zoomOut }), [zoomOut]);
-  return /* @__PURE__ */ React.createElement(React.Fragment, null, lightType === "env" && /* @__PURE__ */ React.createElement(Suspense, {
-    fallback: "Load Failed"
-  }, /* @__PURE__ */ React.createElement(Environment, {
-    files: `${hdrBase}/hdr/${envPreset}.hdr`,
-    background: true
-  })), lightType === "3d" && /* @__PURE__ */ React.createElement("ambientLight", {
+  const city = useRGBELoader("city.hdr", { path: envBasePath });
+  const dawn = useRGBELoader("dawn.hdr", { path: envBasePath });
+  const lobby = useRGBELoader("lobby.hdr", { path: envBasePath });
+  const textures = { city, dawn, lobby };
+  return /* @__PURE__ */ React.createElement(React.Fragment, null, lightType === "env" && /* @__PURE__ */ React.createElement(EnvironmentMap, {
+    background: true,
+    map: textures[envPreset],
+    loadingCallback: setLoadingPercentage
+  }), lightType === "3d" && /* @__PURE__ */ React.createElement("ambientLight", {
     intensity: brightness || 1
-  }), /* @__PURE__ */ React.createElement(CameraControl, __spreadValues({}, others)), /* @__PURE__ */ React.createElement(GradientMesh, __spreadValues({}, others)));
+  }), /* @__PURE__ */ React.createElement(CameraControl, __spreadValues({
+    dampingFactor
+  }, others)), /* @__PURE__ */ React.createElement(GradientMesh, __spreadValues({}, others)));
 }
 var pageLoaded = false;
 function usePresetToStore() {

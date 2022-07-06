@@ -228,7 +228,7 @@ Emitter.prototype.hasListeners = function(event) {
 };
 
 // ../../node_modules/engine.io-client/build/esm/globalThis.browser.js
-var globalThis_browser_default = (() => {
+var globalThisShim = (() => {
   if (typeof self !== "undefined") {
     return self;
   } else if (typeof window !== "undefined") {
@@ -251,11 +251,11 @@ var NATIVE_SET_TIMEOUT = setTimeout;
 var NATIVE_CLEAR_TIMEOUT = clearTimeout;
 function installTimerFunctions(obj, opts) {
   if (opts.useNativeTimers) {
-    obj.setTimeoutFn = NATIVE_SET_TIMEOUT.bind(globalThis_browser_default);
-    obj.clearTimeoutFn = NATIVE_CLEAR_TIMEOUT.bind(globalThis_browser_default);
+    obj.setTimeoutFn = NATIVE_SET_TIMEOUT.bind(globalThisShim);
+    obj.clearTimeoutFn = NATIVE_CLEAR_TIMEOUT.bind(globalThisShim);
   } else {
-    obj.setTimeoutFn = setTimeout.bind(globalThis_browser_default);
-    obj.clearTimeoutFn = clearTimeout.bind(globalThis_browser_default);
+    obj.setTimeoutFn = setTimeout.bind(globalThisShim);
+    obj.clearTimeoutFn = clearTimeout.bind(globalThisShim);
   }
 }
 var BASE64_OVERHEAD = 1.33;
@@ -399,7 +399,7 @@ try {
 var hasCORS = value;
 
 // ../../node_modules/engine.io-client/build/esm/transports/xmlhttprequest.browser.js
-function xmlhttprequest_browser_default(opts) {
+function XHR(opts) {
   const xdomain = opts.xdomain;
   try {
     if (typeof XMLHttpRequest !== "undefined" && (!xdomain || hasCORS)) {
@@ -409,7 +409,7 @@ function xmlhttprequest_browser_default(opts) {
   }
   if (!xdomain) {
     try {
-      return new globalThis_browser_default[["Active"].concat("Object").join("X")]("Microsoft.XMLHTTP");
+      return new globalThisShim[["Active"].concat("Object").join("X")]("Microsoft.XMLHTTP");
     } catch (e) {
     }
   }
@@ -419,7 +419,7 @@ function xmlhttprequest_browser_default(opts) {
 function empty() {
 }
 var hasXHR2 = function() {
-  const xhr = new xmlhttprequest_browser_default({
+  const xhr = new XHR({
     xdomain: false
   });
   return xhr.responseType != null;
@@ -570,7 +570,7 @@ var Request = class extends Emitter {
     const opts = pick(this.opts, "agent", "pfx", "key", "passphrase", "cert", "ca", "ciphers", "rejectUnauthorized", "autoUnref");
     opts.xdomain = !!this.opts.xd;
     opts.xscheme = !!this.opts.xs;
-    const xhr = this.xhr = new xmlhttprequest_browser_default(opts);
+    const xhr = this.xhr = new XHR(opts);
     try {
       xhr.open(this.method, this.uri, this.async);
       try {
@@ -661,7 +661,7 @@ if (typeof document !== "undefined") {
   if (typeof attachEvent === "function") {
     attachEvent("onunload", unloadHandler);
   } else if (typeof addEventListener === "function") {
-    const terminationEvent = "onpagehide" in globalThis_browser_default ? "pagehide" : "unload";
+    const terminationEvent = "onpagehide" in globalThisShim ? "pagehide" : "unload";
     addEventListener(terminationEvent, unloadHandler, false);
   }
 }
@@ -682,7 +682,7 @@ var nextTick = (() => {
     return (cb, setTimeoutFn) => setTimeoutFn(cb, 0);
   }
 })();
-var WebSocket = globalThis_browser_default.WebSocket || globalThis_browser_default.MozWebSocket;
+var WebSocket = globalThisShim.WebSocket || globalThisShim.MozWebSocket;
 var usingBrowserWebSocket = true;
 var defaultBinaryType = "arraybuffer";
 
@@ -787,7 +787,7 @@ var WS = class extends Transport {
     return schema + "://" + (ipv6 ? "[" + this.opts.hostname + "]" : this.opts.hostname) + port + this.opts.path + (encodedQuery.length ? "?" + encodedQuery : "");
   }
   check() {
-    return !!WebSocket && !("__initialize" in WebSocket && this.name === WS.prototype.name);
+    return !!WebSocket;
   }
 };
 
@@ -1371,8 +1371,13 @@ function reconstructPacket(packet, buffers) {
 function _reconstructPacket(data, buffers) {
   if (!data)
     return data;
-  if (data && data._placeholder) {
-    return buffers[data.num];
+  if (data && data._placeholder === true) {
+    const isIndexValid = typeof data.num === "number" && data.num >= 0 && data.num < buffers.length;
+    if (isIndexValid) {
+      return buffers[data.num];
+    } else {
+      throw new Error("illegal attachments");
+    }
   } else if (Array.isArray(data)) {
     for (let i2 = 0; i2 < data.length; i2++) {
       data[i2] = _reconstructPacket(data[i2], buffers);
@@ -1444,6 +1449,9 @@ var Decoder = class extends Emitter {
   add(obj) {
     let packet;
     if (typeof obj === "string") {
+      if (this.reconstructor) {
+        throw new Error("got plaintext data when reconstructing a packet");
+      }
       packet = this.decodeString(obj);
       if (packet.type === PacketType.BINARY_EVENT || packet.type === PacketType.BINARY_ACK) {
         this.reconstructor = new BinaryReconstructor(packet);

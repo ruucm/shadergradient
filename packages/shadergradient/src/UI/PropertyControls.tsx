@@ -31,7 +31,6 @@ export const PropertyControls: React.FC<Props> = ({
         'w-full overflow-y-scroll bg-controls-panel-mobile text-primary mx-auto md:h-full relative hide-scrollbar'
       )}
       style={{
-        // display: activeTab === 'none' ? 'none' : 'block',
         originY: 1,
       }}
       animate={{

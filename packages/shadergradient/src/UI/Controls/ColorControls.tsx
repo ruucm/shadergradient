@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { useQueryState } from '../../hooks/index'
 import { usePropertyStore } from '../../store'
-import { ColorInput } from '../../UI/index'
+import { ColorInput, Radio } from '../../UI/index'
 import { InputPanel } from './InputPanel'
 
 type ColorControlsPropsT = {
@@ -19,6 +19,16 @@ export const ColorControls: React.FC<ColorControlsPropsT> = () => {
   const [bgColor1, setBgColor1] = useQueryState('bgColor1')
   const [bgColor2, setBgColor2] = useQueryState('bgColor2')
   const hoverState = usePropertyStore((state: any) => state.hoverState)
+  const [customBgColor, setCustomBgColor] = React.useState('off')
+  const [isHovered, setIsHovered] = React.useState('')
+
+  React.useEffect(() => {
+    if (bgColor1 !== '#000000' || bgColor2 !== '#000000') {
+      setCustomBgColor('on')
+    } else {
+      setCustomBgColor('off')
+    }
+  }, [bgColor1, bgColor2])
 
   return (
     <div className='flex flex-col gap-3'>
@@ -58,18 +68,50 @@ export const ColorControls: React.FC<ColorControlsPropsT> = () => {
       >
         <ColorInput defaultValue={color3} setValue={setColor3} />
       </InputPanel>
-      <InputPanel title='Bg Color 1' info={true}>
-        <ColorInput
-          defaultValue={bgColor1 === null ? '#000000' : bgColor1}
-          setValue={setBgColor1}
+
+      <InputPanel
+        title='Custom Background'
+        info={true}
+        hoverContent='Change the background behind the 3d object. Default to be black'
+        isHovered={isHovered}
+        onMouseEnter={() => {
+          setIsHovered('Custom Background')
+        }}
+        onMouseLeave={() => {
+          setIsHovered('')
+        }}
+      >
+        <Radio
+          name='customBg'
+          value='on'
+          setValue={setCustomBgColor}
+          check={customBgColor === 'on'}
+          label='On'
+        />
+        <Radio
+          name='customBg'
+          value='off'
+          setValue={setCustomBgColor}
+          check={customBgColor === 'off'}
+          label='Off'
         />
       </InputPanel>
-      <InputPanel title='Bg Color 2' info={true}>
-        <ColorInput
-          defaultValue={bgColor2 === null ? '#000000' : bgColor2}
-          setValue={setBgColor2}
-        />
-      </InputPanel>
+      {customBgColor === 'on' && (
+        <>
+          <InputPanel title='Bg Color 1'>
+            <ColorInput
+              defaultValue={bgColor1 === null ? '#000000' : bgColor1}
+              setValue={setBgColor1}
+            />
+          </InputPanel>
+          <InputPanel title='Bg Color 2'>
+            <ColorInput
+              defaultValue={bgColor2 === null ? '#000000' : bgColor2}
+              setValue={setBgColor2}
+            />
+          </InputPanel>
+        </>
+      )}
     </div>
   )
 }

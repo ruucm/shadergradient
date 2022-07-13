@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react'
 import { useRef } from 'react'
+import { animated, useSpring } from '@react-spring/three'
 import * as THREE from 'three'
 import { usePropertyStore } from '../../../store'
 import { dToRArr, useFiber } from '../../../utils/index'
@@ -125,11 +126,17 @@ export const GradientMesh: React.FC<any> = ({
 
   // change position/rotation for about page
 
+  const { animatedRotation } = useSpring({
+    animatedRotation: dToRArr([rotationX, rotationY, rotationZ]),
+    config: { duration: duration * 1000 },
+  })
+
   return (
     <group>
-      <mesh
+      {/* @ts-ignore */}
+      <animated.mesh
         position={[positionX, positionY, positionZ]}
-        rotation={dToRArr([rotationX, rotationY, rotationZ])}
+        rotation={animatedRotation}
       >
         {type === 'plane' && <planeGeometry args={[10, 10, 1, meshCount]} />}
         {type === 'sphere' && (
@@ -140,7 +147,7 @@ export const GradientMesh: React.FC<any> = ({
         )}
         {/* @ts-ignore */}
         <colorShiftMaterial key={ColorShiftMaterial.key} ref={material} />
-      </mesh>
+      </animated.mesh>
 
       {/* show the line mesh when color is hovered */}
       <mesh>

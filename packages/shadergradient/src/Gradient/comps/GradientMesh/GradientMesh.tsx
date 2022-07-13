@@ -2,13 +2,14 @@ import React, { useEffect } from 'react'
 import { useRef } from 'react'
 import * as THREE from 'three'
 import { usePropertyStore } from '../../../store'
-import { dToRArr, useFiber } from '../../../utils/index'
+import { dToRArr, sleep, useFiber } from '../../../utils/index'
 import { lineMaterial } from './lineMaterial'
 import { shaderMaterial } from './shaderMaterial'
 import * as shaders from './shaders/index'
 
 const clock = new THREE.Clock()
 
+const delay = 1
 const duration = 1.2
 const to = 1
 const speed = to / duration
@@ -100,10 +101,12 @@ export const GradientMesh: React.FC<any> = ({
 
   useFrame((state, delta) => {
     // loading animation
-    if (clock.getElapsedTime() < duration)
-      material.current.userData.uLoadingTime.value =
-        clock.getElapsedTime() * speed
-    else material.current.userData.uLoadingTime.value = to
+    if (clock.getElapsedTime() > delay) {
+      if (clock.getElapsedTime() < duration + delay)
+        material.current.userData.uLoadingTime.value =
+          clock.getElapsedTime() * speed
+      else material.current.userData.uLoadingTime.value = to + delay
+    }
 
     // loop animation
     if (animate === 'on') {
@@ -124,9 +127,14 @@ export const GradientMesh: React.FC<any> = ({
   }, [uTime, reflection])
 
   // change position/rotation for about page
-
   const { animatedRotation } = useSpring({
-    animatedRotation: dToRArr([rotationX, rotationY, rotationZ]),
+    to: async (next, cancel) => {
+      await sleep(0.6)
+      await next({
+        animatedRotation: dToRArr([rotationX, rotationY, rotationZ]),
+      })
+    },
+    from: { animatedRotation: dToRArr([0, 0, 0]) },
     config: { duration: duration * 1000 },
   })
 

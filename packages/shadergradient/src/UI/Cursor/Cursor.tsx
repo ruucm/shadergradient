@@ -20,17 +20,19 @@ export function Cursor() {
   useEffect(() => {
     const moveCursor = (e) => {
       // @ts-ignore
-      cursorX.set(e.clientX - motionCursorSize.current / 2)
+      cursorX.set(e.clientX - motionCursorSize.prev / 2)
       // @ts-ignore
-      cursorY.set(e.clientY - motionCursorSize.current / 2)
+      cursorY.set(e.clientY - motionCursorSize.prev / 2)
 
       if (hover === 'default') {
         motionCursorSize.set(14)
       } else if (hover === 'button') {
         motionCursorSize.set(100)
-      } else if (hover === 'arrowUp') {
-        motionCursorSize.set(0)
-      } else if (hover === 'arrowDown') {
+      } else if (
+        hover === 'arrowUp' ||
+        hover === 'arrowDown' ||
+        hover === 'preview'
+      ) {
         motionCursorSize.set(0)
       }
 
@@ -43,6 +45,12 @@ export function Cursor() {
         motionCursorSize.set(28)
       } else if (hover === 'button') {
         motionCursorSize.set(100)
+      } else if (
+        hover === 'arrowUp' ||
+        hover === 'arrowDown' ||
+        hover === 'preview'
+      ) {
+        motionCursorSize.set(0)
       }
     }
     window.addEventListener('mousemove', moveCursor)
@@ -62,7 +70,8 @@ export function Cursor() {
         width: cursorSizeSpring,
         height: cursorSizeSpring,
         borderRadius: 100,
-        mixBlendMode: 'difference',
+        mixBlendMode:
+          hover === 'default' || hover === 'button' ? 'difference' : 'normal',
         background: 'white',
         translateX: cursorXSpring,
         translateY: cursorYSpring,
@@ -81,7 +90,10 @@ export function Cursor() {
           textAlign: 'center',
           color: 'white',
         }}
-        animate={{ scale: hover === 'arrowUp' ? 1 : 0 }}
+        animate={{
+          scale: hover === 'arrowUp' ? 1 : 0,
+          rotate: hover === 'arrowUp' ? -15 : 15,
+        }}
         transition={{
           springConfig,
         }}
@@ -97,12 +109,15 @@ export function Cursor() {
           textAlign: 'center',
           color: 'white',
         }}
-        animate={{ scale: hover === 'arrowDown' ? 1 : 0 }}
+        animate={{
+          scale: hover === 'arrowDown' ? 1 : 0,
+          rotate: hover === 'arrowDown' ? 15 : -15,
+        }}
         transition={{
           springConfig,
         }}
       >
-        ↓
+        👇
       </motion.div>
     </motion.div>
   )

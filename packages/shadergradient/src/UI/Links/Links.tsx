@@ -35,14 +35,13 @@ export function Links({ isMobile = false }) {
         onClick={() => {
           window.open(link)
         }}
-        onMouseEnter={() => {
+        onMouseOver={() => {
           hoverTitle.start({
             opacity: 1,
-            y: 0,
           })
         }}
         onMouseLeave={() => {
-          hoverTitle.start({ opacity: 0, y: -6 })
+          hoverTitle.start({ opacity: 0 })
           useCursorStore.setState({ hover: 'default' })
         }}
         onMouseMove={() => {
@@ -54,10 +53,10 @@ export function Links({ isMobile = false }) {
           style={{
             position: 'absolute',
             textAlign: 'center',
-            marginTop: 80,
+            marginTop: 65,
             fontSize: 12,
             color: 'white',
-            padding: 8,
+            // padding: 8,
             borderRadius: 4,
           }}
           initial={{

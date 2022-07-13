@@ -8,6 +8,7 @@ export function LCanvas({
   importedFiber = null, // passed imported fiber & drei from usual React App
   ...rest
 }) {
+  console.log('importedFiber', importedFiber)
   const { Canvas } = importedFiber
   const [pixelDensity] = useQueryState('pixelDensity')
   const [fov] = useQueryState('fov')

@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react'
 import { useRef } from 'react'
-import { animated, useSpring } from '@react-spring/three'
 import * as THREE from 'three'
 import { usePropertyStore } from '../../../store'
 import { dToRArr, useFiber } from '../../../utils/index'
@@ -36,7 +35,7 @@ export const GradientMesh: React.FC<any> = ({
   wireframe,
   shader,
 }) => {
-  const { useFrame, extend } = useFiber()
+  const { useFrame, extend, animated, useSpring } = useFiber()
 
   let sceneShader = shaders.defaults[type ?? 'plane'] // default type is plane
   if (shader && shader !== 'defaults') sceneShader = shaders[shader]

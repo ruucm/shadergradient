@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { motion } from 'framer-motion'
 import { PRESETS } from '../../presets'
-import { useUIStore } from '../../store'
+import { useUIStore, useCursorStore } from '../../store'
 import { TextAnimation } from '../../UI/index'
 import styles from './PresetTitle.module.scss'
 
@@ -64,12 +64,24 @@ export function PresetTitle({
               style={{ opacity: 0 }}
               whileHover={{ opacity: 0.2 }}
               onClick={activeUp}
+              onMouseMove={() => {
+                useCursorStore.setState({ hover: 'arrowUp' })
+              }}
+              onMouseLeave={() => {
+                useCursorStore.setState({ hover: 'default' })
+              }}
             ></motion.div>
             <motion.div
               className={styles.clickOnTitle}
               style={{ opacity: 0 }}
               whileHover={{ opacity: 0.2 }}
               onClick={activeDown}
+              onMouseMove={() => {
+                useCursorStore.setState({ hover: 'arrowDown' })
+              }}
+              onMouseLeave={() => {
+                useCursorStore.setState({ hover: 'default' })
+              }}
             ></motion.div>
           </div>
           <TextAnimation

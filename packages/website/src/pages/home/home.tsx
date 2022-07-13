@@ -12,9 +12,9 @@ import {
   PreviewWrapper,
   TextHover,
   useUIStore,
+  useCursorStore,
 } from 'shadergradient'
 
-import { useCursorStore } from '../../helpers/cursorStore'
 import styles from './Home.module.scss'
 import { MobileSwiper } from '@/components/dom/MobileUI'
 import { useTimer } from '@/hooks/useTimer'
@@ -97,15 +97,17 @@ const DOM = () => {
             style={{
               display: isMobile === false ? 'flex' : 'none',
             }}
-            onMouseEnter={() => {
-              useCursorStore.setState({ hover: 'button' })
-            }}
-            onMouseLeave={() => {
-              useCursorStore.setState({ hover: 'default' })
-            }}
           >
             <Link href='/customize'>
-              <motion.div className={styles.customizeBtn}>
+              <motion.div
+                className={styles.customizeBtn}
+                onMouseMove={() => {
+                  useCursorStore.setState({ hover: 'button' })
+                }}
+                onMouseLeave={() => {
+                  useCursorStore.setState({ hover: 'default' })
+                }}
+              >
                 <TextHover
                   fontSize={isMobile === true ? 15 : 18}
                   color={PRESETS[activePreset].color}
@@ -133,7 +135,7 @@ const DOM = () => {
 // canvas components goes here
 const R3F = () => {
   const loadingPercentage = useUIStore((state: any) => state.loadingPercentage)
-  console.log('loadingPercentage', loadingPercentage)
+  // console.log('loadingPercentage', loadingPercentage)
 
   const time = useTimer()
 

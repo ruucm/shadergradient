@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 
 import { useRouter } from 'next/router'
 import { Header } from 'shadergradient'
-import { Cursor } from '../dom/Cursor'
+import { Cursor } from 'shadergradient/src/UI/Cursor'
 import useStore from '@/helpers/store'
 
 const Dom = ({ children }) => {

@@ -43,7 +43,7 @@ const DOM = () => {
   }, [])
   // const [embedMode] = useQueryState('embedMode')
 
-  console.log('loadingPercentage', loadingPercentage)
+  // console.log('loadingPercentage', loadingPercentage)
 
   return (
     <>

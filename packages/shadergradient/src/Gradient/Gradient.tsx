@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { Suspense, useEffect } from 'react'
 import { envBasePath } from '../consts'
 import { usePostProcessing, useQueryState } from '../hooks/index'
 import { PRESETS } from '../presets'
@@ -13,7 +13,7 @@ type Props = {
   [x: string]: any
 }
 
-export function Gradient({
+function GradientComp({
   zoomOut = false,
   control = 'props',
   dampingFactor,
@@ -52,6 +52,12 @@ export function Gradient({
     </>
   )
 }
+
+export const Gradient = (props) => (
+  <Suspense fallback='Load Failed'>
+    <GradientComp {...props} />
+  </Suspense>
+)
 
 let pageLoaded = false
 

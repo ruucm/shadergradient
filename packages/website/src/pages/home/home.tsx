@@ -128,9 +128,9 @@ const R3F = () => {
   const loadingPercentage = useUIStore((state: any) => state.loadingPercentage)
   console.log('loadingPercentage', loadingPercentage)
 
-  const time = useTimer()
+  const afterStart = useTimer(true, mainLoading.start * 1000)
 
-  if (time <= mainLoading.start)
+  if (!afterStart)
     return (
       <Gradient
         cDistance={28}
@@ -140,8 +140,8 @@ const R3F = () => {
         dampingFactor={1}
       />
     )
-  else if (time > mainLoading.start)
-    return <Gradient control='query' dampingFactor={0.03} />
+
+  return <Gradient control='query' dampingFactor={0.03} />
 }
 
 const Page = () => {

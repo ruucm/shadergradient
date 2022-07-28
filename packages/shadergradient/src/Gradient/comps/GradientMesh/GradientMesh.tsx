@@ -119,8 +119,8 @@ export const GradientMesh: React.FC<any> = ({
     // loading animation
     if (elapsed > delay) {
       if (elapsed < duration + delay) {
-        const current = material.current.userData.uLoadingTime.value
         currentTime += increment
+        const current = material.current.userData.uLoadingTime.value
         // @ts-ignore
         const val = Math.easeInOutQuad(
           currentTime,
@@ -128,6 +128,7 @@ export const GradientMesh: React.FC<any> = ({
           to - current,
           duration * 1000
         )
+        console.log({ elapsed, val })
         material.current.userData.uLoadingTime.value = val
       }
     }

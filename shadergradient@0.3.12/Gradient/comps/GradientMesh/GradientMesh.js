@@ -24155,21 +24155,16 @@ if (typeof window !== "undefined") {
 }
 
 // src/Gradient/comps/GradientMesh/GradientMesh.tsx
+import { mainLoading } from "../../../consts.js";
 import { usePropertyStore } from "../../../store.js";
 import { dToRArr, sleep, useFiber } from "../../../utils/index.js";
 import { lineMaterial } from "./lineMaterial.js";
 import { shaderMaterial } from "./shaderMaterial.js";
 import * as shaders from "./shaders/index.js";
+var { delay, duration, to } = mainLoading;
 var clock = new Clock();
-var delay = 1;
-var duration = 1.2;
-var to = 1;
-Math.easeInOutQuad = function(t, b, c, d) {
-  t /= d / 2;
-  if (t < 1)
-    return c / 2 * t * t + b;
-  t--;
-  return -c / 2 * (t * (t - 2) - 1) + b;
+Math.easeInExpo = function(t, b, c, d) {
+  return c * Math.pow(2, 10 * (t / d - 1)) + b;
 };
 var increment = 20;
 var GradientMesh = ({
@@ -24238,11 +24233,12 @@ var GradientMesh = ({
   useFrame((state, delta) => {
     const elapsed = clock.getElapsedTime();
     if (elapsed > delay) {
+      const current = material.current.userData.uLoadingTime.value;
+      const val = elapsed < duration + delay ? Math.easeInExpo(currentTime, current, to.loading - current, duration * 1e3) : to.original;
+      material.current.userData.uLoadingTime.value = val;
       if (elapsed < duration + delay) {
-        const current = material.current.userData.uLoadingTime.value;
         currentTime += increment;
-        const val = Math.easeInOutQuad(currentTime, current, to - current, duration * 1e3);
-        material.current.userData.uLoadingTime.value = val;
+        console.log({ elapsed, val });
       }
     }
     if (animate === "on") {

@@ -6,7 +6,7 @@ import { useUIStore } from "../../../store.js";
 import { PropertyControls } from "../../PropertyControls.js";
 import { ToolsBox, ControlTypeTitles } from "../Tools/index.js";
 
-// esbuild-css-modules-plugin-namespace:/tmp/tmp-2051-uezr1kG7eBMH/shadergradient/src/UI/Controls/AllControls/AllControls.module.css.js
+// esbuild-css-modules-plugin-namespace:/tmp/tmp-1979-n2Ef3autC2KX/shadergradient/src/UI/Controls/AllControls/AllControls.module.css.js
 var digest = "c7eddb2529d2ec07cea99f62eca3c19b2e449d5299e02c5dd62cb45df38aa86e";
 var css = `._controlMobile_1dm53_1 {
   width: 100vw;

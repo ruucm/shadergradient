@@ -62,7 +62,7 @@ const DOM = () => {
 
       <div
         className={styles.contentWrapper}
-        style={{ display: mode === 'full' ? 'flex' : 'none', cursor: 'none' }}
+        style={{ display: mode === 'full' ? 'flex' : 'none' }}
       >
         <div
           className={styles.content}

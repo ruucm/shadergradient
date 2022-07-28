@@ -134,9 +134,6 @@ const DOM = () => {
 
 // canvas components goes here
 const R3F = () => {
-  const loadingPercentage = useUIStore((state: any) => state.loadingPercentage)
-  // console.log('loadingPercentage', loadingPercentage)
-
   const afterStart = useTimer(true, mainLoading.end * 1000)
 
   if (!afterStart)

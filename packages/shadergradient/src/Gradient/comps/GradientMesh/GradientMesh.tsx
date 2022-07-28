@@ -12,7 +12,20 @@ const clock = new THREE.Clock()
 const delay = 1
 const duration = 1.2
 const to = 1
-const speed = to / duration
+
+//t = current time
+//b = start value
+//c = change in value
+//d = duration
+// @ts-ignore
+Math.easeInOutQuad = function (t, b, c, d) {
+  t /= d / 2
+  if (t < 1) return (c / 2) * t * t + b
+  t--
+  return (-c / 2) * (t * (t - 2) - 1) + b
+}
+
+const increment = 20
 
 export const GradientMesh: React.FC<any> = ({
   type,
@@ -99,20 +112,31 @@ export const GradientMesh: React.FC<any> = ({
   const material: any = useRef()
   const linemat: any = useRef()
 
+  let currentTime = 0
   useFrame((state, delta) => {
+    const elapsed = clock.getElapsedTime()
+
     // loading animation
-    if (clock.getElapsedTime() > delay) {
-      if (clock.getElapsedTime() < duration + delay)
-        material.current.userData.uLoadingTime.value =
-          clock.getElapsedTime() * speed
-      else material.current.userData.uLoadingTime.value = to + delay
+    if (elapsed > delay) {
+      if (elapsed < duration + delay) {
+        const current = material.current.userData.uLoadingTime.value
+        currentTime += increment
+        // @ts-ignore
+        const val = Math.easeInOutQuad(
+          currentTime,
+          current,
+          to - current,
+          duration * 1000
+        )
+        material.current.userData.uLoadingTime.value = val
+      }
     }
 
     // loop animation
     if (animate === 'on') {
-      material.current.userData.uTime.value = clock.getElapsedTime()
+      material.current.userData.uTime.value = elapsed
       if (linemat.current !== undefined) {
-        linemat.current.userData.uTime.value = clock.getElapsedTime()
+        linemat.current.userData.uTime.value = elapsed
       }
     }
   })

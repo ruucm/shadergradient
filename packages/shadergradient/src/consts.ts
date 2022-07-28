@@ -45,10 +45,7 @@ export const mainLoading = {
   duration: 3,
   end: 4 + 1,
   // mesh
-  to: {
-    loading: 1,
-    original: 1,
-  },
+  to: 1,
 }
 
 // environment hdr

@@ -118,13 +118,8 @@ export const GradientMesh: React.FC<any> = ({
       const val =
         elapsed < duration + delay
           ? // @ts-ignore
-            Math.easeInExpo(
-              currentTime,
-              current,
-              to.loading - current,
-              duration * 1000
-            )
-          : to.original
+            Math.easeInExpo(currentTime, current, to - current, duration * 1000)
+          : to
       material.current.userData.uLoadingTime.value = val
 
       if (elapsed < duration + delay) {

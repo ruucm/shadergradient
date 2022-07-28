@@ -66,7 +66,7 @@ export function Cursor() {
         position: 'absolute',
         left: 0,
         top: 0,
-        zIndex: 1,
+        zIndex: 10,
         width: cursorSizeSpring,
         height: cursorSizeSpring,
         borderRadius: 100,

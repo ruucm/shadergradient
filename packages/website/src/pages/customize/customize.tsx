@@ -43,7 +43,7 @@ const DOM = () => {
   }, [])
   // const [embedMode] = useQueryState('embedMode')
 
-  console.log('loadingPercentage', loadingPercentage)
+  // console.log('loadingPercentage', loadingPercentage)
 
   return (
     <>
@@ -78,7 +78,7 @@ const DOM = () => {
 
 // canvas components goes here
 const R3F = () => {
-  return <Gradient control='query' />
+  return <Gradient />
 }
 
 const Page = () => {

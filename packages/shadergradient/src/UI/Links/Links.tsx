@@ -3,7 +3,7 @@ import { motion, useAnimation } from 'framer-motion'
 import { Framer, GitHub, Figma } from 'react-feather'
 import { links } from '../../consts'
 import { PRESETS } from '../../presets'
-import { useUIStore } from '../../store'
+import { useUIStore, useCursorStore } from '../../store'
 import styles from './Links.module.scss'
 
 export function Links({ isMobile = false }) {
@@ -29,20 +29,23 @@ export function Links({ isMobile = false }) {
           borderRadius: 25,
           cursor: 'pointer',
         }}
-        whileHover={{
-          backgroundColor: 'rgba(255,255,255,0.2)',
-        }}
+        // whileHover={{
+        //   backgroundColor: 'rgba(255,255,255,0.2)',
+        // }}
         onClick={() => {
           window.open(link)
         }}
-        onMouseEnter={() => {
+        onMouseOver={() => {
           hoverTitle.start({
             opacity: 1,
-            y: 0,
           })
         }}
         onMouseLeave={() => {
-          hoverTitle.start({ opacity: 0, y: -6 })
+          hoverTitle.start({ opacity: 0 })
+          useCursorStore.setState({ hover: 'default' })
+        }}
+        onMouseMove={() => {
+          useCursorStore.setState({ hover: 'button' })
         }}
       >
         {children}
@@ -50,10 +53,10 @@ export function Links({ isMobile = false }) {
           style={{
             position: 'absolute',
             textAlign: 'center',
-            marginTop: 80,
+            marginTop: 65,
             fontSize: 12,
             color: 'white',
-            padding: 8,
+            // padding: 8,
             borderRadius: 4,
           }}
           initial={{

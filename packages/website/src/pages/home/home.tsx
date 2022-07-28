@@ -12,6 +12,7 @@ import {
   PreviewWrapper,
   TextHover,
   useUIStore,
+  useCursorStore,
 } from 'shadergradient'
 
 import styles from './Home.module.scss'
@@ -98,7 +99,15 @@ const DOM = () => {
             }}
           >
             <Link href='/customize'>
-              <motion.div className={styles.customizeBtn}>
+              <motion.div
+                className={styles.customizeBtn}
+                onMouseMove={() => {
+                  useCursorStore.setState({ hover: 'button' })
+                }}
+                onMouseLeave={() => {
+                  useCursorStore.setState({ hover: 'default' })
+                }}
+              >
                 <TextHover
                   fontSize={isMobile === true ? 15 : 18}
                   color={PRESETS[activePreset].color}
@@ -126,7 +135,7 @@ const DOM = () => {
 // canvas components goes here
 const R3F = () => {
   const loadingPercentage = useUIStore((state: any) => state.loadingPercentage)
-  console.log('loadingPercentage', loadingPercentage)
+  // console.log('loadingPercentage', loadingPercentage)
 
   const afterStart = useTimer(true, mainLoading.end * 1000)
 

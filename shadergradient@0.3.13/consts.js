@@ -34,10 +34,7 @@ var mainLoading = {
   delay: 1,
   duration: 3,
   end: 4 + 1,
-  to: {
-    loading: 1,
-    original: 1
-  }
+  to: 1
 };
 var envBasePath = "https://shadergradient.vercel.app/hdr/";
 export {

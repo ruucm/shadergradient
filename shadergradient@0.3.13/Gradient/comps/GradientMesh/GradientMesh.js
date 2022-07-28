@@ -24234,7 +24234,7 @@ var GradientMesh = ({
     const elapsed = clock.getElapsedTime();
     if (elapsed > delay) {
       const current = material.current.userData.uLoadingTime.value;
-      const val = elapsed < duration + delay ? Math.easeInExpo(currentTime, current, to.loading - current, duration * 1e3) : to.original;
+      const val = elapsed < duration + delay ? Math.easeInExpo(currentTime, current, to - current, duration * 1e3) : to;
       material.current.userData.uLoadingTime.value = val;
       if (elapsed < duration + delay) {
         currentTime += increment;

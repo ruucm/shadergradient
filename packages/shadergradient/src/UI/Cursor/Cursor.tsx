@@ -28,11 +28,11 @@ export function Cursor() {
         motionCursorSize.set(14)
       } else if (hover === 'button') {
         motionCursorSize.set(100)
-      } else if (
-        hover === 'arrowUp' ||
-        hover === 'arrowDown' ||
-        hover === 'preview'
-      ) {
+      } else if (hover === 'arrowBtn') {
+        motionCursorSize.set(40)
+      } else if (hover === 'arrowUp' || hover === 'arrowDown') {
+        motionCursorSize.set(80)
+      } else if (hover === 'preview') {
         motionCursorSize.set(0)
       }
 
@@ -45,11 +45,11 @@ export function Cursor() {
         motionCursorSize.set(28)
       } else if (hover === 'button') {
         motionCursorSize.set(100)
-      } else if (
-        hover === 'arrowUp' ||
-        hover === 'arrowDown' ||
-        hover === 'preview'
-      ) {
+      } else if (hover === 'arrowBtn') {
+        motionCursorSize.set(40)
+      } else if (hover === 'arrowUp' || hover === 'arrowDown') {
+        motionCursorSize.set(80)
+      } else if (hover === 'preview') {
         motionCursorSize.set(0)
       }
     }
@@ -66,7 +66,7 @@ export function Cursor() {
         position: 'absolute',
         left: 0,
         top: 0,
-        zIndex: 20,
+        zIndex: 1,
         width: cursorSizeSpring,
         height: cursorSizeSpring,
         borderRadius: 100,
@@ -79,6 +79,7 @@ export function Cursor() {
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
+        fontFamily: '"Inter", sans-serif',
       }}
     >
       <motion.div
@@ -86,9 +87,9 @@ export function Cursor() {
           display: hover === 'arrowUp' ? 'flex' : 'none',
           justifyContent: 'center',
           alignItems: 'center',
-          fontSize: 60,
+          fontSize: 50,
           textAlign: 'center',
-          color: 'white',
+          color: '#FF430A',
         }}
         animate={{
           scale: hover === 'arrowUp' ? 1 : 0,
@@ -98,16 +99,16 @@ export function Cursor() {
           springConfig,
         }}
       >
-        ☝
+        ↑
       </motion.div>
       <motion.div
         style={{
           display: hover === 'arrowDown' ? 'flex' : 'none',
           justifyContent: 'center',
           alignItems: 'center',
-          fontSize: 60,
+          fontSize: 50,
           textAlign: 'center',
-          color: 'white',
+          color: '#FF430A',
         }}
         animate={{
           scale: hover === 'arrowDown' ? 1 : 0,
@@ -117,7 +118,7 @@ export function Cursor() {
           springConfig,
         }}
       >
-        👇
+        ↓
       </motion.div>
     </motion.div>
   )

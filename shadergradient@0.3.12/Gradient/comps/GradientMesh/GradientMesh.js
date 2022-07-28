@@ -24164,7 +24164,14 @@ var clock = new Clock();
 var delay = 1;
 var duration = 1.2;
 var to = 1;
-var speed = to / duration;
+Math.easeInOutQuad = function(t, b, c, d) {
+  t /= d / 2;
+  if (t < 1)
+    return c / 2 * t * t + b;
+  t--;
+  return -c / 2 * (t * (t - 2) - 1) + b;
+};
+var increment = 20;
 var GradientMesh = ({
   type,
   animate,
@@ -24227,17 +24234,21 @@ var GradientMesh = ({
   extend({ HoveredLineMaterial });
   const material = useRef();
   const linemat = useRef();
+  let currentTime = 0;
   useFrame((state, delta) => {
-    if (clock.getElapsedTime() > delay) {
-      if (clock.getElapsedTime() < duration + delay)
-        material.current.userData.uLoadingTime.value = clock.getElapsedTime() * speed;
-      else
-        material.current.userData.uLoadingTime.value = to + delay;
+    const elapsed = clock.getElapsedTime();
+    if (elapsed > delay) {
+      if (elapsed < duration + delay) {
+        const current = material.current.userData.uLoadingTime.value;
+        currentTime += increment;
+        const val = Math.easeInOutQuad(currentTime, current, to - current, duration * 1e3);
+        material.current.userData.uLoadingTime.value = val;
+      }
     }
     if (animate === "on") {
-      material.current.userData.uTime.value = clock.getElapsedTime();
+      material.current.userData.uTime.value = elapsed;
       if (linemat.current !== void 0) {
-        linemat.current.userData.uTime.value = clock.getElapsedTime();
+        linemat.current.userData.uTime.value = elapsed;
       }
     }
   });

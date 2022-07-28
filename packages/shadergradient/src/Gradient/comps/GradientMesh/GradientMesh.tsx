@@ -1,28 +1,24 @@
 import React, { useEffect } from 'react'
 import { useRef } from 'react'
 import * as THREE from 'three'
+import { mainLoading } from '../../../consts'
 import { usePropertyStore } from '../../../store'
 import { dToRArr, sleep, useFiber } from '../../../utils/index'
 import { lineMaterial } from './lineMaterial'
 import { shaderMaterial } from './shaderMaterial'
 import * as shaders from './shaders/index'
 
+const { delay, duration, to } = mainLoading
+
 const clock = new THREE.Clock()
-
-const delay = 1
-const duration = 1.2
-const to = 1
-
 //t = current time
 //b = start value
 //c = change in value
 //d = duration
 // @ts-ignore
-Math.easeInOutQuad = function (t, b, c, d) {
-  t /= d / 2
-  if (t < 1) return (c / 2) * t * t + b
-  t--
-  return (-c / 2) * (t * (t - 2) - 1) + b
+Math.easeInExpo = function (t, b, c, d) {
+  // source from http://gizma.com/easing/
+  return c * Math.pow(2, 10 * (t / d - 1)) + b
 }
 
 const increment = 20
@@ -118,18 +114,22 @@ export const GradientMesh: React.FC<any> = ({
 
     // loading animation
     if (elapsed > delay) {
+      const current = material.current.userData.uLoadingTime.value
+      const val =
+        elapsed < duration + delay
+          ? // @ts-ignore
+            Math.easeInExpo(
+              currentTime,
+              current,
+              to.loading - current,
+              duration * 1000
+            )
+          : to.original
+      material.current.userData.uLoadingTime.value = val
+
       if (elapsed < duration + delay) {
         currentTime += increment
-        const current = material.current.userData.uLoadingTime.value
-        // @ts-ignore
-        const val = Math.easeInOutQuad(
-          currentTime,
-          current,
-          to - current,
-          duration * 1000
-        )
         console.log({ elapsed, val })
-        material.current.userData.uLoadingTime.value = val
       }
     }
 

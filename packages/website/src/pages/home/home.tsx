@@ -51,7 +51,7 @@ const DOM = () => {
     setMode('full')
   }, [])
 
-  if (time <= mainLoading.start) return <></>
+  if (time <= mainLoading.end) return <></>
 
   return (
     <>
@@ -128,7 +128,7 @@ const R3F = () => {
   const loadingPercentage = useUIStore((state: any) => state.loadingPercentage)
   console.log('loadingPercentage', loadingPercentage)
 
-  const afterStart = useTimer(true, mainLoading.start * 1000)
+  const afterStart = useTimer(true, mainLoading.end * 1000)
 
   if (!afterStart)
     return (
@@ -136,7 +136,6 @@ const R3F = () => {
         cDistance={28}
         // rotationZ={0}
         cAzimuthAngle={0}
-        animate='off'
         dampingFactor={1}
       />
     )

@@ -40,7 +40,15 @@ export const hdrBase = 'https://shadergradient.vercel.app'
 
 // loading animations
 export const mainLoading = {
-  start: 2,
+  // times
+  delay: 1,
+  duration: 3,
+  end: 4 + 1,
+  // mesh
+  to: {
+    loading: 1,
+    original: 1,
+  },
 }
 
 // environment hdr

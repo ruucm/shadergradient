@@ -139,9 +139,16 @@ const R3F = () => {
   if (!afterStart)
     return (
       <Gradient
-        cDistance={28}
+        cDistance={18.9}
         // rotationZ={0}
-        cAzimuthAngle={0}
+        cAzimuthAngle={180}
+        cPolarAngle={90}
+        positionX={0}
+        positionY={0}
+        positionZ={0}
+        rotationX={0}
+        rotationY={0}
+        rotationZ={0}
         dampingFactor={1}
       />
     )

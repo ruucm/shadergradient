@@ -23,27 +23,21 @@ Math.easeInExpo = function (t, b, c, d) {
 
 const increment = 20
 
+const meshCount = 192
+const meshLineCount = 36
+
 export const GradientMesh: React.FC<any> = ({
   type,
   animate,
   uTime,
-  uSpeed,
-  uStrength,
-  uDensity,
-  uFrequency,
-  uAmplitude,
   positionX,
   positionY,
   positionZ,
   rotationX,
   rotationY,
   rotationZ,
-  color1,
-  color2,
-  color3,
   reflection,
-  wireframe,
-  shader,
+
   springOption = ({ rotation }) => ({
     to: async (next, cancel) => {
       await next({ animatedRotation: rotation })
@@ -51,66 +45,19 @@ export const GradientMesh: React.FC<any> = ({
     from: { animatedRotation: dToRArr([0, 0, 0]) },
     config: { duration: 0.2 * 1000 },
   }),
+  ...materialProps // uSpeed, uStrength, uDensity, uFrequency, uAmplitude, color1, color2, color3, wireframe, shader
 }) => {
   const { useFrame, extend, animated, useSpring } = useFiber()
 
-  let sceneShader = shaders.defaults[type ?? 'plane'] // default type is plane
-  if (shader && shader !== 'defaults') sceneShader = shaders[shader]
-
   // when color is hovered
   const hoverState = usePropertyStore((state: any) => state.hoverState)
-  const meshCount = 192
-  const meshLineCount = 36
 
-  useEffect(() => {
-    if (hoverState !== 0) {
-      usePropertyStore.setState({ zoomOut: true })
-    } else {
-      usePropertyStore.setState({ zoomOut: false })
-    }
-  }, [hoverState])
-
-  const ColorShiftMaterial = shaderMaterial(
-    {
-      colors: getHoverColor(hoverState, [color1, color2, color3]),
-      uTime,
-      uSpeed,
-
-      uLoadingTime: 0,
-
-      uNoiseDensity: uDensity,
-      uNoiseStrength: uStrength,
-      uFrequency,
-      uAmplitude,
-      uIntensity: 0.5,
-    },
-    sceneShader.vertex,
-    sceneShader.fragment
-  )
-
-  const HoveredLineMaterial = lineMaterial(
-    {
-      uTime,
-      uSpeed,
-      uNoiseDensity: uDensity,
-      uNoiseStrength: uStrength,
-      uFrequency,
-      uAmplitude,
-      uIntensity: 0.5,
-    },
-    sceneShader.vertex
-  )
-
-  // This is the 🔑 that HMR will renew if this file is edited
-  // It works for THREE.ShaderMaterial as well as for drei/shaderMaterial
-  // @ts-ignore
-  ColorShiftMaterial.key = THREE.MathUtils.generateUUID()
-
-  extend({ ColorShiftMaterial })
-
-  HoveredLineMaterial.key = THREE.MathUtils.generateUUID()
-
-  extend({ HoveredLineMaterial })
+  const { ColorShiftMaterial, HoveredLineMaterial } = useMaterials({
+    type,
+    uTime,
+    ...materialProps,
+    hoverState,
+  })
 
   const material: any = useRef()
   const linemat: any = useRef()
@@ -205,4 +152,79 @@ function getHoverColor(hoverState: number, colors: any) {
   else if (hoverState === 2) return ['#000000', colors[1], '#000000']
   else if (hoverState === 3) return ['#000000', '#000000', colors[2]]
   else return [colors[0], colors[1], colors[2]]
+}
+
+function useMaterials({
+  type,
+  uTime,
+
+  uSpeed,
+  uStrength,
+  uDensity,
+  uFrequency,
+  uAmplitude,
+  color1,
+  color2,
+  color3,
+  wireframe,
+  shader,
+
+  hoverState,
+}) {
+  const { extend } = useFiber()
+
+  let sceneShader = shaders.defaults[type ?? 'plane'] // default type is plane
+  if (shader && shader !== 'defaults') sceneShader = shaders[shader]
+
+  useEffect(() => {
+    if (hoverState !== 0) {
+      usePropertyStore.setState({ zoomOut: true })
+    } else {
+      usePropertyStore.setState({ zoomOut: false })
+    }
+  }, [hoverState])
+
+  const ColorShiftMaterial = shaderMaterial(
+    {
+      colors: getHoverColor(hoverState, [color1, color2, color3]),
+      uTime,
+      uSpeed,
+
+      uLoadingTime: 0,
+
+      uNoiseDensity: uDensity,
+      uNoiseStrength: uStrength,
+      uFrequency,
+      uAmplitude,
+      uIntensity: 0.5,
+    },
+    sceneShader.vertex,
+    sceneShader.fragment
+  )
+
+  const HoveredLineMaterial = lineMaterial(
+    {
+      uTime,
+      uSpeed,
+      uNoiseDensity: uDensity,
+      uNoiseStrength: uStrength,
+      uFrequency,
+      uAmplitude,
+      uIntensity: 0.5,
+    },
+    sceneShader.vertex
+  )
+
+  // This is the 🔑 that HMR will renew if this file is edited
+  // It works for THREE.ShaderMaterial as well as for drei/shaderMaterial
+  // @ts-ignore
+  ColorShiftMaterial.key = THREE.MathUtils.generateUUID()
+
+  extend({ ColorShiftMaterial })
+
+  HoveredLineMaterial.key = THREE.MathUtils.generateUUID()
+
+  extend({ HoveredLineMaterial })
+
+  return { ColorShiftMaterial, HoveredLineMaterial, hoverState }
 }

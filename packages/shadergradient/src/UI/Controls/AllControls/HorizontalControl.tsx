@@ -1,6 +1,7 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import cx from 'classnames'
 import { useAnimation, motion } from 'framer-motion'
+import { useOnClickOutside } from '../../../hooks/index'
 
 export function HorizontalControl({
   mode = 'mobile',
@@ -26,6 +27,9 @@ export function HorizontalControl({
     }
   }, [activeTab])
 
+  const ref = useRef(null)
+  useOnClickOutside(ref, () => setActiveTab('none'))
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 50 }}
@@ -40,6 +44,7 @@ export function HorizontalControl({
       }}
     >
       <motion.div
+        ref={ref}
         className={cx('z-10 overflow-hidden rounded-sm', className)}
         style={{
           width: '580px',

@@ -28,3 +28,4 @@ export { TextAnimation, TextHover } from './TextAnimation/index'
 
 export { Header } from './Header/index'
 export { Links } from './Links/index'
+export { Cursor } from './Cursor/index'

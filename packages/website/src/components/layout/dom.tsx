@@ -42,7 +42,7 @@ const Dom = ({ children }) => {
         inAbout={asPath === '/about' ? true : false}
         isMobile={isMobile}
       />
-      <Cursor />
+      <Cursor on={asPath === '/customize' ? false : true} />
     </div>
   )
 }

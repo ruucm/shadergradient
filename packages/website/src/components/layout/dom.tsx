@@ -26,11 +26,14 @@ const Dom = ({ children }) => {
     useStore.setState({ dom: ref })
   }, [])
 
+  useEffect(() => {
+    console.log(asPath)
+  }, [asPath])
+
   return (
     <div
       className='absolute top-0 left-0 z-10 w-full h-full overflow-hidden dom'
       ref={ref}
-      // style={{ cursor: 'none' }}
     >
       {children}
 

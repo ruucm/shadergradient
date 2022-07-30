@@ -8,7 +8,8 @@ import { lineMaterial } from './lineMaterial'
 import { shaderMaterial } from './shaderMaterial'
 import * as shaders from './shaders/index'
 
-const { delay, duration, to, rotDur, meshDur } = mainLoading
+const { delay, duration, to, rotDur, meshDur, rotDelay, meshDelay } =
+  mainLoading
 
 const clock = new THREE.Clock()
 //t = current time
@@ -49,7 +50,7 @@ export const GradientMesh: React.FC<any> = ({
       await next({ animatedRotation: rotation })
     },
     from: { animatedRotation: dToRArr([0, 0, 0]) },
-    config: { duration: 0.2 * 1000 },
+    config: { duration: rotDur * 1000 },
   }),
 }) => {
   const { useFrame, extend, animated, useSpring } = useFiber()
@@ -120,16 +121,16 @@ export const GradientMesh: React.FC<any> = ({
     const elapsed = clock.getElapsedTime()
 
     // loading animation
-    if (elapsed > delay) {
+    if (elapsed > meshDelay) {
       const current = material.current.userData.uLoadingTime.value
       const val =
-        elapsed < meshDur + delay
+        elapsed < meshDur + meshDelay
           ? // @ts-ignore
             Math.easeInExpo(currentTime, current, to - current, meshDur * 1000)
           : to
       material.current.userData.uLoadingTime.value = val
 
-      if (elapsed < meshDur + delay) {
+      if (elapsed < meshDur + meshDelay) {
         currentTime += increment
         // console.log({ elapsed, val })
       }

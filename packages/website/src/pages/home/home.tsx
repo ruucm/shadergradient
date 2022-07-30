@@ -146,14 +146,19 @@ const R3F = () => {
         cAzimuthAngle={180}
         cPolarAngle={90}
         positionX={0}
-        dampingFactor={1}
+        dampingFactor={0.7}
         springOption={({ rotation }) => ({
           to: async (next, cancel) => {
-            await sleep(mainLoading.delay)
+            await sleep(mainLoading.rotDelay)
             await next({ animatedRotation: rotation })
           },
           from: { animatedRotation: dToRArr([0, 0, 0]) },
-          config: { duration: mainLoading.duration * 1000 },
+          config: {
+            duration: mainLoading.rotDur * 1000,
+            friction: 15,
+            mass: 0.5,
+            // easing: easings.easeInOutQuart,
+          },
         })}
       />
     )

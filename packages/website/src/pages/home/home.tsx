@@ -142,7 +142,7 @@ const R3F = () => {
     return (
       <Gradient
         cDistance={28}
-        // rotationZ={0}
+        positionX={0}
         cAzimuthAngle={0}
         dampingFactor={1}
         springOption={({ rotation }) => ({

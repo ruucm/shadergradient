@@ -52,7 +52,7 @@ const DOM = () => {
     setMode('full')
   }, [])
 
-  if (time <= mainLoading.start) return <></>
+  if (time <= mainLoading.end) return <></>
 
   return (
     <>
@@ -134,24 +134,19 @@ const DOM = () => {
 
 // canvas components goes here
 const R3F = () => {
-  const loadingPercentage = useUIStore((state: any) => state.loadingPercentage)
-  // console.log('loadingPercentage', loadingPercentage)
+  const afterStart = useTimer(true, mainLoading.end * 1000)
 
-  const time = useTimer()
-
-  if (time <= mainLoading.ready) return null
-  else if (time > mainLoading.ready && time <= mainLoading.start)
+  if (!afterStart)
     return (
       <Gradient
         cDistance={28}
         // rotationZ={0}
         cAzimuthAngle={0}
-        animate='off'
         dampingFactor={1}
       />
     )
-  else if (time > mainLoading.start)
-    return <Gradient control='query' dampingFactor={0.03} />
+
+  return <Gradient control='query' dampingFactor={0.03} />
 }
 
 const Page = () => {

@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
+import * as reactSpring from '@react-spring/three'
 import { OrbitControls } from '@react-three/drei'
 import * as drei from '@react-three/drei'
 import * as fiber from '@react-three/fiber'
@@ -39,7 +40,7 @@ const NextJsCanvas = ({ children }) => {
   }, [])
   return (
     <LCanvas
-      importedFiber={{ ...fiber, ...drei }}
+      importedFiber={{ ...fiber, ...drei, ...reactSpring }}
       onCreated={(state) => state.events.connect(dom.current)}
       style={{
         position: 'absolute',

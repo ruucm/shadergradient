@@ -1,17 +1,27 @@
 import React, { useEffect } from 'react'
 import { useRef } from 'react'
 import * as THREE from 'three'
+import { mainLoading } from '../../../consts'
 import { usePropertyStore } from '../../../store'
-import { dToRArr, useFiber } from '../../../utils/index'
+import { dToRArr, sleep, useFiber } from '../../../utils/index'
 import { lineMaterial } from './lineMaterial'
 import { shaderMaterial } from './shaderMaterial'
 import * as shaders from './shaders/index'
 
-const clock = new THREE.Clock()
+const { delay, duration, to } = mainLoading
 
-const duration = 1.2
-const to = 1
-const speed = to / duration
+const clock = new THREE.Clock()
+//t = current time
+//b = start value
+//c = change in value
+//d = duration
+// @ts-ignore
+Math.easeInExpo = function (t, b, c, d) {
+  // source from http://gizma.com/easing/
+  return c * Math.pow(2, 10 * (t / d - 1)) + b
+}
+
+const increment = 20
 
 export const GradientMesh: React.FC<any> = ({
   type,
@@ -35,7 +45,7 @@ export const GradientMesh: React.FC<any> = ({
   wireframe,
   shader,
 }) => {
-  const { useFrame, extend } = useFiber()
+  const { useFrame, extend, animated, useSpring } = useFiber()
 
   let sceneShader = shaders.defaults[type ?? 'plane'] // default type is plane
   if (shader && shader !== 'defaults') sceneShader = shaders[shader]
@@ -98,18 +108,31 @@ export const GradientMesh: React.FC<any> = ({
   const material: any = useRef()
   const linemat: any = useRef()
 
+  let currentTime = 0
   useFrame((state, delta) => {
+    const elapsed = clock.getElapsedTime()
+
     // loading animation
-    if (clock.getElapsedTime() < duration)
-      material.current.userData.uLoadingTime.value =
-        clock.getElapsedTime() * speed
-    else material.current.userData.uLoadingTime.value = to
+    if (elapsed > delay) {
+      const current = material.current.userData.uLoadingTime.value
+      const val =
+        elapsed < duration + delay
+          ? // @ts-ignore
+            Math.easeInExpo(currentTime, current, to - current, duration * 1000)
+          : to
+      material.current.userData.uLoadingTime.value = val
+
+      if (elapsed < duration + delay) {
+        currentTime += increment
+        console.log({ elapsed, val })
+      }
+    }
 
     // loop animation
     if (animate === 'on') {
-      material.current.userData.uTime.value = clock.getElapsedTime()
+      material.current.userData.uTime.value = elapsed
       if (linemat.current !== undefined) {
-        linemat.current.userData.uTime.value = clock.getElapsedTime()
+        linemat.current.userData.uTime.value = elapsed
       }
     }
   })
@@ -124,12 +147,23 @@ export const GradientMesh: React.FC<any> = ({
   }, [uTime, reflection])
 
   // change position/rotation for about page
+  const { animatedRotation } = useSpring({
+    to: async (next, cancel) => {
+      await sleep(0.6)
+      await next({
+        animatedRotation: dToRArr([rotationX, rotationY, rotationZ]),
+      })
+    },
+    from: { animatedRotation: dToRArr([0, 0, 0]) },
+    config: { duration: duration * 1000 },
+  })
 
   return (
     <group>
-      <mesh
+      {/* @ts-ignore */}
+      <animated.mesh
         position={[positionX, positionY, positionZ]}
-        rotation={dToRArr([rotationX, rotationY, rotationZ])}
+        rotation={animatedRotation}
       >
         {type === 'plane' && <planeGeometry args={[10, 10, 1, meshCount]} />}
         {type === 'sphere' && (
@@ -140,7 +174,7 @@ export const GradientMesh: React.FC<any> = ({
         )}
         {/* @ts-ignore */}
         <colorShiftMaterial key={ColorShiftMaterial.key} ref={material} />
-      </mesh>
+      </animated.mesh>
 
       {/* show the line mesh when color is hovered */}
       <mesh>

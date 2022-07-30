@@ -1,12 +1,11 @@
+import { useState } from 'react'
 import { useInterval } from './useInterval'
-import { useTimeStore } from '@/helpers/store'
 
 export function useTimer(tick = false, interval: any = 1000) {
-  const time = useTimeStore((state) => state.time)
-  const increaseTime = useTimeStore((state) => state.increaseTime)
+  const [time, setTime] = useState(0)
 
   useInterval(() => {
-    if (tick) increaseTime()
+    if (tick) setTime((p) => p + 1)
   }, interval)
 
   return time

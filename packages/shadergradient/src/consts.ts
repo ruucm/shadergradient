@@ -1,11 +1,11 @@
 export const initialActivePreset = 0
 
-export const canvasProps = (pixelDensity: number) => ({
+export const canvasProps = (pixelDensity: number, fov: number) => ({
   dpr: pixelDensity, //device pixel ratio - 1 default and fast, 2 detailed and slow
   // mode: 'concurrent' as 'legacy' | 'blocking' | 'concurrent',
-  // camera: { fov: 45 }, // could be replaced with zoom or distance?
-  // linear: true, //sRGBEncoding
-  // flat: true, //ACESFilmicToneMapping
+  camera: { fov }, // could be replaced with zoom or distance?
+  linear: true, //sRGBEncoding
+  flat: true, //ACESFilmicToneMapping
   gl: { preserveDrawingBuffer: true }, // to capture the canvas (Figma Plugin)
 })
 
@@ -26,11 +26,27 @@ export const links = [
 
 // useCameraAnimation
 
-export const defaultDistance = 14
-export const defaultZoom = 1
-export const aboutAngles = [190, 130]
-export const aboutPositions = [0, 11, 0]
+export const defaultPlanesZoom = 1
+export const defaultSphereDistance = 14
+export const zoomOutPlanes = { zoom: 1, distance: 14 }
+export const zoomOutSphere = { zoom: 5, distance: 14 }
+
+export const aboutAngles = [190, 140]
+export const aboutPositions = [0, 10, 0]
 export const aboutRotations = [0, 10, 50]
 export const aboutMobilePositions = [0, 20, 0]
 
 export const hdrBase = 'https://shadergradient.vercel.app'
+
+// loading animations
+export const mainLoading = {
+  // times
+  delay: 1,
+  duration: 3,
+  end: 4 + 1,
+  // mesh
+  to: 1,
+}
+
+// environment hdr
+export const envBasePath = 'https://shadergradient.vercel.app/hdr/'

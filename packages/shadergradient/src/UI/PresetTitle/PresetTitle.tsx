@@ -1,7 +1,7 @@
 import * as React from 'react'
-import { motion } from 'framer-motion'
+import { motion, useAnimation } from 'framer-motion'
 import { PRESETS } from '../../presets'
-import { useUIStore } from '../../store'
+import { useUIStore, useCursorStore } from '../../store'
 import { TextAnimation } from '../../UI/index'
 import styles from './PresetTitle.module.scss'
 
@@ -31,6 +31,11 @@ export function PresetTitle({
       setActivePreset(PRESETS.length - 1)
     }
   }
+
+  const arrowUpAnim = useAnimation()
+  const arrowDownAnim = useAnimation()
+  const fogUpAnim = useAnimation()
+  const fogDownAnim = useAnimation()
 
   return (
     <div className={styles.presetWrapper}>
@@ -62,14 +67,52 @@ export function PresetTitle({
             <motion.div
               className={styles.clickOnTitle}
               style={{ opacity: 0 }}
-              whileHover={{ opacity: 0.2 }}
+              whileHover={{ opacity: 0.4 }}
+              animate={fogUpAnim}
               onClick={activeUp}
+              onMouseMove={() => {
+                useCursorStore.setState({ hover: 'arrowUp' })
+                arrowUpAnim.start({
+                  opacity: 1,
+                })
+                arrowDownAnim.start({
+                  opacity: 0.4,
+                })
+              }}
+              onMouseLeave={() => {
+                useCursorStore.setState({ hover: 'default' })
+                arrowUpAnim.start({
+                  opacity: 1,
+                })
+                arrowDownAnim.start({
+                  opacity: 1,
+                })
+              }}
             ></motion.div>
             <motion.div
               className={styles.clickOnTitle}
               style={{ opacity: 0 }}
-              whileHover={{ opacity: 0.2 }}
+              whileHover={{ opacity: 0.4 }}
+              animate={fogDownAnim}
               onClick={activeDown}
+              onMouseMove={() => {
+                useCursorStore.setState({ hover: 'arrowDown' })
+                arrowDownAnim.start({
+                  opacity: 1,
+                })
+                arrowUpAnim.start({
+                  opacity: 0.4,
+                })
+              }}
+              onMouseLeave={() => {
+                useCursorStore.setState({ hover: 'default' })
+                arrowDownAnim.start({
+                  opacity: 1,
+                })
+                arrowUpAnim.start({
+                  opacity: 1,
+                })
+              }}
             ></motion.div>
           </div>
           <TextAnimation
@@ -91,10 +134,31 @@ export function PresetTitle({
         >
           <motion.div
             className={styles.slideBtn}
-            initial={{ opacity: 0, y: -15 }}
-            animate={{ opacity: 1, y: 0 }}
+            // initial={{ opacity: 0, y: -15 }}
+            // animate={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 1 }}
+            animate={arrowDownAnim}
             whileHover={{
-              backgroundColor: 'rgba(255,255,255,0.15)',
+              // backgroundColor: 'rgba(255,255,255,0.15)',
+              color: '#FF430A',
+            }}
+            onMouseOver={() => {
+              fogDownAnim.start({
+                opacity: 0.4,
+              })
+              arrowUpAnim.start({
+                opacity: 0.4,
+              })
+              useCursorStore.setState({ hover: 'arrowDown' })
+            }}
+            onMouseLeave={() => {
+              fogUpAnim.start({
+                opacity: 0,
+              })
+              fogDownAnim.start({
+                opacity: 0,
+              })
+              useCursorStore.setState({ hover: 'default' })
             }}
             onClick={activeDown}
             style={{ width: isMobile ? 35 : 40, height: isMobile ? 35 : 40 }}
@@ -104,10 +168,31 @@ export function PresetTitle({
           <motion.div
             className={styles.slideBtn}
             whileHover={{
-              backgroundColor: 'rgba(255,255,255,0.15)',
+              // backgroundColor: 'rgba(255,255,255,0.15)',
+              color: '#FF430A',
             }}
-            initial={{ opacity: 0, y: 15 }}
-            animate={{ opacity: 1, y: 0 }}
+            animate={arrowUpAnim}
+            initial={{ opacity: 1 }}
+            // initial={{ opacity: 0, y: 15 }}
+            // animate={{ opacity: 1, y: 0 }}
+            onMouseOver={() => {
+              fogUpAnim.start({
+                opacity: 0.4,
+              })
+              arrowDownAnim.start({
+                opacity: 0.4,
+              })
+              useCursorStore.setState({ hover: 'arrowUp' })
+            }}
+            onMouseLeave={() => {
+              fogUpAnim.start({
+                opacity: 0,
+              })
+              fogDownAnim.start({
+                opacity: 0,
+              })
+              useCursorStore.setState({ hover: 'default' })
+            }}
             onClick={activeUp}
             style={{
               width: isMobile === true ? 35 : 40,

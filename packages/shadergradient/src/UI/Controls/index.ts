@@ -11,6 +11,7 @@ export {
   Tools,
   ToolsBox,
   IconButtons,
+  AxisButton,
   Feather,
   ControlTypeTitle,
   ControlTypeTitles,

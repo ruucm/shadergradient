@@ -1,7 +1,7 @@
 import React from 'react'
 import type { ComponentType } from 'react'
 import { PRESETS } from '../presets'
-import { usePropertyStore, useUIStore } from '../store'
+import { updateGradientState, usePropertyStore, useUIStore } from '../store'
 import { cx } from '../utils/index'
 import {
   figma,
@@ -128,6 +128,29 @@ export function ToolCopy(Component): ComponentType {
           await setTimeout(() => {
             setCopyUrl('copy url')
           }, 1000)
+        }}
+      />
+    )
+  }
+}
+export function ToolUndo(Component): ComponentType {
+  return ({ style, ...props }: any) => {
+    return (
+      <Component
+        {...props}
+        style={{ ...style, cursor: 'pointer' }}
+        onClick={() => {
+          const prevUrls = window.history.state.prevUrls || []
+
+          if (prevUrls.length > 1) {
+            prevUrls.pop() // remove current url
+
+            const lastURL = new URL(prevUrls[prevUrls.length - 1]).search
+            updateGradientState(lastURL)
+
+            prevUrls.pop() // remove the updated url(lastURL)
+            window.history.pushState({ prevUrls }, document.title, '') // sync the prevUrls
+          } else alert('no history')
         }}
       />
     )

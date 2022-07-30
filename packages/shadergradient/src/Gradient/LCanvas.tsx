@@ -8,14 +8,17 @@ export function LCanvas({
   importedFiber = null, // passed imported fiber & drei from usual React App
   ...rest
 }) {
+  console.log('importedFiber', importedFiber)
   const { Canvas } = importedFiber
   const [pixelDensity] = useQueryState('pixelDensity')
+  const [fov] = useQueryState('fov')
 
   return (
     <Canvas
       id='gradientCanvas'
+      key={fov}
       resize={{ offsetSize: true }}
-      {...canvasProps(pixelDensity)}
+      {...canvasProps(pixelDensity, fov)}
       {...rest}
     >
       {/* forward the context once more! */}

@@ -1,55 +1,88 @@
 import React, { Suspense, useEffect } from 'react'
-import { hdrBase, initialActivePreset } from '../consts'
+import { envBasePath } from '../consts'
 import { usePostProcessing, useQueryState } from '../hooks/index'
 import { PRESETS } from '../presets'
 import { updateGradientState, usePropertyStore, useUIStore } from '../store'
-import { Environment } from './comps/Environment/index'
+import { EnvironmentMap } from './comps/Environment/EnvironmentMap'
+import { useRGBELoader } from './useRGBELoader'
 import { CameraControl, GradientMesh } from './index'
 
-export function Gradient({ zoomOut = false, ...props }) {
+type Props = {
+  zoomOut?: boolean
+  control?: 'query' | 'props'
+  [x: string]: any
+}
+
+function GradientComp({
+  zoomOut = false,
+  control = 'props',
+  dampingFactor,
+  ...props
+}: Props) {
+  const setLoadingPercentage = useUIStore(
+    (state: any) => state.setLoadingPercentage
+  )
+
   usePresetToStore()
+
+  const { lightType, envPreset, brightness, grain, ...others } =
+    useControlValues(control, props)
+
+  usePostProcessing(grain === 'off')
 
   useEffect(() => usePropertyStore.setState({ zoomOut }), [zoomOut])
 
-  const { lightType, envPreset, brightness, grain, ...others } =
-    useQueryOrProps(props)
-  usePostProcessing(grain === 'off')
+  const city = useRGBELoader('city.hdr', { path: envBasePath })
+  const dawn = useRGBELoader('dawn.hdr', { path: envBasePath })
+  const lobby = useRGBELoader('lobby.hdr', { path: envBasePath })
+  const textures = { city, dawn, lobby }
 
   return (
     <>
       {lightType === 'env' && (
-        <Suspense fallback='Load Failed'>
-          <Environment
-            // preset={envPreset}
-            files={`${hdrBase}/hdr/${envPreset}.hdr`} // use instead of preset, cause rawCdn is not stable on many requests.
-            background={true}
-            // loadingCallback={loadingCallback}
-          />
-        </Suspense>
+        <EnvironmentMap
+          background={true}
+          map={textures[envPreset]}
+          loadingCallback={setLoadingPercentage}
+        />
       )}
       {lightType === '3d' && <ambientLight intensity={brightness || 1} />}
-      <CameraControl {...others} />
+      <CameraControl dampingFactor={dampingFactor} {...others} />
       <GradientMesh {...others} />
     </>
   )
 }
 
+export const Gradient = (props) => (
+  <Suspense fallback='Load Failed'>
+    <GradientComp {...props} />
+  </Suspense>
+)
+
+let pageLoaded = false
+
 function usePresetToStore() {
   // ----------------------------- Preset to Custom Material ---------------------------------
   const activePreset = useUIStore((state: any) => state.activePreset)
   useEffect(() => {
-    let gradientURL = PRESETS[activePreset].url
+    let gradientURL
+
+    // CASE 1. use search params at the first load.
     if (
-      activePreset === initialActivePreset &&
+      !pageLoaded &&
       window.location.search?.includes('pixelDensity') // checking just window.location.search existing is not valid for the Framer Preview search (?target=preview-web)
     )
-      gradientURL = window.location.search // use search params at the first load.
+      gradientURL = window.location.search
+    // CASE 2. When activePreset changes by UI buttons
+    else gradientURL = PRESETS[activePreset].url
 
     updateGradientState(gradientURL)
+
+    pageLoaded = true
   }, [activePreset])
 }
 
-function useQueryOrProps(props) {
+function useControlValues(control, props) {
   // shape
   const [type] = useQueryState('type')
   const [animate] = useQueryState('animate')
@@ -90,7 +123,7 @@ function useQueryOrProps(props) {
   const [grain] = useQueryState('grain')
   const [reflection] = useQueryState('reflection')
 
-  return {
+  const queryProps = {
     type,
     animate,
     uTime,
@@ -119,6 +152,8 @@ function useQueryOrProps(props) {
     envPreset,
     grain,
     reflection,
-    ...props, // props could be overwritten by query params
   }
+
+  if (control === 'props') return { ...queryProps, ...props }
+  else if (control === 'query') return queryProps
 }

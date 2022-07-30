@@ -6,5 +6,4 @@ const useStore = create(() => {
     dom: null,
   }
 })
-
 export default useStore

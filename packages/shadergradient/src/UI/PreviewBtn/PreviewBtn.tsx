@@ -1,7 +1,7 @@
 import * as React from 'react'
 import cx from 'classnames'
 import { motion } from 'framer-motion'
-import { useUIStore } from '../../store'
+import { useUIStore, useCursorStore } from '../../store'
 
 export function PreviewBtn({ display = true, color = 'white' }) {
   const mode = useUIStore((state: any) => state.mode)
@@ -19,6 +19,12 @@ export function PreviewBtn({ display = true, color = 'white' }) {
               setMode('full')
             }
           }}
+          onMouseMove={() => {
+            useCursorStore.setState({ hover: 'preview' })
+          }}
+          onMouseLeave={() => {
+            useCursorStore.setState({ hover: 'default' })
+          }}
           style={{
             overflow: 'hidden',
             border:
@@ -36,7 +42,7 @@ export function PreviewBtn({ display = true, color = 'white' }) {
               background: mode !== 'full' ? '#FF430A' : color,
             }}
             whileHover={{
-              opacity: mode === 'mobile' ? 1 : 0.4,
+              opacity: 1,
             }}
             animate={{
               opacity: mode === 'mobile' ? 1 : 0,
@@ -52,6 +58,12 @@ export function PreviewBtn({ display = true, color = 'white' }) {
               setMode('full')
             }
           }}
+          onMouseMove={() => {
+            useCursorStore.setState({ hover: 'preview' })
+          }}
+          onMouseLeave={() => {
+            useCursorStore.setState({ hover: 'default' })
+          }}
           style={{
             overflow: 'hidden',
             border:
@@ -69,7 +81,7 @@ export function PreviewBtn({ display = true, color = 'white' }) {
               background: mode !== 'full' ? '#FF430A' : color,
             }}
             whileHover={{
-              opacity: mode === 'web' ? 1 : 0.4,
+              opacity: 1,
             }}
             animate={{
               opacity: mode === 'web' ? 1 : 0,

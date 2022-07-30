@@ -1,6 +1,7 @@
 import * as React from 'react'
 import cx from 'classnames'
-import { usePropertyStore } from '../../../store'
+import { updateGradientState, usePropertyStore } from '../../../store'
+import { AxisButton } from './AxisButton'
 import { IconButtons } from './IconButtons'
 
 type ControlTypeTitlePropsT = {
@@ -33,9 +34,25 @@ export const ToolsBox: React.FC<ControlTypeTitlePropsT> = ({
         borderRadius: 40,
       }}
     >
-      <IconButtons icon='CornerUpLeft' content='undo' />
       <IconButtons
-        icon='Box'
+        icon='CornerUpLeft'
+        content='undo'
+        onClick={() => {
+          const prevUrls = window.history.state.prevUrls || []
+
+          if (prevUrls.length > 1) {
+            prevUrls.pop() // remove current url
+
+            const lastURL = new URL(prevUrls[prevUrls.length - 1]).search
+            updateGradientState(lastURL)
+
+            prevUrls.pop() // remove the updated url(lastURL)
+            window.history.pushState({ prevUrls }, document.title, '') // sync the prevUrls
+          } else alert('no history')
+        }}
+      />
+
+      <AxisButton
         content='3d axis'
         active={toggleAxis}
         onClick={() => {

@@ -3,8 +3,8 @@ import { motion } from 'framer-motion'
 // import Link from 'next/link'
 // import router from 'next/router'
 import { Info, ArrowDownLeft } from 'react-feather'
-import { useUIStore } from '../../store'
-import { TextHover } from '../TextAnimation'
+import { useUIStore, useCursorStore } from '../../store'
+import { TextHover } from '../TextAnimation/index'
 
 export function AboutBtn({
   inAbout = false,
@@ -23,12 +23,13 @@ export function AboutBtn({
         position: 'absolute',
         right: 0,
         marginRight: isMobile === true ? '4vw' : '2vw',
-        borderBottom: '1.5px solid transparent',
       }}
-      // whileHover={{
-      //   borderBottom:
-      //     mode !== 'full' ? '1.5px solid #ff430A' : '1.5px solid ' + color,
-      // }}
+      onMouseLeave={() => {
+        useCursorStore.setState({ hover: 'default' })
+      }}
+      onMouseMove={() => {
+        useCursorStore.setState({ hover: 'button' })
+      }}
     >
       {inAbout === true ? (
         <div style={{ display: 'flex' }} onClick={onBackClick}>

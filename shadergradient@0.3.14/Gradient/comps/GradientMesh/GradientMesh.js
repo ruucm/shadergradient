@@ -24157,7 +24157,7 @@ if (typeof window !== "undefined") {
 // src/Gradient/comps/GradientMesh/GradientMesh.tsx
 import { mainLoading } from "../../../consts.js";
 import { usePropertyStore } from "../../../store.js";
-import { dToRArr, sleep, useFiber } from "../../../utils/index.js";
+import { dToRArr, useFiber } from "../../../utils/index.js";
 import { lineMaterial } from "./lineMaterial.js";
 import { shaderMaterial } from "./shaderMaterial.js";
 import * as shaders from "./shaders/index.js";
@@ -24187,7 +24187,14 @@ var GradientMesh = ({
   color3,
   reflection,
   wireframe,
-  shader
+  shader,
+  springOption = ({ rotation }) => ({
+    to: (next, cancel) => __async(void 0, null, function* () {
+      yield next({ animatedRotation: rotation });
+    }),
+    from: { animatedRotation: dToRArr([0, 0, 0]) },
+    config: { duration: 0.2 * 1e3 }
+  })
 }) => {
   const { useFrame, extend, animated, useSpring } = useFiber();
   let sceneShader = shaders.defaults[type != null ? type : "plane"];
@@ -24238,7 +24245,6 @@ var GradientMesh = ({
       material.current.userData.uLoadingTime.value = val;
       if (elapsed < duration + delay) {
         currentTime += increment;
-        console.log({ elapsed, val });
       }
     }
     if (animate === "on") {
@@ -24256,14 +24262,7 @@ var GradientMesh = ({
     material.current.roughness = 1 - reflection;
   }, [uTime, reflection]);
   const rotation = dToRArr([rotationX, rotationY, rotationZ]);
-  const { animatedRotation } = useSpring({
-    to: (next, cancel) => __async(void 0, null, function* () {
-      yield sleep(delay);
-      yield next({ animatedRotation: rotation });
-    }),
-    from: { animatedRotation: dToRArr([0, 0, 0]) },
-    config: { duration: duration * 1e3 }
-  });
+  const { animatedRotation } = useSpring(springOption({ rotation }));
   return /* @__PURE__ */ React.createElement("group", null, /* @__PURE__ */ React.createElement(animated.mesh, {
     position: [positionX, positionY, positionZ],
     rotation: animatedRotation

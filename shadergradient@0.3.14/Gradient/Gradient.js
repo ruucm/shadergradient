@@ -1,4 +1,6 @@
 var __defProp = Object.defineProperty;
+var __defProps = Object.defineProperties;
+var __getOwnPropDescs = Object.getOwnPropertyDescriptors;
 var __getOwnPropSymbols = Object.getOwnPropertySymbols;
 var __hasOwnProp = Object.prototype.hasOwnProperty;
 var __propIsEnum = Object.prototype.propertyIsEnumerable;
@@ -14,6 +16,7 @@ var __spreadValues = (a, b) => {
     }
   return a;
 };
+var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
 var __objRest = (source, exclude) => {
   var target = {};
   for (var prop in source)
@@ -40,11 +43,13 @@ function GradientComp(_a) {
   var _b = _a, {
     zoomOut = false,
     control = "props",
-    dampingFactor
+    dampingFactor,
+    springOption
   } = _b, props = __objRest(_b, [
     "zoomOut",
     "control",
-    "dampingFactor"
+    "dampingFactor",
+    "springOption"
   ]);
   const setLoadingPercentage = useUIStore((state) => state.setLoadingPercentage);
   usePresetToStore();
@@ -63,7 +68,9 @@ function GradientComp(_a) {
     intensity: brightness || 1
   }), /* @__PURE__ */ React.createElement(CameraControl, __spreadValues({
     dampingFactor
-  }, others)), /* @__PURE__ */ React.createElement(GradientMesh, __spreadValues({}, others)));
+  }, others)), /* @__PURE__ */ React.createElement(GradientMesh, __spreadProps(__spreadValues({}, others), {
+    springOption
+  })));
 }
 var Gradient = (props) => /* @__PURE__ */ React.createElement(Suspense, {
   fallback: "Load Failed"

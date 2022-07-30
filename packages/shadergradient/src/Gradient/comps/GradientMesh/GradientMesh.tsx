@@ -154,16 +154,16 @@ export const GradientMesh: React.FC<any> = ({
   }, [uTime, reflection])
 
   // change position/rotation for about page
+  const position = [positionX, positionY, positionZ]
   const rotation = dToRArr([rotationX, rotationY, rotationZ])
+
+  const { animatedPosition } = useSpring({ animatedPosition: position })
   const { animatedRotation } = useSpring(springOption({ rotation }))
 
   return (
     <group>
       {/* @ts-ignore */}
-      <animated.mesh
-        position={[positionX, positionY, positionZ]}
-        rotation={animatedRotation}
-      >
+      <animated.mesh position={animatedPosition} rotation={animatedRotation}>
         {type === 'plane' && <planeGeometry args={[10, 10, 1, meshCount]} />}
         {type === 'sphere' && (
           <icosahedronBufferGeometry args={[1, meshCount / 3]} />

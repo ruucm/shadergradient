@@ -3,7 +3,7 @@ import { useRef } from 'react'
 import * as THREE from 'three'
 import { mainLoading } from '../../../consts'
 import { usePropertyStore } from '../../../store'
-import { dToRArr, sleep, useFiber } from '../../../utils/index'
+import { dToRArr, useFiber } from '../../../utils/index'
 import { lineMaterial } from './lineMaterial'
 import { shaderMaterial } from './shaderMaterial'
 import * as shaders from './shaders/index'
@@ -44,6 +44,13 @@ export const GradientMesh: React.FC<any> = ({
   reflection,
   wireframe,
   shader,
+  springOption = ({ rotation }) => ({
+    to: async (next, cancel) => {
+      await next({ animatedRotation: rotation })
+    },
+    from: { animatedRotation: dToRArr([0, 0, 0]) },
+    config: { duration: 0.2 * 1000 },
+  }),
 }) => {
   const { useFrame, extend, animated, useSpring } = useFiber()
 
@@ -148,14 +155,7 @@ export const GradientMesh: React.FC<any> = ({
 
   // change position/rotation for about page
   const rotation = dToRArr([rotationX, rotationY, rotationZ])
-  const { animatedRotation } = useSpring({
-    to: async (next, cancel) => {
-      await sleep(delay)
-      await next({ animatedRotation: rotation })
-    },
-    from: { animatedRotation: dToRArr([0, 0, 0]) },
-    config: { duration: duration * 1000 },
-  })
+  const { animatedRotation } = useSpring(springOption({ rotation }))
 
   return (
     <group>

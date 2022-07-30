@@ -147,12 +147,11 @@ export const GradientMesh: React.FC<any> = ({
   }, [uTime, reflection])
 
   // change position/rotation for about page
+  const rotation = dToRArr([rotationX, rotationY, rotationZ])
   const { animatedRotation } = useSpring({
     to: async (next, cancel) => {
-      await sleep(0.6)
-      await next({
-        animatedRotation: dToRArr([rotationX, rotationY, rotationZ]),
-      })
+      await sleep(delay)
+      await next({ animatedRotation: rotation })
     },
     from: { animatedRotation: dToRArr([0, 0, 0]) },
     config: { duration: duration * 1000 },
@@ -181,7 +180,7 @@ export const GradientMesh: React.FC<any> = ({
         <lineSegments
           renderOrder={1}
           position={[positionX, positionY, positionZ]}
-          rotation={dToRArr([rotationX, rotationY, rotationZ])}
+          rotation={rotation}
           visible={hoverState !== 0 ? true : false}
         >
           {type === 'plane' && (

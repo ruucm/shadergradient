@@ -44,6 +44,13 @@ export const GradientMesh: React.FC<any> = ({
   reflection,
   wireframe,
   shader,
+  springOption = ({ rotation }) => ({
+    to: async (next, cancel) => {
+      await next({ animatedRotation: rotation })
+    },
+    from: { animatedRotation: dToRArr([0, 0, 0]) },
+    config: { duration: 0.2 * 1000 },
+  }),
 }) => {
   const { useFrame, extend, animated, useSpring } = useFiber()
 
@@ -124,7 +131,7 @@ export const GradientMesh: React.FC<any> = ({
 
       if (elapsed < meshDur + delay) {
         currentTime += increment
-        console.log({ elapsed, val })
+        // console.log({ elapsed, val })
       }
     }
 
@@ -147,24 +154,16 @@ export const GradientMesh: React.FC<any> = ({
   }, [uTime, reflection])
 
   // change position/rotation for about page
-  const { animatedRotation } = useSpring({
-    to: async (next, cancel) => {
-      // await sleep(0.6)
-      await next({
-        animatedRotation: dToRArr([rotationX, rotationY, rotationZ]),
-      })
-    },
-    from: { animatedRotation: dToRArr([0, 0, 0]) },
-    config: { duration: rotDur * 1000 },
-  })
+  const position = [positionX, positionY, positionZ]
+  const rotation = dToRArr([rotationX, rotationY, rotationZ])
+
+  const { animatedPosition } = useSpring({ animatedPosition: position })
+  const { animatedRotation } = useSpring(springOption({ rotation }))
 
   return (
     <group>
       {/* @ts-ignore */}
-      <animated.mesh
-        position={[positionX, positionY, positionZ]}
-        rotation={animatedRotation}
-      >
+      <animated.mesh position={animatedPosition} rotation={animatedRotation}>
         {type === 'plane' && <planeGeometry args={[10, 10, 1, meshCount]} />}
         {type === 'sphere' && (
           <icosahedronBufferGeometry args={[1, meshCount / 3]} />
@@ -181,7 +180,7 @@ export const GradientMesh: React.FC<any> = ({
         <lineSegments
           renderOrder={1}
           position={[positionX, positionY, positionZ]}
-          rotation={dToRArr([rotationX, rotationY, rotationZ])}
+          rotation={rotation}
           visible={hoverState !== 0 ? true : false}
         >
           {type === 'plane' && (

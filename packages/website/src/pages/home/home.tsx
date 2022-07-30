@@ -13,6 +13,8 @@ import {
   TextHover,
   useUIStore,
   useCursorStore,
+  dToRArr,
+  sleep,
 } from 'shadergradient'
 
 import styles from './Home.module.scss'
@@ -144,15 +146,17 @@ const R3F = () => {
         cAzimuthAngle={180}
         cPolarAngle={90}
         positionX={0}
-        positionY={0}
-        positionZ={0}
-        rotationX={0}
-        rotationY={0}
-        rotationZ={0}
         dampingFactor={1}
+        springOption={({ rotation }) => ({
+          to: async (next, cancel) => {
+            await sleep(mainLoading.delay)
+            await next({ animatedRotation: rotation })
+          },
+          from: { animatedRotation: dToRArr([0, 0, 0]) },
+          config: { duration: mainLoading.duration * 1000 },
+        })}
       />
     )
-
   return <Gradient control='query' dampingFactor={0.03} />
 }
 

@@ -69,8 +69,9 @@ var require_classnames = __commonJS({
 
 // src/UI/Controls/AllControls/HorizontalControl.tsx
 var import_classnames = __toESM(require_classnames());
-import React from "react";
+import React, { useRef } from "react";
 import { useAnimation, motion } from "framer-motion";
+import { useOnClickOutside } from "../../../hooks/index.js";
 function HorizontalControl({
   mode = "mobile",
   setMode = void 0,
@@ -93,6 +94,8 @@ function HorizontalControl({
       });
     }
   }, [activeTab]);
+  const ref = useRef(null);
+  useOnClickOutside(ref, () => setActiveTab("none"));
   return /* @__PURE__ */ React.createElement(motion.div, {
     initial: { opacity: 0, y: 50 },
     animate: { opacity: 1, y: 0 },
@@ -105,6 +108,7 @@ function HorizontalControl({
       zIndex: 2
     }
   }, /* @__PURE__ */ React.createElement(motion.div, {
+    ref,
     className: (0, import_classnames.default)("z-10 overflow-hidden rounded-sm", className),
     style: {
       width: "580px",

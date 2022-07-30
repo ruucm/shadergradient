@@ -24192,12 +24192,9 @@ import { dToRArr, useFiber } from "../../../utils/index.js";
 import { lineMaterial } from "./lineMaterial.js";
 import { shaderMaterial } from "./shaderMaterial.js";
 import * as shaders from "./shaders/index.js";
-var { delay, duration, to } = mainLoading;
 var clock = new Clock();
-Math.easeInExpo = function(t, b, c, d) {
-  return c * Math.pow(2, 10 * (t / d - 1)) + b;
-};
 var increment = 20;
+var { delay, duration, to } = mainLoading;
 var meshCount = 192;
 var meshLineCount = 36;
 var GradientMesh = (_a) => {
@@ -24232,41 +24229,23 @@ var GradientMesh = (_a) => {
     "reflection",
     "springOption"
   ]);
-  const { useFrame, extend, animated, useSpring } = useFiber();
+  const { animated, useSpring } = useFiber();
+  const material = useRef();
+  const linemat = useRef();
   const hoverState = usePropertyStore((state) => state.hoverState);
+  useEffect(() => {
+    material.current.userData.uTime.value = uTime;
+    if (linemat.current !== void 0)
+      linemat.current.userData.uTime.value = uTime;
+    material.current.roughness = 1 - reflection;
+  }, [uTime, reflection]);
   const { ColorShiftMaterial, HoveredLineMaterial } = useMaterials(__spreadProps(__spreadValues({
     type,
     uTime
   }, materialProps), {
     hoverState
   }));
-  const material = useRef();
-  const linemat = useRef();
-  let currentTime = 0;
-  useFrame((state, delta) => {
-    const elapsed = clock.getElapsedTime();
-    if (elapsed > delay) {
-      const current = material.current.userData.uLoadingTime.value;
-      const val = elapsed < duration + delay ? Math.easeInExpo(currentTime, current, to - current, duration * 1e3) : to;
-      material.current.userData.uLoadingTime.value = val;
-      if (elapsed < duration + delay) {
-        currentTime += increment;
-      }
-    }
-    if (animate === "on") {
-      material.current.userData.uTime.value = elapsed;
-      if (linemat.current !== void 0) {
-        linemat.current.userData.uTime.value = elapsed;
-      }
-    }
-  });
-  useEffect(() => {
-    material.current.userData.uTime.value = uTime;
-    if (linemat.current !== void 0) {
-      linemat.current.userData.uTime.value = uTime;
-    }
-    material.current.roughness = 1 - reflection;
-  }, [uTime, reflection]);
+  useMaterialAnimate({ animate, material, linemat });
   const position = [positionX, positionY, positionZ];
   const rotation = dToRArr([rotationX, rotationY, rotationZ]);
   const { animatedPosition } = useSpring({ animatedPosition: position });
@@ -24361,6 +24340,30 @@ function useMaterials({
   extend({ HoveredLineMaterial });
   return { ColorShiftMaterial, HoveredLineMaterial, hoverState };
 }
+function useMaterialAnimate({ animate, material, linemat }) {
+  const { useFrame } = useFiber();
+  let currentTime = 0;
+  useFrame((state, delta) => {
+    const elapsed = clock.getElapsedTime();
+    if (elapsed > delay) {
+      const current = material.current.userData.uLoadingTime.value;
+      const val = elapsed < duration + delay ? Math.easeInExpo(currentTime, current, to - current, duration * 1e3) : to;
+      material.current.userData.uLoadingTime.value = val;
+      if (elapsed < duration + delay) {
+        currentTime += increment;
+      }
+    }
+    if (animate === "on") {
+      material.current.userData.uTime.value = elapsed;
+      if (linemat.current !== void 0) {
+        linemat.current.userData.uTime.value = elapsed;
+      }
+    }
+  });
+}
+Math.easeInExpo = function(t, b, c, d) {
+  return c * Math.pow(2, 10 * (t / d - 1)) + b;
+};
 export {
   GradientMesh
 };

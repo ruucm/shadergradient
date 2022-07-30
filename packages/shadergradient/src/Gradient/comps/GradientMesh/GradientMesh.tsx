@@ -131,7 +131,7 @@ export const GradientMesh: React.FC<any> = ({
 
       if (elapsed < duration + delay) {
         currentTime += increment
-        console.log({ elapsed, val })
+        // console.log({ elapsed, val })
       }
     }
 

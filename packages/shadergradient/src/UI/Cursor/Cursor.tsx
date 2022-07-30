@@ -2,10 +2,9 @@ import React, { useEffect } from 'react'
 import { motion, useMotionValue, useSpring } from 'framer-motion'
 import { useCursorStore } from '../../store'
 
-export function Cursor() {
+export function Cursor({ on }) {
   const cursorX = useMotionValue(-100)
   const cursorY = useMotionValue(-100)
-  const cursorSize = 28
   const motionCursorSize = useMotionValue(28)
 
   const springConfig = { damping: 30, stiffness: 150, mass: 0.6 }
@@ -76,10 +75,10 @@ export function Cursor() {
         translateX: cursorXSpring,
         translateY: cursorYSpring,
         pointerEvents: 'none',
-        display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
         fontFamily: '"Inter", sans-serif',
+        display: on === true ? 'flex' : 'none',
       }}
     >
       <motion.div

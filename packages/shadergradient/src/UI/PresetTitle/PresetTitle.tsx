@@ -134,14 +134,8 @@ export function PresetTitle({
         >
           <motion.div
             className={styles.slideBtn}
-            // initial={{ opacity: 0, y: -15 }}
-            // animate={{ opacity: 1, y: 0 }}
             initial={{ opacity: 1 }}
             animate={arrowDownAnim}
-            whileHover={{
-              // backgroundColor: 'rgba(255,255,255,0.15)',
-              color: '#FF430A',
-            }}
             onMouseOver={() => {
               fogDownAnim.start({
                 opacity: 0.4,
@@ -158,6 +152,12 @@ export function PresetTitle({
               fogDownAnim.start({
                 opacity: 0,
               })
+              arrowDownAnim.start({
+                opacity: 1,
+              })
+              arrowUpAnim.start({
+                opacity: 1,
+              })
               useCursorStore.setState({ hover: 'default' })
             }}
             onClick={activeDown}
@@ -167,14 +167,8 @@ export function PresetTitle({
           </motion.div>
           <motion.div
             className={styles.slideBtn}
-            whileHover={{
-              // backgroundColor: 'rgba(255,255,255,0.15)',
-              color: '#FF430A',
-            }}
             animate={arrowUpAnim}
             initial={{ opacity: 1 }}
-            // initial={{ opacity: 0, y: 15 }}
-            // animate={{ opacity: 1, y: 0 }}
             onMouseOver={() => {
               fogUpAnim.start({
                 opacity: 0.4,
@@ -190,6 +184,12 @@ export function PresetTitle({
               })
               fogDownAnim.start({
                 opacity: 0,
+              })
+              arrowDownAnim.start({
+                opacity: 1,
+              })
+              arrowUpAnim.start({
+                opacity: 1,
               })
               useCursorStore.setState({ hover: 'default' })
             }}

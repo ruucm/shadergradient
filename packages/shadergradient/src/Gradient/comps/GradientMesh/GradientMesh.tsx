@@ -8,20 +8,10 @@ import { lineMaterial } from './lineMaterial'
 import { shaderMaterial } from './shaderMaterial'
 import * as shaders from './shaders/index'
 
-const { delay, duration, to } = mainLoading
-
 const clock = new THREE.Clock()
-//t = current time
-//b = start value
-//c = change in value
-//d = duration
-// @ts-ignore
-Math.easeInExpo = function (t, b, c, d) {
-  // source from http://gizma.com/easing/
-  return c * Math.pow(2, 10 * (t / d - 1)) + b
-}
 
 const increment = 20
+const { delay, duration, to } = mainLoading
 
 const meshCount = 192
 const meshLineCount = 36
@@ -47,10 +37,19 @@ export const GradientMesh: React.FC<any> = ({
   }),
   ...materialProps // uSpeed, uStrength, uDensity, uFrequency, uAmplitude, color1, color2, color3, wireframe, shader
 }) => {
-  const { useFrame, extend, animated, useSpring } = useFiber()
+  const { animated, useSpring } = useFiber()
 
-  // when color is hovered
+  const material: any = useRef()
+  const linemat: any = useRef()
   const hoverState = usePropertyStore((state: any) => state.hoverState)
+
+  useEffect(() => {
+    material.current.userData.uTime.value = uTime
+    if (linemat.current !== undefined)
+      linemat.current.userData.uTime.value = uTime
+
+    material.current.roughness = 1 - reflection
+  }, [uTime, reflection])
 
   const { ColorShiftMaterial, HoveredLineMaterial } = useMaterials({
     type,
@@ -58,47 +57,7 @@ export const GradientMesh: React.FC<any> = ({
     ...materialProps,
     hoverState,
   })
-
-  const material: any = useRef()
-  const linemat: any = useRef()
-
-  let currentTime = 0
-  useFrame((state, delta) => {
-    const elapsed = clock.getElapsedTime()
-
-    // loading animation
-    if (elapsed > delay) {
-      const current = material.current.userData.uLoadingTime.value
-      const val =
-        elapsed < duration + delay
-          ? // @ts-ignore
-            Math.easeInExpo(currentTime, current, to - current, duration * 1000)
-          : to
-      material.current.userData.uLoadingTime.value = val
-
-      if (elapsed < duration + delay) {
-        currentTime += increment
-        // console.log({ elapsed, val })
-      }
-    }
-
-    // loop animation
-    if (animate === 'on') {
-      material.current.userData.uTime.value = elapsed
-      if (linemat.current !== undefined) {
-        linemat.current.userData.uTime.value = elapsed
-      }
-    }
-  })
-
-  useEffect(() => {
-    material.current.userData.uTime.value = uTime
-    if (linemat.current !== undefined) {
-      linemat.current.userData.uTime.value = uTime
-    }
-
-    material.current.roughness = 1 - reflection
-  }, [uTime, reflection])
+  useMaterialAnimate({ animate, material, linemat })
 
   // change position/rotation for about page
   const position = [positionX, positionY, positionZ]
@@ -227,4 +186,47 @@ function useMaterials({
   extend({ HoveredLineMaterial })
 
   return { ColorShiftMaterial, HoveredLineMaterial, hoverState }
+}
+
+function useMaterialAnimate({ animate, material, linemat }) {
+  const { useFrame } = useFiber()
+
+  let currentTime = 0
+  useFrame((state, delta) => {
+    const elapsed = clock.getElapsedTime()
+
+    // loading animation
+    if (elapsed > delay) {
+      const current = material.current.userData.uLoadingTime.value
+      const val =
+        elapsed < duration + delay
+          ? // @ts-ignore
+            Math.easeInExpo(currentTime, current, to - current, duration * 1000)
+          : to
+      material.current.userData.uLoadingTime.value = val
+
+      if (elapsed < duration + delay) {
+        currentTime += increment
+        // console.log({ elapsed, val })
+      }
+    }
+
+    // loop animation
+    if (animate === 'on') {
+      material.current.userData.uTime.value = elapsed
+      if (linemat.current !== undefined) {
+        linemat.current.userData.uTime.value = elapsed
+      }
+    }
+  })
+}
+
+//t = current time
+//b = start value
+//c = change in value
+//d = duration
+// @ts-ignore
+Math.easeInExpo = function (t, b, c, d) {
+  // source from http://gizma.com/easing/
+  return c * Math.pow(2, 10 * (t / d - 1)) + b
 }

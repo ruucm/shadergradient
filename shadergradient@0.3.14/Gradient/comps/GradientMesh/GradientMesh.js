@@ -24255,12 +24255,11 @@ var GradientMesh = ({
     }
     material.current.roughness = 1 - reflection;
   }, [uTime, reflection]);
+  const rotation = dToRArr([rotationX, rotationY, rotationZ]);
   const { animatedRotation } = useSpring({
     to: (next, cancel) => __async(void 0, null, function* () {
-      yield sleep(0.6);
-      yield next({
-        animatedRotation: dToRArr([rotationX, rotationY, rotationZ])
-      });
+      yield sleep(delay);
+      yield next({ animatedRotation: rotation });
     }),
     from: { animatedRotation: dToRArr([0, 0, 0]) },
     config: { duration: duration * 1e3 }
@@ -24280,7 +24279,7 @@ var GradientMesh = ({
   })), /* @__PURE__ */ React.createElement("mesh", null, /* @__PURE__ */ React.createElement("lineSegments", {
     renderOrder: 1,
     position: [positionX, positionY, positionZ],
-    rotation: dToRArr([rotationX, rotationY, rotationZ]),
+    rotation,
     visible: hoverState !== 0 ? true : false
   }, type === "plane" && /* @__PURE__ */ React.createElement("planeGeometry", {
     args: [10, 10, 1, meshLineCount]

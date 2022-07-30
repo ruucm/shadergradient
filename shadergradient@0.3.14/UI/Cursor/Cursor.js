@@ -2,10 +2,9 @@
 import React, { useEffect } from "react";
 import { motion, useMotionValue, useSpring } from "framer-motion";
 import { useCursorStore } from "../../store.js";
-function Cursor() {
+function Cursor({ on }) {
   const cursorX = useMotionValue(-100);
   const cursorY = useMotionValue(-100);
-  const cursorSize = 28;
   const motionCursorSize = useMotionValue(28);
   const springConfig = { damping: 30, stiffness: 150, mass: 0.6 };
   const cursorXSpring = useSpring(cursorX, springConfig);
@@ -63,10 +62,10 @@ function Cursor() {
       translateX: cursorXSpring,
       translateY: cursorYSpring,
       pointerEvents: "none",
-      display: "flex",
       justifyContent: "center",
       alignItems: "center",
-      fontFamily: '"Inter", sans-serif'
+      fontFamily: '"Inter", sans-serif',
+      display: on === true ? "flex" : "none"
     }
   }, /* @__PURE__ */ React.createElement(motion.div, {
     style: {

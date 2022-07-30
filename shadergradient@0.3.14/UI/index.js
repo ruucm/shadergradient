@@ -25,6 +25,7 @@ import { PresetTitle, PresetTitles } from "./PresetTitle/index.js";
 import { TextAnimation, TextHover } from "./TextAnimation/index.js";
 import { Header } from "./Header/index.js";
 import { Links } from "./Links/index.js";
+import { Cursor } from "./Cursor/index.js";
 export {
   AllControls,
   AxisButton,
@@ -34,6 +35,7 @@ export {
   ColorInput,
   ControlTypeTitle,
   ControlTypeTitles,
+  Cursor,
   EffectControls,
   Feather,
   Header,

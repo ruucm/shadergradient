@@ -145,7 +145,7 @@ const R3F = () => {
         cAzimuthAngle={180}
         cPolarAngle={90}
         positionX={0}
-        dampingFactor={0.8} // default value 0.05
+        dampingFactor={1.5} // default value 0.05
         springOption={({ rotation }) => ({
           to: async (next, cancel) => {
             await sleep(mainLoading.rotDelay)

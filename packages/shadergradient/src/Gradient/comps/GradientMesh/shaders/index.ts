@@ -10,6 +10,7 @@ import * as stripe from './tests/stripe/index'
 import * as test from './tests/test/index' // testing color-normal-mix + halftone
 import * as test2 from './tests/test2/index'
 import * as twoColorMixWithDepth from './tests/twoColorMixWithDepth/index'
+import * as whatthe from './tests/whatthe/index'
 
 export {
   defaults,
@@ -22,5 +23,6 @@ export {
   snakeHalftone,
   noise,
   grain,
+  whatthe,
   blueMix,
 }

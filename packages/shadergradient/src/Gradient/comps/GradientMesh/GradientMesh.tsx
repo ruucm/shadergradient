@@ -69,7 +69,7 @@ export const GradientMesh: React.FC<any> = ({
       await next({ animatedRotation: rotation })
     },
     from: { animatedRotation: dToRArr([0, 0, 0]) },
-    config: { duration: rotDur * 1000 },
+    config: { duration: 300 }, // default transition
   }),
 }) => {
   const { useFrame, extend, animated, useSpring } = useFiber()

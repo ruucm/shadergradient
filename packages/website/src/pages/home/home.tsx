@@ -136,7 +136,7 @@ const DOM = () => {
 
 // canvas components goes here
 const R3F = () => {
-  const afterStart = useTimer(true, mainLoading.end * 1000)
+  const afterStart = useTimer(true, mainLoading.camera * 1000)
 
   if (!afterStart)
     return (
@@ -145,11 +145,11 @@ const R3F = () => {
         cAzimuthAngle={180}
         cPolarAngle={90}
         positionX={0}
-        dampingFactor={0.7} // default value 0.05, max 1
+        dampingFactor={0.8} // default value 0.05, max 1
         springOption={({ rotation }) => ({
           to: async (next, cancel) => {
             await sleep(mainLoading.rotDelay)
-            await next({ animatedRotation: dToRArr([40, 20, 30]) })
+            await next({ animatedRotation: dToRArr([30, 20, 30]) })
             await next({ animatedRotation: rotation })
           },
           from: { animatedRotation: dToRArr([0, 0, 0]) },

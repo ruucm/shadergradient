@@ -25,7 +25,7 @@ export function Header({
     if (loadingMotion === true) {
       setTimeout(() => {
         setLoadingReady(true)
-      }, mainLoading.end * 1000 + 1000)
+      }, (mainLoading.end + 1) * 1000)
     }
   }, [])
   return (

@@ -44,10 +44,10 @@ export const mainLoading = {
   meshDelay: 1.5, // duration of gradient remain static
   meshDur: 1.5, // duration of gradient becoming 3d
 
-  rotDelay: 4.5,
-  rotDur: 1,
+  rotDelay: 2,
+  rotDur: 3,
 
-  end: 4 + 1.5, // need to be same with rotDelay + rotDur
+  end: 5, // need to be same with rotDelay + rotDur
 
   // mesh
   to: 1, // end factor (0 -> 1) for the mesh noisestrength

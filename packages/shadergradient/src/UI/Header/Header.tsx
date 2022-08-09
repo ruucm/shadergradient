@@ -39,7 +39,7 @@ export function Header({
           color={color}
           size={isMobile === true ? 15 : 18}
           onClick={onLogoClick}
-          delay={loadingMotion === true ? 1 : 0}
+          delay={loadingMotion === true ? 1.5 : 0}
         />
       )}
 

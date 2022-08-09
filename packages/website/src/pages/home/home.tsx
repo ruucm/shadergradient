@@ -142,11 +142,10 @@ const R3F = () => {
     return (
       <Gradient
         cDistance={18.9}
-        // rotationZ={0}
         cAzimuthAngle={180}
         cPolarAngle={90}
         positionX={0}
-        dampingFactor={0.7}
+        dampingFactor={1.5}
         springOption={({ rotation }) => ({
           to: async (next, cancel) => {
             await sleep(mainLoading.rotDelay)
@@ -155,9 +154,10 @@ const R3F = () => {
           from: { animatedRotation: dToRArr([0, 0, 0]) },
           config: {
             duration: mainLoading.rotDur * 1000,
-            friction: 15,
-            mass: 0.5,
-            // easing: easings.easeInOutQuart,
+            // friction: 15,
+            // mass: 0.5,
+            // https://github.com/pmndrs/react-spring/blob/master/packages/core/src/constants.ts
+            easing: (x) => Math.sqrt(1 - Math.pow(x - 1, 2)),
           },
         })}
       />

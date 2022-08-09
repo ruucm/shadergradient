@@ -41,13 +41,14 @@ export const hdrBase = 'https://shadergradient.vercel.app'
 // loading animations
 export const mainLoading = {
   // times
-  delay: 2, // delay of mesh noisestrength animation
-  meshDelay: 1,
-  rotDelay: 3.8,
-  meshDur: 1.5,
-  rotDur: 0.2,
-  duration: 1,
-  end: 3 + 1,
+  meshDelay: 1.5, // duration of gradient remain static
+  meshDur: 1.5, // duration of gradient becoming 3d
+
+  rotDelay: 4.5,
+  rotDur: 1,
+
+  end: 4 + 1.5, // need to be same with rotDelay + rotDur
+
   // mesh
   to: 1, // end factor (0 -> 1) for the mesh noisestrength
 }

@@ -44,6 +44,7 @@ const Dom = ({ children }) => {
         onBackClick={() => router.back()}
         inAbout={asPath === '/about' ? true : false}
         isMobile={isMobile}
+        loadingMotion={asPath === '/' ? true : false}
       />
       <Cursor on={asPath === '/customize' ? false : true} />
     </div>

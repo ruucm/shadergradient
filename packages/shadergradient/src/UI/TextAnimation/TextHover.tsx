@@ -62,7 +62,7 @@ export function TextHover({
 
   setTimeout(() => {
     setCurrentInView(true)
-  }, delay)
+  }, delay * 1000)
   return (
     // @ts-ignore
     <AnimatePresence>
@@ -82,8 +82,8 @@ export function TextHover({
         <motion.h1
           variants={letterContainerVariants}
           ref={ref}
-          initial={'initial'}
-          animate={'default'}
+          // initial={'initial'}
+          animate={currentInView === true ? 'default' : 'initial'}
           whileHover={'hover'}
           // transition={{ delay: delay }}
 

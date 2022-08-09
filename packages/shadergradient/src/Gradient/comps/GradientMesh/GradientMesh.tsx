@@ -8,8 +8,7 @@ import { lineMaterial } from './lineMaterial'
 import { shaderMaterial } from './shaderMaterial'
 import * as shaders from './shaders/index'
 
-const { delay, duration, to, rotDur, meshDur, rotDelay, meshDelay } =
-  mainLoading
+const { to, rotDur, meshDur, rotDelay, meshDelay } = mainLoading
 
 const clock = new THREE.Clock()
 //t = current time

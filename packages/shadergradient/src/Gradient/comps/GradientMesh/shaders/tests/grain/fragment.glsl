@@ -6,6 +6,37 @@
 #define TRANSMISSION
 #endif
 
+#define SQRT2_MINUS_ONE 0.41421356
+#define SQRT2_HALF_MINUS_ONE 0.20710678
+// #define PI2 6.28318531
+#define SHAPE_DOT 1
+#define SHAPE_ELLIPSE 2
+#define SHAPE_LINE 3
+#define SHAPE_SQUARE 4
+#define BLENDING_LINEAR 1
+#define BLENDING_MULTIPLY 2
+#define BLENDING_ADD 3
+#define BLENDING_LIGHTER 4
+#define BLENDING_DARKER 5
+uniform sampler2D tDiffuse;
+uniform float radius;
+uniform float rotateR;
+uniform float rotateG;
+uniform float rotateB;
+uniform float scatter;
+uniform float width;
+uniform float height;
+uniform int shape;
+uniform bool disable;
+uniform float blending;
+uniform int blendingMode;
+varying vec2 vUv;
+uniform bool greyscale;
+const int samples = 8;
+
+
+
+
 uniform vec3 diffuse;
 uniform vec3 emissive;
 uniform float roughness;
@@ -66,7 +97,6 @@ varying vec3 vNormal;
 varying float displacement;
 varying vec3 vPos;
 varying float vDistort;
-varying vec2 vUv;
 
 uniform float uC1r;
 uniform float uC1g;
@@ -82,160 +112,211 @@ varying vec3 color1;
 varying vec3 color2;
 varying vec3 color3;
 
-precision mediump float;
-uniform sampler2D background;
-varying vec2 screenPosition;
 
-vec3 b_x_mod289(vec3 x) {
-  return x - floor(x * (1.0 / 289.0)) * 289.0;
+
+float blend( float a, float b, float t ) {
+
+// linear blend
+    return a * ( 1.0 - t ) + b * t;
+
 }
-vec4 b_x_mod289(vec4 x) {
-  return x - floor(x * (1.0 / 289.0)) * 289.0;
+
+float hypot( float x, float y ) {
+
+// vector magnitude
+    return sqrt( x * x + y * y );
+
 }
-vec4 b_x_permute(vec4 x) {
-  return b_x_mod289(((x * 34.0) + 1.0) * x);
+
+float distanceToDotRadius( float channel, vec2 coord, vec2 normal, vec2 p, float angle, float rad_max ) {
+
+// apply shape-specific transforms
+    float dist = hypot( coord.x - p.x, coord.y - p.y );
+    float rad = channel;
+
+    if ( shape == SHAPE_DOT ) {
+
+        rad = pow( abs( rad ), 1.125 ) * rad_max;
+
+    } else if ( shape == SHAPE_ELLIPSE ) {
+
+        rad = pow( abs( rad ), 1.125 ) * rad_max;
+
+        if ( dist != 0.0 ) {
+            float dot_p = abs( ( p.x - coord.x ) / dist * normal.x + ( p.y - coord.y ) / dist * normal.y );
+            dist = ( dist * ( 1.0 - SQRT2_HALF_MINUS_ONE ) ) + dot_p * dist * SQRT2_MINUS_ONE;
+        }
+
+    } else if ( shape == SHAPE_LINE ) {
+
+        rad = pow( abs( rad ), 1.5) * rad_max;
+        float dot_p = ( p.x - coord.x ) * normal.x + ( p.y - coord.y ) * normal.y;
+        dist = hypot( normal.x * dot_p, normal.y * dot_p );
+
+    } else if ( shape == SHAPE_SQUARE ) {
+
+        float theta = atan( p.y - coord.y, p.x - coord.x ) - angle;
+        float sin_t = abs( sin( theta ) );
+        float cos_t = abs( cos( theta ) );
+        rad = pow( abs( rad ), 1.4 );
+        rad = rad_max * ( rad + ( ( sin_t > cos_t ) ? rad - sin_t * rad : rad - cos_t * rad ) );
+
+    }
+
+    return rad - dist;
+
 }
-vec4 b_x_taylorInvSqrt(vec4 r) {
-  return 1.79284291400159 - 0.85373472095314 * r;
+
+
+struct Cell {
+
+// grid sample positions
+    vec2 normal;
+    vec2 p1;
+    vec2 p2;
+    vec2 p3;
+    vec2 p4;
+    float samp2;
+    float samp1;
+    float samp3;
+    float samp4;
+
+};
+
+vec4 getSample( vec2 point ) {
+
+// multi-sampled point
+    vec4 tex = texture( tDiffuse, vec2( point.x / width, point.y / height ) );
+    float base = rand( vec2( floor( point.x ), floor( point.y ) ) ) * PI2;
+    float step = PI2 / float( samples );
+    float dist = radius * 0.66;
+
+    for ( int i = 0; i < samples; ++i ) {
+
+        float r = base + step * float( i );
+        vec2 coord = point + vec2( cos( r ) * dist, sin( r ) * dist );
+        tex += texture( tDiffuse, vec2( coord.x / width, coord.y / height ) );
+
+    }
+
+    tex /= float( samples ) + 1.0;
+    return tex;
+
 }
-vec3 b_x_fade(vec3 t) {
-  return t * t * t * (t * (t * 6.0 - 15.0) + 10.0);
+
+
+float getDotColour( Cell c, vec2 p, int channel, float angle, float aa ) {
+
+// get colour for given point
+    float dist_c_1, dist_c_2, dist_c_3, dist_c_4, res;
+
+    if ( channel == 0 ) {
+
+        c.samp1 = getSample( c.p1 ).r;
+        c.samp2 = getSample( c.p2 ).r;
+        c.samp3 = getSample( c.p3 ).r;
+        c.samp4 = getSample( c.p4 ).r;
+
+    } else if (channel == 1) {
+
+        c.samp1 = getSample( c.p1 ).g;
+        c.samp2 = getSample( c.p2 ).g;
+        c.samp3 = getSample( c.p3 ).g;
+        c.samp4 = getSample( c.p4 ).g;
+
+    } else {
+
+        c.samp1 = getSample( c.p1 ).b;
+        c.samp3 = getSample( c.p3 ).b;
+        c.samp2 = getSample( c.p2 ).b;
+        c.samp4 = getSample( c.p4 ).b;
+
+    }
+
+    dist_c_1 = distanceToDotRadius( c.samp1, c.p1, c.normal, p, angle, radius );
+    dist_c_2 = distanceToDotRadius( c.samp2, c.p2, c.normal, p, angle, radius );
+    dist_c_3 = distanceToDotRadius( c.samp3, c.p3, c.normal, p, angle, radius );
+    dist_c_4 = distanceToDotRadius( c.samp4, c.p4, c.normal, p, angle, radius );
+    res = ( dist_c_1 > 0.0 ) ? clamp( dist_c_1 / aa, 0.0, 1.0 ) : 0.0;
+    res += ( dist_c_2 > 0.0 ) ? clamp( dist_c_2 / aa, 0.0, 1.0 ) : 0.0;
+    res += ( dist_c_3 > 0.0 ) ? clamp( dist_c_3 / aa, 0.0, 1.0 ) : 0.0;
+    res += ( dist_c_4 > 0.0 ) ? clamp( dist_c_4 / aa, 0.0, 1.0 ) : 0.0;
+    res = clamp( res, 0.0, 1.0 );
+
+    return res;
+
 }
-float b_x_pnoise(vec3 P, vec3 rep) {
-  vec3 Pi0 = mod(floor(P), rep);
-  vec3 Pi1 = mod(Pi0 + vec3(1.0), rep);
-  Pi0 = b_x_mod289(Pi0);
-  Pi1 = b_x_mod289(Pi1);
-  vec3 Pf0 = fract(P);
-  vec3 Pf1 = Pf0 - vec3(1.0);
-  vec4 ix = vec4(Pi0.x, Pi1.x, Pi0.x, Pi1.x);
-  vec4 iy = vec4(Pi0.yy, Pi1.yy);
-  vec4 iz0 = Pi0.zzzz;
-  vec4 iz1 = Pi1.zzzz;
-  vec4 ixy = b_x_permute(b_x_permute(ix) + iy);
-  vec4 ixy0 = b_x_permute(ixy + iz0);
-  vec4 ixy1 = b_x_permute(ixy + iz1);
-  vec4 gx0 = ixy0 * (1.0 / 7.0);
-  vec4 gy0 = fract(floor(gx0) * (1.0 / 7.0)) - 0.5;
-  gx0 = fract(gx0);
-  vec4 gz0 = vec4(0.5) - abs(gx0) - abs(gy0);
-  vec4 sz0 = step(gz0, vec4(0.0));
-  gx0 -= sz0 * (step(0.0, gx0) - 0.5);
-  gy0 -= sz0 * (step(0.0, gy0) - 0.5);
-  vec4 gx1 = ixy1 * (1.0 / 7.0);
-  vec4 gy1 = fract(floor(gx1) * (1.0 / 7.0)) - 0.5;
-  gx1 = fract(gx1);
-  vec4 gz1 = vec4(0.5) - abs(gx1) - abs(gy1);
-  vec4 sz1 = step(gz1, vec4(0.0));
-  gx1 -= sz1 * (step(0.0, gx1) - 0.5);
-  gy1 -= sz1 * (step(0.0, gy1) - 0.5);
-  vec3 g000 = vec3(gx0.x, gy0.x, gz0.x);
-  vec3 g100 = vec3(gx0.y, gy0.y, gz0.y);
-  vec3 g010 = vec3(gx0.z, gy0.z, gz0.z);
-  vec3 g110 = vec3(gx0.w, gy0.w, gz0.w);
-  vec3 g001 = vec3(gx1.x, gy1.x, gz1.x);
-  vec3 g101 = vec3(gx1.y, gy1.y, gz1.y);
-  vec3 g011 = vec3(gx1.z, gy1.z, gz1.z);
-  vec3 g111 = vec3(gx1.w, gy1.w, gz1.w);
-  vec4 norm0 = b_x_taylorInvSqrt(vec4(dot(g000, g000), dot(g010, g010), dot(g100, g100), dot(g110, g110)));
-  g000 *= norm0.x;
-  g010 *= norm0.y;
-  g100 *= norm0.z;
-  g110 *= norm0.w;
-  vec4 norm1 = b_x_taylorInvSqrt(vec4(dot(g001, g001), dot(g011, g011), dot(g101, g101), dot(g111, g111)));
-  g001 *= norm1.x;
-  g011 *= norm1.y;
-  g101 *= norm1.z;
-  g111 *= norm1.w;
-  float n000 = dot(g000, Pf0);
-  float n100 = dot(g100, vec3(Pf1.x, Pf0.yz));
-  float n010 = dot(g010, vec3(Pf0.x, Pf1.y, Pf0.z));
-  float n110 = dot(g110, vec3(Pf1.xy, Pf0.z));
-  float n001 = dot(g001, vec3(Pf0.xy, Pf1.z));
-  float n101 = dot(g101, vec3(Pf1.x, Pf0.y, Pf1.z));
-  float n011 = dot(g011, vec3(Pf0.x, Pf1.yz));
-  float n111 = dot(g111, Pf1);
-  vec3 fade_xyz = b_x_fade(Pf0);
-  vec4 n_z = mix(vec4(n000, n100, n010, n110), vec4(n001, n101, n011, n111), fade_xyz.z);
-  vec2 n_yz = mix(n_z.xy, n_z.zw, fade_xyz.y);
-  float n_xyz = mix(n_yz.x, n_yz.y, fade_xyz.x);
-  return 2.2 * n_xyz;
+
+Cell getReferenceCell( vec2 p, vec2 origin, float grid_angle, float step ) {
+
+// get containing cell
+    Cell c;
+
+// calc grid
+    vec2 n = vec2( cos( grid_angle ), sin( grid_angle ) );
+    float threshold = step * 0.5;
+    float dot_normal = n.x * ( p.x - origin.x ) + n.y * ( p.y - origin.y );
+    float dot_line = -n.y * ( p.x - origin.x ) + n.x * ( p.y - origin.y );
+    vec2 offset = vec2( n.x * dot_normal, n.y * dot_normal );
+    float offset_normal = mod( hypot( offset.x, offset.y ), step );
+    float normal_dir = ( dot_normal < 0.0 ) ? 1.0 : -1.0;
+    float normal_scale = ( ( offset_normal < threshold ) ? -offset_normal : step - offset_normal ) * normal_dir;
+    float offset_line = mod( hypot( ( p.x - offset.x ) - origin.x, ( p.y - offset.y ) - origin.y ), step );
+    float line_dir = ( dot_line < 0.0 ) ? 1.0 : -1.0;
+    float line_scale = ( ( offset_line < threshold ) ? -offset_line : step - offset_line ) * line_dir;
+
+// get closest corner
+    c.normal = n;
+    c.p1.x = p.x - n.x * normal_scale + n.y * line_scale;
+    c.p1.y = p.y - n.y * normal_scale - n.x * line_scale;
+
+// scatter
+    if ( scatter != 0.0 ) {
+
+        float off_mag = scatter * threshold * 0.5;
+        float off_angle = rand( vec2( floor( c.p1.x ), floor( c.p1.y ) ) ) * PI2;
+        c.p1.x += cos( off_angle ) * off_mag;
+        c.p1.y += sin( off_angle ) * off_mag;
+
+    }
+
+// find corners
+    float normal_step = normal_dir * ( ( offset_normal < threshold ) ? step : -step );
+    float line_step = line_dir * ( ( offset_line < threshold ) ? step : -step );
+    c.p2.x = c.p1.x - n.x * normal_step;
+    c.p2.y = c.p1.y - n.y * normal_step;
+    c.p3.x = c.p1.x + n.y * line_step;
+    c.p3.y = c.p1.y - n.x * line_step;
+    c.p4.x = c.p1.x - n.x * normal_step + n.y * line_step;
+    c.p4.y = c.p1.y - n.y * normal_step - n.x * line_step;
+
+    return c;
+
 }
-vec3 c_x_mod289(vec3 x) {
-  return x - floor(x * (1.0 / 289.0)) * 289.0;
+
+float blendColour( float a, float b, float t ) {
+
+// blend colours
+    if ( blendingMode == BLENDING_LINEAR ) {
+        return blend( a, b, 1.0 - t );
+    } else if ( blendingMode == BLENDING_ADD ) {
+        return blend( a, min( 1.0, a + b ), t );
+    } else if ( blendingMode == BLENDING_MULTIPLY ) {
+        return blend( a, max( 0.0, a * b ), t );
+    } else if ( blendingMode == BLENDING_LIGHTER ) {
+        return blend( a, max( a, b ), t );
+    } else if ( blendingMode == BLENDING_DARKER ) {
+        return blend( a, min( a, b ), t );
+    } else {
+        return blend( a, b, 1.0 - t );
+    }
+
 }
-vec4 c_x_mod289(vec4 x) {
-  return x - floor(x * (1.0 / 289.0)) * 289.0;
-}
-vec4 c_x_permute(vec4 x) {
-  return c_x_mod289(((x * 34.0) + 1.0) * x);
-}
-vec4 c_x_taylorInvSqrt(vec4 r) {
-  return 1.79284291400159 - 0.85373472095314 * r;
-}
-float c_x_snoise(vec3 v) {
-  const vec2 C = vec2(1.0 / 6.0, 1.0 / 3.0);
-  const vec4 D = vec4(0.0, 0.5, 1.0, 2.0);
-  vec3 i = floor(v + dot(v, C.yyy));
-  vec3 x0 = v - i + dot(i, C.xxx);
-  vec3 g = step(x0.yzx, x0.xyz);
-  vec3 l = 1.0 - g;
-  vec3 i1 = min(g.xyz, l.zxy);
-  vec3 i2 = max(g.xyz, l.zxy);
-  vec3 x1 = x0 - i1 + C.xxx;
-  vec3 x2 = x0 - i2 + C.yyy;
-  vec3 x3 = x0 - D.yyy;
-  i = c_x_mod289(i);
-  vec4 p = c_x_permute(c_x_permute(c_x_permute(i.z + vec4(0.0, i1.z, i2.z, 1.0)) + i.y + vec4(0.0, i1.y, i2.y, 1.0)) + i.x + vec4(0.0, i1.x, i2.x, 1.0));
-  float n_ = 0.142857142857;
-  vec3 ns = n_ * D.wyz - D.xzx;
-  vec4 j = p - 49.0 * floor(p * ns.z * ns.z);
-  vec4 x_ = floor(j * ns.z);
-  vec4 y_ = floor(j - 7.0 * x_);
-  vec4 x = x_ * ns.x + ns.yyyy;
-  vec4 y = y_ * ns.x + ns.yyyy;
-  vec4 h = 1.0 - abs(x) - abs(y);
-  vec4 b0 = vec4(x.xy, y.xy);
-  vec4 b1 = vec4(x.zw, y.zw);
-  vec4 s0 = floor(b0) * 2.0 + 1.0;
-  vec4 s1 = floor(b1) * 2.0 + 1.0;
-  vec4 sh = -step(h, vec4(0.0));
-  vec4 a0 = b0.xzyw + s0.xzyw * sh.xxyy;
-  vec4 a1 = b1.xzyw + s1.xzyw * sh.zzww;
-  vec3 p0 = vec3(a0.xy, h.x);
-  vec3 p1 = vec3(a0.zw, h.y);
-  vec3 p2 = vec3(a1.xy, h.z);
-  vec3 p3 = vec3(a1.zw, h.w);
-  vec4 norm = c_x_taylorInvSqrt(vec4(dot(p0, p0), dot(p1, p1), dot(p2, p2), dot(p3, p3)));
-  p0 *= norm.x;
-  p1 *= norm.y;
-  p2 *= norm.z;
-  p3 *= norm.w;
-  vec4 m = max(0.6 - vec4(dot(x0, x0), dot(x1, x1), dot(x2, x2), dot(x3, x3)), 0.0);
-  m = m * m;
-  return 42.0 * dot(m * m, vec4(dot(p0, x0), dot(p1, x1), dot(p2, x2), dot(p3, x3)));
-}
-float a_x_zgrain(vec2 texCoord, vec2 resolution, float frame, float multiplier) {
-  vec2 mult = texCoord * resolution;
-  float offset = c_x_snoise(vec3(mult / multiplier, frame));
-  float n1 = b_x_pnoise(vec3(mult, offset), vec3(1.0 / texCoord * resolution, 1.0));
-  return n1 / 2.0 + 0.5;
-}
-float grain(vec2 texCoord, vec2 resolution, float frame) {
-  return a_x_zgrain(texCoord, resolution, frame, 2.5);
-}
-float grain(vec2 texCoord, vec2 resolution) {
-  return grain(texCoord, resolution, 0.0);
-}
-vec3 d_x_blendSoftLight(vec3 base, vec3 blend) {
-  return mix(sqrt(base) * (2.0 * blend - 1.0) + 2.0 * base * (1.0 - blend), 2.0 * base * blend + base * base * (1.0 - 2.0 * blend), step(base, vec3(0.5)));
-}
-float e_x_luma(vec3 color) {
-  return dot(color, vec3(0.299, 0.587, 0.114));
-}
-float e_x_luma(vec4 color) {
-  return dot(color.rgb, vec3(0.299, 0.587, 0.114));
-}
+
+
+
+
+
 
 void main() {
 
@@ -316,22 +397,32 @@ void main() {
   #include <dithering_fragment>
 
 
-    // noise stuff
-  float grainSize = 0.7;
-  vec2 uv = vUv;
-  // float resolution = vec2(1600, 900)
 
-  vec3 g = vec3(grain(uv, vec2(1600, 900) / grainSize));
-  vec3 noiseColor = d_x_blendSoftLight(outgoingLight, g);
-  float luminance = e_x_luma(outgoingLight);
+  vec2 p = vec2( vUv.x * width, vUv.y * height );
+  vec2 origin = vec2( 0, 0 );
+  float aa = ( radius < 2.5 ) ? radius * 0.5 : 1.25;
 
-  //reduce the noise based on some 
-  //threshold of the background luminance
-  float response = smoothstep(0.05, 0.5, luminance);
-  noiseColor = mix(noiseColor, outgoingLight, pow(response, 2.0));
+  // get channel samples
+  Cell cell_r = getReferenceCell( p, origin, rotateR, radius );
+  Cell cell_g = getReferenceCell( p, origin, rotateG, radius );
+  Cell cell_b = getReferenceCell( p, origin, rotateB, radius );
+  float r = getDotColour( cell_r, p, 0, rotateR, aa );
+  float g = getDotColour( cell_g, p, 1, rotateG, aa );
+  float b = getDotColour( cell_b, p, 2, rotateB, aa );
+
+  // blend with original
+  vec4 colour = texture( tDiffuse, vUv );
+  r = blendColour( r, diffuseColor.x, 0.5 );
+  g = blendColour( g, diffuseColor.y, 0.5 );
+  b = blendColour( b, diffuseColor.z, 0.5 );
+
+  // vec3 grainColor = mix(vec3(r, g, b), outgoingLight, 0.1);
 
 
-  gl_FragColor = vec4(noiseColor, diffuseColor.a);
+  // gl_FragColor = vec4(outgoingLight, diffuseColor.a);
+  gl_FragColor = vec4( r, g, b, diffuseColor.a );
+  // gl_FragColor = vec4(grainColor, diffuseColor.a );
+
   // gl_FragColor가 fragment shader를 통해 나타나는 최종값으로, diffuseColor에서
   // 정의한 그라디언트 색상 위에 반사나 빛을 계산한 값을 최종값으로 정의.
   // gl_FragColor = vec4(mix(mix(color1, color3, smoothstep(-3.0, 3.0,vPos.x)),

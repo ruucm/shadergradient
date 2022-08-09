@@ -70,6 +70,13 @@ export const ShapeControls: React.FC<ShapeControlsPropsT> = () => {
           check={shader === 'noise'}
           label='noise'
         />
+        <Radio
+          name='shader'
+          value='grain'
+          setValue={setShader}
+          check={shader === 'grain'}
+          label='grain'
+        />
       </InputPanel>
 
       <InputPanel title='Animate'>

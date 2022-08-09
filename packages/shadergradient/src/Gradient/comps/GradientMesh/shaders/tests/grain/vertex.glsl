@@ -81,4 +81,6 @@ void main() {
   vPos = pos;
 
   gl_Position = projectionMatrix * modelViewMatrix * vec4(pos, 1.);
+
+  // gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
 }

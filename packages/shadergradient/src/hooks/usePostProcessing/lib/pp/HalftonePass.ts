@@ -35,6 +35,8 @@ class HalftonePass extends Pass {
       }
     }
 
+    console.log('this.uniforms', this.uniforms)
+
     this.fsQuad = new FullScreenQuad(this.material)
 
     this.blendMode = new BlendMode(BlendFunction.SCREEN)

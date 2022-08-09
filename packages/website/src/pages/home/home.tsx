@@ -149,7 +149,7 @@ const R3F = () => {
         springOption={({ rotation }) => ({
           to: async (next, cancel) => {
             await sleep(mainLoading.rotDelay)
-            await next({ animatedRotation: dToRArr([30, 20, 30]) })
+            await next({ animatedRotation: dToRArr([40, 20, 30]) })
             await next({ animatedRotation: rotation })
           },
           from: { animatedRotation: dToRArr([0, 0, 0]) },
@@ -158,7 +158,9 @@ const R3F = () => {
             // friction: 15,
             // mass: 0.5,
             // https://github.com/pmndrs/react-spring/blob/master/packages/core/src/constants.ts
-            easing: (x) => Math.sqrt(1 - Math.pow(x - 1, 2)), //easeoutcircle
+            // easing: (x) => Math.sqrt(1 - Math.pow(x - 1, 2)), //easeoutcircle
+            easing: (x) =>
+              x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2, //cubic in out
           },
         })}
       />

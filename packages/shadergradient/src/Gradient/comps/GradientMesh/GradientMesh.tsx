@@ -20,6 +20,26 @@ Math.easeInExpo = function (t, b, c, d) {
   // source from http://gizma.com/easing/
   return c * Math.pow(2, 10 * (t / d - 1)) + b
 }
+// @ts-ignore
+Math.easeOutCirc = function (t, b, c, d) {
+  t /= d
+  t--
+  return c * Math.sqrt(1 - t * t) + b
+}
+// @ts-ignore
+Math.easeInOutCirc = function (t, b, c, d) {
+  t /= d / 2
+  if (t < 1) return (-c / 2) * (Math.sqrt(1 - t * t) - 1) + b
+  t -= 2
+  return (c / 2) * (Math.sqrt(1 - t * t) + 1) + b
+}
+// @ts-ignore
+Math.easeInOutCubic = function (t, b, c, d) {
+  t /= d / 2
+  if (t < 1) return (c / 2) * t * t * t + b
+  t -= 2
+  return (c / 2) * (t * t * t + 2) + b
+}
 
 const increment = 20
 
@@ -125,7 +145,12 @@ export const GradientMesh: React.FC<any> = ({
       const val =
         elapsed < meshDur + meshDelay
           ? // @ts-ignore
-            Math.easeInExpo(currentTime, current, to - current, meshDur * 1000)
+            Math.easeInOutCubic(
+              currentTime,
+              current,
+              to - current,
+              meshDur * 1000
+            )
           : to
       material.current.userData.uLoadingTime.value = val
 

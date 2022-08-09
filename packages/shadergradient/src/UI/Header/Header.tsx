@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
+import { mainLoading } from '../../../src/consts'
 import { PRESETS } from '../../presets'
 import { useUIStore } from '../../store'
 import { AboutBtn } from './AboutBtn'
 import styles from './Header.module.scss'
 import { TextLogo } from './TextLogo'
+
 export function Header({
   mode = 'full',
   isMobile = false,
@@ -18,11 +20,12 @@ export function Header({
   const activePreset = useUIStore((state: any) => state.activePreset)
   const color = mode !== 'full' ? '#FF430A' : PRESETS[activePreset].color
   const [loadingReady, setLoadingReady] = useState(false)
+
   useEffect(() => {
     if (loadingMotion === true) {
       setTimeout(() => {
         setLoadingReady(true)
-      }, 6500)
+      }, mainLoading.end * 1000 + 1000)
     }
   }, [])
   return (
@@ -32,7 +35,12 @@ export function Header({
       animate={{
         top: 0,
       }}
-      transition={{ delay: 5.5, duration: 0.4, type: 'spring', mass: 0.5 }}
+      transition={{
+        delay: mainLoading.end,
+        duration: 0.4,
+        type: 'spring',
+        mass: 0.5,
+      }}
     >
       {(inAbout !== true || isMobile === true) && (
         <TextLogo

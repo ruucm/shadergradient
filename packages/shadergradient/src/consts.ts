@@ -45,9 +45,9 @@ export const mainLoading = {
   meshDur: 3, // duration of gradient becoming 3d
 
   rotDelay: 3,
-  rotDur: 2,
+  rotDur: 2.5,
 
-  end: 5.3, // need to be same with rotDelay + rotDur. Timing for the texts
+  end: 5.6, //  Timing for the texts. Should be bigger than rotDelay + rotDur
 
   // mesh
   to: 1, // end factor (0 -> 1) for the mesh noisestrength

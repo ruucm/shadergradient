@@ -41,9 +41,14 @@ export const hdrBase = 'https://shadergradient.vercel.app'
 // loading animations
 export const mainLoading = {
   // times
-  delay: 1,
-  duration: 3,
-  end: 4 + 1,
+  meshDelay: 2, // duration of gradient remain static
+  meshDur: 2, // duration of gradient becoming 3d
+
+  rotDelay: 2,
+  rotDur: 1.5,
+
+  end: 4.5, //  Timing for the texts. Should be bigger than rotDelay + rotDur
+  camera: 5, // timing for camera animation
   // mesh
   to: 1,
 }

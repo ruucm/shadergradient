@@ -54,6 +54,13 @@ const DOM = () => {
     setMode('full')
   }, [])
 
+  const textAnimationBase = 0.4
+  const textAnimationGap = 0.12
+  const transition = {
+    duration: 0.4,
+    type: 'spring',
+    mass: 0.5,
+  }
   if (time <= mainLoading.end) return <></>
 
   return (
@@ -82,9 +89,12 @@ const DOM = () => {
 
           <motion.div
             className={styles.paragraph}
-            initial={{ opacity: 0, y: 15 }}
+            initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.5 }}
+            transition={{
+              delay: textAnimationBase,
+              transition,
+            }}
             style={{
               color: PRESETS[activePreset].color,
               display: isMobile === false ? 'block' : 'none',
@@ -97,11 +107,16 @@ const DOM = () => {
           </motion.div>
           <motion.div
             className={styles.customizeBtnWrapper}
-            initial={{ display: 'none' }}
+            initial={{ display: 'none', opacity: 0, y: 20 }}
             animate={{
               display: isMobile === false ? 'flex' : 'none',
+              opacity: 1,
+              y: 0,
             }}
-            transition={{ delay: 0.7 }}
+            transition={{
+              delay: textAnimationBase + textAnimationGap,
+              transition,
+            }}
           >
             <Link href='/customize'>
               <motion.div
@@ -124,9 +139,12 @@ const DOM = () => {
             </Link>
           </motion.div>
           <motion.div
-            initial={{ opacity: 0, y: 15 }}
+            initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.9 }}
+            transition={{
+              delay: textAnimationBase + textAnimationGap * 2,
+              transition,
+            }}
           >
             {isMobile === false && <Links />}
           </motion.div>

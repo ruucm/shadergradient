@@ -24,7 +24,7 @@ export function Header({
   useEffect(() => {
     if (loadingMotion === true) {
       setTimeout(() => {
-        setLoadingReady(true)
+        setLoadingReady(true) // about btn
       }, (mainLoading.end + 1) * 1000)
     }
   }, [])
@@ -37,7 +37,7 @@ export function Header({
       }}
       transition={{
         delay: mainLoading.end,
-        duration: 0.4,
+        duration: 0.3,
         type: 'spring',
         mass: 0.5,
       }}

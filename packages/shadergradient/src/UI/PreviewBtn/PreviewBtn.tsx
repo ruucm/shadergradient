@@ -44,6 +44,7 @@ export function PreviewBtn({ display = true, color = 'white' }) {
             whileHover={{
               opacity: 1,
             }}
+            initial={{ opacity: 0 }}
             animate={{
               opacity: mode === 'mobile' ? 1 : 0,
             }}
@@ -83,6 +84,7 @@ export function PreviewBtn({ display = true, color = 'white' }) {
             whileHover={{
               opacity: 1,
             }}
+            initial={{ opacity: 0 }}
             animate={{
               opacity: mode === 'web' ? 1 : 0,
             }}

@@ -82,11 +82,12 @@ const DOM = () => {
 
           <motion.div
             className={styles.paragraph}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.5 }}
             style={{
               color: PRESETS[activePreset].color,
-              display: isMobile === true ? 'none' : 'block',
+              display: isMobile === false ? 'block' : 'none',
             }}
           >
             All visuals are created with ShaderGradient,
@@ -94,11 +95,13 @@ const DOM = () => {
             {`It's made with lines of codes, so you can create your own with just
             a few clicks.`}
           </motion.div>
-          <div
+          <motion.div
             className={styles.customizeBtnWrapper}
-            style={{
+            initial={{ display: 'none' }}
+            animate={{
               display: isMobile === false ? 'flex' : 'none',
             }}
+            transition={{ delay: 0.7 }}
           >
             <Link href='/customize'>
               <motion.div
@@ -119,8 +122,14 @@ const DOM = () => {
                 />
               </motion.div>
             </Link>
-          </div>
-          {isMobile === false && <Links />}
+          </motion.div>
+          <motion.div
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.9 }}
+          >
+            {isMobile === false && <Links />}
+          </motion.div>
         </div>
       </div>
       {isMobile === false && (
@@ -145,7 +154,7 @@ const R3F = () => {
         cAzimuthAngle={180}
         cPolarAngle={90}
         positionX={0}
-        dampingFactor={0.8} // default value 0.05, max 1
+        dampingFactor={!afterStart ? 0.8 : 0.4} // default value 0.05, max 1
         springOption={({ rotation }) => ({
           to: async (next, cancel) => {
             await sleep(mainLoading.rotDelay)

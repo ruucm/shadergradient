@@ -1,6 +1,7 @@
 import { useEffect } from 'react'
 import dynamic from 'next/dynamic'
 import { useRouter } from 'next/router'
+import { Bg } from '@/components/layout/bg'
 import Dom from '@/components/layout/dom'
 import NextHeader from '@/config'
 import partition from '@/helpers/partition'
@@ -18,6 +19,7 @@ const Balance = ({ child }) => {
     <>
       <Dom>{dom}</Dom>
       <NextJsCanvas>{r3f}</NextJsCanvas>
+      <Bg />
     </>
   )
 }

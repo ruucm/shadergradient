@@ -24323,7 +24323,18 @@ function useMaterials({
     uNoiseStrength: uStrength,
     uFrequency,
     uAmplitude,
-    uIntensity: 0.5
+    uIntensity: 0.5,
+    shape: 1,
+    radius: 2,
+    rotateR: Math.PI / 12 * 1,
+    rotateG: Math.PI / 12 * 2,
+    rotateB: Math.PI / 12 * 3,
+    scatter: 1,
+    width: 1060,
+    height: 919,
+    blendingMode: 1,
+    greyscale: false,
+    disable: false
   }, sceneShader.vertex, sceneShader.fragment);
   const HoveredLineMaterial = lineMaterial({
     uTime,

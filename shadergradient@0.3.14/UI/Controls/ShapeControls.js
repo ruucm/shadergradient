@@ -57,6 +57,18 @@ var ShapeControls = () => {
     setValue: setShader,
     check: shader === "noise",
     label: "noise"
+  }), /* @__PURE__ */ React.createElement(Radio, {
+    name: "shader",
+    value: "grain",
+    setValue: setShader,
+    check: shader === "grain",
+    label: "grain"
+  }), /* @__PURE__ */ React.createElement(Radio, {
+    name: "shader",
+    value: "whatthe",
+    setValue: setShader,
+    check: shader === "whatthe",
+    label: "whatthe"
   })), /* @__PURE__ */ React.createElement(InputPanel, {
     title: "Animate"
   }, /* @__PURE__ */ React.createElement(Radio, {

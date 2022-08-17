@@ -23995,6 +23995,7 @@ var HalftonePass = class extends Pass {
         this.uniforms[key].value = params[key];
       }
     }
+    console.log("this.uniforms", this.uniforms);
     this.fsQuad = new FullScreenQuad(this.material);
     this.blendMode = new BlendMode(BlendFunction.SCREEN);
     this.extensions = null;

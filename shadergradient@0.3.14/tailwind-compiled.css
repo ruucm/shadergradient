@@ -761,6 +761,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   height: -webkit-fill-available;
+  background-color: hsl(100, 100%, 30%);
 }
 :root {
   --guide-opacity: 0;

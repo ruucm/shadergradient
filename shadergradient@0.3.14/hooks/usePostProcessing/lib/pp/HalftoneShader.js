@@ -286,7 +286,31 @@ var HalftoneShader = {
 					r = g = b = (r + b + g) / 3.0;
 				}
 
-				gl_FragColor = vec4( r, g, b, 1.0 );
+				// add alpha channel to each r, g, b colors
+				vec4 vR;
+				vec4 vG;
+				vec4 vB;
+	
+				if (r == 0.0) {
+					vR = vec4( 0, 0, 0, 0 );
+				} else {
+					vR = vec4( r, 0, 0, 1 );
+				}
+	
+				if (g == 0.0) {
+					vG = vec4( 0, 0, 0, 0 );
+				} else {
+					vG = vec4( 0, g, 0, 1 );
+				}
+	
+				if (b == 0.0) {
+					vB = vec4( 0, 0, 0, 0 );
+				} else {
+					vB = vec4( 0, 0, b, 1 );
+				}
+
+				// gl_FragColor = vec4( r, g, b, 1.0 );
+				gl_FragColor = vR + vG + vB;
 
 			} else {
 

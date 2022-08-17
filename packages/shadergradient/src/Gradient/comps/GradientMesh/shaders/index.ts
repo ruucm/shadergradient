@@ -5,6 +5,7 @@ import * as colorNormalMix from './tests/colorNormalMix/index'
 import * as colorPosMix from './tests/colorPosMix/index'
 import * as grain from './tests/grain/index'
 import * as noise from './tests/noise/index'
+import * as planeTest from './tests/planeTest/index'
 import * as snakeHalftone from './tests/snakeHalftone/index'
 import * as stripe from './tests/stripe/index'
 import * as test from './tests/test/index' // testing color-normal-mix + halftone
@@ -24,5 +25,6 @@ export {
   noise,
   grain,
   whatthe,
+  planeTest,
   blueMix,
 }

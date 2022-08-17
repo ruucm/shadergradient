@@ -158,7 +158,7 @@ const R3F = () => {
         springOption={({ rotation }) => ({
           to: async (next, cancel) => {
             await sleep(mainLoading.rotDelay)
-            await next({ animatedRotation: dToRArr([30, 20, 30]) })
+            await next({ animatedRotation: dToRArr([40, 15, 30]) })
             await next({ animatedRotation: rotation })
           },
           from: { animatedRotation: dToRArr([0, 0, 0]) },

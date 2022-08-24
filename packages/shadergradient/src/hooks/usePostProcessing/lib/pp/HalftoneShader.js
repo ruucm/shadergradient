@@ -290,9 +290,28 @@ const HalftoneShader = {
 
 		// blend with original
 				vec4 colour = texture2D( tDiffuse, vUV );
-				r = blendColour( r, colour.r, blending );
-				g = blendColour( g, colour.g, blending );
-				b = blendColour( b, colour.b, blending );
+				
+				// add masking before blendColour
+				if (colour.r == 0.0) {
+					r = 0.0;
+				} else {
+					r = blendColour( r, colour.r, blending );
+				}
+
+				if (colour.g == 0.0) {
+					g = 0.0;
+				} else {
+					g = blendColour( g, colour.g, blending );
+				}
+
+				if (colour.b == 0.0) {
+					b = 0.0;
+				} else {
+					b = blendColour( b, colour.b, blending );
+				}
+				
+				
+				
 
 				if ( greyscale ) {
 					r = g = b = (r + b + g) / 3.0;

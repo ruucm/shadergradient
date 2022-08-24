@@ -34,8 +34,8 @@ var HalftoneShader = {
 		#define SHAPE_ELLIPSE 2
 		#define SHAPE_LINE 3
 		#define SHAPE_SQUARE 4
-		#define BLENDING_LINEAR 1
-		#define BLENDING_MULTIPLY 2
+		#define BLENDING_LINEAR 2
+		#define BLENDING_MULTIPLY 1
 		#define BLENDING_ADD 3
 		#define BLENDING_LIGHTER 4
 		#define BLENDING_DARKER 5

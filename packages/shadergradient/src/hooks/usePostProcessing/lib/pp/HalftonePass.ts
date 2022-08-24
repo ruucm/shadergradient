@@ -29,11 +29,11 @@ class HalftonePass extends Pass {
     this.uniforms.width.value = width
     this.uniforms.height.value = height
 
-    for (const key in params) {
-      if (params.hasOwnProperty(key) && this.uniforms.hasOwnProperty(key)) {
-        this.uniforms[key].value = params[key]
-      }
-    }
+    // for (const key in params) {
+    //   if (params.hasOwnProperty(key) && this.uniforms.hasOwnProperty(key)) {
+    //     this.uniforms[key].value = params[key]
+    //   }
+    // }
 
     console.log('this.uniforms', this.uniforms)
 

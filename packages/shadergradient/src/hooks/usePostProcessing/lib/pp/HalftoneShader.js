@@ -277,8 +277,8 @@ const HalftoneShader = {
 		// setup
 				vec2 p = vec2( vUV.x * width, vUV.y * height );
 				vec2 origin = vec2( 0, 0 );
-				// float aa = ( radius < 2.5 ) ? radius * 0.5 : 1.25;
-				float aa = 0.0;
+				float aa = ( radius < 2.5 ) ? radius * 0.5 : 1.25;
+				// float aa = 0.0;
 
 		// get channel samples
 				Cell cell_r = getReferenceCell( p, origin, rotateR, radius );

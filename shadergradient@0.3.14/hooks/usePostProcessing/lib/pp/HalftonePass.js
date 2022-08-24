@@ -23976,6 +23976,7 @@ if (typeof window !== "undefined") {
 import { BlendFunction, BlendMode } from "./blending/index.js";
 import { HalftoneShader } from "./HalftoneShader.js";
 import { Pass, FullScreenQuad } from "./Pass.js";
+var usePassedMeshSize = true;
 var HalftonePass = class extends Pass {
   constructor(width, height, params) {
     super();
@@ -23988,12 +23989,9 @@ var HalftonePass = class extends Pass {
       fragmentShader: HalftoneShader.fragmentShader,
       vertexShader: HalftoneShader.vertexShader
     });
-    this.uniforms.width.value = width;
-    this.uniforms.height.value = height;
-    for (const key in params) {
-      if (params.hasOwnProperty(key) && this.uniforms.hasOwnProperty(key)) {
-        this.uniforms[key].value = params[key];
-      }
+    if (usePassedMeshSize) {
+      this.uniforms.width.value = width;
+      this.uniforms.height.value = height;
     }
     console.log("this.uniforms", this.uniforms);
     this.fsQuad = new FullScreenQuad(this.material);
@@ -24013,8 +24011,10 @@ var HalftonePass = class extends Pass {
     }
   }
   setSize(width, height) {
-    this.uniforms.width.value = width;
-    this.uniforms.height.value = height;
+    if (usePassedMeshSize) {
+      this.uniforms.width.value = width;
+      this.uniforms.height.value = height;
+    }
   }
   initialize(renderer, alpha, frameBufferType) {
   }

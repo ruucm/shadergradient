@@ -1007,8 +1007,8 @@ import { links } from "../../consts.js";
 import { PRESETS } from "../../presets.js";
 import { useUIStore, useCursorStore } from "../../store.js";
 
-// esbuild-css-modules-plugin-namespace:/tmp/tmp-1915-qYEZjRXVLEiW/shadergradient/src/UI/Links/Links.module.css.js
-var digest = "1ab37bb29a43751e21576764eaef95d5b06efefcb35d02a3fa8ad4fccd0c1ac5";
+// esbuild-css-modules-plugin-namespace:/tmp/tmp-2111-OmX1SGyeBHI1/shadergradient/src/UI/Links/Links.module.css.js
+var digest = "6bf553b3be9bebd9b1434316482083d60e36cf5657c00f92c9e8e72f5132856b";
 var css = `._LinksWrapper_6zqs1_1 {
   width: 100vw;
   height: fit-content;

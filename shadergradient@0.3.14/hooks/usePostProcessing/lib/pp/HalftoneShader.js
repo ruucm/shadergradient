@@ -3,13 +3,13 @@ var HalftoneShader = {
   uniforms: {
     tDiffuse: { value: null },
     shape: { value: 1 },
-    radius: { value: 4 },
+    radius: { value: 2 },
     rotateR: { value: Math.PI / 12 * 1 },
     rotateG: { value: Math.PI / 12 * 2 },
     rotateB: { value: Math.PI / 12 * 3 },
-    scatter: { value: 0 },
-    width: { value: 1 },
-    height: { value: 1 },
+    scatter: { value: 1 },
+    width: { value: 20 },
+    height: { value: 20 },
     blending: { value: 1 },
     blendingMode: { value: 1 },
     greyscale: { value: false },
@@ -34,8 +34,8 @@ var HalftoneShader = {
 		#define SHAPE_ELLIPSE 2
 		#define SHAPE_LINE 3
 		#define SHAPE_SQUARE 4
-		#define BLENDING_LINEAR 2
-		#define BLENDING_MULTIPLY 1
+		#define BLENDING_LINEAR 1
+		#define BLENDING_MULTIPLY 2
 		#define BLENDING_ADD 3
 		#define BLENDING_LIGHTER 4
 		#define BLENDING_DARKER 5
@@ -136,7 +136,8 @@ var HalftoneShader = {
 			vec4 tex = texture2D( tDiffuse, vec2( point.x / width, point.y / height ) );
 			float base = rand( vec2( floor( point.x ), floor( point.y ) ) ) * PI2;
 			float step = PI2 / float( samples );
-			float dist = radius * 0.66;
+			// float dist = radius * 0.66;
+			float dist = radius * 0.0;
 
 			for ( int i = 0; i < samples; ++i ) {
 
@@ -184,12 +185,14 @@ var HalftoneShader = {
 			dist_c_3 = distanceToDotRadius( c.samp3, c.p3, c.normal, p, angle, radius );
 			dist_c_4 = distanceToDotRadius( c.samp4, c.p4, c.normal, p, angle, radius );
 			res = ( dist_c_1 > 0.0 ) ? clamp( dist_c_1 / aa, 0.0, 1.0 ) : 0.0;
+			// res = 0.0;
 			res += ( dist_c_2 > 0.0 ) ? clamp( dist_c_2 / aa, 0.0, 1.0 ) : 0.0;
 			res += ( dist_c_3 > 0.0 ) ? clamp( dist_c_3 / aa, 0.0, 1.0 ) : 0.0;
 			res += ( dist_c_4 > 0.0 ) ? clamp( dist_c_4 / aa, 0.0, 1.0 ) : 0.0;
 			res = clamp( res, 0.0, 1.0 );
 
 			return res;
+			// return 2
 
 		}
 
@@ -267,6 +270,7 @@ var HalftoneShader = {
 				vec2 p = vec2( vUV.x * width, vUV.y * height );
 				vec2 origin = vec2( 0, 0 );
 				float aa = ( radius < 2.5 ) ? radius * 0.5 : 1.25;
+				// float aa = 0.0;
 
 		// get channel samples
 				Cell cell_r = getReferenceCell( p, origin, rotateR, radius );
@@ -278,9 +282,28 @@ var HalftoneShader = {
 
 		// blend with original
 				vec4 colour = texture2D( tDiffuse, vUV );
-				r = blendColour( r, colour.r, blending );
-				g = blendColour( g, colour.g, blending );
-				b = blendColour( b, colour.b, blending );
+				
+				// add masking before blendColour
+				if (colour.r == 0.0) {
+					r = 0.0;
+				} else {
+					r = blendColour( r, colour.r, blending );
+				}
+
+				if (colour.g == 0.0) {
+					g = 0.0;
+				} else {
+					g = blendColour( g, colour.g, blending );
+				}
+
+				if (colour.b == 0.0) {
+					b = 0.0;
+				} else {
+					b = blendColour( b, colour.b, blending );
+				}
+				
+				
+				
 
 				if ( greyscale ) {
 					r = g = b = (r + b + g) / 3.0;

@@ -64,6 +64,7 @@ export function shaderMaterial(
           shader.vertexShader = vertexShader
           shader.fragmentShader = fragmentShader
         },
+        // wireframe: true,
       })
       // Create getter/setters
       entries.forEach(([name]) =>

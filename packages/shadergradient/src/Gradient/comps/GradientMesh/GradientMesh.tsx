@@ -64,11 +64,18 @@ export const GradientMesh: React.FC<any> = ({
   reflection,
   wireframe,
   shader,
-  springOption = ({ rotation }) => ({
+  rotSpringOption = ({ rotation }) => ({
     to: async (next, cancel) => {
       await next({ animatedRotation: rotation })
     },
     from: { animatedRotation: dToRArr([0, 0, 0]) },
+    config: { duration: 300 }, // default transition
+  }),
+  posSpringOption = ({ position }) => ({
+    to: async (next, cancel) => {
+      await next({ animatedPosition: position })
+    },
+    from: { animatedRotation: [0, 0, 0] },
     config: { duration: 300 }, // default transition
   }),
 }) => {
@@ -182,8 +189,10 @@ export const GradientMesh: React.FC<any> = ({
   const position = [positionX, positionY, positionZ]
   const rotation = dToRArr([rotationX, rotationY, rotationZ])
 
-  const { animatedPosition } = useSpring({ animatedPosition: position })
-  const { animatedRotation } = useSpring(springOption({ rotation }))
+  // const { animatedPosition } = useSpring({ animatedPosition: position })
+  const { animatedPosition } = useSpring(posSpringOption({ position }))
+
+  const { animatedRotation } = useSpring(rotSpringOption({ rotation }))
 
   return (
     <group>

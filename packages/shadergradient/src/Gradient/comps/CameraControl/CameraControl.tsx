@@ -24,7 +24,12 @@ export function CameraControl({
     <cameraControls
       ref={ref}
       args={[camera, gl.domElement]}
+      enableDamping={true}
       dampingFactor={dampingFactor}
+      zoomSpeed={10}
+      dollySpeed={10}
+      // zoomSpeed={5}
+      restThreshold={0}
     />
   )
 }

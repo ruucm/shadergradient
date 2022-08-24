@@ -55,10 +55,14 @@ const DOM = () => {
   }, [])
 
   const textAnimationBase = 0.3
-  const textAnimationGap = 0.12
+  const textAnimationGap = 0.05
   const transition = {
-    duration: 0.4,
+    // duration: 0.2,
+    // ease: 'circleInOut',
     type: 'spring',
+    damping: 5,
+    stiffness: 100,
+    restDelta: 0.001,
   }
   if (time <= mainLoading.end) return <></>
 
@@ -88,7 +92,7 @@ const DOM = () => {
 
           <motion.div
             className={styles.paragraph}
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{
               delay: textAnimationBase,
@@ -106,7 +110,7 @@ const DOM = () => {
           </motion.div>
           <motion.div
             className={styles.customizeBtnWrapper}
-            initial={{ display: 'none', opacity: 0, y: 20 }}
+            initial={{ display: 'none', opacity: 0, y: 30 }}
             animate={{
               display: isMobile === false ? 'flex' : 'none',
               opacity: 1,
@@ -139,7 +143,7 @@ const DOM = () => {
           </motion.div>
           <motion.div
             style={{ position: 'absolute', bottom: 0 }}
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{
               delay: textAnimationBase + textAnimationGap * 2,
@@ -168,12 +172,13 @@ const R3F = () => {
   if (!afterStart)
     return (
       <Gradient
-        cDistance={18.9}
+        // cDistance={3.6}
         cAzimuthAngle={180}
         cPolarAngle={90}
-        positionX={0}
-        dampingFactor={!afterStart ? 0.8 : 0.3} // default value 0.05, max 1
-        springOption={({ rotation }) => ({
+        // positionX={0}
+        // positionZ={15}
+        dampingFactor={1} // default value 0.05, max 1
+        rotSpringOption={({ rotation }) => ({
           to: async (next, cancel) => {
             await sleep(mainLoading.rotDelay)
             await next({ animatedRotation: dToRArr([40, 15, 30]) })
@@ -182,6 +187,22 @@ const R3F = () => {
           from: { animatedRotation: dToRArr([0, 0, 0]) },
           config: {
             duration: mainLoading.rotDur * 1000,
+            // friction: 15,
+            // mass: 0.5,
+            // https://github.com/pmndrs/react-spring/blob/master/packages/core/src/constants.ts
+            // easing: (x) => Math.sqrt(1 - Math.pow(x - 1, 2)), //easeoutcircle
+            easing: (x) =>
+              x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2, //cubic in out
+          },
+        })}
+        posSpringOption={({ position }) => ({
+          to: async (next, cancel) => {
+            await sleep(mainLoading.camera)
+            await next({ animatedPosition: position })
+          },
+          from: { animatedPosition: [0, 0, 15] },
+          config: {
+            duration: 100,
             // friction: 15,
             // mass: 0.5,
             // https://github.com/pmndrs/react-spring/blob/master/packages/core/src/constants.ts

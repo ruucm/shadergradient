@@ -46,7 +46,7 @@ const Dom = ({ children }) => {
         isMobile={isMobile}
         loadingMotion={asPath === '/' ? true : false}
       />
-      <Cursor on={asPath === '/customize' ? false : true} />
+      <Cursor on={true} />
     </div>
   )
 }

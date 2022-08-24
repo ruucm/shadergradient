@@ -36,10 +36,9 @@ export function Header({
         top: 0,
       }}
       transition={{
+        duration: 0.5,
         delay: mainLoading.end,
-        duration: 0.3,
         type: 'spring',
-        mass: 0.5,
       }}
     >
       {(inAbout !== true || isMobile === true) && (

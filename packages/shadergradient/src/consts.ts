@@ -47,8 +47,8 @@ export const mainLoading = {
   rotDelay: 2,
   rotDur: 1.5,
 
-  end: 4.5, //  Timing for the texts. Should be bigger than rotDelay + rotDur
-  camera: 5, // timing for camera animation
+  end: 4.0, //  Timing for the texts. Should be bigger than rotDelay + rotDur
+  camera: 4.3, // timing for camera animation
   // mesh
   to: 1, // end factor (0 -> 1) for the mesh noisestrength
 }

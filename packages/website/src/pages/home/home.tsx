@@ -54,12 +54,11 @@ const DOM = () => {
     setMode('full')
   }, [])
 
-  const textAnimationBase = 0.4
+  const textAnimationBase = 0.3
   const textAnimationGap = 0.12
   const transition = {
     duration: 0.4,
     type: 'spring',
-    mass: 0.5,
   }
   if (time <= mainLoading.end) return <></>
 
@@ -139,6 +138,7 @@ const DOM = () => {
             </Link>
           </motion.div>
           <motion.div
+            style={{ position: 'absolute', bottom: 0 }}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{

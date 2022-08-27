@@ -44,11 +44,13 @@ export const mainLoading = {
   meshDelay: 2, // duration of gradient remain static
   meshDur: 2, // duration of gradient becoming 3d
 
-  rotDelay: 2,
+  rotDelay: 1.8,
   rotDur: 1.5,
 
+  posDelay: 4.5,
+  posDur: 0.4,
+
   end: 4.3, //  Timing for the texts. Should be bigger than rotDelay + rotDur
-  camera: 4.5, // timing for camera animation
   // mesh
   to: 1, // end factor (0 -> 1) for the mesh noisestrength
 }

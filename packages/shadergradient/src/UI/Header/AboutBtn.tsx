@@ -47,16 +47,12 @@ export function AboutBtn({
           {isMobile === true ? (
             <Info color={color} />
           ) : (
-            <>
-              <TextHover
-                content={'about'}
-                fontSize={14}
-                border={false}
-                color={color}
-              ></TextHover>
-              {/* <p>about </p>
-              <p style={{ transform: 'rotate(45deg)', marginLeft: 3 }}>↑</p> */}
-            </>
+            <TextHover
+              content={'about'}
+              fontSize={14}
+              border={false}
+              color={color}
+            ></TextHover>
           )}
         </div>
       )}

@@ -64,6 +64,7 @@ const DOM = () => {
     stiffness: 100,
     restDelta: 0.001,
   }
+
   if (time <= mainLoading.end) return <></>
 
   return (
@@ -134,7 +135,7 @@ const DOM = () => {
                 <TextHover
                   fontSize={isMobile === true ? 15 : 18}
                   color={PRESETS[activePreset].color}
-                  content={'Try it by yourself →'}
+                  content={'Create yours →'}
                   delay={0}
                   border
                 />
@@ -167,7 +168,12 @@ const DOM = () => {
 
 // canvas components goes here
 const R3F = () => {
-  const afterStart = useTimer(true, mainLoading.camera * 1000)
+  const afterStart = useTimer(true, mainLoading.posDelay * 1000)
+  const c1 = 1.70158
+  const c2 = c1 * 1.525
+  const c3 = c1 + 1
+  const c4 = (2 * Math.PI) / 3
+  const c5 = (2 * Math.PI) / 4.5
 
   if (!afterStart)
     return (
@@ -197,18 +203,23 @@ const R3F = () => {
         })}
         posSpringOption={({ position }) => ({
           to: async (next, cancel) => {
-            await sleep(mainLoading.camera)
+            await sleep(mainLoading.posDelay)
             await next({ animatedPosition: position })
           },
           from: { animatedPosition: [0, 0, 15] },
           config: {
-            duration: 100,
+            duration: mainLoading.posDur * 1000,
             // friction: 15,
             // mass: 0.5,
             // https://github.com/pmndrs/react-spring/blob/master/packages/core/src/constants.ts
             // easing: (x) => Math.sqrt(1 - Math.pow(x - 1, 2)), //easeoutcircle
+            // easing: (x) =>
+            //   x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2, //cubic in out
             easing: (x) =>
-              x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2, //cubic in out
+              x < 0.5
+                ? (Math.pow(2 * x, 2) * ((c2 + 1) * 2 * x - c2)) / 2
+                : (Math.pow(2 * x - 2, 2) * ((c2 + 1) * (x * 2 - 2) + c2) + 2) /
+                  2,
           },
         })}
       />

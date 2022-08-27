@@ -37,7 +37,7 @@ export function Header({
       }}
       transition={{
         duration: 0.5,
-        delay: mainLoading.end,
+        delay: mainLoading.end + 0.6,
         type: 'spring',
       }}
     >

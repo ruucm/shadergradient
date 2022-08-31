@@ -3,7 +3,7 @@ var HalftoneShader = {
   uniforms: {
     tDiffuse: { value: null },
     shape: { value: 1 },
-    radius: { value: 0.1 },
+    radius: { value: 2 },
     rotateR: { value: Math.PI / 12 * 1 },
     rotateG: { value: Math.PI / 12 * 2 },
     rotateB: { value: Math.PI / 12 * 3 },
@@ -18,10 +18,13 @@ var HalftoneShader = {
   vertexShader: `
 
 		varying vec2 vUV;
+		varying vec3 vPosition;
 
 		void main() {
 
 			vUV = uv;
+			vPosition = position;
+
 			gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
 
 		}`,
@@ -52,6 +55,7 @@ var HalftoneShader = {
 		uniform float blending;
 		uniform int blendingMode;
 		varying vec2 vUV;
+		varying vec3 vPosition;
 		uniform bool greyscale;
 		const int samples = 8;
 
@@ -267,7 +271,7 @@ var HalftoneShader = {
 			if ( ! disable ) {
 
 		// setup
-				vec2 p = vec2( vUV.x * width, vUV.y * height );
+				vec2 p = vec2( vUV.x * width, vUV.y * height ) - vec2(vPosition.x, vPosition.y) * 3.0; // - position values to remove black borders.
 				vec2 origin = vec2( 0, 0 );
 				float aa = ( radius < 2.5 ) ? radius * 0.5 : 1.25;
 				// float aa = 0.0;

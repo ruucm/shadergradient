@@ -68,18 +68,18 @@ export const GradientMesh: React.FC<any> = ({
     to: async (next, cancel) => {
       await next({ animatedRotation: rotation })
     },
-    from: { animatedRotation: dToRArr([0, 0, 0]) },
+    from: { rotation: dToRArr([0, 0, 0]) },
     config: { duration: 300 }, // default transition
   }),
   posSpringOption = ({ position }) => ({
     to: async (next, cancel) => {
       await next({ animatedPosition: position })
     },
-    from: { animatedRotation: [0, 0, 0] },
+    from: { position: [0, 0, 0] },
     config: { duration: 300 }, // default transition
   }),
 }) => {
-  const { useFrame, extend, animated, useSpring } = useFiber()
+  const { useFrame, extend, animated, useSpring, useSprings } = useFiber()
 
   let sceneShader = shaders.defaults[type ?? 'plane'] // default type is plane
   if (shader && shader !== 'defaults') sceneShader = shaders[shader]
@@ -189,7 +189,6 @@ export const GradientMesh: React.FC<any> = ({
   const position = [positionX, positionY, positionZ]
   const rotation = dToRArr([rotationX, rotationY, rotationZ])
 
-  // const { animatedPosition } = useSpring({ animatedPosition: position })
   const { animatedPosition } = useSpring(posSpringOption({ position }))
 
   const { animatedRotation } = useSpring(rotSpringOption({ rotation }))
@@ -213,7 +212,7 @@ export const GradientMesh: React.FC<any> = ({
       <mesh>
         <lineSegments
           renderOrder={1}
-          position={[positionX, positionY, positionZ]}
+          position={position}
           rotation={rotation}
           visible={hoverState !== 0 ? true : false}
         >

@@ -125,6 +125,7 @@ export function PresetTitle({
             font='"Lora", serif'
             color={color}
             fontSize={fontSize}
+            yBefore={50}
             //default 120, for mobile title 80, for customize 50
             content={isMobile === true ? title.substring(3) : title}
           />

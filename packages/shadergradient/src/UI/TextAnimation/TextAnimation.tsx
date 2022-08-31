@@ -2,34 +2,6 @@ import React, { useState, useEffect } from 'react'
 import { motion, useAnimation, AnimatePresence } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
 
-const letterContainerVariants = {
-  before: { transition: { staggerChildren: 0.015 } },
-  after: { transition: { staggerChildren: 0.03 } },
-}
-
-const letterVariants = {
-  before: {
-    opacity: 0,
-    y: 20,
-    rotate: -10,
-    transition: {
-      type: 'spring',
-      damping: 12,
-      stiffness: 200,
-    },
-  },
-  after: {
-    opacity: 1,
-    y: 0,
-    rotate: 0,
-    transition: {
-      type: 'spring',
-      damping: 12,
-      stiffness: 200,
-    },
-  },
-}
-
 export function TextAnimation({
   fontSize,
   color,
@@ -39,8 +11,38 @@ export function TextAnimation({
   width = null,
   font = null,
   textCenter = false,
+  yBefore = 20,
 }) {
   //   const splitted = referer?.split('/') || []
+
+  const letterContainerVariants = {
+    before: { transition: { staggerChildren: 0.015 } },
+    after: { transition: { staggerChildren: 0.03 } },
+  }
+
+  const letterVariants = {
+    before: {
+      opacity: 0,
+      y: yBefore,
+      rotate: -10,
+      transition: {
+        type: 'spring',
+        damping: 12,
+        stiffness: 200,
+      },
+    },
+    after: {
+      opacity: 1,
+      y: 0,
+      rotate: 0,
+      transition: {
+        type: 'spring',
+        damping: 12,
+        stiffness: 200,
+      },
+    },
+  }
+
   const [ref, inView] = useInView()
   const controls = useAnimation()
   const [activePresetInView, setActivePresetInView] = useState(false)

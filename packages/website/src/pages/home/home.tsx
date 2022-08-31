@@ -168,7 +168,10 @@ const DOM = () => {
 
 // canvas components goes here
 const R3F = () => {
-  const afterStart = useTimer(true, mainLoading.posDelay * 1000)
+  const afterStart = useTimer(
+    true,
+    (mainLoading.posDelay + mainLoading.posDur) * 1000
+  )
   const c1 = 1.70158
   const c2 = c1 * 1.525
   const c3 = c1 + 1
@@ -181,8 +184,6 @@ const R3F = () => {
         // cDistance={3.6}
         cAzimuthAngle={180}
         cPolarAngle={90}
-        // positionX={0}
-        // positionZ={15}
         dampingFactor={1} // default value 0.05, max 1
         rotSpringOption={({ rotation }) => ({
           to: async (next, cancel) => {
@@ -209,17 +210,17 @@ const R3F = () => {
           from: { animatedPosition: [0, 0, 15] },
           config: {
             duration: mainLoading.posDur * 1000,
-            // friction: 15,
-            // mass: 0.5,
+            // friction: 2,
+            // mass: 0.1,
             // https://github.com/pmndrs/react-spring/blob/master/packages/core/src/constants.ts
             // easing: (x) => Math.sqrt(1 - Math.pow(x - 1, 2)), //easeoutcircle
-            // easing: (x) =>
-            //   x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2, //cubic in out
             easing: (x) =>
-              x < 0.5
-                ? (Math.pow(2 * x, 2) * ((c2 + 1) * 2 * x - c2)) / 2
-                : (Math.pow(2 * x - 2, 2) * ((c2 + 1) * (x * 2 - 2) + c2) + 2) /
-                  2,
+              x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2, //cubic in out
+            // easing: (x) =>
+            //   x < 0.5
+            //     ? (Math.pow(2 * x, 2) * ((c2 + 1) * 2 * x - c2)) / 2
+            //     : (Math.pow(2 * x - 2, 2) * ((c2 + 1) * (x * 2 - 2) + c2) + 2) /
+            //       2,
           },
         })}
       />

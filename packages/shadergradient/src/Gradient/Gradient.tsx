@@ -17,7 +17,8 @@ function GradientComp({
   zoomOut = false,
   control = 'props',
   dampingFactor,
-  springOption,
+  rotSpringOption,
+  posSpringOption,
   ...props
 }: Props) {
   const setLoadingPercentage = useUIStore(
@@ -49,7 +50,11 @@ function GradientComp({
       )}
       {lightType === '3d' && <ambientLight intensity={brightness || 1} />}
       <CameraControl dampingFactor={dampingFactor} {...others} />
-      <GradientMesh {...others} springOption={springOption} />
+      <GradientMesh
+        {...others}
+        rotSpringOption={rotSpringOption}
+        posSpringOption={posSpringOption}
+      />
     </>
   )
 }

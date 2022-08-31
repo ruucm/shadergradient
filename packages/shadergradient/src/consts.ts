@@ -45,10 +45,10 @@ export const mainLoading = {
   meshDur: 2, // duration of gradient becoming 3d
 
   rotDelay: 1.8,
-  rotDur: 1.5,
+  rotDur: 1.6, // rotation twice
 
-  posDelay: 4.5,
-  posDur: 0.4,
+  posDelay: 4.4,
+  posDur: 0.3,
 
   end: 4.3, //  Timing for the texts. Should be bigger than rotDelay + rotDur
   // mesh

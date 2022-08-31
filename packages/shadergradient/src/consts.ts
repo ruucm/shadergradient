@@ -47,8 +47,8 @@ export const mainLoading = {
   rotDelay: 1.8,
   rotDur: 1.6, // rotation twice
 
-  posDelay: 4.4,
-  posDur: 0.3,
+  posDelay: 2,
+  posDur: 4,
 
   end: 4.3, //  Timing for the texts. Should be bigger than rotDelay + rotDur
   // mesh

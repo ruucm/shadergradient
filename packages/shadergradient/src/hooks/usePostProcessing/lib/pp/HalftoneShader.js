@@ -25,10 +25,13 @@ const HalftoneShader = {
   vertexShader: /* glsl */ `
 
 		varying vec2 vUV;
+		varying vec3 vPosition;
 
 		void main() {
 
 			vUV = uv;
+			vPosition = position;
+
 			gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
 
 		}`,
@@ -60,6 +63,7 @@ const HalftoneShader = {
 		uniform float blending;
 		uniform int blendingMode;
 		varying vec2 vUV;
+		varying vec3 vPosition;
 		uniform bool greyscale;
 		const int samples = 8;
 
@@ -275,7 +279,7 @@ const HalftoneShader = {
 			if ( ! disable ) {
 
 		// setup
-				vec2 p = vec2( vUV.x * width, vUV.y * height );
+				vec2 p = vec2( vUV.x * width, vUV.y * height ) - vec2(vPosition.x, vPosition.y) * 3.0; // - position values to remove black borders.
 				vec2 origin = vec2( 0, 0 );
 				float aa = ( radius < 2.5 ) ? radius * 0.5 : 1.25;
 				// float aa = 0.0;

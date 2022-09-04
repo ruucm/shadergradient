@@ -17,28 +17,32 @@ export function TextAnimation({
 
   const letterContainerVariants = {
     before: { transition: { staggerChildren: 0.015 } },
-    after: { transition: { staggerChildren: 0.03 } },
+    after: { transition: { staggerChildren: 0.015 } },
   }
 
   const letterVariants = {
     before: {
       opacity: 0,
       y: yBefore,
-      rotate: -10,
+      rotate: -15,
+      scale: 0.4,
       transition: {
         type: 'spring',
-        damping: 12,
-        stiffness: 200,
+        duration: 0.4,
+        damping: 6,
+        // stiffness: 200,
       },
     },
     after: {
       opacity: 1,
       y: 0,
+      scale: 1,
       rotate: 0,
       transition: {
         type: 'spring',
-        damping: 12,
-        stiffness: 200,
+        duration: 0.4,
+        damping: 6,
+        // stiffness: 80,
       },
     },
   }
@@ -92,7 +96,7 @@ export function TextAnimation({
                         width: 'auto',
                       }} // Position elements
                       variants={letterVariants}
-                      transition={{ duration: 0.5 }}
+                      // transition={{ duration: 0.5, ease: 'backInOut' }}
                     >
                       {letter === ' ' ? '\u00A0' : letter}
                     </motion.span>

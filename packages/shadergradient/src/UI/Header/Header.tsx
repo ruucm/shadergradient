@@ -25,7 +25,7 @@ export function Header({
     if (loadingMotion === true) {
       setTimeout(() => {
         setLoadingReady(true) // about btn
-      }, (mainLoading.end + 1) * 1000)
+      }, (mainLoading.end + 1.2) * 1000)
     }
   }, [])
   return (
@@ -37,7 +37,7 @@ export function Header({
       }}
       transition={{
         duration: 0.5,
-        delay: mainLoading.end + 0.6,
+        delay: mainLoading.end + 0.3,
         type: 'spring',
       }}
     >

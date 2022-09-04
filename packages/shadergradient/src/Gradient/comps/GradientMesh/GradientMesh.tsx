@@ -41,6 +41,13 @@ Math.easeInOutCubic = function (t, b, c, d) {
   return (c / 2) * (t * t * t + 2) + b
 }
 
+//@ts-ignore
+
+Math.easeInCubic = function (t, b, c, d) {
+  t /= d
+  return c * t * t * t + b
+}
+
 const increment = 20
 
 export const GradientMesh: React.FC<any> = ({

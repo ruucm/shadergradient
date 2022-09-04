@@ -55,15 +55,9 @@ const DOM = () => {
   }, [])
 
   const textAnimationBase = 0.3
-  const textAnimationGap = 0.05
-  const transition = {
-    // duration: 0.2,
-    // ease: 'circleInOut',
-    type: 'spring',
-    damping: 5,
-    stiffness: 100,
-    restDelta: 0.001,
-  }
+  const textAnimationGap = 0.15
+  const textDuration = 0.35
+  const textEase = 'easeInOut'
 
   if (time <= mainLoading.end) return <></>
 
@@ -93,11 +87,18 @@ const DOM = () => {
 
           <motion.div
             className={styles.paragraph}
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
+            initial={{
+              opacity: 0,
+              y: 20,
+            }}
+            animate={{
+              opacity: 1,
+              y: 0,
+            }}
             transition={{
               delay: textAnimationBase,
-              transition,
+              duration: textDuration,
+              ease: textEase,
             }}
             style={{
               color: PRESETS[activePreset].color,
@@ -111,7 +112,11 @@ const DOM = () => {
           </motion.div>
           <motion.div
             className={styles.customizeBtnWrapper}
-            initial={{ display: 'none', opacity: 0, y: 30 }}
+            initial={{
+              display: 'none',
+              opacity: 0,
+              y: 20,
+            }}
             animate={{
               display: isMobile === false ? 'flex' : 'none',
               opacity: 1,
@@ -119,7 +124,8 @@ const DOM = () => {
             }}
             transition={{
               delay: textAnimationBase + textAnimationGap,
-              transition,
+              duration: textDuration,
+              ease: textEase,
             }}
           >
             <Link href='/customize'>
@@ -144,11 +150,12 @@ const DOM = () => {
           </motion.div>
           <motion.div
             style={{ position: 'absolute', bottom: 0 }}
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{
               delay: textAnimationBase + textAnimationGap * 2,
-              transition,
+              duration: textDuration,
+              ease: textEase,
             }}
           >
             {isMobile === false && <Links />}
@@ -188,7 +195,7 @@ const R3F = () => {
         rotSpringOption={({ rotation }) => ({
           to: async (next, cancel) => {
             await sleep(mainLoading.rotDelay)
-            await next({ animatedRotation: dToRArr([40, 15, 30]) })
+            await next({ animatedRotation: dToRArr([30, 10, 40]) })
             await next({ animatedRotation: rotation })
           },
           from: { animatedRotation: dToRArr([0, 0, 0]) },
@@ -197,7 +204,6 @@ const R3F = () => {
             // friction: 15,
             // mass: 0.5,
             // https://github.com/pmndrs/react-spring/blob/master/packages/core/src/constants.ts
-            // easing: (x) => Math.sqrt(1 - Math.pow(x - 1, 2)), //easeoutcircle
             easing: (x) =>
               x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2, //cubic in out
           },
@@ -213,14 +219,8 @@ const R3F = () => {
             // friction: 2,
             // mass: 0.1,
             // https://github.com/pmndrs/react-spring/blob/master/packages/core/src/constants.ts
-            // easing: (x) => Math.sqrt(1 - Math.pow(x - 1, 2)), //easeoutcircle
             easing: (x) =>
               x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2, //cubic in out
-            // easing: (x) =>
-            //   x < 0.5
-            //     ? (Math.pow(2 * x, 2) * ((c2 + 1) * 2 * x - c2)) / 2
-            //     : (Math.pow(2 * x - 2, 2) * ((c2 + 1) * (x * 2 - 2) + c2) + 2) /
-            //       2,
           },
         })}
       />

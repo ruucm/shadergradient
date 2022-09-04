@@ -42,15 +42,15 @@ export const hdrBase = 'https://shadergradient.vercel.app'
 export const mainLoading = {
   // times
   meshDelay: 2, // duration of gradient remain static
-  meshDur: 2, // duration of gradient becoming 3d
+  meshDur: 1.8, // duration of gradient becoming 3d
 
-  rotDelay: 1.8,
-  rotDur: 1.6, // rotation twice
+  rotDelay: 1.7,
+  rotDur: 1, // rotation twice
 
-  posDelay: 2,
-  posDur: 4,
+  posDelay: 1.8,
+  posDur: 2,
 
-  end: 4.3, //  Timing for the texts. Should be bigger than rotDelay + rotDur
+  end: 3.7, //  Timing for the texts. Should be bigger than rotDelay + rotDur
   // mesh
   to: 1, // end factor (0 -> 1) for the mesh noisestrength
 }

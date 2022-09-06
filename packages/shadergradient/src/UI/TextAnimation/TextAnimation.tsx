@@ -29,7 +29,7 @@ export function TextAnimation({
       transition: {
         type: 'spring',
         duration: 0.4,
-        damping: 6,
+        damping: 10,
         // stiffness: 200,
       },
     },
@@ -41,7 +41,7 @@ export function TextAnimation({
       transition: {
         type: 'spring',
         duration: 0.4,
-        damping: 6,
+        damping: 10,
         // stiffness: 80,
       },
     },

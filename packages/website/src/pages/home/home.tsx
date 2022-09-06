@@ -59,7 +59,7 @@ const DOM = () => {
   const textDuration = 0.35
   const textEase = 'easeInOut'
 
-  if (time <= mainLoading.end) return <></>
+  if (time <= mainLoading.end - 1) return <></>
 
   return (
     <>
@@ -206,6 +206,18 @@ const R3F = () => {
             // https://github.com/pmndrs/react-spring/blob/master/packages/core/src/constants.ts
             easing: (x) =>
               x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2, //cubic in out
+            // easing: (x) =>
+            //   x === 0
+            //     ? 0
+            //     : x === 1
+            //     ? 1
+            //     : x < 0.5
+            //     ? Math.pow(2, 20 * x - 10) / 2
+            //     : (2 - Math.pow(2, -20 * x + 10)) / 2, // expoInOut
+            // easing: (x) =>
+            //   x < 0.5
+            //     ? (1 - Math.sqrt(1 - Math.pow(2 * x, 2))) / 2
+            //     : (Math.sqrt(1 - Math.pow(-2 * x + 2, 2)) + 1) / 2,
           },
         })}
         posSpringOption={({ position }) => ({
@@ -219,8 +231,16 @@ const R3F = () => {
             // friction: 2,
             // mass: 0.1,
             // https://github.com/pmndrs/react-spring/blob/master/packages/core/src/constants.ts
+            // easing: (x) =>
+            //   x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2, //cubic in out
             easing: (x) =>
-              x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2, //cubic in out
+              x === 0
+                ? 0
+                : x === 1
+                ? 1
+                : x < 0.5
+                ? Math.pow(2, 20 * x - 10) / 2
+                : (2 - Math.pow(2, -20 * x + 10)) / 2,
           },
         })}
       />

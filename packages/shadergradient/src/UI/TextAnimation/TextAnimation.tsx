@@ -2,34 +2,6 @@ import React, { useState, useEffect } from 'react'
 import { motion, useAnimation, AnimatePresence } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
 
-const letterContainerVariants = {
-  before: { transition: { staggerChildren: 0.015 } },
-  after: { transition: { staggerChildren: 0.03 } },
-}
-
-const letterVariants = {
-  before: {
-    opacity: 0,
-    y: 20,
-    rotate: -10,
-    transition: {
-      type: 'spring',
-      damping: 12,
-      stiffness: 200,
-    },
-  },
-  after: {
-    opacity: 1,
-    y: 0,
-    rotate: 0,
-    transition: {
-      type: 'spring',
-      damping: 12,
-      stiffness: 200,
-    },
-  },
-}
-
 export function TextAnimation({
   fontSize,
   color,
@@ -39,8 +11,42 @@ export function TextAnimation({
   width = null,
   font = null,
   textCenter = false,
+  yBefore = 20,
 }) {
   //   const splitted = referer?.split('/') || []
+
+  const letterContainerVariants = {
+    before: { transition: { staggerChildren: 0.015 } },
+    after: { transition: { staggerChildren: 0.015 } },
+  }
+
+  const letterVariants = {
+    before: {
+      opacity: 0,
+      y: yBefore,
+      rotate: -15,
+      scale: 0.4,
+      transition: {
+        type: 'spring',
+        duration: 0.4,
+        damping: 10,
+        // stiffness: 200,
+      },
+    },
+    after: {
+      opacity: 1,
+      y: 0,
+      scale: 1,
+      rotate: 0,
+      transition: {
+        type: 'spring',
+        duration: 0.4,
+        damping: 10,
+        // stiffness: 80,
+      },
+    },
+  }
+
   const [ref, inView] = useInView()
   const controls = useAnimation()
   const [activePresetInView, setActivePresetInView] = useState(false)
@@ -90,7 +96,7 @@ export function TextAnimation({
                         width: 'auto',
                       }} // Position elements
                       variants={letterVariants}
-                      transition={{ duration: 0.5 }}
+                      // transition={{ duration: 0.5, ease: 'backInOut' }}
                     >
                       {letter === ' ' ? '\u00A0' : letter}
                     </motion.span>

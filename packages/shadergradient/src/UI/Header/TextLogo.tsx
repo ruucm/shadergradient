@@ -3,7 +3,7 @@ import React from 'react'
 import { useUIStore, useCursorStore } from '../../store'
 import { TextHover } from '../TextAnimation/index'
 
-export function TextLogo({ color = 'white', size = 18, onClick }) {
+export function TextLogo({ color = 'white', size = 18, onClick, delay = 0 }) {
   const mode = useUIStore((state: any) => state.mode)
   return (
     <div
@@ -33,7 +33,7 @@ export function TextLogo({ color = 'white', size = 18, onClick }) {
           fontSize={size}
           color={mode !== 'full' ? '#FF430A' : color}
           content='ShaderGradient'
-          delay={0}
+          delay={delay}
           border={true}
         />
       </div>

@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { motion } from 'framer-motion'
-import { useUIStore } from '../../../store'
+import { useOnClickOutside } from '../../../hooks/index'
+import { useUIStore, useCursorStore } from '../../../store'
 import { PropertyControls } from '../../PropertyControls'
 import { ToolsBox, ControlTypeTitles } from '../Tools/index'
 import styles from './AllControls.module.scss'
@@ -23,6 +24,12 @@ export const AllControls: React.FC<Props> = ({ isMobile, isFigma = false }) => {
         display: 'flex',
         flexDirection: isFigma === true ? 'column-reverse' : 'column',
         justifyContent: 'flex-end',
+      }}
+      onMouseMove={() => {
+        useCursorStore.setState({ hover: 'control' })
+      }}
+      onMouseLeave={() => {
+        useCursorStore.setState({ hover: 'default' })
       }}
     >
       <PropertyControls activeTab={activeTab} setActiveTab={setActiveTab} />

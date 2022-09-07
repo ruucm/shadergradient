@@ -32,6 +32,11 @@ export function PresetTitle({
     }
   }
 
+  React.useEffect(() => {
+    arrowDownAnim.start({ opacity: 1, transition: { delay: 0.3 } })
+    arrowUpAnim.start({ opacity: 1, transition: { delay: 0.3 } })
+  }, [])
+
   const arrowUpAnim = useAnimation()
   const arrowDownAnim = useAnimation()
   const fogUpAnim = useAnimation()
@@ -120,6 +125,7 @@ export function PresetTitle({
             font='"Lora", serif'
             color={color}
             fontSize={fontSize}
+            yBefore={50}
             //default 120, for mobile title 80, for customize 50
             content={isMobile === true ? title.substring(3) : title}
           />
@@ -134,7 +140,7 @@ export function PresetTitle({
         >
           <motion.div
             className={styles.slideBtn}
-            initial={{ opacity: 1 }}
+            initial={{ opacity: 0 }}
             animate={arrowDownAnim}
             onMouseOver={() => {
               fogDownAnim.start({
@@ -168,7 +174,7 @@ export function PresetTitle({
           <motion.div
             className={styles.slideBtn}
             animate={arrowUpAnim}
-            initial={{ opacity: 1 }}
+            initial={{ opacity: 0 }}
             onMouseOver={() => {
               fogUpAnim.start({
                 opacity: 0.4,

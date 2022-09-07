@@ -14,8 +14,6 @@ type Props = {
   [x: string]: any
 }
 
-const tabHeights = { shape: 324, colors: 274, effects: 174, view: 224 }
-
 export const PropertyControls: React.FC<Props> = ({
   // isMobile,
   activeTab,
@@ -34,7 +32,8 @@ export const PropertyControls: React.FC<Props> = ({
         originY: 1,
       }}
       animate={{
-        height: activeTab === 'none' ? 0 : tabHeights[activeTab],
+        height: 'fit-content',
+        maxHeight: activeTab === 'none' ? 0 : 600,
         padding: activeTab === 'none' ? 0 : 20,
       }}
       transition={{ duration: 0.72 }}

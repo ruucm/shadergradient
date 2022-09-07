@@ -54,7 +54,12 @@ const DOM = () => {
     setMode('full')
   }, [])
 
-  if (time <= mainLoading.end) return <></>
+  const textAnimationBase = 0.3
+  const textAnimationGap = 0.15
+  const textDuration = 0.35
+  const textEase = 'easeInOut'
+
+  if (time <= mainLoading.text) return <></>
 
   return (
     <>
@@ -82,11 +87,22 @@ const DOM = () => {
 
           <motion.div
             className={styles.paragraph}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
+            initial={{
+              opacity: 0,
+              y: 20,
+            }}
+            animate={{
+              opacity: 1,
+              y: 0,
+            }}
+            transition={{
+              delay: textAnimationBase,
+              duration: textDuration,
+              ease: textEase,
+            }}
             style={{
               color: PRESETS[activePreset].color,
-              display: isMobile === true ? 'none' : 'block',
+              display: isMobile === false ? 'block' : 'none',
             }}
           >
             All visuals are created with ShaderGradient,
@@ -94,10 +110,22 @@ const DOM = () => {
             {`It's made with lines of codes, so you can create your own with just
             a few clicks.`}
           </motion.div>
-          <div
+          <motion.div
             className={styles.customizeBtnWrapper}
-            style={{
+            initial={{
+              display: 'none',
+              opacity: 0,
+              y: 20,
+            }}
+            animate={{
               display: isMobile === false ? 'flex' : 'none',
+              opacity: 1,
+              y: 0,
+            }}
+            transition={{
+              delay: textAnimationBase + textAnimationGap,
+              duration: textDuration,
+              ease: textEase,
             }}
           >
             <Link href='/customize'>
@@ -113,14 +141,25 @@ const DOM = () => {
                 <TextHover
                   fontSize={isMobile === true ? 15 : 18}
                   color={PRESETS[activePreset].color}
-                  content={'Try it by yourself →'}
+                  content={'Create yours →'}
                   delay={0}
                   border
                 />
               </motion.div>
             </Link>
-          </div>
-          {isMobile === false && <Links />}
+          </motion.div>
+          <motion.div
+            style={{ position: 'absolute', bottom: 0 }}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{
+              delay: textAnimationBase + textAnimationGap * 2,
+              duration: textDuration,
+              ease: textEase,
+            }}
+          >
+            {isMobile === false && <Links />}
+          </motion.div>
         </div>
       </div>
       {isMobile === false && (
@@ -136,22 +175,54 @@ const DOM = () => {
 
 // canvas components goes here
 const R3F = () => {
-  const afterStart = useTimer(true, mainLoading.end * 1000)
+  const afterStart = useTimer(
+    true,
+    (mainLoading.posDelay + mainLoading.posDur) * 1000
+  )
+  const c1 = 1.70158
+  const c2 = c1 * 1.525
+  const c3 = c1 + 1
+  const c4 = (2 * Math.PI) / 3
+  const c5 = (2 * Math.PI) / 4.5
 
   if (!afterStart)
     return (
       <Gradient
-        cDistance={28}
-        positionX={0}
-        cAzimuthAngle={0}
-        dampingFactor={1}
-        springOption={({ rotation }) => ({
+        cAzimuthAngle={180}
+        cPolarAngle={90}
+        dampingFactor={1} // default value 0.05, max 1
+        rotSpringOption={({ rotation }) => ({
           to: async (next, cancel) => {
-            await sleep(mainLoading.delay)
+            await sleep(mainLoading.rotDelay)
+            await next({ animatedRotation: dToRArr([30, 10, 40]) })
             await next({ animatedRotation: rotation })
           },
           from: { animatedRotation: dToRArr([0, 0, 0]) },
-          config: { duration: mainLoading.duration * 1000 },
+          config: {
+            duration: mainLoading.rotDur * 1000,
+            // https://github.com/pmndrs/react-spring/blob/master/packages/core/src/constants.ts
+            easing: (x) =>
+              x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2, //cubic in out
+          },
+        })}
+        posSpringOption={({ position }) => ({
+          to: async (next, cancel) => {
+            await sleep(mainLoading.posDelay)
+            await next({ animatedPosition: position })
+          },
+          from: { animatedPosition: [0, 0, 15] },
+          config: {
+            duration: mainLoading.posDur * 1000,
+            // https://github.com/pmndrs/react-spring/blob/master/packages/core/src/constants.ts
+            easing: (x) =>
+              x === 0
+                ? 0
+                : x === 1
+                ? 1
+                : x < 0.5
+                ? Math.pow(2, 20 * x - 10) / 2
+                : (2 - Math.pow(2, -20 * x + 10)) / 2, //expoInOut
+          },
         })}
       />
     )

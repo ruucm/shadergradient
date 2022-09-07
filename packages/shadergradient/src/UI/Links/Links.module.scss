@@ -1,12 +1,14 @@
 .LinksWrapper {
   width: 100vw;
   height: fit-content;
-  margin-top: 12vh;
+  position: absolute;
+  bottom: 9vh;
+  // margin-top: 13vh;
   p {
     width: 100%;
     text-align: center;
     font-size: 12px;
-    margin-bottom: 16px;
+    margin-bottom: 8px;
   }
 }
 

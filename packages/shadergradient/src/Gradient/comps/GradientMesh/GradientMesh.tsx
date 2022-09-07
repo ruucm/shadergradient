@@ -8,7 +8,23 @@ import { lineMaterial } from './lineMaterial'
 import { shaderMaterial } from './shaderMaterial'
 import * as shaders from './shaders/index'
 
+
+const { to, rotDur, meshDur, rotDelay, meshDelay } = mainLoading
+
 const clock = new THREE.Clock()
+//t = current time
+//b = start value
+//c = change in value
+//d = duration
+
+// @ts-ignore
+Math.easeInOutCubic = function (t, b, c, d) {
+  t /= d / 2
+  if (t < 1) return (c / 2) * t * t * t + b
+  t -= 2
+  return (c / 2) * (t * t * t + 2) + b
+}
+
 
 const increment = 20
 const { delay, duration, to } = mainLoading
@@ -27,17 +43,25 @@ export const GradientMesh: React.FC<any> = ({
   rotationY,
   rotationZ,
   reflection,
-
-  springOption = ({ rotation }) => ({
+  wireframe,
+  shader,
+  rotSpringOption = ({ rotation }) => ({
     to: async (next, cancel) => {
       await next({ animatedRotation: rotation })
     },
-    from: { animatedRotation: dToRArr([0, 0, 0]) },
-    config: { duration: 0.2 * 1000 },
+    from: { rotation: dToRArr([0, 0, 0]) },
+    config: { duration: 300 }, // default transition
+  }),
+  posSpringOption = ({ position }) => ({
+    to: async (next, cancel) => {
+      await next({ animatedPosition: position })
+    },
+    from: { position: [0, 0, 0] },
+    config: { duration: 300 }, // default transition
   }),
   ...materialProps // uSpeed, uStrength, uDensity, uFrequency, uAmplitude, color1, color2, color3, wireframe, shader
 }) => {
-  const { animated, useSpring } = useFiber()
+  const { useFrame, extend, animated, useSpring, useSprings } = useFiber()
 
   const material: any = useRef()
   const linemat: any = useRef()
@@ -259,16 +283,21 @@ function useMaterialAnimate({ animate, material, linemat }) {
     const elapsed = clock.getElapsedTime()
 
     // loading animation
-    if (elapsed > delay) {
+    if (elapsed > meshDelay) {
       const current = material.current.userData.uLoadingTime.value
       const val =
-        elapsed < duration + delay
+        elapsed < meshDur + meshDelay
           ? // @ts-ignore
-            Math.easeInExpo(currentTime, current, to - current, duration * 1000)
+            Math.easeInOutCubic(
+              currentTime,
+              current,
+              to - current,
+              meshDur * 1000
+            )
           : to
       material.current.userData.uLoadingTime.value = val
 
-      if (elapsed < duration + delay) {
+      if (elapsed < meshDur + meshDelay) {
         currentTime += increment
         // console.log({ elapsed, val })
       }
@@ -282,6 +311,62 @@ function useMaterialAnimate({ animate, material, linemat }) {
       }
     }
   })
+
+  useEffect(() => {
+    material.current.userData.uTime.value = uTime
+    if (linemat.current !== undefined) {
+      linemat.current.userData.uTime.value = uTime
+    }
+
+    material.current.roughness = 1 - reflection
+  }, [uTime, reflection])
+
+  // change position/rotation for about page
+  const position = [positionX, positionY, positionZ]
+  const rotation = dToRArr([rotationX, rotationY, rotationZ])
+
+  const { animatedPosition } = useSpring(posSpringOption({ position }))
+
+  const { animatedRotation } = useSpring(rotSpringOption({ rotation }))
+
+  return (
+    <group>
+      {/* @ts-ignore */}
+      <animated.mesh position={animatedPosition} rotation={animatedRotation}>
+        {type === 'plane' && <planeGeometry args={[10, 10, 1, meshCount]} />}
+        {type === 'sphere' && (
+          <icosahedronBufferGeometry args={[1, meshCount / 3]} />
+        )}
+        {type === 'waterPlane' && (
+          <planeGeometry args={[10, 10, meshCount, meshCount]} />
+        )}
+        {/* @ts-ignore */}
+        <colorShiftMaterial key={ColorShiftMaterial.key} ref={material} />
+      </animated.mesh>
+
+      {/* show the line mesh when color is hovered */}
+      <mesh>
+        <lineSegments
+          renderOrder={1}
+          position={position}
+          rotation={rotation}
+          visible={hoverState !== 0 ? true : false}
+        >
+          {type === 'plane' && (
+            <planeGeometry args={[10, 10, 1, meshLineCount]} />
+          )}
+          {type === 'sphere' && (
+            <icosahedronBufferGeometry args={[1, meshLineCount / 3]} />
+          )}
+          {type === 'waterPlane' && (
+            <planeGeometry args={[10, 10, meshLineCount, meshLineCount]} />
+          )}
+          {/* @ts-ignore */}
+          <hoveredLineMaterial key={HoveredLineMaterial.key} ref={linemat} />
+        </lineSegments>
+      </mesh>
+    </group>
+  )
 }
 
 //t = current time

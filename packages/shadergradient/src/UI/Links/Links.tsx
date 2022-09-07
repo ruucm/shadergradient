@@ -29,9 +29,6 @@ export function Links({ isMobile = false }) {
           borderRadius: 25,
           cursor: 'pointer',
         }}
-        // whileHover={{
-        //   backgroundColor: 'rgba(255,255,255,0.2)',
-        // }}
         onClick={() => {
           window.open(link)
         }}
@@ -56,7 +53,6 @@ export function Links({ isMobile = false }) {
             marginTop: 65,
             fontSize: 12,
             color: 'white',
-            // padding: 8,
             borderRadius: 4,
           }}
           initial={{

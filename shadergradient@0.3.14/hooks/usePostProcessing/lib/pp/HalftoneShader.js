@@ -318,19 +318,20 @@ var HalftoneShader = {
 				vec4 vG;
 				vec4 vB;
 	
-				if (r == 0.0) {
+				// apply transparent to outside of mesh
+				if (r == 0.0 && colour.r == 0.0) {
 					vR = vec4( 0, 0, 0, 0 );
 				} else {
 					vR = vec4( r, 0, 0, 1 );
 				}
 	
-				if (g == 0.0) {
+				if (g == 0.0 && colour.g == 0.0) {
 					vG = vec4( 0, 0, 0, 0 );
 				} else {
 					vG = vec4( 0, g, 0, 1 );
 				}
 	
-				if (b == 0.0) {
+				if (b == 0.0 && colour.b == 0.0) {
 					vB = vec4( 0, 0, 0, 0 );
 				} else {
 					vB = vec4( 0, 0, b, 1 );

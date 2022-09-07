@@ -50,7 +50,7 @@ export const mainLoading = {
 
   // position animation
   posDelay: 1.3,
-  posDur: 2.5,
+  posDur: 2.2,
 
   logoTransition: 3.1, // Timing for the logo
   text: 2.5, // Timing for the preset title appearing

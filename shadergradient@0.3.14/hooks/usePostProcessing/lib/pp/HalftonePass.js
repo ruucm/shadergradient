@@ -23993,6 +23993,7 @@ var HalftonePass = class extends Pass {
       this.uniforms.width.value = width;
       this.uniforms.height.value = height;
     }
+    this.uniforms.disable.value = params["disable"];
     console.log("this.uniforms", this.uniforms);
     this.fsQuad = new FullScreenQuad(this.material);
     this.blendMode = new BlendMode(BlendFunction.SCREEN);

@@ -177,7 +177,7 @@ const DOM = () => {
 const R3F = () => {
   const afterStart = useTimer(
     true,
-    (mainLoading.posDelay + mainLoading.posDur) * 1000
+    (mainLoading.meshDur + mainLoading.meshDelay + 0.7) * 1000
   )
   const c1 = 1.70158
   const c2 = c1 * 1.525

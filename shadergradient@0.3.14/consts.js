@@ -36,7 +36,7 @@ var mainLoading = {
   rotDelay: 1.7,
   rotDur: 1,
   posDelay: 1.3,
-  posDur: 2.5,
+  posDur: 2.2,
   logoTransition: 3.1,
   text: 2.5,
   to: 1

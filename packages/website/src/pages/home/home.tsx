@@ -59,7 +59,7 @@ const DOM = () => {
   const textDuration = 0.35
   const textEase = 'easeInOut'
 
-  if (time <= mainLoading.end - 1) return <></>
+  if (time <= mainLoading.text) return <></>
 
   return (
     <>
@@ -188,7 +188,6 @@ const R3F = () => {
   if (!afterStart)
     return (
       <Gradient
-        // cDistance={3.6}
         cAzimuthAngle={180}
         cPolarAngle={90}
         dampingFactor={1} // default value 0.05, max 1
@@ -201,23 +200,9 @@ const R3F = () => {
           from: { animatedRotation: dToRArr([0, 0, 0]) },
           config: {
             duration: mainLoading.rotDur * 1000,
-            // friction: 15,
-            // mass: 0.5,
             // https://github.com/pmndrs/react-spring/blob/master/packages/core/src/constants.ts
             easing: (x) =>
               x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2, //cubic in out
-            // easing: (x) =>
-            //   x === 0
-            //     ? 0
-            //     : x === 1
-            //     ? 1
-            //     : x < 0.5
-            //     ? Math.pow(2, 20 * x - 10) / 2
-            //     : (2 - Math.pow(2, -20 * x + 10)) / 2, // expoInOut
-            // easing: (x) =>
-            //   x < 0.5
-            //     ? (1 - Math.sqrt(1 - Math.pow(2 * x, 2))) / 2
-            //     : (Math.sqrt(1 - Math.pow(-2 * x + 2, 2)) + 1) / 2,
           },
         })}
         posSpringOption={({ position }) => ({
@@ -228,11 +213,7 @@ const R3F = () => {
           from: { animatedPosition: [0, 0, 15] },
           config: {
             duration: mainLoading.posDur * 1000,
-            // friction: 2,
-            // mass: 0.1,
             // https://github.com/pmndrs/react-spring/blob/master/packages/core/src/constants.ts
-            // easing: (x) =>
-            //   x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2, //cubic in out
             easing: (x) =>
               x === 0
                 ? 0
@@ -240,7 +221,7 @@ const R3F = () => {
                 ? 1
                 : x < 0.5
                 ? Math.pow(2, 20 * x - 10) / 2
-                : (2 - Math.pow(2, -20 * x + 10)) / 2,
+                : (2 - Math.pow(2, -20 * x + 10)) / 2, //expoInOut
           },
         })}
       />

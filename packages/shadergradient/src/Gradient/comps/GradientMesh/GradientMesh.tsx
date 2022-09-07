@@ -15,37 +15,13 @@ const clock = new THREE.Clock()
 //b = start value
 //c = change in value
 //d = duration
-// @ts-ignore
-Math.easeInExpo = function (t, b, c, d) {
-  // source from http://gizma.com/easing/
-  return c * Math.pow(2, 10 * (t / d - 1)) + b
-}
-// @ts-ignore
-Math.easeOutCirc = function (t, b, c, d) {
-  t /= d
-  t--
-  return c * Math.sqrt(1 - t * t) + b
-}
-// @ts-ignore
-Math.easeInOutCirc = function (t, b, c, d) {
-  t /= d / 2
-  if (t < 1) return (-c / 2) * (Math.sqrt(1 - t * t) - 1) + b
-  t -= 2
-  return (c / 2) * (Math.sqrt(1 - t * t) + 1) + b
-}
+
 // @ts-ignore
 Math.easeInOutCubic = function (t, b, c, d) {
   t /= d / 2
   if (t < 1) return (c / 2) * t * t * t + b
   t -= 2
   return (c / 2) * (t * t * t + 2) + b
-}
-
-//@ts-ignore
-
-Math.easeInCubic = function (t, b, c, d) {
-  t /= d
-  return c * t * t * t + b
 }
 
 const increment = 20

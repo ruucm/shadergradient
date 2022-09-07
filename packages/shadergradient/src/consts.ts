@@ -40,17 +40,21 @@ export const hdrBase = 'https://shadergradient.vercel.app'
 
 // loading animations
 export const mainLoading = {
-  // times
-  meshDelay: 2, // duration of gradient remain static
-  meshDur: 1.8, // duration of gradient becoming 3d
+  // mesh animation
+  meshDelay: 2,
+  meshDur: 1.8,
 
+  // rotation animation
   rotDelay: 1.7,
-  rotDur: 1, // rotation twice
+  rotDur: 1,
 
+  // position animation
   posDelay: 1.3,
   posDur: 2.5,
 
-  end: 3.5, //  Timing for the texts. Should be bigger than rotDelay + rotDur
+  logoTransition: 3.1, // Timing for the logo
+  text: 2.5, // Timing for the preset title appearing
+
   // mesh
   to: 1, // end factor (0 -> 1) for the mesh noisestrength
 }

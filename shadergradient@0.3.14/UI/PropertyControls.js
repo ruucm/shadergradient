@@ -78,7 +78,6 @@ import {
   EffectControls,
   ViewControls
 } from "../UI/index.js";
-var tabHeights = { shape: 324, colors: 274, effects: 174, view: 224 };
 var PropertyControls = ({
   activeTab,
   setActiveTab
@@ -92,7 +91,8 @@ var PropertyControls = ({
       originY: 1
     },
     animate: {
-      height: activeTab === "none" ? 0 : tabHeights[activeTab],
+      height: "fit-content",
+      maxHeight: activeTab === "none" ? 0 : 600,
       padding: activeTab === "none" ? 0 : 20
     },
     transition: { duration: 0.72 }

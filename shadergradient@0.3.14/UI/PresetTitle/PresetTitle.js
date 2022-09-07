@@ -5,8 +5,8 @@ import { PRESETS } from "../../presets.js";
 import { useUIStore, useCursorStore } from "../../store.js";
 import { TextAnimation } from "../../UI/index.js";
 
-// esbuild-css-modules-plugin-namespace:/tmp/tmp-1919-A2qUAWH16DaJ/shadergradient/src/UI/PresetTitle/PresetTitle.module.css.js
-var digest = "8c9cbb24b61977e36f8b81ad63f435aca8cdf95cd1b797f60daefc579ea1c0b6";
+// esbuild-css-modules-plugin-namespace:/tmp/tmp-1885-VUEVB1ED3EXa/shadergradient/src/UI/PresetTitle/PresetTitle.module.css.js
+var digest = "0d36bad6b7905f2e80a8b761335ec6837fb40be77ccc0ede86080fd4ca55ec04";
 var css = `@import url("https://fonts.googleapis.com/css2?family=Lora:wght@500&display=swap");
 ._presetWrapper_nbez8_2 {
   width: 100vw;
@@ -79,6 +79,10 @@ function PresetTitle({
       setActivePreset(PRESETS.length - 1);
     }
   };
+  React.useEffect(() => {
+    arrowDownAnim.start({ opacity: 1, transition: { delay: 0.3 } });
+    arrowUpAnim.start({ opacity: 1, transition: { delay: 0.3 } });
+  }, []);
   const arrowUpAnim = useAnimation();
   const arrowDownAnim = useAnimation();
   const fogUpAnim = useAnimation();
@@ -160,6 +164,7 @@ function PresetTitle({
     font: '"Lora", serif',
     color,
     fontSize,
+    yBefore: 50,
     content: isMobile === true ? title.substring(3) : title
   })), /* @__PURE__ */ React.createElement("div", {
     className: PresetTitle_module_css_default.slideBtns,
@@ -170,7 +175,7 @@ function PresetTitle({
     }
   }, /* @__PURE__ */ React.createElement(motion.div, {
     className: PresetTitle_module_css_default.slideBtn,
-    initial: { opacity: 1 },
+    initial: { opacity: 0 },
     animate: arrowDownAnim,
     onMouseOver: () => {
       fogDownAnim.start({
@@ -201,7 +206,7 @@ function PresetTitle({
   }, "\u2193"), /* @__PURE__ */ React.createElement(motion.div, {
     className: PresetTitle_module_css_default.slideBtn,
     animate: arrowUpAnim,
-    initial: { opacity: 1 },
+    initial: { opacity: 0 },
     onMouseOver: () => {
       fogUpAnim.start({
         opacity: 0.4

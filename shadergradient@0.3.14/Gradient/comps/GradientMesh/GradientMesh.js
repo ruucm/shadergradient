@@ -1,34 +1,3 @@
-var __defProp = Object.defineProperty;
-var __defProps = Object.defineProperties;
-var __getOwnPropDescs = Object.getOwnPropertyDescriptors;
-var __getOwnPropSymbols = Object.getOwnPropertySymbols;
-var __hasOwnProp = Object.prototype.hasOwnProperty;
-var __propIsEnum = Object.prototype.propertyIsEnumerable;
-var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
-var __spreadValues = (a, b) => {
-  for (var prop in b || (b = {}))
-    if (__hasOwnProp.call(b, prop))
-      __defNormalProp(a, prop, b[prop]);
-  if (__getOwnPropSymbols)
-    for (var prop of __getOwnPropSymbols(b)) {
-      if (__propIsEnum.call(b, prop))
-        __defNormalProp(a, prop, b[prop]);
-    }
-  return a;
-};
-var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
-var __objRest = (source, exclude) => {
-  var target = {};
-  for (var prop in source)
-    if (__hasOwnProp.call(source, prop) && exclude.indexOf(prop) < 0)
-      target[prop] = source[prop];
-  if (source != null && __getOwnPropSymbols)
-    for (var prop of __getOwnPropSymbols(source)) {
-      if (exclude.indexOf(prop) < 0 && __propIsEnum.call(source, prop))
-        target[prop] = source[prop];
-    }
-  return target;
-};
 var __async = (__this, __arguments, generator) => {
   return new Promise((resolve, reject) => {
     var fulfilled = (value) => {
@@ -20101,10 +20070,10 @@ var VectorKeyframeTrack = class extends KeyframeTrack {
 };
 VectorKeyframeTrack.prototype.ValueTypeName = "vector";
 var AnimationClip = class {
-  constructor(name, duration2 = -1, tracks, blendMode = NormalAnimationBlendMode) {
+  constructor(name, duration = -1, tracks, blendMode = NormalAnimationBlendMode) {
     this.name = name;
     this.tracks = tracks;
-    this.duration = duration2;
+    this.duration = duration;
     this.blendMode = blendMode;
     this.uuid = generateUUID();
     if (this.duration < 0) {
@@ -20206,7 +20175,7 @@ var AnimationClip = class {
     const clipName = animation.name || "default";
     const fps = animation.fps || 30;
     const blendMode = animation.blendMode;
-    let duration2 = animation.length || -1;
+    let duration = animation.length || -1;
     const hierarchyTracks = animation.hierarchy || [];
     for (let h = 0; h < hierarchyTracks.length; h++) {
       const animationKeys = hierarchyTracks[h].keys;
@@ -20232,7 +20201,7 @@ var AnimationClip = class {
           }
           tracks.push(new NumberKeyframeTrack(".morphTargetInfluence[" + morphTargetName + "]", times, values));
         }
-        duration2 = morphTargetNames.length * (fps || 1);
+        duration = morphTargetNames.length * (fps || 1);
       } else {
         const boneName = ".bones[" + bones[h].name + "]";
         addNonemptyTrack(VectorKeyframeTrack, boneName + ".position", animationKeys, "pos", tracks);
@@ -20243,17 +20212,17 @@ var AnimationClip = class {
     if (tracks.length === 0) {
       return null;
     }
-    const clip = new this(clipName, duration2, tracks, blendMode);
+    const clip = new this(clipName, duration, tracks, blendMode);
     return clip;
   }
   resetDuration() {
     const tracks = this.tracks;
-    let duration2 = 0;
+    let duration = 0;
     for (let i = 0, n = tracks.length; i !== n; ++i) {
       const track = this.tracks[i];
-      duration2 = Math.max(duration2, track.times[track.times.length - 1]);
+      duration = Math.max(duration, track.times[track.times.length - 1]);
     }
-    this.duration = duration2;
+    this.duration = duration;
     return this;
   }
   trim() {
@@ -21420,7 +21389,7 @@ var Audio = class extends Object3D {
       this.play();
     return this;
   }
-  play(delay2 = 0) {
+  play(delay = 0) {
     if (this.isPlaying === true) {
       console.warn("THREE.Audio: Audio is already playing.");
       return;
@@ -21429,7 +21398,7 @@ var Audio = class extends Object3D {
       console.warn("THREE.Audio: this Audio has no playback control.");
       return;
     }
-    this._startedAt = this.context.currentTime + delay2;
+    this._startedAt = this.context.currentTime + delay;
     const source = this.context.createBufferSource();
     source.buffer = this.buffer;
     source.loop = this.loop;
@@ -22317,24 +22286,24 @@ var AnimationAction = class {
   getEffectiveWeight() {
     return this._effectiveWeight;
   }
-  fadeIn(duration2) {
-    return this._scheduleFading(duration2, 0, 1);
+  fadeIn(duration) {
+    return this._scheduleFading(duration, 0, 1);
   }
-  fadeOut(duration2) {
-    return this._scheduleFading(duration2, 1, 0);
+  fadeOut(duration) {
+    return this._scheduleFading(duration, 1, 0);
   }
-  crossFadeFrom(fadeOutAction, duration2, warp) {
-    fadeOutAction.fadeOut(duration2);
-    this.fadeIn(duration2);
+  crossFadeFrom(fadeOutAction, duration, warp) {
+    fadeOutAction.fadeOut(duration);
+    this.fadeIn(duration);
     if (warp) {
       const fadeInDuration = this._clip.duration, fadeOutDuration = fadeOutAction._clip.duration, startEndRatio = fadeOutDuration / fadeInDuration, endStartRatio = fadeInDuration / fadeOutDuration;
-      fadeOutAction.warp(1, startEndRatio, duration2);
-      this.warp(endStartRatio, 1, duration2);
+      fadeOutAction.warp(1, startEndRatio, duration);
+      this.warp(endStartRatio, 1, duration);
     }
     return this;
   }
-  crossFadeTo(fadeInAction, duration2, warp) {
-    return fadeInAction.crossFadeFrom(this, duration2, warp);
+  crossFadeTo(fadeInAction, duration, warp) {
+    return fadeInAction.crossFadeFrom(this, duration, warp);
   }
   stopFading() {
     const weightInterpolant = this._weightInterpolant;
@@ -22352,8 +22321,8 @@ var AnimationAction = class {
   getEffectiveTimeScale() {
     return this._effectiveTimeScale;
   }
-  setDuration(duration2) {
-    this.timeScale = this._clip.duration / duration2;
+  setDuration(duration) {
+    this.timeScale = this._clip.duration / duration;
     return this.stopWarping();
   }
   syncWith(action) {
@@ -22361,10 +22330,10 @@ var AnimationAction = class {
     this.timeScale = action.timeScale;
     return this.stopWarping();
   }
-  halt(duration2) {
-    return this.warp(this._effectiveTimeScale, 0, duration2);
+  halt(duration) {
+    return this.warp(this._effectiveTimeScale, 0, duration);
   }
-  warp(startTimeScale, endTimeScale, duration2) {
+  warp(startTimeScale, endTimeScale, duration) {
     const mixer = this._mixer, now2 = mixer.time, timeScale = this.timeScale;
     let interpolant = this._timeScaleInterpolant;
     if (interpolant === null) {
@@ -22373,7 +22342,7 @@ var AnimationAction = class {
     }
     const times = interpolant.parameterPositions, values = interpolant.sampleValues;
     times[0] = now2;
-    times[1] = now2 + duration2;
+    times[1] = now2 + duration;
     values[0] = startTimeScale / timeScale;
     values[1] = endTimeScale / timeScale;
     return this;
@@ -22472,7 +22441,7 @@ var AnimationAction = class {
     return timeScale;
   }
   _updateTime(deltaTime) {
-    const duration2 = this._clip.duration;
+    const duration = this._clip.duration;
     const loop = this.loop;
     let time = this.time + deltaTime;
     let loopCount = this._loopCount;
@@ -22480,7 +22449,7 @@ var AnimationAction = class {
     if (deltaTime === 0) {
       if (loopCount === -1)
         return time;
-      return pingPong && (loopCount & 1) === 1 ? duration2 - time : time;
+      return pingPong && (loopCount & 1) === 1 ? duration - time : time;
     }
     if (loop === LoopOnce) {
       if (loopCount === -1) {
@@ -22488,8 +22457,8 @@ var AnimationAction = class {
         this._setEndings(true, true, false);
       }
       handle_stop: {
-        if (time >= duration2) {
-          time = duration2;
+        if (time >= duration) {
+          time = duration;
         } else if (time < 0) {
           time = 0;
         } else {
@@ -22516,9 +22485,9 @@ var AnimationAction = class {
           this._setEndings(this.repetitions === 0, true, pingPong);
         }
       }
-      if (time >= duration2 || time < 0) {
-        const loopDelta = Math.floor(time / duration2);
-        time -= duration2 * loopDelta;
+      if (time >= duration || time < 0) {
+        const loopDelta = Math.floor(time / duration);
+        time -= duration * loopDelta;
         loopCount += Math.abs(loopDelta);
         const pending = this.repetitions - loopCount;
         if (pending <= 0) {
@@ -22526,7 +22495,7 @@ var AnimationAction = class {
             this.paused = true;
           else
             this.enabled = false;
-          time = deltaTime > 0 ? duration2 : 0;
+          time = deltaTime > 0 ? duration : 0;
           this.time = time;
           this._mixer.dispatchEvent({
             type: "finished",
@@ -22552,7 +22521,7 @@ var AnimationAction = class {
         this.time = time;
       }
       if (pingPong && (loopCount & 1) === 1) {
-        return duration2 - time;
+        return duration - time;
       }
     }
     return time;
@@ -22575,7 +22544,7 @@ var AnimationAction = class {
       }
     }
   }
-  _scheduleFading(duration2, weightNow, weightThen) {
+  _scheduleFading(duration, weightNow, weightThen) {
     const mixer = this._mixer, now2 = mixer.time;
     let interpolant = this._weightInterpolant;
     if (interpolant === null) {
@@ -22585,7 +22554,7 @@ var AnimationAction = class {
     const times = interpolant.parameterPositions, values = interpolant.sampleValues;
     times[0] = now2;
     values[0] = weightNow;
-    times[1] = now2 + duration2;
+    times[1] = now2 + duration;
     values[1] = weightThen;
     return this;
   }
@@ -24192,64 +24161,121 @@ import { dToRArr, useFiber } from "../../../utils/index.js";
 import { lineMaterial } from "./lineMaterial.js";
 import { shaderMaterial } from "./shaderMaterial.js";
 import * as shaders from "./shaders/index.js";
+var { to, rotDur, meshDur, rotDelay, meshDelay } = mainLoading;
 var clock = new Clock();
+Math.easeInOutCubic = function(t, b, c, d) {
+  t /= d / 2;
+  if (t < 1)
+    return c / 2 * t * t * t + b;
+  t -= 2;
+  return c / 2 * (t * t * t + 2) + b;
+};
 var increment = 20;
-var { delay, duration, to } = mainLoading;
-var meshCount = 192;
-var meshLineCount = 36;
-var GradientMesh = (_a) => {
-  var _b = _a, {
-    type,
-    animate,
+var GradientMesh = ({
+  type,
+  animate,
+  uTime,
+  uSpeed,
+  uStrength,
+  uDensity,
+  uFrequency,
+  uAmplitude,
+  positionX,
+  positionY,
+  positionZ,
+  rotationX,
+  rotationY,
+  rotationZ,
+  color1,
+  color2,
+  color3,
+  reflection,
+  wireframe,
+  shader,
+  rotSpringOption = ({ rotation }) => ({
+    to: (next, cancel) => __async(void 0, null, function* () {
+      yield next({ animatedRotation: rotation });
+    }),
+    from: { rotation: dToRArr([0, 0, 0]) },
+    config: { duration: 300 }
+  }),
+  posSpringOption = ({ position }) => ({
+    to: (next, cancel) => __async(void 0, null, function* () {
+      yield next({ animatedPosition: position });
+    }),
+    from: { position: [0, 0, 0] },
+    config: { duration: 300 }
+  })
+}) => {
+  const { useFrame, extend, animated, useSpring, useSprings } = useFiber();
+  let sceneShader = shaders.defaults[type != null ? type : "plane"];
+  if (shader && shader !== "defaults")
+    sceneShader = shaders[shader];
+  const hoverState = usePropertyStore((state) => state.hoverState);
+  const meshCount = 192;
+  const meshLineCount = 36;
+  useEffect(() => {
+    if (hoverState !== 0) {
+      usePropertyStore.setState({ zoomOut: true });
+    } else {
+      usePropertyStore.setState({ zoomOut: false });
+    }
+  }, [hoverState]);
+  const ColorShiftMaterial = shaderMaterial({
+    colors: getHoverColor(hoverState, [color1, color2, color3]),
     uTime,
-    positionX,
-    positionY,
-    positionZ,
-    rotationX,
-    rotationY,
-    rotationZ,
-    reflection,
-    springOption = ({ rotation }) => ({
-      to: (next, cancel) => __async(void 0, null, function* () {
-        yield next({ animatedRotation: rotation });
-      }),
-      from: { animatedRotation: dToRArr([0, 0, 0]) },
-      config: { duration: 0.2 * 1e3 }
-    })
-  } = _b, materialProps = __objRest(_b, [
-    "type",
-    "animate",
-    "uTime",
-    "positionX",
-    "positionY",
-    "positionZ",
-    "rotationX",
-    "rotationY",
-    "rotationZ",
-    "reflection",
-    "springOption"
-  ]);
-  const { animated, useSpring } = useFiber();
+    uSpeed,
+    uLoadingTime: 0,
+    uNoiseDensity: uDensity,
+    uNoiseStrength: uStrength,
+    uFrequency,
+    uAmplitude,
+    uIntensity: 0.5
+  }, sceneShader.vertex, sceneShader.fragment);
+  const HoveredLineMaterial = lineMaterial({
+    uTime,
+    uSpeed,
+    uNoiseDensity: uDensity,
+    uNoiseStrength: uStrength,
+    uFrequency,
+    uAmplitude,
+    uIntensity: 0.5
+  }, sceneShader.vertex);
+  ColorShiftMaterial.key = MathUtils.generateUUID();
+  extend({ ColorShiftMaterial });
+  HoveredLineMaterial.key = MathUtils.generateUUID();
+  extend({ HoveredLineMaterial });
   const material = useRef();
   const linemat = useRef();
-  const hoverState = usePropertyStore((state) => state.hoverState);
+  let currentTime = 0;
+  useFrame((state, delta) => {
+    const elapsed = clock.getElapsedTime();
+    if (elapsed > meshDelay) {
+      const current = material.current.userData.uLoadingTime.value;
+      const val = elapsed < meshDur + meshDelay ? Math.easeInOutCubic(currentTime, current, to - current, meshDur * 1e3) : to;
+      material.current.userData.uLoadingTime.value = val;
+      if (elapsed < meshDur + meshDelay) {
+        currentTime += increment;
+      }
+    }
+    if (animate === "on") {
+      material.current.userData.uTime.value = elapsed;
+      if (linemat.current !== void 0) {
+        linemat.current.userData.uTime.value = elapsed;
+      }
+    }
+  });
   useEffect(() => {
     material.current.userData.uTime.value = uTime;
-    if (linemat.current !== void 0)
+    if (linemat.current !== void 0) {
       linemat.current.userData.uTime.value = uTime;
+    }
     material.current.roughness = 1 - reflection;
   }, [uTime, reflection]);
-  const { ColorShiftMaterial, HoveredLineMaterial } = useMaterials(__spreadProps(__spreadValues({
-    type,
-    uTime
-  }, materialProps), {
-    hoverState
-  }));
-  useMaterialAnimate({ animate, material, linemat });
   const position = [positionX, positionY, positionZ];
   const rotation = dToRArr([rotationX, rotationY, rotationZ]);
-  const { animatedPosition } = useSpring({ animatedPosition: position });
-  const { animatedRotation } = useSpring(springOption({ rotation }));
+  const { animatedPosition } = useSpring(posSpringOption({ position }));
+  const { animatedRotation } = useSpring(rotSpringOption({ rotation }));
   return /* @__PURE__ */ React.createElement("group", null, /* @__PURE__ */ React.createElement(animated.mesh, {
     position: animatedPosition,
     rotation: animatedRotation
@@ -24264,7 +24290,7 @@ var GradientMesh = (_a) => {
     ref: material
   })), /* @__PURE__ */ React.createElement("mesh", null, /* @__PURE__ */ React.createElement("lineSegments", {
     renderOrder: 1,
-    position: [positionX, positionY, positionZ],
+    position,
     rotation,
     visible: hoverState !== 0 ? true : false
   }, type === "plane" && /* @__PURE__ */ React.createElement("planeGeometry", {
@@ -24288,93 +24314,6 @@ function getHoverColor(hoverState, colors) {
   else
     return [colors[0], colors[1], colors[2]];
 }
-function useMaterials({
-  type,
-  uTime,
-  uSpeed,
-  uStrength,
-  uDensity,
-  uFrequency,
-  uAmplitude,
-  color1,
-  color2,
-  color3,
-  wireframe,
-  shader,
-  hoverState
-}) {
-  const { extend } = useFiber();
-  let sceneShader = shaders.defaults[type != null ? type : "plane"];
-  if (shader && shader !== "defaults")
-    sceneShader = shaders[shader];
-  useEffect(() => {
-    if (hoverState !== 0) {
-      usePropertyStore.setState({ zoomOut: true });
-    } else {
-      usePropertyStore.setState({ zoomOut: false });
-    }
-  }, [hoverState]);
-  const ColorShiftMaterial = shaderMaterial({
-    colors: getHoverColor(hoverState, [color1, color2, color3]),
-    uTime,
-    uSpeed,
-    uLoadingTime: 0,
-    uNoiseDensity: uDensity,
-    uNoiseStrength: uStrength,
-    uFrequency,
-    uAmplitude,
-    uIntensity: 0.5,
-    shape: 1,
-    radius: 2,
-    rotateR: Math.PI / 12 * 1,
-    rotateG: Math.PI / 12 * 2,
-    rotateB: Math.PI / 12 * 3,
-    scatter: 1,
-    width: 1060,
-    height: 919,
-    blendingMode: 1,
-    greyscale: false,
-    disable: false
-  }, sceneShader.vertex, sceneShader.fragment);
-  const HoveredLineMaterial = lineMaterial({
-    uTime,
-    uSpeed,
-    uNoiseDensity: uDensity,
-    uNoiseStrength: uStrength,
-    uFrequency,
-    uAmplitude,
-    uIntensity: 0.5
-  }, sceneShader.vertex);
-  ColorShiftMaterial.key = MathUtils.generateUUID();
-  extend({ ColorShiftMaterial });
-  HoveredLineMaterial.key = MathUtils.generateUUID();
-  extend({ HoveredLineMaterial });
-  return { ColorShiftMaterial, HoveredLineMaterial, hoverState };
-}
-function useMaterialAnimate({ animate, material, linemat }) {
-  const { useFrame } = useFiber();
-  let currentTime = 0;
-  useFrame((state, delta) => {
-    const elapsed = clock.getElapsedTime();
-    if (elapsed > delay) {
-      const current = material.current.userData.uLoadingTime.value;
-      const val = elapsed < duration + delay ? Math.easeInExpo(currentTime, current, to - current, duration * 1e3) : to;
-      material.current.userData.uLoadingTime.value = val;
-      if (elapsed < duration + delay) {
-        currentTime += increment;
-      }
-    }
-    if (animate === "on") {
-      material.current.userData.uTime.value = elapsed;
-      if (linemat.current !== void 0) {
-        linemat.current.userData.uTime.value = elapsed;
-      }
-    }
-  });
-}
-Math.easeInExpo = function(t, b, c, d) {
-  return c * Math.pow(2, 10 * (t / d - 1)) + b;
-};
 export {
   GradientMesh
 };

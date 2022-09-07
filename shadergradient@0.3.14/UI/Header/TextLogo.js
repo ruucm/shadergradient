@@ -2,7 +2,7 @@
 import React from "react";
 import { useUIStore, useCursorStore } from "../../store.js";
 import { TextHover } from "../TextAnimation/index.js";
-function TextLogo({ color = "white", size = 18, onClick }) {
+function TextLogo({ color = "white", size = 18, onClick, delay = 0 }) {
   const mode = useUIStore((state) => state.mode);
   return /* @__PURE__ */ React.createElement("div", {
     style: {
@@ -28,7 +28,7 @@ function TextLogo({ color = "white", size = 18, onClick }) {
     fontSize: size,
     color: mode !== "full" ? "#FF430A" : color,
     content: "ShaderGradient",
-    delay: 0,
+    delay,
     border: true
   })));
 }

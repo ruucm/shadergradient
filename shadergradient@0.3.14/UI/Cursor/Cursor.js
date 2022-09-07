@@ -39,7 +39,7 @@ function Cursor({ on }) {
         motionCursorSize.set(40);
       } else if (hover === "arrowUp" || hover === "arrowDown") {
         motionCursorSize.set(80);
-      } else if (hover === "preview") {
+      } else if (hover === "preview" || hover === "control") {
         motionCursorSize.set(0);
       }
     };

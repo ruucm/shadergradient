@@ -158,32 +158,6 @@ function useInView({
 }
 
 // src/UI/TextAnimation/TextAnimation.tsx
-var letterContainerVariants = {
-  before: { transition: { staggerChildren: 0.015 } },
-  after: { transition: { staggerChildren: 0.03 } }
-};
-var letterVariants = {
-  before: {
-    opacity: 0,
-    y: 20,
-    rotate: -10,
-    transition: {
-      type: "spring",
-      damping: 12,
-      stiffness: 200
-    }
-  },
-  after: {
-    opacity: 1,
-    y: 0,
-    rotate: 0,
-    transition: {
-      type: "spring",
-      damping: 12,
-      stiffness: 200
-    }
-  }
-};
 function TextAnimation({
   fontSize,
   color,
@@ -192,8 +166,37 @@ function TextAnimation({
   delay,
   width = null,
   font = null,
-  textCenter = false
+  textCenter = false,
+  yBefore = 20
 }) {
+  const letterContainerVariants = {
+    before: { transition: { staggerChildren: 0.015 } },
+    after: { transition: { staggerChildren: 0.015 } }
+  };
+  const letterVariants = {
+    before: {
+      opacity: 0,
+      y: yBefore,
+      rotate: -15,
+      scale: 0.4,
+      transition: {
+        type: "spring",
+        duration: 0.4,
+        damping: 10
+      }
+    },
+    after: {
+      opacity: 1,
+      y: 0,
+      scale: 1,
+      rotate: 0,
+      transition: {
+        type: "spring",
+        duration: 0.4,
+        damping: 10
+      }
+    }
+  };
   const [ref, inView] = useInView();
   const controls = useAnimation();
   const [activePresetInView, setActivePresetInView] = useState2(false);
@@ -232,8 +235,7 @@ function TextAnimation({
       display: "inline-block",
       width: "auto"
     },
-    variants: letterVariants,
-    transition: { duration: 0.5 }
+    variants: letterVariants
   }, letter === " " ? "\xA0" : letter)), wordI !== content.split(" ").length - 1 ? "\xA0" : null))))));
 }
 export {

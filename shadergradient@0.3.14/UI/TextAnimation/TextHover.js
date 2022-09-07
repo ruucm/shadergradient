@@ -214,7 +214,7 @@ function TextHover({
   const activePreset = useUIStore((state) => state.activePreset);
   setTimeout(() => {
     setCurrentInView(true);
-  }, delay);
+  }, delay * 1e3);
   return /* @__PURE__ */ React2.createElement(AnimatePresence, null, /* @__PURE__ */ React2.createElement(motion.div, {
     style: {
       position: "relative",
@@ -230,8 +230,7 @@ function TextHover({
   }, /* @__PURE__ */ React2.createElement(motion.h1, {
     variants: letterContainerVariants,
     ref,
-    initial: "initial",
-    animate: "default",
+    animate: currentInView === true ? "default" : "initial",
     whileHover: "hover",
     style: { padding: "2px 5px" }
   }, /* @__PURE__ */ React2.createElement("div", {

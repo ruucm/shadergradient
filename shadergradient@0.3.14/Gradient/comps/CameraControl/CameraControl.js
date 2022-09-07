@@ -30076,7 +30076,11 @@ function CameraControl(_a) {
   return /* @__PURE__ */ React.createElement("cameraControls", {
     ref,
     args: [camera, gl.domElement],
-    dampingFactor
+    enableDamping: true,
+    dampingFactor,
+    zoomSpeed: 10,
+    dollySpeed: 10,
+    restThreshold: 0
   });
 }
 export {

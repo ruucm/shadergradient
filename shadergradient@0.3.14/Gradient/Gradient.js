@@ -44,12 +44,14 @@ function GradientComp(_a) {
     zoomOut = false,
     control = "props",
     dampingFactor,
-    springOption
+    rotSpringOption,
+    posSpringOption
   } = _b, props = __objRest(_b, [
     "zoomOut",
     "control",
     "dampingFactor",
-    "springOption"
+    "rotSpringOption",
+    "posSpringOption"
   ]);
   const setLoadingPercentage = useUIStore((state) => state.setLoadingPercentage);
   usePresetToStore();
@@ -69,7 +71,8 @@ function GradientComp(_a) {
   }), /* @__PURE__ */ React.createElement(CameraControl, __spreadValues({
     dampingFactor
   }, others)), /* @__PURE__ */ React.createElement(GradientMesh, __spreadProps(__spreadValues({}, others), {
-    springOption
+    rotSpringOption,
+    posSpringOption
   })));
 }
 var Gradient = (props) => /* @__PURE__ */ React.createElement(Suspense, {

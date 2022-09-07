@@ -975,12 +975,12 @@ function AboutBtn({
     onClick: onAboutClick
   }, isMobile === true ? /* @__PURE__ */ React3.createElement(info_default, {
     color
-  }) : /* @__PURE__ */ React3.createElement(React3.Fragment, null, /* @__PURE__ */ React3.createElement(TextHover, {
+  }) : /* @__PURE__ */ React3.createElement(TextHover, {
     content: "about",
     fontSize: 14,
     border: false,
     color
-  }))));
+  })));
 }
 export {
   AboutBtn

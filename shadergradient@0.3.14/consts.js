@@ -31,9 +31,14 @@ var aboutRotations = [0, 10, 50];
 var aboutMobilePositions = [0, 20, 0];
 var hdrBase = "https://shadergradient.vercel.app";
 var mainLoading = {
-  delay: 1,
-  duration: 3,
-  end: 4 + 1,
+  meshDelay: 2,
+  meshDur: 1.8,
+  rotDelay: 1.7,
+  rotDur: 1,
+  posDelay: 1.3,
+  posDur: 2.5,
+  logoTransition: 3.1,
+  text: 2.5,
   to: 1
 };
 var envBasePath = "https://shadergradient.vercel.app/hdr/";

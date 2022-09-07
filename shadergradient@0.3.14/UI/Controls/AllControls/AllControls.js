@@ -1,12 +1,12 @@
 // src/UI/Controls/AllControls/AllControls.tsx
 import React, { useState } from "react";
 import { motion } from "framer-motion";
-import { useUIStore } from "../../../store.js";
+import { useUIStore, useCursorStore } from "../../../store.js";
 import { PropertyControls } from "../../PropertyControls.js";
 import { ToolsBox, ControlTypeTitles } from "../Tools/index.js";
 
-// esbuild-css-modules-plugin-namespace:/tmp/tmp-1919-A2qUAWH16DaJ/shadergradient/src/UI/Controls/AllControls/AllControls.module.css.js
-var digest = "f41cf4803bb96ca95ae89e8f109b26d668fc40aadf1107a2dd065596ed13df8b";
+// esbuild-css-modules-plugin-namespace:/tmp/tmp-1885-VUEVB1ED3EXa/shadergradient/src/UI/Controls/AllControls/AllControls.module.css.js
+var digest = "3b25056b4f2b4914ddd44426831596351f3f3a2d1287891e85ae81ce46c28906";
 var css = `._controlMobile_1dm53_1 {
   width: 100vw;
   height: fit-content; }
@@ -47,6 +47,12 @@ var AllControls = ({ isMobile, isFigma = false }) => {
       display: "flex",
       flexDirection: isFigma === true ? "column-reverse" : "column",
       justifyContent: "flex-end"
+    },
+    onMouseMove: () => {
+      useCursorStore.setState({ hover: "control" });
+    },
+    onMouseLeave: () => {
+      useCursorStore.setState({ hover: "default" });
     }
   }, /* @__PURE__ */ React.createElement(PropertyControls, {
     activeTab,

@@ -9,13 +9,13 @@ const HalftoneShader = {
   uniforms: {
     tDiffuse: { value: null },
     shape: { value: 1 },
-    radius: { value: 4 },
+    radius: { value: 2 },
     rotateR: { value: (Math.PI / 12) * 1 },
     rotateG: { value: (Math.PI / 12) * 2 },
     rotateB: { value: (Math.PI / 12) * 3 },
-    scatter: { value: 0 },
-    width: { value: 1 },
-    height: { value: 1 },
+    scatter: { value: 1 },
+    width: { value: 20 },
+    height: { value: 20 },
     blending: { value: 1 },
     blendingMode: { value: 1 },
     greyscale: { value: false },
@@ -25,10 +25,13 @@ const HalftoneShader = {
   vertexShader: /* glsl */ `
 
 		varying vec2 vUV;
+		varying vec3 vPosition;
 
 		void main() {
 
 			vUV = uv;
+			vPosition = position;
+
 			gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
 
 		}`,
@@ -60,6 +63,7 @@ const HalftoneShader = {
 		uniform float blending;
 		uniform int blendingMode;
 		varying vec2 vUV;
+		varying vec3 vPosition;
 		uniform bool greyscale;
 		const int samples = 8;
 
@@ -144,7 +148,8 @@ const HalftoneShader = {
 			vec4 tex = texture2D( tDiffuse, vec2( point.x / width, point.y / height ) );
 			float base = rand( vec2( floor( point.x ), floor( point.y ) ) ) * PI2;
 			float step = PI2 / float( samples );
-			float dist = radius * 0.66;
+			// float dist = radius * 0.66;
+			float dist = radius * 0.0;
 
 			for ( int i = 0; i < samples; ++i ) {
 
@@ -192,12 +197,14 @@ const HalftoneShader = {
 			dist_c_3 = distanceToDotRadius( c.samp3, c.p3, c.normal, p, angle, radius );
 			dist_c_4 = distanceToDotRadius( c.samp4, c.p4, c.normal, p, angle, radius );
 			res = ( dist_c_1 > 0.0 ) ? clamp( dist_c_1 / aa, 0.0, 1.0 ) : 0.0;
+			// res = 0.0;
 			res += ( dist_c_2 > 0.0 ) ? clamp( dist_c_2 / aa, 0.0, 1.0 ) : 0.0;
 			res += ( dist_c_3 > 0.0 ) ? clamp( dist_c_3 / aa, 0.0, 1.0 ) : 0.0;
 			res += ( dist_c_4 > 0.0 ) ? clamp( dist_c_4 / aa, 0.0, 1.0 ) : 0.0;
 			res = clamp( res, 0.0, 1.0 );
 
 			return res;
+			// return 2
 
 		}
 
@@ -272,9 +279,10 @@ const HalftoneShader = {
 			if ( ! disable ) {
 
 		// setup
-				vec2 p = vec2( vUV.x * width, vUV.y * height );
+				vec2 p = vec2( vUV.x * width, vUV.y * height ) - vec2(vPosition.x, vPosition.y) * 3.0; // - position values to remove black borders.
 				vec2 origin = vec2( 0, 0 );
 				float aa = ( radius < 2.5 ) ? radius * 0.5 : 1.25;
+				// float aa = 0.0;
 
 		// get channel samples
 				Cell cell_r = getReferenceCell( p, origin, rotateR, radius );
@@ -286,15 +294,58 @@ const HalftoneShader = {
 
 		// blend with original
 				vec4 colour = texture2D( tDiffuse, vUV );
-				r = blendColour( r, colour.r, blending );
-				g = blendColour( g, colour.g, blending );
-				b = blendColour( b, colour.b, blending );
+				
+				// add masking before blendColour
+				if (colour.r == 0.0) {
+					r = 0.0;
+				} else {
+					r = blendColour( r, colour.r, blending );
+				}
+
+				if (colour.g == 0.0) {
+					g = 0.0;
+				} else {
+					g = blendColour( g, colour.g, blending );
+				}
+
+				if (colour.b == 0.0) {
+					b = 0.0;
+				} else {
+					b = blendColour( b, colour.b, blending );
+				}
+				
+				
+				
 
 				if ( greyscale ) {
 					r = g = b = (r + b + g) / 3.0;
 				}
 
-				gl_FragColor = vec4( r, g, b, 1.0 );
+				// add alpha channel to each r, g, b colors
+				vec4 vR;
+				vec4 vG;
+				vec4 vB;
+	
+				if (r == 0.0) {
+					vR = vec4( 0, 0, 0, 0 );
+				} else {
+					vR = vec4( r, 0, 0, 1 );
+				}
+	
+				if (g == 0.0) {
+					vG = vec4( 0, 0, 0, 0 );
+				} else {
+					vG = vec4( 0, g, 0, 1 );
+				}
+	
+				if (b == 0.0) {
+					vB = vec4( 0, 0, 0, 0 );
+				} else {
+					vB = vec4( 0, 0, b, 1 );
+				}
+
+				// gl_FragColor = vec4( r, g, b, 1.0 );
+				gl_FragColor = vR + vG + vB;
 
 			} else {
 

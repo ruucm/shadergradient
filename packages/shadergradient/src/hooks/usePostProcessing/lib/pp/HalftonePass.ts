@@ -10,6 +10,8 @@ import { Pass, FullScreenQuad } from './Pass'
  * RGB Halftone pass for three.js effects composer. Requires HalftoneShader.
  */
 
+const usePassedMeshSize = true
+
 class HalftonePass extends Pass {
   constructor(width, height, params) {
     super()
@@ -26,14 +28,18 @@ class HalftonePass extends Pass {
     })
 
     // set params
-    this.uniforms.width.value = width
-    this.uniforms.height.value = height
-
-    for (const key in params) {
-      if (params.hasOwnProperty(key) && this.uniforms.hasOwnProperty(key)) {
-        this.uniforms[key].value = params[key]
-      }
+    if (usePassedMeshSize) {
+      this.uniforms.width.value = width
+      this.uniforms.height.value = height
     }
+
+    // for (const key in params) {
+    //   if (params.hasOwnProperty(key) && this.uniforms.hasOwnProperty(key)) {
+    //     this.uniforms[key].value = params[key]
+    //   }
+    // }
+
+    console.log('this.uniforms', this.uniforms)
 
     this.fsQuad = new FullScreenQuad(this.material)
 
@@ -56,8 +62,10 @@ class HalftonePass extends Pass {
   }
 
   setSize(width, height) {
-    this.uniforms.width.value = width
-    this.uniforms.height.value = height
+    if (usePassedMeshSize) {
+      this.uniforms.width.value = width
+      this.uniforms.height.value = height
+    }
   }
 
   initialize(renderer, alpha, frameBufferType) {

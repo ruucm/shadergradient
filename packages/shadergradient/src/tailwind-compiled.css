@@ -551,6 +551,10 @@ html {
   z-index: 10;
 }
 
+.-z-\[1\] {
+  z-index: -1;
+}
+
 .m-4 {
   margin: 26px;
 }
@@ -945,6 +949,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
   /* height: var(--app-height); */
   height: -webkit-fill-available;
+  /* background-color: hsl(100, 100%, 30%); */
 }
 
 /**

@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react'
+import React, { useState } from 'react'
 import { motion } from 'framer-motion'
 import { useOnClickOutside } from '../../../hooks/index'
 import { useUIStore, useCursorStore } from '../../../store'
@@ -17,9 +17,6 @@ export const AllControls: React.FC<Props> = ({ isMobile, isFigma = false }) => {
 
   const mode = useUIStore((state: any) => state.mode)
   const setMode = useUIStore((state: any) => state.setMode)
-
-  const ref = useRef(null)
-  useOnClickOutside(ref, () => isWeb && setActiveTab('none'))
 
   const children = (
     <div
@@ -59,7 +56,7 @@ export const AllControls: React.FC<Props> = ({ isMobile, isFigma = false }) => {
   )
 
   return (
-    <div ref={ref}>
+    <div>
       {isMobile === true ? (
         <div className={styles.controlMobile}>
           {!isFigma && (

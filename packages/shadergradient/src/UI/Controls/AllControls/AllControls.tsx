@@ -43,7 +43,7 @@ export const AllControls: React.FC<Props> = ({ isMobile, isFigma = false }) => {
           height: 58,
         }}
         className={isFigma ? 'sticky top-0' : ''}
-        onClick={() => setActiveTab('shape')}
+        // onClick={() => setActiveTab('shape')}
       >
         <ControlTypeTitles
           activeTab={activeTab}

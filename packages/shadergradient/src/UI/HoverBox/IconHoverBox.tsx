@@ -4,6 +4,7 @@ import cx from 'classnames'
 type ControlTypeTitlePropsT = {
   content?: string
   isHovered?: boolean
+  bottom?: number
 } & React.DetailedHTMLProps<
   React.HTMLAttributes<HTMLDivElement>,
   HTMLDivElement
@@ -12,6 +13,7 @@ type ControlTypeTitlePropsT = {
 export const IconHoverBox: React.FC<ControlTypeTitlePropsT> = ({
   content,
   isHovered,
+  bottom = 75,
   ...rest
 }) => {
   return (
@@ -22,7 +24,7 @@ export const IconHoverBox: React.FC<ControlTypeTitlePropsT> = ({
         display: 'flex',
         visibility: isHovered ? 'visible' : 'hidden',
         justifyContent: 'center',
-        marginBottom: isHovered ? 85 : 75,
+        marginBottom: isHovered ? bottom + 10 : bottom,
         transitionDuration: '0.3s',
         opacity: isHovered ? 1 : 0,
       }}

@@ -4,6 +4,8 @@ import cx from 'classnames'
 type ControlTypeTitlePropsT = {
   content?: string
   isHovered?: boolean
+  centered?: boolean
+  downward?: boolean
 } & React.DetailedHTMLProps<
   React.HTMLAttributes<HTMLDivElement>,
   HTMLDivElement
@@ -13,6 +15,8 @@ export const HoverBox: React.FC<ControlTypeTitlePropsT> = ({
   content,
   onClick,
   isHovered,
+  centered = false,
+  downward = true,
   ...rest
 }) => {
   return (
@@ -20,7 +24,7 @@ export const HoverBox: React.FC<ControlTypeTitlePropsT> = ({
       className={cx('text-sm font-medium text-white')}
       style={{
         position: 'fixed',
-        marginLeft: -10,
+        marginLeft: centered === true ? 0 : -10,
         visibility: isHovered ? 'visible' : 'hidden',
         marginTop: isHovered ? 10 : 0,
         transitionDuration: '0.3s',
@@ -53,7 +57,7 @@ export const HoverBox: React.FC<ControlTypeTitlePropsT> = ({
               background: 'rgb(255, 67, 10)',
               transform: 'rotate(45deg)',
               position: 'absolute',
-              left: 12,
+              left: centered === true ? 'calc(50% - 15px)' : 12,
               top: -7,
               borderRadius: 3,
             }}

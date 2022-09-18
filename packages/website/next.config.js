@@ -34,6 +34,23 @@ const nextConfig = {
       use: ['raw-loader', 'glslify-loader'],
     })
 
+    // Framer module support
+    config.experiments = {
+      buildHttp: {
+        allowedUris: [
+          'https://framer.com/m/',
+          'https://framerusercontent.com/',
+          'https://fonts.gstatic.com/',
+          'https://ga.jspm.io/',
+          'https://jspm.dev/',
+          'https://gh.ruucm.work',
+          'http://localhost:8001',
+        ],
+      },
+      // buildHttp: true,
+      // layers: true,
+    }
+
     return config
   },
   pageExtensions: ['page.ts', 'page.tsx', 'api.ts', 'api.tsx'],

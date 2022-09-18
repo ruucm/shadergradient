@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
-import { mainLoading } from '../../../src/consts'
+import { mainLoading } from '../../consts'
 import { PRESETS } from '../../presets'
 import { useUIStore } from '../../store'
 import { AboutBtn } from './AboutBtn'

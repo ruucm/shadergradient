@@ -2,9 +2,7 @@ import React, { useEffect } from 'react'
 
 const FigmaPlugin: any = dynamic(
   () => import('https://framer.com/m/Figma-Plugin-g95F.js'),
-  {
-    ssr: false,
-  }
+  { ssr: false }
 )
 
 import dynamic from 'next/dynamic'

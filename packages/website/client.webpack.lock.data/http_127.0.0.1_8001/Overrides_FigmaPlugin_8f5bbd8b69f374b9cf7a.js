@@ -72,6 +72,15 @@ function createRectangle(Component) {
     }));
   };
 }
+function extractGIF(Component) {
+  return (_a) => {
+    var _b = _a, { style } = _b, props = __objRest(_b, ["style"]);
+    return /* @__PURE__ */ React.createElement(Component, __spreadProps(__spreadValues({}, props), {
+      style: __spreadProps(__spreadValues({}, style), { cursor: "pointer" }),
+      onClick: () => alert("Under development \u{1F64F}")
+    }));
+  };
+}
 function insertCanvasAsImage(Component) {
   return (_a) => {
     var _b = _a, { style } = _b, props = __objRest(_b, ["style"]);
@@ -196,5 +205,6 @@ export {
   ToolUndo,
   ToolZoomOut,
   createRectangle,
+  extractGIF,
   insertCanvasAsImage
 };

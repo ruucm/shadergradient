@@ -26,6 +26,18 @@ export function createRectangle(Component): ComponentType {
   }
 }
 
+export function extractGIF(Component): ComponentType {
+  return ({ style, ...props }: any) => {
+    return (
+      <Component
+        {...props}
+        style={{ ...style, cursor: 'pointer' }}
+        onClick={() => alert('Under development 🙏')}
+      />
+    )
+  }
+}
+
 export function insertCanvasAsImage(Component): ComponentType {
   return ({ style, ...props }: any) => {
     return (

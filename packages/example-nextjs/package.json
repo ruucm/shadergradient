@@ -8,7 +8,6 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "box": "^0.0.1",
     "shadergradient": "^0.0.1"
   }
 }

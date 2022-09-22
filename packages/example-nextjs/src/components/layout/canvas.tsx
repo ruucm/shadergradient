@@ -1,25 +1,7 @@
-import { useEffect, useRef, useState } from 'react'
-import * as reactSpring from '@react-spring/three'
-import { OrbitControls } from '@react-three/drei'
-import * as drei from '@react-three/drei'
-import * as fiber from '@react-three/fiber'
-import { LCanvas } from 'shadergradient'
+import { useEffect, useState } from 'react'
+import { Canvas } from '@react-three/fiber'
 import useStore from '@/helpers/store'
 
-const LControl = () => {
-  const dom = useStore((state) => state.dom)
-  const control = useRef(null)
-
-  useEffect(() => {
-    if (control) {
-      dom.current.style['touch-action'] = 'none'
-    }
-  }, [dom, control])
-  // @ts-ignore
-  return <OrbitControls ref={control} domElement={dom.current} />
-}
-
-// export default LCanvas
 const NextJsCanvas = ({ children }) => {
   const dom = useStore((state) => state.dom)
   const [isMobile, setIsMobile] = useState(null)
@@ -39,8 +21,8 @@ const NextJsCanvas = ({ children }) => {
     window.addEventListener('resize', handleResize)
   }, [])
   return (
-    <LCanvas
-      importedFiber={{ ...fiber, ...drei, ...reactSpring }}
+    <Canvas
+      // importedFiber={{ ...fiber, ...drei, ...reactSpring }}
       onCreated={(state) => state.events.connect(dom.current)}
       style={{
         position: 'absolute',
@@ -49,7 +31,7 @@ const NextJsCanvas = ({ children }) => {
       }}
     >
       {children}
-    </LCanvas>
+    </Canvas>
   )
 }
 export default NextJsCanvas

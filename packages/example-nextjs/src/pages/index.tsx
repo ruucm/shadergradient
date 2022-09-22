@@ -1,5 +1,5 @@
 import React from 'react'
-import { Box } from 'box'
+import { Box } from 'shadergradient'
 
 const DOM = () => {
   return <div>NextJS Example</div>

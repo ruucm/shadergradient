@@ -6,3 +6,5 @@ export * from './hooks/index'
 export * from './store'
 export * from './presets'
 export * from './consts'
+
+export * from './Box/index'

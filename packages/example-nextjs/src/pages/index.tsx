@@ -7,7 +7,7 @@ const DOM = () => {
 
 // canvas components goes here
 const R3F = () => {
-  return <Gradient />
+  return <Gradient cDistance={30} color2='#44CCFF' />
 }
 
 const Page = () => {

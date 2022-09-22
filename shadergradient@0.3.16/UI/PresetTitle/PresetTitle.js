@@ -5,7 +5,7 @@ import { PRESETS } from "../../presets.js";
 import { useUIStore, useCursorStore } from "../../store.js";
 import { TextAnimation } from "../../UI/index.js";
 
-// esbuild-css-modules-plugin-namespace:/tmp/tmp-2006-2Jplk4HNa6gf/shadergradient/src/UI/PresetTitle/PresetTitle.module.css.js
+// esbuild-css-modules-plugin-namespace:/tmp/tmp-1960-3SuT8Gb74Xyf/shadergradient/src/UI/PresetTitle/PresetTitle.module.css.js
 var digest = "0d36bad6b7905f2e80a8b761335ec6837fb40be77ccc0ede86080fd4ca55ec04";
 var css = `@import url("https://fonts.googleapis.com/css2?family=Lora:wght@500&display=swap");
 ._presetWrapper_nbez8_2 {

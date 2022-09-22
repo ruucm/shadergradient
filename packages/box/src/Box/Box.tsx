@@ -9,11 +9,17 @@ type Props = {
 export function Box(props: Props) {
   return (
     <>
-      <mesh {...props}>
+      {/* @ts-ignore */}
+      <ambientLight />
+      {/* @ts-ignore */}
+      <pointLight position={[10, 10, 10]} />
+      {/* @ts-ignore */}
+      <mesh {...props} rotation={[1, 1, 0]}>
         {/* @ts-ignore */}
-        <boxGeometry args={[1, 1, 1]} />
+        <boxGeometry args={[2, 2, 2]} />
         {/* @ts-ignore */}
         <meshStandardMaterial color={'hotpink'} />
+        {/* @ts-ignore */}
       </mesh>
     </>
   )

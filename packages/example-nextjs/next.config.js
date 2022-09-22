@@ -1,7 +1,7 @@
 const plugins = require('next-compose-plugins')
 
 const withOffline = require('next-offline')
-const withTM = require('next-transpile-modules')(['shadergradient'])
+const withTM = require('next-transpile-modules')(['shadergradient', 'box'])
 
 const nextConfig = {
   webpack(config, { isServer }) {

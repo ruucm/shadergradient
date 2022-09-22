@@ -1,4 +1,5 @@
 import React from 'react'
+import { Box } from 'box'
 import { Gradient } from 'shadergradient'
 
 const DOM = () => {
@@ -8,14 +9,17 @@ const DOM = () => {
 // canvas components goes here
 const R3F = () => {
   return (
-    <Gradient
-      cDistance={30}
-      // grain='off'
-      // shader='planeTest'
-      // brightness={0.5}
-      // grain='off'
-      //  shader='whatthe'
-    />
+    <>
+      <Box />
+      <Gradient
+        cDistance={30}
+        // grain='off'
+        // shader='planeTest'
+        // brightness={0.5}
+        // grain='off'
+        //  shader='whatthe'
+      />
+    </>
   )
 }
 

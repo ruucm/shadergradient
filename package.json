@@ -5,7 +5,6 @@
   "license": "MIT",
   "scripts": {
     "bootstrap": "lerna bootstrap",
-    "package:shadergradient": "lerna run --scope shadergradient --stream serve",
     "package:website": "lerna run --scope website --stream dev",
     "package:example-nextjs": "lerna run --scope example-nextjs --stream dev",
     "package:figma-plugin": "lerna run --scope figma-plugin --stream start",

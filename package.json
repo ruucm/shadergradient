@@ -37,7 +37,6 @@
     "@types/socket.io": "^3.0.2",
     "@typescript-eslint/eslint-plugin": "^5.19.0",
     "autoprefixer": "^10.4.2",
-    "babel-plugin-glsl": "^1.0.0",
     "classnames": "^2.3.1",
     "esbuild": "^0.14.34",
     "esbuild-plugin-glsl": "^1.1.0",

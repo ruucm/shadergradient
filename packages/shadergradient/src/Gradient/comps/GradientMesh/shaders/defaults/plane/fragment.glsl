@@ -81,6 +81,12 @@ varying vec3 color1;
 varying vec3 color2;
 varying vec3 color3;
 
+// for npm package, need to add this manually
+float linearToRelativeLuminance( const in vec3 color ) {
+    vec3 weights = vec3( 0.2126, 0.7152, 0.0722 );
+    return dot( weights, color.rgb );
+}
+
 void main() {
 
   //-------- basic gradient ------------

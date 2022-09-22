@@ -1,0 +1,13 @@
+{
+  "name": "example-nextjs",
+  "version": "0.1.0",
+  "scripts": {
+    "dev": "next dev -p 4001",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "shadergradient": "^0.3.0"
+  }
+}

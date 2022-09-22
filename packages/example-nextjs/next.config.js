@@ -1,14 +1,14 @@
 const plugins = require('next-compose-plugins')
 
 const withOffline = require('next-offline')
-const withTM = require('next-transpile-modules')(['shadergradient', 'box'])
+const withTM = require('next-transpile-modules')(['shadergradient'])
 
 const nextConfig = {
   webpack(config, { isServer }) {
     // shader support
     config.module.rules.push({
       test: /\.(glsl|vs|fs|vert|frag)$/,
-      exclude: /node_modules/,
+      exclude: /node_modules\/(?!shadergradient)/,
       use: ['raw-loader', 'glslify-loader'],
     })
 

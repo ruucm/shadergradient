@@ -1,5 +1,9 @@
 import { useEffect, useState } from 'react'
-import { Canvas } from '@react-three/fiber'
+// import { Canvas } from '@react-three/fiber'
+import * as reactSpring from '@react-spring/three'
+import * as drei from '@react-three/drei'
+import * as fiber from '@react-three/fiber'
+import { LCanvas } from 'shadergradient'
 import useStore from '@/helpers/store'
 
 const NextJsCanvas = ({ children }) => {
@@ -21,8 +25,8 @@ const NextJsCanvas = ({ children }) => {
     window.addEventListener('resize', handleResize)
   }, [])
   return (
-    <Canvas
-      // importedFiber={{ ...fiber, ...drei, ...reactSpring }}
+    <LCanvas
+      importedFiber={{ ...fiber, ...drei, ...reactSpring }}
       onCreated={(state) => state.events.connect(dom.current)}
       style={{
         position: 'absolute',
@@ -31,7 +35,7 @@ const NextJsCanvas = ({ children }) => {
       }}
     >
       {children}
-    </Canvas>
+    </LCanvas>
   )
 }
 export default NextJsCanvas

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Box } from 'shadergradient'
+import { Gradient } from 'shadergradient'
 
 const DOM = () => {
   return <div>NextJS Example</div>
@@ -7,11 +7,7 @@ const DOM = () => {
 
 // canvas components goes here
 const R3F = () => {
-  return (
-    <>
-      <Box />
-    </>
-  )
+  return <Gradient />
 }
 
 const Page = () => {

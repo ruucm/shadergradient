@@ -54,7 +54,7 @@
     "glslify": "^7.1.1",
     "glslify-loader": "^2.0.0",
     "lerna": "^5.5.2",
-    "next": "^12.1.4",
+    "next": "12.2.0",
     "next-compose-plugins": "^2.2.1",
     "next-offline": "^5.0.5",
     "next-transpile-modules": "^9.0.0",

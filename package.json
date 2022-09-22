@@ -12,6 +12,7 @@
     "package:tailwind": "tailwindcss -i tailwind.css -o ./packages/shadergradient/src/tailwind-compiled.css --watch",
     "shadergradient-build": "lerna run --scope shadergradient --stream build",
     "shadergradient-release": "lerna run --scope shadergradient --stream release",
+    "shadergradient-publish": "lerna run --scope shadergradient --stream publish",
     "website-build": "lerna run --scope website --stream build",
     "start": "run-p --print-label package:*",
     "build": "lerna run --parallel build",

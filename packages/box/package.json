@@ -1,6 +1,6 @@
 {
   "name": "box",
-  "version": "0.0.4",
+  "version": "0.0.1",
   "main": "src/index.tsx",
   "scripts": {
     "serve": "yarn install && node esmbuild/esmbuild serve ./src 8001",

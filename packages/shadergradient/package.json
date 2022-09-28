@@ -1,6 +1,6 @@
 {
   "name": "shadergradient",
-  "version": "0.3.21",
+  "version": "0.3.22",
   "main": "dist/index.js",
   "scripts": {
     "serve": "yarn install && node esmbuild/esmbuild serve ./src 8001",

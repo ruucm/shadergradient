@@ -46,7 +46,7 @@ const Dom = ({ children }) => {
         isMobile={isMobile}
         loadingMotion={asPath === '/' ? true : false}
       />
-      <Cursor on={true} />
+      <Cursor on={asPath === '/figma-plugin' ? false : true} />
     </div>
   )
 }

@@ -107,7 +107,7 @@ export function Links({ isMobile = false }) {
           </MobileIconWrapper>
         </div>
       ) : (
-        <div className={styles.LinksWrapper} style={{ color: color }}>
+        <div className={styles.linksWrapper} style={{ color: color }}>
           <p style={{ textAlign: 'center' }}>Also available from</p>
           <div className={styles.iconWrapper}>
             <IconWrapper link={links[2].link} title='Framer'>

@@ -47,9 +47,10 @@ const digest = '${digest}';
 const css = \`${result.css}\`;
 ${
   inject &&
+  // temperary add client check for the website (shadergradient.co)
   `
 (function() {
-  if (!document.getElementById(digest)) {
+  if (typeof document !== 'undefined' && !document.getElementById(digest)) {
     var ele = document.createElement('style');
     ele.id = digest;
     ele.textContent = css;

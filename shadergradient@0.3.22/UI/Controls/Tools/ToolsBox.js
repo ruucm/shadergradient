@@ -30,26 +30,6 @@ var __copyProps = (to, from, except, desc) => {
   return to;
 };
 var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
-var __async = (__this, __arguments, generator) => {
-  return new Promise((resolve, reject) => {
-    var fulfilled = (value) => {
-      try {
-        step(generator.next(value));
-      } catch (e) {
-        reject(e);
-      }
-    };
-    var rejected = (value) => {
-      try {
-        step(generator.throw(value));
-      } catch (e) {
-        reject(e);
-      }
-    };
-    var step = (x) => x.done ? resolve(x.value) : Promise.resolve(x.value).then(fulfilled, rejected);
-    step((generator = generator.apply(__this, __arguments)).next());
-  });
-};
 
 // ../../node_modules/classnames/index.js
 var require_classnames = __commonJS({
@@ -106,6 +86,7 @@ var import_classnames = __toESM(require_classnames());
 import * as React from "react";
 import { updateGradientState, usePropertyStore } from "../../../store.js";
 import { AxisButton } from "./AxisButton.js";
+import { CopyButton } from "./CopyButton.js";
 import { IconButtons } from "./IconButtons.js";
 var ToolsBox = (_a) => {
   var _b = _a, {
@@ -119,7 +100,7 @@ var ToolsBox = (_a) => {
   const toggleAxis = usePropertyStore((state) => state.toggleAxis);
   const [copyUrlText, setCopyUrl] = React.useState("copy url");
   return /* @__PURE__ */ React.createElement("div", {
-    className: (0, import_classnames.default)("flex items-center justify-center p-3", darkMode && "bg-controls-sub-panel"),
+    className: (0, import_classnames.default)("flex items-center justify-center p-1", darkMode && "bg-controls-sub-panel"),
     style: {
       gap: 6,
       width: "fit-content",
@@ -153,17 +134,7 @@ var ToolsBox = (_a) => {
     onClick: () => {
       usePropertyStore.setState({ zoomOut: !zoomOut });
     }
-  }), /* @__PURE__ */ React.createElement(IconButtons, {
-    icon: "Copy",
-    content: copyUrlText,
-    onClick: () => __async(void 0, null, function* () {
-      window.navigator.clipboard.writeText(window.location.href);
-      setCopyUrl("copied!");
-      yield setTimeout(() => {
-        setCopyUrl("copy url");
-      }, 1e3);
-    })
-  }));
+  }), /* @__PURE__ */ React.createElement(CopyButton, null));
 };
 export {
   ToolsBox

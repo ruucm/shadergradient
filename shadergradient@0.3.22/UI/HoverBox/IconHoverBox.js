@@ -87,10 +87,12 @@ import * as React from "react";
 var IconHoverBox = (_a) => {
   var _b = _a, {
     content,
-    isHovered
+    isHovered,
+    bottom = 75
   } = _b, rest = __objRest(_b, [
     "content",
-    "isHovered"
+    "isHovered",
+    "bottom"
   ]);
   return /* @__PURE__ */ React.createElement("div", {
     className: (0, import_classnames.default)("text-sm font-medium text-white"),
@@ -99,7 +101,7 @@ var IconHoverBox = (_a) => {
       display: "flex",
       visibility: isHovered ? "visible" : "hidden",
       justifyContent: "center",
-      marginBottom: isHovered ? 85 : 75,
+      marginBottom: isHovered ? bottom + 10 : bottom,
       transitionDuration: "0.3s",
       opacity: isHovered ? 1 : 0
     }

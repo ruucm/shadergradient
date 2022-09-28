@@ -88,17 +88,21 @@ var HoverBox = (_a) => {
   var _b = _a, {
     content,
     onClick,
-    isHovered
+    isHovered,
+    centered = false,
+    downward = true
   } = _b, rest = __objRest(_b, [
     "content",
     "onClick",
-    "isHovered"
+    "isHovered",
+    "centered",
+    "downward"
   ]);
   return /* @__PURE__ */ React.createElement("div", {
     className: (0, import_classnames.default)("text-sm font-medium text-white"),
     style: {
       position: "fixed",
-      marginLeft: -10,
+      marginLeft: centered === true ? 0 : -10,
       visibility: isHovered ? "visible" : "hidden",
       marginTop: isHovered ? 10 : 0,
       transitionDuration: "0.3s",
@@ -128,7 +132,7 @@ var HoverBox = (_a) => {
       background: "rgb(255, 67, 10)",
       transform: "rotate(45deg)",
       position: "absolute",
-      left: 12,
+      left: centered === true ? "calc(50% - 15px)" : 12,
       top: -7,
       borderRadius: 3
     }

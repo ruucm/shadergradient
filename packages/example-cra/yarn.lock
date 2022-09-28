@@ -7721,6 +7721,13 @@ react-scripts@5.0.1:
   optionalDependencies:
     fsevents "^2.3.2"
 
+react-slider@^2.0.0:
+  version "2.0.4"
+  resolved "https://registry.yarnpkg.com/react-slider/-/react-slider-2.0.4.tgz#21c656ffabc3bb4481cf6b49e6d647baeda83572"
+  integrity sha512-sWwQD01n6v+MbeLCYthJGZPc0kzOyhQHyd0bSo0edg+IAxTVQmj3Oy4SBK65eX6gNwS9meUn6Z5sIBUVmwAd9g==
+  dependencies:
+    prop-types "^15.8.1"
+
 react-three-fiber@0.0.0-deprecated:
   version "0.0.0-deprecated"
   resolved "https://registry.yarnpkg.com/react-three-fiber/-/react-three-fiber-0.0.0-deprecated.tgz#c737242487d824cf9520307308b7e4c4071a278f"
@@ -8181,6 +8188,13 @@ setprototypeof@1.2.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/setprototypeof/-/setprototypeof-1.2.0.tgz#66c9a24a73f9fc28cbe66b09fed3d33dcaf1b424"
   integrity sha512-E5LDX7Wrp85Kil5bhZv46j8jOeboKq5JMmYM3gVGdGH8xFpPWXUMsNrlODCrkoxMEeNi/XZIwuRvY4XNwYMJpw==
+
+shadergradient@latest:
+  version "0.3.21"
+  resolved "https://registry.yarnpkg.com/shadergradient/-/shadergradient-0.3.21.tgz#fdc3b8c46111cbac8f25e60de5547f807c08ab49"
+  integrity sha512-PMcOdVEtR+MyLxkZL3d/S2Tlm86W3Sbfdg1vkJ523eFbVWUU5GWIzkZt6PY2NPx+GkjCmBFeGO0KZKgUeeMzew==
+  dependencies:
+    react-slider "^2.0.0"
 
 shebang-command@^2.0.0:
   version "2.0.0"

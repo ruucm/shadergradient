@@ -8,7 +8,6 @@
     "package:shadergradient": "lerna run --scope shadergradient --stream serve",
     "package:website": "lerna run --scope website --stream dev",
     "package:example-nextjs": "lerna run --scope example-nextjs --stream dev",
-    "package:example-cra": "lerna run --scope example-cra --stream start",
     "package:figma-plugin": "lerna run --scope figma-plugin --stream start",
     "package:tailwind": "tailwindcss -i tailwind.css -o ./packages/shadergradient/src/tailwind-compiled.css --watch",
     "shadergradient-build": "lerna run --scope shadergradient --stream build",

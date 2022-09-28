@@ -48,4 +48,5 @@ yarn install && yarn bootstrap
 yarn start
 ```
 
-
+## TODO
+- add proper importing method to the `example-cra` (like `next-transpile-modules` does on the `example-nextjs`)

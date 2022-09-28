@@ -16,7 +16,7 @@
     "three": "^0.144.0",
     "typescript": "^4.4.2",
     "web-vitals": "^2.1.0",
-    "shadergradient": "0.3.18",
+    "shadergradient": "0.3.19",
     "box": "0.0.1"
   },
   "scripts": {

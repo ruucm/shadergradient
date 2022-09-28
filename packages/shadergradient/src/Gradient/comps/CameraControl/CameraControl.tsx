@@ -1,3 +1,4 @@
+import React from 'react'
 import CameraControls from 'camera-controls'
 import * as THREE from 'three'
 import { useFiber } from '../../../utils/index'

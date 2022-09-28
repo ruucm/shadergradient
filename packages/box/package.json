@@ -1,7 +1,7 @@
 {
   "name": "box",
   "version": "0.0.1",
-  "main": "src/index.tsx",
+  "main": "dist/index.js",
   "scripts": {
     "serve": "yarn install && node esmbuild/esmbuild serve ./src 8001",
     "build": "yarn install && node esmbuild/esmbuild build ./src dist",

@@ -1,12 +1,14 @@
-import React from 'react'
+import React, { useState } from 'react'
 
-type Props = {
-  zoomOut?: boolean
-  control?: 'query' | 'props'
-  [x: string]: any
-}
+// type Props = {
+//   zoomOut?: boolean
+//   control?: 'query' | 'props'
+//   [x: string]: any
+// }
 
-export function Box(props: Props) {
+export function Box(props: any) {
+  const [hey, setHey] = useState(2)
+
   return (
     <>
       {/* @ts-ignore */}

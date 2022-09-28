@@ -16,7 +16,7 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-scripts": "5.0.1",
-    "shadergradient": "^0.3.21",
+    "shadergradient": "latest",
     "three": "^0.135.0",
     "three-stdlib": "^2.6.1",
     "typescript": "^4.4.2",

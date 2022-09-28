@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { IconHoverBox } from '../../HoverBox'
+import { IconHoverBox } from '../../HoverBox/IconHoverBox'
 
 type CopyBtnPropsT = React.DetailedHTMLProps<
   React.HTMLAttributes<HTMLDivElement>,

@@ -767,6 +767,10 @@ html {
   width: fit-content;
 }
 
+.w-\[70px\] {
+  width: 70px;
+}
+
 .w-\[90px\] {
   width: 90px;
 }
@@ -923,6 +927,14 @@ html {
 
 .p-3 {
   padding: 16px;
+}
+
+.p-1\.5 {
+  padding: 10px;
+}
+
+.p-1 {
+  padding: 8px;
 }
 
 .text-center {

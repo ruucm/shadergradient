@@ -2,6 +2,7 @@ import * as React from 'react'
 import cx from 'classnames'
 import { updateGradientState, usePropertyStore } from '../../../store'
 import { AxisButton } from './AxisButton'
+import { CopyButton } from './CopyButton'
 import { IconButtons } from './IconButtons'
 
 type ControlTypeTitlePropsT = {
@@ -24,7 +25,7 @@ export const ToolsBox: React.FC<ControlTypeTitlePropsT> = ({
   return (
     <div
       className={cx(
-        'flex items-center justify-center p-3',
+        'flex items-center justify-center p-1',
         darkMode && 'bg-controls-sub-panel'
       )}
       style={{
@@ -67,7 +68,8 @@ export const ToolsBox: React.FC<ControlTypeTitlePropsT> = ({
           usePropertyStore.setState({ zoomOut: !zoomOut })
         }}
       />
-      <IconButtons
+      <CopyButton />
+      {/* <IconButtons
         icon='Copy'
         content={copyUrlText}
         onClick={async () => {
@@ -77,7 +79,7 @@ export const ToolsBox: React.FC<ControlTypeTitlePropsT> = ({
             setCopyUrl('copy url')
           }, 1000)
         }}
-      />
+      /> */}
     </div>
   )
 }

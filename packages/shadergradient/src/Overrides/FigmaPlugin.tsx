@@ -1,5 +1,6 @@
-import React from 'react'
 import type { ComponentType } from 'react'
+import React from 'react'
+import * as qs from 'query-string'
 import { PRESETS } from '../presets'
 import { updateGradientState, usePropertyStore, useUIStore } from '../store'
 import { cx } from '../utils/index'
@@ -169,9 +170,72 @@ export function ToolUndo(Component): ComponentType {
   }
 }
 
+const useStore = createStore({ gradientProps: {} })
+
+export function UrlToProps(Component): ComponentType {
+  return (props) => {
+    const [store] = useStore()
+
+    return <Component {...props} control='props' {...store.gradientProps} />
+  }
+}
+export function UrlInput(Component): ComponentType {
+  return (props) => {
+    const [, setStore] = useStore()
+
+    return (
+      <Component
+        {...props}
+        onChange={(value) =>
+          setStore({
+            gradientProps: qs.parse(value, {
+              parseNumbers: true,
+              parseBooleans: true,
+              arrayFormat: 'index',
+            }),
+          })
+        }
+      />
+    )
+  }
+}
+
 // styles
 export function HideScrollBar(Component): ComponentType {
   return ({ className, ...props }: any) => (
     <Component {...props} className={cx('hide-scrollbar', className)} />
   )
+}
+
+// cannot use framer's createStore with unknown reasons
+// https://gist.github.com/koenbok/ae7b94f9fefccc16a34589af344db789
+function createStore<T>(state: T) {
+  // Store the initial state, copy the object if it's an object
+  let storeState: T = typeof state === 'object' ? { ...state } : state
+
+  // Keep a list of all the listener, in the form of React hook setters
+  const storeSetters = new Set<any>()
+
+  // Create a set function that updates all the listeners / setters
+  const setStoreState = (state: Partial<T>) => {
+    // If the state is an object, make sure we copy it
+    storeState = typeof state === 'object' ? { ...storeState, ...state } : state
+    // Update all the listeners / setters with the new value
+    storeSetters.forEach((setter) => setter(storeState))
+  }
+
+  // Create the actual hook based on everything above
+  function useStore(): [T, typeof setStoreState] {
+    // Create the hook we are going to use as a listener
+    const [state, setState] = React.useState(storeState)
+    // If we unmount the component using this hook, we need to remove the listener
+    // @ts-ignore
+    React.useEffect(() => () => storeSetters.delete(setState), [])
+    // But right now, we need to add the listener
+    storeSetters.add(setState)
+    // Return the state and a function to update the central store
+    return [state, setStoreState]
+  }
+
+  return useStore
 }

@@ -7,6 +7,7 @@ import {
   PresetTitles,
   AllControls,
   Gradient,
+  useQueryState,
 } from 'shadergradient'
 import styles from '../home/Home.module.scss'
 
@@ -41,39 +42,40 @@ const DOM = () => {
     window.addEventListener('resize', handleResize)
     setMode('full')
   }, [])
-  // const [embedMode] = useQueryState('embedMode')
+  const [embedMode] = useQueryState('embedMode')
 
   // console.log('loadingPercentage', loadingPercentage)
+  if (embedMode === 'off' || embedMode === null)
+    return (
+      <>
+        <PreviewWrapper />
 
-  return (
-    <>
-      <PreviewWrapper />
-
-      <div className={styles.contentWrapper}>
-        <div className={styles.content}>
-          <div
-            className={styles.presetTitleWrapper}
-            style={{
-              display: mode === 'full' ? 'block' : 'none',
-              marginTop: isMobile === true ? '-35vh' : null,
-            }}
-          >
-            <PresetTitles isMobile={isMobile} fontSize={50} />
+        <div className={styles.contentWrapper}>
+          <div className={styles.content}>
+            <div
+              className={styles.presetTitleWrapper}
+              style={{
+                display: mode === 'full' ? 'block' : 'none',
+                marginTop: isMobile === true ? '-35vh' : null,
+              }}
+            >
+              <PresetTitles isMobile={isMobile} fontSize={50} />
+            </div>
+            <div className='fixed bottom-0'>
+              <AllControls isMobile={isMobile} />
+            </div>
           </div>
-          <div className='fixed bottom-0'>
-            <AllControls isMobile={isMobile} />
+
+          <div className={styles.footer}>
+            <PreviewBtn
+              color={mode !== 'full' ? '#FF430A' : PRESETS[activePreset].color}
+              display={isMobile === true ? false : true}
+            />
           </div>
         </div>
-
-        <div className={styles.footer}>
-          <PreviewBtn
-            color={mode !== 'full' ? '#FF430A' : PRESETS[activePreset].color}
-            display={isMobile === true ? false : true}
-          />
-        </div>
-      </div>
-    </>
-  )
+      </>
+    )
+  else return <></>
 }
 
 // canvas components goes here

@@ -347,7 +347,7 @@ var require_query_string = __commonJS({
       }
       return value;
     }
-    function parse(query, options) {
+    function parse2(query, options) {
       options = Object.assign({
         decode: true,
         sort: true,
@@ -398,7 +398,7 @@ var require_query_string = __commonJS({
       }, /* @__PURE__ */ Object.create(null));
     }
     exports.extract = extract;
-    exports.parse = parse;
+    exports.parse = parse2;
     exports.stringify = (object, options) => {
       if (!object) {
         return "";
@@ -446,7 +446,7 @@ var require_query_string = __commonJS({
       const [url_, hash] = splitOnFirst(url, "#");
       return Object.assign({
         url: url_.split("?")[0] || "",
-        query: parse(extract(url), options)
+        query: parse2(extract(url), options)
       }, options && options.parseFragmentIdentifier && hash ? { fragmentIdentifier: decode(hash, options) } : {});
     };
     exports.stringifyUrl = (object, options) => {
@@ -515,6 +515,21 @@ var useQueryState = (propName, defaultValue = null) => {
   }, [_setGlobalValue]);
   return [globalValue, setQueryValue];
 };
+var useURLQueryState = () => {
+  const setQueryValue = (search) => {
+    setTimeout(() => {
+      const query = useQueryStore.getState();
+      updateHistory(qs.stringifyUrl({ url: window.location.pathname, query }, { skipNull: true, arrayFormat: "index" }));
+    }, 0);
+    const state = qs.parse(search, {
+      parseNumbers: true,
+      parseBooleans: true,
+      arrayFormat: "index"
+    });
+    useQueryStore.setState(state);
+  };
+  return setQueryValue;
+};
 function updateHistory(path) {
   var _a;
   window.history.pushState({
@@ -527,5 +542,7 @@ function updateHistory(path) {
 var useQueryState_default = useQueryState;
 export {
   useQueryState_default as default,
-  useQueryState
+  updateHistory,
+  useQueryState,
+  useURLQueryState
 };

@@ -48,6 +48,31 @@ export const useQueryState = (propName: any, defaultValue: any = null) => {
   return [globalValue, setQueryValue]
 }
 
+export const useURLQueryState = () => {
+  // it's weird, but need to wrap below func as a hook
+  const setQueryValue = (search) => {
+    // defer update of URL
+    setTimeout(() => {
+      const query = useQueryStore.getState()
+      updateHistory(
+        qs.stringifyUrl(
+          { url: window.location.pathname, query },
+          { skipNull: true, arrayFormat: 'index' }
+        )
+      )
+    }, 0)
+
+    const state = qs.parse(search, {
+      parseNumbers: true,
+      parseBooleans: true,
+      arrayFormat: 'index',
+    })
+
+    useQueryStore.setState(state)
+  }
+  return setQueryValue
+}
+
 function updateHistory(path: string) {
   window.history.pushState(
     {

@@ -1,5 +1,6 @@
 import type { ComponentType } from 'react'
 import React from 'react'
+import _ from 'lodash'
 import * as qs from 'query-string'
 import { PRESETS } from '../presets'
 import { updateGradientState, usePropertyStore, useUIStore } from '../store'
@@ -175,8 +176,10 @@ const useStore = createStore({ gradientProps: {} })
 export function UrlToProps(Component): ComponentType {
   return (props) => {
     const [store] = useStore()
+    const gradientProps: any = store.gradientProps
+    if (!_.isEmpty(gradientProps)) gradientProps.control = 'props'
 
-    return <Component {...props} control='props' {...store.gradientProps} />
+    return <Component {...props} {...gradientProps} />
   }
 }
 export function UrlInput(Component): ComponentType {

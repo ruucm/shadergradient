@@ -6,8 +6,8 @@ import { PRESETS } from "../../presets.js";
 import { useUIStore } from "../../store.js";
 import { AboutBtn } from "./AboutBtn.js";
 
-// esbuild-css-modules-plugin-namespace:/var/folders/ym/yzmq9ln54g95nc5cn7pqjr180000gn/T/tmp-50388-S2kCFQwDJY9j/shadergradient/src/UI/Header/Header.module.css.js
-var digest = "1dca1a4dc3142660731f695c87f3cba3de75b9c2397d87d2f0600df9a4329c56";
+// esbuild-css-modules-plugin-namespace:/var/folders/ym/yzmq9ln54g95nc5cn7pqjr180000gn/T/tmp-51297-tkluQWk3OvtN/shadergradient/src/UI/Header/Header.module.css.js
+var digest = "91ace2ecb8cea31822a5b7fd95facf9929e5a1bd4f2ed57d7feae99d18e966de";
 var css = `._header_bdl6a_1 {
   width: 100vw;
   height: 8vh;

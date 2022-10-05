@@ -540,7 +540,6 @@ var require_query_string = __commonJS({
 // src/Overrides/FigmaPlugin.tsx
 var qs = __toESM(require_query_string());
 import React from "react";
-import { createStore } from "https://framer.com/m/framer/store.js@^1.0.0";
 import { PRESETS } from "../presets.js";
 import { updateGradientState, usePropertyStore, useUIStore } from "../store.js";
 import { cx } from "../utils/index.js";
@@ -676,13 +675,10 @@ function ToolUndo(Component) {
     }));
   };
 }
-var useStore = createStore({
-  gradientProps: { cDistance: 20 }
-});
+var useStore = createStore({ gradientProps: {} });
 function UrlToProps(Component) {
   return (props) => {
     const [store] = useStore();
-    console.log("store.gradientProps", store.gradientProps);
     return /* @__PURE__ */ React.createElement(Component, __spreadValues(__spreadProps(__spreadValues({}, props), {
       control: "props"
     }), store.gradientProps));
@@ -709,6 +705,21 @@ function HideScrollBar(Component) {
       className: cx("hide-scrollbar", className)
     }));
   };
+}
+function createStore(state) {
+  let storeState = typeof state === "object" ? __spreadValues({}, state) : state;
+  const storeSetters = /* @__PURE__ */ new Set();
+  const setStoreState = (state2) => {
+    storeState = typeof state2 === "object" ? __spreadValues(__spreadValues({}, storeState), state2) : state2;
+    storeSetters.forEach((setter) => setter(storeState));
+  };
+  function useStore2() {
+    const [state2, setState] = React.useState(storeState);
+    React.useEffect(() => () => storeSetters.delete(setState), []);
+    storeSetters.add(setState);
+    return [state2, setStoreState];
+  }
+  return useStore2;
 }
 export {
   ActiveTitle,

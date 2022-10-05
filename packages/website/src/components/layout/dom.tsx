@@ -36,7 +36,6 @@ const Dom = ({ children }) => {
       ref={ref}
     >
       {children}
-
       <Header
         onLogoClick={() => router.push('/')}
         aboutBtn

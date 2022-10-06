@@ -542,7 +542,6 @@ function updateHistory(path) {
 var useQueryState_default = useQueryState;
 export {
   useQueryState_default as default,
-  updateHistory,
   useQueryState,
   useURLQueryState
 };

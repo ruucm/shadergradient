@@ -172,11 +172,17 @@ export function ToolUndo(Component): ComponentType {
 }
 
 export function UrlInput(Component): ComponentType {
-  return (props) => {
+  return (props: any) => {
     const setQueryValue = useURLQueryState()
 
     const [value, setValue] = useState('')
     const [valid, setValid] = useState(true)
+
+    let variant = 'default'
+    if (value) {
+      if (valid) variant = 'valid'
+      else variant = 'invalid'
+    }
 
     return (
       <Component
@@ -189,12 +195,18 @@ export function UrlInput(Component): ComponentType {
           else setValid(false)
         }}
         onKeyDown={(e) => {
-          if (e.key === 'Enter' && valid) setQueryValue(value)
+          if (e.key === 'Enter' && valid) {
+            setQueryValue(value)
+            props?.onKeyDown() // hide the Input (back to the default variant)
+          }
         }}
         onSubmit={() => {
-          if (valid) setQueryValue(value)
+          if (valid) {
+            setQueryValue(value)
+            props?.onSubmit() // hide the Input (back to the default variant)
+          }
         }}
-        variant={valid ? 'valid' : 'invalid'}
+        variant={variant}
       />
     )
   }

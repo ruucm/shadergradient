@@ -682,6 +682,13 @@ function UrlInput(Component) {
     const setQueryValue = useURLQueryState();
     const [value, setValue] = useState("");
     const [valid, setValid] = useState(true);
+    let variant = "default";
+    if (value) {
+      if (valid)
+        variant = "valid";
+      else
+        variant = "invalid";
+    }
     return /* @__PURE__ */ React.createElement(Component, __spreadProps(__spreadValues({}, props), {
       onChange: (e) => {
         const value2 = e.target.value;
@@ -692,14 +699,18 @@ function UrlInput(Component) {
           setValid(false);
       },
       onKeyDown: (e) => {
-        if (e.key === "Enter" && valid)
+        if (e.key === "Enter" && valid) {
           setQueryValue(value);
+          props == null ? void 0 : props.onKeyDown();
+        }
       },
       onSubmit: () => {
-        if (valid)
+        if (valid) {
           setQueryValue(value);
+          props == null ? void 0 : props.onSubmit();
+        }
       },
-      variant: valid ? "valid" : "invalid"
+      variant
     }));
   };
 }

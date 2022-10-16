@@ -2,7 +2,7 @@
   "name": "example-nextjs",
   "version": "0.0.1",
   "scripts": {
-    "dev": "next dev -p 4001",
+    "dev": "next dev -p 5001",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"

@@ -1,5 +1,6 @@
-import type { ComponentType } from 'react'
+import { ComponentType, useState } from 'react'
 import React from 'react'
+import * as qs from 'query-string'
 import { useURLQueryState } from '../hooks/index'
 import { PRESETS } from '../presets'
 import { updateGradientState, usePropertyStore, useUIStore } from '../store'
@@ -173,9 +174,41 @@ export function ToolUndo(Component): ComponentType {
 export function UrlInput(Component): ComponentType {
   return (props) => {
     const setQueryValue = useURLQueryState()
-    // TODO: add validation
-    return <Component {...props} onChange={(value) => setQueryValue(value)} />
+
+    const [value, setValue] = useState('')
+    const [valid, setValid] = useState(true)
+
+    return (
+      <Component
+        {...props}
+        onChange={(e) => {
+          const value = e.target.value
+          setValue(value)
+
+          if (isValidUrl(value)) setValid(true)
+          else setValid(false)
+        }}
+        onKeyDown={(e) => {
+          if (e.key === 'Enter' && valid) setQueryValue(value)
+        }}
+        onSubmit={() => {
+          if (valid) setQueryValue(value)
+        }}
+        variant={valid ? 'valid' : 'invalid'}
+      />
+    )
   }
+}
+
+const isValidUrl = (urlString) => {
+  const state = qs.parse(urlString, {
+    parseNumbers: true,
+    parseBooleans: true,
+    arrayFormat: 'index',
+  })
+
+  // TODO: more accurate validation check
+  return state.color1 && state.color2 && state.color3
 }
 
 // styles

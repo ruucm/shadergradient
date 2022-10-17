@@ -14,6 +14,7 @@
     "shadergradient-release": "lerna run --scope shadergradient --stream release",
     "shadergradient-publish": "lerna run --scope shadergradient --stream publish",
     "website-build": "lerna run --scope website --stream build",
+    "website-start": "lerna run --scope website --stream start",
     "start": "run-p --print-label package:*",
     "build": "lerna run --parallel build",
     "eslint": "eslint --fix \"./packages/shadergradient/src/**/*.{js,jsx,ts,tsx}\" \"./packages/website/src/**/*.{js,jsx,ts,tsx}\"",

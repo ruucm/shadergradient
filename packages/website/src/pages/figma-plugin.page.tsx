@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 
 const FigmaPlugin: any = dynamic(
   () =>
-    import('https://framer.com/m/Figma-Plugin-ModN.js@giji8uKpXymH8BDe9gHv'),
+    import('https://framer.com/m/Figma-Plugin-ModN.js@J8KROyGd8AZWHxY7rIoZ'),
   { ssr: false }
 )
 

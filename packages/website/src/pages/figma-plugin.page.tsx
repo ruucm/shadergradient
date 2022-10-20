@@ -1,17 +1,19 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 
-const FigmaPlugin: any = dynamic(
-  () =>
-    import('https://framer.com/m/Figma-Plugin-SHx3.js@p9qZXYWKOC9yGrtPTT2s'),
-  { ssr: false }
-)
+// const FigmaPlugin: any = dynamic(
+//   () =>
+//     import('https://framer.com/m/Figma-Plugin-SHx3.js@p9qZXYWKOC9yGrtPTT2s'),
+//   { ssr: false }
+// )
 
-import dynamic from 'next/dynamic'
+// import dynamic from 'next/dynamic'
+
+import FigmaPlugin from 'https://framer.com/m/Figma-Plugin-SHx3.js@p9qZXYWKOC9yGrtPTT2s'
 
 const DOM = () => {
-  useEffect(() => {
-    window.React = React
-  }, [])
+  // useEffect(() => {
+  //   window.React = React
+  // }, [])
 
   return <FigmaPlugin style={{ width: '100%', height: '100%' }} />
 }

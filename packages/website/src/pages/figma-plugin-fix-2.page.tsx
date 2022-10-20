@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 
 const FigmaPlugin: any = dynamic(
   () =>
-    import('https://framer.com/m/Figma-Plugin-2-jgyp.js@5TYSPrDgGbcdSCpRsAXN'),
+    import('https://framer.com/m/Figma-Plugin-2-jgyp.js@Rj4LqkQMkV5dkOAia4rk'),
   { ssr: false }
 )
 
@@ -13,7 +13,7 @@ const DOM = () => {
     window.React = React
   }, [])
 
-  console.log('only with the gradient shader')
+  console.log('only with the gradient shader + text comp')
 
   return <FigmaPlugin style={{ width: '100%', height: '100%' }} />
 }

@@ -8,7 +8,7 @@ import React from 'react'
 
 // import dynamic from 'next/dynamic'
 
-import FigmaPlugin from 'https://framer.com/m/Figma-Plugin-SHx3.js@p9qZXYWKOC9yGrtPTT2s'
+import FigmaPlugin from 'https://framer.com/m/TestButton-t1OQ.js@KlEnL8eAQ7iaFMcsVKqV'
 
 const DOM = () => {
   // useEffect(() => {

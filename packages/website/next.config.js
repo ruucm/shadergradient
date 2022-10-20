@@ -99,5 +99,5 @@ module.exports = plugins(
     ],
     withBundleAnalyzer,
   ],
-  withTM(nextConfig)
+  nextConfig
 )

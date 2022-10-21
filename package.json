@@ -58,7 +58,6 @@
     "lerna": "^5.5.2",
     "next": "12.2.0",
     "next-compose-plugins": "^2.2.1",
-    "next-offline": "^5.0.5",
     "next-pwa": "^5.6.0",
     "next-transpile-modules": "^9.0.0",
     "node-sass": "^7.0.1",

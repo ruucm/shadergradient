@@ -3,9 +3,10 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
 })
 const plugins = require('next-compose-plugins')
 
-const withOffline = require('next-offline')
-const withPWA = require('next-pwa')
-const runtimeCaching = require('next-pwa/cache')
+const withPWA = require('next-pwa')({
+  dest: 'public',
+  disable: process.env.NODE_ENV === 'development',
+})
 const withTM = require('next-transpile-modules')(['shadergradient'])
 
 const nextConfig = {
@@ -67,48 +68,4 @@ if (process.env.EXPORT !== 'true') {
   }
 }
 
-module.exports = plugins(
-  [
-    [
-      withOffline,
-      {
-        workboxOpts: {
-          swDest: process.env.NEXT_EXPORT
-            ? 'service-worker.js'
-            : 'static/service-worker.js',
-          runtimeCaching: [
-            {
-              urlPattern: /^https?.*/,
-              handler: 'NetworkFirst',
-              options: {
-                cacheName: 'offlineCache',
-                expiration: {
-                  maxEntries: 200,
-                },
-              },
-            },
-          ],
-        },
-        async rewrites() {
-          return [
-            {
-              source: '/service-worker.js',
-              destination: '/_next/static/service-worker.js',
-            },
-          ]
-        },
-      },
-    ],
-    withBundleAnalyzer,
-    [
-      withPWA,
-      {
-        pwa: {
-          runtimeCaching,
-          buildExcludes: [/middleware-manifest.json$/],
-        },
-      },
-    ],
-  ],
-  withTM(nextConfig)
-)
+module.exports = plugins([[withPWA], withBundleAnalyzer], withTM(nextConfig))

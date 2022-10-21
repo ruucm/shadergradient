@@ -38,8 +38,6 @@ const DOM = () => {
 
   const time = useTimer(true)
 
-  console.log('withTM added')
-
   // //choose the screen size
   const handleResize = () => {
     if (window.innerWidth < 641) {

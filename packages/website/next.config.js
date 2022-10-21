@@ -4,6 +4,8 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
 const plugins = require('next-compose-plugins')
 
 const withOffline = require('next-offline')
+const withPWA = require('next-pwa')
+const runtimeCaching = require('next-pwa/cache')
 const withTM = require('next-transpile-modules')(['shadergradient'])
 
 const nextConfig = {
@@ -98,6 +100,15 @@ module.exports = plugins(
       },
     ],
     withBundleAnalyzer,
+    [
+      withPWA,
+      {
+        pwa: {
+          runtimeCaching,
+          buildExcludes: [/middleware-manifest.json$/],
+        },
+      },
+    ],
   ],
   withTM(nextConfig)
 )

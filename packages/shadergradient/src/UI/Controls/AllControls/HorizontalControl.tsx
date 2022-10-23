@@ -38,7 +38,7 @@ export function HorizontalControl({
         width: '100vw',
         height: 'fit-content',
         display: 'flex',
-        justifyContent: 'center',
+        justifyContent: 'flex-end',
         alignItems: 'center',
         zIndex: 2,
       }}

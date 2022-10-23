@@ -1,10 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import {
   useUIStore,
-  PRESETS,
-  PreviewBtn,
   PreviewWrapper,
-  PresetTitles,
   AllControls,
   Gradient,
   useQueryState,
@@ -52,7 +49,7 @@ const DOM = () => {
 
         <div className={styles.contentWrapper}>
           <div className={styles.content}>
-            <div
+            {/* <div
               className={styles.presetTitleWrapper}
               style={{
                 display: mode === 'full' ? 'block' : 'none',
@@ -60,18 +57,18 @@ const DOM = () => {
               }}
             >
               <PresetTitles isMobile={isMobile} fontSize={50} />
-            </div>
+            </div> */}
             <div className='fixed bottom-0'>
               <AllControls isMobile={isMobile} />
             </div>
           </div>
 
-          <div className={styles.footer}>
+          {/* <div className={styles.footer}>
             <PreviewBtn
               color={mode !== 'full' ? '#FF430A' : PRESETS[activePreset].color}
               display={isMobile === true ? false : true}
             />
-          </div>
+          </div> */}
         </div>
       </>
     )

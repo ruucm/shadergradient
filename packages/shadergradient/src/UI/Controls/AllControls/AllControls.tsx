@@ -24,6 +24,7 @@ export const AllControls: React.FC<Props> = ({ isMobile, isFigma = false }) => {
         display: 'flex',
         flexDirection: isFigma === true ? 'column-reverse' : 'column',
         justifyContent: 'flex-end',
+        
       }}
       onMouseMove={() => {
         useCursorStore.setState({ hover: 'control' })

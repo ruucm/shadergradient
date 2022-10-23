@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 
 import { useRouter } from 'next/router'
-import { Header } from 'shadergradient'
 import { Cursor } from 'shadergradient/src/UI/Cursor'
 import useStore from '@/helpers/store'
 
@@ -37,7 +36,7 @@ const Dom = ({ children }) => {
     >
       {children}
 
-      <Header
+      {/* <Header
         onLogoClick={() => router.push('/')}
         aboutBtn
         onAboutClick={() => router.push('/about')}
@@ -45,7 +44,7 @@ const Dom = ({ children }) => {
         inAbout={asPath === '/about' ? true : false}
         isMobile={isMobile}
         loadingMotion={asPath === '/' ? true : false}
-      />
+      /> */}
       <Cursor on={asPath === '/figma-plugin' ? false : true} />
     </div>
   )

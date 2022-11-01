@@ -46,3 +46,16 @@ input[type='number'] {
 .slider-mark-center-x {
   margin-left: calc(theme('width.thumb') / 2);
 }
+
+/* color-slider */
+.w-color-alpha-horizontal {
+  height: 10px !important;
+}
+
+.w-color-alpha-horizontal > div {
+  border-radius: 3px !important;
+}
+.w-color-interactive {
+  display: flex;
+  align-items: center;
+}

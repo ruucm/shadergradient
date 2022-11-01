@@ -6,7 +6,6 @@ import Wheel from '@uiw/react-color-wheel'
 import { useOnClickOutside } from '../../../hooks/index'
 
 import { Spacing } from '../../../UI/index'
-import './slider.css'
 
 type ColorInputPropsT = {
   label?: string
@@ -83,7 +82,6 @@ export const ColorInput = React.forwardRef<HTMLInputElement, ColorInputPropsT>(
               <Wheel
                 color={sharedValue}
                 onChange={(color) => {
-                  console.log(hexToHsva(sharedValue))
                   setSharedValue(color.hex)
                 }}
                 width={200}

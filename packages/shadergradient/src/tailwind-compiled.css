@@ -707,10 +707,6 @@ html {
   height: 58px;
 }
 
-.h-full {
-  height: 100%;
-}
-
 .h-fit {
   height: -webkit-fit-content;
   height: -moz-fit-content;
@@ -719,6 +715,10 @@ html {
 
 .h-\[50\%\] {
   height: 50%;
+}
+
+.h-full {
+  height: 100%;
 }
 
 .w-full {

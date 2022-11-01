@@ -476,9 +476,6 @@ html {
 .h-\[58px\] {
   height: 58px;
 }
-.h-full {
-  height: 100%;
-}
 .h-fit {
   height: -webkit-fit-content;
   height: -moz-fit-content;
@@ -486,6 +483,9 @@ html {
 }
 .h-\[50\%\] {
   height: 50%;
+}
+.h-full {
+  height: 100%;
 }
 .w-full {
   width: 100%;
@@ -787,6 +787,16 @@ input[type=number] {
 }
 .slider-mark-center-x {
   margin-left: calc(16px / 2);
+}
+.w-color-alpha-horizontal {
+  height: 10px !important;
+}
+.w-color-alpha-horizontal > div {
+  border-radius: 3px !important;
+}
+.w-color-interactive {
+  display: flex;
+  align-items: center;
 }
 .hover\:bg-opacity-10:hover {
   --tw-bg-opacity: 0.1;

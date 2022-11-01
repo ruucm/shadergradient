@@ -32,7 +32,6 @@ var __objRest = (source, exclude) => {
 
 // src/Gradient/Gradient.tsx
 import React, { Suspense, useEffect } from "react";
-import { Axis } from "../Axis.js";
 import { envBasePath } from "../consts.js";
 import { usePostProcessing, useQueryState } from "../hooks/index.js";
 import { PRESETS } from "../presets.js";
@@ -63,14 +62,13 @@ function GradientComp(_a) {
   const dawn = useRGBELoader("dawn.hdr", { path: envBasePath });
   const lobby = useRGBELoader("lobby.hdr", { path: envBasePath });
   const textures = { city, dawn, lobby };
-  const toggleAxis = usePropertyStore((state) => state.toggleAxis);
   return /* @__PURE__ */ React.createElement(React.Fragment, null, lightType === "env" && /* @__PURE__ */ React.createElement(EnvironmentMap, {
     background: true,
     map: textures[envPreset],
     loadingCallback: setLoadingPercentage
   }), lightType === "3d" && /* @__PURE__ */ React.createElement("ambientLight", {
     intensity: brightness || 1
-  }), toggleAxis && /* @__PURE__ */ React.createElement(Axis, null), /* @__PURE__ */ React.createElement(CameraControl, __spreadValues({
+  }), /* @__PURE__ */ React.createElement(CameraControl, __spreadValues({
     dampingFactor
   }, others)), /* @__PURE__ */ React.createElement(GradientMesh, __spreadProps(__spreadValues({}, others), {
     rotSpringOption,

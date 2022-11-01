@@ -3,6 +3,7 @@ import { envBasePath } from '../consts'
 import { usePostProcessing, useQueryState } from '../hooks/index'
 import { PRESETS } from '../presets'
 import { updateGradientState, usePropertyStore, useUIStore } from '../store'
+import { Axis } from './Axis'
 import { EnvironmentMap } from './comps/Environment/EnvironmentMap'
 import { useRGBELoader } from './useRGBELoader'
 import { CameraControl, GradientMesh } from './index'
@@ -39,6 +40,8 @@ function GradientComp({
   const lobby = useRGBELoader('lobby.hdr', { path: envBasePath })
   const textures = { city, dawn, lobby }
 
+  const toggleAxis = usePropertyStore((state: any) => state.toggleAxis)
+
   return (
     <>
       {lightType === 'env' && (
@@ -49,6 +52,8 @@ function GradientComp({
         />
       )}
       {lightType === '3d' && <ambientLight intensity={brightness || 1} />}
+      {toggleAxis && <Axis />}
+
       <CameraControl dampingFactor={dampingFactor} {...others} />
       <GradientMesh
         {...others}

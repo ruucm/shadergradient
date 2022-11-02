@@ -7,12 +7,13 @@ const lineProps: any = {
   lineWidth: 1,
 }
 
-export function Axis() {
-  const { CubicBezierLine } = useFiber()
+export function Axis({ isFigmaPlugin }) {
+  const { CubicBezierLine, GizmoHelper, GizmoViewport } = useFiber()
+  console.log('GizmoHelper!')
 
   return (
     <>
-      <CubicBezierLine
+      {/* <CubicBezierLine
         start={[0, 0, 0]}
         end={[10, 0, 0]}
         color='red'
@@ -29,7 +30,20 @@ export function Axis() {
         end={[0, 0, 10]}
         color='blue'
         {...lineProps}
-      />
+      /> */}
+      <GizmoHelper
+        alignment='bottom-right' // widget alignment within scene
+        margin={isFigmaPlugin ? [25, 25] : [65, 110]} // widget margins (X, Y)
+        renderPriority={2}
+      >
+        <GizmoViewport
+          axisColors={['#FF430A', '#FF430A', '#FF430A']}
+          labelColor='white'
+          hideNegativeAxes
+          // @ts-ignore
+          axisHeadScale={0.8}
+        />
+      </GizmoHelper>
     </>
   )
 }

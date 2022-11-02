@@ -11,6 +11,7 @@ import { CameraControl, GradientMesh } from './index'
 type Props = {
   zoomOut?: boolean
   control?: 'query' | 'props'
+  isFigmaPlugin?: boolean
   [x: string]: any
 }
 
@@ -20,6 +21,7 @@ function GradientComp({
   dampingFactor,
   rotSpringOption,
   posSpringOption,
+  isFigmaPlugin = false,
   ...props
 }: Props) {
   const setLoadingPercentage = useUIStore(
@@ -52,7 +54,7 @@ function GradientComp({
         />
       )}
       {lightType === '3d' && <ambientLight intensity={brightness || 1} />}
-      {toggleAxis && <Axis />}
+      {toggleAxis && <Axis isFigmaPlugin={isFigmaPlugin} />}
 
       <CameraControl dampingFactor={dampingFactor} {...others} />
       <GradientMesh

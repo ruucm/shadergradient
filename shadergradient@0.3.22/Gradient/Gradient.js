@@ -46,13 +46,15 @@ function GradientComp(_a) {
     control = "props",
     dampingFactor,
     rotSpringOption,
-    posSpringOption
+    posSpringOption,
+    isFigmaPlugin = false
   } = _b, props = __objRest(_b, [
     "zoomOut",
     "control",
     "dampingFactor",
     "rotSpringOption",
-    "posSpringOption"
+    "posSpringOption",
+    "isFigmaPlugin"
   ]);
   const setLoadingPercentage = useUIStore((state) => state.setLoadingPercentage);
   usePresetToStore();
@@ -70,7 +72,9 @@ function GradientComp(_a) {
     loadingCallback: setLoadingPercentage
   }), lightType === "3d" && /* @__PURE__ */ React.createElement("ambientLight", {
     intensity: brightness || 1
-  }), toggleAxis && /* @__PURE__ */ React.createElement(Axis, null), /* @__PURE__ */ React.createElement(CameraControl, __spreadValues({
+  }), toggleAxis && /* @__PURE__ */ React.createElement(Axis, {
+    isFigmaPlugin
+  }), /* @__PURE__ */ React.createElement(CameraControl, __spreadValues({
     dampingFactor
   }, others)), /* @__PURE__ */ React.createElement(GradientMesh, __spreadProps(__spreadValues({}, others), {
     rotSpringOption,

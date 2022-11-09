@@ -57,7 +57,8 @@ export function HorizontalControl({
           background: mode === 'about' ? '#141414' : 'white',
           originY: 1,
           justifyContent: 'flex-end',
-          marginBottom: 20,
+          marginBottom: 30,
+          marginRight: 30,
         }}
         transition={{ type: 'spring', damping: 12, stiffness: 200, delay: 2 }}
         animate={menuAnim}

@@ -1,6 +1,6 @@
 # Shader Gradient
-Curated and customizable 3d gradient package, in modern design tools and React.
 
+Curated and customizable 3d gradient package, in modern design tools and React.
 
 # Available platforms
 
@@ -8,7 +8,7 @@ Curated and customizable 3d gradient package, in modern design tools and React.
 
 [CodeSandbox](https://codesandbox.io/s/github/ruucm/shadergradient/tree/main/packages/example-cra)
 
-```
+````
 yarn add shadergradient
 
 ```tsx
@@ -31,19 +31,11 @@ function App() {
     </LCanvas>
   );
 }
-```
-
-Advanced usage with remotion (WIP)
-
-[CodeSandbox](https://codesandbox.io/s/github/ruucm/shadergradient/tree/main/packages/example-remotion)
-
+````
 
 ## Next.js
 
 [CodeSandbox](https://codesandbox.io/s/github/ruucm/shadergradient/tree/main/packages/example-nextjs)
-
-
-
 
 # Development
 
@@ -60,4 +52,5 @@ yarn start
 ```
 
 ## TODO
+
 - add proper importing method to the `example-cra` (like `next-transpile-modules` does on the `example-nextjs`)

@@ -6,7 +6,7 @@ import { useVideoConfig } from 'remotion'
 import { LCanvas, Gradient } from 'shadergradient'
 
 const uSpeed = 0.4
-const remotionFrameFix = 1 / 8
+const remotionFrameFix = 1 / 80
 
 export const GradientBackground = () => {
   const { width, height } = useVideoConfig()

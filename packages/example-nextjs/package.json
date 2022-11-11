@@ -8,8 +8,6 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@react-three/drei": "^9.29.1",
-    "@react-three/fiber": "^8.7.2",
     "camera-controls": "^1.34.2",
     "classnames": "^2.3.1",
     "framer-motion": "^6.2.9",
@@ -24,8 +22,6 @@
     "react-intersection-observer": "^9.0.0",
     "sass": "^1.55.0",
     "shadergradient": "latest",
-    "three": "^0.144.0",
-    "three-stdlib": "^2.15.0",
     "zustand": "^4.1.1"
   },
   "devDependencies": {

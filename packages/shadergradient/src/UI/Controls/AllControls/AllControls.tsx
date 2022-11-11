@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import { motion } from 'framer-motion'
-import { useOnClickOutside } from '../../../hooks/index'
 import { useUIStore, useCursorStore } from '../../../store'
 import { PropertyControls } from '../../PropertyControls'
 import { ToolsBox, ControlTypeTitles } from '../Tools/index'

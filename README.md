@@ -33,6 +33,9 @@ function App() {
 }
 ```
 
+Advanced usage with remotion (WIP)
+
+[CodeSandbox](https://codesandbox.io/s/github/ruucm/shadergradient/tree/main/packages/example-remotion)
 
 
 ## Next.js

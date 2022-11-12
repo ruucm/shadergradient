@@ -1,0 +1,176 @@
+import React, { useEffect, useState } from 'react'
+
+import { motion } from 'framer-motion'
+import dynamic from 'next/dynamic'
+import Link from 'next/link'
+import { Instagram } from 'react-feather'
+import { Gradient, PRESETS, TextHover, useUIStore } from 'shadergradient'
+
+import styles from '../home/Home.module.scss'
+
+// Dynamic import is ussed to prevent a payload when the website start that will include threejs r3f etc..
+// WARNING ! errors might get obfuscated by using dynamic import.
+// If something goes wrong go back to a static import to show the error.
+// https://github.com/pmndrs/react-three-next/issues/49
+// const Shader = dynamic(() => import('@/components/canvas/Shader/Shader'), {
+//   ssr: false,
+// })
+
+// dom components goes here
+const DOM = () => {
+  const setMode = useUIStore((state: any) => state.setMode)
+  const activePreset = useUIStore((state) => state.activePreset)
+  const [isMobile, setIsMobile] = useState(null)
+
+  const WaitlistInput: any = dynamic(
+    () =>
+      import('https://framer.com/m/WaitlistInput-otE1.js@V2ZkKA05wRUA1FdyKYjV'),
+    { ssr: false }
+  )
+
+  // //choose the screen size
+  const handleResize = () => {
+    if (window.innerWidth < 641) {
+      setIsMobile(true)
+    } else {
+      setIsMobile(false)
+    }
+  }
+
+  // create an event listener
+  useEffect(() => {
+    handleResize()
+    window.addEventListener('resize', handleResize)
+    setMode('full')
+  }, [])
+
+  return (
+    <div className={styles.contentWrapper}>
+      <motion.div
+        style={{
+          width: isMobile === true ? '98vw' : '80vw',
+          height: isMobile === true ? '98vh' : '70vh',
+          position: 'fixed',
+          zIndex: -10,
+          left: isMobile === true ? '1vw' : '10vw',
+          top: isMobile === true ? '1vh' : '15vh',
+          borderRadius: 30,
+          boxShadow: '0 0 0 99999px rgba(0, 0, 0, 1)',
+        }}
+        initial={{ background: 'rgba(0, 0, 0, 1)' }}
+        animate={{ background: 'rgba(0, 0, 0, 0)' }}
+        transition={{ delay: 1.5, duration: 0.7, ease: 'easeInOut' }}
+      ></motion.div>
+
+      <motion.div
+        style={{
+          display: 'flex',
+          width: '100vw',
+          height: '100vh',
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 2 }}
+      >
+        <div
+          style={{
+            color: 'white',
+            width: '100vw',
+            textAlign: 'center',
+            display: 'flex',
+            flexDirection: 'column',
+          }}
+        >
+          <p
+            style={{
+              fontSize: 120,
+              fontFamily: 'Lora',
+              lineHeight: isMobile === true ? 1 : 1.4,
+            }}
+          >
+            Coming Soon
+          </p>
+          <motion.p style={{ fontSize: 16 }}>
+            {"Hear from us when it's ready"}
+          </motion.p>
+          <motion.div
+            style={{
+              width: '100vw',
+              height: 'fit-content',
+              display: 'flex',
+              flexDirection: isMobile === true ? 'column' : 'row',
+              justifyContent: 'center',
+              alignItems: 'center',
+              marginTop: 120,
+              gap: 40,
+            }}
+          >
+            <WaitlistInput />
+            <div style={{ color: 'white', display: 'flex', gap: 8 }}>
+              <Instagram color='white' />
+              <Link href='https://instagram.com/shadergradient'>
+                <a target='_blank'>
+                  <TextHover
+                    fontSize={15}
+                    color={PRESETS[activePreset].color}
+                    content={'@shadergradient'}
+                    delay={0}
+                    border={false}
+                  />
+                </a>
+              </Link>
+            </div>
+          </motion.div>
+        </div>
+      </motion.div>
+
+      {/* footer */}
+      <motion.div
+        style={{
+          color: PRESETS[activePreset].color,
+          position: 'absolute',
+          width: '100vw',
+          height: '15vh',
+          textAlign: 'center',
+          bottom: 0,
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          opacity: 0.5,
+        }}
+      >
+        A new way of creating beautiful, moving gradients. <br />
+        {
+          "It's made with lines of codes, so you can create your own with just a few clicks. "
+        }
+      </motion.div>
+    </div>
+  )
+}
+
+// canvas components goes here
+const R3F = () => {
+  return <Gradient control='query' dampingFactor={0.03} />
+}
+
+const Page = () => {
+  return (
+    <>
+      <DOM />
+      {/* @ts-ignore */}
+      <R3F r3f />
+    </>
+  )
+}
+
+export default Page
+
+export async function getStaticProps() {
+  return {
+    props: {
+      title: 'Shadergradient - coming soon',
+    },
+  }
+}

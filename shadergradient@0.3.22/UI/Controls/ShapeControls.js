@@ -142,7 +142,7 @@ var ShapeControls = () => {
     min: 0,
     max: 7
   })), /* @__PURE__ */ React.createElement(InputPanel, {
-    title: "pixelDensity"
+    title: "Pixel Density"
   }, /* @__PURE__ */ React.createElement(Slider, {
     defaultValue: pixelDensity,
     setValue: setPixelDensity,

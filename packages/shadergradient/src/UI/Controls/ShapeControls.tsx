@@ -182,7 +182,7 @@ export const ShapeControls: React.FC<ShapeControlsPropsT> = () => {
       )}
 
       {/* Pixel-ratio */}
-      <InputPanel title='pixelDensity'>
+      <InputPanel title='Pixel Density'>
         <Slider
           defaultValue={pixelDensity}
           setValue={setPixelDensity}

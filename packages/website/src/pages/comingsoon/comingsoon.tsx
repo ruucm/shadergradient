@@ -149,7 +149,6 @@ const DOM = () => {
             display: isMobile === true ? 'none' : 'block',
           }}
         >
-          {' '}
           Follow us for more updates & inspirations on Instagram
         </p>
         <motion.div
@@ -177,7 +176,7 @@ const DOM = () => {
 
 // canvas components goes here
 const R3F = () => {
-  return <Gradient control='query' dampingFactor={0.03} />
+  return <Gradient dampingFactor={0.03} type='waterPlane' />
 }
 
 const Page = () => {

@@ -772,7 +772,7 @@ var require_prop_types = __commonJS({
 });
 
 // src/UI/Links/Links.tsx
-import React4 from "react";
+import React3 from "react";
 import { motion, useAnimation } from "framer-motion";
 
 // ../../node_modules/react-feather/dist/icons/figma.js
@@ -929,86 +929,13 @@ Framer.propTypes = {
 Framer.displayName = "Framer";
 var framer_default = Framer;
 
-// ../../node_modules/react-feather/dist/icons/github.js
-var import_prop_types3 = __toESM(require_prop_types());
-import React3, { forwardRef as forwardRef3 } from "react";
-function _extends3() {
-  _extends3 = Object.assign || function(target) {
-    for (var i = 1; i < arguments.length; i++) {
-      var source = arguments[i];
-      for (var key in source) {
-        if (Object.prototype.hasOwnProperty.call(source, key)) {
-          target[key] = source[key];
-        }
-      }
-    }
-    return target;
-  };
-  return _extends3.apply(this, arguments);
-}
-function _objectWithoutProperties3(source, excluded) {
-  if (source == null)
-    return {};
-  var target = _objectWithoutPropertiesLoose3(source, excluded);
-  var key, i;
-  if (Object.getOwnPropertySymbols) {
-    var sourceSymbolKeys = Object.getOwnPropertySymbols(source);
-    for (i = 0; i < sourceSymbolKeys.length; i++) {
-      key = sourceSymbolKeys[i];
-      if (excluded.indexOf(key) >= 0)
-        continue;
-      if (!Object.prototype.propertyIsEnumerable.call(source, key))
-        continue;
-      target[key] = source[key];
-    }
-  }
-  return target;
-}
-function _objectWithoutPropertiesLoose3(source, excluded) {
-  if (source == null)
-    return {};
-  var target = {};
-  var sourceKeys = Object.keys(source);
-  var key, i;
-  for (i = 0; i < sourceKeys.length; i++) {
-    key = sourceKeys[i];
-    if (excluded.indexOf(key) >= 0)
-      continue;
-    target[key] = source[key];
-  }
-  return target;
-}
-var GitHub = forwardRef3(function(_ref, ref) {
-  var _ref$color = _ref.color, color = _ref$color === void 0 ? "currentColor" : _ref$color, _ref$size = _ref.size, size = _ref$size === void 0 ? 24 : _ref$size, rest = _objectWithoutProperties3(_ref, ["color", "size"]);
-  return /* @__PURE__ */ React3.createElement("svg", _extends3({
-    ref,
-    xmlns: "http://www.w3.org/2000/svg",
-    width: size,
-    height: size,
-    viewBox: "0 0 24 24",
-    fill: "none",
-    stroke: color,
-    strokeWidth: "2",
-    strokeLinecap: "round",
-    strokeLinejoin: "round"
-  }, rest), /* @__PURE__ */ React3.createElement("path", {
-    d: "M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"
-  }));
-});
-GitHub.propTypes = {
-  color: import_prop_types3.default.string,
-  size: import_prop_types3.default.oneOfType([import_prop_types3.default.string, import_prop_types3.default.number])
-};
-GitHub.displayName = "GitHub";
-var github_default = GitHub;
-
 // src/UI/Links/Links.tsx
 import { links } from "../../consts.js";
 import { PRESETS } from "../../presets.js";
 import { useUIStore, useCursorStore } from "../../store.js";
 
-// esbuild-css-modules-plugin-namespace:/var/folders/ym/yzmq9ln54g95nc5cn7pqjr180000gn/T/tmp-71807-mBCm1FcUI4Ic/shadergradient/src/UI/Links/Links.module.css.js
-var digest = "5fb15d3513d10895a4a86d44083b8fcd45d59f94b723e9df1a7fcc8053d3297a";
+// esbuild-css-modules-plugin-namespace:/var/folders/ym/yzmq9ln54g95nc5cn7pqjr180000gn/T/tmp-38092-Eif19ox5HjoO/shadergradient/src/UI/Links/Links.module.css.js
+var digest = "752f5fa083c3c239a0e2746cfdd2a147fdeb890c319552a31d2fdbccf357a755";
 var css = `._linksWrapper_laa2c_1 {
   width: 100vw;
   height: fit-content;
@@ -1047,12 +974,10 @@ function Links({ isMobile = false }) {
   const activePreset = useUIStore((state) => state.activePreset);
   const color = PRESETS[activePreset].color;
   const iconSize = 30;
-  const mobileIconSize = 24;
   const iconStrokeWidth = 1.5;
-  const keycolor = "#ff430A";
   const IconWrapper = ({ children, link, title }) => {
     const hoverTitle = useAnimation();
-    return /* @__PURE__ */ React4.createElement(motion.div, {
+    return /* @__PURE__ */ React3.createElement(motion.div, {
       style: {
         backgroundColor: "rgba(255,255,255,0)",
         width: 50,
@@ -1078,7 +1003,7 @@ function Links({ isMobile = false }) {
       onMouseMove: () => {
         useCursorStore.setState({ hover: "button" });
       }
-    }, children, /* @__PURE__ */ React4.createElement(motion.div, {
+    }, children, /* @__PURE__ */ React3.createElement(motion.div, {
       style: {
         position: "absolute",
         textAlign: "center",
@@ -1093,64 +1018,56 @@ function Links({ isMobile = false }) {
       animate: hoverTitle
     }, title));
   };
-  const MobileIconWrapper = ({ children, link }) => {
-    return /* @__PURE__ */ React4.createElement(motion.div, {
-      onClick: () => {
-        window.open(link);
-      },
-      style: {
-        cursor: "pointer"
-      }
-    }, children);
-  };
-  return /* @__PURE__ */ React4.createElement(React4.Fragment, null, isMobile ? /* @__PURE__ */ React4.createElement("div", {
-    className: Links_module_css_default.mobileIconWrapper
-  }, /* @__PURE__ */ React4.createElement(MobileIconWrapper, {
-    link: links[2].link
-  }, /* @__PURE__ */ React4.createElement(framer_default, {
-    color: keycolor,
-    size: mobileIconSize,
-    strokeWidth: iconStrokeWidth
-  })), /* @__PURE__ */ React4.createElement(MobileIconWrapper, {
-    link: links[1].link
-  }, /* @__PURE__ */ React4.createElement(github_default, {
-    color: keycolor,
-    size: mobileIconSize,
-    strokeWidth: iconStrokeWidth
-  })), /* @__PURE__ */ React4.createElement(MobileIconWrapper, {
-    link: links[0].link
-  }, /* @__PURE__ */ React4.createElement(figma_default, {
-    color: keycolor,
-    size: mobileIconSize,
-    strokeWidth: iconStrokeWidth
-  }))) : /* @__PURE__ */ React4.createElement("div", {
+  return /* @__PURE__ */ React3.createElement("div", {
     className: Links_module_css_default.linksWrapper,
     style: { color }
-  }, /* @__PURE__ */ React4.createElement("p", {
+  }, /* @__PURE__ */ React3.createElement("p", {
     style: { textAlign: "center" }
-  }, "Also available from"), /* @__PURE__ */ React4.createElement("div", {
+  }, "Also available from"), /* @__PURE__ */ React3.createElement("div", {
     className: Links_module_css_default.iconWrapper
-  }, /* @__PURE__ */ React4.createElement(IconWrapper, {
+  }, /* @__PURE__ */ React3.createElement(IconWrapper, {
     link: links[2].link,
     title: "Framer"
-  }, /* @__PURE__ */ React4.createElement(framer_default, {
+  }, /* @__PURE__ */ React3.createElement(framer_default, {
     color,
     size: iconSize,
     strokeWidth: iconStrokeWidth
-  })), /* @__PURE__ */ React4.createElement(IconWrapper, {
-    link: links[1].link,
-    title: "Github"
-  }, /* @__PURE__ */ React4.createElement(github_default, {
-    color,
-    size: iconSize,
-    strokeWidth: iconStrokeWidth
-  })), /* @__PURE__ */ React4.createElement(IconWrapper, {
+  })), /* @__PURE__ */ React3.createElement(IconWrapper, {
     link: links[0].link,
     title: "Figma"
-  }, /* @__PURE__ */ React4.createElement(figma_default, {
+  }, /* @__PURE__ */ React3.createElement(figma_default, {
     color,
     size: iconSize,
     strokeWidth: iconStrokeWidth
+  })), /* @__PURE__ */ React3.createElement(IconWrapper, {
+    link: links[1].link,
+    title: "React"
+  }, /* @__PURE__ */ React3.createElement("svg", {
+    xmlns: "http://www.w3.org/2000/svg",
+    width: "30",
+    height: "30"
+  }, /* @__PURE__ */ React3.createElement("path", {
+    d: "M 6.072 8.844 L 1 15.844 L 6.072 22.844",
+    fill: "transparent",
+    "stroke-width": 2,
+    stroke: color,
+    "stroke-linecap": "round",
+    "stroke-linejoin": "round"
+  }), /* @__PURE__ */ React3.createElement("path", {
+    d: "M 5.072 0 L 0 7 L 5.072 14",
+    transform: "translate(23.928 8.504) rotate(180 2.536 7)",
+    fill: "transparent",
+    "stroke-width": 2,
+    stroke: color,
+    "stroke-linecap": "round",
+    "stroke-linejoin": "round"
+  }), /* @__PURE__ */ React3.createElement("path", {
+    d: "M 18.043 6.5 L 11.957 24.5",
+    fill: "transparent",
+    "stroke-width": 2,
+    stroke: color,
+    "stroke-linecap": "round",
+    "stroke-linejoin": "round"
   })))));
 }
 export {

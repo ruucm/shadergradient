@@ -65,7 +65,8 @@ export const GradientMesh: React.FC<any> = ({
   const { useFrame, extend, animated, useSpring, useSprings } = useFiber()
 
   let sceneShader = shaders.defaults[type ?? 'plane'] // default type is plane
-  if (shader && shader !== 'defaults') sceneShader = shaders[shader]
+  if (shader && shader !== 'defaults')
+    sceneShader = shaders[shader][type ?? 'plane']
 
   // when color is hovered
   const hoverState = usePropertyStore((state: any) => state.hoverState)

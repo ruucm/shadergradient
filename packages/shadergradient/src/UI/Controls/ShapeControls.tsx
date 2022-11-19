@@ -58,6 +58,13 @@ export const ShapeControls: React.FC<ShapeControlsPropsT> = () => {
         />
         <Radio
           name='shader'
+          value='positionMix'
+          setValue={setShader}
+          check={shader === 'positionMix'}
+          label='Position Mix'
+        />
+        {/* <Radio
+          name='shader'
           value='snakeHalftone'
           setValue={setShader}
           check={shader === 'snakeHalftone'}
@@ -83,7 +90,7 @@ export const ShapeControls: React.FC<ShapeControlsPropsT> = () => {
           setValue={setShader}
           check={shader === 'whatthe'}
           label='whatthe'
-        />
+        /> */}
       </InputPanel>
 
       <InputPanel title='Animate'>

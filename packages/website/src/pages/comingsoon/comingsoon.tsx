@@ -24,7 +24,7 @@ const DOM = () => {
 
   const WaitlistInput: any = dynamic(
     () =>
-      import('https://framer.com/m/waitlistInput-zyql.js@E7SNuLDk3unHj5CZsgAo'),
+      import('https://framer.com/m/waitlistInput-zyql.js@dOrR22KznolMq5DjEG60'),
     { ssr: false }
   )
 
@@ -81,18 +81,21 @@ const DOM = () => {
             textAlign: 'center',
             display: 'flex',
             flexDirection: 'column',
+            justifyContent: 'center',
+            alignItems: 'center',
+            gap: isMobile === true ? 20 : 0,
           }}
         >
           <p
             style={{
-              fontSize: 120,
+              fontSize: isMobile === true ? 80 : 120,
               fontFamily: 'Lora',
               lineHeight: isMobile === true ? 1 : 1.4,
             }}
           >
             Coming Soon
           </p>
-          <motion.p style={{ fontSize: 14, lineHeight: 1.4 }}>
+          <motion.p style={{ fontSize: 14, lineHeight: 1.4, width: '70%' }}>
             Make your designs alive.
             <br />
             Shadergradient is a new tool to create beautiful, moving gradients.
@@ -117,7 +120,9 @@ const DOM = () => {
             <p style={{ fontSize: '0.9em' }}>
               {"Hear from us when it's ready"}
             </p>
-            <WaitlistInput />
+            <WaitlistInput
+              style={{ width: isMobile === true ? '80%' : 'default' }}
+            />
           </motion.div>
         </div>
       </motion.div>
@@ -132,13 +137,18 @@ const DOM = () => {
           textAlign: 'center',
           bottom: 0,
           display: 'flex',
-          // flexDirection: 'column',
+          flexDirection: isMobile === true ? 'column' : 'row',
           justifyContent: 'center',
           alignItems: 'center',
           gap: 20,
         }}
       >
-        <p style={{ opacity: 0.5 }}>
+        <p
+          style={{
+            opacity: 0.5,
+            display: isMobile === true ? 'none' : 'block',
+          }}
+        >
           {' '}
           Follow us for more updates & inspirations on Instagram
         </p>

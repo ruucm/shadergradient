@@ -1,5 +1,6 @@
 // src/Gradient/comps/GradientMesh/shaders/index.ts
 import * as defaults from "./defaults/index.js";
+import * as positionMix from "./positionMix/index.js";
 import * as blueMix from "./tests/blueMix/index.js";
 import * as colorNormalMix from "./tests/colorNormalMix/index.js";
 import * as colorPosMix from "./tests/colorPosMix/index.js";
@@ -20,6 +21,7 @@ export {
   grain,
   noise,
   planeTest,
+  positionMix,
   snakeHalftone,
   stripe,
   test,

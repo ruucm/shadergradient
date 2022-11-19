@@ -24210,7 +24210,7 @@ var GradientMesh = ({
   const { useFrame, extend, animated, useSpring, useSprings } = useFiber();
   let sceneShader = shaders.defaults[type != null ? type : "plane"];
   if (shader && shader !== "defaults")
-    sceneShader = shaders[shader];
+    sceneShader = shaders[shader][type != null ? type : "plane"];
   const hoverState = usePropertyStore((state) => state.hoverState);
   const meshCount = 192;
   const meshLineCount = 36;

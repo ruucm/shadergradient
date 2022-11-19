@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { motion, useMotionValue, useSpring } from 'framer-motion'
 import { useCursorStore } from '../../store'
 
-export function Cursor({ on }) {
+export function Cursor({ on = true }) {
   const cursorX = useMotionValue(-100)
   const cursorY = useMotionValue(-100)
   const motionCursorSize = useMotionValue(28)

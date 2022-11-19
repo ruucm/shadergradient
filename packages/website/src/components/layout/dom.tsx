@@ -18,7 +18,7 @@ const Dom = ({ children }) => {
     }
   }
   const router = useRouter()
-  const { asPath } = useRouter()
+  const { pathname } = useRouter()
 
   useEffect(() => {
     handleResize()
@@ -26,26 +26,26 @@ const Dom = ({ children }) => {
     useStore.setState({ dom: ref })
   }, [])
 
-  useEffect(() => {
-    console.log(asPath)
-  }, [asPath])
-
   return (
     <div
       className='absolute top-0 left-0 z-10 w-full h-full overflow-hidden dom'
       ref={ref}
     >
       {children}
-      <Header
-        onLogoClick={() => router.push('/')}
-        aboutBtn
-        onAboutClick={() => router.push('/about')}
-        onBackClick={() => router.back()}
-        inAbout={asPath === '/about' ? true : false}
-        isMobile={isMobile}
-        loadingMotion={asPath === '/' ? true : false}
-      />
-      <Cursor on={asPath === '/figma-plugin' ? false : true} />
+      {pathname !== '/figma-plugin' && (
+        <>
+          <Header
+            onLogoClick={() => router.push('/')}
+            aboutBtn
+            onAboutClick={() => router.push('/about')}
+            onBackClick={() => router.back()}
+            inAbout={pathname === '/about' ? true : false}
+            isMobile={isMobile}
+            loadingMotion={pathname === '/' ? true : false}
+          />
+          <Cursor />
+        </>
+      )}
     </div>
   )
 }

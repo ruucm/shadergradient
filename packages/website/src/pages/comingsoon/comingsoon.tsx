@@ -24,7 +24,7 @@ const DOM = () => {
 
   const WaitlistInput: any = dynamic(
     () =>
-      import('https://framer.com/m/WaitlistInput-otE1.js@V2ZkKA05wRUA1FdyKYjV'),
+      import('https://framer.com/m/waitlistInput-zyql.js@E7SNuLDk3unHj5CZsgAo'),
     { ssr: false }
   )
 
@@ -59,7 +59,7 @@ const DOM = () => {
         }}
         initial={{ background: 'rgba(0, 0, 0, 1)' }}
         animate={{ background: 'rgba(0, 0, 0, 0)' }}
-        transition={{ delay: 1.5, duration: 0.7, ease: 'easeInOut' }}
+        transition={{ delay: 2, duration: 0.7, ease: 'easeInOut' }}
       ></motion.div>
 
       <motion.div
@@ -92,36 +92,32 @@ const DOM = () => {
           >
             Coming Soon
           </p>
-          <motion.p style={{ fontSize: 16 }}>
-            {"Hear from us when it's ready"}
+          <motion.p style={{ fontSize: 14, lineHeight: 1.4 }}>
+            Make your designs alive.
+            <br />
+            Shadergradient is a new tool to create beautiful, moving gradients.
+            <br />
+            Available on Figma, Framer, and as React component.
           </motion.p>
           <motion.div
             style={{
               width: '100vw',
               height: 'fit-content',
               display: 'flex',
-              flexDirection: isMobile === true ? 'column' : 'row',
+              flexDirection: 'column',
               justifyContent: 'center',
               alignItems: 'center',
               marginTop: 120,
-              gap: 40,
+              gap: 16,
             }}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.3, duration: 0.7, ease: 'easeInOut' }}
           >
+            <p style={{ fontSize: '0.9em' }}>
+              {"Hear from us when it's ready"}
+            </p>
             <WaitlistInput />
-            <div style={{ color: 'white', display: 'flex', gap: 8 }}>
-              <Instagram color='white' />
-              <Link href='https://instagram.com/shadergradient'>
-                <a target='_blank'>
-                  <TextHover
-                    fontSize={15}
-                    color={PRESETS[activePreset].color}
-                    content={'@shadergradient'}
-                    delay={0}
-                    border={false}
-                  />
-                </a>
-              </Link>
-            </div>
           </motion.div>
         </div>
       </motion.div>
@@ -136,15 +132,34 @@ const DOM = () => {
           textAlign: 'center',
           bottom: 0,
           display: 'flex',
+          // flexDirection: 'column',
           justifyContent: 'center',
           alignItems: 'center',
-          opacity: 0.5,
+          gap: 20,
         }}
       >
-        A new way of creating beautiful, moving gradients. <br />
-        {
-          "It's made with lines of codes, so you can create your own with just a few clicks. "
-        }
+        <p style={{ opacity: 0.5 }}>
+          {' '}
+          Follow us for more updates & inspirations on Instagram
+        </p>
+        <motion.div
+          style={{ color: 'white', display: 'flex', gap: 6 }}
+          initial={{ opacity: 0.5 }}
+          whileHover={{ opacity: 1 }}
+        >
+          <Instagram color='white' />
+          <Link href='https://instagram.com/shadergradient'>
+            <a target='_blank'>
+              <TextHover
+                fontSize={14}
+                color={PRESETS[activePreset].color}
+                content={'shadergradient'}
+                delay={0}
+                border={false}
+              />
+            </a>
+          </Link>
+        </motion.div>
       </motion.div>
     </div>
   )

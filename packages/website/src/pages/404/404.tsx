@@ -8,8 +8,9 @@ const DOM = () => {
     <>
       <div
         style={{
-          width: '100vw',
-          height: '46vh',
+          width: '80vw',
+          margin: '0 10vw',
+          height: '44vh',
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'center',
@@ -51,7 +52,7 @@ const R3F = () => {
       rotationZ={50}
       cAzimuthAngle={180}
       cPolarAngle={90}
-      cDistance={10.6}
+      cDistance={9}
       dampingFactor={0.03}
     />
   )

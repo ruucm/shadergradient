@@ -110,7 +110,7 @@ const DOM = () => {
               flexDirection: 'column',
               justifyContent: 'center',
               alignItems: 'center',
-              marginTop: 120,
+              marginTop: isMobile === true ? 30 : 120,
               gap: 16,
             }}
             initial={{ opacity: 0, y: 20 }}
@@ -153,7 +153,7 @@ const DOM = () => {
         </p>
         <motion.div
           style={{ color: 'white', display: 'flex', gap: 6 }}
-          initial={{ opacity: 0.5 }}
+          initial={{ opacity: isMobile === true ? 1 : 0.5 }}
           whileHover={{ opacity: 1 }}
         >
           <Instagram color='white' />

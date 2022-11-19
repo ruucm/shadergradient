@@ -614,16 +614,16 @@ html {
   position: sticky;
 }
 
-.top-1\/2 {
-  top: 50%;
-}
-
 .top-0 {
   top: 0px;
 }
 
 .left-0 {
   left: 0px;
+}
+
+.top-1\/2 {
+  top: 50%;
 }
 
 .bottom-0 {
@@ -675,6 +675,10 @@ html {
   display: none;
 }
 
+.h-full {
+  height: 100%;
+}
+
 .h-button {
   height: 55px;
 }
@@ -705,10 +709,6 @@ html {
 
 .h-\[58px\] {
   height: 58px;
-}
-
-.h-full {
-  height: 100%;
 }
 
 .h-fit {

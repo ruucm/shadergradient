@@ -7,6 +7,7 @@ import { Instagram } from 'react-feather'
 import { Gradient, PRESETS, TextHover, useUIStore } from 'shadergradient'
 
 import styles from '../home/Home.module.scss'
+import { mailchimpSubscribe } from './mailchimp-subscribe'
 
 // Dynamic import is ussed to prevent a payload when the website start that will include threejs r3f etc..
 // WARNING ! errors might get obfuscated by using dynamic import.
@@ -16,17 +17,17 @@ import styles from '../home/Home.module.scss'
 //   ssr: false,
 // })
 
+const WaitlistInput: any = dynamic(
+  () =>
+    import('https://framer.com/m/waitlistInput-zyql.js@nyID6L5HZeR3iJVnwOOw'),
+  { ssr: false }
+)
+
 // dom components goes here
 const DOM = () => {
   const setMode = useUIStore((state: any) => state.setMode)
   const activePreset = useUIStore((state) => state.activePreset)
   const [isMobile, setIsMobile] = useState(null)
-
-  const WaitlistInput: any = dynamic(
-    () =>
-      import('https://framer.com/m/waitlistInput-zyql.js@dOrR22KznolMq5DjEG60'),
-    { ssr: false }
-  )
 
   // //choose the screen size
   const handleResize = () => {
@@ -120,9 +121,7 @@ const DOM = () => {
             <p style={{ fontSize: '0.9em' }}>
               {"Hear from us when it's ready"}
             </p>
-            <WaitlistInput
-              style={{ width: isMobile === true ? '80%' : 'default' }}
-            />
+            <MailchimpSubscribe isMobile={isMobile} />
           </motion.div>
         </div>
       </motion.div>
@@ -186,6 +185,39 @@ const Page = () => {
       {/* @ts-ignore */}
       <R3F r3f />
     </>
+  )
+}
+
+function MailchimpSubscribe({ isMobile }) {
+  const [value, setValue] = useState('')
+  const [valid, setValid] = useState(true)
+  const [status, setStatus] = useState('')
+
+  let variant = 'default'
+  if (value) {
+    if (valid) variant = 'valid'
+    else variant = 'invalid'
+  }
+
+  if (status) variant = status
+
+  return (
+    <WaitlistInput
+      style={{ width: isMobile === true ? '80%' : 'default' }}
+      onChange={(e) => {
+        const value = e.target.value
+        setValue(value)
+
+        if (value.match(/^\S+@\S+$/i)) setValid(true)
+        else setValid(false)
+      }}
+      variant={variant}
+      onSubmit={async () => {
+        setStatus('loading')
+        const data = await mailchimpSubscribe({ email: value })
+        if (data.result === 'success') setStatus('success')
+      }}
+    />
   )
 }
 

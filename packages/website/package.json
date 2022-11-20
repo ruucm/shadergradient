@@ -9,6 +9,8 @@
   },
   "dependencies": {
     "framer": "^2.1.3",
-    "shadergradient": "^0.3.22"
+    "shadergradient": "^0.3.22",
+    "to-querystring": "^1.1.1",
+    "jsonp-promise": "^0.1.2"
   }
 }

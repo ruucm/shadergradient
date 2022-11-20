@@ -17,12 +17,6 @@ import { mailchimpSubscribe } from './mailchimp-subscribe'
 //   ssr: false,
 // })
 
-const WaitlistInput: any = dynamic(
-  () =>
-    import('https://framer.com/m/waitlistInput-zyql.js@nyID6L5HZeR3iJVnwOOw'),
-  { ssr: false }
-)
-
 // dom components goes here
 const DOM = () => {
   const setMode = useUIStore((state: any) => state.setMode)
@@ -187,6 +181,12 @@ const Page = () => {
     </>
   )
 }
+
+const WaitlistInput: any = dynamic(
+  () =>
+    import('https://framer.com/m/waitlistInput-zyql.js@t75mf7iwanuhi50fVxZd'),
+  { ssr: false }
+)
 
 function MailchimpSubscribe({ isMobile }) {
   const [value, setValue] = useState('')

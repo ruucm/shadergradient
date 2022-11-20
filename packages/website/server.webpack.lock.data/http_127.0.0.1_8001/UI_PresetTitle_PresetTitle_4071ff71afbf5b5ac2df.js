@@ -5,8 +5,8 @@ import { PRESETS } from "../../presets.js";
 import { useUIStore, useCursorStore } from "../../store.js";
 import { TextAnimation } from "../../UI/index.js";
 
-// esbuild-css-modules-plugin-namespace:/var/folders/ym/yzmq9ln54g95nc5cn7pqjr180000gn/T/tmp-39574-mHWOkg31g5yJ/shadergradient/src/UI/PresetTitle/PresetTitle.module.css.js
-var digest = "f8be5713d895ce476a48570ebde6b88f695fc4d560642c6b6847e4a5dfd0ffe3";
+// esbuild-css-modules-plugin-namespace:/var/folders/ym/yzmq9ln54g95nc5cn7pqjr180000gn/T/tmp-14604-PU705adjq2tl/shadergradient/src/UI/PresetTitle/PresetTitle.module.css.js
+var digest = "1faace6a84661ca772ada5d9c43912e710c72f26c6d26076dadc917470f6326a";
 var css = `@import url("https://fonts.googleapis.com/css2?family=Lora:wght@500&display=swap");
 ._presetWrapper_nbez8_2 {
   width: 100vw;

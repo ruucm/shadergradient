@@ -3,11 +3,16 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
 })
 const plugins = require('next-compose-plugins')
 
+const isDev = process.env.NODE_ENV === 'development'
 const withPWA = require('next-pwa')({
   dest: 'public',
-  disable: process.env.NODE_ENV === 'development',
+  disable: isDev,
 })
 const withTM = require('next-transpile-modules')(['shadergradient'])
+
+const redirectPages = isDev
+  ? []
+  : ['/404', '/about', '/customize', '/', '/figma-plugin']
 
 const nextConfig = {
   webpack(config, { isServer }) {
@@ -56,6 +61,13 @@ const nextConfig = {
     }
 
     return config
+  },
+  async redirects() {
+    return redirectPages.map((p) => ({
+      source: p,
+      destination: '/comingsoon',
+      permanent: true,
+    }))
   },
   pageExtensions: ['page.ts', 'page.tsx', 'api.ts', 'api.tsx'],
 }

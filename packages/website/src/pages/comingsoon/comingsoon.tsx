@@ -184,7 +184,7 @@ const Page = () => {
 
 const WaitlistInput: any = dynamic(
   () =>
-    import('https://framer.com/m/waitlistInput-zyql.js@t75mf7iwanuhi50fVxZd'),
+    import('https://framer.com/m/waitlistInput-zyql.js@CAZhPgUUcHF980rvEbzk'),
   { ssr: false }
 )
 
@@ -217,6 +217,7 @@ function MailchimpSubscribe({ isMobile }) {
         const data = await mailchimpSubscribe({ email: value })
         if (data.result === 'success') setStatus('success')
       }}
+      messageFontSize={isMobile ? 15 : 18}
     />
   )
 }

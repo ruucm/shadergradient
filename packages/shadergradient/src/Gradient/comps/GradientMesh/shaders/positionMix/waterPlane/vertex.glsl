@@ -1,4 +1,7 @@
 // #pragma glslify: cnoise3 = require(glsl-noise/classic/3d) 
+
+// noise source from https://github.com/hughsk/glsl-noise/blob/master/periodic/3d.glsl
+
 vec3 mod289(vec3 x)
 {
   return x - floor(x * (1.0 / 289.0)) * 289.0;
@@ -108,8 +111,13 @@ varying float displacement;
 varying vec3 vPos;
 varying float vDistort;
 
+varying vec2 vUv;
+
 uniform float uTime;
 uniform float uSpeed;
+
+uniform float uLoadingTime;
+
 uniform float uNoiseDensity;
 uniform float uNoiseStrength;
 
@@ -164,11 +172,15 @@ void main() {
   #include <worldpos_vertex>
 
   //-------- start vertex ------------
+  vUv = uv;
+
+  // vNormal = normal;
+
   float t = uTime * uSpeed;
   // Create a sine wave from top to bottom of the sphere
   float distortion = 0.75 * cnoise(0.43 * position * uNoiseDensity + t);
 
-  vec3 pos = position + normal * distortion * uNoiseStrength;
+  vec3 pos = position + normal * distortion * uNoiseStrength * uLoadingTime;
   vPos = pos;
 
   gl_Position = projectionMatrix * modelViewMatrix * vec4(pos, 1.);

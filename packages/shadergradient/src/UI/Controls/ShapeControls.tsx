@@ -48,7 +48,7 @@ export const ShapeControls: React.FC<ShapeControlsPropsT> = () => {
         />
       </InputPanel>
 
-      {type === 'plane' && (
+      {['plane', 'waterPlane'].includes(type) && (
         <InputPanel title='Shader'>
           <Radio
             name='shader'

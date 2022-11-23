@@ -34,7 +34,7 @@ export function extractGIF(Component): ComponentType {
       <Component
         {...props}
         style={{ ...style, cursor: 'pointer' }}
-        onClick={() => alert('Under development')}
+        onClick={() => alert('This feature is under development.')}
       />
     )
   }

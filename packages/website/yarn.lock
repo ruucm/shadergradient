@@ -37,3 +37,13 @@ hsluv@^0.0.3:
   version "0.0.3"
   resolved "https://registry.yarnpkg.com/hsluv/-/hsluv-0.0.3.tgz#829107dafb4a9f8b52a1809ed02e091eade6754c"
   integrity sha512-08iL2VyCRbkQKBySkSh6m8zMUa3sADAxGVWs3Z1aPcUkTJeK0ETG4Fc27tEmQBGUAXZjIsXOZqBvacuVNSC/fQ==
+
+jsonp-promise@^0.1.2:
+  version "0.1.2"
+  resolved "https://registry.yarnpkg.com/jsonp-promise/-/jsonp-promise-0.1.2.tgz#5c4365d9cbee99c79893a9c750a95f6db468997d"
+  integrity sha512-R9qfMLweZPIPkVLwdvXzio2+L4+d9twytjV/WvxWhdPjz2/OhIR3UxXmmcOcn75GQaf0w+w8O+sYk6uZp5Ee4Q==
+
+to-querystring@^1.1.1:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/to-querystring/-/to-querystring-1.1.1.tgz#98de5b00c79768a98ca48a2c09a960238d960265"
+  integrity sha512-ZgIacl9TXAoT7sGXUYjQiy0MW7Tf/7CJQLt757hYHfXXc8JBzOVBMx4DckqKUO4hi36J72/m8UcH/GCHK+n97g==

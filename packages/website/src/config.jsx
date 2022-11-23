@@ -43,7 +43,7 @@ const Header = ({ title }) => {
         <meta name='twitter:description' content={meta.description} />
         <meta name='twitter:image' content={meta.image} />
 
-        <GAScript />
+        {!isDev && <GAScript />}
 
         <link rel='apple-touch-icon' href='/icons/apple-touch-icon.png' />
         <link

@@ -48,50 +48,52 @@ export const ShapeControls: React.FC<ShapeControlsPropsT> = () => {
         />
       </InputPanel>
 
-      <InputPanel title='Shader'>
-        <Radio
-          name='shader'
-          value='defaults'
-          setValue={setShader}
-          check={shader === 'defaults'}
-          label='Defaults'
-        />
-        <Radio
-          name='shader'
-          value='positionMix'
-          setValue={setShader}
-          check={shader === 'positionMix'}
-          label='Position Mix'
-        />
-        {/* <Radio
-          name='shader'
-          value='snakeHalftone'
-          setValue={setShader}
-          check={shader === 'snakeHalftone'}
-          label='SnakeHalftone'
-        />
-        <Radio
-          name='shader'
-          value='noise'
-          setValue={setShader}
-          check={shader === 'noise'}
-          label='noise'
-        />
-        <Radio
-          name='shader'
-          value='grain'
-          setValue={setShader}
-          check={shader === 'grain'}
-          label='grain'
-        />
-        <Radio
-          name='shader'
-          value='whatthe'
-          setValue={setShader}
-          check={shader === 'whatthe'}
-          label='whatthe'
-        /> */}
-      </InputPanel>
+      {type === 'plane' && (
+        <InputPanel title='Shader'>
+          <Radio
+            name='shader'
+            value='defaults'
+            setValue={setShader}
+            check={shader === 'defaults'}
+            label='Defaults'
+          />
+          <Radio
+            name='shader'
+            value='positionMix'
+            setValue={setShader}
+            check={shader === 'positionMix'}
+            label='Position Mix'
+          />
+          {/* <Radio
+     name='shader'
+     value='snakeHalftone'
+     setValue={setShader}
+     check={shader === 'snakeHalftone'}
+     label='SnakeHalftone'
+   />
+   <Radio
+     name='shader'
+     value='noise'
+     setValue={setShader}
+     check={shader === 'noise'}
+     label='noise'
+   />
+   <Radio
+     name='shader'
+     value='grain'
+     setValue={setShader}
+     check={shader === 'grain'}
+     label='grain'
+   />
+   <Radio
+     name='shader'
+     value='whatthe'
+     setValue={setShader}
+     check={shader === 'whatthe'}
+     label='whatthe'
+   /> */}
+        </InputPanel>
+      )}
 
       <InputPanel title='Animate'>
         <Radio

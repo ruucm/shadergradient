@@ -37,7 +37,7 @@ var ShapeControls = () => {
     setValue: setType,
     check: type === "waterPlane",
     label: "Water"
-  })), /* @__PURE__ */ React.createElement(InputPanel, {
+  })), ["plane", "waterPlane"].includes(type) && /* @__PURE__ */ React.createElement(InputPanel, {
     title: "Shader"
   }, /* @__PURE__ */ React.createElement(Radio, {
     name: "shader",

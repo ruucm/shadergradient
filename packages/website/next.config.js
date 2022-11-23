@@ -10,10 +10,6 @@ const withPWA = require('next-pwa')({
 })
 const withTM = require('next-transpile-modules')(['shadergradient'])
 
-const redirectPages = isDev
-  ? []
-  : ['/404', '/about', '/customize', '/', '/figma-plugin']
-
 const nextConfig = {
   webpack(config, { isServer }) {
     // audio support
@@ -63,7 +59,8 @@ const nextConfig = {
     return config
   },
   async redirects() {
-    return redirectPages.map((p) => ({
+    if (isDev) return []
+    return ['/404', '/about', '/customize', '/', '/figma-plugin'].map((p) => ({
       source: p,
       destination: '/comingsoon',
       permanent: true,

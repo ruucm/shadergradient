@@ -9,7 +9,6 @@
 		"test": "eslint src --ext ts,tsx,js,jsx"
 	},
 	"repository": {},
-	"license": "UNLICENSED",
 	"dependencies": {
 		"@remotion/cli": "3.2.44",
 		"@remotion/three": "^3.2.44",

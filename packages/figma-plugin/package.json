@@ -7,8 +7,6 @@
     "start": "webpack --config ./webpack.config.js --mode development --watch",
     "plugin:build": "webpack --config ./webpack.config.js --mode production"
   },
-  "author": "Figma",
-  "license": "MIT",
   "devDependencies": {
     "@figma/plugin-typings": "*",
     "@types/node": "^16.7.1",

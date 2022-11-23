@@ -35,10 +35,10 @@ const Dom = ({ children }) => {
       {pathname !== '/figma-plugin' && (
         <>
           <Header
-            onLogoClick={() => router.push('/')}
+            // onLogoClick={() => router.push('/')}
             aboutBtn
-            onAboutClick={() => router.push('/about')}
-            onBackClick={() => router.back()}
+            // onAboutClick={() => router.push('/about')}
+            // onBackClick={() => router.back()}
             inAbout={pathname === '/about' ? true : false}
             isMobile={isMobile}
             loadingMotion={pathname === '/' ? true : false}

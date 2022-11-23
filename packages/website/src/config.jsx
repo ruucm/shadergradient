@@ -1,6 +1,7 @@
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 import { isDev } from './consts'
+import { GAScript } from './pages/ga-script'
 
 const Header = ({ title }) => {
   const router = useRouter()
@@ -41,6 +42,8 @@ const Header = ({ title }) => {
         <meta name='twitter:title' content={meta.title} />
         <meta name='twitter:description' content={meta.description} />
         <meta name='twitter:image' content={meta.image} />
+
+        <GAScript />
 
         <link rel='apple-touch-icon' href='/icons/apple-touch-icon.png' />
         <link

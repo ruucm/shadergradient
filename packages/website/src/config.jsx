@@ -9,7 +9,7 @@ const Header = ({ title }) => {
     title: 'Shader Gradient',
     description:
       'The easiest and fastest way to create a 3D website using React Three Fiber and NextJS',
-    image: 'https://shadergradient-beige.vercel.app/og.png',
+    image: 'https://shadergradient.co/og.png',
     type: 'website',
   }
 

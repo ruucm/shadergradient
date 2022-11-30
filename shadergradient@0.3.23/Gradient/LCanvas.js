@@ -43,13 +43,13 @@ function LCanvas(_a) {
   const { Canvas } = importedFiber;
   const [pixelDensity] = useQueryState("pixelDensity");
   const [fov] = useQueryState("fov");
-  return /* @__PURE__ */ React.createElement(Canvas, __spreadValues(__spreadValues({
+  return /* @__PURE__ */ React.createElement(React.Fragment, null, /* @__PURE__ */ React.createElement("style", null, `#gradientCanvas canvas { pointer-events: none; }`), /* @__PURE__ */ React.createElement(Canvas, __spreadValues(__spreadValues({
     id: "gradientCanvas",
     key: fov,
     resize: { offsetSize: true }
   }, canvasProps(pixelDensity, fov)), rest), /* @__PURE__ */ React.createElement(FiberContextProvider, {
     value: importedFiber
-  }, children));
+  }, children)));
 }
 export {
   LCanvas

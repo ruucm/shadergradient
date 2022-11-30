@@ -1,5 +1,6 @@
 import * as React from 'react'
 import cx from 'classnames'
+import { useQueryState } from '../../../hooks/index'
 import { updateGradientState, usePropertyStore } from '../../../store'
 import { AxisButton } from './AxisButton'
 import { CopyButton } from './CopyButton'
@@ -18,7 +19,7 @@ export const ToolsBox: React.FC<ControlTypeTitlePropsT> = ({
   darkMode,
   ...rest
 }) => {
-  const zoomOut = usePropertyStore((state: any) => state.zoomOut)
+  const [zoomOut, setZoomOut] = useQueryState('zoomOut')
   const toggleAxis = usePropertyStore((state: any) => state.toggleAxis)
   const [copyUrlText, setCopyUrl] = React.useState('copy url')
 
@@ -65,7 +66,8 @@ export const ToolsBox: React.FC<ControlTypeTitlePropsT> = ({
         content='zoom out'
         active={zoomOut}
         onClick={() => {
-          usePropertyStore.setState({ zoomOut: !zoomOut })
+          setZoomOut(!zoomOut)
+          // usePropertyStore.setState({ zoomOut: !zoomOut })
         }}
       />
       <CopyButton />

@@ -1,6 +1,6 @@
 {
   "name": "shadergradient",
-  "version": "0.3.22",
+  "version": "0.3.23",
   "main": "dist/index.js",
   "scripts": {
     "serve": "yarn install && node esmbuild/esmbuild serve ./src 8001",
@@ -9,11 +9,11 @@
     "publish": "lerna publish --no-private"
   },
   "dependencies": {
+    "@react-spring/three": "^9.4.5",
     "@react-three/drei": "^7.25.4",
     "@react-three/fiber": "^7.0.21",
-    "@react-spring/three": "^9.4.5",
-    "three": "^0.135.0",
+    "framer-motion": "^6.2.9",
     "react-slider": "^2.0.0",
-    "framer-motion": "^6.2.9"
+    "three": "^0.135.0"
   }
 }

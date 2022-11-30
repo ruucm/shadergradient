@@ -13,17 +13,21 @@ export function LCanvas({
   const [fov] = useQueryState('fov')
 
   return (
-    <Canvas
-      id='gradientCanvas'
-      key={fov}
-      resize={{ offsetSize: true }}
-      {...canvasProps(pixelDensity, fov)}
-      {...rest}
-    >
-      {/* forward the context once more! */}
-      <FiberContextProvider value={importedFiber}>
-        {children}
-      </FiberContextProvider>
-    </Canvas>
+    <>
+      {/* Disable drag rotations of gradeint (for Framer & Figma) */}
+      <style>{`#gradientCanvas canvas { pointer-events: none; }`}</style>
+      <Canvas
+        id='gradientCanvas'
+        key={fov}
+        resize={{ offsetSize: true }}
+        {...canvasProps(pixelDensity, fov)}
+        {...rest}
+      >
+        {/* forward the context once more! */}
+        <FiberContextProvider value={importedFiber}>
+          {children}
+        </FiberContextProvider>
+      </Canvas>
+    </>
   )
 }

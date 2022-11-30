@@ -84,6 +84,7 @@ var require_classnames = __commonJS({
 // src/UI/Controls/Tools/ToolsBox.tsx
 var import_classnames = __toESM(require_classnames());
 import * as React from "react";
+import { useQueryState } from "../../../hooks/index.js";
 import { updateGradientState, usePropertyStore } from "../../../store.js";
 import { AxisButton } from "./AxisButton.js";
 import { CopyButton } from "./CopyButton.js";
@@ -96,7 +97,7 @@ var ToolsBox = (_a) => {
     "title",
     "darkMode"
   ]);
-  const zoomOut = usePropertyStore((state) => state.zoomOut);
+  const [zoomOut, setZoomOut] = useQueryState("zoomOut");
   const toggleAxis = usePropertyStore((state) => state.toggleAxis);
   const [copyUrlText, setCopyUrl] = React.useState("copy url");
   return /* @__PURE__ */ React.createElement("div", {
@@ -132,7 +133,7 @@ var ToolsBox = (_a) => {
     content: "zoom out",
     active: zoomOut,
     onClick: () => {
-      usePropertyStore.setState({ zoomOut: !zoomOut });
+      setZoomOut(!zoomOut);
     }
   }), /* @__PURE__ */ React.createElement(CopyButton, null));
 };

@@ -541,7 +541,7 @@ var require_query_string = __commonJS({
 var qs = __toESM(require_query_string());
 import { useState } from "react";
 import React from "react";
-import { useURLQueryState } from "../hooks/index.js";
+import { useQueryState, useURLQueryState } from "../hooks/index.js";
 import { PRESETS } from "../presets.js";
 import { updateGradientState, usePropertyStore, useUIStore } from "../store.js";
 import { cx } from "../utils/index.js";
@@ -635,7 +635,7 @@ function Tool3dAxis(Component) {
 function ToolZoomOut(Component) {
   return (_a) => {
     var _b = _a, { style } = _b, props = __objRest(_b, ["style"]);
-    const zoomOut = usePropertyStore((state) => state.zoomOut);
+    const [zoomOut] = useQueryState("zoomOut");
     return /* @__PURE__ */ React.createElement(Component, __spreadProps(__spreadValues({}, props), {
       style: __spreadProps(__spreadValues({}, style), { cursor: "pointer" }),
       onClick: () => usePropertyStore.setState({ zoomOut: !zoomOut })

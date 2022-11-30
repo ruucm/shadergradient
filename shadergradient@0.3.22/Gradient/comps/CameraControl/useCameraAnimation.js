@@ -6,20 +6,19 @@ import {
   defaultPlanesZoom,
   defaultSphereDistance
 } from "../../../consts.js";
-import { usePropertyStore } from "../../../store.js";
 import { dToR, useFiber } from "../../../utils/index.js";
 function useCameraAnimation({
   type,
   cAzimuthAngle,
   cPolarAngle,
   cDistance,
-  cameraZoom
+  cameraZoom,
+  zoomOut
 }) {
   const { useFrame } = useFiber();
   const ref = useRef();
   const control = ref.current;
   useFrame((state, delta) => ref.current.update(delta));
-  const zoomOut = usePropertyStore((state) => state.zoomOut);
   useEffect(() => {
     control == null ? void 0 : control.rotateTo(dToR(cAzimuthAngle), dToR(cPolarAngle), true);
   }, [control, cAzimuthAngle, cPolarAngle]);

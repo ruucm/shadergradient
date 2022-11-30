@@ -626,7 +626,6 @@ import { DEFAUlT_PRESET } from "./presets.js";
 var useQueryStore = create((set) => __spreadValues({}, parseState()));
 var usePropertyStore = create((set) => ({
   hoverState: 0,
-  zoomOut: false,
   toggleAxis: false,
   inAbout: false
 }));

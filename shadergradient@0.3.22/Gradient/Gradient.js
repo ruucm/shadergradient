@@ -531,14 +531,12 @@ import { useRGBELoader } from "./useRGBELoader.js";
 import { CameraControl, GradientMesh } from "./index.js";
 function GradientComp(_a) {
   var _b = _a, {
-    zoomOut = false,
     control = "props",
     dampingFactor,
     rotSpringOption,
     posSpringOption,
     isFigmaPlugin = false
   } = _b, props = __objRest(_b, [
-    "zoomOut",
     "control",
     "dampingFactor",
     "rotSpringOption",
@@ -549,7 +547,6 @@ function GradientComp(_a) {
   usePresetToStore();
   const _a2 = useControlValues(control, props), { lightType, envPreset, brightness, grain } = _a2, others = __objRest(_a2, ["lightType", "envPreset", "brightness", "grain"]);
   usePostProcessing(grain === "off");
-  useEffect(() => usePropertyStore.setState({ zoomOut }), [zoomOut]);
   const city = useRGBELoader("city.hdr", { path: envBasePath });
   const dawn = useRGBELoader("dawn.hdr", { path: envBasePath });
   const lobby = useRGBELoader("lobby.hdr", { path: envBasePath });
@@ -617,6 +614,7 @@ function useControlValues(control, _a) {
   const [envPreset] = useQueryState("envPreset");
   const [grain] = useQueryState("grain");
   const [reflection] = useQueryState("reflection");
+  const [zoomOut] = useQueryState("zoomOut");
   const queryProps = {
     type,
     animate,
@@ -645,7 +643,8 @@ function useControlValues(control, _a) {
     brightness,
     envPreset,
     grain,
-    reflection
+    reflection,
+    zoomOut
   };
   if (control === "props")
     return __spreadValues(__spreadValues({}, queryProps), props);

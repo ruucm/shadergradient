@@ -24156,6 +24156,7 @@ if (typeof window !== "undefined") {
 
 // src/Gradient/comps/GradientMesh/GradientMesh.tsx
 import { mainLoading } from "../../../consts.js";
+import { useQueryState } from "../../../hooks/index.js";
 import { usePropertyStore } from "../../../store.js";
 import { dToRArr, useFiber } from "../../../utils/index.js";
 import { lineMaterial } from "./lineMaterial.js";
@@ -24212,14 +24213,14 @@ var GradientMesh = ({
   if (shader && shader !== "defaults")
     sceneShader = shaders[shader][type != null ? type : "plane"];
   const hoverState = usePropertyStore((state) => state.hoverState);
+  const [, setZoomOut] = useQueryState("zoomOut");
   const meshCount = 192;
   const meshLineCount = 36;
   useEffect(() => {
-    if (hoverState !== 0) {
-      usePropertyStore.setState({ zoomOut: true });
-    } else {
-      usePropertyStore.setState({ zoomOut: false });
-    }
+    if (hoverState !== 0)
+      setZoomOut(true);
+    else
+      setZoomOut(false);
   }, [hoverState]);
   const ColorShiftMaterial = shaderMaterial({
     colors: getHoverColor(hoverState, [color1, color2, color3]),

@@ -1,7 +1,7 @@
 import * as React from 'react'
 import cx from 'classnames'
 import { useQueryState } from '../../../hooks/index'
-import { updateGradientState, usePropertyStore } from '../../../store'
+import { updateGradientState } from '../../../store'
 import { AxisButton } from './AxisButton'
 import { CopyButton } from './CopyButton'
 import { IconButtons } from './IconButtons'
@@ -20,7 +20,7 @@ export const ToolsBox: React.FC<ControlTypeTitlePropsT> = ({
   ...rest
 }) => {
   const [zoomOut, setZoomOut] = useQueryState('zoomOut')
-  const toggleAxis = usePropertyStore((state: any) => state.toggleAxis)
+  const [toggleAxis, setToggleAxis] = useQueryState('toggleAxis')
   const [copyUrlText, setCopyUrl] = React.useState('copy url')
 
   return (
@@ -57,18 +57,13 @@ export const ToolsBox: React.FC<ControlTypeTitlePropsT> = ({
       <AxisButton
         content='3d axis'
         active={toggleAxis}
-        onClick={() => {
-          usePropertyStore.setState({ toggleAxis: !toggleAxis })
-        }}
+        onClick={() => setToggleAxis(!toggleAxis)}
       />
       <IconButtons
         icon='Minimize2'
         content='zoom out'
         active={zoomOut}
-        onClick={() => {
-          setZoomOut(!zoomOut)
-          // usePropertyStore.setState({ zoomOut: !zoomOut })
-        }}
+        onClick={() => setZoomOut(!zoomOut)}
       />
       <CopyButton />
       {/* <IconButtons

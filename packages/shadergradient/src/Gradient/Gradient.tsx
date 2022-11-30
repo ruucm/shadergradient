@@ -3,7 +3,7 @@ import * as qs from 'query-string'
 import { envBasePath } from '../consts'
 import { usePostProcessing, useQueryState } from '../hooks/index'
 import { PRESETS } from '../presets'
-import { updateGradientState, usePropertyStore, useUIStore } from '../store'
+import { updateGradientState, useUIStore } from '../store'
 import { formatUrlString } from '../utils/index'
 import { Axis } from './Axis'
 import { EnvironmentMap } from './comps/Environment/EnvironmentMap'
@@ -30,7 +30,7 @@ function GradientComp({
 
   usePresetToStore()
 
-  const { lightType, envPreset, brightness, grain, ...others } =
+  const { lightType, envPreset, brightness, grain, toggleAxis, ...others } =
     useControlValues(control, props)
 
   usePostProcessing(grain === 'off')
@@ -39,8 +39,6 @@ function GradientComp({
   const dawn = useRGBELoader('dawn.hdr', { path: envBasePath })
   const lobby = useRGBELoader('lobby.hdr', { path: envBasePath })
   const textures = { city, dawn, lobby }
-
-  const toggleAxis = usePropertyStore((state: any) => state.toggleAxis)
 
   return (
     <>
@@ -136,6 +134,7 @@ function useControlValues(control, { urlString, ...props }: any) {
 
   // tools
   const [zoomOut] = useQueryState('zoomOut')
+  const [toggleAxis] = useQueryState('toggleAxis')
 
   const queryProps = {
     type,
@@ -167,6 +166,7 @@ function useControlValues(control, { urlString, ...props }: any) {
     grain,
     reflection,
     zoomOut,
+    toggleAxis,
   }
 
   if (control === 'props') return { ...queryProps, ...props }

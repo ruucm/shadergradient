@@ -3,7 +3,7 @@ import React from 'react'
 import * as qs from 'query-string'
 import { useQueryState, useURLQueryState } from '../hooks/index'
 import { PRESETS } from '../presets'
-import { updateGradientState, usePropertyStore, useUIStore } from '../store'
+import { updateGradientState, useUIStore } from '../store'
 import { cx } from '../utils/index'
 import {
   figma,
@@ -104,26 +104,26 @@ export function ActiveTitle(Component): ComponentType {
 // ToolsBox
 export function Tool3dAxis(Component): ComponentType {
   return ({ style, ...props }: any) => {
-    const toggleAxis = usePropertyStore((state: any) => state.toggleAxis)
+    const [toggleAxis, setToggleAxis] = useQueryState('toggleAxis')
 
     return (
       <Component
         {...props}
         style={{ ...style, cursor: 'pointer' }}
-        onClick={() => usePropertyStore.setState({ toggleAxis: !toggleAxis })}
+        onClick={() => setToggleAxis(!toggleAxis)}
       />
     )
   }
 }
 export function ToolZoomOut(Component): ComponentType {
   return ({ style, ...props }: any) => {
-    const [zoomOut] = useQueryState('zoomOut')
+    const [zoomOut, setZoomOut] = useQueryState('zoomOut')
 
     return (
       <Component
         {...props}
         style={{ ...style, cursor: 'pointer' }}
-        onClick={() => usePropertyStore.setState({ zoomOut: !zoomOut })}
+        onClick={() => setZoomOut(!zoomOut)}
       />
     )
   }

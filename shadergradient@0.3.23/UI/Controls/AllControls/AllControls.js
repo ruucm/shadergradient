@@ -5,8 +5,8 @@ import { useUIStore, useCursorStore } from "../../../store.js";
 import { PropertyControls } from "../../PropertyControls.js";
 import { ToolsBox, ControlTypeTitles } from "../Tools/index.js";
 
-// esbuild-css-modules-plugin-namespace:/tmp/tmp-1906-lQHkl3K6D1vr/shadergradient/src/UI/Controls/AllControls/AllControls.module.css.js
-var digest = "c7eddb2529d2ec07cea99f62eca3c19b2e449d5299e02c5dd62cb45df38aa86e";
+// esbuild-css-modules-plugin-namespace:/tmp/tmp-1877-ZhqL7RnUKZOZ/shadergradient/src/UI/Controls/AllControls/AllControls.module.css.js
+var digest = "3b25056b4f2b4914ddd44426831596351f3f3a2d1287891e85ae81ce46c28906";
 var css = `._controlMobile_1dm53_1 {
   width: 100vw;
   height: fit-content; }

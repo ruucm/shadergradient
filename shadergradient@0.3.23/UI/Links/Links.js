@@ -934,8 +934,8 @@ import { links } from "../../consts.js";
 import { PRESETS } from "../../presets.js";
 import { useUIStore, useCursorStore } from "../../store.js";
 
-// esbuild-css-modules-plugin-namespace:/tmp/tmp-1906-lQHkl3K6D1vr/shadergradient/src/UI/Links/Links.module.css.js
-var digest = "15abbc49afbc6a700986d0acd89a5f832605fa2a7dbbe24dc1232d516737698b";
+// esbuild-css-modules-plugin-namespace:/tmp/tmp-1877-ZhqL7RnUKZOZ/shadergradient/src/UI/Links/Links.module.css.js
+var digest = "4bd66d9c8ffedb606b228a37bfc31b2f3e9ceeadd1ff1d95340cc880191b8a91";
 var css = `._linksWrapper_laa2c_1 {
   width: 100vw;
   height: fit-content;
@@ -1049,25 +1049,25 @@ function Links({ isMobile = false }) {
   }, /* @__PURE__ */ React3.createElement("path", {
     d: "M 6.072 8.844 L 1 15.844 L 6.072 22.844",
     fill: "transparent",
-    "stroke-width": 2,
+    strokeWidth: 2,
     stroke: color,
-    "stroke-linecap": "round",
-    "stroke-linejoin": "round"
+    strokeLinecap: "round",
+    strokeLinejoin: "round"
   }), /* @__PURE__ */ React3.createElement("path", {
     d: "M 5.072 0 L 0 7 L 5.072 14",
     transform: "translate(23.928 8.504) rotate(180 2.536 7)",
     fill: "transparent",
-    "stroke-width": 2,
+    strokeWidth: 2,
     stroke: color,
-    "stroke-linecap": "round",
-    "stroke-linejoin": "round"
+    strokeLinecap: "round",
+    strokeLinejoin: "round"
   }), /* @__PURE__ */ React3.createElement("path", {
     d: "M 18.043 6.5 L 11.957 24.5",
     fill: "transparent",
-    "stroke-width": 2,
+    strokeWidth: 2,
     stroke: color,
-    "stroke-linecap": "round",
-    "stroke-linejoin": "round"
+    strokeLinecap: "round",
+    strokeLinejoin: "round"
   })))));
 }
 export {

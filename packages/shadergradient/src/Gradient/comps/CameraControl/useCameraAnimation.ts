@@ -5,7 +5,7 @@ import {
   defaultPlanesZoom,
   defaultSphereDistance,
 } from '../../../consts'
-import { usePropertyStore } from '../../../store'
+import { useQueryState } from '../../../hooks/index'
 import { dToR, useFiber } from '../../../utils/index'
 
 export function useCameraAnimation({
@@ -21,7 +21,7 @@ export function useCameraAnimation({
 
   useFrame((state, delta) => ref.current.update(delta)) // sync r3f delta with 'camera-controls'
 
-  const zoomOut = usePropertyStore((state: any) => state.zoomOut)
+  const [zoomOut] = useQueryState('zoomOut')
 
   // rorate the camera
   useEffect(() => {

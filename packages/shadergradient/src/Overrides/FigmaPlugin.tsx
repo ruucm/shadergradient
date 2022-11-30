@@ -1,7 +1,7 @@
 import { ComponentType, useState } from 'react'
 import React from 'react'
 import * as qs from 'query-string'
-import { useURLQueryState } from '../hooks/index'
+import { useQueryState, useURLQueryState } from '../hooks/index'
 import { PRESETS } from '../presets'
 import { updateGradientState, usePropertyStore, useUIStore } from '../store'
 import { cx } from '../utils/index'
@@ -117,7 +117,7 @@ export function Tool3dAxis(Component): ComponentType {
 }
 export function ToolZoomOut(Component): ComponentType {
   return ({ style, ...props }: any) => {
-    const zoomOut = usePropertyStore((state: any) => state.zoomOut)
+    const [zoomOut] = useQueryState('zoomOut')
 
     return (
       <Component

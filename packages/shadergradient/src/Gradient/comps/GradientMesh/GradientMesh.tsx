@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import { useRef } from 'react'
 import * as THREE from 'three'
 import { mainLoading } from '../../../consts'
+import { useQueryState } from '../../../hooks/index'
 import { usePropertyStore } from '../../../store'
 import { dToRArr, useFiber } from '../../../utils/index'
 import { lineMaterial } from './lineMaterial'
@@ -70,15 +71,13 @@ export const GradientMesh: React.FC<any> = ({
 
   // when color is hovered
   const hoverState = usePropertyStore((state: any) => state.hoverState)
+  const [, setZoomOut] = useQueryState('zoomOut')
   const meshCount = 192
   const meshLineCount = 36
 
   useEffect(() => {
-    if (hoverState !== 0) {
-      usePropertyStore.setState({ zoomOut: true })
-    } else {
-      usePropertyStore.setState({ zoomOut: false })
-    }
+    if (hoverState !== 0) setZoomOut(true)
+    else setZoomOut(false)
   }, [hoverState])
 
   const ColorShiftMaterial = shaderMaterial(

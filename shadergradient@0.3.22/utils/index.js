@@ -10,11 +10,15 @@ function dToRArr(degrees) {
 var sleep = (sec) => {
   return new Promise((resolve) => setTimeout(resolve, sec * 1e3));
 };
+function formatUrlString(urlString) {
+  return urlString.replace("http://localhost:3001/customize", "").replace("https://shadergradient.co/customize", "");
+}
 export {
   FiberContextProvider,
   cx,
   dToR,
   dToRArr,
+  formatUrlString,
   sleep,
   useFiber
 };

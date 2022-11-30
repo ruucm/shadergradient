@@ -79,27 +79,27 @@ export function Links({ isMobile = false }) {
             <path
               d='M 6.072 8.844 L 1 15.844 L 6.072 22.844'
               fill='transparent'
-              stroke-width={2}
+              strokeWidth={2}
               stroke={color}
-              stroke-linecap='round'
-              stroke-linejoin='round'
+              strokeLinecap='round'
+              strokeLinejoin='round'
             ></path>
             <path
               d='M 5.072 0 L 0 7 L 5.072 14'
               transform='translate(23.928 8.504) rotate(180 2.536 7)'
               fill='transparent'
-              stroke-width={2}
+              strokeWidth={2}
               stroke={color}
-              stroke-linecap='round'
-              stroke-linejoin='round'
+              strokeLinecap='round'
+              strokeLinejoin='round'
             ></path>
             <path
               d='M 18.043 6.5 L 11.957 24.5'
               fill='transparent'
-              stroke-width={2}
+              strokeWidth={2}
               stroke={color}
-              stroke-linecap='round'
-              stroke-linejoin='round'
+              strokeLinecap='round'
+              strokeLinejoin='round'
             ></path>
           </svg>
           {/* <GitHub

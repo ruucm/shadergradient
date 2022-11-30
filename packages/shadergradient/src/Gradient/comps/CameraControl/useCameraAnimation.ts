@@ -5,7 +5,6 @@ import {
   defaultPlanesZoom,
   defaultSphereDistance,
 } from '../../../consts'
-import { useQueryState } from '../../../hooks/index'
 import { dToR, useFiber } from '../../../utils/index'
 
 export function useCameraAnimation({
@@ -14,14 +13,13 @@ export function useCameraAnimation({
   cPolarAngle,
   cDistance,
   cameraZoom,
+  zoomOut,
 }) {
   const { useFrame } = useFiber()
   const ref: any = useRef()
   const control = ref.current
 
   useFrame((state, delta) => ref.current.update(delta)) // sync r3f delta with 'camera-controls'
-
-  const [zoomOut] = useQueryState('zoomOut')
 
   // rorate the camera
   useEffect(() => {

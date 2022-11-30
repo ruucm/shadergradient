@@ -13,7 +13,6 @@ export const useQueryStore = create((set) => ({
 
 export const usePropertyStore = create((set) => ({
   hoverState: 0,
-  zoomOut: false,
   toggleAxis: false,
   inAbout: false,
 }))

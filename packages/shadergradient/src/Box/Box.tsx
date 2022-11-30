@@ -1,7 +1,6 @@
 import React from 'react'
 
 type Props = {
-  zoomOut?: boolean
   control?: 'query' | 'props'
   [x: string]: any
 }

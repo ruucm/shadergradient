@@ -11,14 +11,12 @@ import { useRGBELoader } from './useRGBELoader'
 import { CameraControl, GradientMesh } from './index'
 
 type Props = {
-  zoomOut?: boolean
   control?: 'query' | 'props'
   isFigmaPlugin?: boolean
   [x: string]: any
 }
 
 function GradientComp({
-  zoomOut = false,
   control = 'props',
   dampingFactor,
   rotSpringOption,
@@ -36,8 +34,6 @@ function GradientComp({
     useControlValues(control, props)
 
   usePostProcessing(grain === 'off')
-
-  useEffect(() => usePropertyStore.setState({ zoomOut }), [zoomOut])
 
   const city = useRGBELoader('city.hdr', { path: envBasePath })
   const dawn = useRGBELoader('dawn.hdr', { path: envBasePath })
@@ -138,6 +134,9 @@ function useControlValues(control, { urlString, ...props }: any) {
   const [grain] = useQueryState('grain')
   const [reflection] = useQueryState('reflection')
 
+  // tools
+  const [zoomOut] = useQueryState('zoomOut')
+
   const queryProps = {
     type,
     animate,
@@ -167,6 +166,7 @@ function useControlValues(control, { urlString, ...props }: any) {
     envPreset,
     grain,
     reflection,
+    zoomOut,
   }
 
   if (control === 'props') return { ...queryProps, ...props }

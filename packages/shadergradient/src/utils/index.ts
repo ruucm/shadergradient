@@ -14,3 +14,9 @@ export { FiberContextProvider, useFiber } from './useFiber'
 export const sleep = (sec) => {
   return new Promise((resolve) => setTimeout(resolve, sec * 1000))
 }
+
+export function formatUrlString(urlString) {
+  return urlString
+    .replace('http://localhost:3001/customize', '')
+    .replace('https://shadergradient.co/customize', '')
+}

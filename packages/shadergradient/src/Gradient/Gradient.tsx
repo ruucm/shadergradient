@@ -1,8 +1,10 @@
 import React, { Suspense, useEffect } from 'react'
+import * as qs from 'query-string'
 import { envBasePath } from '../consts'
 import { usePostProcessing, useQueryState } from '../hooks/index'
 import { PRESETS } from '../presets'
 import { updateGradientState, usePropertyStore, useUIStore } from '../store'
+import { formatUrlString } from '../utils/index'
 import { Axis } from './Axis'
 import { EnvironmentMap } from './comps/Environment/EnvironmentMap'
 import { useRGBELoader } from './useRGBELoader'
@@ -95,7 +97,7 @@ function usePresetToStore() {
   }, [activePreset])
 }
 
-function useControlValues(control, props) {
+function useControlValues(control, { urlString, ...props }: any) {
   // shape
   const [type] = useQueryState('type')
   const [animate] = useQueryState('animate')
@@ -168,5 +170,12 @@ function useControlValues(control, props) {
   }
 
   if (control === 'props') return { ...queryProps, ...props }
-  else if (control === 'query') return queryProps
+  else if (control === 'query')
+    return urlString
+      ? qs.parse(formatUrlString(urlString), {
+          parseNumbers: true,
+          parseBooleans: true,
+          arrayFormat: 'index',
+        })
+      : queryProps
 }

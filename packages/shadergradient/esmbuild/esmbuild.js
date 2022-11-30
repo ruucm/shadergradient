@@ -1,4 +1,6 @@
+const fs = require('fs')
 const http = require('http')
+const https = require('https')
 const { join, resolve } = require('path')
 const esbuild = require('esbuild')
 const { glsl } = require('esbuild-plugin-glsl')
@@ -59,7 +61,12 @@ async function serve(path = defaultPath, port = 8000) {
   })
   socketServer.listen(8002, '0.0.0.0')
 
-  await esbuild.serve({ port, onRequest }, await getBuildOptions(path))
+  const result = await esbuild.serve(
+    { port, onRequest },
+    await getBuildOptions(path)
+  )
+  console.log('result', result)
+
   /**
    * onEnd isn't being triggered when serving (https://github.com/evanw/esbuild/issues/1384) so we need to setup a regular build to get a callback whenever a build is completed
    */
@@ -73,7 +80,44 @@ async function serve(path = defaultPath, port = 8000) {
     },
   })
 
-  console.log(`Server listening at http://127.0.0.1:${port}`)
+  // behavior customized by putting a proxy in front of esbuild (HTTPS supports)
+  // https://esbuild.github.io/api/#customizing-server-behavior
+  // https://nodejs.org/en/knowledge/HTTP/servers/how-to-create-a-HTTPS-server/
+  const options = {
+    key: fs.readFileSync(resolve(__dirname, 'key.pem')),
+    cert: fs.readFileSync(resolve(__dirname, 'cert.pem')),
+  }
+
+  https
+    .createServer(options, function (req, res) {
+      const options = {
+        hostname: result.host,
+        port: result.port,
+        path: req.url,
+        method: req.method,
+        headers: req.headers,
+      }
+
+      // Forward each incoming request to esbuild
+      const proxyReq = http.request(options, (proxyRes) => {
+        // If esbuild returns "not found", send a custom 404 page
+        if (proxyRes.statusCode === 404) {
+          res.writeHead(404, { 'Content-Type': 'text/html' })
+          res.end('<h1>No esbuil module found 404</h1>')
+          return
+        }
+
+        // Otherwise, forward the response from esbuild to the client
+        res.writeHead(proxyRes.statusCode, proxyRes.headers)
+        proxyRes.pipe(res, { end: true })
+      })
+
+      // Forward the body of the request to esbuild
+      req.pipe(proxyReq, { end: true })
+    })
+    .listen(port)
+
+  console.log(`Server listening at https://localhost:${port}`)
   console.log(`Socket server listening at http://127.0.0.1:8002`)
 }
 

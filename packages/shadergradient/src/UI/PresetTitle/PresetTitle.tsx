@@ -15,6 +15,8 @@ export function PresetTitle({
 }) {
   const activePreset = useUIStore((state) => state.activePreset)
   const setActivePreset = useUIStore((state) => state.setActivePreset)
+  const hover = useCursorStore((state: any) => state.hover)
+  const setHover = useUIStore((state) => state.setCursor)
 
   const activeUp = () => {
     if (activePreset !== PRESETS.length - 1) {
@@ -36,6 +38,10 @@ export function PresetTitle({
     arrowDownAnim.start({ opacity: 1, transition: { delay: 0.3 } })
     arrowUpAnim.start({ opacity: 1, transition: { delay: 0.3 } })
   }, [])
+
+  React.useEffect(() => {
+    console.log(hover)
+  }, [hover])
 
   const arrowUpAnim = useAnimation()
   const arrowDownAnim = useAnimation()
@@ -76,6 +82,7 @@ export function PresetTitle({
               animate={fogUpAnim}
               onClick={activeUp}
               onMouseMove={() => {
+                // setHover('arrowUp')
                 useCursorStore.setState({ hover: 'arrowUp' })
                 arrowUpAnim.start({
                   opacity: 1,
@@ -85,6 +92,7 @@ export function PresetTitle({
                 })
               }}
               onMouseLeave={() => {
+                // setHover('default')
                 useCursorStore.setState({ hover: 'default' })
                 arrowUpAnim.start({
                   opacity: 1,
@@ -101,6 +109,7 @@ export function PresetTitle({
               animate={fogDownAnim}
               onClick={activeDown}
               onMouseMove={() => {
+                // setHover('arrowDown')
                 useCursorStore.setState({ hover: 'arrowDown' })
                 arrowDownAnim.start({
                   opacity: 1,
@@ -110,6 +119,7 @@ export function PresetTitle({
                 })
               }}
               onMouseLeave={() => {
+                // setHover('default')
                 useCursorStore.setState({ hover: 'default' })
                 arrowDownAnim.start({
                   opacity: 1,
@@ -149,6 +159,8 @@ export function PresetTitle({
               arrowUpAnim.start({
                 opacity: 0.4,
               })
+              // setHover('arrowDown')
+
               useCursorStore.setState({ hover: 'arrowDown' })
             }}
             onMouseLeave={() => {
@@ -164,6 +176,8 @@ export function PresetTitle({
               arrowUpAnim.start({
                 opacity: 1,
               })
+              // setHover('default')
+
               useCursorStore.setState({ hover: 'default' })
             }}
             onClick={activeDown}
@@ -182,6 +196,8 @@ export function PresetTitle({
               arrowDownAnim.start({
                 opacity: 0.4,
               })
+              // setHover('arrowUp')
+
               useCursorStore.setState({ hover: 'arrowUp' })
             }}
             onMouseLeave={() => {
@@ -197,6 +213,7 @@ export function PresetTitle({
               arrowUpAnim.start({
                 opacity: 1,
               })
+              // setHover('default')
               useCursorStore.setState({ hover: 'default' })
             }}
             onClick={activeUp}

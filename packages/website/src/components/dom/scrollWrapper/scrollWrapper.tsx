@@ -1,5 +1,8 @@
 import * as React from 'react'
 import { motion, useAnimation } from 'framer-motion'
+import { Footer } from '../Footer'
+import { IconScroll } from './iconScroll'
+import { LinkTo } from './linkTo'
 import useStore from '@/helpers/store'
 
 export function ScrollWrapper() {
@@ -7,7 +10,10 @@ export function ScrollWrapper() {
   const [wWidth, setwWidth] = React.useState(0)
   const [wHeight, setwHeight] = React.useState(0)
   const scroll = useStore((state) => state.scroll)
-  const [scrollSwitch, setScrollSwitch] = React.useState(false)
+  const [scrollSwitch, setScrollSwitch] = React.useState('')
+  const framerSection = 150
+  const figmaSection = 1000
+  const developerSection = 2000
   //   const mode = useUIStore((state: any) => state.mode)
 
   const handleResize = () => {
@@ -16,10 +22,14 @@ export function ScrollWrapper() {
   }
 
   React.useEffect(() => {
-    if (scroll > 150) {
-      setScrollSwitch(true)
+    if (scroll > framerSection && scroll < figmaSection) {
+      setScrollSwitch('framer')
+    } else if (scroll > figmaSection && scroll < developerSection) {
+      setScrollSwitch('figma')
+    } else if (scroll > developerSection) {
+      setScrollSwitch('developer')
     } else {
-      setScrollSwitch(false)
+      setScrollSwitch('')
     }
   }, [scroll])
 
@@ -28,13 +38,12 @@ export function ScrollWrapper() {
   React.useEffect(() => {
     handleResize()
     window.addEventListener('resize', handleResize)
-    console.log(wHeight)
   }, [handleResize])
 
   React.useEffect(() => {
-    if (scrollSwitch === true) {
+    if (scrollSwitch !== '') {
       scrollAnim.start({
-        width: 500,
+        width: wWidth * 0.35,
         height: wHeight * 0.88,
         background: 'none',
         boxShadow: '0 0 0 1000px #1A1A1A',
@@ -45,7 +54,7 @@ export function ScrollWrapper() {
       })
     } else {
       scrollAnim.start({
-        width: '100vw',
+        width: wWidth,
         height: '100vh',
         boxShadow: '0 0 0 0 #1A1A1A',
         borderRadius: 0,
@@ -78,35 +87,78 @@ export function ScrollWrapper() {
       }}
       animate={scrollAnim}
       transition={{
-        duration: 0.5,
-        ease: 'easeInOut',
+        duration: 0.2,
       }}
     >
       <motion.div
         style={{
           width: '100%',
           height: '100%',
-          opacity: scroll > 150 ? 1 : 0,
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'flex-start',
+          opacity: scrollSwitch !== '' ? 1 : 0,
           color: 'white',
-          flexDirection: 'column',
           padding: 30,
+          paddingTop: 50,
+          display: 'flex',
+          flexDirection: 'column',
+          gap: 20,
         }}
       >
-        <div>Shadergradient</div>
-        <motion.div style={{ display: scroll < 1000 ? 'block' : 'none' }}>
-          for framer
-        </motion.div>
-        <motion.div
-          style={{ display: scroll > 1000 && scroll < 1500 ? 'block' : 'none' }}
+        <LinkTo
+          scroll={scroll}
+          figmaSection={figmaSection}
+          framerSection={framerSection}
+          developerSection={developerSection}
+        />
+        <IconScroll
+          scroll={scroll}
+          figmaSection={figmaSection}
+          framerSection={framerSection}
+          developerSection={developerSection}
+        />
+        <div
+          style={{
+            fontSize: '2.8em',
+            fontWeight: 500,
+            gap: 0,
+            lineHeight: 1.2,
+            flexDirection: 'column',
+            display: 'flex',
+            justifyContent: 'flex-start',
+            alignItems: 'flex-start',
+          }}
         >
-          for figma
-        </motion.div>{' '}
-        <motion.div style={{ display: scroll > 1500 ? 'block' : 'none' }}>
-          for developers
-        </motion.div>
+          <div>Shadergradient</div>
+          <motion.div
+            animate={{
+              opacity: scrollSwitch === 'framer' ? 1 : 0.4,
+            }}
+          >
+            {scrollSwitch === 'framer' && <span>—</span>}for Framer{' '}
+          </motion.div>
+          <motion.div
+            animate={{
+              opacity: scrollSwitch === 'figma' ? 1 : 0.4,
+            }}
+          >
+            {scrollSwitch === 'figma' && <span>—</span>}
+            for Figma
+          </motion.div>{' '}
+          <motion.div
+            animate={{ opacity: scrollSwitch === 'developer' ? 1 : 0.4 }}
+          >
+            {scrollSwitch === 'developer' && <span>—</span>} for developers
+          </motion.div>
+        </div>
+        <div style={{ width: 220, paddingTop: 30 }}>
+          {scrollSwitch === 'framer'
+            ? 'The best tool to enjoy the full potential of ShaderGradient.'
+            : scrollSwitch === 'figma'
+            ? 'New way to create a gradient on your favorite design tool. GIF support on the way'
+            : scrollSwitch === 'developer'
+            ? 'Deploy eye-catching website with ShaderGradient component'
+            : ''}
+        </div>
+        <Footer />
       </motion.div>
     </motion.div>
   )

@@ -16,11 +16,9 @@ export const usePropertyStore = create((set) => ({
   inAbout: false,
 }))
 
-export const useCursorStore = create(() => {
-  return {
-    hover: 'default',
-  }
-})
+export const useCursorStore = create((set) => ({
+  hover: 'default',
+}))
 
 // querystate should be a search string
 export const updateGradientState = (querystate: any) => {
@@ -43,10 +41,17 @@ export const useDomStore = create(() => {
 
 export const useUIStore = create(
   combine(
-    { activePreset: initialActivePreset, mode: 'full', loadingPercentage: 0 },
+    {
+      activePreset: initialActivePreset,
+      mode: 'full',
+      loadingPercentage: 0,
+      hover: 'default',
+    },
+
     (set) => ({
       setActivePreset: (by: number) => set((state) => ({ activePreset: by })),
       setMode: (data: any) => set((state) => ({ ...state, mode: data })),
+      setCursor: (data: any) => set((state) => ({ ...state, cursor: data })),
       setLoadingPercentage: (data: any) =>
         set((state) => ({ ...state, loadingPercentage: data })),
     })

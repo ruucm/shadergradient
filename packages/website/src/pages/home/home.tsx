@@ -172,19 +172,29 @@ const DOM = () => {
                 textAlign: 'center',
                 position: 'absolute',
                 bottom: 0,
-                height: 100,
+                height: 200,
                 left: 0,
-              }}
-              onClick={() => {}}
-              initial={{ opacity: 0, y: 0 }}
-              animate={{ opacity: 1, y: 40 }}
-              transition={{
-                duration: 2,
-                repeat: Infinity,
-                repeatType: 'loop',
+                color: 'white',
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                flexDirection: 'column',
               }}
             >
-              learn more
+              <div>learn more</div>
+              <motion.div
+                onClick={() => {}}
+                style={{ fontSize: 20 }}
+                initial={{ opacity: 0, y: 0 }}
+                animate={{ opacity: 1, y: 30 }}
+                transition={{
+                  duration: 1.5,
+                  repeat: Infinity,
+                  repeatType: 'loop',
+                }}
+              >
+                ↓
+              </motion.div>
             </motion.div>
             {/* <motion.div
             style={{ position: 'absolute', bottom: 0 }}
@@ -208,8 +218,15 @@ const DOM = () => {
           </div>
         )}
       </div>
-      <div style={{ width: '100vw', height: 3350, margin: 150 }}>
-        <iframe
+      <div
+        style={{
+          width: '100vw',
+          height: 3350,
+          margin: 150,
+          display: isMobile === true ? 'none' : 'block',
+        }}
+      >
+        <motion.iframe
           style={{
             width: '60vw',
             height: 3350,
@@ -218,11 +235,29 @@ const DOM = () => {
             display: scroll > 150 ? 'block' : 'none',
             right: 30,
             overflow: 'hidden',
+            background: '#1A1A1A',
           }}
+          animate={
+            {
+              // opacity: scroll > 150 ? 1 : 0,
+            }
+          }
           src='https://shader-gradient.framer.website/framercomp'
-          title='W3Schools Free Online Web Tutorials'
-        ></iframe>
+          title='shadergradient content'
+        ></motion.iframe>
       </div>
+      {/* <motion.div
+        style={{
+          background:
+            'linear-gradient(rgba(26, 26, 26,1), rgba(26, 26, 26, 1), rgba(26, 26, 26, 1), rgba(26, 26, 26,0.6), rgba(26, 26, 26,0))',
+          width: '62.5vw',
+          height: 75,
+          position: 'fixed',
+          right: 0,
+          top: 0,
+          opacity: scroll > 150 ? 1 : 0,
+        }}
+      ></motion.div> */}
     </>
   )
 }

@@ -3,7 +3,6 @@ import { motion } from 'framer-motion'
 import { mainLoading } from '../../consts'
 import { PRESETS } from '../../presets'
 import { useUIStore } from '../../store'
-import { AboutBtn } from './AboutBtn'
 import styles from './Header.module.scss'
 import { TextLogo } from './TextLogo'
 
@@ -50,7 +49,7 @@ export function Header({
         />
       )}
 
-      {aboutBtn && loadingReady === true && (
+      {/* {aboutBtn && loadingReady === true && (
         <AboutBtn
           inAbout={inAbout}
           color={color}
@@ -58,7 +57,7 @@ export function Header({
           onBackClick={onBackClick}
           isMobile={isMobile}
         />
-      )}
+      )} */}
     </motion.div>
   )
 }

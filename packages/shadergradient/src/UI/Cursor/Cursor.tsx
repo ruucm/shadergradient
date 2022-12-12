@@ -1,8 +1,10 @@
 import React, { useEffect } from 'react'
 import { motion, useMotionValue, useSpring } from 'framer-motion'
-import { useCursorStore } from '../../store'
+import { useUIStore, useCursorStore } from '../../store'
 
 export function Cursor({ on = true }) {
+  const hover = useCursorStore((state: any) => state.hover)
+  const setHover = useUIStore((state) => state.setCursor)
   const cursorX = useMotionValue(-100)
   const cursorY = useMotionValue(-100)
   const motionCursorSize = useMotionValue(28)
@@ -13,9 +15,12 @@ export function Cursor({ on = true }) {
   const cursorYSpring = useSpring(cursorY, springConfig)
   const cursorSizeSpring = useSpring(motionCursorSize, springConfig)
 
-  const hover = useCursorStore((state) => state.hover)
-
   let timer
+
+  useEffect(() => {
+    console.log(hover)
+  }, [hover])
+
   useEffect(() => {
     const moveCursor = (e) => {
       // @ts-ignore
@@ -57,7 +62,7 @@ export function Cursor({ on = true }) {
     return () => {
       window.removeEventListener('mousemove', moveCursor)
     }
-  }, [hover])
+  }, [])
 
   return (
     <motion.div

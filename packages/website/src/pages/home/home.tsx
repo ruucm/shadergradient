@@ -4,7 +4,6 @@ import { motion } from 'framer-motion'
 import Link from 'next/link'
 import {
   Gradient,
-  Links,
   mainLoading,
   PRESETS,
   PresetTitles,
@@ -19,6 +18,8 @@ import {
 
 import styles from './Home.module.scss'
 import { MobileSwiper } from '@/components/dom/MobileUI'
+import { ScrollWrapper } from '@/components/dom/scrollWrapper'
+import useStore from '@/helpers/store'
 import { useTimer } from '@/hooks/useTimer'
 
 // Dynamic import is ussed to prevent a payload when the website start that will include threejs r3f etc..
@@ -35,6 +36,7 @@ const DOM = () => {
   const setMode = useUIStore((state: any) => state.setMode)
   const activePreset = useUIStore((state) => state.activePreset)
   const [isMobile, setIsMobile] = useState(null)
+  const scroll = useStore((state) => state.scroll)
 
   const time = useTimer(true)
 
@@ -63,92 +65,128 @@ const DOM = () => {
 
   return (
     <>
-      {isMobile && <MobileSwiper />}
-
-      <PreviewWrapper />
-
       <div
-        className={styles.contentWrapper}
-        style={{ display: mode === 'full' ? 'flex' : 'none' }}
+        style={{
+          width: '100vw',
+          height: 'fit-content',
+          position: 'absolute',
+        }}
       >
-        <div
-          className={styles.content}
+        <div style={{ position: 'fixed', color: 'white', zIndex: 100 }}>
+          {scroll}
+        </div>
+        {isMobile && <MobileSwiper />}
+        <ScrollWrapper />
+        <PreviewWrapper />
+
+        <motion.div
+          className={styles.contentWrapper}
           style={{
-            writingMode: isMobile === true ? 'vertical-rl' : null,
+            display: mode === 'full' ? 'flex' : 'none',
+            position: 'absolute',
+          }}
+          animate={{
+            opacity: scroll > 130 ? 0 : 1,
           }}
         >
-          <div className={styles.presetTitleWrapper}>
-            <PresetTitles
-              isMobile={isMobile}
-              fontSize={isMobile === true ? 70 : 120}
-              arrowOn={isMobile === true ? false : true}
-            />
-          </div>
-
-          <motion.div
-            className={styles.paragraph}
-            initial={{
-              opacity: 0,
-              y: 20,
-            }}
-            animate={{
-              opacity: 1,
-              y: 0,
-            }}
-            transition={{
-              delay: textAnimationBase,
-              duration: textDuration,
-              ease: textEase,
-            }}
+          <div
+            className={styles.content}
             style={{
-              color: PRESETS[activePreset].color,
-              display: isMobile === false ? 'block' : 'none',
+              writingMode: isMobile === true ? 'vertical-rl' : null,
             }}
           >
-            All visuals are created with ShaderGradient,
-            <br /> a new way of creating beautiful, moving gradients. <br />
-            {`It's made with lines of codes, so you can create your own with just
+            <div className={styles.presetTitleWrapper}>
+              <PresetTitles
+                isMobile={isMobile}
+                fontSize={isMobile === true ? 70 : 120}
+                arrowOn={isMobile === true ? false : true}
+              />
+            </div>
+
+            <motion.div
+              className={styles.paragraph}
+              initial={{
+                opacity: 0,
+                y: 20,
+              }}
+              animate={{
+                opacity: 1,
+                y: 0,
+              }}
+              transition={{
+                delay: textAnimationBase,
+                duration: textDuration,
+                ease: textEase,
+              }}
+              style={{
+                color: PRESETS[activePreset].color,
+                display: isMobile === false ? 'block' : 'none',
+              }}
+            >
+              All visuals are created with ShaderGradient,
+              <br /> a new way of creating beautiful, moving gradients. <br />
+              {`It's made with lines of codes, so you can create your own with just
             a few clicks.`}
-          </motion.div>
-          <motion.div
-            className={styles.customizeBtnWrapper}
-            initial={{
-              display: 'none',
-              opacity: 0,
-              y: 20,
-            }}
-            animate={{
-              display: isMobile === false ? 'flex' : 'none',
-              opacity: 1,
-              y: 0,
-            }}
-            transition={{
-              delay: textAnimationBase + textAnimationGap,
-              duration: textDuration,
-              ease: textEase,
-            }}
-          >
-            <Link href='/customize'>
-              <motion.div
-                className={styles.customizeBtn}
-                onMouseMove={() => {
-                  useCursorStore.setState({ hover: 'button' })
-                }}
-                onMouseLeave={() => {
-                  useCursorStore.setState({ hover: 'default' })
-                }}
-              >
-                <TextHover
-                  fontSize={isMobile === true ? 15 : 18}
-                  color={PRESETS[activePreset].color}
-                  content={'Create yours →'}
-                  delay={0}
-                  border
-                />
-              </motion.div>
-            </Link>
-          </motion.div>
-          <motion.div
+            </motion.div>
+            <motion.div
+              className={styles.customizeBtnWrapper}
+              initial={{
+                display: 'none',
+                opacity: 0,
+                y: 20,
+              }}
+              animate={{
+                display: isMobile === false ? 'flex' : 'none',
+                opacity: 1,
+                y: 0,
+              }}
+              transition={{
+                delay: textAnimationBase + textAnimationGap,
+                duration: textDuration,
+                ease: textEase,
+              }}
+            >
+              <Link href='/customize'>
+                <motion.div
+                  className={styles.customizeBtn}
+                  onMouseMove={() => {
+                    useCursorStore.setState({ hover: 'button' })
+                  }}
+                  onMouseLeave={() => {
+                    useCursorStore.setState({ hover: 'default' })
+                  }}
+                >
+                  <TextHover
+                    fontSize={isMobile === true ? 15 : 18}
+                    color={PRESETS[activePreset].color}
+                    content={'Create yours →'}
+                    delay={0}
+                    border
+                  />
+                </motion.div>
+              </Link>
+            </motion.div>
+            <motion.div
+              style={{
+                width: '100%',
+                textAlign: 'center',
+                position: 'absolute',
+                bottom: 0,
+                height: 100,
+                left: 0,
+              }}
+              onClick={() => {}}
+              initial={{ opacity: 0, y: 0 }}
+              animate={{ opacity: 1, y: 40 }}
+              transition={{
+                duration: 2,
+                repeat: Infinity,
+                repeatType: 'loop',
+              }}
+            >
+              learn more
+            </motion.div>
+            {/* <motion.div
             style={{ position: 'absolute', bottom: 0 }}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -159,16 +197,32 @@ const DOM = () => {
             }}
           >
             {isMobile === false && <Links />}
-          </motion.div>
-        </div>
+          </motion.div> */}
+          </div>
+        </motion.div>
+        {isMobile === false && (
+          <div className={styles.footer}>
+            <PreviewBtn
+              color={mode !== 'full' ? '#FF430A' : PRESETS[activePreset].color}
+            />
+          </div>
+        )}
       </div>
-      {isMobile === false && (
-        <div className={styles.footer}>
-          <PreviewBtn
-            color={mode !== 'full' ? '#FF430A' : PRESETS[activePreset].color}
-          />
-        </div>
-      )}
+      <div style={{ width: '100vw', height: 3350, margin: 150 }}>
+        <iframe
+          style={{
+            width: '60vw',
+            height: 3350,
+            position: 'absolute',
+            marginTop: 300,
+            display: scroll > 150 ? 'block' : 'none',
+            right: 30,
+            overflow: 'hidden',
+          }}
+          src='https://shader-gradient.framer.website/framercomp'
+          title='W3Schools Free Online Web Tutorials'
+        ></iframe>
+      </div>
     </>
   )
 }

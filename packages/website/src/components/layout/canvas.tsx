@@ -22,6 +22,7 @@ const LControl = () => {
 // export default LCanvas
 const NextJsCanvas = ({ children }) => {
   const dom = useStore((state) => state.dom)
+  const scroll = useStore((state) => state.scroll)
   const [isMobile, setIsMobile] = useState(null)
 
   //choose the screen size
@@ -43,7 +44,7 @@ const NextJsCanvas = ({ children }) => {
       importedFiber={{ ...fiber, ...drei, ...reactSpring }}
       onCreated={(state) => state.events.connect(dom.current)}
       style={{
-        position: 'absolute',
+        position: 'fixed',
         top: 0,
         borderRadius: isMobile === true ? 36 : 0,
       }}

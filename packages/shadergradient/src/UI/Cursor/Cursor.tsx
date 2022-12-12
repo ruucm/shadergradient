@@ -62,7 +62,7 @@ export function Cursor({ on = true }) {
   return (
     <motion.div
       style={{
-        position: 'absolute',
+        position: 'fixed',
         left: 0,
         top: 0,
         zIndex: 10,

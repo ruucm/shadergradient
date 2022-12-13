@@ -11,8 +11,10 @@ export function ScrollWrapper() {
   const [wHeight, setwHeight] = React.useState(0)
   const scroll = useStore((state) => state.scroll)
   const [scrollSwitch, setScrollSwitch] = React.useState('')
-  const framerSection = 150
-  const figmaSection = 1000
+  const initialSection = 30
+  const shaderSection = 150
+  const framerSection = 600
+  const figmaSection = 1500
   const developerSection = 2000
   //   const mode = useUIStore((state: any) => state.mode)
 
@@ -22,18 +24,20 @@ export function ScrollWrapper() {
   }
 
   React.useEffect(() => {
-    if (scroll > framerSection && scroll < figmaSection) {
+    if (scroll < initialSection) {
+      setScrollSwitch('')
+    } else if (scroll < shaderSection && scroll < framerSection) {
+      setScrollSwitch('shader')
+    } else if (scroll > framerSection && scroll < figmaSection) {
       setScrollSwitch('framer')
     } else if (scroll > figmaSection && scroll < developerSection) {
       setScrollSwitch('figma')
     } else if (scroll > developerSection) {
       setScrollSwitch('developer')
     } else {
-      setScrollSwitch('')
+      return
     }
   }, [scroll])
-
-  //   const y = useTransform(scroll, [0, 1], [0, 2])
 
   React.useEffect(() => {
     handleResize()
@@ -105,12 +109,14 @@ export function ScrollWrapper() {
       >
         <LinkTo
           scroll={scroll}
+          shaderSection={shaderSection}
           figmaSection={figmaSection}
           framerSection={framerSection}
           developerSection={developerSection}
         />
         <IconScroll
           scroll={scroll}
+          shaderSection={shaderSection}
           figmaSection={figmaSection}
           framerSection={framerSection}
           developerSection={developerSection}

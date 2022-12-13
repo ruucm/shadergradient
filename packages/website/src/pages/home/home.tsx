@@ -37,7 +37,7 @@ const DOM = () => {
   const activePreset = useUIStore((state) => state.activePreset)
   const [isMobile, setIsMobile] = useState(null)
   const scroll = useStore((state) => state.scroll)
-
+  const scrollStart = 30
   const time = useTimer(true)
 
   // //choose the screen size
@@ -86,7 +86,7 @@ const DOM = () => {
             position: 'absolute',
           }}
           animate={{
-            opacity: scroll > 130 ? 0 : 1,
+            opacity: scroll > scrollStart ? 0 : 1,
           }}
         >
           <div
@@ -232,14 +232,14 @@ const DOM = () => {
             height: 3350,
             position: 'absolute',
             marginTop: 300,
-            display: scroll > 150 ? 'block' : 'none',
+            display: scroll > scrollStart ? 'block' : 'none',
             right: 30,
             overflow: 'hidden',
             background: '#1A1A1A',
           }}
           animate={
             {
-              // opacity: scroll > 150 ? 1 : 0,
+              // opacity: scroll > scrollStart ? 1 : 0,
             }
           }
           src='https://shader-gradient.framer.website/framercomp'

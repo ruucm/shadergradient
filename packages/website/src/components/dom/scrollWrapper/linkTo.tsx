@@ -6,6 +6,7 @@ export function LinkTo({
   figmaSection,
   framerSection,
   developerSection,
+  shaderSection,
 }) {
   const [current, setCurrent] = React.useState('')
 

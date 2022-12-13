@@ -3,6 +3,7 @@ import Image from 'next/image'
 
 export function IconScroll({
   scroll,
+  shaderSection,
   figmaSection,
   framerSection,
   developerSection,
@@ -36,7 +37,7 @@ export function IconScroll({
           borderRadius: 15,
           background: 'white',
           marginLeft: -6,
-          display: 'flex',
+          display: scroll > framerSection ? 'flex' : 'none',
           justifyContent: 'flex-start',
           alignItems: 'center',
           flexDirection: 'column',

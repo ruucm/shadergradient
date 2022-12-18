@@ -1,0 +1,50 @@
+{
+  "name": "shadergradient.vercel.app",
+  "private": true,
+  "engines": {
+    "node": ">=14"
+  },
+  "dependencies": {
+    "@react-three/drei": "^9.40.0",
+    "@react-three/fiber": "^8.9.0",
+    "glsl-random": "^0.0.5",
+    "next": "^13.0.1",
+    "next-pwa": "^5.6.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-merge-refs": "^2.0.1",
+    "three": "^0.146.0",
+    "three-stdlib": "^2.17.3",
+    "ui": "workspace:*",
+    "shadergradient": "workspace:*"
+  },
+  "devDependencies": {
+    "@next/bundle-analyzer": "^12.3.1",
+    "@types/node": "^18.11.16",
+    "@types/react": "^18.0.26",
+    "autoprefixer": "^10.4.12",
+    "eslint": "^8.24.0",
+    "eslint-config-next": "^13.0.1",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-tailwind": "^0.2.1",
+    "file-loader": "^6.2.0",
+    "glslify": "^7.1.1",
+    "glslify-loader": "^2.0.0",
+    "postcss": "^8.4.18",
+    "prettier": "^2.7.1",
+    "raw-loader": "^4.0.2",
+    "tailwindcss": "^3.2.1",
+    "typescript": "^4.9.4",
+    "url-loader": "^4.1.1"
+  },
+  "scripts": {
+    "lint": "yarn prettier && yarn eslint",
+    "eslint": "next lint --fix --dir src",
+    "prettier": "prettier --list-different \"./src/**/*.{ts,tsx,md}\"",
+    "dev": "next dev",
+    "build": "next build",
+    "export": "EXPORT=true next build && EXPORT=true next export",
+    "analyze": "ANALYZE=true next build",
+    "start": "next start"
+  }
+}

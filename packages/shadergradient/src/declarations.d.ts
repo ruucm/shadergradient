@@ -1,5 +1,14 @@
-declare module '*.module.css'
-declare module '*.module.scss'
+import { ReactThreeFiber } from "react-three-fiber";
 
-// for shaders
-declare module '*.glsl'
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      ambientLight: ReactThreeFiber.AmbientLightProps;
+      mesh: ReactThreeFiber.MeshProps;
+      planeGeometry: ReactThreeFiber.PlaneGeometryProps;
+      icosahedronBufferGeometry: ReactThreeFiber.IcosahedronBufferGeometryProps;
+      group: ReactThreeFiber.GrouopProps;
+      lineSegments: ReactThreeFiber.LineSegmentsProps;
+    }
+  }
+}

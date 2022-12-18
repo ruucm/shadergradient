@@ -36,9 +36,8 @@ jobs:
       - name: Generate Pages
         run: |
           cd main
-          yarn
-          yarn run shadergradient-build
-          yarn run shadergradient-release
+          pnpm install
+          pnpm --filter=shadergradient release
           cp -rf packages/shadergradient/release/* $GITHUB_WORKSPACE/pages/
       - name: Commit & Push
         run: |

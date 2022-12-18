@@ -1,19 +1,45 @@
 {
   "name": "shadergradient",
-  "version": "0.3.24",
-  "main": "dist/index.js",
+  "version": "0.0.0",
+  "main": "./dist/index.js",
+  "exports": {
+    ".": "./dist",
+    "./styles.css": "./dist/styles.css"
+  },
+  "license": "MIT",
   "scripts": {
-    "serve": "yarn install && node esmbuild/esmbuild serve ./src 8001",
-    "build": "yarn install && node esmbuild/esmbuild build ./src dist",
+    "build": "node esmbuild/esmbuild build ./src dist && tailwindcss -i ./src/styles.css -o ./dist/styles.css",
+    "dev": "concurrently \"node esmbuild/esmbuild serve ./src 8001\" \"tailwindcss -i ./src/styles.css -o ./dist/styles.css --watch\"",
     "release": "yarn run build && mkdir -p release && cp -Rf dist release/$npm_package_name@$npm_package_version",
-    "publish": "lerna publish --no-private"
+    "clean": "rm -rf dist"
   },
   "dependencies": {
     "@react-spring/three": "^9.4.5",
     "@react-three/drei": "^7.25.4",
     "@react-three/fiber": "^7.0.21",
-    "framer-motion": "^6.2.9",
-    "react-slider": "^2.0.0",
     "three": "^0.135.0"
+  },
+  "devDependencies": {
+    "@types/react": "^17.0.37",
+    "@types/react-dom": "^17.0.11",
+    "concurrently": "^7.2.2",
+    "fs-extra": "^10.0.1",
+    "esbuild": "^0.14.34",
+    "esbuild-plugin-glsl": "^1.1.0",
+    "eslint": "^7.32.0",
+    "eslint-config-custom": "workspace:*",
+    "react": "^18.2.0",
+    "tailwind-config": "workspace:*",
+    "tailwindcss": "^3.1.5",
+    "tsconfig": "workspace:*",
+    "tsup": "^6.1.3",
+    "typescript": "^4.5.2",
+    "node-sass": "^7.0.1",
+    "tmp": "^0.2.1",
+    "postcss-modules": "^4.3.1",
+    "socket.io": "^4.5.0",
+    "socket.io-client": "^4.5.0",
+    "globby": "^11.0.4",
+    "postcss": "^8.3.5"
   }
 }

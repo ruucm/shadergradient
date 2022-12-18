@@ -20,9 +20,7 @@ async function getBuildOptions(path) {
 
   return {
     // entryPoints,
-    entryPoints: [
-      "/Users/ruucm/Desktop/with-tailwind/packages/shadergradient/src/index.tsx",
-    ],
+    entryPoints: [`${defaultPath}/index.tsx`],
     minify: true,
     format: "esm",
     bundle: true,

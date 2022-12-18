@@ -44,13 +44,13 @@ var ShapeControls = () => {
     value: "defaults",
     setValue: setShader,
     check: shader === "defaults",
-    label: "Defaults"
+    label: "A"
   }), /* @__PURE__ */ React.createElement(Radio, {
     name: "shader",
     value: "positionMix",
     setValue: setShader,
     check: shader === "positionMix",
-    label: "Position Mix"
+    label: "B"
   })), /* @__PURE__ */ React.createElement(InputPanel, {
     title: "Animate"
   }, /* @__PURE__ */ React.createElement(Radio, {

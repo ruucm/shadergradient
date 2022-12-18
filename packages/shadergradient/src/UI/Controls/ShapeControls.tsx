@@ -55,14 +55,14 @@ export const ShapeControls: React.FC<ShapeControlsPropsT> = () => {
             value='defaults'
             setValue={setShader}
             check={shader === 'defaults'}
-            label='Defaults'
+            label='A'
           />
           <Radio
             name='shader'
             value='positionMix'
             setValue={setShader}
             check={shader === 'positionMix'}
-            label='Position Mix'
+            label='B'
           />
           {/* <Radio
      name='shader'

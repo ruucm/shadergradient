@@ -35,6 +35,8 @@ jobs:
           path: pages
       - name: Generate Pages
         uses: pnpm/action-setup@v2
+        with:
+          version: 6.0.2
         run: |
           cd main
           pnpm install

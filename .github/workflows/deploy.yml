@@ -33,10 +33,15 @@ jobs:
         with:
           ref: pages
           path: pages
-      - name: Generate Pages
-        uses: pnpm/action-setup@v2
+
+      - uses: pnpm/action-setup@v2
+        name: Install pnpm
+        id: pnpm-install
         with:
-          version: 6.0.2
+          version: 7
+          run_install: false
+
+      - name: Generate Pages
         run: |
           cd main
           pnpm install

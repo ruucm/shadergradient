@@ -1,11 +1,13 @@
 {
+  "version": "0.3.26",
   "private": true,
   "scripts": {
     "build": "turbo run build",
     "dev": "turbo run dev --parallel",
     "lint": "turbo run lint",
     "clean": "turbo run clean",
-    "format": "prettier --write \"**/*.{ts,tsx,md}\""
+    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "deploy": "yarn version; git push --tags; git push"
   },
   "devDependencies": {
     "eslint": "^7.32.0",

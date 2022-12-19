@@ -14,5 +14,6 @@
     "clean": {
       "cache": false
     }
-  }
+  },
+  "globalEnv": ["NODE_ENV"]
 }

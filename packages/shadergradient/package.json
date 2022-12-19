@@ -1,6 +1,6 @@
 {
   "name": "shadergradient",
-  "version": "0.0.0",
+  "version": "0.3.25",
   "main": "./dist/index.js",
   "exports": {
     ".": "./dist",
@@ -11,13 +11,14 @@
     "build": "node esmbuild/esmbuild build ./src dist && tailwindcss -i ./src/styles.css -o ./dist/styles.css",
     "dev": "concurrently \"node esmbuild/esmbuild serve ./src 8001\" \"tailwindcss -i ./src/styles.css -o ./dist/styles.css --watch\"",
     "release": "yarn run build && mkdir -p release && cp -Rf dist release/$npm_package_name@$npm_package_version",
+    "deploy": "yarn version; git push --tags; git push",
     "clean": "rm -rf dist"
   },
   "peerDependencies": {
-    "react": "*",
     "@react-spring/three": "*",
     "@react-three/drei": "*",
     "@react-three/fiber": "*",
+    "react": "*",
     "three": "*"
   },
   "devDependencies": {

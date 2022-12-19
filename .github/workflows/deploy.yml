@@ -26,8 +26,8 @@ jobs:
         uses: actions/checkout@v2
         with:
           fetch-depth: 0 # All commits, so we can look at the tags
-          ref: main
-          path: main
+          ref: main-new
+          path: main-new
       - name: Checkout Pages
         uses: actions/checkout@v2
         with:
@@ -43,7 +43,7 @@ jobs:
 
       - name: Generate Pages
         run: |
-          cd main
+          cd main-new
           pnpm install
           pnpm --filter=shadergradient release
           cp -rf packages/shadergradient/release/* $GITHUB_WORKSPACE/pages/

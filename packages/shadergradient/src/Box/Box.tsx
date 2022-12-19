@@ -15,7 +15,7 @@ export function Box(props: Props) {
         {/* @ts-ignore */}
         <boxGeometry args={[2, 2, 2]} />
         {/* @ts-ignore */}
-        <meshStandardMaterial color={"orange"} />
+        <meshStandardMaterial color={"red"} />
       </mesh>
     </>
   );

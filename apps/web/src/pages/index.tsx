@@ -1,7 +1,8 @@
 import { ScrollTicker } from "@/templates/Scroll";
 import dynamic from "next/dynamic";
 // TODO: separate it to the ui package
-import { Button, Axis } from "shadergradient";
+import { Button } from "shadergradient";
+import { Axis } from "shadergradient/client";
 
 // Dynamic import is used to prevent a payload when the website starts, that includes threejs, r3f etc..
 // WARNING ! errors might get obfuscated by using dynamic import.

@@ -4,6 +4,7 @@
   "main": "./dist/index.js",
   "exports": {
     ".": "./dist",
+    "./*": "./dist/*",
     "./styles.css": "./dist/styles.css"
   },
   "license": "MIT",

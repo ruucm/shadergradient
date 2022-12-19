@@ -1,5 +1,4 @@
 import React from "react";
-// import { useFiber } from "../utils/index";
 import { GizmoHelper, GizmoViewport } from "@react-three/drei";
 
 const lineProps: any = {
@@ -9,9 +8,6 @@ const lineProps: any = {
 };
 
 export function Axis({ isFigmaPlugin }) {
-  // const { CubicBezierLine, GizmoHelper, GizmoViewport } = useFiber();
-  console.log("GizmoHelper!");
-
   return (
     <>
       {/* <CubicBezierLine

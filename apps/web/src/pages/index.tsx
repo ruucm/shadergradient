@@ -1,3 +1,4 @@
+import { ScrollTicker } from '@/templates/Scroll'
 import dynamic from 'next/dynamic'
 // TODO: separate it to the ui package
 import { Button } from 'shadergradient'
@@ -23,6 +24,7 @@ export default function Page(props) {
 // It will receive same props as the Page component (from getStaticProps, etc.)
 Page.canvas = (props) => (
   <>
+    <ScrollTicker />
     <Box />
     <Logo scale={0.5} route='/blob' position-y={-1} />
   </>

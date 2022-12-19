@@ -21,6 +21,7 @@ importers:
       '@next/bundle-analyzer': ^12.3.1
       '@react-three/drei': ^9.40.0
       '@react-three/fiber': ^8.9.0
+      '@studio-freight/lenis': ^0.2.26
       '@types/node': ^18.11.16
       '@types/react': ^18.0.26
       autoprefixer: ^10.4.12
@@ -50,6 +51,7 @@ importers:
     dependencies:
       '@react-three/drei': 9.46.7_xwynmv5llzsuuouxruzymqw67e
       '@react-three/fiber': 8.9.1_mjlgqb43i6mvslmnwgzrdumoh4
+      '@studio-freight/lenis': 0.2.26
       glsl-random: 0.0.5
       next: 13.0.7_672uxklweod7ene3nqtsh262ca
       next-pwa: 5.6.0_w5a4tqvoi4pcdry75twbvfolqy
@@ -1963,6 +1965,13 @@ packages:
   /@socket.io/component-emitter/3.1.0:
     resolution: {integrity: sha512-+9jVqKhRSpsc591z5vX+X5Yyw+he/HCB4iQ/RYxw35CEPaY1gnsNE43nf9n9AaYjAQrTiI/mOwKUKdUs9vf7Xg==}
     dev: true
+
+  /@studio-freight/lenis/0.2.26:
+    resolution: {integrity: sha512-UNTJgO5jhS/5wnBbY7MAt8F4bx21yjI/oxIrLDPVcJ2SOMgRl+naPh2EHe8P/S3x22QLkBDu0L/6739EnDkDSg==}
+    dependencies:
+      tiny-emitter: 2.1.0
+      virtual-scroll: 2.2.1
+    dev: false
 
   /@surma/rollup-plugin-off-main-thread/2.2.3:
     resolution: {integrity: sha512-lR8q/9W7hZpMWweNiAKU7NQerBnzQQLvi8qnTDU/fxItPhtZVMbPV3lbCwjhIlNBe9Bbr5V+KHshvWmVSG9cxQ==}
@@ -7799,6 +7808,10 @@ packages:
       xtend: 4.0.2
     dev: true
 
+  /tiny-emitter/2.1.0:
+    resolution: {integrity: sha512-NB6Dk1A9xgQPMoGqC5CVXn123gWyte215ONT5Pp5a0yt4nlEoO1ZWeCwpncaekPHXO60i47ihFnZPiRPjRMq4Q==}
+    dev: false
+
   /tiny-glob/0.2.9:
     resolution: {integrity: sha512-g/55ssRPUjShh+xkfx9UPDXqhckHEsHr4Vd9zX55oSdGZc/MD0m3sferOkwWtp98bv+kcVfEHtRJgBVJzelrzg==}
     dependencies:
@@ -8242,6 +8255,12 @@ packages:
       core-util-is: 1.0.2
       extsprintf: 1.3.0
     dev: true
+
+  /virtual-scroll/2.2.1:
+    resolution: {integrity: sha512-RvjcLxluh7B/6GPzLgQ9d0NYG4yqEguTc3MU7AvxyPVltuo2Cq5RokTL9RKUaZCMJ64in2hus0d03gTtoHp55g==}
+    dependencies:
+      tiny-emitter: 2.1.0
+    dev: false
 
   /watchpack/2.4.0:
     resolution: {integrity: sha512-Lcvm7MGST/4fup+ifyKi2hjyIAwcdI4HRgtvTpIUxBRhB+RFtUh8XtDOxUfctVCnhVi+QQj49i91OyvzkJl6cg==}

@@ -1,5 +1,5 @@
 {
-  "name": "shadergradient.vercel.app",
+  "name": "web",
   "private": true,
   "engines": {
     "node": ">=14"
@@ -7,16 +7,17 @@
   "dependencies": {
     "@react-three/drei": "^9.40.0",
     "@react-three/fiber": "^8.9.0",
+    "@studio-freight/lenis": "^0.2.26",
     "glsl-random": "^0.0.5",
     "next": "^13.0.1",
     "next-pwa": "^5.6.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-merge-refs": "^2.0.1",
+    "shadergradient": "workspace:*",
     "three": "^0.146.0",
     "three-stdlib": "^2.17.3",
-    "ui": "workspace:*",
-    "shadergradient": "workspace:*"
+    "ui": "workspace:*"
   },
   "devDependencies": {
     "@next/bundle-analyzer": "^12.3.1",

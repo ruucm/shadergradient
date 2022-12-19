@@ -20,7 +20,7 @@ async function getBuildOptions(path) {
   return {
     // entryPoints,
     entryPoints: [`${defaultPath}/index.tsx`],
-    minify: true,
+    // minify: true,
     format: "esm",
     bundle: true,
     external: [
@@ -29,6 +29,10 @@ async function getBuildOptions(path) {
       "react-dom",
       "framer",
       "framer-motion",
+      "@react-three/drei",
+      "@react-three/drei",
+      "@react-three/fiber",
+      "three",
     ],
     // plugins: [esmPlugin, cssPlugin({ inject: true }), glsl({ minify: true })],
   };

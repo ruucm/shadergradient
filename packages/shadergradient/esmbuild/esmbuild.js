@@ -14,9 +14,8 @@ const defaultPath = join(process.cwd(), "src");
 const defaultOutdir = join(process.cwd(), "dist");
 
 async function getBuildOptions(path) {
-  const entryPoints = await globby([`${path}/**/*.(t|j|cs)s*`]);
-
-  console.log("entryPoints", entryPoints);
+  // const entryPoints = await globby([`${path}/**/*.(t|j|cs)s*`]);
+  // console.log("entryPoints", entryPoints);
 
   return {
     // entryPoints,

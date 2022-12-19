@@ -71,27 +71,7 @@ function Box(props) {
     ]
   });
 }
-
-// src/Gradient/Axis.tsx
-import { GizmoHelper, GizmoViewport } from "@react-three/drei";
-import { Fragment as Fragment2, jsx as jsx4 } from "react/jsx-runtime";
-function Axis({ isFigmaPlugin }) {
-  console.log("GizmoHelper!");
-  return /* @__PURE__ */ jsx4(Fragment2, {
-    children: /* @__PURE__ */ jsx4(GizmoHelper, {
-      alignment: "bottom-right",
-      margin: isFigmaPlugin ? [25, 25] : [65, 110],
-      children: /* @__PURE__ */ jsx4(GizmoViewport, {
-        axisColors: ["#FF430A", "#FF430A", "#FF430A"],
-        labelColor: "white",
-        hideNegativeAxes: true,
-        axisHeadScale: 0.8
-      })
-    })
-  });
-}
 export {
-  Axis,
   Box,
   Button,
   Card

@@ -11,11 +11,11 @@ export function Box(props: Props) {
       <ambientLight />
       {/* @ts-ignore */}
       <pointLight position={[10, 10, 10]} />
-      <mesh {...props} rotation={[1, 1, 0]} position={[0, 2, 0]}>
+      <mesh {...props} rotation={[1, 1, 0]} scale={0.5}>
         {/* @ts-ignore */}
         <boxGeometry args={[2, 2, 2]} />
         {/* @ts-ignore */}
-        <meshStandardMaterial color={"hotpink"} />
+        <meshStandardMaterial color={"orange"} />
       </mesh>
     </>
   );

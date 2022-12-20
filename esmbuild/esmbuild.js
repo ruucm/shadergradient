@@ -19,7 +19,11 @@ async function getBuildOptions(path) {
 
   return {
     // entryPoints,
-    entryPoints: [`${defaultPath}/index.ts`, `${defaultPath}/client.ts`],
+    entryPoints: [
+      `${defaultPath}/index.ts`,
+      `${defaultPath}/client.ts`,
+      `${defaultPath}/ui.ts`,
+    ],
     // minify: true,
     format: 'esm',
     bundle: true,

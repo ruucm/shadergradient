@@ -79,7 +79,8 @@ varying float distanceToCenter;
 
 
 // for npm package, need to add this manually
-float linearToRelativeLuminance( const in vec3 color ) {
+// 'linearToRelativeLuminance' : function already has a body
+float linearToRelativeLuminance2( const in vec3 color ) {
     vec3 weights = vec3( 0.2126, 0.7152, 0.0722 );
     return dot( weights, color.rgb );
 }
@@ -133,7 +134,7 @@ void main() {
 #ifdef TRANSMISSION
   diffuseColor.a *=
       mix(saturate(1. - totalTransmission +
-                   linearToRelativeLuminance(reflectedLight.directSpecular +
+                   linearToRelativeLuminance2(reflectedLight.directSpecular +
                                              reflectedLight.indirectSpecular)),
           1.0, metalness);
 #endif

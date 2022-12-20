@@ -44,7 +44,7 @@ jobs:
       - name: Generate Pages
         run: |
           cd main-new
-          pnpm install
+          pnpm install --no-frozen-lockfile
           pnpm --filter=shadergradient release
           cp -rf packages/shadergradient/release/* $GITHUB_WORKSPACE/pages/
       - name: Commit & Push

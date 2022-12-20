@@ -19,7 +19,11 @@ async function getBuildOptions(path) {
 
   return {
     // entryPoints,
-    entryPoints: [`${defaultPath}/index.ts`, `${defaultPath}/client.ts`],
+    entryPoints: [
+      `${defaultPath}/index.ts`,
+      `${defaultPath}/client.ts`,
+      `${defaultPath}/tailwind-compiled.css`,
+    ],
     // minify: true,
     format: 'esm',
     bundle: true,
@@ -63,15 +67,15 @@ async function serve(path = defaultPath, port = 8000) {
     console.log(line)
   }
 
-  const socketServer = http.createServer()
-  const io = new SocketIO(socketServer, {
-    cors: {
-      origin: '*',
-      credentials: true,
-      methods: ['GET', 'POST', 'OPTIONS', 'PUT', 'PATCH', 'DELETE', 'HEAD'],
-    },
-  })
-  socketServer.listen(8002, '0.0.0.0')
+  // const socketServer = http.createServer()
+  // const io = new SocketIO(socketServer, {
+  //   cors: {
+  //     origin: '*',
+  //     credentials: true,
+  //     methods: ['GET', 'POST', 'OPTIONS', 'PUT', 'PATCH', 'DELETE', 'HEAD'],
+  //   },
+  // })
+  // socketServer.listen(8002, '0.0.0.0')
 
   const result = await esbuild.serve(
     { port, onRequest },
@@ -130,7 +134,7 @@ async function serve(path = defaultPath, port = 8000) {
     .listen(port)
 
   console.log(`Server listening at https://localhost:${port}`)
-  console.log(`Socket server listening at http://127.0.0.1:8002`)
+  // console.log(`Socket server listening at http://127.0.0.1:8002`)
 }
 
 let [a, b, command, path, option] = process.argv

@@ -34,3 +34,4 @@ yarn-error.log*
 
 
 dist
+tailwind-compiled.css

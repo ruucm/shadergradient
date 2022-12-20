@@ -9,8 +9,8 @@
   },
   "license": "MIT",
   "scripts": {
-    "build": "node ../../esmbuild/esmbuild build ./src dist && tailwindcss -i ./src/styles.css -o ./dist/styles.css",
-    "dev": "concurrently \"node ../../esmbuild/esmbuild serve ./src 8001\" \"tailwindcss -i ./src/styles.css -o ./dist/styles.css --watch\"",
+    "build": "node ../../esmbuild/esmbuild build ./src dist && tailwindcss -i ./src/tailwind.css -o ./src/tailwind-compiled.css",
+    "dev": "concurrently \"node ../../esmbuild/esmbuild serve ./src 8001\" \"tailwindcss -i ./src/tailwind.css -o ./src/tailwind-compiled.css --watch\"",
     "release": "yarn run build && mkdir -p release && cp -Rf dist release/$npm_package_name@$npm_package_version",
     "deploy": "yarn version; git push --tags; git push",
     "clean": "rm -rf dist"

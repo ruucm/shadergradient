@@ -9,8 +9,8 @@
   },
   "license": "MIT",
   "scripts": {
-    "build": "tsup src/index.tsx --format esm,cjs --dts --external react && tailwindcss -i ./src/styles.css -o ./dist/styles.css",
-    "dev": "concurrently \"tsup src/index.tsx --format esm,cjs --dts --external react --watch\" \"tailwindcss -i ./src/styles.css -o ./dist/styles.css --watch\"",
+    "build": "node ../../esmbuild/esmbuild build ./src dist && tsup src/index.tsx --format esm,cjs --dts --external react && tailwindcss -i ./src/tailwind.css -o ./src/tailwind-compiled.css",
+    "dev": "concurrently \"node ../../esmbuild/esmbuild serve ./src 8002\" \"tsup --entry.foo src/index.ts --format esm,cjs --dts --external react --watch\" \"tailwindcss -i ./src/tailwind.css -o ./src/tailwind-compiled.css --watch --minify\"",
     "clean": "rm -rf dist"
   },
   "devDependencies": {

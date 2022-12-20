@@ -78,7 +78,7 @@ async function serve(path = defaultPath, port = 8000) {
   socketServer.listen(8002, '0.0.0.0')
 
   const result = await esbuild.serve(
-    { port, onRequest },
+    { port, onRequest, servedir: defaultOutdir },
     await getBuildOptions(path)
   )
   console.log('result', result)

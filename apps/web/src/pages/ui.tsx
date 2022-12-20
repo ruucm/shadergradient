@@ -4,7 +4,7 @@ import { Button, Card } from 'shadergradient/ui'
 export default function Page(props) {
   return (
     <div>
-      <Button />
+      <Button>Button</Button>
       <Card />
     </div>
   )

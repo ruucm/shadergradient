@@ -9,7 +9,7 @@ export const Card = () => {
         padding: 20,
       }}
     >
-      <Button />
+      <Button>Button in the card</Button>
       CAARD
     </div>
   )

@@ -1,6 +1,6 @@
 {
   "name": "shadergradient",
-  "version": "0.3.29",
+  "version": "1.0.0",
   "main": "./dist/index.js",
   "exports": {
     ".": "./dist",

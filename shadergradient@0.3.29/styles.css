@@ -516,3 +516,7 @@ video {
 .flex {
   display: flex;
 }
+
+.resize {
+  resize: both;
+}

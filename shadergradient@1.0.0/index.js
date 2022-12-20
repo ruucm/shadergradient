@@ -547,47 +547,12 @@ var require_query_string = __commonJS({
   }
 });
 
-// src/Button.tsx
-import { jsx } from "react/jsx-runtime";
-var Button = () => {
-  return /* @__PURE__ */ jsx(
-    "div",
-    {
-      style: {
-        background: "blue",
-        color: "white",
-        padding: 20,
-        display: "flex"
-      },
-      children: "ESM button33"
-    }
-  );
-};
-
-// src/Card.tsx
-import { jsx as jsx2, jsxs } from "react/jsx-runtime";
-var Card = () => {
-  return /* @__PURE__ */ jsxs(
-    "div",
-    {
-      style: {
-        background: "pink",
-        padding: 20
-      },
-      children: [
-        /* @__PURE__ */ jsx2(Button, {}),
-        "CAARD"
-      ]
-    }
-  );
-};
-
 // src/Box/Box.tsx
-import { Fragment, jsx as jsx3, jsxs as jsxs2 } from "react/jsx-runtime";
+import { Fragment, jsx, jsxs } from "react/jsx-runtime";
 function Box(props) {
-  return /* @__PURE__ */ jsx3(Fragment, { children: /* @__PURE__ */ jsxs2("mesh", __spreadProps(__spreadValues({}, props), { rotation: [1, 1, 0], scale: 0.5, children: [
-    /* @__PURE__ */ jsx3("boxGeometry", { args: [2, 2, 2] }),
-    /* @__PURE__ */ jsx3("meshStandardMaterial", { color: "red" })
+  return /* @__PURE__ */ jsx(Fragment, { children: /* @__PURE__ */ jsxs("mesh", __spreadProps(__spreadValues({}, props), { rotation: [1, 1, 0], scale: 0.5, children: [
+    /* @__PURE__ */ jsx("boxGeometry", { args: [2, 2, 2] }),
+    /* @__PURE__ */ jsx("meshStandardMaterial", { color: "red" })
   ] })) });
 }
 
@@ -771,7 +736,7 @@ function updateHistory(path) {
 var useQueryState_default = useQueryState;
 
 // src/GradientCanvas.tsx
-import { Fragment as Fragment2, jsx as jsx4 } from "react/jsx-runtime";
+import { Fragment as Fragment2, jsx as jsx2 } from "react/jsx-runtime";
 function GradientCanvas(_a) {
   var _b = _a, {
     children,
@@ -783,7 +748,7 @@ function GradientCanvas(_a) {
   usePresetToStore();
   const [pixelDensity] = useQueryState_default("pixelDensity");
   const [fov] = useQueryState_default("fov");
-  return /* @__PURE__ */ jsx4(Fragment2, { children: /* @__PURE__ */ jsx4(
+  return /* @__PURE__ */ jsx2(Fragment2, { children: /* @__PURE__ */ jsx2(
     Canvas,
     __spreadProps(__spreadValues(__spreadProps(__spreadValues({
       id: "gradientCanvas",
@@ -1978,7 +1943,7 @@ function useFBO(width, height, settings) {
 }
 
 // src/Gradient/comps/Axis/OrthographicCamera.tsx
-import { Fragment as Fragment3, jsx as jsx5, jsxs as jsxs3 } from "react/jsx-runtime";
+import { Fragment as Fragment3, jsx as jsx3, jsxs as jsxs2 } from "react/jsx-runtime";
 var isFunction = (node) => typeof node === "function";
 var OrthographicCamera4 = React2.forwardRef(
   (_a, ref) => {
@@ -2033,8 +1998,8 @@ var OrthographicCamera4 = React2.forwardRef(
         count++;
       }
     });
-    return /* @__PURE__ */ jsxs3(Fragment3, { children: [
-      /* @__PURE__ */ jsx5(
+    return /* @__PURE__ */ jsxs2(Fragment3, { children: [
+      /* @__PURE__ */ jsx3(
         "orthographicCamera",
         __spreadProps(__spreadValues({
           left: size.width / -2,
@@ -2046,7 +2011,7 @@ var OrthographicCamera4 = React2.forwardRef(
           children: !functional && children
         })
       ),
-      /* @__PURE__ */ jsx5("group", { ref: groupRef, children: functional && children(fbo.texture) })
+      /* @__PURE__ */ jsx3("group", { ref: groupRef, children: functional && children(fbo.texture) })
     ] });
   }
 );
@@ -2075,7 +2040,7 @@ function useCamera(camera, props) {
 }
 
 // src/Gradient/comps/Axis/GizmoHelper.tsx
-import { jsx as jsx6, jsxs as jsxs4 } from "react/jsx-runtime";
+import { jsx as jsx4, jsxs as jsxs3 } from "react/jsx-runtime";
 var Context = React4.createContext(
   {}
 );
@@ -2181,9 +2146,9 @@ var GizmoHelper = ({
   const x = alignment.endsWith("-center") ? 0 : alignment.endsWith("-left") ? -size.width / 2 + marginX : size.width / 2 - marginX;
   const y = alignment.startsWith("center-") ? 0 : alignment.startsWith("top-") ? size.height / 2 - marginY : -size.height / 2 + marginY;
   return createPortal(
-    /* @__PURE__ */ jsxs4(Context.Provider, { value: gizmoHelperContext, children: [
-      /* @__PURE__ */ jsx6(OrthographicCamera4, { ref: virtualCam, position: [0, 0, 200] }),
-      /* @__PURE__ */ jsx6("group", { ref: gizmoRef, position: [x, y, 0], children: GizmoHelperComponent })
+    /* @__PURE__ */ jsxs3(Context.Provider, { value: gizmoHelperContext, children: [
+      /* @__PURE__ */ jsx4(OrthographicCamera4, { ref: virtualCam, position: [0, 0, 200] }),
+      /* @__PURE__ */ jsx4("group", { ref: gizmoRef, position: [x, y, 0], children: GizmoHelperComponent })
     ] }),
     virtualScene
   );
@@ -2193,11 +2158,11 @@ var GizmoHelper = ({
 import * as React5 from "react";
 import { useThree as useThree6 } from "@react-three/fiber";
 import { CanvasTexture } from "three";
-import { Fragment as Fragment4, jsx as jsx7, jsxs as jsxs5 } from "react/jsx-runtime";
+import { Fragment as Fragment4, jsx as jsx5, jsxs as jsxs4 } from "react/jsx-runtime";
 function Axis({ scale = [0.8, 0.05, 0.05], color, rotation }) {
-  return /* @__PURE__ */ jsx7("group", { rotation, children: /* @__PURE__ */ jsxs5("mesh", { position: [0.4, 0, 0], children: [
-    /* @__PURE__ */ jsx7("boxGeometry", { args: scale }),
-    /* @__PURE__ */ jsx7("meshBasicMaterial", { color, toneMapped: false })
+  return /* @__PURE__ */ jsx5("group", { rotation, children: /* @__PURE__ */ jsxs4("mesh", { position: [0.4, 0, 0], children: [
+    /* @__PURE__ */ jsx5("boxGeometry", { args: scale }),
+    /* @__PURE__ */ jsx5("meshBasicMaterial", { color, toneMapped: false })
   ] }) });
 }
 function AxisHead(_a) {
@@ -2247,14 +2212,14 @@ function AxisHead(_a) {
     e.stopPropagation();
     setActive(false);
   };
-  return /* @__PURE__ */ jsx7(
+  return /* @__PURE__ */ jsx5(
     "sprite",
     __spreadProps(__spreadValues({
       scale,
       onPointerOver: !disabled ? handlePointerOver : void 0,
       onPointerOut: !disabled ? onClick || handlePointerOut : void 0
     }, props), {
-      children: /* @__PURE__ */ jsx7(
+      children: /* @__PURE__ */ jsx5(
         "spriteMaterial",
         {
           map: texture,
@@ -2306,12 +2271,12 @@ var GizmoViewport = (_a) => {
       e.stopPropagation();
     } : void 0
   };
-  return /* @__PURE__ */ jsxs5("group", __spreadProps(__spreadValues({ scale: 40 }, props), { children: [
-    /* @__PURE__ */ jsx7(Axis, { color: colorX, rotation: [0, 0, 0], scale: axisScale }),
-    /* @__PURE__ */ jsx7(Axis, { color: colorY, rotation: [0, 0, Math.PI / 2], scale: axisScale }),
-    /* @__PURE__ */ jsx7(Axis, { color: colorZ, rotation: [0, -Math.PI / 2, 0], scale: axisScale }),
-    !hideAxisHeads && /* @__PURE__ */ jsxs5(Fragment4, { children: [
-      /* @__PURE__ */ jsx7(
+  return /* @__PURE__ */ jsxs4("group", __spreadProps(__spreadValues({ scale: 40 }, props), { children: [
+    /* @__PURE__ */ jsx5(Axis, { color: colorX, rotation: [0, 0, 0], scale: axisScale }),
+    /* @__PURE__ */ jsx5(Axis, { color: colorY, rotation: [0, 0, Math.PI / 2], scale: axisScale }),
+    /* @__PURE__ */ jsx5(Axis, { color: colorZ, rotation: [0, -Math.PI / 2, 0], scale: axisScale }),
+    !hideAxisHeads && /* @__PURE__ */ jsxs4(Fragment4, { children: [
+      /* @__PURE__ */ jsx5(
         AxisHead,
         __spreadValues({
           arcStyle: colorX,
@@ -2319,7 +2284,7 @@ var GizmoViewport = (_a) => {
           label: labels[0]
         }, axisHeadProps)
       ),
-      /* @__PURE__ */ jsx7(
+      /* @__PURE__ */ jsx5(
         AxisHead,
         __spreadValues({
           arcStyle: colorY,
@@ -2327,7 +2292,7 @@ var GizmoViewport = (_a) => {
           label: labels[1]
         }, axisHeadProps)
       ),
-      /* @__PURE__ */ jsx7(
+      /* @__PURE__ */ jsx5(
         AxisHead,
         __spreadValues({
           arcStyle: colorZ,
@@ -2335,22 +2300,22 @@ var GizmoViewport = (_a) => {
           label: labels[2]
         }, axisHeadProps)
       ),
-      !hideNegativeAxes && /* @__PURE__ */ jsxs5(Fragment4, { children: [
-        /* @__PURE__ */ jsx7(
+      !hideNegativeAxes && /* @__PURE__ */ jsxs4(Fragment4, { children: [
+        /* @__PURE__ */ jsx5(
           AxisHead,
           __spreadValues({
             arcStyle: colorX,
             position: [-1, 0, 0]
           }, axisHeadProps)
         ),
-        /* @__PURE__ */ jsx7(
+        /* @__PURE__ */ jsx5(
           AxisHead,
           __spreadValues({
             arcStyle: colorY,
             position: [0, -1, 0]
           }, axisHeadProps)
         ),
-        /* @__PURE__ */ jsx7(
+        /* @__PURE__ */ jsx5(
           AxisHead,
           __spreadValues({
             arcStyle: colorZ,
@@ -2359,21 +2324,21 @@ var GizmoViewport = (_a) => {
         )
       ] })
     ] }),
-    /* @__PURE__ */ jsx7("ambientLight", { intensity: 0.5 }),
-    /* @__PURE__ */ jsx7("pointLight", { position: [10, 10, 10], intensity: 0.5 })
+    /* @__PURE__ */ jsx5("ambientLight", { intensity: 0.5 }),
+    /* @__PURE__ */ jsx5("pointLight", { position: [10, 10, 10], intensity: 0.5 })
   ] }));
 };
 
 // src/Gradient/comps/Axis/Axis.tsx
-import { Fragment as Fragment5, jsx as jsx8 } from "react/jsx-runtime";
+import { Fragment as Fragment5, jsx as jsx6 } from "react/jsx-runtime";
 function Axis2({ isFigmaPlugin }) {
-  return /* @__PURE__ */ jsx8(Fragment5, { children: /* @__PURE__ */ jsx8(
+  return /* @__PURE__ */ jsx6(Fragment5, { children: /* @__PURE__ */ jsx6(
     GizmoHelper,
     {
       alignment: "bottom-right",
       margin: isFigmaPlugin ? [25, 25] : [65, 110],
       renderPriority: 2,
-      children: /* @__PURE__ */ jsx8(
+      children: /* @__PURE__ */ jsx6(
         GizmoViewport,
         {
           axisColors: ["#FF430A", "#FF430A", "#FF430A"],
@@ -3768,7 +3733,7 @@ function useCameraAnimation({
 
 // src/Gradient/comps/CameraControl/CameraControl.tsx
 import { extend, useThree as useThree7, useFrame as useFrame5 } from "@react-three/fiber";
-import { jsx as jsx9 } from "react/jsx-runtime";
+import { jsx as jsx7 } from "react/jsx-runtime";
 function CameraControl(_a) {
   var _b = _a, {
     dampingFactor = 0.05
@@ -3781,7 +3746,7 @@ function CameraControl(_a) {
   const gl = useThree7((state) => state.gl);
   const ref = useCameraAnimation(props);
   useFrame5((state, delta) => ref.current.update(delta));
-  return /* @__PURE__ */ jsx9(
+  return /* @__PURE__ */ jsx7(
     "cameraControls",
     {
       ref,
@@ -4087,14 +4052,14 @@ function EnvironmentMap({ background = false, envPreset }) {
 }
 
 // src/Gradient/comps/Lights/Lights.tsx
-import { Fragment as Fragment6, jsx as jsx10, jsxs as jsxs6 } from "react/jsx-runtime";
+import { Fragment as Fragment6, jsx as jsx8, jsxs as jsxs5 } from "react/jsx-runtime";
 function Lights({ lightType, brightness, envPreset }) {
   const setLoadingPercentage = useUIStore(
     (state) => state.setLoadingPercentage
   );
-  return /* @__PURE__ */ jsxs6(Fragment6, { children: [
-    lightType === "3d" && /* @__PURE__ */ jsx10("ambientLight", { intensity: brightness || 1 }),
-    lightType === "env" && /* @__PURE__ */ jsx10(
+  return /* @__PURE__ */ jsxs5(Fragment6, { children: [
+    lightType === "3d" && /* @__PURE__ */ jsx8("ambientLight", { intensity: brightness || 1 }),
+    lightType === "env" && /* @__PURE__ */ jsx8(
       EnvironmentMap,
       {
         envPreset,
@@ -7321,7 +7286,7 @@ var host = createHost(primitives, {
 var animated = host.animated;
 
 // src/Gradient/comps/Mesh/Mesh.tsx
-import { jsx as jsx11, jsxs as jsxs7 } from "react/jsx-runtime";
+import { jsx as jsx9, jsxs as jsxs6 } from "react/jsx-runtime";
 var { to: to2, rotDur, meshDur, rotDelay, meshDelay } = mainLoading;
 var clock = new THREE7.Clock();
 Math.easeInOutCubic = function(t, b, c, d) {
@@ -7448,14 +7413,14 @@ var Mesh4 = ({
   const rotation = dToRArr([rotationX, rotationY, rotationZ]);
   const { animatedPosition } = useSpring(posSpringOption({ position }));
   const { animatedRotation } = useSpring(rotSpringOption({ rotation }));
-  return /* @__PURE__ */ jsxs7("group", { children: [
-    /* @__PURE__ */ jsxs7(animated.mesh, { position: animatedPosition, rotation: animatedRotation, children: [
-      type === "plane" && /* @__PURE__ */ jsx11("planeGeometry", { args: [10, 10, 1, meshCount] }),
-      type === "sphere" && /* @__PURE__ */ jsx11("icosahedronBufferGeometry", { args: [1, meshCount / 3] }),
-      type === "waterPlane" && /* @__PURE__ */ jsx11("planeGeometry", { args: [10, 10, meshCount, meshCount] }),
-      /* @__PURE__ */ jsx11("colorShiftMaterial", { ref: material }, ColorShiftMaterial.key)
+  return /* @__PURE__ */ jsxs6("group", { children: [
+    /* @__PURE__ */ jsxs6(animated.mesh, { position: animatedPosition, rotation: animatedRotation, children: [
+      type === "plane" && /* @__PURE__ */ jsx9("planeGeometry", { args: [10, 10, 1, meshCount] }),
+      type === "sphere" && /* @__PURE__ */ jsx9("icosahedronBufferGeometry", { args: [1, meshCount / 3] }),
+      type === "waterPlane" && /* @__PURE__ */ jsx9("planeGeometry", { args: [10, 10, meshCount, meshCount] }),
+      /* @__PURE__ */ jsx9("colorShiftMaterial", { ref: material }, ColorShiftMaterial.key)
     ] }),
-    /* @__PURE__ */ jsx11("mesh", { children: /* @__PURE__ */ jsxs7(
+    /* @__PURE__ */ jsx9("mesh", { children: /* @__PURE__ */ jsxs6(
       "lineSegments",
       {
         renderOrder: 1,
@@ -7463,10 +7428,10 @@ var Mesh4 = ({
         rotation,
         visible: hoverState !== 0 ? true : false,
         children: [
-          type === "plane" && /* @__PURE__ */ jsx11("planeGeometry", { args: [10, 10, 1, meshLineCount] }),
-          type === "sphere" && /* @__PURE__ */ jsx11("icosahedronBufferGeometry", { args: [1, meshLineCount / 3] }),
-          type === "waterPlane" && /* @__PURE__ */ jsx11("planeGeometry", { args: [10, 10, meshLineCount, meshLineCount] }),
-          /* @__PURE__ */ jsx11("hoveredLineMaterial", { ref: linemat }, HoveredLineMaterial.key)
+          type === "plane" && /* @__PURE__ */ jsx9("planeGeometry", { args: [10, 10, 1, meshLineCount] }),
+          type === "sphere" && /* @__PURE__ */ jsx9("icosahedronBufferGeometry", { args: [1, meshLineCount / 3] }),
+          type === "waterPlane" && /* @__PURE__ */ jsx9("planeGeometry", { args: [10, 10, meshLineCount, meshLineCount] }),
+          /* @__PURE__ */ jsx9("hoveredLineMaterial", { ref: linemat }, HoveredLineMaterial.key)
         ]
       }
     ) })
@@ -7484,7 +7449,7 @@ function getHoverColor(hoverState, colors2) {
 }
 
 // src/Gradient/Gradient.tsx
-import { jsx as jsx12, jsxs as jsxs8 } from "react/jsx-runtime";
+import { jsx as jsx10, jsxs as jsxs7 } from "react/jsx-runtime";
 function Gradient(_a) {
   var _b = _a, {
     control = "props",
@@ -7501,8 +7466,8 @@ function Gradient(_a) {
   ]);
   const _a2 = useControlValues(control, props), { lightType, envPreset, brightness, grain, toggleAxis } = _a2, others = __objRest(_a2, ["lightType", "envPreset", "brightness", "grain", "toggleAxis"]);
   usePostProcessing(grain === "off");
-  return /* @__PURE__ */ jsxs8(Suspense, { fallback: "Load Failed", children: [
-    /* @__PURE__ */ jsx12(
+  return /* @__PURE__ */ jsxs7(Suspense, { fallback: "Load Failed", children: [
+    /* @__PURE__ */ jsx10(
       Lights,
       {
         lightType,
@@ -7510,21 +7475,19 @@ function Gradient(_a) {
         envPreset
       }
     ),
-    /* @__PURE__ */ jsx12(
+    /* @__PURE__ */ jsx10(
       Mesh4,
       __spreadProps(__spreadValues({}, others), {
         rotSpringOption,
         posSpringOption
       })
     ),
-    toggleAxis && /* @__PURE__ */ jsx12(Axis2, { isFigmaPlugin }),
-    /* @__PURE__ */ jsx12(CameraControl, __spreadValues({ dampingFactor }, others))
+    toggleAxis && /* @__PURE__ */ jsx10(Axis2, { isFigmaPlugin }),
+    /* @__PURE__ */ jsx10(CameraControl, __spreadValues({ dampingFactor }, others))
   ] });
 }
 export {
   Box,
-  Button,
-  Card,
   Gradient,
   GradientCanvas
 };

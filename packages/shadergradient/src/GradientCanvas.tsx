@@ -1,9 +1,12 @@
 import { Canvas } from '@react-three/fiber'
-import { OrbitControls, Preload } from '@react-three/drei'
 import { canvasProps } from './consts'
 import useQueryState from './useQueryState'
 
-export function GradientCanvas({ children, ...rest }) {
+export function GradientCanvas({
+  children,
+  pointerEvents = 'none',
+  ...rest
+}: any) {
   const [pixelDensity] = useQueryState('pixelDensity')
   const [fov] = useQueryState('fov')
 
@@ -16,10 +19,9 @@ export function GradientCanvas({ children, ...rest }) {
         key={fov}
         resize={{ offsetSize: true }}
         {...canvasProps(pixelDensity, fov)}
+        style={{ pointerEvents }}
         {...rest}
       >
-        <Preload all />
-        <OrbitControls />
         {children}
       </Canvas>
     </>

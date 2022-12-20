@@ -109,6 +109,7 @@ importers:
       postcss-modules: ^4.3.1
       query-string: ^7.1.1
       react: '*'
+      react-merge-refs: ^1.1.0
       socket.io: ^4.5.0
       socket.io-client: ^4.5.0
       tailwind-config: workspace:*
@@ -119,7 +120,7 @@ importers:
       tsconfig: workspace:*
       tsup: ^6.1.3
       typescript: ^4.5.2
-      zustand: '*'
+      zustand: ^4.1.5
     dependencies:
       '@react-spring/three': 9.6.1_aj5kj473hsgheg4miwvuwybosy
       '@react-three/drei': 9.46.7_xwynmv5llzsuuouxruzymqw67e
@@ -127,6 +128,7 @@ importers:
       camera-controls: 1.37.4_three@0.146.0
       query-string: 7.1.3
       react: 18.2.0
+      react-merge-refs: 1.1.0
       three: 0.146.0
       three-stdlib: 2.20.4_three@0.146.0
       zustand: 4.1.5_react@18.2.0

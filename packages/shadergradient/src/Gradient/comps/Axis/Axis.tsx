@@ -1,11 +1,14 @@
-import React from "react";
-import { GizmoHelper, GizmoViewport } from "@react-three/drei";
+import React from 'react'
+// import { GizmoHelper, GizmoViewport } from '@react-three/drei'
+// direct import below components cause "@react-three/drei" packages cannot optimized in Framer sites yet
+import { GizmoHelper } from './GizmoHelper'
+import { GizmoViewport } from './GizmoViewport'
 
 const lineProps: any = {
   midA: [0, 0, 0],
   midB: [0, 0, 0],
   lineWidth: 1,
-};
+}
 
 export function Axis({ isFigmaPlugin }) {
   return (
@@ -29,18 +32,18 @@ export function Axis({ isFigmaPlugin }) {
         {...lineProps}
       /> */}
       <GizmoHelper
-        alignment="bottom-right" // widget alignment within scene
+        alignment='bottom-right' // widget alignment within scene
         margin={isFigmaPlugin ? [25, 25] : [65, 110]} // widget margins (X, Y)
-        // renderPriority={2}
+        renderPriority={2}
       >
         <GizmoViewport
-          axisColors={["#FF430A", "#FF430A", "#FF430A"]}
-          labelColor="white"
+          axisColors={['#FF430A', '#FF430A', '#FF430A']}
+          labelColor='white'
           hideNegativeAxes
           // @ts-ignore
           axisHeadScale={0.8}
         />
       </GizmoHelper>
     </>
-  );
+  )
 }

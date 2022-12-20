@@ -1,22 +1,19 @@
-import React from "react";
+import React from 'react'
 
 type Props = {
-  control?: "query" | "props";
-  [x: string]: any;
-};
+  control?: 'query' | 'props'
+  [x: string]: any
+}
 
 export function Box(props: Props) {
   return (
     <>
-      <ambientLight />
-      {/* @ts-ignore */}
-      <pointLight position={[10, 10, 10]} />
+      {/* <ambientLight /> */}
+      {/* <pointLight position={[10, 10, 10]} /> */}
       <mesh {...props} rotation={[1, 1, 0]} scale={0.5}>
-        {/* @ts-ignore */}
         <boxGeometry args={[2, 2, 2]} />
-        {/* @ts-ignore */}
-        <meshStandardMaterial color={"red"} />
+        <meshStandardMaterial color={'red'} />
       </mesh>
     </>
-  );
+  )
 }

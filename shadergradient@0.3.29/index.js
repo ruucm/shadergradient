@@ -593,6 +593,7 @@ function Box(props) {
 
 // src/GradientCanvas.tsx
 import { Canvas } from "@react-three/fiber";
+import { useEffect } from "react";
 
 // src/consts.ts
 var initialActivePreset = 0;
@@ -619,15 +620,6 @@ var mainLoading = {
   to: 1
 };
 var envBasePath = "https://shadergradient.vercel.app/hdr/";
-
-// src/useQueryState.ts
-var qs2 = __toESM(require_query_string());
-import { useCallback } from "react";
-
-// src/store.ts
-var qs = __toESM(require_query_string());
-import create from "zustand";
-import { combine } from "zustand/middleware";
 
 // src/presets.ts
 var DEFAUlT_PRESET = "?pixelDensity=1&fov=45";
@@ -685,6 +677,9 @@ var PRESETS = [
 ];
 
 // src/store.ts
+var qs = __toESM(require_query_string());
+import create from "zustand";
+import { combine } from "zustand/middleware";
 var useQueryStore = create((set) => __spreadValues({}, parseState()));
 var usePropertyStore = create((set) => ({
   hoverState: 0,
@@ -721,6 +716,8 @@ var useUIStore = create(
 );
 
 // src/useQueryState.ts
+var qs2 = __toESM(require_query_string());
+import { useCallback } from "react";
 var useQueryState = (propName, defaultValue = null) => {
   const selector = useCallback(
     (state) => typeof state[propName] !== "undefined" ? state[propName] : defaultValue,
@@ -783,6 +780,7 @@ function GradientCanvas(_a) {
     "children",
     "pointerEvents"
   ]);
+  usePresetToStore();
   const [pixelDensity] = useQueryState_default("pixelDensity");
   const [fov] = useQueryState_default("fov");
   return /* @__PURE__ */ jsx4(Fragment2, { children: /* @__PURE__ */ jsx4(
@@ -798,10 +796,23 @@ function GradientCanvas(_a) {
     fov
   ) });
 }
+var pageLoaded = false;
+function usePresetToStore() {
+  const activePreset = useUIStore((state) => state.activePreset);
+  useEffect(() => {
+    var _a;
+    let gradientURL;
+    if (!pageLoaded && ((_a = window.location.search) == null ? void 0 : _a.includes("pixelDensity")))
+      gradientURL = window.location.search;
+    else
+      gradientURL = PRESETS[activePreset].url;
+    updateGradientState(gradientURL);
+    pageLoaded = true;
+  }, [activePreset]);
+}
 
 // src/Gradient/Gradient.tsx
-var qs3 = __toESM(require_query_string());
-import { Suspense, useEffect as useEffect8 } from "react";
+import { Suspense } from "react";
 
 // src/utils.ts
 function dToR(d) {
@@ -812,6 +823,1567 @@ function dToRArr(degrees) {
 }
 function formatUrlString(urlString) {
   return urlString.replace("http://localhost:3001/customize", "").replace("https://shadergradient.co/customize", "");
+}
+
+// src/Gradient/hooks/useControlValues.ts
+var qs3 = __toESM(require_query_string());
+function useControlValues(control, _a) {
+  var _b = _a, { urlString } = _b, props = __objRest(_b, ["urlString"]);
+  const [type] = useQueryState_default("type");
+  const [animate] = useQueryState_default("animate");
+  const [uTime] = useQueryState_default("uTime");
+  const [uSpeed] = useQueryState_default("uSpeed");
+  const [uStrength] = useQueryState_default("uStrength");
+  const [uDensity] = useQueryState_default("uDensity");
+  const [uFrequency] = useQueryState_default("uFrequency");
+  const [uAmplitude] = useQueryState_default("uAmplitude");
+  const [positionX] = useQueryState_default("positionX");
+  const [positionY] = useQueryState_default("positionY");
+  const [positionZ] = useQueryState_default("positionZ");
+  const [rotationX] = useQueryState_default("rotationX");
+  const [rotationY] = useQueryState_default("rotationY");
+  const [rotationZ] = useQueryState_default("rotationZ");
+  const [color1] = useQueryState_default("color1");
+  const [color2] = useQueryState_default("color2");
+  const [color3] = useQueryState_default("color3");
+  const [cAzimuthAngle] = useQueryState_default("cAzimuthAngle");
+  const [cPolarAngle] = useQueryState_default("cPolarAngle");
+  const [cDistance] = useQueryState_default("cDistance");
+  const [cameraZoom] = useQueryState_default("cameraZoom");
+  const [wireframe] = useQueryState_default("wireframe");
+  const [shader] = useQueryState_default("shader");
+  const [lightType] = useQueryState_default("lightType");
+  const [brightness] = useQueryState_default("brightness");
+  const [envPreset] = useQueryState_default("envPreset");
+  const [grain] = useQueryState_default("grain");
+  const [reflection] = useQueryState_default("reflection");
+  const [zoomOut] = useQueryState_default("zoomOut");
+  const [toggleAxis] = useQueryState_default("toggleAxis");
+  const queryProps = {
+    type,
+    animate,
+    uTime,
+    uSpeed,
+    uStrength,
+    uDensity,
+    uFrequency,
+    uAmplitude,
+    positionX,
+    positionY,
+    positionZ,
+    rotationX,
+    rotationY,
+    rotationZ,
+    color1,
+    color2,
+    color3,
+    cAzimuthAngle,
+    cPolarAngle,
+    cDistance,
+    cameraZoom,
+    wireframe,
+    shader,
+    lightType,
+    brightness,
+    envPreset,
+    grain,
+    reflection,
+    zoomOut,
+    toggleAxis
+  };
+  if (control === "props")
+    return __spreadValues(__spreadValues({}, queryProps), props);
+  else if (control === "query")
+    return urlString ? qs3.parse(formatUrlString(urlString), {
+      parseNumbers: true,
+      parseBooleans: true,
+      arrayFormat: "index"
+    }) : queryProps;
+}
+
+// src/Gradient/hooks/usePostProcessing/usePostProcessing.ts
+import { useEffect as useEffect2, useMemo } from "react";
+
+// src/Gradient/hooks/usePostProcessing/lib/pp/from-threejs/postprocessing/EffectComposer.js
+import {
+  BufferGeometry as BufferGeometry2,
+  Clock,
+  Float32BufferAttribute as Float32BufferAttribute2,
+  LinearFilter,
+  Mesh as Mesh2,
+  OrthographicCamera as OrthographicCamera2,
+  RGBAFormat,
+  Vector2,
+  WebGLRenderTarget
+} from "three";
+
+// src/Gradient/hooks/usePostProcessing/lib/pp/from-threejs/postprocessing/Pass.js
+import {
+  BufferGeometry,
+  Float32BufferAttribute,
+  OrthographicCamera,
+  Mesh
+} from "three";
+var Pass = class {
+  constructor() {
+    this.enabled = true;
+    this.needsSwap = true;
+    this.clear = false;
+    this.renderToScreen = false;
+  }
+  setSize() {
+  }
+  render() {
+    console.error("THREE.Pass: .render() must be implemented in derived pass.");
+  }
+};
+var _camera = new OrthographicCamera(-1, 1, 1, -1, 0, 1);
+var _geometry = new BufferGeometry();
+_geometry.setAttribute(
+  "position",
+  new Float32BufferAttribute([-1, 3, 0, -1, -1, 0, 3, -1, 0], 3)
+);
+_geometry.setAttribute("uv", new Float32BufferAttribute([0, 2, 0, 0, 2, 0], 2));
+var FullScreenQuad = class {
+  constructor(material) {
+    this._mesh = new Mesh(_geometry, material);
+  }
+  dispose() {
+    this._mesh.geometry.dispose();
+  }
+  render(renderer) {
+    renderer.render(this._mesh, _camera);
+  }
+  get material() {
+    return this._mesh.material;
+  }
+  set material(value) {
+    this._mesh.material = value;
+  }
+};
+
+// src/Gradient/hooks/usePostProcessing/lib/pp/from-threejs/postprocessing/MaskPass.js
+var MaskPass = class extends Pass {
+  constructor(scene, camera) {
+    super();
+    this.scene = scene;
+    this.camera = camera;
+    this.clear = true;
+    this.needsSwap = false;
+    this.inverse = false;
+  }
+  render(renderer, writeBuffer, readBuffer) {
+    const context = renderer.getContext();
+    const state = renderer.state;
+    state.buffers.color.setMask(false);
+    state.buffers.depth.setMask(false);
+    state.buffers.color.setLocked(true);
+    state.buffers.depth.setLocked(true);
+    let writeValue, clearValue;
+    if (this.inverse) {
+      writeValue = 0;
+      clearValue = 1;
+    } else {
+      writeValue = 1;
+      clearValue = 0;
+    }
+    state.buffers.stencil.setTest(true);
+    state.buffers.stencil.setOp(
+      context.REPLACE,
+      context.REPLACE,
+      context.REPLACE
+    );
+    state.buffers.stencil.setFunc(context.ALWAYS, writeValue, 4294967295);
+    state.buffers.stencil.setClear(clearValue);
+    state.buffers.stencil.setLocked(true);
+    renderer.setRenderTarget(readBuffer);
+    if (this.clear)
+      renderer.clear();
+    renderer.render(this.scene, this.camera);
+    renderer.setRenderTarget(writeBuffer);
+    if (this.clear)
+      renderer.clear();
+    renderer.render(this.scene, this.camera);
+    state.buffers.color.setLocked(false);
+    state.buffers.depth.setLocked(false);
+    state.buffers.stencil.setLocked(false);
+    state.buffers.stencil.setFunc(context.EQUAL, 1, 4294967295);
+    state.buffers.stencil.setOp(context.KEEP, context.KEEP, context.KEEP);
+    state.buffers.stencil.setLocked(true);
+  }
+};
+var ClearMaskPass = class extends Pass {
+  constructor() {
+    super();
+    this.needsSwap = false;
+  }
+  render(renderer) {
+    renderer.state.buffers.stencil.setLocked(false);
+    renderer.state.buffers.stencil.setTest(false);
+  }
+};
+
+// src/Gradient/hooks/usePostProcessing/lib/pp/from-threejs/postprocessing/ShaderPass.js
+import { ShaderMaterial, UniformsUtils } from "three";
+var ShaderPass = class extends Pass {
+  constructor(shader, textureID) {
+    super();
+    this.textureID = textureID !== void 0 ? textureID : "tDiffuse";
+    if (shader instanceof ShaderMaterial) {
+      this.uniforms = shader.uniforms;
+      this.material = shader;
+    } else if (shader) {
+      this.uniforms = UniformsUtils.clone(shader.uniforms);
+      this.material = new ShaderMaterial({
+        defines: Object.assign({}, shader.defines),
+        uniforms: this.uniforms,
+        vertexShader: shader.vertexShader,
+        fragmentShader: shader.fragmentShader
+      });
+    }
+    this.fsQuad = new FullScreenQuad(this.material);
+  }
+  render(renderer, writeBuffer, readBuffer) {
+    if (this.uniforms[this.textureID]) {
+      this.uniforms[this.textureID].value = readBuffer.texture;
+    }
+    this.fsQuad.material = this.material;
+    if (this.renderToScreen) {
+      renderer.setRenderTarget(null);
+      this.fsQuad.render(renderer);
+    } else {
+      renderer.setRenderTarget(writeBuffer);
+      if (this.clear)
+        renderer.clear(
+          renderer.autoClearColor,
+          renderer.autoClearDepth,
+          renderer.autoClearStencil
+        );
+      this.fsQuad.render(renderer);
+    }
+  }
+};
+
+// src/Gradient/hooks/usePostProcessing/lib/pp/from-threejs/shaders/CopyShader.js
+var CopyShader = {
+  uniforms: {
+    tDiffuse: { value: null },
+    opacity: { value: 1 }
+  },
+  vertexShader: `
+
+		varying vec2 vUv;
+
+		void main() {
+
+			vUv = uv;
+			gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );
+
+		}`,
+  fragmentShader: `
+
+		uniform float opacity;
+
+		uniform sampler2D tDiffuse;
+
+		varying vec2 vUv;
+
+		void main() {
+
+			vec4 texel = texture2D( tDiffuse, vUv );
+			gl_FragColor = opacity * texel;
+
+		}`
+};
+
+// src/Gradient/hooks/usePostProcessing/lib/pp/from-threejs/postprocessing/EffectComposer.js
+var EffectComposer = class {
+  constructor(renderer, renderTarget) {
+    this.renderer = renderer;
+    if (renderTarget === void 0) {
+      const parameters = {
+        minFilter: LinearFilter,
+        magFilter: LinearFilter,
+        format: RGBAFormat
+      };
+      const size = renderer.getSize(new Vector2());
+      this._pixelRatio = renderer.getPixelRatio();
+      this._width = size.width;
+      this._height = size.height;
+      renderTarget = new WebGLRenderTarget(
+        this._width * this._pixelRatio,
+        this._height * this._pixelRatio,
+        parameters
+      );
+      renderTarget.texture.name = "EffectComposer.rt1";
+    } else {
+      this._pixelRatio = 1;
+      this._width = renderTarget.width;
+      this._height = renderTarget.height;
+    }
+    this.renderTarget1 = renderTarget;
+    this.renderTarget2 = renderTarget.clone();
+    this.renderTarget2.texture.name = "EffectComposer.rt2";
+    this.writeBuffer = this.renderTarget1;
+    this.readBuffer = this.renderTarget2;
+    this.renderToScreen = true;
+    this.passes = [];
+    if (CopyShader === void 0) {
+      console.error("THREE.EffectComposer relies on CopyShader");
+    }
+    if (ShaderPass === void 0) {
+      console.error("THREE.EffectComposer relies on ShaderPass");
+    }
+    this.copyPass = new ShaderPass(CopyShader);
+    this.clock = new Clock();
+  }
+  swapBuffers() {
+    const tmp = this.readBuffer;
+    this.readBuffer = this.writeBuffer;
+    this.writeBuffer = tmp;
+  }
+  addPass(pass) {
+    this.passes.push(pass);
+    pass.setSize(
+      this._width * this._pixelRatio,
+      this._height * this._pixelRatio
+    );
+  }
+  insertPass(pass, index) {
+    this.passes.splice(index, 0, pass);
+    pass.setSize(
+      this._width * this._pixelRatio,
+      this._height * this._pixelRatio
+    );
+  }
+  removePass(pass) {
+    const index = this.passes.indexOf(pass);
+    if (index !== -1) {
+      this.passes.splice(index, 1);
+    }
+  }
+  isLastEnabledPass(passIndex) {
+    for (let i = passIndex + 1; i < this.passes.length; i++) {
+      if (this.passes[i].enabled) {
+        return false;
+      }
+    }
+    return true;
+  }
+  render(deltaTime) {
+    if (deltaTime === void 0) {
+      deltaTime = this.clock.getDelta();
+    }
+    const currentRenderTarget = this.renderer.getRenderTarget();
+    let maskActive = false;
+    for (let i = 0, il = this.passes.length; i < il; i++) {
+      const pass = this.passes[i];
+      if (pass.enabled === false)
+        continue;
+      pass.renderToScreen = this.renderToScreen && this.isLastEnabledPass(i);
+      pass.render(
+        this.renderer,
+        this.writeBuffer,
+        this.readBuffer,
+        deltaTime,
+        maskActive
+      );
+      if (pass.needsSwap) {
+        if (maskActive) {
+          const context = this.renderer.getContext();
+          const stencil = this.renderer.state.buffers.stencil;
+          stencil.setFunc(context.NOTEQUAL, 1, 4294967295);
+          this.copyPass.render(
+            this.renderer,
+            this.writeBuffer,
+            this.readBuffer,
+            deltaTime
+          );
+          stencil.setFunc(context.EQUAL, 1, 4294967295);
+        }
+        this.swapBuffers();
+      }
+      if (MaskPass !== void 0) {
+        if (pass instanceof MaskPass) {
+          maskActive = true;
+        } else if (pass instanceof ClearMaskPass) {
+          maskActive = false;
+        }
+      }
+    }
+    this.renderer.setRenderTarget(currentRenderTarget);
+  }
+  reset(renderTarget) {
+    if (renderTarget === void 0) {
+      const size = this.renderer.getSize(new Vector2());
+      this._pixelRatio = this.renderer.getPixelRatio();
+      this._width = size.width;
+      this._height = size.height;
+      renderTarget = this.renderTarget1.clone();
+      renderTarget.setSize(
+        this._width * this._pixelRatio,
+        this._height * this._pixelRatio
+      );
+    }
+    this.renderTarget1.dispose();
+    this.renderTarget2.dispose();
+    this.renderTarget1 = renderTarget;
+    this.renderTarget2 = renderTarget.clone();
+    this.writeBuffer = this.renderTarget1;
+    this.readBuffer = this.renderTarget2;
+  }
+  setSize(width, height) {
+    this._width = width;
+    this._height = height;
+    const effectiveWidth = this._width * this._pixelRatio;
+    const effectiveHeight = this._height * this._pixelRatio;
+    this.renderTarget1.setSize(effectiveWidth, effectiveHeight);
+    this.renderTarget2.setSize(effectiveWidth, effectiveHeight);
+    for (let i = 0; i < this.passes.length; i++) {
+      this.passes[i].setSize(effectiveWidth, effectiveHeight);
+    }
+  }
+  setPixelRatio(pixelRatio) {
+    this._pixelRatio = pixelRatio;
+    this.setSize(this._width, this._height);
+  }
+};
+var _camera2 = new OrthographicCamera2(-1, 1, 1, -1, 0, 1);
+var _geometry2 = new BufferGeometry2();
+_geometry2.setAttribute(
+  "position",
+  new Float32BufferAttribute2([-1, 3, 0, -1, -1, 0, 3, -1, 0], 3)
+);
+_geometry2.setAttribute("uv", new Float32BufferAttribute2([0, 2, 0, 0, 2, 0], 2));
+
+// src/Gradient/hooks/usePostProcessing/lib/pp/from-threejs/postprocessing/RenderPass.js
+import { Color } from "three";
+var RenderPass = class extends Pass {
+  constructor(scene, camera, overrideMaterial, clearColor, clearAlpha) {
+    super();
+    this.scene = scene;
+    this.camera = camera;
+    this.overrideMaterial = overrideMaterial;
+    this.clearColor = clearColor;
+    this.clearAlpha = clearAlpha !== void 0 ? clearAlpha : 0;
+    this.clear = true;
+    this.clearDepth = false;
+    this.needsSwap = false;
+    this._oldClearColor = new Color();
+  }
+  render(renderer, writeBuffer, readBuffer) {
+    const oldAutoClear = renderer.autoClear;
+    renderer.autoClear = false;
+    let oldClearAlpha, oldOverrideMaterial;
+    if (this.overrideMaterial !== void 0) {
+      oldOverrideMaterial = this.scene.overrideMaterial;
+      this.scene.overrideMaterial = this.overrideMaterial;
+    }
+    if (this.clearColor) {
+      renderer.getClearColor(this._oldClearColor);
+      oldClearAlpha = renderer.getClearAlpha();
+      renderer.setClearColor(this.clearColor, this.clearAlpha);
+    }
+    if (this.clearDepth) {
+      renderer.clearDepth();
+    }
+    renderer.setRenderTarget(this.renderToScreen ? null : readBuffer);
+    if (this.clear)
+      renderer.clear(
+        renderer.autoClearColor,
+        renderer.autoClearDepth,
+        renderer.autoClearStencil
+      );
+    renderer.render(this.scene, this.camera);
+    if (this.clearColor) {
+      renderer.setClearColor(this._oldClearColor, oldClearAlpha);
+    }
+    if (this.overrideMaterial !== void 0) {
+      this.scene.overrideMaterial = oldOverrideMaterial;
+    }
+    renderer.autoClear = oldAutoClear;
+  }
+};
+
+// src/Gradient/hooks/usePostProcessing/lib/pp/HalftonePass.ts
+import { ShaderMaterial as ShaderMaterial2, UniformsUtils as UniformsUtils2 } from "three";
+
+// src/Gradient/hooks/usePostProcessing/lib/pp/blending/BlendFunction.js
+var BlendFunction = {
+  SKIP: 0,
+  ADD: 1,
+  ALPHA: 2,
+  AVERAGE: 3,
+  COLOR_BURN: 4,
+  COLOR_DODGE: 5,
+  DARKEN: 6,
+  DIFFERENCE: 7,
+  EXCLUSION: 8,
+  LIGHTEN: 9,
+  MULTIPLY: 10,
+  DIVIDE: 11,
+  NEGATION: 12,
+  NORMAL: 13,
+  OVERLAY: 14,
+  REFLECT: 15,
+  SCREEN: 16,
+  SOFT_LIGHT: 17,
+  SUBTRACT: 18
+};
+
+// src/Gradient/hooks/usePostProcessing/lib/pp/blending/BlendMode.js
+import { EventDispatcher, Uniform } from "three";
+
+// src/Gradient/hooks/usePostProcessing/lib/pp/blending/glsl/add/shader.frag
+var shader_default = "vec4 blend(const in vec4 x,const in vec4 y,const in float opacity){return min(x+y,1.0)*opacity+x*(1.0-opacity);}";
+
+// src/Gradient/hooks/usePostProcessing/lib/pp/blending/glsl/alpha/shader.frag
+var shader_default2 = "vec3 blend(const in vec3 x,const in vec3 y,const in float opacity){return y*opacity+x*(1.0-opacity);}vec4 blend(const in vec4 x,const in vec4 y,const in float opacity){float a=min(y.a,opacity);return vec4(blend(x.rgb,y.rgb,a),max(x.a,a));}";
+
+// src/Gradient/hooks/usePostProcessing/lib/pp/blending/glsl/average/shader.frag
+var shader_default3 = "vec4 blend(const in vec4 x,const in vec4 y,const in float opacity){return(x+y)*0.5*opacity+x*(1.0-opacity);}";
+
+// src/Gradient/hooks/usePostProcessing/lib/pp/blending/glsl/color-burn/shader.frag
+var shader_default4 = "float blend(const in float x,const in float y){return(y==0.0)?y:max(1.0-(1.0-x)/y,0.0);}vec4 blend(const in vec4 x,const in vec4 y,const in float opacity){vec4 z=vec4(blend(x.r,y.r),blend(x.g,y.g),blend(x.b,y.b),blend(x.a,y.a));return z*opacity+x*(1.0-opacity);}";
+
+// src/Gradient/hooks/usePostProcessing/lib/pp/blending/glsl/color-dodge/shader.frag
+var shader_default5 = "float blend(const in float x,const in float y){return(y==1.0)?y:min(x/(1.0-y),1.0);}vec4 blend(const in vec4 x,const in vec4 y,const in float opacity){vec4 z=vec4(blend(x.r,y.r),blend(x.g,y.g),blend(x.b,y.b),blend(x.a,y.a));return z*opacity+x*(1.0-opacity);}";
+
+// src/Gradient/hooks/usePostProcessing/lib/pp/blending/glsl/darken/shader.frag
+var shader_default6 = "vec4 blend(const in vec4 x,const in vec4 y,const in float opacity){return min(x,y)*opacity+x*(1.0-opacity);}";
+
+// src/Gradient/hooks/usePostProcessing/lib/pp/blending/glsl/difference/shader.frag
+var shader_default7 = "vec4 blend(const in vec4 x,const in vec4 y,const in float opacity){return abs(x-y)*opacity+x*(1.0-opacity);}";
+
+// src/Gradient/hooks/usePostProcessing/lib/pp/blending/glsl/divide/shader.frag
+var shader_default8 = "float blend(const in float x,const in float y){return(y>0.0)?min(x/y,1.0):1.0;}vec4 blend(const in vec4 x,const in vec4 y,const in float opacity){vec4 z=vec4(blend(x.r,y.r),blend(x.g,y.g),blend(x.b,y.b),blend(x.a,y.a));return z*opacity+x*(1.0-opacity);}";
+
+// src/Gradient/hooks/usePostProcessing/lib/pp/blending/glsl/exclusion/shader.frag
+var shader_default9 = "vec4 blend(const in vec4 x,const in vec4 y,const in float opacity){return(x+y-2.0*x*y)*opacity+x*(1.0-opacity);}";
+
+// src/Gradient/hooks/usePostProcessing/lib/pp/blending/glsl/lighten/shader.frag
+var shader_default10 = "vec4 blend(const in vec4 x,const in vec4 y,const in float opacity){return max(x,y)*opacity+x*(1.0-opacity);}";
+
+// src/Gradient/hooks/usePostProcessing/lib/pp/blending/glsl/multiply/shader.frag
+var shader_default11 = "vec4 blend(const in vec4 x,const in vec4 y,const in float opacity){return x*y*opacity+x*(1.0-opacity);}";
+
+// src/Gradient/hooks/usePostProcessing/lib/pp/blending/glsl/negation/shader.frag
+var shader_default12 = "vec4 blend(const in vec4 x,const in vec4 y,const in float opacity){return(1.0-abs(1.0-x-y))*opacity+x*(1.0-opacity);}";
+
+// src/Gradient/hooks/usePostProcessing/lib/pp/blending/glsl/normal/shader.frag
+var shader_default13 = "vec4 blend(const in vec4 x,const in vec4 y,const in float opacity){return y*opacity+x*(1.0-opacity);}";
+
+// src/Gradient/hooks/usePostProcessing/lib/pp/blending/glsl/overlay/shader.frag
+var shader_default14 = "float blend(const in float x,const in float y){return(x<0.5)?(2.0*x*y):(1.0-2.0*(1.0-x)*(1.0-y));}vec4 blend(const in vec4 x,const in vec4 y,const in float opacity){vec4 z=vec4(blend(x.r,y.r),blend(x.g,y.g),blend(x.b,y.b),blend(x.a,y.a));return z*opacity+x*(1.0-opacity);}";
+
+// src/Gradient/hooks/usePostProcessing/lib/pp/blending/glsl/reflect/shader.frag
+var shader_default15 = "float blend(const in float x,const in float y){return(y==1.0)?y:min(x*x/(1.0-y),1.0);}vec4 blend(const in vec4 x,const in vec4 y,const in float opacity){vec4 z=vec4(blend(x.r,y.r),blend(x.g,y.g),blend(x.b,y.b),blend(x.a,y.a));return z*opacity+x*(1.0-opacity);}";
+
+// src/Gradient/hooks/usePostProcessing/lib/pp/blending/glsl/screen/shader.frag
+var shader_default16 = "vec4 blend(const in vec4 x,const in vec4 y,const in float opacity){return(1.0-(1.0-x)*(1.0-y))*opacity+x*(1.0-opacity);}";
+
+// src/Gradient/hooks/usePostProcessing/lib/pp/blending/glsl/soft-light/shader.frag
+var shader_default17 = "float blend(const in float x,const in float y){return(y<0.5)?(2.0*x*y+x*x*(1.0-2.0*y)):(sqrt(x)*(2.0*y-1.0)+2.0*x*(1.0-y));}vec4 blend(const in vec4 x,const in vec4 y,const in float opacity){vec4 z=vec4(blend(x.r,y.r),blend(x.g,y.g),blend(x.b,y.b),blend(x.a,y.a));return z*opacity+x*(1.0-opacity);}";
+
+// src/Gradient/hooks/usePostProcessing/lib/pp/blending/glsl/subtract/shader.frag
+var shader_default18 = "vec4 blend(const in vec4 x,const in vec4 y,const in float opacity){return max(x+y-1.0,0.0)*opacity+x*(1.0-opacity);}";
+
+// src/Gradient/hooks/usePostProcessing/lib/pp/blending/BlendMode.js
+var blendFunctions = /* @__PURE__ */ new Map([
+  [BlendFunction.SKIP, null],
+  [BlendFunction.ADD, shader_default],
+  [BlendFunction.ALPHA, shader_default2],
+  [BlendFunction.AVERAGE, shader_default3],
+  [BlendFunction.COLOR_BURN, shader_default4],
+  [BlendFunction.COLOR_DODGE, shader_default5],
+  [BlendFunction.DARKEN, shader_default6],
+  [BlendFunction.DIFFERENCE, shader_default7],
+  [BlendFunction.EXCLUSION, shader_default9],
+  [BlendFunction.LIGHTEN, shader_default10],
+  [BlendFunction.MULTIPLY, shader_default11],
+  [BlendFunction.DIVIDE, shader_default8],
+  [BlendFunction.NEGATION, shader_default12],
+  [BlendFunction.NORMAL, shader_default13],
+  [BlendFunction.OVERLAY, shader_default14],
+  [BlendFunction.REFLECT, shader_default15],
+  [BlendFunction.SCREEN, shader_default16],
+  [BlendFunction.SOFT_LIGHT, shader_default17],
+  [BlendFunction.SUBTRACT, shader_default18]
+]);
+var BlendMode = class extends EventDispatcher {
+  constructor(blendFunction, opacity = 1) {
+    super();
+    this.blendFunction = blendFunction;
+    this.opacity = new Uniform(opacity);
+  }
+  getBlendFunction() {
+    return this.blendFunction;
+  }
+  setBlendFunction(blendFunction) {
+    this.blendFunction = blendFunction;
+    this.dispatchEvent({ type: "change" });
+  }
+  getShaderCode() {
+    return blendFunctions.get(this.blendFunction);
+  }
+};
+
+// src/Gradient/hooks/usePostProcessing/lib/pp/HalftoneShader.js
+var HalftoneShader = {
+  uniforms: {
+    tDiffuse: { value: null },
+    shape: { value: 1 },
+    radius: { value: 2 },
+    rotateR: { value: Math.PI / 12 * 1 },
+    rotateG: { value: Math.PI / 12 * 2 },
+    rotateB: { value: Math.PI / 12 * 3 },
+    scatter: { value: 1 },
+    width: { value: 20 },
+    height: { value: 20 },
+    blending: { value: 1 },
+    blendingMode: { value: 1 },
+    greyscale: { value: false },
+    disable: { value: false }
+  },
+  vertexShader: `
+
+		varying vec2 vUV;
+		varying vec3 vPosition;
+
+		void main() {
+
+			vUV = uv;
+			vPosition = position;
+
+			gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+
+		}`,
+  fragmentShader: `
+
+		#define SQRT2_MINUS_ONE 0.41421356
+		#define SQRT2_HALF_MINUS_ONE 0.20710678
+		#define PI2 6.28318531
+		#define SHAPE_DOT 1
+		#define SHAPE_ELLIPSE 2
+		#define SHAPE_LINE 3
+		#define SHAPE_SQUARE 4
+		#define BLENDING_LINEAR 1
+		#define BLENDING_MULTIPLY 2
+		#define BLENDING_ADD 3
+		#define BLENDING_LIGHTER 4
+		#define BLENDING_DARKER 5
+		uniform sampler2D tDiffuse;
+		uniform float radius;
+		uniform float rotateR;
+		uniform float rotateG;
+		uniform float rotateB;
+		uniform float scatter;
+		uniform float width;
+		uniform float height;
+		uniform int shape;
+		uniform bool disable;
+		uniform float blending;
+		uniform int blendingMode;
+		varying vec2 vUV;
+		varying vec3 vPosition;
+		uniform bool greyscale;
+		const int samples = 8;
+
+		float blend( float a, float b, float t ) {
+
+		// linear blend
+			return a * ( 1.0 - t ) + b * t;
+
+		}
+
+		float hypot( float x, float y ) {
+
+		// vector magnitude
+			return sqrt( x * x + y * y );
+
+		}
+
+		float rand( vec2 seed ){
+
+		// get pseudo-random number
+			return fract( sin( dot( seed.xy, vec2( 12.9898, 78.233 ) ) ) * 43758.5453 );
+
+		}
+
+		float distanceToDotRadius( float channel, vec2 coord, vec2 normal, vec2 p, float angle, float rad_max ) {
+
+		// apply shape-specific transforms
+			float dist = hypot( coord.x - p.x, coord.y - p.y );
+			float rad = channel;
+
+			if ( shape == SHAPE_DOT ) {
+
+				rad = pow( abs( rad ), 1.125 ) * rad_max;
+
+			} else if ( shape == SHAPE_ELLIPSE ) {
+
+				rad = pow( abs( rad ), 1.125 ) * rad_max;
+
+				if ( dist != 0.0 ) {
+					float dot_p = abs( ( p.x - coord.x ) / dist * normal.x + ( p.y - coord.y ) / dist * normal.y );
+					dist = ( dist * ( 1.0 - SQRT2_HALF_MINUS_ONE ) ) + dot_p * dist * SQRT2_MINUS_ONE;
+				}
+
+			} else if ( shape == SHAPE_LINE ) {
+
+				rad = pow( abs( rad ), 1.5) * rad_max;
+				float dot_p = ( p.x - coord.x ) * normal.x + ( p.y - coord.y ) * normal.y;
+				dist = hypot( normal.x * dot_p, normal.y * dot_p );
+
+			} else if ( shape == SHAPE_SQUARE ) {
+
+				float theta = atan( p.y - coord.y, p.x - coord.x ) - angle;
+				float sin_t = abs( sin( theta ) );
+				float cos_t = abs( cos( theta ) );
+				rad = pow( abs( rad ), 1.4 );
+				rad = rad_max * ( rad + ( ( sin_t > cos_t ) ? rad - sin_t * rad : rad - cos_t * rad ) );
+
+			}
+
+			return rad - dist;
+
+		}
+
+		struct Cell {
+
+		// grid sample positions
+			vec2 normal;
+			vec2 p1;
+			vec2 p2;
+			vec2 p3;
+			vec2 p4;
+			float samp2;
+			float samp1;
+			float samp3;
+			float samp4;
+
+		};
+
+		vec4 getSample( vec2 point ) {
+
+		// multi-sampled point
+			vec4 tex = texture2D( tDiffuse, vec2( point.x / width, point.y / height ) );
+			float base = rand( vec2( floor( point.x ), floor( point.y ) ) ) * PI2;
+			float step = PI2 / float( samples );
+			// float dist = radius * 0.66;
+			float dist = radius * 0.0;
+
+			for ( int i = 0; i < samples; ++i ) {
+
+				float r = base + step * float( i );
+				vec2 coord = point + vec2( cos( r ) * dist, sin( r ) * dist );
+				tex += texture2D( tDiffuse, vec2( coord.x / width, coord.y / height ) );
+
+			}
+
+			tex /= float( samples ) + 1.0;
+			return tex;
+
+		}
+
+		float getDotColour( Cell c, vec2 p, int channel, float angle, float aa ) {
+
+		// get colour for given point
+			float dist_c_1, dist_c_2, dist_c_3, dist_c_4, res;
+
+			if ( channel == 0 ) {
+
+				c.samp1 = getSample( c.p1 ).r;
+				c.samp2 = getSample( c.p2 ).r;
+				c.samp3 = getSample( c.p3 ).r;
+				c.samp4 = getSample( c.p4 ).r;
+
+			} else if (channel == 1) {
+
+				c.samp1 = getSample( c.p1 ).g;
+				c.samp2 = getSample( c.p2 ).g;
+				c.samp3 = getSample( c.p3 ).g;
+				c.samp4 = getSample( c.p4 ).g;
+
+			} else {
+
+				c.samp1 = getSample( c.p1 ).b;
+				c.samp3 = getSample( c.p3 ).b;
+				c.samp2 = getSample( c.p2 ).b;
+				c.samp4 = getSample( c.p4 ).b;
+
+			}
+
+			dist_c_1 = distanceToDotRadius( c.samp1, c.p1, c.normal, p, angle, radius );
+			dist_c_2 = distanceToDotRadius( c.samp2, c.p2, c.normal, p, angle, radius );
+			dist_c_3 = distanceToDotRadius( c.samp3, c.p3, c.normal, p, angle, radius );
+			dist_c_4 = distanceToDotRadius( c.samp4, c.p4, c.normal, p, angle, radius );
+			res = ( dist_c_1 > 0.0 ) ? clamp( dist_c_1 / aa, 0.0, 1.0 ) : 0.0;
+			// res = 0.0;
+			res += ( dist_c_2 > 0.0 ) ? clamp( dist_c_2 / aa, 0.0, 1.0 ) : 0.0;
+			res += ( dist_c_3 > 0.0 ) ? clamp( dist_c_3 / aa, 0.0, 1.0 ) : 0.0;
+			res += ( dist_c_4 > 0.0 ) ? clamp( dist_c_4 / aa, 0.0, 1.0 ) : 0.0;
+			res = clamp( res, 0.0, 1.0 );
+
+			return res;
+			// return 2
+
+		}
+
+		Cell getReferenceCell( vec2 p, vec2 origin, float grid_angle, float step ) {
+
+		// get containing cell
+			Cell c;
+
+		// calc grid
+			vec2 n = vec2( cos( grid_angle ), sin( grid_angle ) );
+			float threshold = step * 0.5;
+			float dot_normal = n.x * ( p.x - origin.x ) + n.y * ( p.y - origin.y );
+			float dot_line = -n.y * ( p.x - origin.x ) + n.x * ( p.y - origin.y );
+			vec2 offset = vec2( n.x * dot_normal, n.y * dot_normal );
+			float offset_normal = mod( hypot( offset.x, offset.y ), step );
+			float normal_dir = ( dot_normal < 0.0 ) ? 1.0 : -1.0;
+			float normal_scale = ( ( offset_normal < threshold ) ? -offset_normal : step - offset_normal ) * normal_dir;
+			float offset_line = mod( hypot( ( p.x - offset.x ) - origin.x, ( p.y - offset.y ) - origin.y ), step );
+			float line_dir = ( dot_line < 0.0 ) ? 1.0 : -1.0;
+			float line_scale = ( ( offset_line < threshold ) ? -offset_line : step - offset_line ) * line_dir;
+
+		// get closest corner
+			c.normal = n;
+			c.p1.x = p.x - n.x * normal_scale + n.y * line_scale;
+			c.p1.y = p.y - n.y * normal_scale - n.x * line_scale;
+
+		// scatter
+			if ( scatter != 0.0 ) {
+
+				float off_mag = scatter * threshold * 0.5;
+				float off_angle = rand( vec2( floor( c.p1.x ), floor( c.p1.y ) ) ) * PI2;
+				c.p1.x += cos( off_angle ) * off_mag;
+				c.p1.y += sin( off_angle ) * off_mag;
+
+			}
+
+		// find corners
+			float normal_step = normal_dir * ( ( offset_normal < threshold ) ? step : -step );
+			float line_step = line_dir * ( ( offset_line < threshold ) ? step : -step );
+			c.p2.x = c.p1.x - n.x * normal_step;
+			c.p2.y = c.p1.y - n.y * normal_step;
+			c.p3.x = c.p1.x + n.y * line_step;
+			c.p3.y = c.p1.y - n.x * line_step;
+			c.p4.x = c.p1.x - n.x * normal_step + n.y * line_step;
+			c.p4.y = c.p1.y - n.y * normal_step - n.x * line_step;
+
+			return c;
+
+		}
+
+		float blendColour( float a, float b, float t ) {
+
+		// blend colours
+			if ( blendingMode == BLENDING_LINEAR ) {
+				return blend( a, b, 1.0 - t );
+			} else if ( blendingMode == BLENDING_ADD ) {
+				return blend( a, min( 1.0, a + b ), t );
+			} else if ( blendingMode == BLENDING_MULTIPLY ) {
+				return blend( a, max( 0.0, a * b ), t );
+			} else if ( blendingMode == BLENDING_LIGHTER ) {
+				return blend( a, max( a, b ), t );
+			} else if ( blendingMode == BLENDING_DARKER ) {
+				return blend( a, min( a, b ), t );
+			} else {
+				return blend( a, b, 1.0 - t );
+			}
+
+		}
+
+		void main() {
+
+			if ( ! disable ) {
+
+		// setup
+				vec2 p = vec2( vUV.x * width, vUV.y * height ) - vec2(vPosition.x, vPosition.y) * 3.0; // - position values to remove black borders.
+				vec2 origin = vec2( 0, 0 );
+				float aa = ( radius < 2.5 ) ? radius * 0.5 : 1.25;
+				// float aa = 0.0;
+
+		// get channel samples
+				Cell cell_r = getReferenceCell( p, origin, rotateR, radius );
+				Cell cell_g = getReferenceCell( p, origin, rotateG, radius );
+				Cell cell_b = getReferenceCell( p, origin, rotateB, radius );
+				float r = getDotColour( cell_r, p, 0, rotateR, aa );
+				float g = getDotColour( cell_g, p, 1, rotateG, aa );
+				float b = getDotColour( cell_b, p, 2, rotateB, aa );
+
+		// blend with original
+				vec4 colour = texture2D( tDiffuse, vUV );
+				
+				// add masking before blendColour
+				if (colour.r == 0.0) {
+					r = 0.0;
+				} else {
+					r = blendColour( r, colour.r, blending );
+				}
+
+				if (colour.g == 0.0) {
+					g = 0.0;
+				} else {
+					g = blendColour( g, colour.g, blending );
+				}
+
+				if (colour.b == 0.0) {
+					b = 0.0;
+				} else {
+					b = blendColour( b, colour.b, blending );
+				}
+				
+				
+				
+
+				if ( greyscale ) {
+					r = g = b = (r + b + g) / 3.0;
+				}
+
+				// add alpha channel to each r, g, b colors
+				vec4 vR;
+				vec4 vG;
+				vec4 vB;
+	
+				// apply transparent to outside of mesh
+				if (r == 0.0 && colour.r == 0.0) {
+					vR = vec4( 0, 0, 0, 0 );
+				} else {
+					vR = vec4( r, 0, 0, 1 );
+				}
+	
+				if (g == 0.0 && colour.g == 0.0) {
+					vG = vec4( 0, 0, 0, 0 );
+				} else {
+					vG = vec4( 0, g, 0, 1 );
+				}
+	
+				if (b == 0.0 && colour.b == 0.0) {
+					vB = vec4( 0, 0, 0, 0 );
+				} else {
+					vB = vec4( 0, 0, b, 1 );
+				}
+
+				// gl_FragColor = vec4( r, g, b, 1.0 );
+				gl_FragColor = vR + vG + vB;
+
+			} else {
+
+				gl_FragColor = texture2D( tDiffuse, vUV );
+
+			}
+
+		}`
+};
+
+// src/Gradient/hooks/usePostProcessing/lib/pp/Pass.js
+import {
+  BufferGeometry as BufferGeometry3,
+  Float32BufferAttribute as Float32BufferAttribute3,
+  OrthographicCamera as OrthographicCamera3,
+  Mesh as Mesh3
+} from "three";
+var Pass2 = class {
+  constructor() {
+    this.enabled = true;
+    this.needsSwap = true;
+    this.clear = false;
+    this.renderToScreen = false;
+  }
+  setSize() {
+  }
+  render() {
+    console.error("THREE.Pass: .render() must be implemented in derived pass.");
+  }
+};
+var _camera3 = new OrthographicCamera3(-1, 1, 1, -1, 0, 1);
+var _geometry3 = new BufferGeometry3();
+_geometry3.setAttribute(
+  "position",
+  new Float32BufferAttribute3([-1, 3, 0, -1, -1, 0, 3, -1, 0], 3)
+);
+_geometry3.setAttribute("uv", new Float32BufferAttribute3([0, 2, 0, 0, 2, 0], 2));
+var FullScreenQuad2 = class {
+  constructor(material) {
+    this._mesh = new Mesh3(_geometry3, material);
+  }
+  dispose() {
+    this._mesh.geometry.dispose();
+  }
+  render(renderer) {
+    renderer.render(this._mesh, _camera3);
+  }
+  get material() {
+    return this._mesh.material;
+  }
+  set material(value) {
+    this._mesh.material = value;
+  }
+};
+
+// src/Gradient/hooks/usePostProcessing/lib/pp/HalftonePass.ts
+var usePassedMeshSize = true;
+var HalftonePass = class extends Pass2 {
+  constructor(width, height, params) {
+    super();
+    if (HalftoneShader === void 0) {
+      console.error("THREE.HalftonePass requires HalftoneShader");
+    }
+    this.uniforms = UniformsUtils2.clone(HalftoneShader.uniforms);
+    this.material = new ShaderMaterial2({
+      uniforms: this.uniforms,
+      fragmentShader: HalftoneShader.fragmentShader,
+      vertexShader: HalftoneShader.vertexShader
+    });
+    if (usePassedMeshSize) {
+      this.uniforms.width.value = width;
+      this.uniforms.height.value = height;
+    }
+    this.uniforms.disable.value = params["disable"];
+    this.fsQuad = new FullScreenQuad2(this.material);
+    this.blendMode = new BlendMode(BlendFunction.SCREEN);
+    this.extensions = null;
+  }
+  render(renderer, writeBuffer, readBuffer) {
+    this.material.uniforms["tDiffuse"].value = readBuffer.texture;
+    if (this.renderToScreen) {
+      renderer.setRenderTarget(null);
+      this.fsQuad.render(renderer);
+    } else {
+      renderer.setRenderTarget(writeBuffer);
+      if (this.clear)
+        renderer.clear();
+      this.fsQuad.render(renderer);
+    }
+  }
+  setSize(width, height) {
+    if (usePassedMeshSize) {
+      this.uniforms.width.value = width;
+      this.uniforms.height.value = height;
+    }
+  }
+  initialize(renderer, alpha, frameBufferType) {
+  }
+  addEventListener() {
+  }
+  getAttributes() {
+    return this.attributes;
+  }
+  getFragmentShader() {
+    return HalftoneShader.fragmentShader;
+  }
+  getVertexShader() {
+    return HalftoneShader.vertexShader;
+  }
+  update(renderer, inputBuffer, deltaTime) {
+  }
+};
+
+// src/Gradient/hooks/usePostProcessing/usePostProcessing.ts
+import { useThree, useFrame } from "@react-three/fiber";
+function usePostProcessing(disable) {
+  const { gl, scene, camera, size } = useThree();
+  const composer = useMemo(() => {
+    const effectComposer = new EffectComposer(gl);
+    effectComposer.addPass(new RenderPass(scene, camera));
+    const halftoneParams = {
+      shape: 1,
+      radius: 2,
+      rotateR: Math.PI / 12,
+      rotateB: Math.PI / 12 * 2,
+      rotateG: Math.PI / 12 * 3,
+      scatter: 1,
+      blending: 1,
+      blendingMode: 1,
+      greyscale: false,
+      disable
+    };
+    const halftonePass = new HalftonePass(
+      size.width,
+      size.height,
+      halftoneParams
+    );
+    effectComposer.addPass(halftonePass);
+    return effectComposer;
+  }, [gl, scene, camera, size, disable]);
+  useEffect2(() => composer == null ? void 0 : composer.setSize(size.width, size.height), [composer, size]);
+  useFrame(
+    (_, delta) => void (gl.autoClear = true, composer.render(delta)),
+    1
+  );
+}
+
+// src/Gradient/comps/Axis/GizmoHelper.tsx
+import * as React4 from "react";
+import { createPortal, useFrame as useFrame3, useThree as useThree5 } from "@react-three/fiber";
+import {
+  Matrix4,
+  Object3D,
+  Quaternion,
+  Scene,
+  Vector3
+} from "three";
+
+// src/Gradient/comps/Axis/OrthographicCamera.tsx
+import * as React2 from "react";
+import { useThree as useThree3, useFrame as useFrame2 } from "@react-three/fiber";
+
+// ../../node_modules/.pnpm/react-merge-refs@1.1.0/node_modules/react-merge-refs/dist/react-merge-refs.esm.js
+function mergeRefs(refs) {
+  return function(value) {
+    refs.forEach(function(ref) {
+      if (typeof ref === "function") {
+        ref(value);
+      } else if (ref != null) {
+        ref.current = value;
+      }
+    });
+  };
+}
+var react_merge_refs_esm_default = mergeRefs;
+
+// src/Gradient/comps/Axis/useFBO.tsx
+import * as React from "react";
+import * as THREE from "three";
+import { useThree as useThree2 } from "@react-three/fiber";
+function useFBO(width, height, settings) {
+  const { gl, size, viewport } = useThree2();
+  const _width = typeof width === "number" ? width : size.width * viewport.dpr;
+  const _height = typeof height === "number" ? height : size.height * viewport.dpr;
+  const _settings = (typeof width === "number" ? settings : width) || {};
+  const _a = _settings, { samples } = _a, targetSettings = __objRest(_a, ["samples"]);
+  const target2 = React.useMemo(() => {
+    let target3;
+    target3 = new THREE.WebGLRenderTarget(_width, _height, __spreadValues({
+      minFilter: THREE.LinearFilter,
+      magFilter: THREE.LinearFilter,
+      encoding: gl.outputEncoding,
+      type: THREE.HalfFloatType
+    }, targetSettings));
+    target3.samples = samples;
+    return target3;
+  }, []);
+  React.useLayoutEffect(() => {
+    target2.setSize(_width, _height);
+    if (samples)
+      target2.samples = samples;
+  }, [samples, target2, _width, _height]);
+  React.useEffect(() => {
+    return () => target2.dispose();
+  }, []);
+  return target2;
+}
+
+// src/Gradient/comps/Axis/OrthographicCamera.tsx
+import { Fragment as Fragment3, jsx as jsx5, jsxs as jsxs3 } from "react/jsx-runtime";
+var isFunction = (node) => typeof node === "function";
+var OrthographicCamera4 = React2.forwardRef(
+  (_a, ref) => {
+    var _b = _a, {
+      envMap,
+      resolution = 256,
+      frames = Infinity,
+      children,
+      makeDefault
+    } = _b, props = __objRest(_b, [
+      "envMap",
+      "resolution",
+      "frames",
+      "children",
+      "makeDefault"
+    ]);
+    const set = useThree3(({ set: set2 }) => set2);
+    const camera = useThree3(({ camera: camera2 }) => camera2);
+    const size = useThree3(({ size: size2 }) => size2);
+    const cameraRef = React2.useRef(null);
+    const groupRef = React2.useRef(null);
+    const fbo = useFBO(resolution);
+    React2.useLayoutEffect(() => {
+      if (!props.manual) {
+        cameraRef.current.updateProjectionMatrix();
+      }
+    }, [size, props]);
+    React2.useLayoutEffect(() => {
+      cameraRef.current.updateProjectionMatrix();
+    });
+    React2.useLayoutEffect(() => {
+      if (makeDefault) {
+        const oldCam = camera;
+        set(() => ({ camera: cameraRef.current }));
+        return () => set(() => ({ camera: oldCam }));
+      }
+    }, [cameraRef, makeDefault, set]);
+    let count = 0;
+    let oldEnvMap = null;
+    const functional = isFunction(children);
+    useFrame2((state) => {
+      if (functional && (frames === Infinity || count < frames)) {
+        groupRef.current.visible = false;
+        state.gl.setRenderTarget(fbo);
+        oldEnvMap = state.scene.background;
+        if (envMap)
+          state.scene.background = envMap;
+        state.gl.render(state.scene, cameraRef.current);
+        state.scene.background = oldEnvMap;
+        state.gl.setRenderTarget(null);
+        groupRef.current.visible = true;
+        count++;
+      }
+    });
+    return /* @__PURE__ */ jsxs3(Fragment3, { children: [
+      /* @__PURE__ */ jsx5(
+        "orthographicCamera",
+        __spreadProps(__spreadValues({
+          left: size.width / -2,
+          right: size.width / 2,
+          top: size.height / 2,
+          bottom: size.height / -2,
+          ref: react_merge_refs_esm_default([cameraRef, ref])
+        }, props), {
+          children: !functional && children
+        })
+      ),
+      /* @__PURE__ */ jsx5("group", { ref: groupRef, children: functional && children(fbo.texture) })
+    ] });
+  }
+);
+
+// src/Gradient/comps/Axis/useCamera.tsx
+import * as React3 from "react";
+import { Raycaster, Camera } from "three";
+import { useThree as useThree4, applyProps } from "@react-three/fiber";
+function useCamera(camera, props) {
+  const pointer = useThree4((state) => state.pointer);
+  const [raycast] = React3.useState(() => {
+    const raycaster = new Raycaster();
+    if (props)
+      applyProps(raycaster, props, {});
+    return function(_, intersects) {
+      raycaster.setFromCamera(
+        pointer,
+        camera instanceof Camera ? camera : camera.current
+      );
+      const rc = this.constructor.prototype.raycast.bind(this);
+      if (rc)
+        rc(raycaster, intersects);
+    };
+  });
+  return raycast;
+}
+
+// src/Gradient/comps/Axis/GizmoHelper.tsx
+import { jsx as jsx6, jsxs as jsxs4 } from "react/jsx-runtime";
+var Context = React4.createContext(
+  {}
+);
+var useGizmoContext = () => {
+  return React4.useContext(Context);
+};
+var turnRate = 2 * Math.PI;
+var dummy = new Object3D();
+var matrix = new Matrix4();
+var [q1, q2] = [new Quaternion(), new Quaternion()];
+var target = new Vector3();
+var targetPosition = new Vector3();
+var isOrbitControls = (controls) => {
+  return "minPolarAngle" in controls;
+};
+var GizmoHelper = ({
+  alignment = "bottom-right",
+  margin = [80, 80],
+  renderPriority = 0,
+  autoClear = true,
+  onUpdate,
+  onTarget,
+  children: GizmoHelperComponent
+}) => {
+  const size = useThree5(({ size: size2 }) => size2);
+  const mainCamera = useThree5(({ camera }) => camera);
+  const defaultControls = useThree5(({ controls }) => controls);
+  const gl = useThree5(({ gl: gl2 }) => gl2);
+  const scene = useThree5(({ scene: scene2 }) => scene2);
+  const invalidate = useThree5(({ invalidate: invalidate2 }) => invalidate2);
+  const backgroundRef = React4.useRef();
+  const gizmoRef = React4.useRef();
+  const virtualCam = React4.useRef(null);
+  const [virtualScene] = React4.useState(() => new Scene());
+  const animating = React4.useRef(false);
+  const radius = React4.useRef(0);
+  const focusPoint = React4.useRef(new Vector3(0, 0, 0));
+  const defaultUp = React4.useRef(new Vector3(0, 0, 0));
+  React4.useEffect(() => {
+    defaultUp.current.copy(mainCamera.up);
+  }, [mainCamera]);
+  const tweenCamera = React4.useCallback(
+    (direction) => {
+      animating.current = true;
+      if (defaultControls || onTarget)
+        focusPoint.current = (defaultControls == null ? void 0 : defaultControls.target) || (onTarget == null ? void 0 : onTarget());
+      radius.current = mainCamera.position.distanceTo(target);
+      q1.copy(mainCamera.quaternion);
+      targetPosition.copy(direction).multiplyScalar(radius.current).add(target);
+      dummy.lookAt(targetPosition);
+      q2.copy(dummy.quaternion);
+      invalidate();
+    },
+    [defaultControls, mainCamera, onTarget, invalidate]
+  );
+  React4.useEffect(() => {
+    if (scene.background) {
+      backgroundRef.current = scene.background;
+      scene.background = null;
+      virtualScene.background = backgroundRef.current;
+    }
+    return () => {
+      if (backgroundRef.current)
+        scene.background = backgroundRef.current;
+    };
+  }, []);
+  useFrame3((_, delta) => {
+    var _a;
+    if (virtualCam.current && gizmoRef.current) {
+      if (animating.current) {
+        if (q1.angleTo(q2) < 0.01) {
+          animating.current = false;
+          if (isOrbitControls(defaultControls)) {
+            mainCamera.up.copy(defaultUp.current);
+          }
+        } else {
+          const step = delta * turnRate;
+          q1.rotateTowards(q2, step);
+          mainCamera.position.set(0, 0, 1).applyQuaternion(q1).multiplyScalar(radius.current).add(focusPoint.current);
+          mainCamera.up.set(0, 1, 0).applyQuaternion(q1).normalize();
+          mainCamera.quaternion.copy(q1);
+          if (onUpdate)
+            onUpdate();
+          else if (defaultControls)
+            defaultControls.update();
+          invalidate();
+        }
+      }
+      matrix.copy(mainCamera.matrix).invert();
+      (_a = gizmoRef.current) == null ? void 0 : _a.quaternion.setFromRotationMatrix(matrix);
+      if (autoClear)
+        gl.autoClear = false;
+      gl.clearDepth();
+      gl.render(virtualScene, virtualCam.current);
+    }
+  }, renderPriority);
+  const raycast = useCamera(virtualCam);
+  const gizmoHelperContext = React4.useMemo(
+    () => ({ tweenCamera, raycast }),
+    [tweenCamera]
+  );
+  const [marginX, marginY] = margin;
+  const x = alignment.endsWith("-center") ? 0 : alignment.endsWith("-left") ? -size.width / 2 + marginX : size.width / 2 - marginX;
+  const y = alignment.startsWith("center-") ? 0 : alignment.startsWith("top-") ? size.height / 2 - marginY : -size.height / 2 + marginY;
+  return createPortal(
+    /* @__PURE__ */ jsxs4(Context.Provider, { value: gizmoHelperContext, children: [
+      /* @__PURE__ */ jsx6(OrthographicCamera4, { ref: virtualCam, position: [0, 0, 200] }),
+      /* @__PURE__ */ jsx6("group", { ref: gizmoRef, position: [x, y, 0], children: GizmoHelperComponent })
+    ] }),
+    virtualScene
+  );
+};
+
+// src/Gradient/comps/Axis/GizmoViewport.tsx
+import * as React5 from "react";
+import { useThree as useThree6 } from "@react-three/fiber";
+import { CanvasTexture } from "three";
+import { Fragment as Fragment4, jsx as jsx7, jsxs as jsxs5 } from "react/jsx-runtime";
+function Axis({ scale = [0.8, 0.05, 0.05], color, rotation }) {
+  return /* @__PURE__ */ jsx7("group", { rotation, children: /* @__PURE__ */ jsxs5("mesh", { position: [0.4, 0, 0], children: [
+    /* @__PURE__ */ jsx7("boxGeometry", { args: scale }),
+    /* @__PURE__ */ jsx7("meshBasicMaterial", { color, toneMapped: false })
+  ] }) });
+}
+function AxisHead(_a) {
+  var _b = _a, {
+    onClick,
+    font,
+    disabled,
+    arcStyle,
+    label,
+    labelColor,
+    axisHeadScale = 1
+  } = _b, props = __objRest(_b, [
+    "onClick",
+    "font",
+    "disabled",
+    "arcStyle",
+    "label",
+    "labelColor",
+    "axisHeadScale"
+  ]);
+  const gl = useThree6((state) => state.gl);
+  const texture = React5.useMemo(() => {
+    const canvas = document.createElement("canvas");
+    canvas.width = 64;
+    canvas.height = 64;
+    const context = canvas.getContext("2d");
+    context.beginPath();
+    context.arc(32, 32, 16, 0, 2 * Math.PI);
+    context.closePath();
+    context.fillStyle = arcStyle;
+    context.fill();
+    if (label) {
+      context.font = font;
+      context.textAlign = "center";
+      context.fillStyle = labelColor;
+      context.fillText(label, 32, 41);
+    }
+    return new CanvasTexture(canvas);
+  }, [arcStyle, label, labelColor, font]);
+  const [active, setActive] = React5.useState(false);
+  const scale = (label ? 1 : 0.75) * (active ? 1.2 : 1) * axisHeadScale;
+  const handlePointerOver = (e) => {
+    e.stopPropagation();
+    setActive(true);
+  };
+  const handlePointerOut = (e) => {
+    e.stopPropagation();
+    setActive(false);
+  };
+  return /* @__PURE__ */ jsx7(
+    "sprite",
+    __spreadProps(__spreadValues({
+      scale,
+      onPointerOver: !disabled ? handlePointerOver : void 0,
+      onPointerOut: !disabled ? onClick || handlePointerOut : void 0
+    }, props), {
+      children: /* @__PURE__ */ jsx7(
+        "spriteMaterial",
+        {
+          map: texture,
+          "map-encoding": gl.outputEncoding,
+          "map-anisotropy": gl.capabilities.getMaxAnisotropy() || 1,
+          alphaTest: 0.3,
+          opacity: label ? 1 : 0.75,
+          toneMapped: false
+        }
+      )
+    })
+  );
+}
+var GizmoViewport = (_a) => {
+  var _b = _a, {
+    hideNegativeAxes,
+    hideAxisHeads,
+    disabled,
+    font = "18px Inter var, Arial, sans-serif",
+    axisColors = ["#ff2060", "#20df80", "#2080ff"],
+    axisHeadScale = 1,
+    axisScale,
+    labels = ["X", "Y", "Z"],
+    labelColor = "#000",
+    onClick
+  } = _b, props = __objRest(_b, [
+    "hideNegativeAxes",
+    "hideAxisHeads",
+    "disabled",
+    "font",
+    "axisColors",
+    "axisHeadScale",
+    "axisScale",
+    "labels",
+    "labelColor",
+    "onClick"
+  ]);
+  const [colorX, colorY, colorZ] = axisColors;
+  const { tweenCamera, raycast } = useGizmoContext();
+  const axisHeadProps = {
+    font,
+    disabled,
+    labelColor,
+    raycast,
+    onClick,
+    axisHeadScale,
+    onPointerDown: !disabled ? (e) => {
+      tweenCamera(e.object.position);
+      e.stopPropagation();
+    } : void 0
+  };
+  return /* @__PURE__ */ jsxs5("group", __spreadProps(__spreadValues({ scale: 40 }, props), { children: [
+    /* @__PURE__ */ jsx7(Axis, { color: colorX, rotation: [0, 0, 0], scale: axisScale }),
+    /* @__PURE__ */ jsx7(Axis, { color: colorY, rotation: [0, 0, Math.PI / 2], scale: axisScale }),
+    /* @__PURE__ */ jsx7(Axis, { color: colorZ, rotation: [0, -Math.PI / 2, 0], scale: axisScale }),
+    !hideAxisHeads && /* @__PURE__ */ jsxs5(Fragment4, { children: [
+      /* @__PURE__ */ jsx7(
+        AxisHead,
+        __spreadValues({
+          arcStyle: colorX,
+          position: [1, 0, 0],
+          label: labels[0]
+        }, axisHeadProps)
+      ),
+      /* @__PURE__ */ jsx7(
+        AxisHead,
+        __spreadValues({
+          arcStyle: colorY,
+          position: [0, 1, 0],
+          label: labels[1]
+        }, axisHeadProps)
+      ),
+      /* @__PURE__ */ jsx7(
+        AxisHead,
+        __spreadValues({
+          arcStyle: colorZ,
+          position: [0, 0, 1],
+          label: labels[2]
+        }, axisHeadProps)
+      ),
+      !hideNegativeAxes && /* @__PURE__ */ jsxs5(Fragment4, { children: [
+        /* @__PURE__ */ jsx7(
+          AxisHead,
+          __spreadValues({
+            arcStyle: colorX,
+            position: [-1, 0, 0]
+          }, axisHeadProps)
+        ),
+        /* @__PURE__ */ jsx7(
+          AxisHead,
+          __spreadValues({
+            arcStyle: colorY,
+            position: [0, -1, 0]
+          }, axisHeadProps)
+        ),
+        /* @__PURE__ */ jsx7(
+          AxisHead,
+          __spreadValues({
+            arcStyle: colorZ,
+            position: [0, 0, -1]
+          }, axisHeadProps)
+        )
+      ] })
+    ] }),
+    /* @__PURE__ */ jsx7("ambientLight", { intensity: 0.5 }),
+    /* @__PURE__ */ jsx7("pointLight", { position: [10, 10, 10], intensity: 0.5 })
+  ] }));
+};
+
+// src/Gradient/comps/Axis/Axis.tsx
+import { Fragment as Fragment5, jsx as jsx8 } from "react/jsx-runtime";
+function Axis2({ isFigmaPlugin }) {
+  return /* @__PURE__ */ jsx8(Fragment5, { children: /* @__PURE__ */ jsx8(
+    GizmoHelper,
+    {
+      alignment: "bottom-right",
+      margin: isFigmaPlugin ? [25, 25] : [65, 110],
+      renderPriority: 2,
+      children: /* @__PURE__ */ jsx8(
+        GizmoViewport,
+        {
+          axisColors: ["#FF430A", "#FF430A", "#FF430A"],
+          labelColor: "white",
+          hideNegativeAxes: true,
+          axisHeadScale: 0.8
+        }
+      )
+    }
+  ) });
 }
 
 // ../../node_modules/.pnpm/camera-controls@1.37.4_three@0.146.0/node_modules/camera-controls/dist/camera-controls.module.js
@@ -893,7 +2465,7 @@ function quatInvertCompat(target2) {
   }
   return target2;
 }
-var EventDispatcher = class {
+var EventDispatcher2 = class {
   constructor() {
     this._listeners = {};
   }
@@ -937,7 +2509,7 @@ var isBrowser = typeof window !== "undefined";
 var isMac = isBrowser && /Mac/.test(navigator.platform);
 var isPointerEventsNotSupported = !(isBrowser && "PointerEvent" in window);
 var TOUCH_DOLLY_FACTOR = 1 / 8;
-var THREE;
+var THREE2;
 var _ORIGIN;
 var _AXIS_Y;
 var _AXIS_Z;
@@ -959,7 +2531,7 @@ var _quaternionA;
 var _quaternionB;
 var _rotationMatrix;
 var _raycaster;
-var CameraControls = class extends EventDispatcher {
+var CameraControls = class extends EventDispatcher2 {
   constructor(camera, domElement) {
     super();
     this.minPolarAngle = 0;
@@ -998,7 +2570,7 @@ var CameraControls = class extends EventDispatcher {
     this._truckInternal = (deltaX, deltaY, dragToOffset) => {
       if (isPerspectiveCamera(this._camera)) {
         const offset = _v3A.copy(this._camera.position).sub(this._target);
-        const fov = this._camera.getEffectiveFOV() * THREE.MathUtils.DEG2RAD;
+        const fov = this._camera.getEffectiveFOV() * THREE2.MathUtils.DEG2RAD;
         const targetDistance = offset.length() * Math.tan(fov * 0.5);
         const truckX = this.truckSpeed * deltaX * targetDistance / this._elementRect.height;
         const pedestalY = this.truckSpeed * deltaY * targetDistance / this._elementRect.height;
@@ -1050,39 +2622,39 @@ var CameraControls = class extends EventDispatcher {
       }
       return;
     };
-    if (typeof THREE === "undefined") {
+    if (typeof THREE2 === "undefined") {
       console.error("camera-controls: `THREE` is undefined. You must first run `CameraControls.install( { THREE: THREE } )`. Check the docs for further information.");
     }
     this._camera = camera;
-    this._yAxisUpSpace = new THREE.Quaternion().setFromUnitVectors(this._camera.up, _AXIS_Y);
+    this._yAxisUpSpace = new THREE2.Quaternion().setFromUnitVectors(this._camera.up, _AXIS_Y);
     this._yAxisUpSpaceInverse = quatInvertCompat(this._yAxisUpSpace.clone());
     this._state = ACTION.NONE;
     this._domElement = domElement;
     this._domElement.style.touchAction = "none";
     this._domElement.style.userSelect = "none";
     this._domElement.style.webkitUserSelect = "none";
-    this._target = new THREE.Vector3();
+    this._target = new THREE2.Vector3();
     this._targetEnd = this._target.clone();
-    this._focalOffset = new THREE.Vector3();
+    this._focalOffset = new THREE2.Vector3();
     this._focalOffsetEnd = this._focalOffset.clone();
-    this._spherical = new THREE.Spherical().setFromVector3(_v3A.copy(this._camera.position).applyQuaternion(this._yAxisUpSpace));
+    this._spherical = new THREE2.Spherical().setFromVector3(_v3A.copy(this._camera.position).applyQuaternion(this._yAxisUpSpace));
     this._sphericalEnd = this._spherical.clone();
     this._zoom = this._camera.zoom;
     this._zoomEnd = this._zoom;
     this._nearPlaneCorners = [
-      new THREE.Vector3(),
-      new THREE.Vector3(),
-      new THREE.Vector3(),
-      new THREE.Vector3()
+      new THREE2.Vector3(),
+      new THREE2.Vector3(),
+      new THREE2.Vector3(),
+      new THREE2.Vector3()
     ];
     this._updateNearPlaneCorners();
-    this._boundary = new THREE.Box3(new THREE.Vector3(-Infinity, -Infinity, -Infinity), new THREE.Vector3(Infinity, Infinity, Infinity));
+    this._boundary = new THREE2.Box3(new THREE2.Vector3(-Infinity, -Infinity, -Infinity), new THREE2.Vector3(Infinity, Infinity, Infinity));
     this._target0 = this._target.clone();
     this._position0 = this._camera.position.clone();
     this._zoom0 = this._zoom;
     this._focalOffset0 = this._focalOffset.clone();
     this._dollyControlAmount = 0;
-    this._dollyControlCoord = new THREE.Vector2();
+    this._dollyControlCoord = new THREE2.Vector2();
     this.mouseButtons = {
       left: ACTION.ROTATE,
       middle: ACTION.DOLLY,
@@ -1095,9 +2667,9 @@ var CameraControls = class extends EventDispatcher {
       three: ACTION.TOUCH_TRUCK
     };
     if (this._domElement) {
-      const dragStartPosition = new THREE.Vector2();
-      const lastDragPosition = new THREE.Vector2();
-      const dollyStart = new THREE.Vector2();
+      const dragStartPosition = new THREE2.Vector2();
+      const lastDragPosition = new THREE2.Vector2();
+      const dollyStart = new THREE2.Vector2();
       const onPointerDown = (event) => {
         if (!this._enabled)
           return;
@@ -1437,28 +3009,28 @@ var CameraControls = class extends EventDispatcher {
     this.update(0);
   }
   static install(libs) {
-    THREE = libs.THREE;
-    _ORIGIN = Object.freeze(new THREE.Vector3(0, 0, 0));
-    _AXIS_Y = Object.freeze(new THREE.Vector3(0, 1, 0));
-    _AXIS_Z = Object.freeze(new THREE.Vector3(0, 0, 1));
-    _v2 = new THREE.Vector2();
-    _v3A = new THREE.Vector3();
-    _v3B = new THREE.Vector3();
-    _v3C = new THREE.Vector3();
-    _xColumn = new THREE.Vector3();
-    _yColumn = new THREE.Vector3();
-    _zColumn = new THREE.Vector3();
-    _deltaTarget = new THREE.Vector3();
-    _deltaOffset = new THREE.Vector3();
-    _sphericalA = new THREE.Spherical();
-    _sphericalB = new THREE.Spherical();
-    _box3A = new THREE.Box3();
-    _box3B = new THREE.Box3();
-    _sphere = new THREE.Sphere();
-    _quaternionA = new THREE.Quaternion();
-    _quaternionB = new THREE.Quaternion();
-    _rotationMatrix = new THREE.Matrix4();
-    _raycaster = new THREE.Raycaster();
+    THREE2 = libs.THREE;
+    _ORIGIN = Object.freeze(new THREE2.Vector3(0, 0, 0));
+    _AXIS_Y = Object.freeze(new THREE2.Vector3(0, 1, 0));
+    _AXIS_Z = Object.freeze(new THREE2.Vector3(0, 0, 1));
+    _v2 = new THREE2.Vector2();
+    _v3A = new THREE2.Vector3();
+    _v3B = new THREE2.Vector3();
+    _v3C = new THREE2.Vector3();
+    _xColumn = new THREE2.Vector3();
+    _yColumn = new THREE2.Vector3();
+    _zColumn = new THREE2.Vector3();
+    _deltaTarget = new THREE2.Vector3();
+    _deltaOffset = new THREE2.Vector3();
+    _sphericalA = new THREE2.Spherical();
+    _sphericalB = new THREE2.Spherical();
+    _box3A = new THREE2.Box3();
+    _box3B = new THREE2.Box3();
+    _sphere = new THREE2.Sphere();
+    _quaternionA = new THREE2.Quaternion();
+    _quaternionB = new THREE2.Quaternion();
+    _rotationMatrix = new THREE2.Matrix4();
+    _raycaster = new THREE2.Raycaster();
   }
   static get ACTION() {
     return ACTION;
@@ -1548,8 +3120,8 @@ var CameraControls = class extends EventDispatcher {
     return this.rotateTo(this._sphericalEnd.theta, polarAngle, enableTransition);
   }
   rotateTo(azimuthAngle, polarAngle, enableTransition = false) {
-    const theta = THREE.MathUtils.clamp(azimuthAngle, this.minAzimuthAngle, this.maxAzimuthAngle);
-    const phi = THREE.MathUtils.clamp(polarAngle, this.minPolarAngle, this.maxPolarAngle);
+    const theta = THREE2.MathUtils.clamp(azimuthAngle, this.minAzimuthAngle, this.maxAzimuthAngle);
+    const phi = THREE2.MathUtils.clamp(polarAngle, this.minPolarAngle, this.maxPolarAngle);
     this._sphericalEnd.theta = theta;
     this._sphericalEnd.phi = phi;
     this._sphericalEnd.makeSafe();
@@ -1566,7 +3138,7 @@ var CameraControls = class extends EventDispatcher {
   }
   dollyTo(distance, enableTransition = false) {
     const lastRadius = this._sphericalEnd.radius;
-    const newRadius = THREE.MathUtils.clamp(distance, this.minDistance, this.maxDistance);
+    const newRadius = THREE2.MathUtils.clamp(distance, this.minDistance, this.maxDistance);
     const hasCollider = this.colliderMeshes.length >= 1;
     if (hasCollider) {
       const maxDistanceByCollisionTest = this._collisionTest();
@@ -1589,7 +3161,7 @@ var CameraControls = class extends EventDispatcher {
     return this.zoomTo(this._zoomEnd + zoomStep, enableTransition);
   }
   zoomTo(zoom, enableTransition = false) {
-    this._zoomEnd = THREE.MathUtils.clamp(zoom, this.minZoom, this.maxZoom);
+    this._zoomEnd = THREE2.MathUtils.clamp(zoom, this.minZoom, this.maxZoom);
     this._needsUpdate = true;
     if (!enableTransition) {
       this._zoom = this._zoomEnd;
@@ -1691,7 +3263,7 @@ var CameraControls = class extends EventDispatcher {
   }
   fitToSphere(sphereOrMesh, enableTransition) {
     const promises = [];
-    const isSphere = sphereOrMesh instanceof THREE.Sphere;
+    const isSphere = sphereOrMesh instanceof THREE2.Sphere;
     const boundingSphere = isSphere ? _sphere.copy(sphereOrMesh) : createBoundingSphere(sphereOrMesh, _sphere);
     promises.push(this.moveTo(boundingSphere.center.x, boundingSphere.center.y, boundingSphere.center.z, enableTransition));
     if (isPerspectiveCamera(this._camera)) {
@@ -1791,7 +3363,7 @@ var CameraControls = class extends EventDispatcher {
       this._viewport = null;
       return;
     }
-    this._viewport = this._viewport || new THREE.Vector4();
+    this._viewport = this._viewport || new THREE2.Vector4();
     if (typeof viewportOrX === "number") {
       this._viewport.set(viewportOrX, y, width, height);
     } else {
@@ -1802,7 +3374,7 @@ var CameraControls = class extends EventDispatcher {
     if (notSupportedInOrthographicCamera(this._camera, "getDistanceToFitBox"))
       return this._spherical.radius;
     const boundingRectAspect = width / height;
-    const fov = this._camera.getEffectiveFOV() * THREE.MathUtils.DEG2RAD;
+    const fov = this._camera.getEffectiveFOV() * THREE2.MathUtils.DEG2RAD;
     const aspect = this._camera.aspect;
     const heightToFit = (cover ? boundingRectAspect > aspect : boundingRectAspect < aspect) ? height : width / aspect;
     return heightToFit * 0.5 / Math.tan(fov * 0.5) + depth * 0.5;
@@ -1810,21 +3382,21 @@ var CameraControls = class extends EventDispatcher {
   getDistanceToFitSphere(radius) {
     if (notSupportedInOrthographicCamera(this._camera, "getDistanceToFitSphere"))
       return this._spherical.radius;
-    const vFOV = this._camera.getEffectiveFOV() * THREE.MathUtils.DEG2RAD;
+    const vFOV = this._camera.getEffectiveFOV() * THREE2.MathUtils.DEG2RAD;
     const hFOV = Math.atan(Math.tan(vFOV * 0.5) * this._camera.aspect) * 2;
     const fov = 1 < this._camera.aspect ? vFOV : hFOV;
     return radius / Math.sin(fov * 0.5);
   }
   getTarget(out) {
-    const _out = !!out && out.isVector3 ? out : new THREE.Vector3();
+    const _out = !!out && out.isVector3 ? out : new THREE2.Vector3();
     return _out.copy(this._targetEnd);
   }
   getPosition(out) {
-    const _out = !!out && out.isVector3 ? out : new THREE.Vector3();
+    const _out = !!out && out.isVector3 ? out : new THREE2.Vector3();
     return _out.setFromSpherical(this._sphericalEnd).applyQuaternion(this._yAxisUpSpaceInverse).add(this._targetEnd);
   }
   getFocalOffset(out) {
-    const _out = !!out && out.isVector3 ? out : new THREE.Vector3();
+    const _out = !!out && out.isVector3 ? out : new THREE2.Vector3();
     return _out.copy(this._focalOffsetEnd);
   }
   normalizeRotations() {
@@ -1877,7 +3449,7 @@ var CameraControls = class extends EventDispatcher {
         if (planeX.lengthSq() === 0)
           planeX.x = 1;
         const planeY = _v3C.crossVectors(planeX, direction);
-        const worldToScreen = this._sphericalEnd.radius * Math.tan(camera.getEffectiveFOV() * THREE.MathUtils.DEG2RAD * 0.5);
+        const worldToScreen = this._sphericalEnd.radius * Math.tan(camera.getEffectiveFOV() * THREE2.MathUtils.DEG2RAD * 0.5);
         const prevRadius = this._sphericalEnd.radius - this._dollyControlAmount;
         const lerpRatio2 = (prevRadius - this._sphericalEnd.radius) / this._sphericalEnd.radius;
         const cursor = _v3A.copy(this._targetEnd).add(planeX.multiplyScalar(this._dollyControlCoord.x * worldToScreen * camera.aspect)).add(planeY.multiplyScalar(this._dollyControlCoord.y * worldToScreen));
@@ -2042,7 +3614,7 @@ var CameraControls = class extends EventDispatcher {
     if (isPerspectiveCamera(this._camera)) {
       const camera = this._camera;
       const near = camera.near;
-      const fov = camera.getEffectiveFOV() * THREE.MathUtils.DEG2RAD;
+      const fov = camera.getEffectiveFOV() * THREE2.MathUtils.DEG2RAD;
       const heightHalf = Math.tan(fov * 0.5) * near;
       const widthHalf = heightHalf * camera.aspect;
       this._nearPlaneCorners[0].set(-widthHalf, -heightHalf, 0);
@@ -2141,7 +3713,7 @@ function createBoundingSphere(object3d, out) {
       }
     } else {
       const position = geometry.attributes.position;
-      const vector = new THREE.Vector3();
+      const vector = new THREE2.Vector3();
       for (let i = 0, l = position.count; i < l; i++) {
         vector.fromBufferAttribute(position, i);
         maxRadiusSq = Math.max(maxRadiusSq, center.distanceToSquared(vector));
@@ -2152,12 +3724,12 @@ function createBoundingSphere(object3d, out) {
   return boundingSphere;
 }
 
-// src/Gradient/CameraControl/CameraControl.tsx
-import * as THREE2 from "three";
+// src/Gradient/comps/CameraControl/CameraControl.tsx
+import * as THREE3 from "three";
 
-// src/Gradient/CameraControl/useCameraAnimation.ts
-import { useEffect, useRef } from "react";
-import { useFrame } from "@react-three/fiber";
+// src/Gradient/comps/CameraControl/useCameraAnimation.ts
+import { useEffect as useEffect5, useRef as useRef3 } from "react";
+import { useFrame as useFrame4 } from "@react-three/fiber";
 function useCameraAnimation({
   type,
   cAzimuthAngle,
@@ -2166,13 +3738,13 @@ function useCameraAnimation({
   cameraZoom,
   zoomOut
 }) {
-  const ref = useRef();
+  const ref = useRef3();
   const control = ref.current;
-  useFrame((state, delta) => ref.current.update(delta));
-  useEffect(() => {
+  useFrame4((state, delta) => ref.current.update(delta));
+  useEffect5(() => {
     control == null ? void 0 : control.rotateTo(dToR(cAzimuthAngle), dToR(cPolarAngle), true);
   }, [control, cAzimuthAngle, cPolarAngle]);
-  useEffect(() => {
+  useEffect5(() => {
     if (zoomOut) {
       if (type === "sphere") {
         control == null ? void 0 : control.dollyTo(zoomOutSphere.distance, true);
@@ -2194,22 +3766,22 @@ function useCameraAnimation({
   return ref;
 }
 
-// src/Gradient/CameraControl/CameraControl.tsx
-import { extend, useThree, useFrame as useFrame2 } from "@react-three/fiber";
-import { jsx as jsx5 } from "react/jsx-runtime";
+// src/Gradient/comps/CameraControl/CameraControl.tsx
+import { extend, useThree as useThree7, useFrame as useFrame5 } from "@react-three/fiber";
+import { jsx as jsx9 } from "react/jsx-runtime";
 function CameraControl(_a) {
   var _b = _a, {
     dampingFactor = 0.05
   } = _b, props = __objRest(_b, [
     "dampingFactor"
   ]);
-  CameraControls.install({ THREE: THREE2 });
+  CameraControls.install({ THREE: THREE3 });
   extend({ CameraControls });
-  const camera = useThree((state) => state.camera);
-  const gl = useThree((state) => state.gl);
+  const camera = useThree7((state) => state.camera);
+  const gl = useThree7((state) => state.gl);
   const ref = useCameraAnimation(props);
-  useFrame2((state, delta) => ref.current.update(delta));
-  return /* @__PURE__ */ jsx5(
+  useFrame5((state, delta) => ref.current.update(delta));
+  return /* @__PURE__ */ jsx9(
     "cameraControls",
     {
       ref,
@@ -2223,19 +3795,329 @@ function CameraControl(_a) {
   );
 }
 
+// src/Gradient/comps/Lights/Environment/EnvironmentMap.tsx
+import React6 from "react";
+import { EquirectangularReflectionMapping } from "three";
+import { useThree as useThree8 } from "@react-three/fiber";
+
+// ../../node_modules/.pnpm/three-stdlib@2.20.4_three@0.146.0/node_modules/three-stdlib/loaders/RGBELoader.js
+import { DataTextureLoader, HalfFloatType as HalfFloatType2, FloatType, DataUtils, LinearEncoding, LinearFilter as LinearFilter3 } from "three";
+var RGBELoader = class extends DataTextureLoader {
+  constructor(manager) {
+    super(manager);
+    this.type = HalfFloatType2;
+  }
+  parse(buffer) {
+    const RGBE_RETURN_FAILURE = -1, rgbe_read_error = 1, rgbe_write_error = 2, rgbe_format_error = 3, rgbe_memory_error = 4, rgbe_error = function(rgbe_error_code, msg) {
+      switch (rgbe_error_code) {
+        case rgbe_read_error:
+          console.error("THREE.RGBELoader Read Error: " + (msg || ""));
+          break;
+        case rgbe_write_error:
+          console.error("THREE.RGBELoader Write Error: " + (msg || ""));
+          break;
+        case rgbe_format_error:
+          console.error("THREE.RGBELoader Bad File Format: " + (msg || ""));
+          break;
+        default:
+        case rgbe_memory_error:
+          console.error("THREE.RGBELoader: Error: " + (msg || ""));
+      }
+      return RGBE_RETURN_FAILURE;
+    }, RGBE_VALID_PROGRAMTYPE = 1, RGBE_VALID_FORMAT = 2, RGBE_VALID_DIMENSIONS = 4, NEWLINE = "\n", fgets = function(buffer2, lineLimit, consume) {
+      const chunkSize = 128;
+      lineLimit = !lineLimit ? 1024 : lineLimit;
+      let p = buffer2.pos, i = -1, len = 0, s = "", chunk = String.fromCharCode.apply(null, new Uint16Array(buffer2.subarray(p, p + chunkSize)));
+      while (0 > (i = chunk.indexOf(NEWLINE)) && len < lineLimit && p < buffer2.byteLength) {
+        s += chunk;
+        len += chunk.length;
+        p += chunkSize;
+        chunk += String.fromCharCode.apply(null, new Uint16Array(buffer2.subarray(p, p + chunkSize)));
+      }
+      if (-1 < i) {
+        if (false !== consume)
+          buffer2.pos += len + i + 1;
+        return s + chunk.slice(0, i);
+      }
+      return false;
+    }, RGBE_ReadHeader = function(buffer2) {
+      const magic_token_re = /^#\?(\S+)/, gamma_re = /^\s*GAMMA\s*=\s*(\d+(\.\d+)?)\s*$/, exposure_re = /^\s*EXPOSURE\s*=\s*(\d+(\.\d+)?)\s*$/, format_re = /^\s*FORMAT=(\S+)\s*$/, dimensions_re = /^\s*\-Y\s+(\d+)\s+\+X\s+(\d+)\s*$/, header = {
+        valid: 0,
+        string: "",
+        comments: "",
+        programtype: "RGBE",
+        format: "",
+        gamma: 1,
+        exposure: 1,
+        width: 0,
+        height: 0
+      };
+      let line, match;
+      if (buffer2.pos >= buffer2.byteLength || !(line = fgets(buffer2))) {
+        return rgbe_error(rgbe_read_error, "no header found");
+      }
+      if (!(match = line.match(magic_token_re))) {
+        return rgbe_error(rgbe_format_error, "bad initial token");
+      }
+      header.valid |= RGBE_VALID_PROGRAMTYPE;
+      header.programtype = match[1];
+      header.string += line + "\n";
+      while (true) {
+        line = fgets(buffer2);
+        if (false === line)
+          break;
+        header.string += line + "\n";
+        if ("#" === line.charAt(0)) {
+          header.comments += line + "\n";
+          continue;
+        }
+        if (match = line.match(gamma_re)) {
+          header.gamma = parseFloat(match[1]);
+        }
+        if (match = line.match(exposure_re)) {
+          header.exposure = parseFloat(match[1]);
+        }
+        if (match = line.match(format_re)) {
+          header.valid |= RGBE_VALID_FORMAT;
+          header.format = match[1];
+        }
+        if (match = line.match(dimensions_re)) {
+          header.valid |= RGBE_VALID_DIMENSIONS;
+          header.height = parseInt(match[1], 10);
+          header.width = parseInt(match[2], 10);
+        }
+        if (header.valid & RGBE_VALID_FORMAT && header.valid & RGBE_VALID_DIMENSIONS)
+          break;
+      }
+      if (!(header.valid & RGBE_VALID_FORMAT)) {
+        return rgbe_error(rgbe_format_error, "missing format specifier");
+      }
+      if (!(header.valid & RGBE_VALID_DIMENSIONS)) {
+        return rgbe_error(rgbe_format_error, "missing image size specifier");
+      }
+      return header;
+    }, RGBE_ReadPixels_RLE = function(buffer2, w, h) {
+      const scanline_width = w;
+      if (scanline_width < 8 || scanline_width > 32767 || 2 !== buffer2[0] || 2 !== buffer2[1] || buffer2[2] & 128) {
+        return new Uint8Array(buffer2);
+      }
+      if (scanline_width !== (buffer2[2] << 8 | buffer2[3])) {
+        return rgbe_error(rgbe_format_error, "wrong scanline width");
+      }
+      const data_rgba = new Uint8Array(4 * w * h);
+      if (!data_rgba.length) {
+        return rgbe_error(rgbe_memory_error, "unable to allocate buffer space");
+      }
+      let offset = 0, pos = 0;
+      const ptr_end = 4 * scanline_width;
+      const rgbeStart = new Uint8Array(4);
+      const scanline_buffer = new Uint8Array(ptr_end);
+      let num_scanlines = h;
+      while (num_scanlines > 0 && pos < buffer2.byteLength) {
+        if (pos + 4 > buffer2.byteLength) {
+          return rgbe_error(rgbe_read_error);
+        }
+        rgbeStart[0] = buffer2[pos++];
+        rgbeStart[1] = buffer2[pos++];
+        rgbeStart[2] = buffer2[pos++];
+        rgbeStart[3] = buffer2[pos++];
+        if (2 != rgbeStart[0] || 2 != rgbeStart[1] || (rgbeStart[2] << 8 | rgbeStart[3]) != scanline_width) {
+          return rgbe_error(rgbe_format_error, "bad rgbe scanline format");
+        }
+        let ptr = 0, count;
+        while (ptr < ptr_end && pos < buffer2.byteLength) {
+          count = buffer2[pos++];
+          const isEncodedRun = count > 128;
+          if (isEncodedRun)
+            count -= 128;
+          if (0 === count || ptr + count > ptr_end) {
+            return rgbe_error(rgbe_format_error, "bad scanline data");
+          }
+          if (isEncodedRun) {
+            const byteValue = buffer2[pos++];
+            for (let i = 0; i < count; i++) {
+              scanline_buffer[ptr++] = byteValue;
+            }
+          } else {
+            scanline_buffer.set(buffer2.subarray(pos, pos + count), ptr);
+            ptr += count;
+            pos += count;
+          }
+        }
+        const l = scanline_width;
+        for (let i = 0; i < l; i++) {
+          let off = 0;
+          data_rgba[offset] = scanline_buffer[i + off];
+          off += scanline_width;
+          data_rgba[offset + 1] = scanline_buffer[i + off];
+          off += scanline_width;
+          data_rgba[offset + 2] = scanline_buffer[i + off];
+          off += scanline_width;
+          data_rgba[offset + 3] = scanline_buffer[i + off];
+          offset += 4;
+        }
+        num_scanlines--;
+      }
+      return data_rgba;
+    };
+    const RGBEByteToRGBFloat = function(sourceArray, sourceOffset, destArray, destOffset) {
+      const e = sourceArray[sourceOffset + 3];
+      const scale = Math.pow(2, e - 128) / 255;
+      destArray[destOffset + 0] = sourceArray[sourceOffset + 0] * scale;
+      destArray[destOffset + 1] = sourceArray[sourceOffset + 1] * scale;
+      destArray[destOffset + 2] = sourceArray[sourceOffset + 2] * scale;
+      destArray[destOffset + 3] = 1;
+    };
+    const RGBEByteToRGBHalf = function(sourceArray, sourceOffset, destArray, destOffset) {
+      const e = sourceArray[sourceOffset + 3];
+      const scale = Math.pow(2, e - 128) / 255;
+      destArray[destOffset + 0] = DataUtils.toHalfFloat(Math.min(sourceArray[sourceOffset + 0] * scale, 65504));
+      destArray[destOffset + 1] = DataUtils.toHalfFloat(Math.min(sourceArray[sourceOffset + 1] * scale, 65504));
+      destArray[destOffset + 2] = DataUtils.toHalfFloat(Math.min(sourceArray[sourceOffset + 2] * scale, 65504));
+      destArray[destOffset + 3] = DataUtils.toHalfFloat(1);
+    };
+    const byteArray = new Uint8Array(buffer);
+    byteArray.pos = 0;
+    const rgbe_header_info = RGBE_ReadHeader(byteArray);
+    if (RGBE_RETURN_FAILURE !== rgbe_header_info) {
+      const w = rgbe_header_info.width, h = rgbe_header_info.height, image_rgba_data = RGBE_ReadPixels_RLE(byteArray.subarray(byteArray.pos), w, h);
+      if (RGBE_RETURN_FAILURE !== image_rgba_data) {
+        let data, type;
+        let numElements;
+        switch (this.type) {
+          case FloatType:
+            numElements = image_rgba_data.length / 4;
+            const floatArray = new Float32Array(numElements * 4);
+            for (let j = 0; j < numElements; j++) {
+              RGBEByteToRGBFloat(image_rgba_data, j * 4, floatArray, j * 4);
+            }
+            data = floatArray;
+            type = FloatType;
+            break;
+          case HalfFloatType2:
+            numElements = image_rgba_data.length / 4;
+            const halfArray = new Uint16Array(numElements * 4);
+            for (let j = 0; j < numElements; j++) {
+              RGBEByteToRGBHalf(image_rgba_data, j * 4, halfArray, j * 4);
+            }
+            data = halfArray;
+            type = HalfFloatType2;
+            break;
+          default:
+            console.error("THREE.RGBELoader: unsupported type: ", this.type);
+            break;
+        }
+        return {
+          width: w,
+          height: h,
+          data,
+          header: rgbe_header_info.string,
+          gamma: rgbe_header_info.gamma,
+          exposure: rgbe_header_info.exposure,
+          type
+        };
+      }
+    }
+    return null;
+  }
+  setDataType(value) {
+    this.type = value;
+    return this;
+  }
+  load(url, onLoad, onProgress, onError) {
+    function onLoadCallback(texture, texData) {
+      switch (texture.type) {
+        case FloatType:
+        case HalfFloatType2:
+          texture.encoding = LinearEncoding;
+          texture.minFilter = LinearFilter3;
+          texture.magFilter = LinearFilter3;
+          texture.generateMipmaps = false;
+          texture.flipY = true;
+          break;
+      }
+      if (onLoad)
+        onLoad(texture, texData);
+    }
+    return super.load(url, onLoadCallback, onProgress, onError);
+  }
+};
+
+// src/Gradient/comps/Lights/Environment/useRGBELoader.ts
+import { useLoader } from "@react-three/fiber";
+function useRGBELoader(file, { path }) {
+  const cubeTexture = useLoader(
+    RGBELoader,
+    file,
+    (loader) => loader.setPath(path)
+  );
+  return cubeTexture;
+}
+
+// src/Gradient/comps/Lights/Environment/EnvironmentMap.tsx
+var isRef = (obj) => obj.current && obj.current.isScene;
+var resolveScene = (scene) => isRef(scene) ? scene.current : scene;
+function EnvironmentMap({ background = false, envPreset }) {
+  const city = useRGBELoader("city.hdr", { path: envBasePath });
+  const dawn = useRGBELoader("dawn.hdr", { path: envBasePath });
+  const lobby = useRGBELoader("lobby.hdr", { path: envBasePath });
+  const textures = { city, dawn, lobby };
+  const map = textures[envPreset];
+  const defaultScene = useThree8((state) => state.scene);
+  React6.useLayoutEffect(() => {
+    if (map) {
+      const target2 = resolveScene(defaultScene);
+      const oldbg = target2.background;
+      const oldenv = target2.environment;
+      if (background !== "only")
+        target2.environment = map;
+      if (background)
+        target2.background = map;
+      return () => {
+        if (background !== "only")
+          target2.environment = oldenv;
+        if (background)
+          target2.background = "black";
+      };
+    }
+  }, [defaultScene, map, background]);
+  const texture = map;
+  texture.mapping = EquirectangularReflectionMapping;
+  return null;
+}
+
+// src/Gradient/comps/Lights/Lights.tsx
+import { Fragment as Fragment6, jsx as jsx10, jsxs as jsxs6 } from "react/jsx-runtime";
+function Lights({ lightType, brightness, envPreset }) {
+  const setLoadingPercentage = useUIStore(
+    (state) => state.setLoadingPercentage
+  );
+  return /* @__PURE__ */ jsxs6(Fragment6, { children: [
+    lightType === "3d" && /* @__PURE__ */ jsx10("ambientLight", { intensity: brightness || 1 }),
+    lightType === "env" && /* @__PURE__ */ jsx10(
+      EnvironmentMap,
+      {
+        envPreset,
+        background: true,
+        loadingCallback: setLoadingPercentage
+      }
+    )
+  ] });
+}
+
 // src/Gradient/comps/Mesh/Mesh.tsx
-import { useEffect as useEffect4 } from "react";
-import { useRef as useRef5 } from "react";
-import * as THREE6 from "three";
+import { useEffect as useEffect8 } from "react";
+import { useRef as useRef7 } from "react";
+import * as THREE7 from "three";
 
 // src/Gradient/comps/Mesh/lineMaterial.ts
-import * as THREE3 from "three";
+import * as THREE4 from "three";
 function lineMaterial(uniforms, vertexShader, onInit) {
-  return class extends THREE3.LineBasicMaterial {
+  return class extends THREE4.LineBasicMaterial {
     constructor() {
       const entries = Object.entries(uniforms);
       const uniformValues = entries.reduce((acc, [name, value]) => {
-        const uniform = THREE3.UniformsUtils.clone({ [name]: { value } });
+        const uniform = THREE4.UniformsUtils.clone({ [name]: { value } });
         return __spreadValues(__spreadValues({}, acc), uniform);
       }, {});
       super({
@@ -2260,9 +4142,9 @@ function lineMaterial(uniforms, vertexShader, onInit) {
 }
 
 // src/Gradient/comps/Mesh/shaderMaterial.ts
-import * as THREE4 from "three";
+import * as THREE5 from "three";
 function shaderMaterial(uniforms, vertexShader, fragmentShader, onInit) {
-  return class extends THREE4.MeshPhysicalMaterial {
+  return class extends THREE5.MeshPhysicalMaterial {
     constructor() {
       const entries = Object.entries(uniforms);
       const colors2 = uniforms.colors;
@@ -2281,13 +4163,13 @@ function shaderMaterial(uniforms, vertexShader, fragmentShader, onInit) {
         uC3b: { value: formatColor(uC3 == null ? void 0 : uC3.b) }
       };
       const uniformValues = entries.reduce((acc, [name, value]) => {
-        const uniform = THREE4.UniformsUtils.clone({ [name]: { value } });
+        const uniform = THREE5.UniformsUtils.clone({ [name]: { value } });
         return __spreadValues(__spreadValues({}, acc), uniform);
       }, {});
       super({
         metalness: 0.2,
         userData: uniformValues,
-        side: THREE4.DoubleSide,
+        side: THREE5.DoubleSide,
         onBeforeCompile: (shader) => {
           shader.uniforms = __spreadValues(__spreadValues(__spreadValues({}, shader.uniforms), uniformValues), rgbColors);
           shader.vertexShader = vertexShader;
@@ -2353,7 +4235,7 @@ __export(sphere_exports, {
 });
 
 // src/Gradient/comps/Mesh/shaders/defaults/sphere/fragment.glsl
-var fragment_default2 = "\n#define STANDARD\n#ifdef PHYSICAL\n#define REFLECTIVITY\n#define CLEARCOAT\n#define TRANSMISSION\n#endif\nuniform vec3 diffuse;uniform vec3 emissive;uniform float roughness;uniform float metalness;uniform float opacity;\n#ifdef TRANSMISSION\nuniform float transmission;\n#endif\n#ifdef REFLECTIVITY\nuniform float reflectivity;\n#endif\n#ifdef CLEARCOAT\nuniform float clearcoat;uniform float clearcoatRoughness;\n#endif\n#ifdef USE_SHEEN\nuniform vec3 sheen;\n#endif\nvarying vec3 vViewPosition;\n#ifndef FLAT_SHADED\n#ifdef USE_TANGENT\nvarying vec3 vTangent;varying vec3 vBitangent;\n#endif\n#endif\n#include <alphamap_pars_fragment>\n#include <aomap_pars_fragment>\n#include <color_pars_fragment>\n#include <common>\n#include <dithering_pars_fragment>\n#include <emissivemap_pars_fragment>\n#include <lightmap_pars_fragment>\n#include <map_pars_fragment>\n#include <packing>\n#include <uv2_pars_fragment>\n#include <uv_pars_fragment>\n#include <bsdfs>\n#include <bumpmap_pars_fragment>\n#include <clearcoat_pars_fragment>\n#include <clipping_planes_pars_fragment>\n#include <cube_uv_reflection_fragment>\n#include <envmap_common_pars_fragment>\n#include <envmap_physical_pars_fragment>\n#include <fog_pars_fragment>\n#include <lights_pars_begin>\n#include <lights_physical_pars_fragment>\n#include <logdepthbuf_pars_fragment>\n#include <metalnessmap_pars_fragment>\n#include <normalmap_pars_fragment>\n#include <roughnessmap_pars_fragment>\n#include <shadowmap_pars_fragment>\nvarying vec3 vNormal;varying float displacement;varying vec3 vPos;varying float vDistort;uniform float uC1r;uniform float uC1g;uniform float uC1b;uniform float uC2r;uniform float uC2g;uniform float uC2b;uniform float uC3r;uniform float uC3g;uniform float uC3b;varying vec3 color1;varying vec3 color2;varying vec3 color3;varying float distanceToCenter;float linearToRelativeLuminance(const in vec3 color){vec3 weights=vec3(0.2126,0.7152,0.0722);return dot(weights,color.rgb);}void main(){vec3 color1=vec3(uC1r,uC1g,uC1b);vec3 color2=vec3(uC2r,uC2g,uC2b);vec3 color3=vec3(uC3r,uC3g,uC3b);float clearcoat=1.0;float clearcoatRoughness=0.5;\n#include <clipping_planes_fragment>\nfloat distanceToCenter=distance(vPos,vec3(0,0,0));vec4 diffuseColor=vec4(mix(color3,mix(color2,color1,smoothstep(-1.0,1.0,vPos.y)),distanceToCenter),1);ReflectedLight reflectedLight=ReflectedLight(vec3(0.0),vec3(0.0),vec3(0.0),vec3(0.0));vec3 totalEmissiveRadiance=emissive;\n#ifdef TRANSMISSION\nfloat totalTransmission=transmission;\n#endif\n#include <logdepthbuf_fragment>\n#include <map_fragment>\n#include <color_fragment>\n#include <alphamap_fragment>\n#include <alphatest_fragment>\n#include <roughnessmap_fragment>\n#include <metalnessmap_fragment>\n#include <normal_fragment_begin>\n#include <normal_fragment_maps>\n#include <clearcoat_normal_fragment_begin>\n#include <clearcoat_normal_fragment_maps>\n#include <emissivemap_fragment>\n#include <lights_physical_fragment>\n#include <lights_fragment_begin>\n#include <lights_fragment_maps>\n#include <lights_fragment_end>\n#include <aomap_fragment>\nvec3 outgoingLight=reflectedLight.directDiffuse+reflectedLight.indirectDiffuse+reflectedLight.directSpecular+reflectedLight.indirectSpecular;\n#ifdef TRANSMISSION\ndiffuseColor.a*=mix(saturate(1.-totalTransmission+linearToRelativeLuminance(reflectedLight.directSpecular+reflectedLight.indirectSpecular)),1.0,metalness);\n#endif\ngl_FragColor=vec4(outgoingLight,diffuseColor.a);\n#include <tonemapping_fragment>\n#include <encodings_fragment>\n#include <fog_fragment>\n#include <premultiplied_alpha_fragment>\n#include <dithering_fragment>\n}";
+var fragment_default2 = "\n#define STANDARD\n#ifdef PHYSICAL\n#define REFLECTIVITY\n#define CLEARCOAT\n#define TRANSMISSION\n#endif\nuniform vec3 diffuse;uniform vec3 emissive;uniform float roughness;uniform float metalness;uniform float opacity;\n#ifdef TRANSMISSION\nuniform float transmission;\n#endif\n#ifdef REFLECTIVITY\nuniform float reflectivity;\n#endif\n#ifdef CLEARCOAT\nuniform float clearcoat;uniform float clearcoatRoughness;\n#endif\n#ifdef USE_SHEEN\nuniform vec3 sheen;\n#endif\nvarying vec3 vViewPosition;\n#ifndef FLAT_SHADED\n#ifdef USE_TANGENT\nvarying vec3 vTangent;varying vec3 vBitangent;\n#endif\n#endif\n#include <alphamap_pars_fragment>\n#include <aomap_pars_fragment>\n#include <color_pars_fragment>\n#include <common>\n#include <dithering_pars_fragment>\n#include <emissivemap_pars_fragment>\n#include <lightmap_pars_fragment>\n#include <map_pars_fragment>\n#include <packing>\n#include <uv2_pars_fragment>\n#include <uv_pars_fragment>\n#include <bsdfs>\n#include <bumpmap_pars_fragment>\n#include <clearcoat_pars_fragment>\n#include <clipping_planes_pars_fragment>\n#include <cube_uv_reflection_fragment>\n#include <envmap_common_pars_fragment>\n#include <envmap_physical_pars_fragment>\n#include <fog_pars_fragment>\n#include <lights_pars_begin>\n#include <lights_physical_pars_fragment>\n#include <logdepthbuf_pars_fragment>\n#include <metalnessmap_pars_fragment>\n#include <normalmap_pars_fragment>\n#include <roughnessmap_pars_fragment>\n#include <shadowmap_pars_fragment>\nvarying vec3 vNormal;varying float displacement;varying vec3 vPos;varying float vDistort;uniform float uC1r;uniform float uC1g;uniform float uC1b;uniform float uC2r;uniform float uC2g;uniform float uC2b;uniform float uC3r;uniform float uC3g;uniform float uC3b;varying vec3 color1;varying vec3 color2;varying vec3 color3;varying float distanceToCenter;float linearToRelativeLuminance2(const in vec3 color){vec3 weights=vec3(0.2126,0.7152,0.0722);return dot(weights,color.rgb);}void main(){vec3 color1=vec3(uC1r,uC1g,uC1b);vec3 color2=vec3(uC2r,uC2g,uC2b);vec3 color3=vec3(uC3r,uC3g,uC3b);float clearcoat=1.0;float clearcoatRoughness=0.5;\n#include <clipping_planes_fragment>\nfloat distanceToCenter=distance(vPos,vec3(0,0,0));vec4 diffuseColor=vec4(mix(color3,mix(color2,color1,smoothstep(-1.0,1.0,vPos.y)),distanceToCenter),1);ReflectedLight reflectedLight=ReflectedLight(vec3(0.0),vec3(0.0),vec3(0.0),vec3(0.0));vec3 totalEmissiveRadiance=emissive;\n#ifdef TRANSMISSION\nfloat totalTransmission=transmission;\n#endif\n#include <logdepthbuf_fragment>\n#include <map_fragment>\n#include <color_fragment>\n#include <alphamap_fragment>\n#include <alphatest_fragment>\n#include <roughnessmap_fragment>\n#include <metalnessmap_fragment>\n#include <normal_fragment_begin>\n#include <normal_fragment_maps>\n#include <clearcoat_normal_fragment_begin>\n#include <clearcoat_normal_fragment_maps>\n#include <emissivemap_fragment>\n#include <lights_physical_fragment>\n#include <lights_fragment_begin>\n#include <lights_fragment_maps>\n#include <lights_fragment_end>\n#include <aomap_fragment>\nvec3 outgoingLight=reflectedLight.directDiffuse+reflectedLight.indirectDiffuse+reflectedLight.directSpecular+reflectedLight.indirectSpecular;\n#ifdef TRANSMISSION\ndiffuseColor.a*=mix(saturate(1.-totalTransmission+linearToRelativeLuminance2(reflectedLight.directSpecular+reflectedLight.indirectSpecular)),1.0,metalness);\n#endif\ngl_FragColor=vec4(outgoingLight,diffuseColor.a);\n#include <tonemapping_fragment>\n#include <encodings_fragment>\n#include <fog_fragment>\n#include <premultiplied_alpha_fragment>\n#include <dithering_fragment>\n}";
 
 // src/Gradient/comps/Mesh/shaders/defaults/sphere/vertex.glsl
 var vertex_default2 = "vec3 mod289(vec3 x){return x-floor(x*(1.0/289.0))*289.0;}vec4 mod289(vec4 x){return x-floor(x*(1.0/289.0))*289.0;}vec4 permute(vec4 x){return mod289(((x*34.0)+1.0)*x);}vec4 taylorInvSqrt(vec4 r){return 1.79284291400159-0.85373472095314*r;}vec3 fade(vec3 t){return t*t*t*(t*(t*6.0-15.0)+10.0);}float pnoise(vec3 P,vec3 rep){vec3 Pi0=mod(floor(P),rep);vec3 Pi1=mod(Pi0+vec3(1.0),rep);Pi0=mod289(Pi0);Pi1=mod289(Pi1);vec3 Pf0=fract(P);vec3 Pf1=Pf0-vec3(1.0);vec4 ix=vec4(Pi0.x,Pi1.x,Pi0.x,Pi1.x);vec4 iy=vec4(Pi0.yy,Pi1.yy);vec4 iz0=Pi0.zzzz;vec4 iz1=Pi1.zzzz;vec4 ixy=permute(permute(ix)+iy);vec4 ixy0=permute(ixy+iz0);vec4 ixy1=permute(ixy+iz1);vec4 gx0=ixy0*(1.0/7.0);vec4 gy0=fract(floor(gx0)*(1.0/7.0))-0.5;gx0=fract(gx0);vec4 gz0=vec4(0.5)-abs(gx0)-abs(gy0);vec4 sz0=step(gz0,vec4(0.0));gx0-=sz0*(step(0.0,gx0)-0.5);gy0-=sz0*(step(0.0,gy0)-0.5);vec4 gx1=ixy1*(1.0/7.0);vec4 gy1=fract(floor(gx1)*(1.0/7.0))-0.5;gx1=fract(gx1);vec4 gz1=vec4(0.5)-abs(gx1)-abs(gy1);vec4 sz1=step(gz1,vec4(0.0));gx1-=sz1*(step(0.0,gx1)-0.5);gy1-=sz1*(step(0.0,gy1)-0.5);vec3 g000=vec3(gx0.x,gy0.x,gz0.x);vec3 g100=vec3(gx0.y,gy0.y,gz0.y);vec3 g010=vec3(gx0.z,gy0.z,gz0.z);vec3 g110=vec3(gx0.w,gy0.w,gz0.w);vec3 g001=vec3(gx1.x,gy1.x,gz1.x);vec3 g101=vec3(gx1.y,gy1.y,gz1.y);vec3 g011=vec3(gx1.z,gy1.z,gz1.z);vec3 g111=vec3(gx1.w,gy1.w,gz1.w);vec4 norm0=taylorInvSqrt(vec4(dot(g000,g000),dot(g010,g010),dot(g100,g100),dot(g110,g110)));g000*=norm0.x;g010*=norm0.y;g100*=norm0.z;g110*=norm0.w;vec4 norm1=taylorInvSqrt(vec4(dot(g001,g001),dot(g011,g011),dot(g101,g101),dot(g111,g111)));g001*=norm1.x;g011*=norm1.y;g101*=norm1.z;g111*=norm1.w;float n000=dot(g000,Pf0);float n100=dot(g100,vec3(Pf1.x,Pf0.yz));float n010=dot(g010,vec3(Pf0.x,Pf1.y,Pf0.z));float n110=dot(g110,vec3(Pf1.xy,Pf0.z));float n001=dot(g001,vec3(Pf0.xy,Pf1.z));float n101=dot(g101,vec3(Pf1.x,Pf0.y,Pf1.z));float n011=dot(g011,vec3(Pf0.x,Pf1.yz));float n111=dot(g111,Pf1);vec3 fade_xyz=fade(Pf0);vec4 n_z=mix(vec4(n000,n100,n010,n110),vec4(n001,n101,n011,n111),fade_xyz.z);vec2 n_yz=mix(n_z.xy,n_z.zw,fade_xyz.y);float n_xyz=mix(n_yz.x,n_yz.y,fade_xyz.x);return 2.2*n_xyz;}varying vec3 vNormal;uniform float uTime;uniform float uSpeed;uniform float uNoiseDensity;uniform float uNoiseStrength;uniform float uFrequency;uniform float uAmplitude;varying vec3 vPos;varying float vDistort;varying vec2 vUv;varying vec3 vViewPosition;\n#define STANDARD\n#ifndef FLAT_SHADED\n#ifdef USE_TANGENT\nvarying vec3 vTangent;varying vec3 vBitangent;\n#endif\n#endif\n#include <clipping_planes_pars_vertex>\n#include <color_pars_vertex>\n#include <common>\n#include <displacementmap_pars_vertex>\n#include <fog_pars_vertex>\n#include <logdepthbuf_pars_vertex>\n#include <morphtarget_pars_vertex>\n#include <shadowmap_pars_vertex>\n#include <skinning_pars_vertex>\n#include <uv2_pars_vertex>\n#include <uv_pars_vertex>\nmat3 rotation3dY(float angle){float s=sin(angle);float c=cos(angle);return mat3(c,0.0,-s,0.0,1.0,0.0,s,0.0,c);}vec3 rotateY(vec3 v,float angle){return rotation3dY(angle)*v;}void main(){\n#include <beginnormal_vertex>\n#include <color_vertex>\n#include <defaultnormal_vertex>\n#include <morphnormal_vertex>\n#include <skinbase_vertex>\n#include <skinnormal_vertex>\n#include <uv2_vertex>\n#include <uv_vertex>\n#ifndef FLAT_SHADED\nvNormal=normalize(transformedNormal);\n#ifdef USE_TANGENT\nvTangent=normalize(transformedTangent);vBitangent=normalize(cross(vNormal,vTangent)*tangent.w);\n#endif\n#endif\n#include <begin_vertex>\n#include <clipping_planes_vertex>\n#include <displacementmap_vertex>\n#include <logdepthbuf_vertex>\n#include <morphtarget_vertex>\n#include <project_vertex>\n#include <skinning_vertex>\nvViewPosition=-mvPosition.xyz;\n#include <fog_vertex>\n#include <shadowmap_vertex>\n#include <worldpos_vertex>\nfloat t=uTime*uSpeed;float distortion=pnoise((normal+t)*uNoiseDensity,vec3(10.0))*uNoiseStrength;vec3 pos=position+(normal*distortion);float angle=sin(uv.y*uFrequency+t)*uAmplitude;pos=rotateY(pos,angle);vPos=pos;vDistort=distortion;vNormal=normal;vUv=uv;gl_Position=projectionMatrix*modelViewMatrix*vec4(pos,1.);}";
@@ -2366,7 +4248,7 @@ __export(waterPlane_exports, {
 });
 
 // src/Gradient/comps/Mesh/shaders/defaults/waterPlane/fragment.glsl
-var fragment_default3 = "\n#define STANDARD\n#ifdef PHYSICAL\n#define REFLECTIVITY\n#define CLEARCOAT\n#define TRANSMISSION\n#endif\nuniform vec3 diffuse;uniform vec3 emissive;uniform float roughness;uniform float metalness;uniform float opacity;\n#ifdef TRANSMISSION\nuniform float transmission;\n#endif\n#ifdef REFLECTIVITY\nuniform float reflectivity;\n#endif\n#ifdef CLEARCOAT\nuniform float clearcoat;uniform float clearcoatRoughness;\n#endif\n#ifdef USE_SHEEN\nuniform vec3 sheen;\n#endif\nvarying vec3 vViewPosition;\n#ifndef FLAT_SHADED\n#ifdef USE_TANGENT\nvarying vec3 vTangent;varying vec3 vBitangent;\n#endif\n#endif\n#include <alphamap_pars_fragment>\n#include <aomap_pars_fragment>\n#include <color_pars_fragment>\n#include <common>\n#include <dithering_pars_fragment>\n#include <emissivemap_pars_fragment>\n#include <lightmap_pars_fragment>\n#include <map_pars_fragment>\n#include <packing>\n#include <uv2_pars_fragment>\n#include <uv_pars_fragment>\n#include <bsdfs>\n#include <bumpmap_pars_fragment>\n#include <clearcoat_pars_fragment>\n#include <clipping_planes_pars_fragment>\n#include <cube_uv_reflection_fragment>\n#include <envmap_common_pars_fragment>\n#include <envmap_physical_pars_fragment>\n#include <fog_pars_fragment>\n#include <lights_pars_begin>\n#include <lights_physical_pars_fragment>\n#include <logdepthbuf_pars_fragment>\n#include <metalnessmap_pars_fragment>\n#include <normalmap_pars_fragment>\n#include <roughnessmap_pars_fragment>\n#include <shadowmap_pars_fragment>\nvarying vec3 vNormal;varying float displacement;varying vec3 vPos;varying float vDistort;uniform float uC1r;uniform float uC1g;uniform float uC1b;uniform float uC2r;uniform float uC2g;uniform float uC2b;uniform float uC3r;uniform float uC3g;uniform float uC3b;varying vec3 color1;varying vec3 color2;varying vec3 color3;float linearToRelativeLuminance(const in vec3 color){vec3 weights=vec3(0.2126,0.7152,0.0722);return dot(weights,color.rgb);}void main(){vec3 color1=vec3(uC1r,uC1g,uC1b);vec3 color2=vec3(uC2r,uC2g,uC2b);vec3 color3=vec3(uC3r,uC3g,uC3b);float clearcoat=1.0;float clearcoatRoughness=0.5;\n#include <clipping_planes_fragment>\nvec4 diffuseColor=vec4(mix(mix(color1,color2,smoothstep(-3.0,3.0,vPos.x)),color3,vPos.z),1);ReflectedLight reflectedLight=ReflectedLight(vec3(0.0),vec3(0.0),vec3(0.0),vec3(0.0));vec3 totalEmissiveRadiance=emissive;\n#ifdef TRANSMISSION\nfloat totalTransmission=transmission;\n#endif\n#include <logdepthbuf_fragment>\n#include <map_fragment>\n#include <color_fragment>\n#include <alphamap_fragment>\n#include <alphatest_fragment>\n#include <roughnessmap_fragment>\n#include <metalnessmap_fragment>\n#include <normal_fragment_begin>\n#include <normal_fragment_maps>\n#include <clearcoat_normal_fragment_begin>\n#include <clearcoat_normal_fragment_maps>\n#include <emissivemap_fragment>\n#include <lights_physical_fragment>\n#include <lights_fragment_begin>\n#include <lights_fragment_maps>\n#include <lights_fragment_end>\n#include <aomap_fragment>\nvec3 outgoingLight=reflectedLight.directDiffuse+reflectedLight.indirectDiffuse+reflectedLight.directSpecular+reflectedLight.indirectSpecular;\n#ifdef TRANSMISSION\ndiffuseColor.a*=mix(saturate(1.-totalTransmission+linearToRelativeLuminance(reflectedLight.directSpecular+reflectedLight.indirectSpecular)),1.0,metalness);\n#endif\n#include <tonemapping_fragment>\n#include <encodings_fragment>\n#include <fog_fragment>\n#include <premultiplied_alpha_fragment>\n#include <dithering_fragment>\ngl_FragColor=vec4(outgoingLight,diffuseColor.a);}";
+var fragment_default3 = "\n#define STANDARD\n#ifdef PHYSICAL\n#define REFLECTIVITY\n#define CLEARCOAT\n#define TRANSMISSION\n#endif\nuniform vec3 diffuse;uniform vec3 emissive;uniform float roughness;uniform float metalness;uniform float opacity;\n#ifdef TRANSMISSION\nuniform float transmission;\n#endif\n#ifdef REFLECTIVITY\nuniform float reflectivity;\n#endif\n#ifdef CLEARCOAT\nuniform float clearcoat;uniform float clearcoatRoughness;\n#endif\n#ifdef USE_SHEEN\nuniform vec3 sheen;\n#endif\nvarying vec3 vViewPosition;\n#ifndef FLAT_SHADED\n#ifdef USE_TANGENT\nvarying vec3 vTangent;varying vec3 vBitangent;\n#endif\n#endif\n#include <alphamap_pars_fragment>\n#include <aomap_pars_fragment>\n#include <color_pars_fragment>\n#include <common>\n#include <dithering_pars_fragment>\n#include <emissivemap_pars_fragment>\n#include <lightmap_pars_fragment>\n#include <map_pars_fragment>\n#include <packing>\n#include <uv2_pars_fragment>\n#include <uv_pars_fragment>\n#include <bsdfs>\n#include <bumpmap_pars_fragment>\n#include <clearcoat_pars_fragment>\n#include <clipping_planes_pars_fragment>\n#include <cube_uv_reflection_fragment>\n#include <envmap_common_pars_fragment>\n#include <envmap_physical_pars_fragment>\n#include <fog_pars_fragment>\n#include <lights_pars_begin>\n#include <lights_physical_pars_fragment>\n#include <logdepthbuf_pars_fragment>\n#include <metalnessmap_pars_fragment>\n#include <normalmap_pars_fragment>\n#include <roughnessmap_pars_fragment>\n#include <shadowmap_pars_fragment>\nvarying vec3 vNormal;varying float displacement;varying vec3 vPos;varying float vDistort;uniform float uC1r;uniform float uC1g;uniform float uC1b;uniform float uC2r;uniform float uC2g;uniform float uC2b;uniform float uC3r;uniform float uC3g;uniform float uC3b;varying vec3 color1;varying vec3 color2;varying vec3 color3;float linearToRelativeLuminance2(const in vec3 color){vec3 weights=vec3(0.2126,0.7152,0.0722);return dot(weights,color.rgb);}void main(){vec3 color1=vec3(uC1r,uC1g,uC1b);vec3 color2=vec3(uC2r,uC2g,uC2b);vec3 color3=vec3(uC3r,uC3g,uC3b);float clearcoat=1.0;float clearcoatRoughness=0.5;\n#include <clipping_planes_fragment>\nvec4 diffuseColor=vec4(mix(mix(color1,color2,smoothstep(-3.0,3.0,vPos.x)),color3,vPos.z),1);ReflectedLight reflectedLight=ReflectedLight(vec3(0.0),vec3(0.0),vec3(0.0),vec3(0.0));vec3 totalEmissiveRadiance=emissive;\n#ifdef TRANSMISSION\nfloat totalTransmission=transmission;\n#endif\n#include <logdepthbuf_fragment>\n#include <map_fragment>\n#include <color_fragment>\n#include <alphamap_fragment>\n#include <alphatest_fragment>\n#include <roughnessmap_fragment>\n#include <metalnessmap_fragment>\n#include <normal_fragment_begin>\n#include <normal_fragment_maps>\n#include <clearcoat_normal_fragment_begin>\n#include <clearcoat_normal_fragment_maps>\n#include <emissivemap_fragment>\n#include <lights_physical_fragment>\n#include <lights_fragment_begin>\n#include <lights_fragment_maps>\n#include <lights_fragment_end>\n#include <aomap_fragment>\nvec3 outgoingLight=reflectedLight.directDiffuse+reflectedLight.indirectDiffuse+reflectedLight.directSpecular+reflectedLight.indirectSpecular;\n#ifdef TRANSMISSION\ndiffuseColor.a*=mix(saturate(1.-totalTransmission+linearToRelativeLuminance2(reflectedLight.directSpecular+reflectedLight.indirectSpecular)),1.0,metalness);\n#endif\n#include <tonemapping_fragment>\n#include <encodings_fragment>\n#include <fog_fragment>\n#include <premultiplied_alpha_fragment>\n#include <dithering_fragment>\ngl_FragColor=vec4(outgoingLight,diffuseColor.a);}";
 
 // src/Gradient/comps/Mesh/shaders/defaults/waterPlane/vertex.glsl
 var vertex_default3 = "vec3 mod289(vec3 x){return x-floor(x*(1.0/289.0))*289.0;}vec4 mod289(vec4 x){return x-floor(x*(1.0/289.0))*289.0;}vec4 permute(vec4 x){return mod289(((x*34.0)+1.0)*x);}vec4 taylorInvSqrt(vec4 r){return 1.79284291400159-0.85373472095314*r;}vec3 fade(vec3 t){return t*t*t*(t*(t*6.0-15.0)+10.0);}float cnoise(vec3 P){vec3 Pi0=floor(P);vec3 Pi1=Pi0+vec3(1.0);Pi0=mod289(Pi0);Pi1=mod289(Pi1);vec3 Pf0=fract(P);vec3 Pf1=Pf0-vec3(1.0);vec4 ix=vec4(Pi0.x,Pi1.x,Pi0.x,Pi1.x);vec4 iy=vec4(Pi0.yy,Pi1.yy);vec4 iz0=Pi0.zzzz;vec4 iz1=Pi1.zzzz;vec4 ixy=permute(permute(ix)+iy);vec4 ixy0=permute(ixy+iz0);vec4 ixy1=permute(ixy+iz1);vec4 gx0=ixy0*(1.0/7.0);vec4 gy0=fract(floor(gx0)*(1.0/7.0))-0.5;gx0=fract(gx0);vec4 gz0=vec4(0.5)-abs(gx0)-abs(gy0);vec4 sz0=step(gz0,vec4(0.0));gx0-=sz0*(step(0.0,gx0)-0.5);gy0-=sz0*(step(0.0,gy0)-0.5);vec4 gx1=ixy1*(1.0/7.0);vec4 gy1=fract(floor(gx1)*(1.0/7.0))-0.5;gx1=fract(gx1);vec4 gz1=vec4(0.5)-abs(gx1)-abs(gy1);vec4 sz1=step(gz1,vec4(0.0));gx1-=sz1*(step(0.0,gx1)-0.5);gy1-=sz1*(step(0.0,gy1)-0.5);vec3 g000=vec3(gx0.x,gy0.x,gz0.x);vec3 g100=vec3(gx0.y,gy0.y,gz0.y);vec3 g010=vec3(gx0.z,gy0.z,gz0.z);vec3 g110=vec3(gx0.w,gy0.w,gz0.w);vec3 g001=vec3(gx1.x,gy1.x,gz1.x);vec3 g101=vec3(gx1.y,gy1.y,gz1.y);vec3 g011=vec3(gx1.z,gy1.z,gz1.z);vec3 g111=vec3(gx1.w,gy1.w,gz1.w);vec4 norm0=taylorInvSqrt(vec4(dot(g000,g000),dot(g010,g010),dot(g100,g100),dot(g110,g110)));g000*=norm0.x;g010*=norm0.y;g100*=norm0.z;g110*=norm0.w;vec4 norm1=taylorInvSqrt(vec4(dot(g001,g001),dot(g011,g011),dot(g101,g101),dot(g111,g111)));g001*=norm1.x;g011*=norm1.y;g101*=norm1.z;g111*=norm1.w;float n000=dot(g000,Pf0);float n100=dot(g100,vec3(Pf1.x,Pf0.yz));float n010=dot(g010,vec3(Pf0.x,Pf1.y,Pf0.z));float n110=dot(g110,vec3(Pf1.xy,Pf0.z));float n001=dot(g001,vec3(Pf0.xy,Pf1.z));float n101=dot(g101,vec3(Pf1.x,Pf0.y,Pf1.z));float n011=dot(g011,vec3(Pf0.x,Pf1.yz));float n111=dot(g111,Pf1);vec3 fade_xyz=fade(Pf0);vec4 n_z=mix(vec4(n000,n100,n010,n110),vec4(n001,n101,n011,n111),fade_xyz.z);vec2 n_yz=mix(n_z.xy,n_z.zw,fade_xyz.y);float n_xyz=mix(n_yz.x,n_yz.y,fade_xyz.x);return 2.2*n_xyz;}mat3 rotation3dY(float angle){float s=sin(angle);float c=cos(angle);return mat3(c,0.0,-s,0.0,1.0,0.0,s,0.0,c);}vec3 rotateY(vec3 v,float angle){return rotation3dY(angle)*v;}varying vec3 vNormal;varying float displacement;varying vec3 vPos;varying float vDistort;uniform float uTime;uniform float uSpeed;uniform float uNoiseDensity;uniform float uNoiseStrength;\n#define STANDARD\nvarying vec3 vViewPosition;\n#ifndef FLAT_SHADED\n#ifdef USE_TANGENT\nvarying vec3 vTangent;varying vec3 vBitangent;\n#endif\n#endif\n#include <clipping_planes_pars_vertex>\n#include <color_pars_vertex>\n#include <common>\n#include <displacementmap_pars_vertex>\n#include <fog_pars_vertex>\n#include <logdepthbuf_pars_vertex>\n#include <morphtarget_pars_vertex>\n#include <shadowmap_pars_vertex>\n#include <skinning_pars_vertex>\n#include <uv2_pars_vertex>\n#include <uv_pars_vertex>\nvoid main(){\n#include <beginnormal_vertex>\n#include <color_vertex>\n#include <defaultnormal_vertex>\n#include <morphnormal_vertex>\n#include <skinbase_vertex>\n#include <skinnormal_vertex>\n#include <uv2_vertex>\n#include <uv_vertex>\n#ifndef FLAT_SHADED\nvNormal=normalize(transformedNormal);\n#ifdef USE_TANGENT\nvTangent=normalize(transformedTangent);vBitangent=normalize(cross(vNormal,vTangent)*tangent.w);\n#endif\n#endif\n#include <begin_vertex>\n#include <clipping_planes_vertex>\n#include <displacementmap_vertex>\n#include <logdepthbuf_vertex>\n#include <morphtarget_vertex>\n#include <project_vertex>\n#include <skinning_vertex>\nvViewPosition=-mvPosition.xyz;\n#include <fog_vertex>\n#include <shadowmap_vertex>\n#include <worldpos_vertex>\nfloat t=uTime*uSpeed;float distortion=0.75*cnoise(0.43*position*uNoiseDensity+t);vec3 pos=position+normal*distortion*uNoiseStrength;vPos=pos;gl_Position=projectionMatrix*modelViewMatrix*vec4(pos,1.);}";
@@ -2419,10 +4301,10 @@ var fragment_default6 = "uniform float uC1r;uniform float uC1g;uniform float uC1
 var vertex_default6 = "vec3 mod289(vec3 x){return x-floor(x*(1.0/289.0))*289.0;}vec4 mod289(vec4 x){return x-floor(x*(1.0/289.0))*289.0;}vec4 permute(vec4 x){return mod289(((x*34.0)+1.0)*x);}vec4 taylorInvSqrt(vec4 r){return 1.79284291400159-0.85373472095314*r;}vec3 fade(vec3 t){return t*t*t*(t*(t*6.0-15.0)+10.0);}float cnoise(vec3 P){vec3 Pi0=floor(P);vec3 Pi1=Pi0+vec3(1.0);Pi0=mod289(Pi0);Pi1=mod289(Pi1);vec3 Pf0=fract(P);vec3 Pf1=Pf0-vec3(1.0);vec4 ix=vec4(Pi0.x,Pi1.x,Pi0.x,Pi1.x);vec4 iy=vec4(Pi0.yy,Pi1.yy);vec4 iz0=Pi0.zzzz;vec4 iz1=Pi1.zzzz;vec4 ixy=permute(permute(ix)+iy);vec4 ixy0=permute(ixy+iz0);vec4 ixy1=permute(ixy+iz1);vec4 gx0=ixy0*(1.0/7.0);vec4 gy0=fract(floor(gx0)*(1.0/7.0))-0.5;gx0=fract(gx0);vec4 gz0=vec4(0.5)-abs(gx0)-abs(gy0);vec4 sz0=step(gz0,vec4(0.0));gx0-=sz0*(step(0.0,gx0)-0.5);gy0-=sz0*(step(0.0,gy0)-0.5);vec4 gx1=ixy1*(1.0/7.0);vec4 gy1=fract(floor(gx1)*(1.0/7.0))-0.5;gx1=fract(gx1);vec4 gz1=vec4(0.5)-abs(gx1)-abs(gy1);vec4 sz1=step(gz1,vec4(0.0));gx1-=sz1*(step(0.0,gx1)-0.5);gy1-=sz1*(step(0.0,gy1)-0.5);vec3 g000=vec3(gx0.x,gy0.x,gz0.x);vec3 g100=vec3(gx0.y,gy0.y,gz0.y);vec3 g010=vec3(gx0.z,gy0.z,gz0.z);vec3 g110=vec3(gx0.w,gy0.w,gz0.w);vec3 g001=vec3(gx1.x,gy1.x,gz1.x);vec3 g101=vec3(gx1.y,gy1.y,gz1.y);vec3 g011=vec3(gx1.z,gy1.z,gz1.z);vec3 g111=vec3(gx1.w,gy1.w,gz1.w);vec4 norm0=taylorInvSqrt(vec4(dot(g000,g000),dot(g010,g010),dot(g100,g100),dot(g110,g110)));g000*=norm0.x;g010*=norm0.y;g100*=norm0.z;g110*=norm0.w;vec4 norm1=taylorInvSqrt(vec4(dot(g001,g001),dot(g011,g011),dot(g101,g101),dot(g111,g111)));g001*=norm1.x;g011*=norm1.y;g101*=norm1.z;g111*=norm1.w;float n000=dot(g000,Pf0);float n100=dot(g100,vec3(Pf1.x,Pf0.yz));float n010=dot(g010,vec3(Pf0.x,Pf1.y,Pf0.z));float n110=dot(g110,vec3(Pf1.xy,Pf0.z));float n001=dot(g001,vec3(Pf0.xy,Pf1.z));float n101=dot(g101,vec3(Pf1.x,Pf0.y,Pf1.z));float n011=dot(g011,vec3(Pf0.x,Pf1.yz));float n111=dot(g111,Pf1);vec3 fade_xyz=fade(Pf0);vec4 n_z=mix(vec4(n000,n100,n010,n110),vec4(n001,n101,n011,n111),fade_xyz.z);vec2 n_yz=mix(n_z.xy,n_z.zw,fade_xyz.y);float n_xyz=mix(n_yz.x,n_yz.y,fade_xyz.x);return 2.2*n_xyz;}mat3 rotation3dY(float angle){float s=sin(angle);float c=cos(angle);return mat3(c,0.0,-s,0.0,1.0,0.0,s,0.0,c);}vec3 rotateY(vec3 v,float angle){return rotation3dY(angle)*v;}varying vec3 vNormal;varying float displacement;varying vec3 vPos;varying float vDistort;varying vec2 vUv;uniform float uTime;uniform float uSpeed;uniform float uLoadingTime;uniform float uNoiseDensity;uniform float uNoiseStrength;\n#define STANDARD\nvarying vec3 vViewPosition;\n#ifndef FLAT_SHADED\n#ifdef USE_TANGENT\nvarying vec3 vTangent;varying vec3 vBitangent;\n#endif\n#endif\n#include <clipping_planes_pars_vertex>\n#include <color_pars_vertex>\n#include <common>\n#include <displacementmap_pars_vertex>\n#include <fog_pars_vertex>\n#include <logdepthbuf_pars_vertex>\n#include <morphtarget_pars_vertex>\n#include <shadowmap_pars_vertex>\n#include <skinning_pars_vertex>\n#include <uv2_pars_vertex>\n#include <uv_pars_vertex>\nvoid main(){\n#include <beginnormal_vertex>\n#include <color_vertex>\n#include <defaultnormal_vertex>\n#include <morphnormal_vertex>\n#include <skinbase_vertex>\n#include <skinnormal_vertex>\n#include <uv2_vertex>\n#include <uv_vertex>\n#ifndef FLAT_SHADED\nvNormal=normalize(transformedNormal);\n#ifdef USE_TANGENT\nvTangent=normalize(transformedTangent);vBitangent=normalize(cross(vNormal,vTangent)*tangent.w);\n#endif\n#endif\n#include <begin_vertex>\n#include <clipping_planes_vertex>\n#include <displacementmap_vertex>\n#include <logdepthbuf_vertex>\n#include <morphtarget_vertex>\n#include <project_vertex>\n#include <skinning_vertex>\nvViewPosition=-mvPosition.xyz;\n#include <fog_vertex>\n#include <shadowmap_vertex>\n#include <worldpos_vertex>\nvUv=uv;float t=uTime*uSpeed;float distortion=0.75*cnoise(0.43*position*uNoiseDensity+t);vec3 pos=position+normal*distortion*uNoiseStrength*uLoadingTime;vPos=pos;gl_Position=projectionMatrix*modelViewMatrix*vec4(pos,1.);}";
 
 // src/Gradient/comps/Mesh/Mesh.tsx
-import { useFrame as useFrame3, extend as extend2 } from "@react-three/fiber";
+import { useFrame as useFrame6, extend as extend2 } from "@react-three/fiber";
 
 // ../../node_modules/.pnpm/@react-spring+three@9.6.1_aj5kj473hsgheg4miwvuwybosy/node_modules/@react-spring/three/dist/react-spring-three.esm.js
-import { addEffect, applyProps } from "@react-three/fiber";
+import { addEffect, applyProps as applyProps2 } from "@react-three/fiber";
 
 // ../../node_modules/.pnpm/@react-spring+rafz@9.6.1/node_modules/@react-spring/rafz/dist/react-spring-rafz.esm.js
 var updateQueue = makeQueue();
@@ -2582,7 +4464,7 @@ function eachSafely(values, each2) {
 }
 
 // ../../node_modules/.pnpm/@react-spring+shared@9.6.1_react@18.2.0/node_modules/@react-spring/shared/dist/react-spring-shared.esm.js
-import { useRef as useRef2, useEffect as useEffect2, useLayoutEffect, useState } from "react";
+import { useRef as useRef4, useEffect as useEffect6, useLayoutEffect as useLayoutEffect3, useState as useState4 } from "react";
 function noop() {
 }
 var defineHidden = (obj, key, value) => Object.defineProperty(obj, key, {
@@ -3290,9 +5172,9 @@ function deprecateDirectCall() {
 function isAnimatedString(value) {
   return is.str(value) && (value[0] == "#" || /\d/.test(value) || !isSSR() && cssVariableRegex.test(value) || value in (colors$1 || {}));
 }
-var useIsomorphicLayoutEffect = isSSR() ? useEffect2 : useLayoutEffect;
+var useIsomorphicLayoutEffect = isSSR() ? useEffect6 : useLayoutEffect3;
 var useIsMounted = () => {
-  const isMounted = useRef2(false);
+  const isMounted = useRef4(false);
   useIsomorphicLayoutEffect(() => {
     isMounted.current = true;
     return () => {
@@ -3302,7 +5184,7 @@ var useIsMounted = () => {
   return isMounted;
 };
 function useForceUpdate() {
-  const update3 = useState()[1];
+  const update3 = useState4()[1];
   const isMounted = useIsMounted();
   return () => {
     if (isMounted.current) {
@@ -3311,11 +5193,11 @@ function useForceUpdate() {
   };
 }
 function useMemoOne(getResult, inputs) {
-  const [initial] = useState(() => ({
+  const [initial] = useState4(() => ({
     inputs,
     result: getResult()
   }));
-  const committed = useRef2();
+  const committed = useRef4();
   const prevCache = committed.current;
   let cache = prevCache;
   if (cache) {
@@ -3329,7 +5211,7 @@ function useMemoOne(getResult, inputs) {
   } else {
     cache = initial;
   }
-  useEffect2(() => {
+  useEffect6(() => {
     committed.current = cache;
     if (prevCache == initial) {
       initial.inputs = initial.result = void 0;
@@ -3348,23 +5230,23 @@ function areInputsEqual(next, prev) {
   }
   return true;
 }
-var useOnce = (effect) => useEffect2(effect, emptyDeps);
+var useOnce = (effect) => useEffect6(effect, emptyDeps);
 var emptyDeps = [];
 function usePrev(value) {
-  const prevRef = useRef2();
-  useEffect2(() => {
+  const prevRef = useRef4();
+  useEffect6(() => {
     prevRef.current = value;
   });
   return prevRef.current;
 }
 
 // ../../node_modules/.pnpm/@react-spring+core@9.6.1_react@18.2.0/node_modules/@react-spring/core/dist/react-spring-core.esm.js
-import * as React2 from "react";
-import { useContext, useMemo, useRef as useRef4, useState as useState2 } from "react";
+import * as React8 from "react";
+import { useContext as useContext2, useMemo as useMemo5, useRef as useRef6, useState as useState5 } from "react";
 
 // ../../node_modules/.pnpm/@react-spring+animated@9.6.1_react@18.2.0/node_modules/@react-spring/animated/dist/react-spring-animated.esm.js
-import * as React from "react";
-import { forwardRef, useRef as useRef3, useCallback as useCallback2, useEffect as useEffect3 } from "react";
+import * as React7 from "react";
+import { forwardRef as forwardRef2, useRef as useRef5, useCallback as useCallback3, useEffect as useEffect7 } from "react";
 var $node = Symbol.for("Animated:node");
 var isAnimated = (value) => !!value && value[$node] === value;
 var getAnimated = (owner) => owner && owner[$node];
@@ -3564,9 +5446,9 @@ function _extends2() {
 }
 var withAnimated = (Component, host2) => {
   const hasInstance = !is.fun(Component) || Component.prototype && Component.prototype.isReactComponent;
-  return forwardRef((givenProps, givenRef) => {
-    const instanceRef = useRef3(null);
-    const ref = hasInstance && useCallback2((value) => {
+  return forwardRef2((givenProps, givenRef) => {
+    const instanceRef = useRef5(null);
+    const ref = hasInstance && useCallback3((value) => {
       instanceRef.current = updateRef(givenRef, value);
     }, [givenRef]);
     const [props, deps] = getAnimatedState(givenProps, host2);
@@ -3582,7 +5464,7 @@ var withAnimated = (Component, host2) => {
       }
     };
     const observer = new PropsObserver(callback, deps);
-    const observerRef = useRef3();
+    const observerRef = useRef5();
     useIsomorphicLayoutEffect(() => {
       observerRef.current = observer;
       each(deps, (dep) => addFluidObserver(dep, observer));
@@ -3593,13 +5475,13 @@ var withAnimated = (Component, host2) => {
         }
       };
     });
-    useEffect3(callback, []);
+    useEffect7(callback, []);
     useOnce(() => () => {
       const observer2 = observerRef.current;
       each(observer2.deps, (dep) => removeFluidObserver(dep, observer2));
     });
     const usedProps = host2.getComponentProps(props.getValue());
-    return React.createElement(Component, _extends2({}, usedProps, {
+    return React7.createElement(Component, _extends2({}, usedProps, {
       ref
     }));
   });
@@ -5132,7 +7014,7 @@ var SpringContext = (_ref) => {
   let {
     children
   } = _ref, props = _objectWithoutPropertiesLoose(_ref, _excluded$6);
-  const inherited = useContext(ctx);
+  const inherited = useContext2(ctx);
   const pause = props.pause || !!inherited.pause, immediate = props.immediate || !!inherited.immediate;
   props = useMemoOne(() => ({
     pause,
@@ -5141,7 +7023,7 @@ var SpringContext = (_ref) => {
   const {
     Provider
   } = ctx;
-  return React2.createElement(Provider, {
+  return React8.createElement(Provider, {
     value: props
   }, children);
 };
@@ -5149,7 +7031,7 @@ var ctx = makeContext(SpringContext, {});
 SpringContext.Provider = ctx.Provider;
 SpringContext.Consumer = ctx.Consumer;
 function makeContext(target2, init) {
-  Object.assign(target2, React2.createContext(init));
+  Object.assign(target2, React8.createContext(init));
   target2.Provider._context = target2;
   target2.Consumer._context = target2;
   return target2;
@@ -5225,10 +7107,10 @@ function useSprings(length, props, deps) {
   const propsFn = is.fun(props) && props;
   if (propsFn && !deps)
     deps = [];
-  const ref = useMemo(() => propsFn || arguments.length == 3 ? SpringRef() : void 0, []);
-  const layoutId = useRef4(0);
+  const ref = useMemo5(() => propsFn || arguments.length == 3 ? SpringRef() : void 0, []);
+  const layoutId = useRef6(0);
   const forceUpdate = useForceUpdate();
-  const state = useMemo(() => ({
+  const state = useMemo5(() => ({
     ctrls: [],
     queue: [],
     flush(ctrl, updates2) {
@@ -5243,10 +7125,10 @@ function useSprings(length, props, deps) {
       });
     }
   }), []);
-  const ctrls = useRef4([...state.ctrls]);
+  const ctrls = useRef6([...state.ctrls]);
   const updates = [];
   const prevLength = usePrev(length) || 0;
-  useMemo(() => {
+  useMemo5(() => {
     each(ctrls.current.slice(length, prevLength), (ctrl) => {
       detachRefs(ctrl, ref);
       ctrl.stop(true);
@@ -5254,7 +7136,7 @@ function useSprings(length, props, deps) {
     ctrls.current.length = length;
     declareUpdates(prevLength, length);
   }, [length]);
-  useMemo(() => {
+  useMemo5(() => {
     declareUpdates(0, Math.min(prevLength, length));
   }, deps);
   function declareUpdates(startIndex, endIndex) {
@@ -5267,7 +7149,7 @@ function useSprings(length, props, deps) {
     }
   }
   const springs = ctrls.current.map((ctrl, i) => getSprings(ctrl, updates[i]));
-  const context = useContext(SpringContext);
+  const context = useContext2(SpringContext);
   const prevContext = usePrev(context);
   const hasContext = context !== prevContext && hasProps(context);
   useIsomorphicLayoutEffect(() => {
@@ -5423,8 +7305,8 @@ globals.assign({
 var update2 = frameLoop.advance;
 
 // ../../node_modules/.pnpm/@react-spring+three@9.6.1_aj5kj473hsgheg4miwvuwybosy/node_modules/@react-spring/three/dist/react-spring-three.esm.js
-import * as THREE5 from "three";
-var primitives = ["primitive"].concat(Object.keys(THREE5).filter((key) => /^[A-Z]/.test(key)).map((key) => key[0].toLowerCase() + key.slice(1)));
+import * as THREE6 from "three";
+var primitives = ["primitive"].concat(Object.keys(THREE6).filter((key) => /^[A-Z]/.test(key)).map((key) => key[0].toLowerCase() + key.slice(1)));
 globals.assign({
   createStringInterpolator,
   colors,
@@ -5434,14 +7316,14 @@ addEffect(() => {
   raf.advance();
 });
 var host = createHost(primitives, {
-  applyAnimatedValues: applyProps
+  applyAnimatedValues: applyProps2
 });
 var animated = host.animated;
 
 // src/Gradient/comps/Mesh/Mesh.tsx
-import { jsx as jsx6, jsxs as jsxs3 } from "react/jsx-runtime";
+import { jsx as jsx11, jsxs as jsxs7 } from "react/jsx-runtime";
 var { to: to2, rotDur, meshDur, rotDelay, meshDelay } = mainLoading;
-var clock = new THREE6.Clock();
+var clock = new THREE7.Clock();
 Math.easeInOutCubic = function(t, b, c, d) {
   t /= d / 2;
   if (t < 1)
@@ -5450,7 +7332,7 @@ Math.easeInOutCubic = function(t, b, c, d) {
   return c / 2 * (t * t * t + 2) + b;
 };
 var increment = 20;
-var Mesh = ({
+var Mesh4 = ({
   type,
   animate,
   uTime,
@@ -5493,7 +7375,7 @@ var Mesh = ({
   const [, setZoomOut] = useQueryState_default("zoomOut");
   const meshCount = 192;
   const meshLineCount = 36;
-  useEffect4(() => {
+  useEffect8(() => {
     if (hoverState !== 0)
       setZoomOut(true);
     else
@@ -5526,14 +7408,14 @@ var Mesh = ({
     },
     sceneShader.vertex
   );
-  ColorShiftMaterial.key = THREE6.MathUtils.generateUUID();
+  ColorShiftMaterial.key = THREE7.MathUtils.generateUUID();
   extend2({ ColorShiftMaterial });
-  HoveredLineMaterial.key = THREE6.MathUtils.generateUUID();
+  HoveredLineMaterial.key = THREE7.MathUtils.generateUUID();
   extend2({ HoveredLineMaterial });
-  const material = useRef5();
-  const linemat = useRef5();
+  const material = useRef7();
+  const linemat = useRef7();
   let currentTime = 0;
-  useFrame3((state, delta) => {
+  useFrame6((state, delta) => {
     const elapsed = clock.getElapsedTime();
     if (elapsed > meshDelay) {
       const current = material.current.userData.uLoadingTime.value;
@@ -5555,7 +7437,7 @@ var Mesh = ({
       }
     }
   });
-  useEffect4(() => {
+  useEffect8(() => {
     material.current.userData.uTime.value = uTime;
     if (linemat.current !== void 0) {
       linemat.current.userData.uTime.value = uTime;
@@ -5566,14 +7448,14 @@ var Mesh = ({
   const rotation = dToRArr([rotationX, rotationY, rotationZ]);
   const { animatedPosition } = useSpring(posSpringOption({ position }));
   const { animatedRotation } = useSpring(rotSpringOption({ rotation }));
-  return /* @__PURE__ */ jsxs3("group", { children: [
-    /* @__PURE__ */ jsxs3(animated.mesh, { position: animatedPosition, rotation: animatedRotation, children: [
-      type === "plane" && /* @__PURE__ */ jsx6("planeGeometry", { args: [10, 10, 1, meshCount] }),
-      type === "sphere" && /* @__PURE__ */ jsx6("icosahedronBufferGeometry", { args: [1, meshCount / 3] }),
-      type === "waterPlane" && /* @__PURE__ */ jsx6("planeGeometry", { args: [10, 10, meshCount, meshCount] }),
-      /* @__PURE__ */ jsx6("colorShiftMaterial", { ref: material }, ColorShiftMaterial.key)
+  return /* @__PURE__ */ jsxs7("group", { children: [
+    /* @__PURE__ */ jsxs7(animated.mesh, { position: animatedPosition, rotation: animatedRotation, children: [
+      type === "plane" && /* @__PURE__ */ jsx11("planeGeometry", { args: [10, 10, 1, meshCount] }),
+      type === "sphere" && /* @__PURE__ */ jsx11("icosahedronBufferGeometry", { args: [1, meshCount / 3] }),
+      type === "waterPlane" && /* @__PURE__ */ jsx11("planeGeometry", { args: [10, 10, meshCount, meshCount] }),
+      /* @__PURE__ */ jsx11("colorShiftMaterial", { ref: material }, ColorShiftMaterial.key)
     ] }),
-    /* @__PURE__ */ jsx6("mesh", { children: /* @__PURE__ */ jsxs3(
+    /* @__PURE__ */ jsx11("mesh", { children: /* @__PURE__ */ jsxs7(
       "lineSegments",
       {
         renderOrder: 1,
@@ -5581,10 +7463,10 @@ var Mesh = ({
         rotation,
         visible: hoverState !== 0 ? true : false,
         children: [
-          type === "plane" && /* @__PURE__ */ jsx6("planeGeometry", { args: [10, 10, 1, meshLineCount] }),
-          type === "sphere" && /* @__PURE__ */ jsx6("icosahedronBufferGeometry", { args: [1, meshLineCount / 3] }),
-          type === "waterPlane" && /* @__PURE__ */ jsx6("planeGeometry", { args: [10, 10, meshLineCount, meshLineCount] }),
-          /* @__PURE__ */ jsx6("hoveredLineMaterial", { ref: linemat }, HoveredLineMaterial.key)
+          type === "plane" && /* @__PURE__ */ jsx11("planeGeometry", { args: [10, 10, 1, meshLineCount] }),
+          type === "sphere" && /* @__PURE__ */ jsx11("icosahedronBufferGeometry", { args: [1, meshLineCount / 3] }),
+          type === "waterPlane" && /* @__PURE__ */ jsx11("planeGeometry", { args: [10, 10, meshLineCount, meshLineCount] }),
+          /* @__PURE__ */ jsx11("hoveredLineMaterial", { ref: linemat }, HoveredLineMaterial.key)
         ]
       }
     ) })
@@ -5601,1802 +7483,9 @@ function getHoverColor(hoverState, colors2) {
     return [colors2[0], colors2[1], colors2[2]];
 }
 
-// src/Gradient/usePostProcessing/usePostProcessing.ts
-import { useEffect as useEffect5, useMemo as useMemo2 } from "react";
-
-// src/Gradient/usePostProcessing/lib/pp/from-threejs/postprocessing/EffectComposer.js
-import {
-  BufferGeometry as BufferGeometry2,
-  Clock as Clock2,
-  Float32BufferAttribute as Float32BufferAttribute2,
-  LinearFilter,
-  Mesh as Mesh3,
-  OrthographicCamera as OrthographicCamera2,
-  RGBAFormat,
-  Vector2,
-  WebGLRenderTarget
-} from "three";
-
-// src/Gradient/usePostProcessing/lib/pp/from-threejs/postprocessing/Pass.js
-import {
-  BufferGeometry,
-  Float32BufferAttribute,
-  OrthographicCamera,
-  Mesh as Mesh2
-} from "three";
-var Pass = class {
-  constructor() {
-    this.enabled = true;
-    this.needsSwap = true;
-    this.clear = false;
-    this.renderToScreen = false;
-  }
-  setSize() {
-  }
-  render() {
-    console.error("THREE.Pass: .render() must be implemented in derived pass.");
-  }
-};
-var _camera = new OrthographicCamera(-1, 1, 1, -1, 0, 1);
-var _geometry = new BufferGeometry();
-_geometry.setAttribute(
-  "position",
-  new Float32BufferAttribute([-1, 3, 0, -1, -1, 0, 3, -1, 0], 3)
-);
-_geometry.setAttribute("uv", new Float32BufferAttribute([0, 2, 0, 0, 2, 0], 2));
-var FullScreenQuad = class {
-  constructor(material) {
-    this._mesh = new Mesh2(_geometry, material);
-  }
-  dispose() {
-    this._mesh.geometry.dispose();
-  }
-  render(renderer) {
-    renderer.render(this._mesh, _camera);
-  }
-  get material() {
-    return this._mesh.material;
-  }
-  set material(value) {
-    this._mesh.material = value;
-  }
-};
-
-// src/Gradient/usePostProcessing/lib/pp/from-threejs/postprocessing/MaskPass.js
-var MaskPass = class extends Pass {
-  constructor(scene, camera) {
-    super();
-    this.scene = scene;
-    this.camera = camera;
-    this.clear = true;
-    this.needsSwap = false;
-    this.inverse = false;
-  }
-  render(renderer, writeBuffer, readBuffer) {
-    const context = renderer.getContext();
-    const state = renderer.state;
-    state.buffers.color.setMask(false);
-    state.buffers.depth.setMask(false);
-    state.buffers.color.setLocked(true);
-    state.buffers.depth.setLocked(true);
-    let writeValue, clearValue;
-    if (this.inverse) {
-      writeValue = 0;
-      clearValue = 1;
-    } else {
-      writeValue = 1;
-      clearValue = 0;
-    }
-    state.buffers.stencil.setTest(true);
-    state.buffers.stencil.setOp(
-      context.REPLACE,
-      context.REPLACE,
-      context.REPLACE
-    );
-    state.buffers.stencil.setFunc(context.ALWAYS, writeValue, 4294967295);
-    state.buffers.stencil.setClear(clearValue);
-    state.buffers.stencil.setLocked(true);
-    renderer.setRenderTarget(readBuffer);
-    if (this.clear)
-      renderer.clear();
-    renderer.render(this.scene, this.camera);
-    renderer.setRenderTarget(writeBuffer);
-    if (this.clear)
-      renderer.clear();
-    renderer.render(this.scene, this.camera);
-    state.buffers.color.setLocked(false);
-    state.buffers.depth.setLocked(false);
-    state.buffers.stencil.setLocked(false);
-    state.buffers.stencil.setFunc(context.EQUAL, 1, 4294967295);
-    state.buffers.stencil.setOp(context.KEEP, context.KEEP, context.KEEP);
-    state.buffers.stencil.setLocked(true);
-  }
-};
-var ClearMaskPass = class extends Pass {
-  constructor() {
-    super();
-    this.needsSwap = false;
-  }
-  render(renderer) {
-    renderer.state.buffers.stencil.setLocked(false);
-    renderer.state.buffers.stencil.setTest(false);
-  }
-};
-
-// src/Gradient/usePostProcessing/lib/pp/from-threejs/postprocessing/ShaderPass.js
-import { ShaderMaterial, UniformsUtils as UniformsUtils3 } from "three";
-var ShaderPass = class extends Pass {
-  constructor(shader, textureID) {
-    super();
-    this.textureID = textureID !== void 0 ? textureID : "tDiffuse";
-    if (shader instanceof ShaderMaterial) {
-      this.uniforms = shader.uniforms;
-      this.material = shader;
-    } else if (shader) {
-      this.uniforms = UniformsUtils3.clone(shader.uniforms);
-      this.material = new ShaderMaterial({
-        defines: Object.assign({}, shader.defines),
-        uniforms: this.uniforms,
-        vertexShader: shader.vertexShader,
-        fragmentShader: shader.fragmentShader
-      });
-    }
-    this.fsQuad = new FullScreenQuad(this.material);
-  }
-  render(renderer, writeBuffer, readBuffer) {
-    if (this.uniforms[this.textureID]) {
-      this.uniforms[this.textureID].value = readBuffer.texture;
-    }
-    this.fsQuad.material = this.material;
-    if (this.renderToScreen) {
-      renderer.setRenderTarget(null);
-      this.fsQuad.render(renderer);
-    } else {
-      renderer.setRenderTarget(writeBuffer);
-      if (this.clear)
-        renderer.clear(
-          renderer.autoClearColor,
-          renderer.autoClearDepth,
-          renderer.autoClearStencil
-        );
-      this.fsQuad.render(renderer);
-    }
-  }
-};
-
-// src/Gradient/usePostProcessing/lib/pp/from-threejs/shaders/CopyShader.js
-var CopyShader = {
-  uniforms: {
-    tDiffuse: { value: null },
-    opacity: { value: 1 }
-  },
-  vertexShader: `
-
-		varying vec2 vUv;
-
-		void main() {
-
-			vUv = uv;
-			gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );
-
-		}`,
-  fragmentShader: `
-
-		uniform float opacity;
-
-		uniform sampler2D tDiffuse;
-
-		varying vec2 vUv;
-
-		void main() {
-
-			vec4 texel = texture2D( tDiffuse, vUv );
-			gl_FragColor = opacity * texel;
-
-		}`
-};
-
-// src/Gradient/usePostProcessing/lib/pp/from-threejs/postprocessing/EffectComposer.js
-var EffectComposer = class {
-  constructor(renderer, renderTarget) {
-    this.renderer = renderer;
-    if (renderTarget === void 0) {
-      const parameters = {
-        minFilter: LinearFilter,
-        magFilter: LinearFilter,
-        format: RGBAFormat
-      };
-      const size = renderer.getSize(new Vector2());
-      this._pixelRatio = renderer.getPixelRatio();
-      this._width = size.width;
-      this._height = size.height;
-      renderTarget = new WebGLRenderTarget(
-        this._width * this._pixelRatio,
-        this._height * this._pixelRatio,
-        parameters
-      );
-      renderTarget.texture.name = "EffectComposer.rt1";
-    } else {
-      this._pixelRatio = 1;
-      this._width = renderTarget.width;
-      this._height = renderTarget.height;
-    }
-    this.renderTarget1 = renderTarget;
-    this.renderTarget2 = renderTarget.clone();
-    this.renderTarget2.texture.name = "EffectComposer.rt2";
-    this.writeBuffer = this.renderTarget1;
-    this.readBuffer = this.renderTarget2;
-    this.renderToScreen = true;
-    this.passes = [];
-    if (CopyShader === void 0) {
-      console.error("THREE.EffectComposer relies on CopyShader");
-    }
-    if (ShaderPass === void 0) {
-      console.error("THREE.EffectComposer relies on ShaderPass");
-    }
-    this.copyPass = new ShaderPass(CopyShader);
-    this.clock = new Clock2();
-  }
-  swapBuffers() {
-    const tmp = this.readBuffer;
-    this.readBuffer = this.writeBuffer;
-    this.writeBuffer = tmp;
-  }
-  addPass(pass) {
-    this.passes.push(pass);
-    pass.setSize(
-      this._width * this._pixelRatio,
-      this._height * this._pixelRatio
-    );
-  }
-  insertPass(pass, index) {
-    this.passes.splice(index, 0, pass);
-    pass.setSize(
-      this._width * this._pixelRatio,
-      this._height * this._pixelRatio
-    );
-  }
-  removePass(pass) {
-    const index = this.passes.indexOf(pass);
-    if (index !== -1) {
-      this.passes.splice(index, 1);
-    }
-  }
-  isLastEnabledPass(passIndex) {
-    for (let i = passIndex + 1; i < this.passes.length; i++) {
-      if (this.passes[i].enabled) {
-        return false;
-      }
-    }
-    return true;
-  }
-  render(deltaTime) {
-    if (deltaTime === void 0) {
-      deltaTime = this.clock.getDelta();
-    }
-    const currentRenderTarget = this.renderer.getRenderTarget();
-    let maskActive = false;
-    for (let i = 0, il = this.passes.length; i < il; i++) {
-      const pass = this.passes[i];
-      if (pass.enabled === false)
-        continue;
-      pass.renderToScreen = this.renderToScreen && this.isLastEnabledPass(i);
-      pass.render(
-        this.renderer,
-        this.writeBuffer,
-        this.readBuffer,
-        deltaTime,
-        maskActive
-      );
-      if (pass.needsSwap) {
-        if (maskActive) {
-          const context = this.renderer.getContext();
-          const stencil = this.renderer.state.buffers.stencil;
-          stencil.setFunc(context.NOTEQUAL, 1, 4294967295);
-          this.copyPass.render(
-            this.renderer,
-            this.writeBuffer,
-            this.readBuffer,
-            deltaTime
-          );
-          stencil.setFunc(context.EQUAL, 1, 4294967295);
-        }
-        this.swapBuffers();
-      }
-      if (MaskPass !== void 0) {
-        if (pass instanceof MaskPass) {
-          maskActive = true;
-        } else if (pass instanceof ClearMaskPass) {
-          maskActive = false;
-        }
-      }
-    }
-    this.renderer.setRenderTarget(currentRenderTarget);
-  }
-  reset(renderTarget) {
-    if (renderTarget === void 0) {
-      const size = this.renderer.getSize(new Vector2());
-      this._pixelRatio = this.renderer.getPixelRatio();
-      this._width = size.width;
-      this._height = size.height;
-      renderTarget = this.renderTarget1.clone();
-      renderTarget.setSize(
-        this._width * this._pixelRatio,
-        this._height * this._pixelRatio
-      );
-    }
-    this.renderTarget1.dispose();
-    this.renderTarget2.dispose();
-    this.renderTarget1 = renderTarget;
-    this.renderTarget2 = renderTarget.clone();
-    this.writeBuffer = this.renderTarget1;
-    this.readBuffer = this.renderTarget2;
-  }
-  setSize(width, height) {
-    this._width = width;
-    this._height = height;
-    const effectiveWidth = this._width * this._pixelRatio;
-    const effectiveHeight = this._height * this._pixelRatio;
-    this.renderTarget1.setSize(effectiveWidth, effectiveHeight);
-    this.renderTarget2.setSize(effectiveWidth, effectiveHeight);
-    for (let i = 0; i < this.passes.length; i++) {
-      this.passes[i].setSize(effectiveWidth, effectiveHeight);
-    }
-  }
-  setPixelRatio(pixelRatio) {
-    this._pixelRatio = pixelRatio;
-    this.setSize(this._width, this._height);
-  }
-};
-var _camera2 = new OrthographicCamera2(-1, 1, 1, -1, 0, 1);
-var _geometry2 = new BufferGeometry2();
-_geometry2.setAttribute(
-  "position",
-  new Float32BufferAttribute2([-1, 3, 0, -1, -1, 0, 3, -1, 0], 3)
-);
-_geometry2.setAttribute("uv", new Float32BufferAttribute2([0, 2, 0, 0, 2, 0], 2));
-
-// src/Gradient/usePostProcessing/lib/pp/from-threejs/postprocessing/RenderPass.js
-import { Color } from "three";
-var RenderPass = class extends Pass {
-  constructor(scene, camera, overrideMaterial, clearColor, clearAlpha) {
-    super();
-    this.scene = scene;
-    this.camera = camera;
-    this.overrideMaterial = overrideMaterial;
-    this.clearColor = clearColor;
-    this.clearAlpha = clearAlpha !== void 0 ? clearAlpha : 0;
-    this.clear = true;
-    this.clearDepth = false;
-    this.needsSwap = false;
-    this._oldClearColor = new Color();
-  }
-  render(renderer, writeBuffer, readBuffer) {
-    const oldAutoClear = renderer.autoClear;
-    renderer.autoClear = false;
-    let oldClearAlpha, oldOverrideMaterial;
-    if (this.overrideMaterial !== void 0) {
-      oldOverrideMaterial = this.scene.overrideMaterial;
-      this.scene.overrideMaterial = this.overrideMaterial;
-    }
-    if (this.clearColor) {
-      renderer.getClearColor(this._oldClearColor);
-      oldClearAlpha = renderer.getClearAlpha();
-      renderer.setClearColor(this.clearColor, this.clearAlpha);
-    }
-    if (this.clearDepth) {
-      renderer.clearDepth();
-    }
-    renderer.setRenderTarget(this.renderToScreen ? null : readBuffer);
-    if (this.clear)
-      renderer.clear(
-        renderer.autoClearColor,
-        renderer.autoClearDepth,
-        renderer.autoClearStencil
-      );
-    renderer.render(this.scene, this.camera);
-    if (this.clearColor) {
-      renderer.setClearColor(this._oldClearColor, oldClearAlpha);
-    }
-    if (this.overrideMaterial !== void 0) {
-      this.scene.overrideMaterial = oldOverrideMaterial;
-    }
-    renderer.autoClear = oldAutoClear;
-  }
-};
-
-// src/Gradient/usePostProcessing/lib/pp/HalftonePass.ts
-import { ShaderMaterial as ShaderMaterial2, UniformsUtils as UniformsUtils4 } from "three";
-
-// src/Gradient/usePostProcessing/lib/pp/blending/BlendFunction.js
-var BlendFunction = {
-  SKIP: 0,
-  ADD: 1,
-  ALPHA: 2,
-  AVERAGE: 3,
-  COLOR_BURN: 4,
-  COLOR_DODGE: 5,
-  DARKEN: 6,
-  DIFFERENCE: 7,
-  EXCLUSION: 8,
-  LIGHTEN: 9,
-  MULTIPLY: 10,
-  DIVIDE: 11,
-  NEGATION: 12,
-  NORMAL: 13,
-  OVERLAY: 14,
-  REFLECT: 15,
-  SCREEN: 16,
-  SOFT_LIGHT: 17,
-  SUBTRACT: 18
-};
-
-// src/Gradient/usePostProcessing/lib/pp/blending/BlendMode.js
-import { EventDispatcher as EventDispatcher2, Uniform } from "three";
-
-// src/Gradient/usePostProcessing/lib/pp/blending/glsl/add/shader.frag
-var shader_default = "vec4 blend(const in vec4 x,const in vec4 y,const in float opacity){return min(x+y,1.0)*opacity+x*(1.0-opacity);}";
-
-// src/Gradient/usePostProcessing/lib/pp/blending/glsl/alpha/shader.frag
-var shader_default2 = "vec3 blend(const in vec3 x,const in vec3 y,const in float opacity){return y*opacity+x*(1.0-opacity);}vec4 blend(const in vec4 x,const in vec4 y,const in float opacity){float a=min(y.a,opacity);return vec4(blend(x.rgb,y.rgb,a),max(x.a,a));}";
-
-// src/Gradient/usePostProcessing/lib/pp/blending/glsl/average/shader.frag
-var shader_default3 = "vec4 blend(const in vec4 x,const in vec4 y,const in float opacity){return(x+y)*0.5*opacity+x*(1.0-opacity);}";
-
-// src/Gradient/usePostProcessing/lib/pp/blending/glsl/color-burn/shader.frag
-var shader_default4 = "float blend(const in float x,const in float y){return(y==0.0)?y:max(1.0-(1.0-x)/y,0.0);}vec4 blend(const in vec4 x,const in vec4 y,const in float opacity){vec4 z=vec4(blend(x.r,y.r),blend(x.g,y.g),blend(x.b,y.b),blend(x.a,y.a));return z*opacity+x*(1.0-opacity);}";
-
-// src/Gradient/usePostProcessing/lib/pp/blending/glsl/color-dodge/shader.frag
-var shader_default5 = "float blend(const in float x,const in float y){return(y==1.0)?y:min(x/(1.0-y),1.0);}vec4 blend(const in vec4 x,const in vec4 y,const in float opacity){vec4 z=vec4(blend(x.r,y.r),blend(x.g,y.g),blend(x.b,y.b),blend(x.a,y.a));return z*opacity+x*(1.0-opacity);}";
-
-// src/Gradient/usePostProcessing/lib/pp/blending/glsl/darken/shader.frag
-var shader_default6 = "vec4 blend(const in vec4 x,const in vec4 y,const in float opacity){return min(x,y)*opacity+x*(1.0-opacity);}";
-
-// src/Gradient/usePostProcessing/lib/pp/blending/glsl/difference/shader.frag
-var shader_default7 = "vec4 blend(const in vec4 x,const in vec4 y,const in float opacity){return abs(x-y)*opacity+x*(1.0-opacity);}";
-
-// src/Gradient/usePostProcessing/lib/pp/blending/glsl/divide/shader.frag
-var shader_default8 = "float blend(const in float x,const in float y){return(y>0.0)?min(x/y,1.0):1.0;}vec4 blend(const in vec4 x,const in vec4 y,const in float opacity){vec4 z=vec4(blend(x.r,y.r),blend(x.g,y.g),blend(x.b,y.b),blend(x.a,y.a));return z*opacity+x*(1.0-opacity);}";
-
-// src/Gradient/usePostProcessing/lib/pp/blending/glsl/exclusion/shader.frag
-var shader_default9 = "vec4 blend(const in vec4 x,const in vec4 y,const in float opacity){return(x+y-2.0*x*y)*opacity+x*(1.0-opacity);}";
-
-// src/Gradient/usePostProcessing/lib/pp/blending/glsl/lighten/shader.frag
-var shader_default10 = "vec4 blend(const in vec4 x,const in vec4 y,const in float opacity){return max(x,y)*opacity+x*(1.0-opacity);}";
-
-// src/Gradient/usePostProcessing/lib/pp/blending/glsl/multiply/shader.frag
-var shader_default11 = "vec4 blend(const in vec4 x,const in vec4 y,const in float opacity){return x*y*opacity+x*(1.0-opacity);}";
-
-// src/Gradient/usePostProcessing/lib/pp/blending/glsl/negation/shader.frag
-var shader_default12 = "vec4 blend(const in vec4 x,const in vec4 y,const in float opacity){return(1.0-abs(1.0-x-y))*opacity+x*(1.0-opacity);}";
-
-// src/Gradient/usePostProcessing/lib/pp/blending/glsl/normal/shader.frag
-var shader_default13 = "vec4 blend(const in vec4 x,const in vec4 y,const in float opacity){return y*opacity+x*(1.0-opacity);}";
-
-// src/Gradient/usePostProcessing/lib/pp/blending/glsl/overlay/shader.frag
-var shader_default14 = "float blend(const in float x,const in float y){return(x<0.5)?(2.0*x*y):(1.0-2.0*(1.0-x)*(1.0-y));}vec4 blend(const in vec4 x,const in vec4 y,const in float opacity){vec4 z=vec4(blend(x.r,y.r),blend(x.g,y.g),blend(x.b,y.b),blend(x.a,y.a));return z*opacity+x*(1.0-opacity);}";
-
-// src/Gradient/usePostProcessing/lib/pp/blending/glsl/reflect/shader.frag
-var shader_default15 = "float blend(const in float x,const in float y){return(y==1.0)?y:min(x*x/(1.0-y),1.0);}vec4 blend(const in vec4 x,const in vec4 y,const in float opacity){vec4 z=vec4(blend(x.r,y.r),blend(x.g,y.g),blend(x.b,y.b),blend(x.a,y.a));return z*opacity+x*(1.0-opacity);}";
-
-// src/Gradient/usePostProcessing/lib/pp/blending/glsl/screen/shader.frag
-var shader_default16 = "vec4 blend(const in vec4 x,const in vec4 y,const in float opacity){return(1.0-(1.0-x)*(1.0-y))*opacity+x*(1.0-opacity);}";
-
-// src/Gradient/usePostProcessing/lib/pp/blending/glsl/soft-light/shader.frag
-var shader_default17 = "float blend(const in float x,const in float y){return(y<0.5)?(2.0*x*y+x*x*(1.0-2.0*y)):(sqrt(x)*(2.0*y-1.0)+2.0*x*(1.0-y));}vec4 blend(const in vec4 x,const in vec4 y,const in float opacity){vec4 z=vec4(blend(x.r,y.r),blend(x.g,y.g),blend(x.b,y.b),blend(x.a,y.a));return z*opacity+x*(1.0-opacity);}";
-
-// src/Gradient/usePostProcessing/lib/pp/blending/glsl/subtract/shader.frag
-var shader_default18 = "vec4 blend(const in vec4 x,const in vec4 y,const in float opacity){return max(x+y-1.0,0.0)*opacity+x*(1.0-opacity);}";
-
-// src/Gradient/usePostProcessing/lib/pp/blending/BlendMode.js
-var blendFunctions = /* @__PURE__ */ new Map([
-  [BlendFunction.SKIP, null],
-  [BlendFunction.ADD, shader_default],
-  [BlendFunction.ALPHA, shader_default2],
-  [BlendFunction.AVERAGE, shader_default3],
-  [BlendFunction.COLOR_BURN, shader_default4],
-  [BlendFunction.COLOR_DODGE, shader_default5],
-  [BlendFunction.DARKEN, shader_default6],
-  [BlendFunction.DIFFERENCE, shader_default7],
-  [BlendFunction.EXCLUSION, shader_default9],
-  [BlendFunction.LIGHTEN, shader_default10],
-  [BlendFunction.MULTIPLY, shader_default11],
-  [BlendFunction.DIVIDE, shader_default8],
-  [BlendFunction.NEGATION, shader_default12],
-  [BlendFunction.NORMAL, shader_default13],
-  [BlendFunction.OVERLAY, shader_default14],
-  [BlendFunction.REFLECT, shader_default15],
-  [BlendFunction.SCREEN, shader_default16],
-  [BlendFunction.SOFT_LIGHT, shader_default17],
-  [BlendFunction.SUBTRACT, shader_default18]
-]);
-var BlendMode = class extends EventDispatcher2 {
-  constructor(blendFunction, opacity = 1) {
-    super();
-    this.blendFunction = blendFunction;
-    this.opacity = new Uniform(opacity);
-  }
-  getBlendFunction() {
-    return this.blendFunction;
-  }
-  setBlendFunction(blendFunction) {
-    this.blendFunction = blendFunction;
-    this.dispatchEvent({ type: "change" });
-  }
-  getShaderCode() {
-    return blendFunctions.get(this.blendFunction);
-  }
-};
-
-// src/Gradient/usePostProcessing/lib/pp/HalftoneShader.js
-var HalftoneShader = {
-  uniforms: {
-    tDiffuse: { value: null },
-    shape: { value: 1 },
-    radius: { value: 2 },
-    rotateR: { value: Math.PI / 12 * 1 },
-    rotateG: { value: Math.PI / 12 * 2 },
-    rotateB: { value: Math.PI / 12 * 3 },
-    scatter: { value: 1 },
-    width: { value: 20 },
-    height: { value: 20 },
-    blending: { value: 1 },
-    blendingMode: { value: 1 },
-    greyscale: { value: false },
-    disable: { value: false }
-  },
-  vertexShader: `
-
-		varying vec2 vUV;
-		varying vec3 vPosition;
-
-		void main() {
-
-			vUV = uv;
-			vPosition = position;
-
-			gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
-
-		}`,
-  fragmentShader: `
-
-		#define SQRT2_MINUS_ONE 0.41421356
-		#define SQRT2_HALF_MINUS_ONE 0.20710678
-		#define PI2 6.28318531
-		#define SHAPE_DOT 1
-		#define SHAPE_ELLIPSE 2
-		#define SHAPE_LINE 3
-		#define SHAPE_SQUARE 4
-		#define BLENDING_LINEAR 1
-		#define BLENDING_MULTIPLY 2
-		#define BLENDING_ADD 3
-		#define BLENDING_LIGHTER 4
-		#define BLENDING_DARKER 5
-		uniform sampler2D tDiffuse;
-		uniform float radius;
-		uniform float rotateR;
-		uniform float rotateG;
-		uniform float rotateB;
-		uniform float scatter;
-		uniform float width;
-		uniform float height;
-		uniform int shape;
-		uniform bool disable;
-		uniform float blending;
-		uniform int blendingMode;
-		varying vec2 vUV;
-		varying vec3 vPosition;
-		uniform bool greyscale;
-		const int samples = 8;
-
-		float blend( float a, float b, float t ) {
-
-		// linear blend
-			return a * ( 1.0 - t ) + b * t;
-
-		}
-
-		float hypot( float x, float y ) {
-
-		// vector magnitude
-			return sqrt( x * x + y * y );
-
-		}
-
-		float rand( vec2 seed ){
-
-		// get pseudo-random number
-			return fract( sin( dot( seed.xy, vec2( 12.9898, 78.233 ) ) ) * 43758.5453 );
-
-		}
-
-		float distanceToDotRadius( float channel, vec2 coord, vec2 normal, vec2 p, float angle, float rad_max ) {
-
-		// apply shape-specific transforms
-			float dist = hypot( coord.x - p.x, coord.y - p.y );
-			float rad = channel;
-
-			if ( shape == SHAPE_DOT ) {
-
-				rad = pow( abs( rad ), 1.125 ) * rad_max;
-
-			} else if ( shape == SHAPE_ELLIPSE ) {
-
-				rad = pow( abs( rad ), 1.125 ) * rad_max;
-
-				if ( dist != 0.0 ) {
-					float dot_p = abs( ( p.x - coord.x ) / dist * normal.x + ( p.y - coord.y ) / dist * normal.y );
-					dist = ( dist * ( 1.0 - SQRT2_HALF_MINUS_ONE ) ) + dot_p * dist * SQRT2_MINUS_ONE;
-				}
-
-			} else if ( shape == SHAPE_LINE ) {
-
-				rad = pow( abs( rad ), 1.5) * rad_max;
-				float dot_p = ( p.x - coord.x ) * normal.x + ( p.y - coord.y ) * normal.y;
-				dist = hypot( normal.x * dot_p, normal.y * dot_p );
-
-			} else if ( shape == SHAPE_SQUARE ) {
-
-				float theta = atan( p.y - coord.y, p.x - coord.x ) - angle;
-				float sin_t = abs( sin( theta ) );
-				float cos_t = abs( cos( theta ) );
-				rad = pow( abs( rad ), 1.4 );
-				rad = rad_max * ( rad + ( ( sin_t > cos_t ) ? rad - sin_t * rad : rad - cos_t * rad ) );
-
-			}
-
-			return rad - dist;
-
-		}
-
-		struct Cell {
-
-		// grid sample positions
-			vec2 normal;
-			vec2 p1;
-			vec2 p2;
-			vec2 p3;
-			vec2 p4;
-			float samp2;
-			float samp1;
-			float samp3;
-			float samp4;
-
-		};
-
-		vec4 getSample( vec2 point ) {
-
-		// multi-sampled point
-			vec4 tex = texture2D( tDiffuse, vec2( point.x / width, point.y / height ) );
-			float base = rand( vec2( floor( point.x ), floor( point.y ) ) ) * PI2;
-			float step = PI2 / float( samples );
-			// float dist = radius * 0.66;
-			float dist = radius * 0.0;
-
-			for ( int i = 0; i < samples; ++i ) {
-
-				float r = base + step * float( i );
-				vec2 coord = point + vec2( cos( r ) * dist, sin( r ) * dist );
-				tex += texture2D( tDiffuse, vec2( coord.x / width, coord.y / height ) );
-
-			}
-
-			tex /= float( samples ) + 1.0;
-			return tex;
-
-		}
-
-		float getDotColour( Cell c, vec2 p, int channel, float angle, float aa ) {
-
-		// get colour for given point
-			float dist_c_1, dist_c_2, dist_c_3, dist_c_4, res;
-
-			if ( channel == 0 ) {
-
-				c.samp1 = getSample( c.p1 ).r;
-				c.samp2 = getSample( c.p2 ).r;
-				c.samp3 = getSample( c.p3 ).r;
-				c.samp4 = getSample( c.p4 ).r;
-
-			} else if (channel == 1) {
-
-				c.samp1 = getSample( c.p1 ).g;
-				c.samp2 = getSample( c.p2 ).g;
-				c.samp3 = getSample( c.p3 ).g;
-				c.samp4 = getSample( c.p4 ).g;
-
-			} else {
-
-				c.samp1 = getSample( c.p1 ).b;
-				c.samp3 = getSample( c.p3 ).b;
-				c.samp2 = getSample( c.p2 ).b;
-				c.samp4 = getSample( c.p4 ).b;
-
-			}
-
-			dist_c_1 = distanceToDotRadius( c.samp1, c.p1, c.normal, p, angle, radius );
-			dist_c_2 = distanceToDotRadius( c.samp2, c.p2, c.normal, p, angle, radius );
-			dist_c_3 = distanceToDotRadius( c.samp3, c.p3, c.normal, p, angle, radius );
-			dist_c_4 = distanceToDotRadius( c.samp4, c.p4, c.normal, p, angle, radius );
-			res = ( dist_c_1 > 0.0 ) ? clamp( dist_c_1 / aa, 0.0, 1.0 ) : 0.0;
-			// res = 0.0;
-			res += ( dist_c_2 > 0.0 ) ? clamp( dist_c_2 / aa, 0.0, 1.0 ) : 0.0;
-			res += ( dist_c_3 > 0.0 ) ? clamp( dist_c_3 / aa, 0.0, 1.0 ) : 0.0;
-			res += ( dist_c_4 > 0.0 ) ? clamp( dist_c_4 / aa, 0.0, 1.0 ) : 0.0;
-			res = clamp( res, 0.0, 1.0 );
-
-			return res;
-			// return 2
-
-		}
-
-		Cell getReferenceCell( vec2 p, vec2 origin, float grid_angle, float step ) {
-
-		// get containing cell
-			Cell c;
-
-		// calc grid
-			vec2 n = vec2( cos( grid_angle ), sin( grid_angle ) );
-			float threshold = step * 0.5;
-			float dot_normal = n.x * ( p.x - origin.x ) + n.y * ( p.y - origin.y );
-			float dot_line = -n.y * ( p.x - origin.x ) + n.x * ( p.y - origin.y );
-			vec2 offset = vec2( n.x * dot_normal, n.y * dot_normal );
-			float offset_normal = mod( hypot( offset.x, offset.y ), step );
-			float normal_dir = ( dot_normal < 0.0 ) ? 1.0 : -1.0;
-			float normal_scale = ( ( offset_normal < threshold ) ? -offset_normal : step - offset_normal ) * normal_dir;
-			float offset_line = mod( hypot( ( p.x - offset.x ) - origin.x, ( p.y - offset.y ) - origin.y ), step );
-			float line_dir = ( dot_line < 0.0 ) ? 1.0 : -1.0;
-			float line_scale = ( ( offset_line < threshold ) ? -offset_line : step - offset_line ) * line_dir;
-
-		// get closest corner
-			c.normal = n;
-			c.p1.x = p.x - n.x * normal_scale + n.y * line_scale;
-			c.p1.y = p.y - n.y * normal_scale - n.x * line_scale;
-
-		// scatter
-			if ( scatter != 0.0 ) {
-
-				float off_mag = scatter * threshold * 0.5;
-				float off_angle = rand( vec2( floor( c.p1.x ), floor( c.p1.y ) ) ) * PI2;
-				c.p1.x += cos( off_angle ) * off_mag;
-				c.p1.y += sin( off_angle ) * off_mag;
-
-			}
-
-		// find corners
-			float normal_step = normal_dir * ( ( offset_normal < threshold ) ? step : -step );
-			float line_step = line_dir * ( ( offset_line < threshold ) ? step : -step );
-			c.p2.x = c.p1.x - n.x * normal_step;
-			c.p2.y = c.p1.y - n.y * normal_step;
-			c.p3.x = c.p1.x + n.y * line_step;
-			c.p3.y = c.p1.y - n.x * line_step;
-			c.p4.x = c.p1.x - n.x * normal_step + n.y * line_step;
-			c.p4.y = c.p1.y - n.y * normal_step - n.x * line_step;
-
-			return c;
-
-		}
-
-		float blendColour( float a, float b, float t ) {
-
-		// blend colours
-			if ( blendingMode == BLENDING_LINEAR ) {
-				return blend( a, b, 1.0 - t );
-			} else if ( blendingMode == BLENDING_ADD ) {
-				return blend( a, min( 1.0, a + b ), t );
-			} else if ( blendingMode == BLENDING_MULTIPLY ) {
-				return blend( a, max( 0.0, a * b ), t );
-			} else if ( blendingMode == BLENDING_LIGHTER ) {
-				return blend( a, max( a, b ), t );
-			} else if ( blendingMode == BLENDING_DARKER ) {
-				return blend( a, min( a, b ), t );
-			} else {
-				return blend( a, b, 1.0 - t );
-			}
-
-		}
-
-		void main() {
-
-			if ( ! disable ) {
-
-		// setup
-				vec2 p = vec2( vUV.x * width, vUV.y * height ) - vec2(vPosition.x, vPosition.y) * 3.0; // - position values to remove black borders.
-				vec2 origin = vec2( 0, 0 );
-				float aa = ( radius < 2.5 ) ? radius * 0.5 : 1.25;
-				// float aa = 0.0;
-
-		// get channel samples
-				Cell cell_r = getReferenceCell( p, origin, rotateR, radius );
-				Cell cell_g = getReferenceCell( p, origin, rotateG, radius );
-				Cell cell_b = getReferenceCell( p, origin, rotateB, radius );
-				float r = getDotColour( cell_r, p, 0, rotateR, aa );
-				float g = getDotColour( cell_g, p, 1, rotateG, aa );
-				float b = getDotColour( cell_b, p, 2, rotateB, aa );
-
-		// blend with original
-				vec4 colour = texture2D( tDiffuse, vUV );
-				
-				// add masking before blendColour
-				if (colour.r == 0.0) {
-					r = 0.0;
-				} else {
-					r = blendColour( r, colour.r, blending );
-				}
-
-				if (colour.g == 0.0) {
-					g = 0.0;
-				} else {
-					g = blendColour( g, colour.g, blending );
-				}
-
-				if (colour.b == 0.0) {
-					b = 0.0;
-				} else {
-					b = blendColour( b, colour.b, blending );
-				}
-				
-				
-				
-
-				if ( greyscale ) {
-					r = g = b = (r + b + g) / 3.0;
-				}
-
-				// add alpha channel to each r, g, b colors
-				vec4 vR;
-				vec4 vG;
-				vec4 vB;
-	
-				// apply transparent to outside of mesh
-				if (r == 0.0 && colour.r == 0.0) {
-					vR = vec4( 0, 0, 0, 0 );
-				} else {
-					vR = vec4( r, 0, 0, 1 );
-				}
-	
-				if (g == 0.0 && colour.g == 0.0) {
-					vG = vec4( 0, 0, 0, 0 );
-				} else {
-					vG = vec4( 0, g, 0, 1 );
-				}
-	
-				if (b == 0.0 && colour.b == 0.0) {
-					vB = vec4( 0, 0, 0, 0 );
-				} else {
-					vB = vec4( 0, 0, b, 1 );
-				}
-
-				// gl_FragColor = vec4( r, g, b, 1.0 );
-				gl_FragColor = vR + vG + vB;
-
-			} else {
-
-				gl_FragColor = texture2D( tDiffuse, vUV );
-
-			}
-
-		}`
-};
-
-// src/Gradient/usePostProcessing/lib/pp/Pass.js
-import {
-  BufferGeometry as BufferGeometry3,
-  Float32BufferAttribute as Float32BufferAttribute3,
-  OrthographicCamera as OrthographicCamera3,
-  Mesh as Mesh4
-} from "three";
-var Pass2 = class {
-  constructor() {
-    this.enabled = true;
-    this.needsSwap = true;
-    this.clear = false;
-    this.renderToScreen = false;
-  }
-  setSize() {
-  }
-  render() {
-    console.error("THREE.Pass: .render() must be implemented in derived pass.");
-  }
-};
-var _camera3 = new OrthographicCamera3(-1, 1, 1, -1, 0, 1);
-var _geometry3 = new BufferGeometry3();
-_geometry3.setAttribute(
-  "position",
-  new Float32BufferAttribute3([-1, 3, 0, -1, -1, 0, 3, -1, 0], 3)
-);
-_geometry3.setAttribute("uv", new Float32BufferAttribute3([0, 2, 0, 0, 2, 0], 2));
-var FullScreenQuad2 = class {
-  constructor(material) {
-    this._mesh = new Mesh4(_geometry3, material);
-  }
-  dispose() {
-    this._mesh.geometry.dispose();
-  }
-  render(renderer) {
-    renderer.render(this._mesh, _camera3);
-  }
-  get material() {
-    return this._mesh.material;
-  }
-  set material(value) {
-    this._mesh.material = value;
-  }
-};
-
-// src/Gradient/usePostProcessing/lib/pp/HalftonePass.ts
-var usePassedMeshSize = true;
-var HalftonePass = class extends Pass2 {
-  constructor(width, height, params) {
-    super();
-    if (HalftoneShader === void 0) {
-      console.error("THREE.HalftonePass requires HalftoneShader");
-    }
-    this.uniforms = UniformsUtils4.clone(HalftoneShader.uniforms);
-    this.material = new ShaderMaterial2({
-      uniforms: this.uniforms,
-      fragmentShader: HalftoneShader.fragmentShader,
-      vertexShader: HalftoneShader.vertexShader
-    });
-    if (usePassedMeshSize) {
-      this.uniforms.width.value = width;
-      this.uniforms.height.value = height;
-    }
-    this.uniforms.disable.value = params["disable"];
-    this.fsQuad = new FullScreenQuad2(this.material);
-    this.blendMode = new BlendMode(BlendFunction.SCREEN);
-    this.extensions = null;
-  }
-  render(renderer, writeBuffer, readBuffer) {
-    this.material.uniforms["tDiffuse"].value = readBuffer.texture;
-    if (this.renderToScreen) {
-      renderer.setRenderTarget(null);
-      this.fsQuad.render(renderer);
-    } else {
-      renderer.setRenderTarget(writeBuffer);
-      if (this.clear)
-        renderer.clear();
-      this.fsQuad.render(renderer);
-    }
-  }
-  setSize(width, height) {
-    if (usePassedMeshSize) {
-      this.uniforms.width.value = width;
-      this.uniforms.height.value = height;
-    }
-  }
-  initialize(renderer, alpha, frameBufferType) {
-  }
-  addEventListener() {
-  }
-  getAttributes() {
-    return this.attributes;
-  }
-  getFragmentShader() {
-    return HalftoneShader.fragmentShader;
-  }
-  getVertexShader() {
-    return HalftoneShader.vertexShader;
-  }
-  update(renderer, inputBuffer, deltaTime) {
-  }
-};
-
-// src/Gradient/usePostProcessing/usePostProcessing.ts
-import { useThree as useThree2, useFrame as useFrame4 } from "@react-three/fiber";
-function usePostProcessing(disable) {
-  const { gl, scene, camera, size } = useThree2();
-  const composer = useMemo2(() => {
-    const effectComposer = new EffectComposer(gl);
-    effectComposer.addPass(new RenderPass(scene, camera));
-    const halftoneParams = {
-      shape: 1,
-      radius: 2,
-      rotateR: Math.PI / 12,
-      rotateB: Math.PI / 12 * 2,
-      rotateG: Math.PI / 12 * 3,
-      scatter: 1,
-      blending: 1,
-      blendingMode: 1,
-      greyscale: false,
-      disable
-    };
-    const halftonePass = new HalftonePass(
-      size.width,
-      size.height,
-      halftoneParams
-    );
-    effectComposer.addPass(halftonePass);
-    return effectComposer;
-  }, [gl, scene, camera, size, disable]);
-  useEffect5(() => composer == null ? void 0 : composer.setSize(size.width, size.height), [composer, size]);
-  useFrame4(
-    (_, delta) => void (gl.autoClear = true, composer.render(delta)),
-    1
-  );
-}
-
-// src/Gradient/comps/Axis/GizmoHelper.tsx
-import * as React7 from "react";
-import { createPortal, useFrame as useFrame6, useThree as useThree6 } from "@react-three/fiber";
-import {
-  Matrix4,
-  Object3D,
-  Quaternion,
-  Scene,
-  Vector3
-} from "three";
-
-// src/Gradient/comps/Axis/OrthographicCamera.tsx
-import * as React5 from "react";
-import { useThree as useThree4, useFrame as useFrame5 } from "@react-three/fiber";
-
-// ../../node_modules/.pnpm/react-merge-refs@1.1.0/node_modules/react-merge-refs/dist/react-merge-refs.esm.js
-function mergeRefs(refs) {
-  return function(value) {
-    refs.forEach(function(ref) {
-      if (typeof ref === "function") {
-        ref(value);
-      } else if (ref != null) {
-        ref.current = value;
-      }
-    });
-  };
-}
-var react_merge_refs_esm_default = mergeRefs;
-
-// src/Gradient/comps/Axis/useFBO.tsx
-import * as React4 from "react";
-import * as THREE7 from "three";
-import { useThree as useThree3 } from "@react-three/fiber";
-function useFBO(width, height, settings) {
-  const { gl, size, viewport } = useThree3();
-  const _width = typeof width === "number" ? width : size.width * viewport.dpr;
-  const _height = typeof height === "number" ? height : size.height * viewport.dpr;
-  const _settings = (typeof width === "number" ? settings : width) || {};
-  const _a = _settings, { samples } = _a, targetSettings = __objRest(_a, ["samples"]);
-  const target2 = React4.useMemo(() => {
-    let target3;
-    target3 = new THREE7.WebGLRenderTarget(_width, _height, __spreadValues({
-      minFilter: THREE7.LinearFilter,
-      magFilter: THREE7.LinearFilter,
-      encoding: gl.outputEncoding,
-      type: THREE7.HalfFloatType
-    }, targetSettings));
-    target3.samples = samples;
-    return target3;
-  }, []);
-  React4.useLayoutEffect(() => {
-    target2.setSize(_width, _height);
-    if (samples)
-      target2.samples = samples;
-  }, [samples, target2, _width, _height]);
-  React4.useEffect(() => {
-    return () => target2.dispose();
-  }, []);
-  return target2;
-}
-
-// src/Gradient/comps/Axis/OrthographicCamera.tsx
-import { Fragment as Fragment4, jsx as jsx7, jsxs as jsxs4 } from "react/jsx-runtime";
-var isFunction = (node) => typeof node === "function";
-var OrthographicCamera4 = React5.forwardRef(
-  (_a, ref) => {
-    var _b = _a, {
-      envMap,
-      resolution = 256,
-      frames = Infinity,
-      children,
-      makeDefault
-    } = _b, props = __objRest(_b, [
-      "envMap",
-      "resolution",
-      "frames",
-      "children",
-      "makeDefault"
-    ]);
-    const set = useThree4(({ set: set2 }) => set2);
-    const camera = useThree4(({ camera: camera2 }) => camera2);
-    const size = useThree4(({ size: size2 }) => size2);
-    const cameraRef = React5.useRef(null);
-    const groupRef = React5.useRef(null);
-    const fbo = useFBO(resolution);
-    React5.useLayoutEffect(() => {
-      if (!props.manual) {
-        cameraRef.current.updateProjectionMatrix();
-      }
-    }, [size, props]);
-    React5.useLayoutEffect(() => {
-      cameraRef.current.updateProjectionMatrix();
-    });
-    React5.useLayoutEffect(() => {
-      if (makeDefault) {
-        const oldCam = camera;
-        set(() => ({ camera: cameraRef.current }));
-        return () => set(() => ({ camera: oldCam }));
-      }
-    }, [cameraRef, makeDefault, set]);
-    let count = 0;
-    let oldEnvMap = null;
-    const functional = isFunction(children);
-    useFrame5((state) => {
-      if (functional && (frames === Infinity || count < frames)) {
-        groupRef.current.visible = false;
-        state.gl.setRenderTarget(fbo);
-        oldEnvMap = state.scene.background;
-        if (envMap)
-          state.scene.background = envMap;
-        state.gl.render(state.scene, cameraRef.current);
-        state.scene.background = oldEnvMap;
-        state.gl.setRenderTarget(null);
-        groupRef.current.visible = true;
-        count++;
-      }
-    });
-    return /* @__PURE__ */ jsxs4(Fragment4, { children: [
-      /* @__PURE__ */ jsx7(
-        "orthographicCamera",
-        __spreadProps(__spreadValues({
-          left: size.width / -2,
-          right: size.width / 2,
-          top: size.height / 2,
-          bottom: size.height / -2,
-          ref: react_merge_refs_esm_default([cameraRef, ref])
-        }, props), {
-          children: !functional && children
-        })
-      ),
-      /* @__PURE__ */ jsx7("group", { ref: groupRef, children: functional && children(fbo.texture) })
-    ] });
-  }
-);
-
-// src/Gradient/comps/Axis/useCamera.tsx
-import * as React6 from "react";
-import { Raycaster, Camera } from "three";
-import { useThree as useThree5, applyProps as applyProps2 } from "@react-three/fiber";
-function useCamera(camera, props) {
-  const pointer = useThree5((state) => state.pointer);
-  const [raycast] = React6.useState(() => {
-    const raycaster = new Raycaster();
-    if (props)
-      applyProps2(raycaster, props, {});
-    return function(_, intersects) {
-      raycaster.setFromCamera(
-        pointer,
-        camera instanceof Camera ? camera : camera.current
-      );
-      const rc = this.constructor.prototype.raycast.bind(this);
-      if (rc)
-        rc(raycaster, intersects);
-    };
-  });
-  return raycast;
-}
-
-// src/Gradient/comps/Axis/GizmoHelper.tsx
-import { jsx as jsx8, jsxs as jsxs5 } from "react/jsx-runtime";
-var Context = React7.createContext(
-  {}
-);
-var useGizmoContext = () => {
-  return React7.useContext(Context);
-};
-var turnRate = 2 * Math.PI;
-var dummy = new Object3D();
-var matrix = new Matrix4();
-var [q1, q2] = [new Quaternion(), new Quaternion()];
-var target = new Vector3();
-var targetPosition = new Vector3();
-var isOrbitControls = (controls) => {
-  return "minPolarAngle" in controls;
-};
-var GizmoHelper = ({
-  alignment = "bottom-right",
-  margin = [80, 80],
-  renderPriority = 0,
-  autoClear = true,
-  onUpdate,
-  onTarget,
-  children: GizmoHelperComponent
-}) => {
-  const size = useThree6(({ size: size2 }) => size2);
-  const mainCamera = useThree6(({ camera }) => camera);
-  const defaultControls = useThree6(({ controls }) => controls);
-  const gl = useThree6(({ gl: gl2 }) => gl2);
-  const scene = useThree6(({ scene: scene2 }) => scene2);
-  const invalidate = useThree6(({ invalidate: invalidate2 }) => invalidate2);
-  const backgroundRef = React7.useRef();
-  const gizmoRef = React7.useRef();
-  const virtualCam = React7.useRef(null);
-  const [virtualScene] = React7.useState(() => new Scene());
-  const animating = React7.useRef(false);
-  const radius = React7.useRef(0);
-  const focusPoint = React7.useRef(new Vector3(0, 0, 0));
-  const defaultUp = React7.useRef(new Vector3(0, 0, 0));
-  React7.useEffect(() => {
-    defaultUp.current.copy(mainCamera.up);
-  }, [mainCamera]);
-  const tweenCamera = React7.useCallback(
-    (direction) => {
-      animating.current = true;
-      if (defaultControls || onTarget)
-        focusPoint.current = (defaultControls == null ? void 0 : defaultControls.target) || (onTarget == null ? void 0 : onTarget());
-      radius.current = mainCamera.position.distanceTo(target);
-      q1.copy(mainCamera.quaternion);
-      targetPosition.copy(direction).multiplyScalar(radius.current).add(target);
-      dummy.lookAt(targetPosition);
-      q2.copy(dummy.quaternion);
-      invalidate();
-    },
-    [defaultControls, mainCamera, onTarget, invalidate]
-  );
-  React7.useEffect(() => {
-    if (scene.background) {
-      backgroundRef.current = scene.background;
-      scene.background = null;
-      virtualScene.background = backgroundRef.current;
-    }
-    return () => {
-      if (backgroundRef.current)
-        scene.background = backgroundRef.current;
-    };
-  }, []);
-  useFrame6((_, delta) => {
-    var _a;
-    if (virtualCam.current && gizmoRef.current) {
-      if (animating.current) {
-        if (q1.angleTo(q2) < 0.01) {
-          animating.current = false;
-          if (isOrbitControls(defaultControls)) {
-            mainCamera.up.copy(defaultUp.current);
-          }
-        } else {
-          const step = delta * turnRate;
-          q1.rotateTowards(q2, step);
-          mainCamera.position.set(0, 0, 1).applyQuaternion(q1).multiplyScalar(radius.current).add(focusPoint.current);
-          mainCamera.up.set(0, 1, 0).applyQuaternion(q1).normalize();
-          mainCamera.quaternion.copy(q1);
-          if (onUpdate)
-            onUpdate();
-          else if (defaultControls)
-            defaultControls.update();
-          invalidate();
-        }
-      }
-      matrix.copy(mainCamera.matrix).invert();
-      (_a = gizmoRef.current) == null ? void 0 : _a.quaternion.setFromRotationMatrix(matrix);
-      if (autoClear)
-        gl.autoClear = false;
-      gl.clearDepth();
-      gl.render(virtualScene, virtualCam.current);
-    }
-  }, renderPriority);
-  const raycast = useCamera(virtualCam);
-  const gizmoHelperContext = React7.useMemo(
-    () => ({ tweenCamera, raycast }),
-    [tweenCamera]
-  );
-  const [marginX, marginY] = margin;
-  const x = alignment.endsWith("-center") ? 0 : alignment.endsWith("-left") ? -size.width / 2 + marginX : size.width / 2 - marginX;
-  const y = alignment.startsWith("center-") ? 0 : alignment.startsWith("top-") ? size.height / 2 - marginY : -size.height / 2 + marginY;
-  return createPortal(
-    /* @__PURE__ */ jsxs5(Context.Provider, { value: gizmoHelperContext, children: [
-      /* @__PURE__ */ jsx8(OrthographicCamera4, { ref: virtualCam, position: [0, 0, 200] }),
-      /* @__PURE__ */ jsx8("group", { ref: gizmoRef, position: [x, y, 0], children: GizmoHelperComponent })
-    ] }),
-    virtualScene
-  );
-};
-
-// src/Gradient/comps/Axis/GizmoViewport.tsx
-import * as React8 from "react";
-import { useThree as useThree7 } from "@react-three/fiber";
-import { CanvasTexture } from "three";
-import { Fragment as Fragment5, jsx as jsx9, jsxs as jsxs6 } from "react/jsx-runtime";
-function Axis({ scale = [0.8, 0.05, 0.05], color, rotation }) {
-  return /* @__PURE__ */ jsx9("group", { rotation, children: /* @__PURE__ */ jsxs6("mesh", { position: [0.4, 0, 0], children: [
-    /* @__PURE__ */ jsx9("boxGeometry", { args: scale }),
-    /* @__PURE__ */ jsx9("meshBasicMaterial", { color, toneMapped: false })
-  ] }) });
-}
-function AxisHead(_a) {
-  var _b = _a, {
-    onClick,
-    font,
-    disabled,
-    arcStyle,
-    label,
-    labelColor,
-    axisHeadScale = 1
-  } = _b, props = __objRest(_b, [
-    "onClick",
-    "font",
-    "disabled",
-    "arcStyle",
-    "label",
-    "labelColor",
-    "axisHeadScale"
-  ]);
-  const gl = useThree7((state) => state.gl);
-  const texture = React8.useMemo(() => {
-    const canvas = document.createElement("canvas");
-    canvas.width = 64;
-    canvas.height = 64;
-    const context = canvas.getContext("2d");
-    context.beginPath();
-    context.arc(32, 32, 16, 0, 2 * Math.PI);
-    context.closePath();
-    context.fillStyle = arcStyle;
-    context.fill();
-    if (label) {
-      context.font = font;
-      context.textAlign = "center";
-      context.fillStyle = labelColor;
-      context.fillText(label, 32, 41);
-    }
-    return new CanvasTexture(canvas);
-  }, [arcStyle, label, labelColor, font]);
-  const [active, setActive] = React8.useState(false);
-  const scale = (label ? 1 : 0.75) * (active ? 1.2 : 1) * axisHeadScale;
-  const handlePointerOver = (e) => {
-    e.stopPropagation();
-    setActive(true);
-  };
-  const handlePointerOut = (e) => {
-    e.stopPropagation();
-    setActive(false);
-  };
-  return /* @__PURE__ */ jsx9(
-    "sprite",
-    __spreadProps(__spreadValues({
-      scale,
-      onPointerOver: !disabled ? handlePointerOver : void 0,
-      onPointerOut: !disabled ? onClick || handlePointerOut : void 0
-    }, props), {
-      children: /* @__PURE__ */ jsx9(
-        "spriteMaterial",
-        {
-          map: texture,
-          "map-encoding": gl.outputEncoding,
-          "map-anisotropy": gl.capabilities.getMaxAnisotropy() || 1,
-          alphaTest: 0.3,
-          opacity: label ? 1 : 0.75,
-          toneMapped: false
-        }
-      )
-    })
-  );
-}
-var GizmoViewport = (_a) => {
-  var _b = _a, {
-    hideNegativeAxes,
-    hideAxisHeads,
-    disabled,
-    font = "18px Inter var, Arial, sans-serif",
-    axisColors = ["#ff2060", "#20df80", "#2080ff"],
-    axisHeadScale = 1,
-    axisScale,
-    labels = ["X", "Y", "Z"],
-    labelColor = "#000",
-    onClick
-  } = _b, props = __objRest(_b, [
-    "hideNegativeAxes",
-    "hideAxisHeads",
-    "disabled",
-    "font",
-    "axisColors",
-    "axisHeadScale",
-    "axisScale",
-    "labels",
-    "labelColor",
-    "onClick"
-  ]);
-  const [colorX, colorY, colorZ] = axisColors;
-  const { tweenCamera, raycast } = useGizmoContext();
-  const axisHeadProps = {
-    font,
-    disabled,
-    labelColor,
-    raycast,
-    onClick,
-    axisHeadScale,
-    onPointerDown: !disabled ? (e) => {
-      tweenCamera(e.object.position);
-      e.stopPropagation();
-    } : void 0
-  };
-  return /* @__PURE__ */ jsxs6("group", __spreadProps(__spreadValues({ scale: 40 }, props), { children: [
-    /* @__PURE__ */ jsx9(Axis, { color: colorX, rotation: [0, 0, 0], scale: axisScale }),
-    /* @__PURE__ */ jsx9(Axis, { color: colorY, rotation: [0, 0, Math.PI / 2], scale: axisScale }),
-    /* @__PURE__ */ jsx9(Axis, { color: colorZ, rotation: [0, -Math.PI / 2, 0], scale: axisScale }),
-    !hideAxisHeads && /* @__PURE__ */ jsxs6(Fragment5, { children: [
-      /* @__PURE__ */ jsx9(
-        AxisHead,
-        __spreadValues({
-          arcStyle: colorX,
-          position: [1, 0, 0],
-          label: labels[0]
-        }, axisHeadProps)
-      ),
-      /* @__PURE__ */ jsx9(
-        AxisHead,
-        __spreadValues({
-          arcStyle: colorY,
-          position: [0, 1, 0],
-          label: labels[1]
-        }, axisHeadProps)
-      ),
-      /* @__PURE__ */ jsx9(
-        AxisHead,
-        __spreadValues({
-          arcStyle: colorZ,
-          position: [0, 0, 1],
-          label: labels[2]
-        }, axisHeadProps)
-      ),
-      !hideNegativeAxes && /* @__PURE__ */ jsxs6(Fragment5, { children: [
-        /* @__PURE__ */ jsx9(
-          AxisHead,
-          __spreadValues({
-            arcStyle: colorX,
-            position: [-1, 0, 0]
-          }, axisHeadProps)
-        ),
-        /* @__PURE__ */ jsx9(
-          AxisHead,
-          __spreadValues({
-            arcStyle: colorY,
-            position: [0, -1, 0]
-          }, axisHeadProps)
-        ),
-        /* @__PURE__ */ jsx9(
-          AxisHead,
-          __spreadValues({
-            arcStyle: colorZ,
-            position: [0, 0, -1]
-          }, axisHeadProps)
-        )
-      ] })
-    ] }),
-    /* @__PURE__ */ jsx9("ambientLight", { intensity: 0.5 }),
-    /* @__PURE__ */ jsx9("pointLight", { position: [10, 10, 10], intensity: 0.5 })
-  ] }));
-};
-
-// src/Gradient/comps/Axis/Axis.tsx
-import { Fragment as Fragment6, jsx as jsx10 } from "react/jsx-runtime";
-function Axis2({ isFigmaPlugin }) {
-  return /* @__PURE__ */ jsx10(Fragment6, { children: /* @__PURE__ */ jsx10(
-    GizmoHelper,
-    {
-      alignment: "bottom-right",
-      margin: isFigmaPlugin ? [25, 25] : [65, 110],
-      renderPriority: 2,
-      children: /* @__PURE__ */ jsx10(
-        GizmoViewport,
-        {
-          axisColors: ["#FF430A", "#FF430A", "#FF430A"],
-          labelColor: "white",
-          hideNegativeAxes: true,
-          axisHeadScale: 0.8
-        }
-      )
-    }
-  ) });
-}
-
-// src/Gradient/comps/Environment/EnvironmentMap.tsx
-import React9 from "react";
-import { EquirectangularReflectionMapping } from "three";
-import { useThree as useThree8 } from "@react-three/fiber";
-
-// ../../node_modules/.pnpm/three-stdlib@2.20.4_three@0.146.0/node_modules/three-stdlib/loaders/RGBELoader.js
-import { DataTextureLoader, HalfFloatType as HalfFloatType2, FloatType, DataUtils, LinearEncoding, LinearFilter as LinearFilter3 } from "three";
-var RGBELoader = class extends DataTextureLoader {
-  constructor(manager) {
-    super(manager);
-    this.type = HalfFloatType2;
-  }
-  parse(buffer) {
-    const RGBE_RETURN_FAILURE = -1, rgbe_read_error = 1, rgbe_write_error = 2, rgbe_format_error = 3, rgbe_memory_error = 4, rgbe_error = function(rgbe_error_code, msg) {
-      switch (rgbe_error_code) {
-        case rgbe_read_error:
-          console.error("THREE.RGBELoader Read Error: " + (msg || ""));
-          break;
-        case rgbe_write_error:
-          console.error("THREE.RGBELoader Write Error: " + (msg || ""));
-          break;
-        case rgbe_format_error:
-          console.error("THREE.RGBELoader Bad File Format: " + (msg || ""));
-          break;
-        default:
-        case rgbe_memory_error:
-          console.error("THREE.RGBELoader: Error: " + (msg || ""));
-      }
-      return RGBE_RETURN_FAILURE;
-    }, RGBE_VALID_PROGRAMTYPE = 1, RGBE_VALID_FORMAT = 2, RGBE_VALID_DIMENSIONS = 4, NEWLINE = "\n", fgets = function(buffer2, lineLimit, consume) {
-      const chunkSize = 128;
-      lineLimit = !lineLimit ? 1024 : lineLimit;
-      let p = buffer2.pos, i = -1, len = 0, s = "", chunk = String.fromCharCode.apply(null, new Uint16Array(buffer2.subarray(p, p + chunkSize)));
-      while (0 > (i = chunk.indexOf(NEWLINE)) && len < lineLimit && p < buffer2.byteLength) {
-        s += chunk;
-        len += chunk.length;
-        p += chunkSize;
-        chunk += String.fromCharCode.apply(null, new Uint16Array(buffer2.subarray(p, p + chunkSize)));
-      }
-      if (-1 < i) {
-        if (false !== consume)
-          buffer2.pos += len + i + 1;
-        return s + chunk.slice(0, i);
-      }
-      return false;
-    }, RGBE_ReadHeader = function(buffer2) {
-      const magic_token_re = /^#\?(\S+)/, gamma_re = /^\s*GAMMA\s*=\s*(\d+(\.\d+)?)\s*$/, exposure_re = /^\s*EXPOSURE\s*=\s*(\d+(\.\d+)?)\s*$/, format_re = /^\s*FORMAT=(\S+)\s*$/, dimensions_re = /^\s*\-Y\s+(\d+)\s+\+X\s+(\d+)\s*$/, header = {
-        valid: 0,
-        string: "",
-        comments: "",
-        programtype: "RGBE",
-        format: "",
-        gamma: 1,
-        exposure: 1,
-        width: 0,
-        height: 0
-      };
-      let line, match;
-      if (buffer2.pos >= buffer2.byteLength || !(line = fgets(buffer2))) {
-        return rgbe_error(rgbe_read_error, "no header found");
-      }
-      if (!(match = line.match(magic_token_re))) {
-        return rgbe_error(rgbe_format_error, "bad initial token");
-      }
-      header.valid |= RGBE_VALID_PROGRAMTYPE;
-      header.programtype = match[1];
-      header.string += line + "\n";
-      while (true) {
-        line = fgets(buffer2);
-        if (false === line)
-          break;
-        header.string += line + "\n";
-        if ("#" === line.charAt(0)) {
-          header.comments += line + "\n";
-          continue;
-        }
-        if (match = line.match(gamma_re)) {
-          header.gamma = parseFloat(match[1]);
-        }
-        if (match = line.match(exposure_re)) {
-          header.exposure = parseFloat(match[1]);
-        }
-        if (match = line.match(format_re)) {
-          header.valid |= RGBE_VALID_FORMAT;
-          header.format = match[1];
-        }
-        if (match = line.match(dimensions_re)) {
-          header.valid |= RGBE_VALID_DIMENSIONS;
-          header.height = parseInt(match[1], 10);
-          header.width = parseInt(match[2], 10);
-        }
-        if (header.valid & RGBE_VALID_FORMAT && header.valid & RGBE_VALID_DIMENSIONS)
-          break;
-      }
-      if (!(header.valid & RGBE_VALID_FORMAT)) {
-        return rgbe_error(rgbe_format_error, "missing format specifier");
-      }
-      if (!(header.valid & RGBE_VALID_DIMENSIONS)) {
-        return rgbe_error(rgbe_format_error, "missing image size specifier");
-      }
-      return header;
-    }, RGBE_ReadPixels_RLE = function(buffer2, w, h) {
-      const scanline_width = w;
-      if (scanline_width < 8 || scanline_width > 32767 || 2 !== buffer2[0] || 2 !== buffer2[1] || buffer2[2] & 128) {
-        return new Uint8Array(buffer2);
-      }
-      if (scanline_width !== (buffer2[2] << 8 | buffer2[3])) {
-        return rgbe_error(rgbe_format_error, "wrong scanline width");
-      }
-      const data_rgba = new Uint8Array(4 * w * h);
-      if (!data_rgba.length) {
-        return rgbe_error(rgbe_memory_error, "unable to allocate buffer space");
-      }
-      let offset = 0, pos = 0;
-      const ptr_end = 4 * scanline_width;
-      const rgbeStart = new Uint8Array(4);
-      const scanline_buffer = new Uint8Array(ptr_end);
-      let num_scanlines = h;
-      while (num_scanlines > 0 && pos < buffer2.byteLength) {
-        if (pos + 4 > buffer2.byteLength) {
-          return rgbe_error(rgbe_read_error);
-        }
-        rgbeStart[0] = buffer2[pos++];
-        rgbeStart[1] = buffer2[pos++];
-        rgbeStart[2] = buffer2[pos++];
-        rgbeStart[3] = buffer2[pos++];
-        if (2 != rgbeStart[0] || 2 != rgbeStart[1] || (rgbeStart[2] << 8 | rgbeStart[3]) != scanline_width) {
-          return rgbe_error(rgbe_format_error, "bad rgbe scanline format");
-        }
-        let ptr = 0, count;
-        while (ptr < ptr_end && pos < buffer2.byteLength) {
-          count = buffer2[pos++];
-          const isEncodedRun = count > 128;
-          if (isEncodedRun)
-            count -= 128;
-          if (0 === count || ptr + count > ptr_end) {
-            return rgbe_error(rgbe_format_error, "bad scanline data");
-          }
-          if (isEncodedRun) {
-            const byteValue = buffer2[pos++];
-            for (let i = 0; i < count; i++) {
-              scanline_buffer[ptr++] = byteValue;
-            }
-          } else {
-            scanline_buffer.set(buffer2.subarray(pos, pos + count), ptr);
-            ptr += count;
-            pos += count;
-          }
-        }
-        const l = scanline_width;
-        for (let i = 0; i < l; i++) {
-          let off = 0;
-          data_rgba[offset] = scanline_buffer[i + off];
-          off += scanline_width;
-          data_rgba[offset + 1] = scanline_buffer[i + off];
-          off += scanline_width;
-          data_rgba[offset + 2] = scanline_buffer[i + off];
-          off += scanline_width;
-          data_rgba[offset + 3] = scanline_buffer[i + off];
-          offset += 4;
-        }
-        num_scanlines--;
-      }
-      return data_rgba;
-    };
-    const RGBEByteToRGBFloat = function(sourceArray, sourceOffset, destArray, destOffset) {
-      const e = sourceArray[sourceOffset + 3];
-      const scale = Math.pow(2, e - 128) / 255;
-      destArray[destOffset + 0] = sourceArray[sourceOffset + 0] * scale;
-      destArray[destOffset + 1] = sourceArray[sourceOffset + 1] * scale;
-      destArray[destOffset + 2] = sourceArray[sourceOffset + 2] * scale;
-      destArray[destOffset + 3] = 1;
-    };
-    const RGBEByteToRGBHalf = function(sourceArray, sourceOffset, destArray, destOffset) {
-      const e = sourceArray[sourceOffset + 3];
-      const scale = Math.pow(2, e - 128) / 255;
-      destArray[destOffset + 0] = DataUtils.toHalfFloat(Math.min(sourceArray[sourceOffset + 0] * scale, 65504));
-      destArray[destOffset + 1] = DataUtils.toHalfFloat(Math.min(sourceArray[sourceOffset + 1] * scale, 65504));
-      destArray[destOffset + 2] = DataUtils.toHalfFloat(Math.min(sourceArray[sourceOffset + 2] * scale, 65504));
-      destArray[destOffset + 3] = DataUtils.toHalfFloat(1);
-    };
-    const byteArray = new Uint8Array(buffer);
-    byteArray.pos = 0;
-    const rgbe_header_info = RGBE_ReadHeader(byteArray);
-    if (RGBE_RETURN_FAILURE !== rgbe_header_info) {
-      const w = rgbe_header_info.width, h = rgbe_header_info.height, image_rgba_data = RGBE_ReadPixels_RLE(byteArray.subarray(byteArray.pos), w, h);
-      if (RGBE_RETURN_FAILURE !== image_rgba_data) {
-        let data, type;
-        let numElements;
-        switch (this.type) {
-          case FloatType:
-            numElements = image_rgba_data.length / 4;
-            const floatArray = new Float32Array(numElements * 4);
-            for (let j = 0; j < numElements; j++) {
-              RGBEByteToRGBFloat(image_rgba_data, j * 4, floatArray, j * 4);
-            }
-            data = floatArray;
-            type = FloatType;
-            break;
-          case HalfFloatType2:
-            numElements = image_rgba_data.length / 4;
-            const halfArray = new Uint16Array(numElements * 4);
-            for (let j = 0; j < numElements; j++) {
-              RGBEByteToRGBHalf(image_rgba_data, j * 4, halfArray, j * 4);
-            }
-            data = halfArray;
-            type = HalfFloatType2;
-            break;
-          default:
-            console.error("THREE.RGBELoader: unsupported type: ", this.type);
-            break;
-        }
-        return {
-          width: w,
-          height: h,
-          data,
-          header: rgbe_header_info.string,
-          gamma: rgbe_header_info.gamma,
-          exposure: rgbe_header_info.exposure,
-          type
-        };
-      }
-    }
-    return null;
-  }
-  setDataType(value) {
-    this.type = value;
-    return this;
-  }
-  load(url, onLoad, onProgress, onError) {
-    function onLoadCallback(texture, texData) {
-      switch (texture.type) {
-        case FloatType:
-        case HalfFloatType2:
-          texture.encoding = LinearEncoding;
-          texture.minFilter = LinearFilter3;
-          texture.magFilter = LinearFilter3;
-          texture.generateMipmaps = false;
-          texture.flipY = true;
-          break;
-      }
-      if (onLoad)
-        onLoad(texture, texData);
-    }
-    return super.load(url, onLoadCallback, onProgress, onError);
-  }
-};
-
-// src/Gradient/useRGBELoader.ts
-import { useLoader } from "@react-three/fiber";
-function useRGBELoader(file, { path }) {
-  const cubeTexture = useLoader(
-    RGBELoader,
-    file,
-    (loader) => loader.setPath(path)
-  );
-  return cubeTexture;
-}
-
-// src/Gradient/comps/Environment/EnvironmentMap.tsx
-var isRef = (obj) => obj.current && obj.current.isScene;
-var resolveScene = (scene) => isRef(scene) ? scene.current : scene;
-function EnvironmentMap({ background = false }) {
-  const city = useRGBELoader("city.hdr", { path: envBasePath });
-  const dawn = useRGBELoader("dawn.hdr", { path: envBasePath });
-  const lobby = useRGBELoader("lobby.hdr", { path: envBasePath });
-  const map = { city, dawn, lobby };
-  const defaultScene = useThree8((state) => state.scene);
-  React9.useLayoutEffect(() => {
-    if (map) {
-      const target2 = resolveScene(defaultScene);
-      const oldbg = target2.background;
-      const oldenv = target2.environment;
-      if (background !== "only")
-        target2.environment = map;
-      if (background)
-        target2.background = map;
-      return () => {
-        if (background !== "only")
-          target2.environment = oldenv;
-        if (background)
-          target2.background = oldbg;
-      };
-    }
-  }, [defaultScene, map, background]);
-  const texture = map;
-  texture.mapping = EquirectangularReflectionMapping;
-  return null;
-}
-
-// src/Gradient/comps/Lights.tsx
-import { Fragment as Fragment7, jsx as jsx11, jsxs as jsxs7 } from "react/jsx-runtime";
-function Lights({ lightType, brightness }) {
-  const setLoadingPercentage = useUIStore(
-    (state) => state.setLoadingPercentage
-  );
-  return /* @__PURE__ */ jsxs7(Fragment7, { children: [
-    lightType === "env" && /* @__PURE__ */ jsx11(
-      EnvironmentMap,
-      {
-        background: true,
-        loadingCallback: setLoadingPercentage
-      }
-    ),
-    lightType === "3d" && /* @__PURE__ */ jsx11("ambientLight", { intensity: brightness || 1 })
-  ] });
-}
-
 // src/Gradient/Gradient.tsx
-import { Fragment as Fragment8, jsx as jsx12, jsxs as jsxs8 } from "react/jsx-runtime";
-function GradientComp(_a) {
+import { jsx as jsx12, jsxs as jsxs8 } from "react/jsx-runtime";
+function Gradient(_a) {
   var _b = _a, {
     control = "props",
     dampingFactor,
@@ -7410,109 +7499,27 @@ function GradientComp(_a) {
     "posSpringOption",
     "isFigmaPlugin"
   ]);
-  usePresetToStore();
   const _a2 = useControlValues(control, props), { lightType, envPreset, brightness, grain, toggleAxis } = _a2, others = __objRest(_a2, ["lightType", "envPreset", "brightness", "grain", "toggleAxis"]);
   usePostProcessing(grain === "off");
-  return /* @__PURE__ */ jsxs8(Fragment8, { children: [
-    /* @__PURE__ */ jsx12(Lights, { lightType, brightness }),
-    toggleAxis && /* @__PURE__ */ jsx12(Axis2, { isFigmaPlugin }),
-    /* @__PURE__ */ jsx12(CameraControl, __spreadValues({ dampingFactor }, others)),
+  return /* @__PURE__ */ jsxs8(Suspense, { fallback: "Load Failed", children: [
     /* @__PURE__ */ jsx12(
-      Mesh,
+      Lights,
+      {
+        lightType,
+        brightness,
+        envPreset
+      }
+    ),
+    /* @__PURE__ */ jsx12(
+      Mesh4,
       __spreadProps(__spreadValues({}, others), {
         rotSpringOption,
         posSpringOption
       })
-    )
+    ),
+    toggleAxis && /* @__PURE__ */ jsx12(Axis2, { isFigmaPlugin }),
+    /* @__PURE__ */ jsx12(CameraControl, __spreadValues({ dampingFactor }, others))
   ] });
-}
-var Gradient = (props) => /* @__PURE__ */ jsx12(Suspense, { fallback: "Load Failed", children: /* @__PURE__ */ jsx12(GradientComp, __spreadValues({}, props)) });
-var pageLoaded = false;
-function usePresetToStore() {
-  const activePreset = useUIStore((state) => state.activePreset);
-  useEffect8(() => {
-    var _a;
-    let gradientURL;
-    if (!pageLoaded && ((_a = window.location.search) == null ? void 0 : _a.includes("pixelDensity")))
-      gradientURL = window.location.search;
-    else
-      gradientURL = PRESETS[activePreset].url;
-    updateGradientState(gradientURL);
-    pageLoaded = true;
-  }, [activePreset]);
-}
-function useControlValues(control, _a) {
-  var _b = _a, { urlString } = _b, props = __objRest(_b, ["urlString"]);
-  const [type] = useQueryState_default("type");
-  const [animate] = useQueryState_default("animate");
-  const [uTime] = useQueryState_default("uTime");
-  const [uSpeed] = useQueryState_default("uSpeed");
-  const [uStrength] = useQueryState_default("uStrength");
-  const [uDensity] = useQueryState_default("uDensity");
-  const [uFrequency] = useQueryState_default("uFrequency");
-  const [uAmplitude] = useQueryState_default("uAmplitude");
-  const [positionX] = useQueryState_default("positionX");
-  const [positionY] = useQueryState_default("positionY");
-  const [positionZ] = useQueryState_default("positionZ");
-  const [rotationX] = useQueryState_default("rotationX");
-  const [rotationY] = useQueryState_default("rotationY");
-  const [rotationZ] = useQueryState_default("rotationZ");
-  const [color1] = useQueryState_default("color1");
-  const [color2] = useQueryState_default("color2");
-  const [color3] = useQueryState_default("color3");
-  const [cAzimuthAngle] = useQueryState_default("cAzimuthAngle");
-  const [cPolarAngle] = useQueryState_default("cPolarAngle");
-  const [cDistance] = useQueryState_default("cDistance");
-  const [cameraZoom] = useQueryState_default("cameraZoom");
-  const [wireframe] = useQueryState_default("wireframe");
-  const [shader] = useQueryState_default("shader");
-  const [lightType] = useQueryState_default("lightType");
-  const [brightness] = useQueryState_default("brightness");
-  const [envPreset] = useQueryState_default("envPreset");
-  const [grain] = useQueryState_default("grain");
-  const [reflection] = useQueryState_default("reflection");
-  const [zoomOut] = useQueryState_default("zoomOut");
-  const [toggleAxis] = useQueryState_default("toggleAxis");
-  const queryProps = {
-    type,
-    animate,
-    uTime,
-    uSpeed,
-    uStrength,
-    uDensity,
-    uFrequency,
-    uAmplitude,
-    positionX,
-    positionY,
-    positionZ,
-    rotationX,
-    rotationY,
-    rotationZ,
-    color1,
-    color2,
-    color3,
-    cAzimuthAngle,
-    cPolarAngle,
-    cDistance,
-    cameraZoom,
-    wireframe,
-    shader,
-    lightType,
-    brightness,
-    envPreset,
-    grain,
-    reflection,
-    zoomOut,
-    toggleAxis
-  };
-  if (control === "props")
-    return __spreadValues(__spreadValues({}, queryProps), props);
-  else if (control === "query")
-    return urlString ? qs3.parse(formatUrlString(urlString), {
-      parseNumbers: true,
-      parseBooleans: true,
-      arrayFormat: "index"
-    }) : queryProps;
 }
 export {
   Box,

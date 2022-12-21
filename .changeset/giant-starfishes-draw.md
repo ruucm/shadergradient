@@ -1,0 +1,5 @@
+---
+'@shadergradient/store': patch
+---
+
+Init

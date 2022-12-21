@@ -1,5 +1,5 @@
-import { Button, Card } from 'shadergradient/ui'
-import { Gradient, TestControl } from 'shadergradient'
+import { Button, Card, TestControl } from 'shadergradient/ui'
+import { Gradient } from 'shadergradient'
 
 // Dom components go here
 export default function Page(props) {

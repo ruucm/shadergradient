@@ -35,7 +35,9 @@ async function getBuildOptions(path) {
       '@react-three/drei',
       '@react-three/fiber',
       'three',
-      'store',
+      'framer',
+      'framer-motion',
+      '@shadergradient/store',
     ],
     plugins: [
       // esmPlugin,

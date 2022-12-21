@@ -1,17 +1,12 @@
 import { Canvas } from '@react-three/fiber'
-import { useEffect } from 'react'
 import { canvasProps } from './consts'
-import { PRESETS } from './presets'
-import { useUIStore, updateGradientState } from './store'
-import useQueryState from './useQueryState'
+import { useQueryState } from 'store'
 
 export function GradientCanvas({
   children,
   pointerEvents = 'none',
   ...rest
 }: any) {
-  usePresetToStore() // init gradient state with preset
-
   const [pixelDensity] = useQueryState('pixelDensity')
   const [fov] = useQueryState('fov')
 
@@ -31,26 +26,4 @@ export function GradientCanvas({
       </Canvas>
     </>
   )
-}
-
-let pageLoaded = false
-function usePresetToStore() {
-  // ----------------------------- Preset to Custom Material ---------------------------------
-  const activePreset = useUIStore((state: any) => state.activePreset)
-  useEffect(() => {
-    let gradientURL
-
-    // CASE 1. use search params at the first load.
-    if (
-      !pageLoaded &&
-      window.location.search?.includes('pixelDensity') // checking just window.location.search existing is not valid for the Framer Preview search (?target=preview-web)
-    )
-      gradientURL = window.location.search
-    // CASE 2. When activePreset changes by UI buttons
-    else gradientURL = PRESETS[activePreset].url
-
-    updateGradientState(gradientURL)
-
-    pageLoaded = true
-  }, [activePreset])
 }

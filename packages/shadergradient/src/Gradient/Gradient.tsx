@@ -1,5 +1,5 @@
 import { Suspense } from 'react'
-import { useControlValues, usePostProcessing } from './hooks'
+import { useControlValues, usePostProcessing, usePresetToStore } from './hooks'
 import { Lights, Mesh, Axis, CameraControl } from './comps'
 
 type Props = {
@@ -19,6 +19,8 @@ export function Gradient({
   const { lightType, envPreset, brightness, grain, toggleAxis, ...others } =
     useControlValues(control, props)
   usePostProcessing(grain === 'off')
+
+  usePresetToStore() // init gradient state with preset
 
   return (
     <Suspense fallback='Load Failed'>

@@ -35,7 +35,7 @@ async function getBuildOptions(path) {
       '@react-three/drei',
       '@react-three/fiber',
       'three',
-      'zustand',
+      'store',
     ],
     plugins: [
       // esmPlugin,

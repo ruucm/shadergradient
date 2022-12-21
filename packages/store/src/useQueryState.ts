@@ -85,5 +85,3 @@ function updateHistory(path: string) {
     path
   )
 }
-
-export default useQueryState

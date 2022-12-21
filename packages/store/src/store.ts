@@ -1,8 +1,7 @@
 import * as qs from 'query-string'
 import create from 'zustand'
 import { combine } from 'zustand/middleware'
-import { initialActivePreset } from './consts'
-import { DEFAUlT_PRESET } from './presets'
+import { DEFAUlT_PRESET, initialActivePreset } from './presets'
 
 // without embedMode
 // it renders without the dom & other gradient controls at first, and add it after the first updateGradientState() excuted.

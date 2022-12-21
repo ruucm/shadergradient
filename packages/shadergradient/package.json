@@ -49,6 +49,6 @@
     "camera-controls": "^1.37.4",
     "query-string": "^7.1.1",
     "react-merge-refs": "^1.1.0",
-    "zustand": "^4.1.5"
+    "store": "workspace:*"
   }
 }

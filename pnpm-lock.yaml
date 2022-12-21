@@ -112,6 +112,7 @@ importers:
       react-merge-refs: ^1.1.0
       socket.io: ^4.5.0
       socket.io-client: ^4.5.0
+      store: workspace:*
       tailwind-config: workspace:*
       tailwindcss: ^3.1.5
       three: '*'
@@ -120,7 +121,6 @@ importers:
       tsconfig: workspace:*
       tsup: ^6.1.3
       typescript: ^4.5.2
-      zustand: ^4.1.5
     dependencies:
       '@react-spring/three': 9.6.1_aj5kj473hsgheg4miwvuwybosy
       '@react-three/drei': 9.46.7_xwynmv5llzsuuouxruzymqw67e
@@ -129,9 +129,9 @@ importers:
       query-string: 7.1.3
       react: 18.2.0
       react-merge-refs: 1.1.0
+      store: link:../store
       three: 0.146.0
       three-stdlib: 2.20.4_three@0.146.0
-      zustand: 4.1.5_react@18.2.0
     devDependencies:
       '@types/react': 18.0.26
       '@types/react-dom': 18.0.9
@@ -153,6 +153,37 @@ importers:
       tsconfig: link:../tsconfig
       tsup: 6.5.0_idbjo54bpfgfu5hzy4ncsoa6f4
       typescript: 4.9.3
+
+  packages/store:
+    specifiers:
+      '@types/react': ^18.0.26
+      '@types/react-dom': ^18.0.9
+      concurrently: ^7.2.2
+      eslint: ^7.32.0
+      eslint-config-custom: workspace:*
+      query-string: ^7.1.1
+      react: ^18.2.0
+      tailwind-config: workspace:*
+      tailwindcss: ^3.1.5
+      tsconfig: workspace:*
+      tsup: ^6.1.3
+      typescript: ^4.5.2
+      zustand: ^4.1.5
+    dependencies:
+      query-string: 7.1.3
+      zustand: 4.1.5_react@18.2.0
+    devDependencies:
+      '@types/react': 18.0.26
+      '@types/react-dom': 18.0.9
+      concurrently: 7.6.0
+      eslint: 7.32.0
+      eslint-config-custom: link:../eslint-config-custom
+      react: 18.2.0
+      tailwind-config: link:../tailwind-config
+      tailwindcss: 3.2.4_postcss@8.4.19
+      tsconfig: link:../tsconfig
+      tsup: 6.5.0_o6pf6py3ttho7dpy7mshkpxque
+      typescript: 4.9.4
 
   packages/tailwind-config:
     specifiers:
@@ -7572,6 +7603,43 @@ packages:
       sucrase: 3.29.0
       tree-kill: 1.2.2
       typescript: 4.9.3
+    transitivePeerDependencies:
+      - supports-color
+      - ts-node
+    dev: true
+
+  /tsup/6.5.0_o6pf6py3ttho7dpy7mshkpxque:
+    resolution: {integrity: sha512-36u82r7rYqRHFkD15R20Cd4ercPkbYmuvRkz3Q1LCm5BsiFNUgpo36zbjVhCOgvjyxNBWNKHsaD5Rl8SykfzNA==}
+    engines: {node: '>=14'}
+    hasBin: true
+    peerDependencies:
+      '@swc/core': ^1
+      postcss: ^8.4.12
+      typescript: ^4.1.0
+    peerDependenciesMeta:
+      '@swc/core':
+        optional: true
+      postcss:
+        optional: true
+      typescript:
+        optional: true
+    dependencies:
+      bundle-require: 3.1.2_esbuild@0.15.15
+      cac: 6.7.14
+      chokidar: 3.5.3
+      debug: 4.3.4
+      esbuild: 0.15.15
+      execa: 5.1.1
+      globby: 11.1.0
+      joycon: 3.1.1
+      postcss: 8.4.19
+      postcss-load-config: 3.1.4_postcss@8.4.19
+      resolve-from: 5.0.0
+      rollup: 3.4.0
+      source-map: 0.8.0-beta.0
+      sucrase: 3.29.0
+      tree-kill: 1.2.2
+      typescript: 4.9.4
     transitivePeerDependencies:
       - supports-color
       - ts-node

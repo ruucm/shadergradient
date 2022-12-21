@@ -1,4 +1,4 @@
-import { useUIStore } from '@/store'
+import { useUIStore } from 'store'
 import { EnvironmentMap } from './Environment'
 
 export function Lights({ lightType, brightness, envPreset }: any) {

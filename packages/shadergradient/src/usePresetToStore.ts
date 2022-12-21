@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
-import { PRESETS } from 'store'
-import { useUIStore, updateGradientState } from 'store'
+import { PRESETS } from '@/store'
+import { useUIStore, updateGradientState } from '@/store'
 
 let pageLoaded = false
 export function usePresetToStore() {

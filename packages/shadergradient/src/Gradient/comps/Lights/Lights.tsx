@@ -1,10 +1,10 @@
-import { useUIStore } from 'store'
+// import { useUIStore } from '@shadergradient/store'
 import { EnvironmentMap } from './Environment'
 
 export function Lights({ lightType, brightness, envPreset }: any) {
-  const setLoadingPercentage = useUIStore(
-    (state: any) => state.setLoadingPercentage
-  )
+  // const setLoadingPercentage = useUIStore(
+  //   (state: any) => state.setLoadingPercentage
+  // )
 
   return (
     <>
@@ -13,7 +13,7 @@ export function Lights({ lightType, brightness, envPreset }: any) {
         <EnvironmentMap
           envPreset={envPreset}
           background={true}
-          loadingCallback={setLoadingPercentage}
+          // loadingCallback={setLoadingPercentage}
         />
       )}
     </>

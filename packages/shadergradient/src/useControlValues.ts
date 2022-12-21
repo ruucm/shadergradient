@@ -1,4 +1,4 @@
-import { useQueryState } from 'store'
+import { useQueryState } from '@/store'
 import { formatUrlString } from '@/utils'
 import * as qs from 'query-string'
 

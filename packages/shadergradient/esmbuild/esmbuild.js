@@ -23,6 +23,7 @@ async function getBuildOptions(path) {
       `${defaultPath}/index.ts`,
       `${defaultPath}/client.ts`,
       `${defaultPath}/ui.ts`,
+      `${defaultPath}/controls.ts`,
     ],
     // minify: true,
     format: 'esm',
@@ -38,6 +39,7 @@ async function getBuildOptions(path) {
       'framer',
       'framer-motion',
       '@shadergradient/store',
+      'zustand',
     ],
     plugins: [
       // esmPlugin,

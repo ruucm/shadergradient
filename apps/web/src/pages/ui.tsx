@@ -1,5 +1,6 @@
 import { Button, Card, TestControl } from 'shadergradient/ui'
 import { Gradient } from 'shadergradient'
+import { useControlValues } from 'shadergradient/controls'
 
 // Dom components go here
 export default function Page(props) {
@@ -12,12 +13,16 @@ export default function Page(props) {
   )
 }
 
-Page.canvas = (props) => (
-  <>
-    <Gradient control='query' />
-  </>
-)
+Page.canvas = (props) => {
+  const controls = useControlValues('query', props)
 
+  if (controls.type)
+    return (
+      <>
+        <Gradient control='query' controls={controls} />
+      </>
+    )
+}
 export async function getStaticProps() {
   return { props: { title: 'Index' } }
 }

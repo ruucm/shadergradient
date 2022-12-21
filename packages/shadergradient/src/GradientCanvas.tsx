@@ -1,14 +1,14 @@
 import { Canvas } from '@react-three/fiber'
 import { canvasProps } from './consts'
-import { useQueryState } from 'store'
+// import { useQueryState } from '@shadergradient/store'
 
 export function GradientCanvas({
   children,
   pointerEvents = 'none',
   ...rest
 }: any) {
-  const [pixelDensity] = useQueryState('pixelDensity')
-  const [fov] = useQueryState('fov')
+  // const [pixelDensity] = useQueryState('pixelDensity')
+  // const [fov] = useQueryState('fov')
 
   return (
     <>
@@ -16,9 +16,9 @@ export function GradientCanvas({
       {/* <style>{`#gradientCanvas canvas { pointer-events: none; }`}</style> */}
       <Canvas
         id='gradientCanvas'
-        key={fov}
+        // key={fov}
         resize={{ offsetSize: true }}
-        {...canvasProps(pixelDensity, fov)}
+        // {...canvasProps(pixelDensity, fov)}
         style={{ pointerEvents }}
         {...rest}
       >

@@ -15,6 +15,7 @@
     "react-dom": "^18.2.0",
     "react-merge-refs": "^2.0.1",
     "shadergradient": "workspace:*",
+    "@shadergradient/store": "workspace:*",
     "three": "0.147.0",
     "three-stdlib": "2.20.5",
     "ui": "workspace:*"
@@ -45,5 +46,6 @@
     "export": "EXPORT=true next build && EXPORT=true next export",
     "analyze": "ANALYZE=true next build",
     "start": "next start"
-  }
+  },
+  "version": null
 }

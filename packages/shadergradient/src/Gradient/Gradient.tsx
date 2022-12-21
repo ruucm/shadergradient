@@ -1,5 +1,5 @@
 import { Suspense } from 'react'
-import { useControlValues, usePostProcessing, usePresetToStore } from './hooks'
+import { usePostProcessing } from './hooks'
 import { Lights, Mesh, Axis, CameraControl } from './comps'
 
 type Props = {
@@ -14,16 +14,20 @@ export function Gradient({
   rotSpringOption,
   posSpringOption,
   isFigmaPlugin = false,
+  controls = {},
   ...props
 }: Props) {
   const { lightType, envPreset, brightness, grain, toggleAxis, ...others } =
-    useControlValues(control, props)
-  usePostProcessing(grain === 'off')
+    controls
+  // const { lightType, envPreset, brightness, grain, toggleAxis, ...others } =
+  //   useControlValues(control, props)
+  // usePostProcessing(grain === 'off')
+  usePostProcessing(false)
 
-  usePresetToStore() // init gradient state with preset
+  // usePresetToStore() // init gradient state with preset
 
   return (
-    <Suspense fallback='Load Failed'>
+    <>
       <Lights
         lightType={lightType}
         brightness={brightness}
@@ -36,6 +40,6 @@ export function Gradient({
       />
       {toggleAxis && <Axis isFigmaPlugin={isFigmaPlugin} />}
       <CameraControl dampingFactor={dampingFactor} {...others} />
-    </Suspense>
+    </>
   )
 }

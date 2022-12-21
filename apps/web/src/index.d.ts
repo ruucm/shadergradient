@@ -10,3 +10,4 @@ declare module '*.frag' {
 
 declare module 'shadergradient/client'
 declare module 'shadergradient/ui'
+declare module 'shadergradient/controls'

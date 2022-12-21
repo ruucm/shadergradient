@@ -1,6 +1,6 @@
 {
   "name": "shadergradient",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "main": "./dist/index.js",
   "exports": {
     ".": "./dist",
@@ -46,9 +46,15 @@
     "typescript": "^4.5.2"
   },
   "dependencies": {
+    "@shadergradient/store": "workspace:*",
+    "@uiw/color-convert": "^1.1.1",
+    "@uiw/react-color-shade-slider": "^1.1.1",
+    "@uiw/react-color-wheel": "^1.1.1",
     "camera-controls": "^1.37.4",
+    "framer-motion": "^7.10.3",
     "query-string": "^7.1.1",
     "react-merge-refs": "^1.1.0",
-    "store": "workspace:*"
+    "react-slider": "^2.0.4",
+    "zustand": "^4.1.5"
   }
 }

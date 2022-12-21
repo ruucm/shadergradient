@@ -1,0 +1,1 @@
+export { useOnClickOutside } from './useOnClickOutside'

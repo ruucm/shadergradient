@@ -1,5 +1,5 @@
 import { Gradient, TestControl, AllControls } from 'shadergradient'
-import { Button, Card, NumberInput } from 'shadergradient/ui'
+import { Button, Card, NumberInput, PresetTitles } from 'shadergradient/ui'
 
 // Dom components go here
 export default function Page(props) {
@@ -7,6 +7,7 @@ export default function Page(props) {
     <div>
       <Button>Button</Button>
       <Card />
+      <PresetTitles />
       <TestControl />
       <NumberInput />
       <AllControls isMobile={false} />

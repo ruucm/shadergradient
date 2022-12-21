@@ -403,7 +403,7 @@ var require_query_string = __commonJS({
       }
       return value;
     }
-    function parse4(query, options) {
+    function parse5(query, options) {
       options = Object.assign({
         decode: true,
         sort: true,
@@ -454,7 +454,7 @@ var require_query_string = __commonJS({
       }, /* @__PURE__ */ Object.create(null));
     }
     exports.extract = extract;
-    exports.parse = parse4;
+    exports.parse = parse5;
     exports.stringify = (object, options) => {
       if (!object) {
         return "";
@@ -503,7 +503,7 @@ var require_query_string = __commonJS({
       return Object.assign(
         {
           url: url_.split("?")[0] || "",
-          query: parse4(extract(url), options)
+          query: parse5(extract(url), options)
         },
         options && options.parseFragmentIdentifier && hash ? { fragmentIdentifier: decode(hash, options) } : {}
       );
@@ -561,7 +561,6 @@ import { Canvas } from "@react-three/fiber";
 import { useEffect } from "react";
 
 // src/consts.ts
-var initialActivePreset = 0;
 var canvasProps = (pixelDensity, fov) => ({
   dpr: pixelDensity,
   camera: { fov },
@@ -586,7 +585,13 @@ var mainLoading = {
 };
 var envBasePath = "https://shadergradient.vercel.app/hdr/";
 
-// src/presets.ts
+// src/store/store.ts
+var qs = __toESM(require_query_string());
+import create from "zustand";
+import { combine } from "zustand/middleware";
+
+// src/store/presets.ts
+var initialActivePreset = 0;
 var DEFAUlT_PRESET = "?pixelDensity=1&fov=45";
 var PRESETS = [
   {
@@ -641,10 +646,7 @@ var PRESETS = [
   }
 ];
 
-// src/store.ts
-var qs = __toESM(require_query_string());
-import create from "zustand";
-import { combine } from "zustand/middleware";
+// src/store/store.ts
 var useQueryStore = create((set) => __spreadValues({}, parseState()));
 var usePropertyStore = create((set) => ({
   hoverState: 0,
@@ -680,7 +682,7 @@ var useUIStore = create(
   )
 );
 
-// src/useQueryState.ts
+// src/store/useQueryState.ts
 var qs2 = __toESM(require_query_string());
 import { useCallback } from "react";
 var useQueryState = (propName, defaultValue = null) => {
@@ -733,7 +735,61 @@ function updateHistory(path) {
     path
   );
 }
-var useQueryState_default = useQueryState;
+
+// src/useQueryState.ts
+var qs3 = __toESM(require_query_string());
+import { useCallback as useCallback2 } from "react";
+var useQueryState2 = (propName, defaultValue = null) => {
+  const selector = useCallback2(
+    (state) => typeof state[propName] !== "undefined" ? state[propName] : defaultValue,
+    [propName, defaultValue]
+  );
+  const globalValue = useQueryStore(selector);
+  const _setGlobalValue = useCallback2(
+    (valueFun) => useQueryStore.setState({
+      [propName]: valueFun(useQueryStore.getState()[propName])
+    }),
+    [propName]
+  );
+  const setQueryValue = useCallback2(
+    (newVal) => {
+      _setGlobalValue((currentState) => {
+        if (typeof newVal === "function") {
+          newVal = newVal(currentState || defaultValue);
+        }
+        if (Number.isFinite(newVal)) {
+          newVal = parseFloat(newVal.toFixed(2));
+        }
+        setTimeout(() => {
+          const query = useQueryStore.getState();
+          updateHistory2(
+            qs3.stringifyUrl(
+              { url: window.location.pathname, query },
+              { skipNull: true, arrayFormat: "index" }
+            )
+          );
+        }, 0);
+        return newVal;
+      });
+    },
+    [_setGlobalValue]
+  );
+  return [globalValue, setQueryValue];
+};
+function updateHistory2(path) {
+  var _a;
+  window.history.pushState(
+    {
+      prevUrls: [
+        ...((_a = window.history.state) == null ? void 0 : _a.prevUrls) || [],
+        window.location.origin + path
+      ]
+    },
+    document.title,
+    path
+  );
+}
+var useQueryState_default = useQueryState2;
 
 // src/GradientCanvas.tsx
 import { Fragment as Fragment2, jsx as jsx2 } from "react/jsx-runtime";
@@ -791,7 +847,7 @@ function formatUrlString(urlString) {
 }
 
 // src/Gradient/hooks/useControlValues.ts
-var qs3 = __toESM(require_query_string());
+var qs4 = __toESM(require_query_string());
 function useControlValues(control, _a) {
   var _b = _a, { urlString } = _b, props = __objRest(_b, ["urlString"]);
   const [type] = useQueryState_default("type");
@@ -859,7 +915,7 @@ function useControlValues(control, _a) {
   if (control === "props")
     return __spreadValues(__spreadValues({}, queryProps), props);
   else if (control === "query")
-    return urlString ? qs3.parse(formatUrlString(urlString), {
+    return urlString ? qs4.parse(formatUrlString(urlString), {
       parseNumbers: true,
       parseBooleans: true,
       arrayFormat: "index"
@@ -5211,7 +5267,7 @@ import { useContext as useContext2, useMemo as useMemo5, useRef as useRef6, useS
 
 // ../../node_modules/.pnpm/@react-spring+animated@9.6.1_react@18.2.0/node_modules/@react-spring/animated/dist/react-spring-animated.esm.js
 import * as React7 from "react";
-import { forwardRef as forwardRef2, useRef as useRef5, useCallback as useCallback3, useEffect as useEffect7 } from "react";
+import { forwardRef as forwardRef2, useRef as useRef5, useCallback as useCallback4, useEffect as useEffect7 } from "react";
 var $node = Symbol.for("Animated:node");
 var isAnimated = (value) => !!value && value[$node] === value;
 var getAnimated = (owner) => owner && owner[$node];
@@ -5413,7 +5469,7 @@ var withAnimated = (Component, host2) => {
   const hasInstance = !is.fun(Component) || Component.prototype && Component.prototype.isReactComponent;
   return forwardRef2((givenProps, givenRef) => {
     const instanceRef = useRef5(null);
-    const ref = hasInstance && useCallback3((value) => {
+    const ref = hasInstance && useCallback4((value) => {
       instanceRef.current = updateRef(givenRef, value);
     }, [givenRef]);
     const [props, deps] = getAnimatedState(givenProps, host2);
@@ -7486,8 +7542,25 @@ function Gradient(_a) {
     /* @__PURE__ */ jsx10(CameraControl, __spreadValues({ dampingFactor }, others))
   ] });
 }
+
+// src/Controls/TestControl.tsx
+import { jsx as jsx11 } from "react/jsx-runtime";
+function TestControl() {
+  const [, setcDistance] = useQueryState("cDistance");
+  return /* @__PURE__ */ jsx11(
+    "input",
+    {
+      type: "number",
+      onChange: (e) => {
+        setcDistance(e.target.value);
+      },
+      style: { border: "1px solid black", fontSize: 24 }
+    }
+  );
+}
 export {
   Box,
   Gradient,
-  GradientCanvas
+  GradientCanvas,
+  TestControl
 };

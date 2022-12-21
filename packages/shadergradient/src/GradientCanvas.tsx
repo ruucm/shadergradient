@@ -1,8 +1,7 @@
 import { Canvas } from '@react-three/fiber'
 import { useEffect } from 'react'
 import { canvasProps } from './consts'
-import { PRESETS } from './presets'
-import { useUIStore, updateGradientState } from './store'
+import { useUIStore, updateGradientState, PRESETS } from '@/store'
 import useQueryState from './useQueryState'
 
 export function GradientCanvas({

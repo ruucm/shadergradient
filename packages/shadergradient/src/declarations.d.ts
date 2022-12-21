@@ -6,7 +6,7 @@ declare global {
       ambientLight: ReactThreeFiber.AmbientLightProps
       mesh: ReactThreeFiber.MeshProps
       planeGeometry: ReactThreeFiber.PlaneGeometryProps
-      icosahedronBufferGeometry: ReactThreeFiber.IcosahedronBufferGeometryProps
+      icosahedronGeometry: ReactThreeFiber.IcosahedronGeometryProps
       group: ReactThreeFiber.GrouopProps
       lineSegments: ReactThreeFiber.LineSegmentsProps
     }

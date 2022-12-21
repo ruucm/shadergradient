@@ -1,4 +1,4 @@
-export const initialActivePreset = 1
+export const initialActivePreset = 0
 
 export const DEFAUlT_PRESET = '?pixelDensity=1&fov=45'
 

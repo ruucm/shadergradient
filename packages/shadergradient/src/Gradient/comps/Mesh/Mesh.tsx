@@ -65,24 +65,26 @@ export const Mesh: React.FC<any> = ({
     config: { duration: 300 }, // default transition
   }),
 }) => {
-  let sceneShader = shaders.defaults[type ?? 'plane'] // default type is plane
-  if (shader && shader !== 'defaults')
-    sceneShader = shaders[shader][type ?? 'plane']
+  const shaderType = type ?? 'plane'
+
+  let sceneShader = shaders.defaults[shaderType] // default type is plane
+  if (shader && shader !== 'defaults') sceneShader = shaders[shader][shaderType]
 
   // when color is hovered
-  const hoverState = usePropertyStore((state: any) => state.hoverState)
+  // const hoverState = usePropertyStore((state: any) => state.hoverState)
   const [, setZoomOut] = useQueryState('zoomOut')
   const meshCount = 192
   const meshLineCount = 36
 
-  useEffect(() => {
-    if (hoverState !== 0) setZoomOut(true)
-    else setZoomOut(false)
-  }, [hoverState])
+  // useEffect(() => {
+  //   if (hoverState !== 0) setZoomOut(true)
+  //   else setZoomOut(false)
+  // }, [hoverState])
 
   const ColorShiftMaterial = shaderMaterial(
     {
-      colors: getHoverColor(hoverState, [color1, color2, color3]),
+      // colors: getHoverColor(hoverState, [color1, color2, color3]),
+      colors: [color1, color2, color3],
       uTime,
       uSpeed,
 
@@ -181,9 +183,7 @@ export const Mesh: React.FC<any> = ({
       {/* @ts-ignore */}
       <animated.mesh position={animatedPosition} rotation={animatedRotation}>
         {type === 'plane' && <planeGeometry args={[10, 10, 1, meshCount]} />}
-        {type === 'sphere' && (
-          <icosahedronBufferGeometry args={[1, meshCount / 3]} />
-        )}
+        {type === 'sphere' && <icosahedronGeometry args={[1, meshCount / 3]} />}
         {type === 'waterPlane' && (
           <planeGeometry args={[10, 10, meshCount, meshCount]} />
         )}
@@ -197,13 +197,14 @@ export const Mesh: React.FC<any> = ({
           renderOrder={1}
           position={position}
           rotation={rotation}
-          visible={hoverState !== 0 ? true : false}
+          // visible={hoverState !== 0 ? true : false}
+          visible={false}
         >
           {type === 'plane' && (
             <planeGeometry args={[10, 10, 1, meshLineCount]} />
           )}
           {type === 'sphere' && (
-            <icosahedronBufferGeometry args={[1, meshLineCount / 3]} />
+            <icosahedronGeometry args={[1, meshLineCount / 3]} />
           )}
           {type === 'waterPlane' && (
             <planeGeometry args={[10, 10, meshLineCount, meshLineCount]} />

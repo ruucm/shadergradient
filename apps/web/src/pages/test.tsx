@@ -12,10 +12,11 @@ export default function Page(props) {
     <div className='bg-slate-600'>
       <Button>Button</Button>
       <Card />
-      <PresetTitles />
       {/* <TestControl />
       <NumberInput /> */}
-      {/* <AllControls isMobile={false} /> */}
+      <div className='fixed bottom-0 z-10'>
+        <AllControls isMobile={false} />
+      </div>
     </div>
   )
 }

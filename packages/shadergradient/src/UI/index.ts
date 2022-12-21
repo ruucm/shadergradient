@@ -5,3 +5,4 @@ export * from './Spacing'
 export * from './Inputs'
 
 export * from './HoverBox'
+export * from './TextAnimation'

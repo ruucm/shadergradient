@@ -53,6 +53,7 @@
     "framer-motion": "^7.10.3",
     "query-string": "^7.1.1",
     "react-feather": "^2.0.10",
+    "react-intersection-observer": "^9.4.1",
     "react-merge-refs": "^1.1.0",
     "react-slider": "^2.0.4",
     "zustand": "^4.1.5"

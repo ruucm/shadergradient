@@ -114,6 +114,7 @@ importers:
       query-string: ^7.1.1
       react: '*'
       react-feather: ^2.0.10
+      react-intersection-observer: ^9.4.1
       react-merge-refs: ^1.1.0
       react-slider: ^2.0.4
       socket.io: ^4.5.0
@@ -139,6 +140,7 @@ importers:
       query-string: 7.1.3
       react: 18.2.0
       react-feather: 2.0.10_react@18.2.0
+      react-intersection-observer: 9.4.1_react@18.2.0
       react-merge-refs: 1.1.0
       react-slider: 2.0.4_react@18.2.0
       three: 0.146.0
@@ -6571,6 +6573,14 @@ packages:
       react: '>=16.8.6'
     dependencies:
       prop-types: 15.8.1
+      react: 18.2.0
+    dev: false
+
+  /react-intersection-observer/9.4.1_react@18.2.0:
+    resolution: {integrity: sha512-IXpIsPe6BleFOEHKzKh5UjwRUaz/JYS0lT/HPsupWEQou2hDqjhLMStc5zyE3eQVT4Fk3FufM8Fw33qW1uyeiw==}
+    peerDependencies:
+      react: ^15.0.0 || ^16.0.0 || ^17.0.0 || ^18.0.0
+    dependencies:
       react: 18.2.0
     dev: false
 

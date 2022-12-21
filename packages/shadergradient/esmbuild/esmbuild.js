@@ -24,7 +24,7 @@ async function getBuildOptions(path) {
       `${defaultPath}/client.ts`,
       `${defaultPath}/ui.ts`,
     ],
-    // minify: true,
+    minify: true,
     format: 'esm',
     bundle: true,
     external: [

@@ -46,9 +46,15 @@
     "typescript": "^4.5.2"
   },
   "dependencies": {
+    "@uiw/color-convert": "^1.1.1",
+    "@uiw/react-color-shade-slider": "^1.1.1",
+    "@uiw/react-color-wheel": "^1.1.1",
     "camera-controls": "^1.37.4",
+    "framer-motion": "^7.10.3",
     "query-string": "^7.1.1",
+    "react-feather": "^2.0.10",
     "react-merge-refs": "^1.1.0",
+    "react-slider": "^2.0.4",
     "zustand": "^4.1.5"
   }
 }

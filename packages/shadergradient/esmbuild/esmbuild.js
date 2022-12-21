@@ -35,11 +35,13 @@ async function getBuildOptions(path) {
       '@react-three/drei',
       '@react-three/fiber',
       'three',
+      'framer',
+      'framer-motion',
       'zustand',
     ],
     plugins: [
       // esmPlugin,
-      // cssPlugin({ inject: true }),
+      cssPlugin({ inject: true }),
       glsl({ minify: true }),
     ],
   }

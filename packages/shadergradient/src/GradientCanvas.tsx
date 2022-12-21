@@ -1,6 +1,5 @@
 import { Canvas } from '@react-three/fiber'
 import { canvasProps } from './consts'
-import { usePresetToStore } from '@/store'
 import useQueryState from './useQueryState'
 
 export function GradientCanvas({
@@ -8,8 +7,6 @@ export function GradientCanvas({
   pointerEvents = 'none',
   ...rest
 }: any) {
-  usePresetToStore() // init gradient state with preset
-
   const [pixelDensity] = useQueryState('pixelDensity')
   const [fov] = useQueryState('fov')
 

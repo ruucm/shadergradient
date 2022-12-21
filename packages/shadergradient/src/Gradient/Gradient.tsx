@@ -1,6 +1,7 @@
 import { Suspense } from 'react'
 import { useControlValues, usePostProcessing } from './hooks'
 import { Lights, Mesh, Axis, CameraControl } from './comps'
+import { usePresetToStore } from '@/store'
 
 type Props = {
   control?: 'query' | 'props'
@@ -16,6 +17,8 @@ export function Gradient({
   isFigmaPlugin = false,
   ...props
 }: Props) {
+  usePresetToStore() // init gradient state with preset
+
   const { lightType, envPreset, brightness, grain, toggleAxis, ...others } =
     useControlValues(control, props)
   usePostProcessing(grain === 'off')

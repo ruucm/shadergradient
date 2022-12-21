@@ -2,7 +2,7 @@ import * as React from 'react'
 import { motion, useAnimation } from 'framer-motion'
 import { useUIStore, useCursorStore, PRESETS } from '@/store'
 import styles from './PresetTitle.module.scss'
-import { TextAnimation } from '../TextAnimation'
+import { TextAnimation } from '@/ui'
 
 export function PresetTitle({
   color = '#FF430A',

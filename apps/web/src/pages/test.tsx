@@ -1,25 +1,28 @@
-import { Gradient, TestControl, AllControls } from 'shadergradient'
-import { Button, Card, NumberInput, PresetTitles } from 'shadergradient/ui'
+import {
+  Gradient,
+  TestControl,
+  AllControls,
+  PresetTitles,
+} from 'shadergradient'
+import { Button, Card, NumberInput } from 'shadergradient/ui'
 
 // Dom components go here
 export default function Page(props) {
   return (
-    <div>
+    <div className='bg-slate-600'>
       <Button>Button</Button>
       <Card />
       <PresetTitles />
-      <TestControl />
-      <NumberInput />
-      <AllControls isMobile={false} />
+      {/* <TestControl />
+      <NumberInput /> */}
+      {/* <AllControls isMobile={false} /> */}
     </div>
   )
 }
 
 Page.canvas = (props) => (
   <>
-    <Gradient
-    //  control='query'
-    />
+    <Gradient control='query' />
   </>
 )
 

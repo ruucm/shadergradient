@@ -18,3 +18,4 @@ export {
 } from './Tools/index'
 
 export { AllControls } from './AllControls/index'
+export * from './PresetTitle'

@@ -75,6 +75,7 @@ export function TextHover({
           display: 'flex',
           flexDirection: 'column',
           color: PRESETS[activePreset].color,
+          whiteSpace: 'nowrap',
         }}
         onClick={onClick}
       >

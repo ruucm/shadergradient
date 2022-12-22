@@ -1,6 +1,7 @@
 import { useUIStore } from '@/store'
 import { EnvironmentMap } from './Environment'
-import { Suspense } from 'react'
+import { Suspense, useEffect } from 'react'
+import { useProgress } from './useProgress'
 
 export function Lights({ lightType, brightness, envPreset }: any) {
   const setLoadingPercentage = useUIStore(
@@ -11,7 +12,7 @@ export function Lights({ lightType, brightness, envPreset }: any) {
     <>
       {lightType === '3d' && <ambientLight intensity={brightness || 1} />}
       {lightType === 'env' && (
-        <Suspense fallback={null}>
+        <Suspense fallback={<Loader />}>
           <EnvironmentMap
             envPreset={envPreset}
             background={true}
@@ -21,4 +22,20 @@ export function Lights({ lightType, brightness, envPreset }: any) {
       )}
     </>
   )
+}
+
+function Loader() {
+  const { progress } = useProgress()
+
+  useEffect(() => {
+    const el = document.getElementById('loaderText')
+    el.innerHTML = `${progress}% loaded`
+    if (progress === 100) {
+      setTimeout(() => {
+        el.innerHTML = ''
+      }, 1000)
+    }
+  }, [progress])
+
+  return null
 }

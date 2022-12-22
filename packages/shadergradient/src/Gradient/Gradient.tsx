@@ -31,6 +31,7 @@ export function Gradient({
         envPreset={envPreset}
       />
       <Mesh
+        key={JSON.stringify(others)}
         {...others}
         rotSpringOption={rotSpringOption}
         posSpringOption={posSpringOption}

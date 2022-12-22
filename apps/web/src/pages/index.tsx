@@ -15,7 +15,7 @@ export default function Page(props) {
 // It will receive same props as the Page component (from getStaticProps, etc.)
 Page.canvas = (props) => (
   <>
-    <Gradient control='query' />
+    <Gradient />
   </>
 )
 

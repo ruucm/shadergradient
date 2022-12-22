@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useRef } from 'react'
 import * as THREE from 'three'
 import { mainLoading } from '@/consts'
@@ -65,11 +65,6 @@ export const Mesh: React.FC<any> = ({
     config: { duration: 300 }, // default transition
   }),
 }) => {
-  const shaderType = type ?? 'plane'
-
-  let sceneShader = shaders.defaults[shaderType] // default type is plane
-  if (shader && shader !== 'defaults') sceneShader = shaders[shader][shaderType]
-
   // when color is hovered
   // const hoverState = usePropertyStore((state: any) => state.hoverState)
   const [, setZoomOut] = useQueryState('zoomOut')
@@ -81,101 +76,75 @@ export const Mesh: React.FC<any> = ({
   //   else setZoomOut(false)
   // }, [hoverState])
 
-  const ColorShiftMaterial = shaderMaterial(
-    {
-      // colors: getHoverColor(hoverState, [color1, color2, color3]),
-      colors: [color1, color2, color3],
-      uTime,
-      uSpeed,
-
-      uLoadingTime: 0,
-
-      uNoiseDensity: uDensity,
-      uNoiseStrength: uStrength,
-      uFrequency,
-      uAmplitude,
-      uIntensity: 0.5,
-    },
-    sceneShader.vertex,
-    sceneShader.fragment
-  )
-
-  const HoveredLineMaterial = lineMaterial(
-    {
-      uTime,
-      uSpeed,
-      uNoiseDensity: uDensity,
-      uNoiseStrength: uStrength,
-      uFrequency,
-      uAmplitude,
-      uIntensity: 0.5,
-    },
-    sceneShader.vertex
-  )
-
-  // This is the 🔑 that HMR will renew if this file is edited
-  // It works for THREE.ShaderMaterial as well as for drei/shaderMaterial
-  // @ts-ignore
-  ColorShiftMaterial.key = THREE.MathUtils.generateUUID()
-
-  extend({ ColorShiftMaterial })
-
-  HoveredLineMaterial.key = THREE.MathUtils.generateUUID()
-
-  extend({ HoveredLineMaterial })
+  const materialMounted = useMaterials({
+    type,
+    shader,
+    color1,
+    color2,
+    color3,
+    uTime,
+    uSpeed,
+    uDensity,
+    uStrength,
+    uFrequency,
+    uAmplitude,
+  })
 
   const material: any = useRef()
   const linemat: any = useRef()
 
   let currentTime = 0
   useFrame((state, delta) => {
-    const elapsed = clock.getElapsedTime()
+    if (material.current) {
+      const elapsed = clock.getElapsedTime()
 
-    // loading animation
-    if (elapsed > meshDelay) {
-      const current = material.current.userData.uLoadingTime.value
-      const val =
-        elapsed < meshDur + meshDelay
-          ? // @ts-ignore
-            Math.easeInOutCubic(
-              currentTime,
-              current,
-              to - current,
-              meshDur * 1000
-            )
-          : to
-      material.current.userData.uLoadingTime.value = val
+      // loading animation
+      if (elapsed > meshDelay) {
+        const current = material.current.userData.uLoadingTime.value
+        const val =
+          elapsed < meshDur + meshDelay
+            ? // @ts-ignore
+              Math.easeInOutCubic(
+                currentTime,
+                current,
+                to - current,
+                meshDur * 1000
+              )
+            : to
+        material.current.userData.uLoadingTime.value = val
 
-      if (elapsed < meshDur + meshDelay) {
-        currentTime += increment
-        // console.log({ elapsed, val })
+        if (elapsed < meshDur + meshDelay) {
+          currentTime += increment
+          // console.log({ elapsed, val })
+        }
       }
-    }
 
-    // loop animation
-    if (animate === 'on') {
-      material.current.userData.uTime.value = elapsed
-      if (linemat.current !== undefined) {
-        linemat.current.userData.uTime.value = elapsed
+      // loop animation
+      if (animate === 'on') {
+        material.current.userData.uTime.value = elapsed
+        if (linemat.current !== undefined) {
+          linemat.current.userData.uTime.value = elapsed
+        }
       }
     }
   })
 
   useEffect(() => {
-    material.current.userData.uTime.value = uTime
+    if (material.current) {
+      material.current.userData.uTime.value = uTime
+      material.current.roughness = 1 - reflection
+    }
+
     if (linemat.current !== undefined) {
       linemat.current.userData.uTime.value = uTime
     }
-
-    material.current.roughness = 1 - reflection
-  }, [uTime, reflection])
+  }, [uTime, reflection, material.current])
 
   // change position/rotation for about page
   const position = [positionX, positionY, positionZ]
   const rotation = dToRArr([rotationX, rotationY, rotationZ])
 
   const { animatedPosition } = useSpring(posSpringOption({ position }))
-
   const { animatedRotation } = useSpring(rotSpringOption({ rotation }))
 
   return (
@@ -188,7 +157,7 @@ export const Mesh: React.FC<any> = ({
           <planeGeometry args={[10, 10, meshCount, meshCount]} />
         )}
         {/* @ts-ignore */}
-        <colorShiftMaterial key={ColorShiftMaterial.key} ref={material} />
+        {materialMounted && <colorShiftMaterial ref={material} />}
       </animated.mesh>
 
       {/* show the line mesh when color is hovered */}
@@ -210,7 +179,7 @@ export const Mesh: React.FC<any> = ({
             <planeGeometry args={[10, 10, meshLineCount, meshLineCount]} />
           )}
           {/* @ts-ignore */}
-          <hoveredLineMaterial key={HoveredLineMaterial.key} ref={linemat} />
+          {materialMounted && <hoveredLineMaterial ref={linemat} />}
         </lineSegments>
       </mesh>
     </group>
@@ -222,4 +191,66 @@ function getHoverColor(hoverState: number, colors: any) {
   else if (hoverState === 2) return ['#000000', colors[1], '#000000']
   else if (hoverState === 3) return ['#000000', '#000000', colors[2]]
   else return [colors[0], colors[1], colors[2]]
+}
+
+function useMaterials({
+  type,
+  shader,
+  color1,
+  color2,
+  color3,
+  uTime,
+  uSpeed,
+  uDensity,
+  uStrength,
+  uFrequency,
+  uAmplitude,
+}) {
+  const [mounted, setMounted] = useState(false)
+  const shaderType = type ?? 'plane'
+  let sceneShader = shaders.defaults[shaderType] // default type is plane
+  if (shader && shader !== 'defaults') sceneShader = shaders[shader][shaderType]
+
+  // extend only once when the component is mounted
+  // this Mesh component always gets mounted when prop changes on the parent (Gradient.tsx)
+  useEffect(() => {
+    const ColorShiftMaterial = shaderMaterial(
+      {
+        // colors: getHoverColor(hoverState, [color1, color2, color3]),
+        colors: [color1, color2, color3],
+        uTime,
+        uSpeed,
+
+        uLoadingTime: 0,
+
+        uNoiseDensity: uDensity,
+        uNoiseStrength: uStrength,
+        uFrequency,
+        uAmplitude,
+        uIntensity: 0.5,
+      },
+      sceneShader.vertex,
+      sceneShader.fragment
+    )
+
+    const HoveredLineMaterial = lineMaterial(
+      {
+        uTime,
+        uSpeed,
+        uNoiseDensity: uDensity,
+        uNoiseStrength: uStrength,
+        uFrequency,
+        uAmplitude,
+        uIntensity: 0.5,
+      },
+      sceneShader.vertex
+    )
+
+    extend({ ColorShiftMaterial })
+    extend({ HoveredLineMaterial })
+
+    setMounted(true)
+  }, [])
+
+  return mounted
 }

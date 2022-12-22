@@ -38,5 +38,5 @@ function Loader() {
     }
   }, [progress])
 
-  return <ambientLight />
+  return <ambientLight intensity={0.4} />
 }

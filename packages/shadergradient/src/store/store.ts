@@ -10,16 +10,12 @@ export const useQueryStore = create((set) => ({
   ...parseState(),
 }))
 
-export const usePropertyStore = create((set) => ({
+// store for UI updates
+export const useCursorStore = create((set) => ({
   hoverState: 0,
-  inAbout: false,
+  hover: 'default',
+  updateHoverState: (payload) => set({ hoverState: payload }),
 }))
-
-export const useCursorStore = create(() => {
-  return {
-    hover: 'default',
-  }
-})
 
 // querystate should be a search string
 export const updateGradientState = (querystate: any) => {

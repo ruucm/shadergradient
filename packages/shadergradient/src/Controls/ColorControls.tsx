@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { usePropertyStore, useQueryState } from '@/store'
+import { useCursorStore, useQueryState } from '@/store'
 import { ColorInput, Radio } from '@/ui'
 import { InputPanel } from './InputPanel'
 
@@ -17,7 +17,10 @@ export const ColorControls: React.FC<ColorControlsPropsT> = () => {
   const [color3, setColor3] = useQueryState('color3')
   const [bgColor1, setBgColor1] = useQueryState('bgColor1')
   const [bgColor2, setBgColor2] = useQueryState('bgColor2')
-  const hoverState = usePropertyStore((state: any) => state.hoverState)
+  const updateHoverState = useCursorStore(
+    (state: any) => state.updateHoverState
+  )
+
   const [customBgColor, setCustomBgColor] = React.useState('off')
   const [isHovered, setIsHovered] = React.useState('')
 
@@ -34,36 +37,24 @@ export const ColorControls: React.FC<ColorControlsPropsT> = () => {
       <InputPanel
         title='Color 1'
         info={true}
-        onMouseEnter={() => {
-          usePropertyStore.setState({ hoverState: 1 })
-        }}
-        onMouseLeave={() => {
-          usePropertyStore.setState({ hoverState: 0 })
-        }}
+        onMouseEnter={() => updateHoverState(1)}
+        onMouseLeave={() => updateHoverState(0)}
       >
         <ColorInput defaultValue={color1} setValue={setColor1} />
       </InputPanel>
       <InputPanel
         title='Color 2'
         info={true}
-        onMouseEnter={() => {
-          usePropertyStore.setState({ hoverState: 2 })
-        }}
-        onMouseLeave={() => {
-          usePropertyStore.setState({ hoverState: 0 })
-        }}
+        onMouseEnter={() => updateHoverState(2)}
+        onMouseLeave={() => updateHoverState(0)}
       >
         <ColorInput defaultValue={color2} setValue={setColor2} />
       </InputPanel>
       <InputPanel
         title='Color 3'
         info={true}
-        onMouseEnter={() => {
-          usePropertyStore.setState({ hoverState: 3 })
-        }}
-        onMouseLeave={() => {
-          usePropertyStore.setState({ hoverState: 0 })
-        }}
+        onMouseEnter={() => updateHoverState(3)}
+        onMouseLeave={() => updateHoverState(0)}
       >
         <ColorInput defaultValue={color3} setValue={setColor3} />
       </InputPanel>

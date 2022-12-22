@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useRef } from 'react'
 import * as THREE from 'three'
 import { mainLoading } from '@/consts'
-import { usePropertyStore } from '@/store'
+import { useCursorStore } from '@/store'
 import { dToRArr } from '@/utils'
 import { lineMaterial } from './lineMaterial'
 import { shaderMaterial } from './shaderMaterial'
@@ -65,23 +65,14 @@ export const Mesh: React.FC<any> = ({
     config: { duration: 300 }, // default transition
   }),
 }) => {
-  // when color is hovered
-  // const hoverState = usePropertyStore((state: any) => state.hoverState)
-  const [, setZoomOut] = useQueryState('zoomOut')
   const meshCount = 192
   const meshLineCount = 36
 
-  // useEffect(() => {
-  //   if (hoverState !== 0) setZoomOut(true)
-  //   else setZoomOut(false)
-  // }, [hoverState])
-
+  const [hoverState, colors] = useHoverColorInfo({ color1, color2, color3 })
   const materialMounted = useMaterials({
     type,
     shader,
-    color1,
-    color2,
-    color3,
+    ...colors,
     uTime,
     uSpeed,
     uDensity,
@@ -118,8 +109,7 @@ export const Mesh: React.FC<any> = ({
           renderOrder={1}
           position={position}
           rotation={rotation}
-          // visible={hoverState !== 0 ? true : false}
-          visible={false}
+          visible={hoverState !== 0 ? true : false}
         >
           {type === 'plane' && (
             <planeGeometry args={[10, 10, 1, meshLineCount]} />
@@ -136,13 +126,6 @@ export const Mesh: React.FC<any> = ({
       </mesh>
     </group>
   )
-}
-
-function getHoverColor(hoverState: number, colors: any) {
-  if (hoverState === 1) return [colors[0], '#000000', '#000000']
-  else if (hoverState === 2) return ['#000000', colors[1], '#000000']
-  else if (hoverState === 3) return ['#000000', '#000000', colors[2]]
-  else return [colors[0], colors[1], colors[2]]
 }
 
 function useMaterials({
@@ -168,7 +151,6 @@ function useMaterials({
   useEffect(() => {
     const ColorShiftMaterial = shaderMaterial(
       {
-        // colors: getHoverColor(hoverState, [color1, color2, color3]),
         colors: [color1, color2, color3],
         uTime,
         uSpeed,
@@ -259,4 +241,25 @@ function useTimeAnimation({ animate, uTime, reflection }) {
   }, [uTime, reflection, material.current])
 
   return { material, linemat }
+}
+
+function useHoverColorInfo({ color1, color2, color3 }) {
+  // when color is hovered
+  const hoverState = useCursorStore((state: any) => state.hoverState)
+  const [, setZoomOut] = useQueryState('zoomOut')
+
+  useEffect(() => {
+    if (hoverState !== 0) setZoomOut(true)
+    else setZoomOut(false)
+  }, [hoverState])
+
+  return [hoverState, getHoverColor(hoverState, { color1, color2, color3 })]
+}
+function getHoverColor(hoverState: number, { color1, color2, color3 }: any) {
+  if (hoverState === 1) return { color1, color2: '#000000', color3: '#000000' }
+  else if (hoverState === 2)
+    return { color1: '#000000', color2, color3: '#000000' }
+  else if (hoverState === 3)
+    return { color1: '#000000', color2: '#000000', color3 }
+  else return { color1, color2, color3 }
 }

@@ -6,5 +6,3 @@ export * from './Inputs'
 
 export * from './HoverBox'
 export * from './TextAnimation'
-
-export * from './Loader'

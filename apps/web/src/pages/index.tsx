@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import { Gradient, PresetTitles } from 'shadergradient'
-import { TextHover, Loader } from 'shadergradient/ui'
+import { TextHover } from 'shadergradient/ui'
 
 // Dom components go here
 export default function Page(props) {
@@ -11,8 +11,6 @@ export default function Page(props) {
         <Link href='/test'>
           <TextHover content='Try it by yourself →' />
         </Link>
-
-        <Loader />
       </div>
     </>
   )

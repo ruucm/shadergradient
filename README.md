@@ -42,13 +42,13 @@ function App() {
 ## Setup
 
 ```
-yarn install && yarn bootstrap
+pnpm install
 ```
 
 ## Start development
 
 ```
-yarn start
+yarn dev
 ```
 
 ## TODO

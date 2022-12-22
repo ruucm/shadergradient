@@ -67,6 +67,9 @@ export default function Page(props) {
               fontSize={isMobile === true ? 70 : 120}
               arrowOn={isMobile === true ? false : true}
             />
+
+            <LoaderRoot />
+            <br />
           </div>
 
           <motion.div

@@ -90,55 +90,7 @@ export const Mesh: React.FC<any> = ({
     uAmplitude,
   })
 
-  const material: any = useRef()
-  const linemat: any = useRef()
-
-  let currentTime = 0
-  useFrame((state, delta) => {
-    if (material.current) {
-      const elapsed = clock.getElapsedTime()
-
-      // loading animation
-      if (elapsed > meshDelay) {
-        const current = material.current.userData.uLoadingTime.value
-        const val =
-          elapsed < meshDur + meshDelay
-            ? // @ts-ignore
-              Math.easeInOutCubic(
-                currentTime,
-                current,
-                to - current,
-                meshDur * 1000
-              )
-            : to
-        material.current.userData.uLoadingTime.value = val
-
-        if (elapsed < meshDur + meshDelay) {
-          currentTime += increment
-          // console.log({ elapsed, val })
-        }
-      }
-
-      // loop animation
-      if (animate === 'on') {
-        material.current.userData.uTime.value = elapsed
-        if (linemat.current !== undefined) {
-          linemat.current.userData.uTime.value = elapsed
-        }
-      }
-    }
-  })
-
-  useEffect(() => {
-    if (material.current) {
-      material.current.userData.uTime.value = uTime
-      material.current.roughness = 1 - reflection
-    }
-
-    if (linemat.current !== undefined) {
-      linemat.current.userData.uTime.value = uTime
-    }
-  }, [uTime, reflection, material.current])
+  const { material, linemat } = useTimeAnimation({ animate, uTime, reflection })
 
   // change position/rotation for about page
   const position = [positionX, positionY, positionZ]
@@ -253,4 +205,58 @@ function useMaterials({
   }, [])
 
   return mounted
+}
+
+function useTimeAnimation({ animate, uTime, reflection }) {
+  const material: any = useRef()
+  const linemat: any = useRef()
+
+  let currentTime = 0
+  useFrame((state, delta) => {
+    if (material.current) {
+      const elapsed = clock.getElapsedTime()
+
+      // loading animation
+      if (elapsed > meshDelay) {
+        const current = material.current.userData.uLoadingTime.value
+        const val =
+          elapsed < meshDur + meshDelay
+            ? // @ts-ignore
+              Math.easeInOutCubic(
+                currentTime,
+                current,
+                to - current,
+                meshDur * 1000
+              )
+            : to
+        material.current.userData.uLoadingTime.value = val
+
+        if (elapsed < meshDur + meshDelay) {
+          currentTime += increment
+          // console.log({ elapsed, val })
+        }
+      }
+
+      // loop animation
+      if (animate === 'on') {
+        material.current.userData.uTime.value = elapsed
+        if (linemat.current !== undefined) {
+          linemat.current.userData.uTime.value = elapsed
+        }
+      }
+    }
+  })
+
+  useEffect(() => {
+    if (material.current) {
+      material.current.userData.uTime.value = uTime
+      material.current.roughness = 1 - reflection
+    }
+
+    if (linemat.current !== undefined) {
+      linemat.current.userData.uTime.value = uTime
+    }
+  }, [uTime, reflection, material.current])
+
+  return { material, linemat }
 }

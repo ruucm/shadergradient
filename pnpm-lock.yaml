@@ -109,7 +109,7 @@ importers:
       esbuild-plugin-glsl: ^1.1.0
       eslint: ^7.32.0
       eslint-config-custom: workspace:*
-      framer-motion: ^7.10.3
+      framer-motion: '*'
       fs-extra: ^10.0.1
       globby: ^11.0.4
       node-sass: ^7.0.1
@@ -140,7 +140,7 @@ importers:
       '@uiw/react-color-shade-slider': 1.1.1_biqbaboplfbrettd7655fr4n2y
       '@uiw/react-color-wheel': 1.1.1_biqbaboplfbrettd7655fr4n2y
       camera-controls: 1.37.4_three@0.146.0
-      framer-motion: 7.10.3_biqbaboplfbrettd7655fr4n2y
+      framer-motion: 8.0.1_biqbaboplfbrettd7655fr4n2y
       query-string: 7.1.3
       react: 18.2.0
       react-feather: 2.0.10_react@18.2.0
@@ -4534,21 +4534,6 @@ packages:
   /fraction.js/4.2.0:
     resolution: {integrity: sha512-MhLuK+2gUcnZe8ZHlaaINnQLl0xRIGRfcGk2yl8xoQAfHrSsL3rYu6FCmBdkdbhc9EPlwyGHewaRsvwRMJtAlA==}
     dev: true
-
-  /framer-motion/7.10.3_biqbaboplfbrettd7655fr4n2y:
-    resolution: {integrity: sha512-k2ccYeZNSpPg//HTaqrU+4pRq9f9ZpaaN7rr0+Rx5zA4wZLbk547wtDzge2db1sB+1mnJ6r59P4xb+aEIi/W+w==}
-    peerDependencies:
-      react: ^18.0.0
-      react-dom: ^18.0.0
-    dependencies:
-      '@motionone/dom': 10.15.3
-      hey-listen: 1.0.8
-      react: 18.2.0
-      react-dom: 18.2.0_react@18.2.0
-      tslib: 2.4.0
-    optionalDependencies:
-      '@emotion/is-prop-valid': 0.8.8
-    dev: false
 
   /framer-motion/8.0.1_biqbaboplfbrettd7655fr4n2y:
     resolution: {integrity: sha512-rr9Sb97cGM5BWU0jMsmTi9x5w8hF90p6wRUlXto5IFejxMVS8YUxT8Ljjy8RspQKPEGOQUZDIZNvlcLBhs0tMw==}

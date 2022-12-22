@@ -1,5 +1,9 @@
+// modified from https://github.com/pmndrs/drei/blob/master/src/core/useProgress.tsx
+// use useState instead of zustand cause it is not works on the Framer canvas
+
+import { useState } from 'react'
 import { DefaultLoadingManager } from 'three'
-import create from 'zustand'
+// import create from 'zustand'
 
 type Data = {
   errors: string[]
@@ -11,44 +15,46 @@ type Data = {
 }
 let saveLastTotalLoaded = 0
 
-const useProgress = create<Data>((set) => {
-  DefaultLoadingManager.onStart = (item, loaded, total) => {
-    set({
-      active: true,
-      item,
-      loaded,
-      total,
-      progress:
-        ((loaded - saveLastTotalLoaded) / (total - saveLastTotalLoaded)) * 100,
-    })
-  }
+function useProgress() {
+  const [s, setS] = useState<any>({})
+
+  // DefaultLoadingManager.onStart = (item, loaded, total) => {
+  // const progress =
+  //   ((loaded - saveLastTotalLoaded) / (total - saveLastTotalLoaded)) * 100
+  // setS((p) => ({
+  //   ...p,
+  //   active: true,
+  //   item,
+  //   loaded,
+  //   total,
+  //   progress,
+  // }))
+  // }
+  // DefaultLoadingManager.onError = (item) =>
+  // setS((state) => ({ errors: [...state.errors, item] }))
+
   DefaultLoadingManager.onLoad = () => {
-    set({ active: false })
+    setS((p) => ({ ...p, active: false }))
   }
-  DefaultLoadingManager.onError = (item) =>
-    set((state) => ({ errors: [...state.errors, item] }))
   DefaultLoadingManager.onProgress = (item, loaded, total) => {
     if (loaded === total) {
       saveLastTotalLoaded = total
     }
-    set({
+
+    const progress =
+      ((loaded - saveLastTotalLoaded) / (total - saveLastTotalLoaded)) * 100 ||
+      100
+    setS((p) => ({
+      ...p,
       active: true,
       item,
       loaded,
       total,
-      progress:
-        ((loaded - saveLastTotalLoaded) / (total - saveLastTotalLoaded)) *
-          100 || 100,
-    })
+      progress,
+    }))
   }
-  return {
-    errors: [],
-    active: false,
-    progress: 0,
-    item: '',
-    loaded: 0,
-    total: 0,
-  }
-})
+
+  return s
+}
 
 export { useProgress }

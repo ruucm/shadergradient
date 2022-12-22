@@ -21,7 +21,8 @@
     "@react-three/fiber": "*",
     "react": "*",
     "three": "*",
-    "three-stdlib": "*"
+    "three-stdlib": "*",
+    "framer-motion": "*"
   },
   "devDependencies": {
     "@types/react": "^18.0.26",
@@ -50,7 +51,6 @@
     "@uiw/react-color-shade-slider": "^1.1.1",
     "@uiw/react-color-wheel": "^1.1.1",
     "camera-controls": "^1.37.4",
-    "framer-motion": "^7.10.3",
     "query-string": "^7.1.1",
     "react-feather": "^2.0.10",
     "react-intersection-observer": "^9.4.1",

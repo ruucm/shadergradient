@@ -7,6 +7,8 @@ const withPWA = require('next-pwa')({
   disable: process.env.NODE_ENV === 'development',
 })
 
+const isDev = process.env.NODE_ENV === 'development'
+
 const nextConfig = {
   // uncomment the following snippet if using styled components
   // compiler: {
@@ -44,6 +46,15 @@ const nextConfig = {
 
     return config
   },
+  async redirects() {
+    if (isDev) return []
+    return ['/404', '/about', '/customize', '/', '/figma-plugin'].map((p) => ({
+      source: p,
+      destination: '/comingsoon',
+      permanent: true,
+    }))
+  },
+  pageExtensions: ['page.ts', 'page.tsx', 'api.ts', 'api.tsx'],
 }
 
 // manage i18n
@@ -54,15 +65,26 @@ if (process.env.EXPORT !== 'true') {
   }
 }
 
-const KEYS_TO_OMIT = ['webpackDevMiddleware', 'configOrigin', 'target', 'analyticsId', 'webpack5', 'amp', 'assetPrefix']
+const KEYS_TO_OMIT = [
+  'webpackDevMiddleware',
+  'configOrigin',
+  'target',
+  'analyticsId',
+  'webpack5',
+  'amp',
+  'assetPrefix',
+]
 
 module.exports = (_phase, { defaultConfig }) => {
   const plugins = [[withPWA], [withBundleAnalyzer, {}]]
 
-  const wConfig = plugins.reduce((acc, [plugin, config]) => plugin({ ...acc, ...config }), {
-    ...defaultConfig,
-    ...nextConfig,
-  })
+  const wConfig = plugins.reduce(
+    (acc, [plugin, config]) => plugin({ ...acc, ...config }),
+    {
+      ...defaultConfig,
+      ...nextConfig,
+    }
+  )
 
   const finalConfig = {}
   Object.keys(wConfig).forEach((key) => {

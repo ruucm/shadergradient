@@ -10,13 +10,6 @@ export const useQueryStore = create((set) => ({
   ...parseState(),
 }))
 
-// store for UI updates
-export const useCursorStore = create((set) => ({
-  hoverState: 0,
-  hover: 'default',
-  updateHoverState: (payload) => set({ hoverState: payload }),
-}))
-
 export const updateGradientState = (querystate: object | string) => {
   const isString = typeof querystate === 'string'
 
@@ -39,6 +32,12 @@ export const useDomStore = create(() => {
   return { dom: null }
 })
 
+// store for UI updates
+export const useCursorStore = create((set) => ({
+  hoverState: 0,
+  hover: 'default',
+  updateHoverState: (payload) => set({ hoverState: payload }),
+}))
 export const useUIStore = create(
   combine(
     { activePreset: initialActivePreset, mode: 'full', loadingPercentage: 0 },

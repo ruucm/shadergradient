@@ -2,10 +2,12 @@ import React from 'react'
 import { EquirectangularReflectionMapping, Texture } from 'three'
 import * as THREE from 'three'
 import { useThree } from '@react-three/fiber'
+import { envBasePath } from '@/consts'
+import { useRGBELoader } from './useRGBELoader'
 
 type Props = {
   background?: boolean | 'only'
-  map?: THREE.Texture
+  envPreset?: 'city' | 'dawn' | 'lobby'
   loadingCallback?: (percentage: number) => void
 }
 
@@ -15,7 +17,13 @@ const resolveScene = (
   scene: THREE.Scene | React.MutableRefObject<THREE.Scene>
 ) => (isRef(scene) ? scene.current : scene)
 
-export function EnvironmentMap({ background = false, map }: Props) {
+export function EnvironmentMap({ background = false, envPreset }: Props) {
+  const city = useRGBELoader('city.hdr', { path: envBasePath })
+  const dawn = useRGBELoader('dawn.hdr', { path: envBasePath })
+  const lobby = useRGBELoader('lobby.hdr', { path: envBasePath })
+  const textures = { city, dawn, lobby }
+  const map: THREE.Texture = textures[envPreset]
+
   const defaultScene = useThree((state) => state.scene)
 
   React.useLayoutEffect(() => {

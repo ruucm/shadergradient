@@ -1,4 +1,3 @@
-import { Suspense } from 'react'
 import { useControlValues, usePostProcessing } from './hooks'
 import { Lights, Mesh, Axis, CameraControl } from './comps'
 import { usePresetToStore } from '@/store'
@@ -24,7 +23,7 @@ export function Gradient({
   usePostProcessing(grain === 'off')
 
   return (
-    <Suspense fallback='Load Failed'>
+    <>
       <Lights
         lightType={lightType}
         brightness={brightness}
@@ -38,6 +37,6 @@ export function Gradient({
       />
       {toggleAxis && <Axis isFigmaPlugin={isFigmaPlugin} />}
       <CameraControl dampingFactor={dampingFactor} {...others} />
-    </Suspense>
+    </>
   )
 }

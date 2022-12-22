@@ -2,7 +2,6 @@ import { useUIStore } from '@/store'
 import { EnvironmentMap } from './Environment'
 import { Suspense, useEffect } from 'react'
 import { useProgress } from './useProgress'
-import { Html } from './Html'
 
 export function Lights({ lightType, brightness, envPreset }: any) {
   const setLoadingPercentage = useUIStore(
@@ -27,21 +26,17 @@ export function Lights({ lightType, brightness, envPreset }: any) {
 
 function Loader() {
   const { progress } = useProgress()
-  return (
-    <>
-      <ambientLight />
-      {/* <pointLight position={[10, 10, 10]} /> */}
-      <Html
-        center
-        style={{
-          color: 'white',
-          position: 'fixed',
-          whiteSpace: 'nowrap',
-          fontSize: '18px',
-        }}
-      >
-        {progress}% loaded
-      </Html>
-    </>
-  )
+
+  // update loader text (at LoaderRoot)
+  useEffect(() => {
+    const el = document.getElementById('LoaderRoot')
+    el.innerHTML = `${progress}% loaded`
+    if (progress === 100) {
+      setTimeout(() => {
+        el.innerHTML = ''
+      }, 1000)
+    }
+  }, [progress])
+
+  return <ambientLight />
 }

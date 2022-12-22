@@ -17,10 +17,13 @@ export const useCursorStore = create((set) => ({
   updateHoverState: (payload) => set({ hoverState: payload }),
 }))
 
-// querystate should be a search string
-export const updateGradientState = (querystate: any) => {
-  const state = parseState(querystate)
-  useQueryStore.setState(state, true)
+export const updateGradientState = (querystate: object | string) => {
+  const isString = typeof querystate === 'string'
+
+  let state = querystate
+  if (isString) state = parseState(querystate)
+
+  useQueryStore.setState(state, isString) // replace true if it's a string
 }
 
 // defaultGradient could be replaced by window.location.search

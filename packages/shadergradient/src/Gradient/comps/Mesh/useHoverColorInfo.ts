@@ -1,14 +1,13 @@
-import { useCursorStore, useQueryState } from '@/store'
+import { updateGradientState, useCursorStore } from '@/store'
 import { useEffect } from 'react'
 
 export function useHoverColorInfo({ color1, color2, color3 }) {
   // when color is hovered
   const hoverState = useCursorStore((state: any) => state.hoverState)
-  const [, setZoomOut] = useQueryState('zoomOut')
 
   useEffect(() => {
-    if (hoverState !== 0) setZoomOut(true)
-    else setZoomOut(false)
+    if (hoverState !== 0) updateGradientState({ zoomOut: true })
+    else updateGradientState({ zoomOut: false })
   }, [hoverState])
 
   return [hoverState, getHoverColor(hoverState, { color1, color2, color3 })]

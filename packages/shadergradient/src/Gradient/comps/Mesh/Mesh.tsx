@@ -12,6 +12,8 @@ Math.easeInOutCubic = function (t, b, c, d) {
   t -= 2
   return (c / 2) * (t * t * t + 2) + b
 }
+const meshCount = 192
+const meshLineCount = 36
 
 export const Mesh: React.FC<any> = ({
   type,
@@ -49,9 +51,6 @@ export const Mesh: React.FC<any> = ({
     config: { duration: 300 }, // default transition
   }),
 }) => {
-  const meshCount = 192
-  const meshLineCount = 36
-
   const [hoverState, colors] = useHoverColorInfo({ color1, color2, color3 })
   const materialMounted = useMaterials({
     type,

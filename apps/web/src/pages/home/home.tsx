@@ -128,6 +128,7 @@ export default function Page(props) {
                 <TextHover
                   fontSize={isMobile === true ? 15 : 18}
                   color={PRESETS[activePreset].color}
+                  font={'Inter'}
                   content={'Create yours →'}
                   delay={0}
                   border

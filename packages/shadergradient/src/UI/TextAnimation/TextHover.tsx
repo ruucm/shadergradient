@@ -1,7 +1,4 @@
-import React, { useState } from 'react'
-import { motion, useAnimation, AnimatePresence } from 'framer-motion'
-import { useInView } from 'react-intersection-observer'
-import { useUIStore, PRESETS } from '@/store'
+import { motion, AnimatePresence } from 'framer-motion'
 
 const letterContainerVariants = {
   initial: { transition: { staggerChildren: 0.015 } },
@@ -12,7 +9,7 @@ const letterContainerVariants = {
 const letterVariants = {
   initial: {
     opacity: 0,
-    y: 20,
+    y: 60,
     rotate: 0,
     transition: {
       type: 'spring',
@@ -26,13 +23,13 @@ const letterVariants = {
     rotate: 0,
     transition: {
       type: 'spring',
-      damping: 12,
+      damping: 20,
       stiffness: 200,
     },
   },
   hover: {
     opacity: 1,
-    y: -7,
+    y: -4,
     rotate: 0,
     transition: {
       type: 'spring',
@@ -52,16 +49,8 @@ export function TextHover({
   font = null,
   onClick = () => void 0,
   border = false,
+  fontWeight = 400,
 }) {
-  //   const splitted = referer?.split('/') || []
-  const [ref, inView] = useInView()
-  const controls = useAnimation()
-  const [currentInView, setCurrentInView] = useState(false)
-  const activePreset = useUIStore((state) => state.activePreset)
-
-  setTimeout(() => {
-    setCurrentInView(true)
-  }, delay * 1000)
   return (
     // @ts-ignore
     <AnimatePresence>
@@ -69,62 +58,89 @@ export function TextHover({
         style={{
           position: 'relative',
           wordBreak: 'break-word',
-          width: width,
-          fontFamily: '"Inter", san-serif',
-          cursor: 'pointer',
+          maxWidth: width === 0 ? 'fit-content' : width,
+          width: 'fit-content',
+          height: 'fit-content',
+          fontFamily: '"' + font + '", san-serif',
           display: 'flex',
           flexDirection: 'column',
-          color: PRESETS[activePreset].color,
+          color: color,
           whiteSpace: 'nowrap',
+          userSelect: 'none',
         }}
-        onClick={onClick}
       >
         <motion.h1
           variants={letterContainerVariants}
-          ref={ref}
-          // initial={'initial'}
-          animate={currentInView === true ? 'default' : 'initial'}
+          initial={'initial'}
+          whileInView={'default'}
           whileHover={'hover'}
-          // transition={{ delay: delay }}
-
-          style={{ padding: '2px 5px' }}
+          style={{
+            fontWeight: fontWeight,
+            margin: 0,
+            width: 'fit-content',
+            userSelect: 'none',
+          }}
+          transition={{ delay: delay }}
         >
-          <div style={{ textAlign: 'left', fontSize: fontSize, color: color }}>
-            {content.split(' ').map((word: string, wordI: number) => (
+          <div
+            style={{
+              textAlign: 'left',
+              fontSize: fontSize,
+              color: color,
+              display: 'flex',
+              flexWrap: 'wrap',
+              alignItems: 'center',
+              height: 'fit-content',
+            }}
+          >
+            {content.split(' ').map((word, wordI) => (
               <div
                 key={`word-${word}-${wordI}`}
                 style={{
-                  display: 'inline-block',
+                  height: 'fit-content',
+                  display: 'flex',
+                  alignItems: 'center',
                 }}
               >
                 {Array.from(word).map((letter, index) => (
-                  <motion.span
+                  <motion.div
                     key={`${index}-${letter}`}
                     style={{
+                      width: 'fit-content',
+                      height: 'fit-content',
+                      overflow: 'hidden',
                       position: 'relative',
                       display: 'inline-block',
-                      width: 'auto',
-                    }} // Position elements
-                    variants={letterVariants}
-                    transition={{ duration: 0.5 }}
+                    }}
                   >
-                    {letter === ' ' ? '\u00A0' : letter}
-                  </motion.span>
+                    <motion.span
+                      variants={letterVariants}
+                      transition={{ duration: 0.5 }}
+                      style={{
+                        position: 'relative',
+                        display: 'inline-block',
+                      }} // Position elements
+                    >
+                      {/* @ts-ignore */}
+                      {letter === ' ' ? '\u00A0' : letter}
+                    </motion.span>
+                  </motion.div>
                 ))}
                 {/* remove the last spacing */}
                 {wordI !== content.split(' ').length - 1 ? '\u00A0' : null}
               </div>
             ))}
           </div>
+          {/* border */}
+          {border && (
+            <motion.div
+              style={{ background: color, height: 2, marginTop: 3 }}
+              initial={{ width: 0 }}
+              animate={{ width: '100%' }}
+              transition={{ delay: delay + 0.5 }}
+            />
+          )}
         </motion.h1>
-        {/* border */}
-        {border && (
-          <motion.div
-            style={{ background: color, height: 2 }}
-            initial={{ width: 0 }}
-            animate={{ width: '100%' }}
-          />
-        )}
       </motion.div>
     </AnimatePresence>
   )

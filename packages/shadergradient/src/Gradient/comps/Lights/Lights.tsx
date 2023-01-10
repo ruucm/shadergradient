@@ -15,7 +15,7 @@ export function Lights({ lightType, brightness, envPreset }: any) {
         <Suspense fallback={<Loader />}>
           <EnvironmentMap
             envPreset={envPreset}
-            background={true}
+            background={false}
             loadingCallback={setLoadingPercentage}
           />
         </Suspense>

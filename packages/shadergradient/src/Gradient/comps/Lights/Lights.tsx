@@ -31,12 +31,14 @@ function Loader() {
   useEffect(() => {
     const el = document.getElementById('LoaderRoot')
     // el.innerHTML = `${progress}% loaded`
-    if (progress === 100) {
-      el.innerHTML = 'Ligths are loaded'
-      setTimeout(() => {
-        el.innerHTML = ''
-      }, 1000)
-    } else el.innerHTML = 'Loading lights...'
+    if (el && progress) {
+      if (progress === 100) {
+        el.innerHTML = 'Ligths are loaded'
+        setTimeout(() => {
+          el.innerHTML = ''
+        }, 1000)
+      } else el.innerHTML = 'Loading lights...'
+    }
   }, [progress])
 
   return <ambientLight intensity={0.4} />

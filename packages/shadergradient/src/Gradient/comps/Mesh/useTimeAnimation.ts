@@ -1,6 +1,6 @@
 import { mainLoading } from '@/consts'
 import { useFrame } from '@react-three/fiber'
-import { useRef, useEffect } from 'react'
+import { useRef } from 'react'
 import * as THREE from 'three'
 
 const { to, rotDur, meshDur, rotDelay, meshDelay } = mainLoading
@@ -13,7 +13,7 @@ const clock = new THREE.Clock()
 
 const increment = 20
 
-export function useTimeAnimation({ animate, uTime, reflection }) {
+export function useTimeAnimation({ animate }) {
   const material: any = useRef()
   const linemat: any = useRef()
 
@@ -52,17 +52,6 @@ export function useTimeAnimation({ animate, uTime, reflection }) {
       }
     }
   })
-
-  useEffect(() => {
-    if (material.current) {
-      material.current.userData.uTime.value = uTime
-      material.current.roughness = 1 - reflection
-    }
-
-    if (linemat.current !== undefined) {
-      linemat.current.userData.uTime.value = uTime
-    }
-  }, [uTime, reflection, material.current])
 
   return { material, linemat }
 }

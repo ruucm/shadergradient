@@ -64,7 +64,7 @@ export const Mesh: React.FC<any> = ({
     uAmplitude,
   })
 
-  const { material, linemat } = useTimeAnimation({ animate, uTime, reflection })
+  const { material, linemat } = useTimeAnimation({ animate })
 
   // change position/rotation for about page
   const position = [positionX, positionY, positionZ]
@@ -82,8 +82,10 @@ export const Mesh: React.FC<any> = ({
         {type === 'waterPlane' && (
           <planeGeometry args={[10, 10, meshCount, meshCount]} />
         )}
-        {/* @ts-ignore */}
-        {materialMounted && <colorShiftMaterial ref={material} />}
+        {materialMounted && (
+          // @ts-ignore
+          <colorShiftMaterial ref={material} roughness={1 - reflection} />
+        )}
       </animated.mesh>
 
       {/* show the line mesh when color is hovered */}

@@ -15,3 +15,5 @@ export {
   aboutAngles,
 } from './consts'
 export { cx } from './utils'
+
+export * from './Overrides'

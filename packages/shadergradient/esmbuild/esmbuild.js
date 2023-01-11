@@ -23,7 +23,6 @@ async function getBuildOptions(path) {
       `${defaultPath}/index.ts`,
       `${defaultPath}/client.ts`,
       `${defaultPath}/ui.ts`,
-      `${defaultPath}/Overrides/index.ts`,
     ],
     minify: true,
     format: 'esm',

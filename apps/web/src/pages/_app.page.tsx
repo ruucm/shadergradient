@@ -5,7 +5,7 @@ import Layout from '@/components/dom/Layout'
 import '@/styles/index.css'
 import 'shadergradient/styles.css'
 
-const Scene: any = dynamic(() => import('@/components/canvas/Scene'), {
+const Scene = dynamic(() => import('@/components/canvas/Scene'), {
   ssr: true,
 })
 

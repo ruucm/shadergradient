@@ -1,3 +1,4 @@
+import { useCursorStore } from '@/store'
 import useQueryState from '@/useQueryState'
 import { formatUrlString } from '@/utils'
 import * as qs from 'query-string'
@@ -46,6 +47,7 @@ export function useControlValues(control, { urlString, ...props }: any) {
   // tools
   const [zoomOut] = useQueryState('zoomOut')
   const [toggleAxis] = useQueryState('toggleAxis')
+  const hoverState = useCursorStore((state: any) => state.hoverState)
 
   const queryProps = {
     type,
@@ -78,6 +80,8 @@ export function useControlValues(control, { urlString, ...props }: any) {
     reflection,
     zoomOut,
     toggleAxis,
+
+    hoverState, // include hoverState to flush the shader when it is hovered
   }
 
   if (control === 'props') return { ...queryProps, ...props }

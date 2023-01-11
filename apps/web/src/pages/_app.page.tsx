@@ -5,7 +5,9 @@ import Layout from '@/components/dom/Layout'
 import '@/styles/index.css'
 import 'shadergradient/styles.css'
 
-const Scene = dynamic(() => import('@/components/canvas/Scene'), { ssr: true })
+const Scene: any = dynamic(() => import('@/components/canvas/Scene'), {
+  ssr: true,
+})
 
 export default function App({ Component, pageProps = { title: 'index' } }) {
   const ref = useRef()

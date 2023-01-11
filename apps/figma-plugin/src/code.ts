@@ -1,6 +1,6 @@
 // import framerOnMessage from 'framer-sites-figma-plugin/lib/api'
 
-figma.showUI(__html__, { width: 453, height: 832 })
+figma.showUI(__html__, { width: 450, height: 837 })
 
 figma.ui.onmessage = (msg) => {
   // framerOnMessage(msg)

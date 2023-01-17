@@ -1,19 +1,33 @@
 // import framerOnMessage from 'framer-sites-figma-plugin/lib/api'
 
-figma.showUI(__html__, { width: 450, height: 837 })
+figma.showUI(__html__, { width: 450, height: 630 })
+
+// restore previous size
+figma.clientStorage
+  .getAsync('size')
+  .then((size) => {
+    if (size) figma.ui.resize(size.w, size.h)
+  })
+  .catch((err) => {})
 
 figma.ui.onmessage = (msg) => {
-  // framerOnMessage(msg)
-  const { type } = msg
-  console.log('msg type', type)
-  if (type === 'SNAPSHOT') {
-    Promise.all(
-      figma.currentPage.selection.map((selected) =>
-        replaceToNewImage(selected, msg.bytes)
-      )
-    ).then(() => {
-      console.log('complete')
-    })
+  switch (msg.type) {
+    case 'resize':
+      figma.ui.resize(msg.size.w, msg.size.h)
+      figma.clientStorage.setAsync('size', msg.size).catch((err) => {
+        console.log('err (setAsync)', err)
+      }) // save size
+
+      break
+    case 'SNAPSHOT':
+      Promise.all(
+        figma.currentPage.selection.map((selected) =>
+          replaceToNewImage(selected, msg.bytes)
+        )
+      ).then(() => {
+        console.log('complete')
+      })
+      break
   }
 }
 

@@ -7,7 +7,12 @@ export * from './Gradient'
 export * from './controls'
 
 // to use inside the web app
-export { useUIStore, useCursorStore, PRESETS } from './store'
+export {
+  useUIStore,
+  useCursorStore,
+  updateGradientState,
+  PRESETS,
+} from './store'
 export {
   mainLoading,
   aboutPositions,

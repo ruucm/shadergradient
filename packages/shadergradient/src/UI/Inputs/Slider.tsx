@@ -45,7 +45,7 @@ export const Slider = React.forwardRef<HTMLInputElement, SliderPropsT>(
           className='bg-primary h-slider w-full'
           marks={[(min + max) / 2]}
           markClassName='w-mark h-mark bg-primary top-1/2 transform -translate-y-1/2 slider-mark-center-x'
-          thumbClassName='bg-primary w-thumb h-thumb rounded-full top-1/2 transform -translate-y-1/2 outline-none cursor-pointer'
+          thumbClassName='bg-primary w-thumb h-thumb rounded-full top-1/2 transform -translate-y-1/2 outline-none cursor-pointer z-0'
           thumbActiveClassName='bg-opacity-80'
           // trackClassName={styles.track}
         />

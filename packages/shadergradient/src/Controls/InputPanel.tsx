@@ -27,7 +27,7 @@ export const InputPanel: React.FC<InputPanelPropsT> = ({
 }) => {
   return (
     <div className='flex justify-between items-center gap-3.5' {...rest}>
-      <span className='font-semibold text-primary w-[50%] text-base'>
+      <span className='font-semibold text-primary w-[50%] text-base relative'>
         {title}{' '}
         <span
           className='cursor-pointer'

@@ -56,7 +56,7 @@ export const ColorInput = React.forwardRef<HTMLInputElement, ColorInputPropsT>(
               height: 290,
               position: 'absolute',
               bottom: 10,
-              left: 80,
+              left: 20,
               zIndex: 100,
               background: 'blue',
               display: toggle === true ? 'block' : 'none',

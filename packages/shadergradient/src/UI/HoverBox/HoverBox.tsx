@@ -23,24 +23,30 @@ export const HoverBox: React.FC<ControlTypeTitlePropsT> = ({
     <div
       className={cx('text-sm font-medium text-white')}
       style={{
-        position: 'fixed',
+        position: 'sticky',
         marginLeft: centered === true ? 0 : -10,
         visibility: isHovered ? 'visible' : 'hidden',
-        marginTop: isHovered ? 10 : 0,
+        marginTop: 0,
         transitionDuration: '0.3s',
         opacity: isHovered ? 1 : 0,
+        zIndex: 20,
       }}
     >
       <div
         style={{
-          maxWidth: 230,
           width: 'fit-content',
           height: 'fit-content',
+          position: 'absolute',
+          zIndex: 20,
+          top: isHovered ? 10 : 0,
+          transitionDuration: '0.3s',
         }}
       >
         <div
           className={cx('bg-primary')}
           style={{
+            maxWidth: 260,
+
             position: 'absolute',
             width: '100%',
             height: '100%',
@@ -63,7 +69,13 @@ export const HoverBox: React.FC<ControlTypeTitlePropsT> = ({
             }}
           ></div>
         </div>
-        <p style={{ padding: 8, zIndex: 20, position: 'relative' }}>
+        <p
+          style={{
+            padding: 8,
+            zIndex: 20,
+            position: 'relative',
+          }}
+        >
           {content}
         </p>
       </div>

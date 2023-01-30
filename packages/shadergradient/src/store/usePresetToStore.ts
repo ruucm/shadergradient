@@ -25,11 +25,12 @@ export function usePresetToStore() {
     // CASE 2. When activePreset changes by UI buttons
     else if (
       (activePreset === 0 && !gradientURL) || // initial case
-      loadedPreset !== activePreset
+      (loadedPreset && loadedPreset !== activePreset)
     ) {
       console.log(
         '[CASE 2] usePresetToStore (When activePreset changes by UI buttons)'
       )
+      console.log('gradientURL', gradientURL)
       gradientURL = PRESETS[activePreset].url
       loadedPreset = activePreset
     }

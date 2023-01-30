@@ -23,6 +23,7 @@ export function usePresetToStore() {
       )
       console.log('gradientURL (1)', gradientURL)
       gradientURL = window.location.search
+      updateGradientState(gradientURL)
     }
     // CASE 2. When activePreset changes by UI buttons
     else if (
@@ -35,9 +36,9 @@ export function usePresetToStore() {
       console.log('gradientURL (2)', gradientURL)
       gradientURL = PRESETS[activePreset].url
       loadedPreset = activePreset
+      updateGradientState(gradientURL)
     }
 
-    updateGradientState(gradientURL)
     pageLoaded = true
   }, [activePreset])
 }

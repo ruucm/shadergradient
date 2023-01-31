@@ -23,6 +23,7 @@ export default function Page() {
   const setMode = useUIStore((state: any) => state.setMode)
   const activePreset = useUIStore((state) => state.activePreset)
   const [isMobile, setIsMobile] = useState(null)
+  const isDefaultPreset = activePreset === -1
 
   // //choose the screen size
   const handleResize = () => {
@@ -124,7 +125,7 @@ export default function Page() {
       {/* footer */}
       <motion.div
         style={{
-          color: PRESETS[activePreset].color,
+          color: PRESETS[isDefaultPreset ? 0 : activePreset].color,
           position: 'absolute',
           width: '100vw',
           height: '15vh',
@@ -154,7 +155,7 @@ export default function Page() {
           <Link href='https://instagram.com/shadergradient' target='_blank'>
             <TextHover
               fontSize={14}
-              color={PRESETS[activePreset].color}
+              color={PRESETS[isDefaultPreset ? 0 : activePreset].color}
               content={'shadergradient'}
               delay={0}
               border={false}

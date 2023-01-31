@@ -66,11 +66,15 @@ export function ArrowLeft(Component): ComponentType {
         {...props}
         style={{ ...style, cursor: 'pointer' }}
         onClick={() => {
+          let presetNumber
           if (activePreset !== 0) {
-            setActivePreset(activePreset - 1)
+            presetNumber = activePreset - 1
           } else {
-            setActivePreset(PRESETS.length - 1)
+            presetNumber = PRESETS.length - 1
           }
+
+          setActivePreset(presetNumber)
+          updateGradientState(PRESETS[presetNumber].url)
         }}
       />
     )
@@ -86,11 +90,15 @@ export function ArrowRight(Component): ComponentType {
         {...props}
         style={{ ...style, cursor: 'pointer' }}
         onClick={() => {
+          let presetNumber
           if (activePreset !== PRESETS.length - 1) {
-            setActivePreset(activePreset + 1)
+            presetNumber = activePreset + 1
           } else {
-            setActivePreset(0)
+            presetNumber = 0
           }
+
+          setActivePreset(presetNumber)
+          updateGradientState(PRESETS[presetNumber].url)
         }}
       />
     )

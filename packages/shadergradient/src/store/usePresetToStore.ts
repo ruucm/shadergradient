@@ -6,7 +6,6 @@ let pageLoaded = false
 export function usePresetToStore() {
   // ----------------------------- Preset to Custom Material ---------------------------------
   const activePreset = useUIStore((state: any) => state.activePreset)
-  console.log('activePreset', activePreset)
   useEffect(() => {
     let gradientURL
 

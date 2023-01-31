@@ -1,6 +1,4 @@
-export const initialActivePreset = 0
-
-export const DEFAUlT_PRESET = '?pixelDensity=1&fov=45'
+export const initialActivePreset = -1
 
 export const PRESETS = [
   {
@@ -54,3 +52,6 @@ export const PRESETS = [
     url: '?animate=on&axesHelper=off&brightness=1.2&cAzimuthAngle=180&cDistance=2.9&cPolarAngle=120&cameraZoom=1&color1=%23ebedff&color2=%23f3f2f8&color3=%23dbf8ff&embedMode=off&envPreset=city&gizmoHelper=hide&grain=off&lightType=3d&pixelDensity=1&fov=45&positionX=0&positionY=1.8&positionZ=0&reflection=0.1&rotationX=0&rotationY=0&rotationZ=-90&type=waterPlane&uDensity=1&uSpeed=0.3&uStrength=3&uTime=0.2&uFrequency=5.5&wireframe=false&shader=defaults',
   },
 ]
+
+// export const DEFAUlT_PRESET = '?pixelDensity=1&fov=45'
+export const DEFAUlT_PRESET = PRESETS[0].url

@@ -11,23 +11,30 @@ export function PresetTitle({
   fontSize = 120,
   isMobile = false,
   arrowOn = true,
+  isDefaultPreset = false,
 }) {
   const activePreset = useUIStore((state) => state.activePreset)
   const setActivePreset = useUIStore((state) => state.setActivePreset)
 
   const activeUp = () => {
-    if (activePreset !== PRESETS.length - 1) {
-      setActivePreset(activePreset + 1)
-    } else {
-      setActivePreset(0)
+    if (isDefaultPreset) setActivePreset(1)
+    else {
+      if (activePreset !== PRESETS.length - 1) {
+        setActivePreset(activePreset + 1)
+      } else {
+        setActivePreset(0)
+      }
     }
   }
 
   const activeDown = () => {
-    if (activePreset !== 0) {
-      setActivePreset(activePreset - 1)
-    } else {
-      setActivePreset(PRESETS.length - 1)
+    if (isDefaultPreset) setActivePreset(PRESETS.length - 1)
+    else {
+      if (activePreset !== 0) {
+        setActivePreset(activePreset - 1)
+      } else {
+        setActivePreset(PRESETS.length - 1)
+      }
     }
   }
 
@@ -46,7 +53,7 @@ export function PresetTitle({
       <div
         className={styles.presetTitle}
         style={{
-          display: index === activePreset ? 'flex' : 'none',
+          display: index === activePreset || isDefaultPreset ? 'flex' : 'none',
           gap: 25,
           flexDirection: isMobile === true ? 'column' : 'row',
         }}

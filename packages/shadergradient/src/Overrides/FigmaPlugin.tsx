@@ -60,16 +60,20 @@ export function ArrowLeft(Component): ComponentType {
   return ({ style, ...props }: any) => {
     const activePreset = useUIStore((state) => state.activePreset)
     const setActivePreset = useUIStore((state) => state.setActivePreset)
+    const isDefaultPreset = activePreset === -1
 
     return (
       <Component
         {...props}
         style={{ ...style, cursor: 'pointer' }}
         onClick={() => {
-          if (activePreset !== 0) {
-            setActivePreset(activePreset - 1)
-          } else {
-            setActivePreset(PRESETS.length - 1)
+          if (isDefaultPreset) setActivePreset(PRESETS.length - 1)
+          else {
+            if (activePreset !== 0) {
+              setActivePreset(activePreset - 1)
+            } else {
+              setActivePreset(PRESETS.length - 1)
+            }
           }
         }}
       />
@@ -80,16 +84,20 @@ export function ArrowRight(Component): ComponentType {
   return ({ style, ...props }: any) => {
     const activePreset = useUIStore((state) => state.activePreset)
     const setActivePreset = useUIStore((state) => state.setActivePreset)
+    const isDefaultPreset = activePreset === -1
 
     return (
       <Component
         {...props}
         style={{ ...style, cursor: 'pointer' }}
         onClick={() => {
-          if (activePreset !== PRESETS.length - 1) {
-            setActivePreset(activePreset + 1)
-          } else {
-            setActivePreset(0)
+          if (isDefaultPreset) setActivePreset(1)
+          else {
+            if (activePreset !== PRESETS.length - 1) {
+              setActivePreset(activePreset + 1)
+            } else {
+              setActivePreset(0)
+            }
           }
         }}
       />
@@ -100,8 +108,14 @@ export function ArrowRight(Component): ComponentType {
 export function ActiveTitle(Component): ComponentType {
   return (props) => {
     const activePreset = useUIStore((state) => state.activePreset)
+    const isDefaultPreset = activePreset === -1
 
-    return <Component {...props} text={PRESETS[activePreset].title} />
+    return (
+      <Component
+        {...props}
+        text={PRESETS[isDefaultPreset ? 0 : activePreset].title}
+      />
+    )
   }
 }
 

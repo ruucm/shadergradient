@@ -5,8 +5,7 @@ import './ui.css'
 import { useEffect, useRef } from 'react'
 
 // const figmaPluginSite = 'https://shadergradient.framer.website/figma-plugin'
-const figmaPluginSite =
-  'https://shadergradient-staging.framer.website/figma-plugin'
+const figmaPluginSite = 'https://shadergradient.co/figma-plugin'
 
 const App = () => {
   useFramerMessage()

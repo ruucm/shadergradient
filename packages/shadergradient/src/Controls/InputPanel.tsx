@@ -9,6 +9,7 @@ type InputPanelPropsT = {
   info?: boolean
   hoverContent?: string
   isHovered?: string
+  isFigma?: boolean
 } & React.DetailedHTMLProps<
   React.HTMLAttributes<HTMLDivElement>,
   HTMLDivElement
@@ -21,6 +22,7 @@ export const InputPanel: React.FC<InputPanelPropsT> = ({
   info,
   hoverContent,
   isHovered,
+  isFigma = false,
   onMouseEnter,
   onMouseLeave,
   ...rest
@@ -38,7 +40,11 @@ export const InputPanel: React.FC<InputPanelPropsT> = ({
           {info === true && <Info size={14} color='rgb(255,67,10)' />}
         </span>
         {hoverContent && (
-          <HoverBox content={hoverContent} isHovered={isHovered === title} />
+          <HoverBox
+            content={hoverContent}
+            isHovered={isHovered === title}
+            isFigma={isFigma}
+          />
         )}
       </span>
       <div className='flex justify-between w-full'>

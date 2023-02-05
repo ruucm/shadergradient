@@ -3,12 +3,14 @@ import { useQueryState } from '@/store'
 import { NumberInput, Slider } from '@/ui'
 import { InputPanel } from './InputPanel'
 
-type ViewControlsPropsT = React.DetailedHTMLProps<
+type ViewControlsPropsT = {
+  isFigma?: boolean
+} & React.DetailedHTMLProps<
   React.HTMLAttributes<HTMLDivElement>,
   HTMLDivElement
 >
 
-export const ViewControls: React.FC<ViewControlsPropsT> = () => {
+export const ViewControls: React.FC<ViewControlsPropsT> = ({ isFigma }) => {
   const [cDistance, setCdistance] = useQueryState('cDistance')
   const [cameraZoom, setCameraZoom] = useQueryState('cameraZoom')
 
@@ -58,6 +60,7 @@ export const ViewControls: React.FC<ViewControlsPropsT> = () => {
       <InputPanel
         title='Camera Angle'
         info={true}
+        isFigma={isFigma}
         hoverContent='Imagine a globe. Azimuth moves the camera in the direction of latitude, and polar, in the direction of longtitude'
         isHovered={isHovered}
         onMouseEnter={() => {

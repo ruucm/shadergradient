@@ -31,7 +31,11 @@ export const AllControls: React.FC<Props> = ({ isMobile, isFigma = false }) => {
         useCursorStore.setState({ hover: 'default' })
       }}
     >
-      <PropertyControls activeTab={activeTab} setActiveTab={setActiveTab} />
+      <PropertyControls
+        activeTab={activeTab}
+        setActiveTab={setActiveTab}
+        isFigma={isFigma}
+      />
       <div
         style={{
           width: '100%',

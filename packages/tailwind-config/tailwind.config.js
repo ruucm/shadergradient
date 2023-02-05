@@ -66,6 +66,9 @@ module.exports = {
       opacity: {
         'preview-btn': '.17',
       },
+      zIndex: {
+        hoverBox: '2147483648', // need to be higher than mobile bottom banner's zIndex (2147483647)
+      },
     },
   },
   variants: {

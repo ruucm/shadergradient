@@ -21,9 +21,9 @@ export const HoverBox: React.FC<ControlTypeTitlePropsT> = ({
 }) => {
   return (
     <div
-      className={cx('text-sm font-medium text-white')}
+      className={cx('text-sm font-medium text-white z-hoverBox')}
       style={{
-        position: 'fixed',
+        position: 'absolute',
         marginLeft: centered === true ? 0 : -10,
         visibility: isHovered ? 'visible' : 'hidden',
         marginTop: isHovered ? 10 : 0,

@@ -31,7 +31,11 @@ export const AllControls: React.FC<Props> = ({ isMobile, isFigma = false }) => {
         useCursorStore.setState({ hover: 'default' })
       }}
     >
-      <PropertyControls activeTab={activeTab} setActiveTab={setActiveTab} />
+      <PropertyControls
+        activeTab={activeTab}
+        setActiveTab={setActiveTab}
+        isFigma={isFigma}
+      />
       <div
         style={{
           width: '100%',
@@ -41,7 +45,7 @@ export const AllControls: React.FC<Props> = ({ isMobile, isFigma = false }) => {
           cursor: 'pointer',
           height: 58,
         }}
-        className={isFigma ? 'sticky top-0' : ''}
+        className={isFigma ? 'sticky top-0' : 'absolute z-10'}
         // onClick={() => setActiveTab('shape')}
       >
         <ControlTypeTitles
@@ -89,6 +93,8 @@ export const AllControls: React.FC<Props> = ({ isMobile, isFigma = false }) => {
           {children}
         </HorizontalControl>
       )}
+      {/* add space to the bottom of controls to prevent overlap with the bottom bar */}
+      {isFigma && <div style={{ height: 88 }} />}
     </div>
   )
 }

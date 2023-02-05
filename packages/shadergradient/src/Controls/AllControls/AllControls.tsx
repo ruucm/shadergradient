@@ -10,7 +10,7 @@ type Props = {
   // All other props
   [x: string]: any
 }
-export const AllControls: React.FC<Props> = ({ isMobile, isFigma = true }) => {
+export const AllControls: React.FC<Props> = ({ isMobile, isFigma = false }) => {
   const isWeb = !isMobile && !isFigma
   const [activeTab, setActiveTab] = useState(isWeb ? 'none' : 'shape')
 

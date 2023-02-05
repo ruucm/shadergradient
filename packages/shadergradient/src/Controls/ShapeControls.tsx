@@ -141,7 +141,7 @@ export const ShapeControls: React.FC<ShapeControlsPropsT> = ({ isFigma }) => {
       <InputPanel
         title='Noise Strength'
         info={true}
-        isFigma={true}
+        isFigma={isFigma}
         hoverContent='Control the height of the bumps'
         isHovered={isHovered}
         onMouseEnter={() => {
@@ -163,7 +163,7 @@ export const ShapeControls: React.FC<ShapeControlsPropsT> = ({ isFigma }) => {
       <InputPanel
         title='Noise Density'
         info={true}
-        isFigma={true}
+        isFigma={isFigma}
         hoverContent='Control the frequency of the bumps'
         isHovered={isHovered}
         onMouseEnter={() => {

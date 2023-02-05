@@ -8,8 +8,9 @@ Curated and customizable 3d gradient package, in modern design tools and React.
 
 [CodeSandbox](https://codesandbox.io/s/github/ruucm/shadergradient/tree/main/packages/example-cra)
 
-````
+```
 yarn add shadergradient
+```
 
 ```tsx
 import React from "react";

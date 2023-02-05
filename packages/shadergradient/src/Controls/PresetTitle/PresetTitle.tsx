@@ -1,6 +1,11 @@
 import * as React from 'react'
 import { motion, useAnimation } from 'framer-motion'
-import { useUIStore, useCursorStore, PRESETS } from '@/store'
+import {
+  useUIStore,
+  useCursorStore,
+  PRESETS,
+  updateGradientState,
+} from '@/store'
 import styles from './PresetTitle.module.scss'
 import { TextAnimation } from '@/ui'
 
@@ -16,19 +21,27 @@ export function PresetTitle({
   const setActivePreset = useUIStore((state) => state.setActivePreset)
 
   const activeUp = () => {
+    let presetNumber
     if (activePreset !== PRESETS.length - 1) {
-      setActivePreset(activePreset + 1)
+      presetNumber = activePreset + 1
     } else {
-      setActivePreset(0)
+      presetNumber = 0
     }
+
+    setActivePreset(presetNumber)
+    updateGradientState(PRESETS[presetNumber].url)
   }
 
   const activeDown = () => {
+    let presetNumber
     if (activePreset !== 0) {
-      setActivePreset(activePreset - 1)
+      presetNumber = activePreset - 1
     } else {
-      setActivePreset(PRESETS.length - 1)
+      presetNumber = PRESETS.length - 1
     }
+
+    setActivePreset(presetNumber)
+    updateGradientState(PRESETS[presetNumber].url)
   }
 
   React.useEffect(() => {

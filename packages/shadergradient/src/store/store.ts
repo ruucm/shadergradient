@@ -6,9 +6,8 @@ import { DEFAUlT_PRESET, initialActivePreset } from './presets'
 // without embedMode
 // it renders without the dom & other gradient controls at first, and add it after the first updateGradientState() excuted.
 
-export const useQueryStore = create((set) => ({
-  ...parseState(),
-}))
+const defaultState = { ...parseState() }
+export const useQueryStore = create((set) => defaultState)
 
 export const updateGradientState = (querystate: object | string) => {
   const isString = typeof querystate === 'string'

@@ -3,12 +3,14 @@ import { useQueryState } from '@/store'
 import { Slider, Radio } from '@/ui'
 import { InputPanel } from './InputPanel'
 
-type ShapeControlsPropsT = React.DetailedHTMLProps<
+type ShapeControlsPropsT = {
+  isFigma?: boolean
+} & React.DetailedHTMLProps<
   React.HTMLAttributes<HTMLDivElement>,
   HTMLDivElement
 >
 
-export const ShapeControls: React.FC<ShapeControlsPropsT> = () => {
+export const ShapeControls: React.FC<ShapeControlsPropsT> = ({ isFigma }) => {
   const [type, setType] = useQueryState('type')
   const [shader, setShader] = useQueryState('shader')
   const [animate, setAnimate] = useQueryState('animate')
@@ -47,7 +49,7 @@ export const ShapeControls: React.FC<ShapeControlsPropsT> = () => {
           label='Water'
         />
       </InputPanel>
-
+      {/* @ts-ignore */}
       {['plane', 'waterPlane'].includes(type) && (
         <InputPanel title='Shader'>
           <Radio
@@ -139,6 +141,7 @@ export const ShapeControls: React.FC<ShapeControlsPropsT> = () => {
       <InputPanel
         title='Noise Strength'
         info={true}
+        isFigma={true}
         hoverContent='Control the height of the bumps'
         isHovered={isHovered}
         onMouseEnter={() => {
@@ -160,6 +163,7 @@ export const ShapeControls: React.FC<ShapeControlsPropsT> = () => {
       <InputPanel
         title='Noise Density'
         info={true}
+        isFigma={true}
         hoverContent='Control the frequency of the bumps'
         isHovered={isHovered}
         onMouseEnter={() => {

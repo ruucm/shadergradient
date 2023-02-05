@@ -3,12 +3,14 @@ import { useQueryState } from '@/store'
 import { Radio, Slider } from '@/ui'
 import { InputPanel } from './InputPanel'
 
-type EffectControlsPropsT = React.DetailedHTMLProps<
+type EffectControlsPropsT = {
+  isFigma?: boolean
+} & React.DetailedHTMLProps<
   React.HTMLAttributes<HTMLDivElement>,
   HTMLDivElement
 >
 
-export const EffectControls: React.FC<EffectControlsPropsT> = () => {
+export const EffectControls: React.FC<EffectControlsPropsT> = ({ isFigma }) => {
   const [grain, setGrain] = useQueryState('grain')
   const [lightType, setLightType] = useQueryState('lightType')
   const [envPreset, setEnvPreset] = useQueryState('envPreset')
@@ -21,6 +23,7 @@ export const EffectControls: React.FC<EffectControlsPropsT> = () => {
       <InputPanel
         title='Grain'
         info={true}
+        isFigma={isFigma}
         hoverContent='Grain effects can slow down the performance of the animation. '
         isHovered={isHovered}
         onMouseEnter={() => {
@@ -49,6 +52,7 @@ export const EffectControls: React.FC<EffectControlsPropsT> = () => {
       <InputPanel
         title='Environment'
         info={true}
+        isFigma={isFigma}
         hoverContent='Environment lighting creates more dynamic lighting effects, e.g. reflections'
         isHovered={isHovered}
         onMouseEnter={() => {

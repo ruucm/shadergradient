@@ -10,7 +10,7 @@ type Props = {
   // All other props
   [x: string]: any
 }
-export const AllControls: React.FC<Props> = ({ isMobile, isFigma = false }) => {
+export const AllControls: React.FC<Props> = ({ isMobile, isFigma = true }) => {
   const isWeb = !isMobile && !isFigma
   const [activeTab, setActiveTab] = useState(isWeb ? 'none' : 'shape')
 
@@ -31,7 +31,11 @@ export const AllControls: React.FC<Props> = ({ isMobile, isFigma = false }) => {
         useCursorStore.setState({ hover: 'default' })
       }}
     >
-      <PropertyControls activeTab={activeTab} setActiveTab={setActiveTab} />
+      <PropertyControls
+        activeTab={activeTab}
+        setActiveTab={setActiveTab}
+        isFigma={isFigma}
+      />
       <div
         style={{
           width: '100%',

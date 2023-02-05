@@ -19,6 +19,7 @@ export const PropertyControls: React.FC<Props> = ({
   // isMobile,
   activeTab,
   setActiveTab,
+  isFigma,
 }) => {
   const [type] = useQueryState('type')
   // even if there is activeTab, queryState should be have value before return below controls
@@ -39,10 +40,10 @@ export const PropertyControls: React.FC<Props> = ({
       }}
       transition={{ duration: 0.72 }}
     >
-      {activeTab === 'shape' && <ShapeControls />}
-      {activeTab === 'colors' && <ColorControls />}
-      {activeTab === 'effects' && <EffectControls />}
-      {activeTab === 'view' && <ViewControls />}
+      {activeTab === 'shape' && <ShapeControls isFigma={isFigma} />}
+      {activeTab === 'colors' && <ColorControls isFigma={isFigma} />}
+      {activeTab === 'effects' && <EffectControls isFigma={isFigma} />}
+      {activeTab === 'view' && <ViewControls isFigma={isFigma} />}
     </motion.div>
   )
 }

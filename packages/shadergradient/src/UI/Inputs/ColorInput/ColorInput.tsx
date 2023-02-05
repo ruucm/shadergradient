@@ -42,7 +42,9 @@ export const ColorInput = React.forwardRef<HTMLInputElement, ColorInputPropsT>(
         <div className='flex items-center gap-2 w-full relative'>
           <div
             className='w-full h-input rounded'
-            style={{ background: sharedValue }}
+            style={{
+              background: sharedValue,
+            }}
             onClick={() => {
               setToggle(!toggle)
             }}
@@ -55,10 +57,9 @@ export const ColorInput = React.forwardRef<HTMLInputElement, ColorInputPropsT>(
               width: 'fit-content',
               height: 290,
               position: 'absolute',
-              bottom: 10,
-              left: 20,
+              bottom: -5,
+              left: -5,
               zIndex: 100,
-              background: 'blue',
               display: toggle === true ? 'block' : 'none',
             }}
           >
@@ -69,11 +70,11 @@ export const ColorInput = React.forwardRef<HTMLInputElement, ColorInputPropsT>(
                 width: 'fit-content',
                 height: 'fit-content',
                 background: 'white',
-                padding: 24,
+                padding: 14,
                 flexDirection: 'column',
                 justifyContent: 'center',
                 alignItems: 'center',
-                gap: 16,
+                gap: 12,
                 borderRadius: 5,
                 boxShadow: 'rgb(0 0 0 / 37%) 0px 1px 4px 0px',
               }}

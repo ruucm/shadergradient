@@ -6,6 +6,7 @@ type ControlTypeTitlePropsT = {
   isHovered?: boolean
   centered?: boolean
   downward?: boolean
+  isFigma?: boolean
 } & React.DetailedHTMLProps<
   React.HTMLAttributes<HTMLDivElement>,
   HTMLDivElement
@@ -17,19 +18,21 @@ export const HoverBox: React.FC<ControlTypeTitlePropsT> = ({
   isHovered,
   centered = false,
   downward = true,
+  isFigma = false,
   ...rest
 }) => {
   return (
     <div
       className={cx('text-sm font-medium text-white')}
       style={{
-        position: 'sticky',
+        position: isFigma ? 'sticky' : 'fixed',
         marginLeft: centered === true ? 0 : -10,
         visibility: isHovered ? 'visible' : 'hidden',
-        marginTop: 0,
         transitionDuration: '0.3s',
         opacity: isHovered ? 1 : 0,
         zIndex: 20,
+        width: 'fit-content',
+        height: 'fit-content',
       }}
     >
       <div
@@ -37,7 +40,8 @@ export const HoverBox: React.FC<ControlTypeTitlePropsT> = ({
           width: 'fit-content',
           height: 'fit-content',
           position: 'absolute',
-          zIndex: 20,
+          maxWidth: 280,
+          minWidth: 200,
           top: isHovered ? 10 : 0,
           transitionDuration: '0.3s',
         }}
@@ -45,8 +49,6 @@ export const HoverBox: React.FC<ControlTypeTitlePropsT> = ({
         <div
           className={cx('bg-primary')}
           style={{
-            maxWidth: 260,
-
             position: 'absolute',
             width: '100%',
             height: '100%',

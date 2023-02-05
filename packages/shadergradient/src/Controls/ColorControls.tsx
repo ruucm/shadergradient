@@ -6,12 +6,15 @@ import { InputPanel } from './InputPanel'
 type ColorControlsPropsT = {
   hoverState?: number
   setHoverState?: any
+  isFigma?: boolean
 } & React.DetailedHTMLProps<
   React.HTMLAttributes<HTMLDivElement>,
   HTMLDivElement
 >
 
-export const ColorControls: React.FC<ColorControlsPropsT> = () => {
+export const ColorControls: React.FC<ColorControlsPropsT> = ({
+  isFigma = false,
+}) => {
   const [color1, setColor1] = useQueryState('color1')
   const [color2, setColor2] = useQueryState('color2')
   const [color3, setColor3] = useQueryState('color3')
@@ -58,34 +61,36 @@ export const ColorControls: React.FC<ColorControlsPropsT> = () => {
       >
         <ColorInput defaultValue={color3} setValue={setColor3} />
       </InputPanel>
+      {isFigma === false && (
+        <InputPanel
+          title='Custom Background'
+          info={true}
+          hoverContent='Change the background behind the 3d object. Default to be black'
+          isHovered={isHovered}
+          onMouseEnter={() => {
+            setIsHovered('Custom Background')
+          }}
+          onMouseLeave={() => {
+            setIsHovered('')
+          }}
+        >
+          <Radio
+            name='customBg'
+            value='on'
+            setValue={setCustomBgColor}
+            check={customBgColor === 'on'}
+            label='On'
+          />
+          <Radio
+            name='customBg'
+            value='off'
+            setValue={setCustomBgColor}
+            check={customBgColor === 'off'}
+            label='Off'
+          />
+        </InputPanel>
+      )}
 
-      <InputPanel
-        title='Custom Background'
-        info={true}
-        hoverContent='Change the background behind the 3d object. Default to be black'
-        isHovered={isHovered}
-        onMouseEnter={() => {
-          setIsHovered('Custom Background')
-        }}
-        onMouseLeave={() => {
-          setIsHovered('')
-        }}
-      >
-        <Radio
-          name='customBg'
-          value='on'
-          setValue={setCustomBgColor}
-          check={customBgColor === 'on'}
-          label='On'
-        />
-        <Radio
-          name='customBg'
-          value='off'
-          setValue={setCustomBgColor}
-          check={customBgColor === 'off'}
-          label='Off'
-        />
-      </InputPanel>
       {customBgColor === 'on' && (
         <>
           <InputPanel title='Bg Color 1'>

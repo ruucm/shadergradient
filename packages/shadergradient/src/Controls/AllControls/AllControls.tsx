@@ -41,7 +41,7 @@ export const AllControls: React.FC<Props> = ({ isMobile, isFigma = false }) => {
           cursor: 'pointer',
           height: 58,
         }}
-        className={isFigma ? 'sticky top-0' : ''}
+        className={isFigma ? 'sticky top-0' : 'absolute'}
         // onClick={() => setActiveTab('shape')}
       >
         <ControlTypeTitles

@@ -55,10 +55,9 @@ export const ColorInput = React.forwardRef<HTMLInputElement, ColorInputPropsT>(
               width: 'fit-content',
               height: 290,
               position: 'absolute',
-              bottom: 10,
-              left: 80,
+              bottom: 0,
+              left: -10,
               zIndex: 100,
-              background: 'blue',
               display: toggle === true ? 'block' : 'none',
             }}
           >
@@ -69,13 +68,13 @@ export const ColorInput = React.forwardRef<HTMLInputElement, ColorInputPropsT>(
                 width: 'fit-content',
                 height: 'fit-content',
                 background: 'white',
-                padding: 24,
+                padding: 16,
                 flexDirection: 'column',
                 justifyContent: 'center',
                 alignItems: 'center',
                 gap: 16,
                 borderRadius: 5,
-                boxShadow: 'rgb(0 0 0 / 37%) 0px 1px 4px 0px',
+                filter: 'drop-shadow(0px 0px 10px rgba(0,0,0,0.37))',
               }}
             >
               <Wheel
@@ -101,6 +100,17 @@ export const ColorInput = React.forwardRef<HTMLInputElement, ColorInputPropsT>(
                   )
                 }}
               />
+              <div
+                style={{
+                  width: 16,
+                  height: 16,
+                  background: 'white',
+                  position: 'absolute',
+                  borderRadius: 3,
+                  bottom: -5,
+                  transform: 'rotate(45deg)',
+                }}
+              ></div>
             </div>
           </div>
           <input

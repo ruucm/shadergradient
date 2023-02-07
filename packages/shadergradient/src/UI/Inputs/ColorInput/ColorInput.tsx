@@ -20,8 +20,8 @@ export const ColorInput = React.forwardRef<HTMLInputElement, ColorInputPropsT>(
     const [sharedValue, setSharedValue] = useState<any>(defaultValue)
     const [toggle, setToggle] = useState(false)
     useEffect(() => {
-      setSharedValue(defaultValue)
-    }, [defaultValue])
+      setSharedValue(defaultValue) // init once with the passed value (from search params)
+    }, [])
     useEffect(() => {
       setValue(sharedValue)
     }, [sharedValue])

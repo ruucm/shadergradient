@@ -19,8 +19,8 @@ export const Slider = React.forwardRef<HTMLInputElement, SliderPropsT>(
     const [sharedValue, setSharedValue] = useState<any>(defaultValue)
 
     useEffect(() => {
-      setSharedValue(defaultValue)
-    }, [defaultValue])
+      setSharedValue(defaultValue) // init once with the passed value (from search params)
+    }, [])
     useEffect(() => {
       setValue(sharedValue)
     }, [sharedValue])

@@ -5,6 +5,7 @@ import styles from './AllControls.module.scss'
 import { HorizontalControl } from './HorizontalControl'
 import { PropertyControls } from './PropertyControls'
 import { useUIStore, useCursorStore } from '@/store'
+import { cx } from '@/utils'
 
 type Props = {
   // All other props
@@ -45,7 +46,7 @@ export const AllControls: React.FC<Props> = ({ isMobile, isFigma = false }) => {
           cursor: 'pointer',
           height: 58,
         }}
-        className={isFigma ? 'sticky top-0' : 'absolute z-10'}
+        className={cx(isFigma && 'sticky top-0', isMobile && 'absolute')}
         // onClick={() => setActiveTab('shape')}
       >
         <ControlTypeTitles

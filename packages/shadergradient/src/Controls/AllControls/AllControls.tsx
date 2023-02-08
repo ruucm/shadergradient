@@ -36,6 +36,7 @@ export const AllControls: React.FC<Props> = ({ isMobile, isFigma = false }) => {
         activeTab={activeTab}
         setActiveTab={setActiveTab}
         isFigma={isFigma}
+        isMobile={isMobile}
       />
       <div
         style={{

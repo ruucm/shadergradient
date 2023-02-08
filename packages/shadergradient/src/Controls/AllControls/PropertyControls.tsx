@@ -20,6 +20,7 @@ export const PropertyControls: React.FC<Props> = ({
   activeTab,
   setActiveTab,
   isFigma,
+  isMobile,
 }) => {
   const [type] = useQueryState('type')
   // even if there is activeTab, queryState should be have value before return below controls
@@ -38,7 +39,8 @@ export const PropertyControls: React.FC<Props> = ({
         maxHeight: activeTab === 'none' ? 0 : 600,
         padding: activeTab === 'none' ? 0 : 20,
         overflow: activeTab === 'none' ? 'hidden' : 'visible',
-        borderRadius: '4px 4px 0 0',
+        borderRadius: isMobile === true ? 0 : '4px 4px 0 0',
+        marginBottom: isMobile === true ? 56 : 0, // make space for the overlapping horizontal control bar
       }}
       transition={{
         duration: 0.72,

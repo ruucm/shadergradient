@@ -56,6 +56,21 @@ async function serve(path = defaultPath, port = 8000) {
     { port, onRequest, servedir: defaultOutdir },
     await getBuildOptions(path)
   )
+
+  /**
+   * watch changes & build
+   *
+   * onEnd isn't being triggered when serving (https://github.com/evanw/esbuild/issues/1384) so we need to setup a regular build to get a callback whenever a build is completed
+   */
+  await esbuild.build({
+    outdir: resolve(defaultOutdir),
+    ...(await getBuildOptions(path)),
+    watch: {
+      onRebuild(error, result) {
+        io.emit('build')
+      },
+    },
+  })
   console.log(`Server listening at http://127.0.0.1:${port}`)
 }
 

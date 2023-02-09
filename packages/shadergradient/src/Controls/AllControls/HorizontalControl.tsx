@@ -45,7 +45,7 @@ export function HorizontalControl({
     >
       <motion.div
         ref={ref}
-        className={cx('z-10 overflow-hidden rounded-sm', className)}
+        className={cx('z-10 rounded-sm', className)}
         style={{
           width: '580px',
           display: 'flex',

@@ -47,7 +47,10 @@ export const AllControls: React.FC<Props> = ({ isMobile, isFigma = false }) => {
           cursor: 'pointer',
           height: 58,
         }}
-        className={cx(isFigma && 'sticky top-0', isMobile && 'absolute z-5')}
+        className={cx(
+          isFigma && 'sticky top-0',
+          isMobile && 'absolute z-allControl'
+        )}
         // onClick={() => setActiveTab('shape')}
       >
         <ControlTypeTitles

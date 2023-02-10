@@ -68,6 +68,7 @@ module.exports = {
       },
       zIndex: {
         hoverBox: '2147483648', // need to be higher than mobile bottom banner's zIndex (2147483647)
+        allControl: '5', // keeping it lower than 10 (Framer's max zIndex on control)
       },
     },
   },

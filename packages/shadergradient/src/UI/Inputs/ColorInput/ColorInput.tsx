@@ -51,9 +51,9 @@ export const ColorInput = React.forwardRef<HTMLInputElement, ColorInputPropsT>(
               ref={tabRef}
               style={{
                 width: 'fit-content',
-                height: 'fit-content',
+                height: 290, // this layer is for positioning, so 'fit-content' makes this layer height 0.
                 position: 'absolute',
-                bottom: 25,
+                bottom: 0,
                 left: -10,
                 zIndex: 100,
                 display: toggle === true ? 'block' : 'none',

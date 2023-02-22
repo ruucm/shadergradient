@@ -41,80 +41,77 @@ export const ColorInput = React.forwardRef<HTMLInputElement, ColorInputPropsT>(
         )}
         <div className='flex items-center gap-2 w-full relative'>
           <div
-            className='w-full h-input rounded relative'
+            className='w-full h-input rounded'
             style={{ background: sharedValue }}
             onClick={() => {
               setToggle(!toggle)
             }}
-          >
-            <div
-              ref={tabRef}
-              style={{
-                width: 'fit-content',
-                height: 290, // this layer is for positioning, so 'fit-content' makes this layer height 0.
-                position: 'absolute',
-                bottom: 0,
-                left: -10,
-                zIndex: 100,
-                display: toggle === true ? 'block' : 'none',
-              }}
-            >
-              <div
-                style={{
-                  position: 'relative',
-                  display: 'flex',
-                  width: 'fit-content',
-                  height: 'fit-content',
-                  background: 'white',
-                  padding: 16,
-                  flexDirection: 'column',
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                  gap: 16,
-                  borderRadius: 5,
-                  filter: 'drop-shadow(0px 0px 10px rgba(0,0,0,0.37))',
-                }}
-              >
-                <Wheel
-                  color={sharedValue}
-                  onChange={(color) => {
-                    setSharedValue(color.hex)
-                  }}
-                  width={200}
-                  height={200}
-                ></Wheel>
-                <ShadeSlider
-                  width={200}
-                  style={{ display: 'flex', alignItems: 'center' }}
-                  hsva={hexToHsva(sharedValue)}
-                  onChange={(color) => {
-                    setSharedValue(
-                      hsvaToHex({
-                        h: hexToHsva(sharedValue).h,
-                        s: color.s,
-                        v: color.v,
-                        a: 1,
-                      })
-                    )
-                  }}
-                />
-                <div
-                  style={{
-                    width: 16,
-                    height: 16,
-                    background: 'white',
-                    position: 'absolute',
-                    borderRadius: 3,
-                    bottom: -5,
-                    transform: 'rotate(45deg)',
-                  }}
-                ></div>
-              </div>
-            </div>
-          </div>
+          ></div>
 
           {/* color control */}
-
+          <div
+            ref={tabRef}
+            style={{
+              width: 'fit-content',
+              height: 'fit-content',
+              position: 'absolute',
+              bottom: 25,
+              left: -10,
+              zIndex: 100,
+              display: toggle === true ? 'block' : 'none',
+            }}
+          >
+            <div
+              style={{
+                display: 'flex',
+                width: 'fit-content',
+                height: 'fit-content',
+                background: 'white',
+                padding: 16,
+                flexDirection: 'column',
+                justifyContent: 'center',
+                alignItems: 'center',
+                gap: 16,
+                borderRadius: 5,
+                filter: 'drop-shadow(0px 0px 10px rgba(0,0,0,0.37))',
+              }}
+            >
+              <Wheel
+                color={sharedValue}
+                onChange={(color) => {
+                  setSharedValue(color.hex)
+                }}
+                width={200}
+                height={200}
+              ></Wheel>
+              <ShadeSlider
+                width={200}
+                style={{ display: 'flex', alignItems: 'center' }}
+                hsva={hexToHsva(sharedValue)}
+                onChange={(color) => {
+                  setSharedValue(
+                    hsvaToHex({
+                      h: hexToHsva(sharedValue).h,
+                      s: color.s,
+                      v: color.v,
+                      a: 1,
+                    })
+                  )
+                }}
+              />
+              <div
+                style={{
+                  width: 16,
+                  height: 16,
+                  background: 'white',
+                  position: 'absolute',
+                  borderRadius: 3,
+                  bottom: -5,
+                  transform: 'rotate(45deg)',
+                }}
+              ></div>
+            </div>
+          </div>
           <input
             type='text'
             value={sharedValue}

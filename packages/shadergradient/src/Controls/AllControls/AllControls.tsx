@@ -36,7 +36,9 @@ export const AllControls: React.FC<Props> = ({ isMobile, isFigma = false }) => {
         activeTab={activeTab}
         setActiveTab={setActiveTab}
         isFigma={isFigma}
+        isMobile={isMobile}
       />
+
       <div
         style={{
           width: '100%',
@@ -46,7 +48,11 @@ export const AllControls: React.FC<Props> = ({ isMobile, isFigma = false }) => {
           cursor: 'pointer',
           height: 58,
         }}
-        className={cx(isFigma && 'sticky top-0', isMobile && 'absolute z-10')}
+        className={cx(
+          isFigma && 'sticky top-0',
+          isMobile && 'absolute',
+          'z-controlTab'
+        )}
         // onClick={() => setActiveTab('shape')}
       >
         <ControlTypeTitles

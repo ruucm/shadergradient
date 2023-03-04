@@ -20,6 +20,7 @@ export const PropertyControls: React.FC<Props> = ({
   activeTab,
   setActiveTab,
   isFigma,
+  isMobile,
 }) => {
   const [type] = useQueryState('type')
   // even if there is activeTab, queryState should be have value before return below controls
@@ -28,7 +29,7 @@ export const PropertyControls: React.FC<Props> = ({
   return (
     <motion.div
       className={cx(
-        'w-full overflow-y-scroll bg-controls-panel-mobile text-primary mx-auto md:h-full relative hide-scrollbar'
+        'bg-controls-panel-mobile text-primary hide-scrollbar relative mx-auto w-full overflow-y-scroll md:h-full'
       )}
       style={{
         originY: 1,
@@ -44,6 +45,8 @@ export const PropertyControls: React.FC<Props> = ({
       {activeTab === 'colors' && <ColorControls isFigma={isFigma} />}
       {activeTab === 'effects' && <EffectControls />}
       {activeTab === 'view' && <ViewControls />}
+      {/* adding space to fix overlapping propertycontrol under bottom controltab */}
+      {isMobile && <div style={{ height: 58 }} />}
     </motion.div>
   )
 }

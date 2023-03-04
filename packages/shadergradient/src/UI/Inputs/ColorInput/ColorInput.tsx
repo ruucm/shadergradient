@@ -53,9 +53,9 @@ export const ColorInput = React.forwardRef<HTMLInputElement, ColorInputPropsT>(
             ref={tabRef}
             style={{
               width: 'fit-content',
-              height: 290,
+              height: 'fit-content',
               position: 'absolute',
-              bottom: 0,
+              bottom: 25,
               left: -10,
               zIndex: 100,
               display: toggle === true ? 'block' : 'none',
@@ -63,7 +63,6 @@ export const ColorInput = React.forwardRef<HTMLInputElement, ColorInputPropsT>(
           >
             <div
               style={{
-                position: 'fixed',
                 display: 'flex',
                 width: 'fit-content',
                 height: 'fit-content',

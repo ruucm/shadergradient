@@ -71,9 +71,10 @@ function computeContainerPosition(
     trackRect.left > canvasSize.width
 
   if (isNonLegacyCanvasSize(canvasSize)) {
-    const canvasBottom = canvasSize.top + canvasSize.height
+    const canvasBottom = canvasSize.height
+
     const bottom = canvasBottom - trackBottom
-    const left = trackLeft - canvasSize.left
+    const left = trackLeft
 
     return {
       position: { width, height, left, top, bottom, right },
@@ -107,7 +108,7 @@ function Container({
   let frameCount = 0
   useFrame((state) => {
     if (frames === Infinity || frameCount <= frames) {
-      rect.current = track.current?.getBoundingClientRect()
+      rect.current = getOffsetRect(track.current)
       frameCount++
     }
 
@@ -234,3 +235,11 @@ export const View = ({
     </>
   )
 }
+
+const getOffsetRect: any = (element) => ({
+  width: element.offsetWidth,
+  height: element.offsetHeight,
+
+  left: element.offsetLeft,
+  bottom: element.offsetTop + element.offsetHeight,
+})

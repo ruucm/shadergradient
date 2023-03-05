@@ -21,8 +21,6 @@ async function getBuildOptions(path) {
       'react',
       'react/jsx-runtime',
       'react-dom',
-      '@react-three/drei',
-      '@react-three/drei',
       '@react-three/fiber',
       'three',
       'framer',

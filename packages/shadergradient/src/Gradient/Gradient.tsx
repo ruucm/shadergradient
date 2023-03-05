@@ -22,7 +22,7 @@ export function Gradient({
 
   const { lightType, envPreset, brightness, grain, toggleAxis, ...others } =
     useControlValues(control, props)
-  usePostProcessing(grain === 'off') // it makes mobile performance worse
+  usePostProcessing(grain === 'off') // this performs badly in Safari
 
   return (
     <>

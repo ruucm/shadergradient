@@ -8,6 +8,8 @@ export function usePostProcessing(disable) {
   const { gl, scene, camera, size } = useThree()
 
   const composer = useMemo(() => {
+    if (disable) return
+
     // Initialize composer
     const effectComposer = new EffectComposerImpl(gl)
     // Add render pass
@@ -38,7 +40,7 @@ export function usePostProcessing(disable) {
 
   useEffect(() => composer?.setSize(size.width, size.height), [composer, size])
   useFrame(
-    (_, delta) => void ((gl.autoClear = true), composer.render(delta)),
+    (_, delta) => void ((gl.autoClear = true), composer?.render(delta)),
     1
   )
 }

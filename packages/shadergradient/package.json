@@ -56,6 +56,7 @@
     "react-intersection-observer": "^9.4.1",
     "react-merge-refs": "^1.1.0",
     "react-slider": "^2.0.4",
+    "react-use-refs": "^1.0.1",
     "zustand": "^4.1.5"
   }
 }

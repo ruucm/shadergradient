@@ -22,3 +22,5 @@ export {
 export { cx } from './utils'
 
 export * from './Overrides'
+
+export * from './View/index'

@@ -7,7 +7,7 @@ type CopyBtnPropsT = React.DetailedHTMLProps<
 >
 
 export const CopyButton: React.FC<CopyBtnPropsT> = () => {
-  const [copyUrlText, setCopyUrl] = React.useState('Copy')
+  const [copyUrlText, setCopyUrl] = React.useState('Copy URL')
   const [isHovered, setIsHovered] = React.useState(false)
   const initial = async () => {
     await setTimeout(() => {
@@ -20,16 +20,16 @@ export const CopyButton: React.FC<CopyBtnPropsT> = () => {
   }, [])
   return (
     <div
-      className='flex flex-col justify-center items-center'
+      className='flex flex-col items-center justify-center'
       style={{ marginLeft: 5 }}
     >
       <div
-        className='flex items-center cursor-pointer text-large font-medium bg-primary p-1.5 w-[70px] text-white rounded-sm justify-center'
+        className='bg-primary flex w-[90px] cursor-pointer items-center justify-center rounded-sm p-1.5 text-sm font-medium text-white'
         onClick={async () => {
           window.navigator.clipboard.writeText(window.location.href)
           setCopyUrl('Copied!')
           await setTimeout(() => {
-            setCopyUrl('Copy')
+            setCopyUrl('Copy URL')
           }, 2000)
         }}
         onMouseOver={() => {

@@ -47,7 +47,7 @@ export function HorizontalControl({
         ref={ref}
         className={cx('z-10 rounded-sm', className)}
         style={{
-          width: '580px',
+          width: '584px',
           display: 'flex',
           flexDirection: 'column',
           boxShadow:

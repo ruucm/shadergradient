@@ -50,7 +50,7 @@ function App() {
 
 ## Next.js
 
-[CodeSandbox](https://codesandbox.io/p/sandbox/zjxeci?file=%2Fsrc%2Fpages%2Findex.jsx)
+[CodeSandbox](https://codesandbox.io/p/sandbox/zjxeci?file=%2Fsrc%2Fpages%2Findex.tsx)
 
 # Development
 

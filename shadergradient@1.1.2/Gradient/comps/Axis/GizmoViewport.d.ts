@@ -1,4 +1,3 @@
-/// <reference types="react" />
 import { ThreeEvent } from '@react-three/fiber';
 type GizmoViewportProps = JSX.IntrinsicElements['group'] & {
     axisColors?: [string, string, string];

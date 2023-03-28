@@ -1,4 +1,3 @@
-/// <reference types="react" />
 export declare const Spacing: ({ guide, className, ...props }: {
     [x: string]: any;
     guide?: boolean;

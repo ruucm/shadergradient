@@ -1,4 +1,3 @@
-/// <reference types="react" />
 type Props = {
     control?: 'query' | 'props';
     [x: string]: any;

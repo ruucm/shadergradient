@@ -1,4 +1,3 @@
-/// <reference types="react" />
 export declare function PresetTitles({ isMobile, fontSize, arrowOn, }: {
     isMobile?: boolean;
     fontSize?: number;

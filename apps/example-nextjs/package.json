@@ -19,6 +19,7 @@
   "dependencies": {
     "@react-three/drei": "^9.56.5",
     "@react-three/fiber": "^8.10.1",
+    "framer-motion": "^8.0.1",
     "glsl-random": "^0.0.5",
     "next": "^13.1.6",
     "next-pwa": "^5.6.0",

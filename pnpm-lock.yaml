@@ -29,6 +29,7 @@ importers:
       eslint-config-prettier: ^8.6.0
       eslint-plugin-tailwindcss: ^3.9.0
       file-loader: ^6.2.0
+      framer-motion: ^8.0.1
       glsl-random: ^0.0.5
       glslify: ^7.1.1
       glslify-loader: ^2.0.0
@@ -39,7 +40,7 @@ importers:
       raw-loader: ^4.0.2
       react: ^18.2.0
       react-dom: ^18.2.0
-      shadergradient: workspace:^1.1.0
+      shadergradient: latest
       tailwindcss: ^3.2.4
       three: ^0.149.0
       three-stdlib: ^2.21.6
@@ -47,6 +48,7 @@ importers:
     dependencies:
       '@react-three/drei': 9.58.5_uqnvqwomiquorxzsbmunof542u
       '@react-three/fiber': 8.12.0_xor7byvqlg4baqj6ymfbcmaax4
+      framer-motion: 8.0.1_biqbaboplfbrettd7655fr4n2y
       glsl-random: 0.0.5
       next: 13.2.4_672uxklweod7ene3nqtsh262ca
       next-pwa: 5.6.0_tqgbaabkbrbon76mwxzp5tjcti
@@ -2101,7 +2103,7 @@ packages:
       '@motionone/easing': 10.15.1
       '@motionone/types': 10.15.1
       '@motionone/utils': 10.15.1
-      tslib: 2.4.1
+      tslib: 2.5.0
     dev: false
 
   /@motionone/dom/10.15.3:
@@ -2112,14 +2114,14 @@ packages:
       '@motionone/types': 10.15.1
       '@motionone/utils': 10.15.1
       hey-listen: 1.0.8
-      tslib: 2.4.1
+      tslib: 2.5.0
     dev: false
 
   /@motionone/easing/10.15.1:
     resolution: {integrity: sha512-6hIHBSV+ZVehf9dcKZLT7p5PEKHGhDwky2k8RKkmOvUoYP3S+dXsKupyZpqx5apjd9f+php4vXk4LuS+ADsrWw==}
     dependencies:
       '@motionone/utils': 10.15.1
-      tslib: 2.4.1
+      tslib: 2.5.0
     dev: false
 
   /@motionone/generators/10.15.1:
@@ -2127,7 +2129,7 @@ packages:
     dependencies:
       '@motionone/types': 10.15.1
       '@motionone/utils': 10.15.1
-      tslib: 2.4.1
+      tslib: 2.5.0
     dev: false
 
   /@motionone/types/10.15.1:
@@ -2139,7 +2141,7 @@ packages:
     dependencies:
       '@motionone/types': 10.15.1
       hey-listen: 1.0.8
-      tslib: 2.4.1
+      tslib: 2.5.0
     dev: false
 
   /@next/bundle-analyzer/12.3.4:
@@ -10340,7 +10342,6 @@ packages:
 
   /tslib/2.5.0:
     resolution: {integrity: sha512-336iVw3rtn2BUK7ORdIAHTyxHGRIHVReokCR3XjbckJMK7ms8FysBfhLR8IXnAgy7T0PTPNBWKiH514FOW/WSg==}
-    dev: true
 
   /tsup/6.5.0_idbjo54bpfgfu5hzy4ncsoa6f4:
     resolution: {integrity: sha512-36u82r7rYqRHFkD15R20Cd4ercPkbYmuvRkz3Q1LCm5BsiFNUgpo36zbjVhCOgvjyxNBWNKHsaD5Rl8SykfzNA==}

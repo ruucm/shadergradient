@@ -16,6 +16,7 @@ async function getBuildOptions(path) {
     ],
     minify: true,
     format: 'esm',
+    outExtension: { '.js': '.mjs' }, // need to use .mjs for esm (if it is .js, next.js will try to parse it as commonjs)
     bundle: true,
     external: [
       'react',
@@ -35,7 +36,10 @@ async function getBuildOptions(path) {
 
 async function build(path = defaultPath, outdir = defaultOutdir) {
   outdir = resolve(outdir)
-  await esbuild.build({ outdir, ...(await getBuildOptions(path)) })
+  await esbuild.build({
+    outdir,
+    ...(await getBuildOptions(path)),
+  })
   console.log(`Build done at ${outdir}`)
 }
 

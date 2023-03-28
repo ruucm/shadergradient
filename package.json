@@ -6,9 +6,13 @@
     "lint": "turbo run lint",
     "clean": "turbo run clean",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
-    "shadergradient:deploy": "cd packages/shadergradient && npm run deploy"
+    "changeset": "changeset add",
+    "version-packages": "changeset version",
+    "shadergradient:deploy": "cd packages/shadergradient && npm run deploy",
+    "release": "turbo run build --filter=shadergradient && changeset publish"
   },
   "devDependencies": {
+    "@changesets/cli": "^2.26.1",
     "eslint": "^7.32.0",
     "eslint-config-custom": "workspace:*",
     "prettier": "^2.7.1",

@@ -1,5 +1,11 @@
 # shadergradient
 
+## 1.1.5
+
+### Patch Changes
+
+- fix types
+
 ## 1.1.4
 
 ### Patch Changes

@@ -7,7 +7,11 @@ exports.dtsPlugin = () => {
     setup(build) {
       build.onEnd((result) => {
         if (result.errors.length > 0) return
-        execSync('tsc --emitDeclarationOnly --outDir dist')
+        try {
+          execSync('tsc --emitDeclarationOnly --outDir dist')
+        } catch (error) {
+          console.log('[tsc error]', error)
+        }
       })
     },
   }

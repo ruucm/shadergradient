@@ -10,11 +10,11 @@ Install below dependencies on your React app.
 yarn add three @types/three @react-three/fiber shadergradient framer-motion
 ```
 
-# Available platforms
+# Available Platforms
 
 ## Framer
 
-[Framer Remix](https://framer.com/projects/new?duplicate=sJitbgOn6on6Savojbyk)
+[Framer Remix (Login required)](https://framer.com/projects/new?duplicate=sJitbgOn6on6Savojbyk)
 
 ## Figma
 
@@ -63,3 +63,9 @@ pnpm install
 ```
 yarn dev
 ```
+
+# Future Plan
+
+- [ ] Detatch framer-motion peer depenency (Seperate UI & Store Pacakge)
+- [ ] Figma GIF Support
+- [ ] More Shaders

@@ -12,13 +12,15 @@ yarn add three @types/three @react-three/fiber shadergradient framer-motion
 
 # Available Platforms
 
+## Figma
+
+[Figma Plugin](https://www.figma.com/community/plugin/1203016883447870818)
+
 ## Framer
 
 [Framer Remix (Login required)](https://framer.com/projects/new?duplicate=sJitbgOn6on6Savojbyk)
 
-## Figma
-
-[Figma Plugin](https://www.figma.com/community/plugin/1203016883447870818)
+[Framer ESM (Copy it on Framer Canvas)](https://framer.com/m/Gradient-YIzl.js)
 
 ## React
 

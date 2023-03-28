@@ -1,5 +1,11 @@
 # shadergradient
 
+## 1.1.2
+
+### Patch Changes
+
+- d.ts built files added (dtsPlugin)
+
 ## 1.1.1
 
 ### Patch Changes

@@ -1,13 +1,7 @@
 import { useControlValues, usePostProcessing } from './hooks'
 import { Lights, Mesh, Axis, CameraControl } from './comps'
-import { usePresetToStore } from '@/store'
 import { useSearchParamToStore } from '@/store/useSearchParamToStore'
-
-type Props = {
-  control?: 'query' | 'props'
-  isFigmaPlugin?: boolean
-  [x: string]: any
-}
+import { GradientT } from '@/types'
 
 export function Gradient({
   control = 'props',
@@ -16,7 +10,7 @@ export function Gradient({
   posSpringOption,
   isFigmaPlugin = false,
   ...props
-}: Props) {
+}: GradientT) {
   // usePresetToStore() // init gradient state with preset
   useSearchParamToStore() // init gradient state with url query
 

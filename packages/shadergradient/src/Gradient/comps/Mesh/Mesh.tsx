@@ -4,6 +4,7 @@ import { animated, useSpring } from '@react-spring/three'
 import { useMaterials } from './useMaterials'
 import { useTimeAnimation } from './useTimeAnimation'
 import { useHoverColorInfo } from './useHoverColorInfo'
+import { MeshT } from '@/types'
 
 // @ts-ignore
 Math.easeInOutCubic = function (t, b, c, d) {
@@ -15,7 +16,7 @@ Math.easeInOutCubic = function (t, b, c, d) {
 const meshCount = 192
 const meshLineCount = 36
 
-export const Mesh: React.FC<any> = ({
+export const Mesh: React.FC<MeshT> = ({
   type,
   animate,
   uTime,

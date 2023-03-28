@@ -1,5 +1,11 @@
 # shadergradient
 
+## 1.1.4
+
+### Patch Changes
+
+- Gradient component types
+
 ## 1.1.3
 
 ### Patch Changes

@@ -1,6 +1,6 @@
 export type MeshT = {
   type?: 'plane' | 'sphere' | 'waterPlane'
-  animate?: boolean
+  animate?: 'on' | 'off'
   uTime?: number
   uSpeed?: number
   uStrength?: number

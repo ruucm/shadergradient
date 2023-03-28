@@ -1,7 +1,7 @@
 import { useControlValues, usePostProcessing } from './hooks'
 import { Lights, Mesh, Axis, CameraControl } from './comps'
 import { useSearchParamToStore } from '@/store/useSearchParamToStore'
-import { GradientT } from '@/types'
+import { GradientT } from '../types'
 
 export function Gradient({
   control = 'props',

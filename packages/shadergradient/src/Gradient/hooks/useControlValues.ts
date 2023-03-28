@@ -1,9 +1,13 @@
 import { useCursorStore } from '@/store'
+import { GradientT } from '@/types'
 import useQueryState from '@/useQueryState'
 import { formatUrlString } from '@/utils'
 import * as qs from 'query-string'
 
-export function useControlValues(control, { urlString, ...props }: any) {
+export function useControlValues(
+  control,
+  { urlString, ...props }: any
+): GradientT {
   // shape
   const [type] = useQueryState('type')
   const [animate] = useQueryState('animate')

@@ -27,4 +27,21 @@ export type GradientT = MeshT & {
   control?: 'query' | 'props'
   isFigmaPlugin?: boolean
   dampingFactor?: number
+
+  // View (camera) props
+  cAzimuthAngle?: number
+  cPolarAngle?: number
+  cDistance?: number
+  cameraZoom?: number
+
+  // Effect props
+  lightType?: '3d' | 'env'
+  brightness?: number
+  envPreset?: 'city' | 'dawn' | 'lobby'
+  grain?: 'on' | 'off'
+
+  // Tool props
+  zoomOut?: boolean
+  toggleAxis?: boolean
+  hoverState?: string
 }

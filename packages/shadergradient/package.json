@@ -7,6 +7,9 @@
     "./styles.css": "./dist/styles.css"
   },
   "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
   "license": "MIT",
   "scripts": {
     "build": "node esmbuild/esmbuild build ./src dist && tailwindcss -i ./src/styles.css -o ./dist/styles.css --minify",

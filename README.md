@@ -24,7 +24,7 @@ yarn add three @types/three @react-three/fiber shadergradient framer-motion
 
 ## React
 
-[CodeSandbox](https://codesandbox.io/s/github/ruucm/shadergradient/tree/main/apps/example-cra)
+[CodeSandbox](https://codesandbox.io/p/sandbox/github/ruucm/shadergradient/tree/main/apps/example-cra?file=%2Fsrc%2FApp.tsx)
 
 ```tsx
 import React from 'react'

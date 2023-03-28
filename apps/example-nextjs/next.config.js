@@ -12,7 +12,9 @@ const nextConfig = {
   // compiler: {
   //   styledComponents: true,
   // },
-  experimental: {},
+  experimental: {
+    urlImports: ['https://cdn.skypack.dev', 'https://gh.ruucm.work'],
+  },
   images: {},
   reactStrictMode: true, // Recommended for the `pages` directory, default in `app`.
   webpack(config, { isServer }) {

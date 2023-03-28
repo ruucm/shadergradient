@@ -1,9 +1,6 @@
 {
-  "name": "react-three-next",
-  "version": "2.0.0",
-  "authors": [
-    "Renaud ROHLINGER <https://twitter.com/onirenaud>"
-  ],
+  "name": "example-nextjs",
+  "version": "0.1.0",
   "license": "MIT",
   "private": true,
   "engines": {

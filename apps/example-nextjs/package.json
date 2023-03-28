@@ -1,36 +1,32 @@
 {
-  "name": "example-nextjs",
-  "version": "0.1.0",
+  "name": "react-three-next",
+  "version": "2.0.0",
+  "authors": [
+    "Renaud ROHLINGER <https://twitter.com/onirenaud>"
+  ],
   "license": "MIT",
   "private": true,
   "engines": {
     "node": ">=14"
   },
-  "scripts": {
-    "lint": "yarn prettier && yarn eslint",
-    "eslint": "next lint --fix --dir src",
-    "prettier": "prettier -l \"./src/**/*.{js,jsx,md}\"",
-    "dev": "next dev --port 3002",
-    "build": "next build",
-    "export": "EXPORT=true next build && EXPORT=true next export",
-    "analyze": "ANALYZE=true next build",
-    "start": "next start"
-  },
   "dependencies": {
     "@react-three/drei": "^9.56.5",
-    "@react-three/fiber": "^8.10.1",
-    "framer-motion": "^8.0.1",
+    "@react-three/fiber": "^8.12.0",
+    "@types/three": "^0.150.0",
+    "framer-motion": "^10.9.2",
     "glsl-random": "^0.0.5",
     "next": "^13.1.6",
     "next-pwa": "^5.6.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "shadergradient": "^1.1.5",
-    "three": "^0.149.0",
+    "three": "^0.150.1",
     "three-stdlib": "^2.21.6"
   },
   "devDependencies": {
     "@next/bundle-analyzer": "^13.1.6",
+    "@types/node": "^18.15.10",
+    "@types/react": "^18.0.30",
     "autoprefixer": "^10.4.12",
     "eslint": "^8.33.0",
     "eslint-config-next": "^13.1.6",
@@ -43,6 +39,17 @@
     "prettier": "^2.8.3",
     "raw-loader": "^4.0.2",
     "tailwindcss": "^3.2.4",
+    "typescript": "^5.0.2",
     "url-loader": "^4.1.1"
+  },
+  "scripts": {
+    "lint": "yarn prettier && yarn eslint",
+    "eslint": "next lint --fix --dir src",
+    "prettier": "npx prettier --list-different \"./src/**/*.{ts,tsx,md}\" \"./app/**/*.{ts,tsx,md}\"\"",
+    "dev": "next dev",
+    "build": "next build",
+    "export": "EXPORT=true next build && EXPORT=true next export",
+    "analyze": "ANALYZE=true next build",
+    "start": "next start"
   }
 }

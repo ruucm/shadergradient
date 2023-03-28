@@ -1,12 +1,12 @@
 {
   "name": "shadergradient",
   "version": "1.1.1",
-  "main": "./dist/index.js",
   "exports": {
     ".": "./dist",
     "./*": "./dist/*",
     "./styles.css": "./dist/styles.css"
   },
+  "types": "./dist/index.d.ts",
   "license": "MIT",
   "scripts": {
     "build": "node esmbuild/esmbuild build ./src dist && tailwindcss -i ./src/styles.css -o ./dist/styles.css --minify",
@@ -19,10 +19,10 @@
     "@react-spring/three": "*",
     "@react-three/drei": "*",
     "@react-three/fiber": "*",
+    "framer-motion": "*",
     "react": "*",
     "three": "*",
-    "three-stdlib": "*",
-    "framer-motion": "*"
+    "three-stdlib": "*"
   },
   "devDependencies": {
     "@types/react": "^18.0.26",

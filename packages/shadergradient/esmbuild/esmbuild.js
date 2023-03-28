@@ -2,6 +2,7 @@ const { join, resolve } = require('path')
 const esbuild = require('esbuild')
 const { glsl } = require('esbuild-plugin-glsl')
 const { cssPlugin } = require('./plugin.css')
+const { dtsPlugin } = require('./plugin.dts')
 
 const color = (n, v) => `\x1b[${n}m${v}\x1b[0m`
 const defaultPath = join(process.cwd(), 'src')
@@ -30,7 +31,7 @@ async function getBuildOptions(path) {
       'framer-motion',
       'zustand',
     ],
-    plugins: [cssPlugin({ inject: true }), glsl({ minify: true })],
+    plugins: [cssPlugin({ inject: true }), glsl({ minify: true }), dtsPlugin()],
   }
 }
 

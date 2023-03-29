@@ -13,7 +13,7 @@ export default function Page(props) {
 
 // Canvas components go here
 // It will receive same props as the Page component (from getStaticProps, etc.)
-Page.canvas = (props) => <Gradient cDistance={24} color1='#FF0000' color2='#00FF00' color3='#0000FF' />
+Page.canvas = (props) => <Gradient cDistance={24} color1='#ff5005' color2='#dbba95' color3='#d0bce1' />
 
 export async function getStaticProps() {
   return { props: { title: 'Index' } }

@@ -6,7 +6,7 @@ function App() {
   return (
     <div className="App">
       <GradientCanvas style={{ position: "absolute" }}>
-        <Gradient cDistance={32} cPolarAngle={125} />
+        <Gradient cDistance={32} cPolarAngle={125} color1="#ff5005" color2="#dbba95" color3="#d0bce1" />
       </GradientCanvas>
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />

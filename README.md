@@ -1,5 +1,7 @@
 # Shader Gradient
 
+![Intro](./intro.gif)
+
 Curated and customizable 3d gradient package, in modern design tools (Framer, Figma) and React.
 
 # Installation
@@ -52,7 +54,71 @@ function App() {
 
 [CodeSandbox](https://codesandbox.io/p/sandbox/zjxeci?file=%2Fsrc%2Fpages%2Findex.tsx)
 
-# Development
+# Usage
+
+Drop the gradient component on your canvas. Then you can customize it with props.
+
+## Figma
+
+![Figma](./figma.gif)
+
+## Framer
+
+![Framer](./framer.gif)
+
+## React
+
+```ts
+export type MeshT = {
+  type?: 'plane' | 'sphere' | 'waterPlane'
+  animate?: 'on' | 'off'
+  uTime?: number
+  uSpeed?: number
+  uStrength?: number
+  uDensity?: number
+  uFrequency?: number
+  uAmplitude?: number
+  positionX?: number
+  positionY?: number
+  positionZ?: number
+  rotationX?: number
+  rotationY?: number
+  rotationZ?: number
+  color1?: string
+  color2?: string
+  color3?: string
+  reflection?: number
+  wireframe?: boolean
+  shader?: string
+  rotSpringOption?: any
+  posSpringOption?: any
+}
+
+export type GradientT = MeshT & {
+  control?: 'query' | 'props'
+  isFigmaPlugin?: boolean
+  dampingFactor?: number
+
+  // View (camera) props
+  cAzimuthAngle?: number
+  cPolarAngle?: number
+  cDistance?: number
+  cameraZoom?: number
+
+  // Effect props
+  lightType?: '3d' | 'env'
+  brightness?: number
+  envPreset?: 'city' | 'dawn' | 'lobby'
+  grain?: 'on' | 'off'
+
+  // Tool props
+  zoomOut?: boolean
+  toggleAxis?: boolean
+  hoverState?: string
+}
+```
+
+# Contributes
 
 ## Setup
 

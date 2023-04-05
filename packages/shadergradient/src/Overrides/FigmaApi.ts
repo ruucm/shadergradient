@@ -1526,7 +1526,6 @@ export const postFigmaMessage = async (func) => {
     {
       pluginMessage: {
         type: 'execute',
-        //@ts-ignore
         code: getCodeString(func),
       },
     },
@@ -1566,20 +1565,16 @@ export const postFigmaMessageForSnapShot = async (func) => {
 }
 
 async function captureCanvas() {
-  return new Promise((resolve, reject) => {
-    const image = new Image()
-
+  return new Promise(async (resolve, reject) => {
     const r3fCanvas = document.getElementById('gradientCanvas')
       .children[0] as HTMLCanvasElement
 
     const dataURL = r3fCanvas.toDataURL('image/png', 1.0) // full quality
-    image.src = dataURL
 
-    image.onload = async () => {
-      const view: any = await imageToUint8Array(image)
-      console.log(`${view.length} bytes`)
-      resolve(view)
-    }
+    const image = await loadImage(dataURL)
+    const view: any = await imageToUint8Array(image)
+    console.log(`${view.length} bytes!`)
+    resolve(view)
   })
 }
 

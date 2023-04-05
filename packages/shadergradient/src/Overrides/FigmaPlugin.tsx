@@ -246,22 +246,3 @@ export function HideScrollBar(Component): ComponentType {
     <Component {...props} className={cx('hide-scrollbar', className)} />
   )
 }
-
-// add libs for gif encoding
-addScript(
-  'https://gh.ruucm.work/shadergradient/shadergradient@1.1.5/hdr/lib/LZWEncoder.js'
-)
-addScript(
-  'https://gh.ruucm.work/shadergradient/shadergradient@1.1.5/hdr/lib/NeuQuant.js'
-)
-addScript(
-  'https://gh.ruucm.work/shadergradient/shadergradient@1.1.5/hdr/lib/GIFEncoder.js'
-)
-addScript(
-  'https://gh.ruucm.work/shadergradient/shadergradient@1.1.5/hdr/lib/b64.js'
-)
-function addScript(src) {
-  var my_awesome_script = document.createElement('script')
-  my_awesome_script.setAttribute('src', src)
-  document.head.appendChild(my_awesome_script)
-}

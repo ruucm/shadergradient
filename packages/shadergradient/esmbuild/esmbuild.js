@@ -72,7 +72,7 @@ async function serve(path = defaultPath, port = 8000) {
     ...(await getBuildOptions(path)),
     watch: {
       onRebuild(error, result) {
-        io.emit('build')
+        // io.emit('build')
       },
     },
   })

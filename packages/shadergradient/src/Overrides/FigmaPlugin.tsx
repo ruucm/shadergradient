@@ -35,11 +35,15 @@ export function createRectangle(Component): ComponentType {
 
 export function extractGIF(Component): ComponentType {
   return ({ style, ...props }: any) => {
+    const [progress, setProgress] = useState(0)
+    const loading = progress > 0 && progress < 1
+
     return (
       <Component
         {...props}
         style={{ ...style, cursor: 'pointer' }}
-        onClick={() => postFigmaMessageForCreateGIF(() => void 0)}
+        onClick={() => postFigmaMessageForCreateGIF(setProgress)}
+        variant={loading ? 'loading' : 'default'}
       />
     )
   }

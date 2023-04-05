@@ -1533,14 +1533,14 @@ export const postFigmaMessage = async (func) => {
   )
 }
 
-export const postFigmaMessageForCreateGIF = async (func) => {
-  const bytes = await captureGIF()
+export const postFigmaMessageForCreateGIF = async (callback) => {
+  const bytes = await captureGIF(callback)
 
   parent.postMessage(
     {
       pluginMessage: {
         type: 'SNAPSHOT',
-        code: getCodeString(func),
+        code: getCodeString(callback),
         bytes,
       },
     },
@@ -1578,7 +1578,7 @@ async function captureCanvas() {
   })
 }
 
-async function captureGIF() {
+async function captureGIF(callback) {
   return new Promise(async (resolve, reject) => {
     const encoder = new GIFEncoder()
     encoder.setRepeat(0) //0  -> loop forever
@@ -1586,7 +1586,10 @@ async function captureGIF() {
     encoder.setQuality(20)
 
     encoder.start()
-    for (let i = 0; i < 30; i++) await gifAddFrame(encoder)
+    for (let i = 0; i < 30; i++) {
+      await gifAddFrame(encoder)
+      callback(i / 29)
+    }
     encoder.finish()
     // encoder.download('download.gif')
     const binary_gif = encoder.stream().getData()

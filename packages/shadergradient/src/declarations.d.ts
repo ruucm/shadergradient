@@ -12,3 +12,9 @@ declare global {
     }
   }
 }
+
+// declare functions for gif encoding (imported as script tags)
+declare global {
+  function GIFEncoder(): void
+  function encode64(input: string): string
+}

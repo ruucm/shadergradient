@@ -1534,6 +1534,21 @@ export const postFigmaMessage = async (func) => {
   )
 }
 
+export const postFigmaMessageForCreateGIF = async (func) => {
+  const bytes = await captureGIF()
+
+  parent.postMessage(
+    {
+      pluginMessage: {
+        type: 'SNAPSHOT',
+        code: getCodeString(func),
+        bytes,
+      },
+    },
+    '*'
+  )
+}
+
 export const postFigmaMessageForSnapShot = async (func) => {
   const bytes = await captureCanvas()
 
@@ -1568,6 +1583,42 @@ async function captureCanvas() {
   })
 }
 
+async function captureGIF() {
+  return new Promise(async (resolve, reject) => {
+    const encoder = new GIFEncoder()
+    encoder.setRepeat(0) //0  -> loop forever
+    encoder.setDelay(100) //go to next frame every n milliseconds
+    encoder.setQuality(20)
+
+    encoder.start()
+    for (let i = 0; i < 30; i++) await gifAddFrame(encoder)
+    encoder.finish()
+    // encoder.download('download.gif')
+    const binary_gif = encoder.stream().getData()
+    const dataURL = 'data:image/gif;base64,' + encode64(binary_gif)
+
+    resolve(gifToUint8Array(dataURL))
+  })
+}
+
+async function gifAddFrame(encoder) {
+  const r3fCanvas: any = document.getElementById('gradientCanvas')
+    ?.children[0] as HTMLCanvasElement
+  const dataURL = r3fCanvas.toDataURL('image/png', 1.0) // full quality
+
+  const image = await loadImage(dataURL)
+
+  // add the image to the encoder
+  const canvas = document.createElement('canvas')
+  const context: any = canvas.getContext('2d')
+
+  context.canvas.width = image.width
+  context.canvas.height = image.height
+  context.drawImage(image, 0, 0)
+
+  encoder.addFrame(context)
+}
+
 async function imageToUint8Array(image) {
   return new Promise((resolve, reject) => {
     // create a canvas for converto image to uint8array
@@ -1585,4 +1636,26 @@ async function imageToUint8Array(image) {
         .catch(reject)
     )
   })
+}
+
+async function gifToUint8Array(dataURL) {
+  // Convert base64 data URL to binary string
+  const binaryString = atob(dataURL.split(',')[1])
+  // Convert binary string to Uint8Array
+  const uint8Array = new Uint8Array(binaryString.length)
+  for (let i = 0; i < binaryString.length; i++)
+    uint8Array[i] = binaryString.charCodeAt(i)
+
+  return uint8Array
+}
+
+async function loadImage(src) {
+  const image = new Image()
+  image.src = src
+  await new Promise((resolve, reject) => {
+    image.onload = resolve
+    image.onerror = reject
+  })
+  console.log('Image has loaded')
+  return image
 }

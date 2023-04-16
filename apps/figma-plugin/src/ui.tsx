@@ -23,7 +23,7 @@ const App = () => {
   )
 }
 
-// 소니 형이었군 https://gist.github.com/sonnylazuardi/e55300f28fbe109db052f6568fee5a04
+// https://gist.github.com/sonnylazuardi/e55300f28fbe109db052f6568fee5a04
 function resizeWindow(e) {
   const size = {
     w: Math.max(50, Math.floor(e.clientX + 5)),

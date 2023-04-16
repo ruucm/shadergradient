@@ -48,6 +48,17 @@ export function extractGIF(Component): ComponentType {
     )
   }
 }
+export function extractGIFDEV(Component): ComponentType {
+  return ({ style, ...props }: any) => {
+    return (
+      <Component
+        {...props}
+        style={{ ...style, cursor: 'pointer' }}
+        onClick={() => alert('This feature is under development.')}
+      />
+    )
+  }
+}
 
 export function insertCanvasAsImage(Component): ComponentType {
   return ({ style, ...props }: any) => {
@@ -243,6 +254,28 @@ export function UrlInput(Component): ComponentType {
           }
         }}
         variant={variant}
+      />
+    )
+  }
+}
+
+export function LoadViewAfterStyleSheet(Component): ComponentType {
+  return (props: any) => {
+    const [foundStylesheet, setFoundStylesheet] = useState(false)
+
+    useEffect(() => {
+      const interval = setInterval(() => {
+        const stylesheet = document.getElementById('shadergradient-app-styles')
+        if (stylesheet) setFoundStylesheet(true)
+      }, 200)
+
+      return () => clearInterval(interval)
+    }, [])
+
+    return (
+      <Component
+        {...props}
+        style={{ ...props.style, opacity: foundStylesheet ? 1 : 0 }}
       />
     )
   }

@@ -34,6 +34,24 @@ export function createRectangle(Component): ComponentType {
   }
 }
 
+export function insertCanvasAsImage(Component): ComponentType {
+  return ({ style, ...props }: any) => {
+    const selection = useFigmaSelections() // need to attatch once to listen figma selection changes
+    const enabled = selection > 0
+
+    return (
+      <Component
+        {...props}
+        style={{ ...style, cursor: 'pointer', opacity: enabled ? 1 : 0.5 }}
+        onTap={() => {
+          if (enabled) postFigmaMessageForSnapShot(() => void 0)
+          else props?.onTap() // move to the alert variant
+        }}
+      />
+    )
+  }
+}
+
 export function extractGIF(Component): ComponentType {
   return ({ style, ...props }: any) => {
     const [progress, setProgress] = useState(0)
@@ -62,24 +80,6 @@ export function extractGIFDEV(Component): ComponentType {
         {...props}
         style={{ ...style, cursor: 'pointer' }}
         onClick={() => alert('This feature is under development.')}
-      />
-    )
-  }
-}
-
-export function insertCanvasAsImage(Component): ComponentType {
-  return ({ style, ...props }: any) => {
-    const selection = useFigmaSelections() // need to attatch once to listen figma selection changes
-    const enabled = selection > 0
-
-    return (
-      <Component
-        {...props}
-        style={{ ...style, cursor: 'pointer', opacity: enabled ? 1 : 0.5 }}
-        onTap={() => {
-          if (enabled) postFigmaMessageForSnapShot(() => void 0)
-          else props?.onTap() // move to the alert variant
-        }}
       />
     )
   }

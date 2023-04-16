@@ -4,5 +4,6 @@
   "api": "1.0.0",
   "main": "dist/code.js",
   "ui": "dist/ui.html",
-  "editorType": ["figma", "figjam"]
+  "editorType": ["figma", "figjam"],
+  "permissions": ["payments"]
 }

@@ -2,6 +2,27 @@
 
 figma.showUI(__html__, { width: 450, height: 630 })
 
+run()
+async function run() {
+  const ONE_DAY_IN_SECONDS = 60 * 60 * 24
+  const secondsSinceFirstRun = figma.payments.getUserFirstRanSecondsAgo()
+  console.log('secondsSinceFirstRun', secondsSinceFirstRun)
+  const daysSinceFirstRun = secondsSinceFirstRun / ONE_DAY_IN_SECONDS
+  console.log('daysSinceFirstRun', daysSinceFirstRun)
+  if (daysSinceFirstRun > 3) {
+    await figma.payments.initiateCheckoutAsync({
+      interstitial: 'TRIAL_ENDED',
+    })
+    if (figma.payments.status.type === 'UNPAID') {
+      figma.notify('USER CANCELLED CHECKOUT')
+    } else {
+      figma.notify('USER JUST PAID')
+    }
+  } else {
+    figma.notify('USER IS IN THREE DAY TRIAL PERIOD')
+  }
+}
+
 // restore previous size
 figma.clientStorage
   .getAsync('size')

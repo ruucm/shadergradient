@@ -57,7 +57,9 @@ export function insertCanvasAsImage(Component): ComponentType {
     useEffect(() => {
       parent.postMessage({ pluginMessage: { type: 'UI_READY' } }, '*') // init selection
       onmessage = (event) => {
-        setSelection(event.data.pluginMessage.selection.length)
+        const msg = event.data.pluginMessage
+        if (msg.type === 'SELECTION')
+          setSelection(event.data.pluginMessage.selection.length)
       }
     }, [])
 

@@ -62,5 +62,5 @@ async function replaceToNewImage(node, bytes) {
 
 function postMessageSelection() {
   const selection = figma.currentPage.selection
-  figma.ui.postMessage({ type: 'selection', selection })
+  figma.ui.postMessage({ type: 'SELECTION', selection })
 }

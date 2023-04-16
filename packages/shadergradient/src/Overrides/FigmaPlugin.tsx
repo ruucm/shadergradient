@@ -7,6 +7,7 @@ import {
   PRESETS,
   useURLQueryState,
   useQueryState,
+  useSelection,
 } from '../store'
 import {
   figma,
@@ -38,11 +39,17 @@ export function extractGIF(Component): ComponentType {
     const [progress, setProgress] = useState(0)
     const loading = progress > 0 && progress < 1
 
+    const [selection] = useSelection()
+    const enabled = selection > 0
+
     return (
       <Component
         {...props}
-        style={{ ...style, cursor: 'pointer' }}
-        onClick={() => postFigmaMessageForCreateGIF(setProgress)}
+        style={{ ...style, cursor: 'pointer', opacity: enabled ? 1 : 0.5 }}
+        tap={() => {
+          if (enabled) postFigmaMessageForCreateGIF(setProgress)
+          else props?.tap() // move to the alert variant
+        }}
         variant={loading ? 'loading' : 'default'}
       />
     )
@@ -62,26 +69,13 @@ export function extractGIFDEV(Component): ComponentType {
 
 export function insertCanvasAsImage(Component): ComponentType {
   return ({ style, ...props }: any) => {
-    const [selection, setSelection] = useState(0)
+    const selection = useFigmaSelections() // need to attatch once to listen figma selection changes
     const enabled = selection > 0
-
-    useEffect(() => {
-      parent.postMessage({ pluginMessage: { type: 'UI_READY' } }, '*') // init selection
-      onmessage = (event) => {
-        const msg = event.data.pluginMessage
-        if (msg.type === 'SELECTION')
-          setSelection(event.data.pluginMessage.selection.length)
-      }
-    }, [])
 
     return (
       <Component
         {...props}
-        style={{
-          ...style,
-          cursor: 'pointer',
-          opacity: enabled ? 1 : 0.5,
-        }}
+        style={{ ...style, cursor: 'pointer', opacity: enabled ? 1 : 0.5 }}
         onTap={() => {
           if (enabled) postFigmaMessageForSnapShot(() => void 0)
           else props?.onTap() // move to the alert variant
@@ -297,4 +291,18 @@ export function HideScrollBar(Component): ComponentType {
   return ({ className, ...props }: any) => (
     <Component {...props} className={cx('hide-scrollbar', className)} />
   )
+}
+
+function useFigmaSelections() {
+  const [selection, setSelection] = useSelection()
+
+  useEffect(() => {
+    parent.postMessage({ pluginMessage: { type: 'UI_READY' } }, '*') // init selection
+    onmessage = (event) => {
+      const msg = event.data.pluginMessage
+      if (msg.type === 'SELECTION')
+        setSelection(event.data.pluginMessage.selection.length)
+    }
+  }, [])
+  return selection
 }

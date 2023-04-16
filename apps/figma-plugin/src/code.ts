@@ -19,6 +19,9 @@ figma.ui.onmessage = (msg) => {
       }) // save size
 
       break
+    case 'UI_READY':
+      postMessageSelection()
+      break
     case 'SNAPSHOT':
       Promise.all(
         figma.currentPage.selection.map((selected) =>
@@ -30,6 +33,8 @@ figma.ui.onmessage = (msg) => {
       break
   }
 }
+
+figma.on('selectionchange', postMessageSelection)
 
 async function invertPaint(paint, bytes) {
   if (paint.type === 'IMAGE') {
@@ -53,4 +58,9 @@ async function replaceToNewImage(node, bytes) {
     newFills.push(await invertPaint(paint, bytes))
   }
   node.fills = newFills
+}
+
+function postMessageSelection() {
+  const selection = figma.currentPage.selection
+  figma.ui.postMessage({ type: 'selection', selection })
 }

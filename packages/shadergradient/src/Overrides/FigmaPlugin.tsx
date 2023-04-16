@@ -1,4 +1,4 @@
-import { ComponentType, useState } from 'react'
+import { ComponentType, useEffect, useState } from 'react'
 import React from 'react'
 import * as qs from 'query-string'
 import {
@@ -51,11 +51,28 @@ export function extractGIF(Component): ComponentType {
 
 export function insertCanvasAsImage(Component): ComponentType {
   return ({ style, ...props }: any) => {
+    const [selection, setSelection] = useState(0)
+    const enabled = selection > 0
+
+    useEffect(() => {
+      parent.postMessage({ pluginMessage: { type: 'UI_READY' } }, '*') // init selection
+      onmessage = (event) => {
+        setSelection(event.data.pluginMessage.selection.length)
+      }
+    }, [])
+
     return (
       <Component
         {...props}
-        style={{ ...style, cursor: 'pointer' }}
-        onClick={() => postFigmaMessageForSnapShot(() => void 0)}
+        style={{
+          ...style,
+          cursor: 'pointer',
+          opacity: enabled ? 1 : 0.5,
+        }}
+        onTap={() => {
+          if (enabled) postFigmaMessageForSnapShot(() => void 0)
+          else props?.onTap() // move to the alert variant
+        }}
       />
     )
   }

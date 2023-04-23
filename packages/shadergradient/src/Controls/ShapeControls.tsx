@@ -43,7 +43,7 @@ export const ShapeControls: React.FC<ShapeControlsPropsT> = () => {
           step={0.1}
           min={0}
           max={40}
-          preview={true}
+          preview={false}
         />
       </InputPanel>
       <InputPanel title='Type'>

@@ -52,22 +52,22 @@ export const RangeSlider = React.forwardRef<HTMLInputElement, SliderPropsT>(
           minDistance={0.5}
           withTracks={true}
           // styles
-          className='bg-primary h-[10px] w-full bg-opacity-10 rounded-full'
+          className='bg-primary h-[8px] w-full bg-opacity-20 rounded-full'
           marks={[(min + max) / 2]}
           markClassName='w-mark h-mark bg-primary top-1/2 transform -translate-y-1/2 slider-mark-center-x'
-          thumbClassName='bg-white w-thumb h-thumb rounded-full top-1/2 transform -translate-y-1/2 outline-none cursor-pointer shadow-md shadow-primary/30'
-          trackClassName='bg-primary h-[10px] rounded-full relative'
+          thumbClassName='bg-primary w-thumb h-thumb rounded-full top-1/2 transform -translate-y-1/2 outline-none cursor-pointer'
+          trackClassName='bg-primary h-[8px] rounded-full relative'
           renderTrack={(props, state) => (
             <div
               {...props}
               style={{
                 ...props.style,
-                opacity: state.index === 1 ? 1 : 0,
+                opacity: state.index === 1 ? 0.7 : 0,
               }}
             >
               {preview === true && (
                 <motion.div
-                  className='w-[4px] h-[10px] bg-white absolute'
+                  className='w-[4px] h-[8px] bg-white absolute'
                   initial={{ left: 0 }}
                   animate={{ left: '100%' }}
                   transition={{

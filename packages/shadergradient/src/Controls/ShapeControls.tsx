@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { useQueryState } from '@/store'
-import { Slider, Radio } from '@/ui'
+import { Slider, Radio, RangeSlider } from '@/ui'
 import { InputPanel } from './InputPanel'
 
 type ShapeControlsPropsT = React.DetailedHTMLProps<
@@ -24,6 +24,28 @@ export const ShapeControls: React.FC<ShapeControlsPropsT> = () => {
 
   return (
     <div className='flex flex-col gap-3'>
+      {/* need to remove later */}
+      <InputPanel
+        title='Range'
+        info={true}
+        hoverContent='Set the start and end of gif'
+        isHovered={isHovered}
+        onMouseEnter={() => {
+          setIsHovered('Range')
+        }}
+        onMouseLeave={() => {
+          setIsHovered('')
+        }}
+      >
+        <RangeSlider
+          // defaultValue={uDensity}
+          setValue={setUDensity}
+          step={0.1}
+          min={0}
+          max={40}
+          preview={true}
+        />
+      </InputPanel>
       <InputPanel title='Type'>
         <Radio
           name='type'

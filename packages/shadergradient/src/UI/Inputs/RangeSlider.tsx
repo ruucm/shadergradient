@@ -2,7 +2,6 @@ import * as React from 'react'
 import { useEffect, useState } from 'react'
 import ReactSlider from 'react-slider'
 import { NumberInput, Spacing } from '../../UI/index'
-import { motion } from 'framer-motion'
 
 type SliderPropsT = {
   // defaultValue: number
@@ -10,14 +9,13 @@ type SliderPropsT = {
   step: number
   min: number
   max: number
-  preview: boolean
 } & React.DetailedHTMLProps<
   React.InputHTMLAttributes<HTMLInputElement>,
   HTMLInputElement
 >
 
 export const RangeSlider = React.forwardRef<HTMLInputElement, SliderPropsT>(
-  ({ setValue, step, min, max, preview }: SliderPropsT, ref) => {
+  ({ setValue, step, min, max }: SliderPropsT, ref) => {
     // const [sharedValue, setSharedValue] = useState<any>(defaultValue)
     const [rangeStart, setRangeStart] = useState<any>(min)
     const [rangeEnd, setRangeEnd] = useState<any>(max)
@@ -64,21 +62,7 @@ export const RangeSlider = React.forwardRef<HTMLInputElement, SliderPropsT>(
                 ...props.style,
                 opacity: state.index === 1 ? 0.7 : 0,
               }}
-            >
-              {preview === true && (
-                <motion.div
-                  className='w-[4px] h-[8px] bg-white absolute'
-                  initial={{ left: 0 }}
-                  animate={{ left: '100%' }}
-                  transition={{
-                    duration: 2,
-                    repeat: Infinity,
-                    repeatType: 'loop',
-                    ease: 'linear',
-                  }}
-                ></motion.div>
-              )}
-            </div>
+            ></div>
           )}
         />
         <Spacing className='w-4' />

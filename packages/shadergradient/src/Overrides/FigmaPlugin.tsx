@@ -1,4 +1,4 @@
-import { ComponentType, useState } from 'react'
+import { ComponentType, useEffect, useState } from 'react'
 import React from 'react'
 import * as qs from 'query-string'
 import {
@@ -224,6 +224,28 @@ export function UrlInput(Component): ComponentType {
           }
         }}
         variant={variant}
+      />
+    )
+  }
+}
+
+export function LoadViewAfterStyleSheet(Component): ComponentType {
+  return (props: any) => {
+    const [foundStylesheet, setFoundStylesheet] = useState(false)
+
+    useEffect(() => {
+      const interval = setInterval(() => {
+        const stylesheet = document.getElementById('shadergradient-app-styles')
+        if (stylesheet) setFoundStylesheet(true)
+      }, 200)
+
+      return () => clearInterval(interval)
+    }, [])
+
+    return (
+      <Component
+        {...props}
+        style={{ ...props.style, opacity: foundStylesheet ? 1 : 0 }}
       />
     )
   }

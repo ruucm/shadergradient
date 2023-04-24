@@ -1,0 +1,16 @@
+/*
+ * Skypack CDN - canvas-confetti@1.6.0
+ *
+ * Learn more:
+ *   📙 Package Documentation: https://www.skypack.dev/view/canvas-confetti
+ *   📘 Skypack Documentation: https://www.skypack.dev/docs
+ *
+ * Pinned URL: (Optimized for Production)
+ *   ▶️ Normal: https://cdn.skypack.dev/pin/canvas-confetti@v1.6.0-t438JJTXIbBReqvLtDua/mode=imports/optimized/canvas-confetti.js
+ *   ⏩ Minified: https://cdn.skypack.dev/pin/canvas-confetti@v1.6.0-t438JJTXIbBReqvLtDua/mode=imports,min/optimized/canvas-confetti.js
+ *
+ */
+
+// Browser-Optimized Imports (Don't directly import the URLs below in your application!)
+export * from '/-/canvas-confetti@v1.6.0-t438JJTXIbBReqvLtDua/dist=es2019,mode=imports/optimized/canvas-confetti.js';
+export {default} from '/-/canvas-confetti@v1.6.0-t438JJTXIbBReqvLtDua/dist=es2019,mode=imports/optimized/canvas-confetti.js';

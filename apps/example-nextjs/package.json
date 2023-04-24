@@ -46,7 +46,6 @@
     "dev": "next dev --port 3002",
     "build": "next build",
     "export": "EXPORT=true next build && EXPORT=true next export",
-    "analyze": "ANALYZE=true next build",
-    "start": "next start"
+    "analyze": "ANALYZE=true next build"
   }
 }

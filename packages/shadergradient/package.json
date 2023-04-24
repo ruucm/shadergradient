@@ -13,6 +13,7 @@
   "license": "MIT",
   "scripts": {
     "build": "node esmbuild/esmbuild build ./src dist && tailwindcss -i ./src/styles.css -o ./dist/styles.css --minify",
+    "start": "node esmbuild/esmbuild-render serve",
     "dev": "concurrently \"node esmbuild/esmbuild serve ./src 8001\" \"tailwindcss -i ./src/styles.css -o ./dist/styles.css --watch\"",
     "release": "yarn run build && mkdir -p release && cp -Rf dist release/$npm_package_name@$npm_package_version && cp -Rf hdr release/$npm_package_name@$npm_package_version",
     "deploy": "yarn version; git push --tags; git push",
@@ -40,6 +41,7 @@
     "node-sass": "^7.0.1",
     "postcss": "^8.3.5",
     "postcss-modules": "^4.3.1",
+    "request-ip": "^3.3.0",
     "socket.io": "^4.5.0",
     "socket.io-client": "^4.5.0",
     "tailwind-config": "workspace:*",

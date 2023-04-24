@@ -74,17 +74,12 @@ async function serve(path = defaultPath, port = 8000) {
     console.log(line)
   }
 
-  // await esbuild.serve(
-  //   { port, onRequest, servedir: defaultOutdir },
-  //   await getBuildOptions(path)
-  // )
-
   await esbuild.serve(
-    { port: devPort, onRequest },
+    { port: devPort, onRequest, servedir: defaultOutdir },
     await getBuildOptions(devPath)
   )
   await esbuild.serve(
-    { port: prodPort, onRequest },
+    { port: prodPort, onRequest, servedir: defaultOutdir },
     await getBuildOptions(prodPath)
   )
 

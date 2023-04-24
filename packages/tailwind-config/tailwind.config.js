@@ -14,6 +14,7 @@ module.exports = {
         // brandblue: colors.blue[500],
         // brandred: colors.red[500],
         primary: '#FF430A',
+        'primary-dev': 'hsl(123, 100%, 52%)',
         'controls-panel': '#F6F8F8',
         'controls-panel-mobile': '#F6F8F8',
         'controls-sub-panel': '#383838',

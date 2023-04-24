@@ -45,9 +45,12 @@ async function build(path = defaultPath, outdir = defaultOutdir) {
 
 const devPath = join(process.cwd(), 'src-dev')
 const prodPath = join(process.cwd(), 'src')
-const devPort = 8000
-const prodPort = 8001
-const proxyPort = 10000
+console.log('process.env.PORT', process.env.PORT)
+const proxyPort = Number(process.env.PORT || 10000)
+console.log('proxyPort', proxyPort)
+const devPort = proxyPort + 1
+const prodPort = proxyPort + 2
+console.log({ devPort, prodPort })
 
 const devIPs = [
   '192.168.1.100',
@@ -89,7 +92,7 @@ async function serve() {
         console.log('isDev', isDev)
         const options = {
           hostname: '0.0.0.0',
-          port: isDev ? 8000 : 8001,
+          port: isDev ? devPort : prodPort,
           path: req.url,
           method: req.method,
           headers: req.headers,

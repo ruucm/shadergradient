@@ -10,5 +10,6 @@ export declare function ToolZoomOut(Component: any): ComponentType;
 export declare function ToolCopy(Component: any): ComponentType;
 export declare function ToolUndo(Component: any): ComponentType;
 export declare function UrlInput(Component: any): ComponentType;
+export declare function LoadViewAfterStyleSheet(Component: any): ComponentType;
 export declare function HideScrollBar(Component: any): ComponentType;
 //# sourceMappingURL=FigmaPlugin.d.ts.map

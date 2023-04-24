@@ -8,16 +8,12 @@ const http = require('http')
 const requestIp = require('request-ip')
 
 const color = (n, v) => `\x1b[${n}m${v}\x1b[0m`
-const defaultPath = join(process.cwd(), 'src')
+// const defaultPath = join(process.cwd(), 'src')
 const defaultOutdir = join(process.cwd(), 'dist')
 
 async function getBuildOptions(path) {
   return {
-    entryPoints: [
-      `${defaultPath}/index.ts`,
-      `${defaultPath}/client.ts`,
-      `${defaultPath}/ui.ts`,
-    ],
+    entryPoints: [`${path}/index.ts`, `${path}/client.ts`, `${path}/ui.ts`],
     minify: true,
     format: 'esm',
     outExtension: { '.js': '.mjs' }, // need to use .mjs for esm (if it is .js, next.js will try to parse it as commonjs)
@@ -62,7 +58,7 @@ const devIPs = [
   '118.235.7.164', // iPhone 14 Pro
 ]
 
-async function serve(path = defaultPath, port = 8000) {
+async function serve() {
   function onRequest(info) {
     const status = color(
       info.status.toString().startsWith('2') ? 32 : 31,

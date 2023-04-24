@@ -13,7 +13,7 @@
   "license": "MIT",
   "scripts": {
     "build": "node esmbuild/esmbuild build ./src dist && tailwindcss -i ./src/styles.css -o ./dist/styles.css --minify",
-    "start": "concurrently \"node esmbuild/esmbuild-render serve\" \"tailwindcss -i ./src/styles.css -o ./dist/styles.css --watch\"",
+    "start": "tailwindcss -i ./src/styles.css -o ./dist/styles.css && node esmbuild/esmbuild-render serve",
     "dev": "concurrently \"node esmbuild/esmbuild serve ./src 8001\" \"tailwindcss -i ./src/styles.css -o ./dist/styles.css --watch\"",
     "release": "yarn run build && mkdir -p release && cp -Rf dist release/$npm_package_name@$npm_package_version && cp -Rf hdr release/$npm_package_name@$npm_package_version",
     "deploy": "yarn version; git push --tags; git push",

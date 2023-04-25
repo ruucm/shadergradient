@@ -6,6 +6,7 @@ const { dtsPlugin } = require('./plugin.dts')
 
 const http = require('http')
 const requestIp = require('request-ip')
+const { getDevIPs } = require('./utils')
 
 const color = (n, v) => `\x1b[${n}m${v}\x1b[0m`
 // const defaultPath = join(process.cwd(), 'src')
@@ -52,15 +53,6 @@ const devPort = proxyPort + 1
 const prodPort = proxyPort + 2
 console.log({ devPort, prodPort })
 
-const devIPs = [
-  '192.168.1.100',
-  '192.168.1.101',
-  '127.0.0.1',
-  '::ffff:127.0.0.1',
-  '1.224.28.250', // liverhill
-  '118.235.7.164', // iPhone 14 Pro
-]
-
 async function serve() {
   function onRequest(info) {
     const status = color(
@@ -85,9 +77,12 @@ async function serve() {
   // Then start a proxy server on port proxyPort
   http
     .createServer((req, res) => {
-      requestIp.mw()(req, res, () => {
+      requestIp.mw()(req, res, async () => {
         const clientIp = req.clientIp
         console.log('clientIp', clientIp)
+        const devIPs = await getDevIPs()
+        console.log('devIPs', devIPs)
+
         const isDev = devIPs.includes(clientIp)
         console.log('isDev', isDev)
         const options = {

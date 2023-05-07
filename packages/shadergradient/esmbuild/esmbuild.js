@@ -10,11 +10,7 @@ const defaultOutdir = join(process.cwd(), 'dist')
 
 async function getBuildOptions(path) {
   return {
-    entryPoints: [
-      `${defaultPath}/index.ts`,
-      `${defaultPath}/client.ts`,
-      `${defaultPath}/ui.ts`,
-    ],
+    entryPoints: [`${path}/index.ts`, `${path}/client.ts`, `${path}/ui.ts`],
     minify: true,
     format: 'esm',
     outExtension: { '.js': '.mjs' }, // need to use .mjs for esm (if it is .js, next.js will try to parse it as commonjs)

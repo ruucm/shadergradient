@@ -14,18 +14,16 @@ type SliderPropsT = {
 >
 
 export const RangeSlider: React.FC<SliderPropsT> = ({
+  defaultValue,
   setValue,
   step,
   min,
   max,
 }) => {
-  const [rangeStart, setRangeStart] = useState<any>(min)
-  const [rangeEnd, setRangeEnd] = useState<any>(max)
-
-  useEffect(() => {
-    setRangeStart(min)
-    setRangeEnd(max)
-  }, [])
+  const defaultStart = defaultValue?.[0] || min
+  const defaultEnd = defaultValue?.[1] || max
+  const [rangeStart, setRangeStart] = useState<any>(defaultStart)
+  const [rangeEnd, setRangeEnd] = useState<any>(defaultEnd)
 
   useEffect(() => {
     setValue([rangeStart, rangeEnd])

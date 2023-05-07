@@ -11,6 +11,9 @@ export function useControlValues(
   // shape
   const [type] = useQueryState('type')
   const [animate] = useQueryState('animate')
+  const [loop] = useQueryState('loop')
+  const [loopStart] = useQueryState('loopStart')
+  const [loopEnd] = useQueryState('loopEnd')
   const [uTime] = useQueryState('uTime')
   const [uSpeed] = useQueryState('uSpeed')
   const [uStrength] = useQueryState('uStrength')
@@ -56,6 +59,9 @@ export function useControlValues(
   const queryProps = {
     type,
     animate,
+    loop,
+    loopStart,
+    loopEnd,
     uTime,
     uSpeed,
     uStrength,

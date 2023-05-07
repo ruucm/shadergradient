@@ -13,14 +13,24 @@ const clock = new THREE.Clock()
 
 const increment = 20
 
-export function useTimeAnimation({ animate }) {
+export function useTimeAnimation({ animate, loop, loopStart, loopEnd }) {
   const material: any = useRef()
   const linemat: any = useRef()
 
   let currentTime = 0
   useFrame((state, delta) => {
     if (material.current) {
-      const elapsed = clock.getElapsedTime()
+      let elapsed = clock.getElapsedTime()
+
+      if (loop === 'enabled') {
+        elapsed = loopStart
+        elapsed = elapsed + clock.getElapsedTime()
+
+        if (elapsed >= loopEnd) {
+          elapsed = loopStart
+          clock.start() // restart the clock
+        }
+      }
 
       // loading animation
       if (elapsed > meshDelay) {

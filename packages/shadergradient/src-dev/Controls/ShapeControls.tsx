@@ -24,27 +24,6 @@ export const ShapeControls: React.FC<ShapeControlsPropsT> = () => {
 
   return (
     <div className='flex flex-col gap-3'>
-      {/* need to remove later */}
-      <InputPanel
-        title='Range'
-        info={true}
-        hoverContent='Set the start and end of gif'
-        isHovered={isHovered}
-        onMouseEnter={() => {
-          setIsHovered('Range')
-        }}
-        onMouseLeave={() => {
-          setIsHovered('')
-        }}
-      >
-        <RangeSlider
-          // defaultValue={uDensity}
-          setValue={setUDensity}
-          step={0.1}
-          min={0}
-          max={40}
-        />
-      </InputPanel>
       <InputPanel title='Type'>
         <Radio
           name='type'
@@ -69,6 +48,7 @@ export const ShapeControls: React.FC<ShapeControlsPropsT> = () => {
         />
       </InputPanel>
 
+      {/* @ts-ignore */}
       {['plane', 'waterPlane'].includes(type) && (
         <InputPanel title='Shader'>
           <Radio
@@ -113,47 +93,6 @@ export const ShapeControls: React.FC<ShapeControlsPropsT> = () => {
      check={shader === 'whatthe'}
      label='whatthe'
    /> */}
-        </InputPanel>
-      )}
-
-      <InputPanel title='Animate'>
-        <Radio
-          name='animate'
-          value='on'
-          setValue={setAnimate}
-          check={animate === 'on'}
-          label='On'
-        />
-        <Radio
-          name='animate'
-          value='off'
-          setValue={setAnimate}
-          check={animate === 'off'}
-          label='Off'
-        />
-      </InputPanel>
-
-      {animate === 'off' && (
-        <InputPanel title='Movements'>
-          <Slider
-            defaultValue={uTime}
-            setValue={setUTime}
-            step={0.1}
-            min={0}
-            max={9}
-          />
-        </InputPanel>
-      )}
-
-      {animate === 'on' && (
-        <InputPanel title='Speed'>
-          <Slider
-            defaultValue={uSpeed}
-            setValue={setUSpeed}
-            step={0.1}
-            min={0}
-            max={2}
-          />
         </InputPanel>
       )}
 

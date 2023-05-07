@@ -60,12 +60,21 @@ export function extractGIF(Component): ComponentType {
     const [selection] = useSelection()
     const enabled = selection > 0
 
+    const [animate] = useQueryState('animate')
+    const [loop] = useQueryState('loop')
+    const [loopStart] = useQueryState('loopStart')
+    const [loopEnd] = useQueryState('loopEnd')
+
+    console.log({ animate, loop, loopStart, loopEnd })
+    const valid = animate === 'on' && loop === 'enabled'
+    console.log('valid', valid)
+
     return (
       <Component
         {...props}
         style={{ ...style, cursor: 'pointer', opacity: enabled ? 1 : 0.5 }}
         tap={() => {
-          if (enabled) postFigmaMessageForCreateGIF(setProgress)
+          if (enabled && valid) postFigmaMessageForCreateGIF(setProgress)
           else props?.tap() // move to the alert variant
         }}
         variant={loading ? 'loading' : 'default'}

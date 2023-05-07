@@ -48,3 +48,15 @@ export const useUIStore = create(
     })
   )
 )
+
+// store for Figma Plugin
+const useSelectionStore = create((set) => ({
+  selection: 0,
+  setSelection: (payload) => set({ selection: payload }),
+}))
+
+export function useSelection() {
+  const selection = useSelectionStore((state: any) => state.selection)
+  const setSelection = useSelectionStore((state: any) => state.setSelection)
+  return [selection, setSelection]
+}

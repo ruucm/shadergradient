@@ -1,19 +1,19 @@
 import * as React from 'react'
-import useFramerMessage from 'framer-sites-figma-plugin'
 import * as ReactDOM from 'react-dom'
 import './ui.css'
 import { useEffect, useRef } from 'react'
 
-// const figmaPluginSite = 'https://shadergradient.framer.website/figma-plugin'
-// const figmaPluginSite =
-//   'https://shadergradient-staging.framer.website/figma-plugin'
-const figmaPluginSite = 'https://shadergradient.co/figma-plugin'
+const figmaPluginSite =
+  'https://thriving-instance-690163.framer.app/figma-plugin' // staging
+// const figmaPluginSite = 'https://shadergradient.co/figma-plugin'
 
 const App = () => {
-  useFramerMessage()
+  useShareMessages()
+
   return (
     <div>
       <iframe
+        id='framer-site'
         src={figmaPluginSite} // your framer sites url
         loading='lazy'
         style={{ width: '100%', height: '100%', border: 'none' }}
@@ -23,7 +23,7 @@ const App = () => {
   )
 }
 
-// 소니 형이었군 https://gist.github.com/sonnylazuardi/e55300f28fbe109db052f6568fee5a04
+// https://gist.github.com/sonnylazuardi/e55300f28fbe109db052f6568fee5a04
 function resizeWindow(e) {
   const size = {
     w: Math.max(50, Math.floor(e.clientX + 5)),
@@ -63,6 +63,22 @@ function Corner() {
       }}
     ></div>
   )
+}
+
+function useShareMessages() {
+  useEffect(() => {
+    const iframe: any = document.getElementById('framer-site')
+
+    window.addEventListener(
+      'message',
+      (event) => {
+        parent.postMessage(event.data, '*') // useFramerMessage()
+
+        iframe.contentWindow.postMessage(event.data, '*') // Send message to child iframe
+      },
+      false
+    )
+  }, [])
 }
 
 ReactDOM.render(<App />, document.getElementById('react-page'))

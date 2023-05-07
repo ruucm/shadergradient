@@ -46,7 +46,7 @@ async function build(path = defaultPath, outdir = defaultOutdir) {
 
 const devPath = join(process.cwd(), 'src-dev')
 const prodPath = join(process.cwd(), 'src')
-console.log('process.env.PORT', process.env.PORT)
+console.log('process.env.PORT.', process.env.PORT)
 const proxyPort = Number(process.env.PORT || 10000)
 console.log('proxyPort', proxyPort)
 const devPort = proxyPort + 1

@@ -5,7 +5,7 @@ import * as THREE from 'three'
 
 const { to, rotDur, meshDur, rotDelay, meshDelay } = mainLoading
 
-const clock = new THREE.Clock()
+export const clock = new THREE.Clock()
 //t = current time
 //b = start value
 //c = change in value

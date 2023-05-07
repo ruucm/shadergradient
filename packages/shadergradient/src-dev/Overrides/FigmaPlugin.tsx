@@ -16,6 +16,7 @@ import {
   postFigmaMessageForCreateGIF,
 } from './FigmaApi'
 import { cx } from '@/utils'
+import { clock } from '@/Gradient/comps/Mesh/useTimeAnimation'
 
 // example from https://github.com/sonnylazuardi/framer-sites-figma-plugin/
 export function createRectangle(Component): ComponentType {
@@ -65,18 +66,22 @@ export function extractGIF(Component): ComponentType {
     const [loopStart] = useQueryState('loopStart')
     const [loopEnd] = useQueryState('loopEnd')
 
-    console.log({ animate, loop, loopStart, loopEnd })
     const valid = animate === 'on' && loop === 'enabled'
-    console.log('valid', valid)
+    const option = { loopStart, loopEnd }
 
     return (
       <Component
         {...props}
+        key={progress} // need to flush Framer button
         style={{ ...style, cursor: 'pointer', opacity: enabled ? 1 : 0.5 }}
         tap={() => {
-          if (enabled && valid) postFigmaMessageForCreateGIF(setProgress)
-          else props?.tap() // move to the alert variant
+          if (enabled && valid) {
+            console.log('startTime', Date.now())
+            clock.start() // restart the clock
+            postFigmaMessageForCreateGIF(option, setProgress)
+          } else props?.tap() // move to the alert variant
         }}
+        progress={progress * 100}
         variant={loading ? 'loading' : 'default'}
       />
     )

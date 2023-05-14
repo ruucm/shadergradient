@@ -49,7 +49,7 @@ export const PropertyControls: React.FC<Props> = ({
     >
       {activeTab === 'shape' && <ShapeControls />}
       {activeTab === 'colors' && <ColorControls isFigma={isFigma} />}
-      {activeTab === 'motion' && <MotionControls />}
+      {activeTab === 'motion' && <MotionControls isFigma={isFigma} />}
       {activeTab === 'view' && <ViewControls />}
     </motion.div>
   )

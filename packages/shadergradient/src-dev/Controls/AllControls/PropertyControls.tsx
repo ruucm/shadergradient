@@ -5,7 +5,7 @@ import { useQueryState } from '@/store'
 import { cx } from '@/utils'
 import {
   ColorControls,
-  EffectControls,
+  MotionControls,
   ShapeControls,
   ViewControls,
 } from '../index'
@@ -49,7 +49,7 @@ export const PropertyControls: React.FC<Props> = ({
     >
       {activeTab === 'shape' && <ShapeControls />}
       {activeTab === 'colors' && <ColorControls isFigma={isFigma} />}
-      {activeTab === 'effects' && <EffectControls />}
+      {activeTab === 'motion' && <MotionControls />}
       {activeTab === 'view' && <ViewControls />}
     </motion.div>
   )

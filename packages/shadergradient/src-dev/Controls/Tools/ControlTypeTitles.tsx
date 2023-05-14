@@ -48,14 +48,12 @@ export const ControlTypeTitles: React.FC<ControlTypeTitlePropsT> = ({
       />
 
       <ControlTypeTitle
-        title='Effects'
-        active={activeTab === 'effects'}
+        title='Motion'
+        active={activeTab === 'motion'}
         onClick={(e) => {
           e.stopPropagation() // ignore parent click
 
-          activeTab === 'effects'
-            ? setActiveTab('none')
-            : setActiveTab('effects')
+          activeTab === 'motion' ? setActiveTab('none') : setActiveTab('motion')
         }}
       />
 

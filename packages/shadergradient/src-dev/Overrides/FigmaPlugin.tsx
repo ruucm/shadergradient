@@ -74,12 +74,12 @@ export function extractGIF(Component): ComponentType {
         {...props}
         key={progress} // need to flush Framer button
         style={{ ...style, cursor: 'pointer', opacity: enabled ? 1 : 0.5 }}
-        tap={() => {
+        onTapGIF={() => {
           if (enabled && valid) {
             console.log('startTime', Date.now())
             clock.start() // restart the clock
             postFigmaMessageForCreateGIF(option, setProgress)
-          } else props?.tap() // move to the alert variant
+          } else props?.onTapGIF() // move to the alert variant
         }}
         progress={progress * 100}
         variant={loading ? 'loading' : 'default'}

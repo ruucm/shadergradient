@@ -1511,6 +1511,9 @@ interface ActiveUser extends User {
   readonly selection: string[]
 }
 
+// https://github.com/mattdesl/gifenc
+import { GIFEncoder, quantize, applyPalette } from './lib'
+
 //@ts-ignore
 export const figma: PluginAPI = {}
 
@@ -1578,53 +1581,66 @@ async function captureCanvas() {
   })
 }
 
+const fps = 10
+// const fps = 30
+// const fps = 60
+
+const fpsInterval = 1 / fps
+const delay = fpsInterval * 1000
+
 async function captureGIF(option, callback) {
-  const { loopStart, loopEnd } = option
+  const { loopStart, loopEnd, setAnimate, setUTime } = option
+  setAnimate('off')
+  setUTime(loopStart)
   const duration = loopEnd - loopStart // seconds
-  const frames = duration * 10
+  const totalFrames = Math.ceil(duration * fps)
+  console.log('totalFrames', totalFrames)
+  console.log('duration', duration)
 
   return new Promise(async (resolve, reject) => {
-    const encoder = new GIFEncoder()
-    encoder.setRepeat(0) // 0  -> loop forever
-    encoder.setDelay(100) // go to next frame every n milliseconds
-    encoder.setQuality(20)
+    const frames = new Array(totalFrames).fill(0).map((_, i) => i)
 
-    encoder.start()
-    for (let i = 0; i < frames; i++) {
-      await gifAddFrame(encoder)
-      callback(i / (frames - 1))
+    // Setup an encoder that we will write frames into
+    const gif = GIFEncoder()
+
+    // We use for 'of' to loop with async await
+    for (let i of frames) {
+      // a t value 0..1 to animate the frame
+      const playhead = loopStart + i / fps
+      // render target frame
+      setUTime(playhead)
+
+      const [imageData, width, height]: any = await getImage()
+      const { data } = imageData
+
+      // Choose a pixel format: rgba4444, rgb444, rgb565
+      const format = 'rgb444'
+
+      // If necessary, quantize your colors to a reduced palette
+      const palette = quantize(data, 256, { format })
+
+      // Apply palette to RGBA data to get an indexed bitmap
+      const index = applyPalette(data, palette, format)
+
+      // Write frame into GIF
+      await gif.writeFrame(index, width, height, { palette, delay })
+      callback(i / (totalFrames - 1))
     }
-    encoder.finish()
-    console.log('endTime', Date.now())
-    // encoder.download('download.gif')
-    const binary_gif = encoder.stream().getData()
-    const dataURL = 'data:image/gif;base64,' + encode64(binary_gif)
+
+    // Finalize stream
+    gif.finish()
+
+    // Get a direct typed array view into the buffer to avoid copying it
+    const buffer = gif.bytesView()
+
+    download(buffer, 'animation.gif', { type: 'image/gif' })
+
+    const b64 = await base64_arraybuffer(buffer)
+
+    const dataURL = 'data:image/gif;base64,' + b64
 
     resolve(gifToUint8Array(dataURL))
   })
-}
-async function captureVideo(option, callback) {
-  const { loopStart, loopEnd } = option
-  const duration = loopEnd - loopStart // seconds
-  recordVideo(duration)
-}
-
-async function gifAddFrame(encoder) {
-  const r3fCanvas: any = document.getElementById('gradientCanvas')
-    ?.children[0] as HTMLCanvasElement
-  const dataURL = r3fCanvas.toDataURL('image/png', 1.0) // full quality
-
-  const image = await loadImage(dataURL)
-
-  // add the image to the encoder
-  const canvas = document.createElement('canvas')
-  const context: any = canvas.getContext('2d')
-
-  context.canvas.width = image.width
-  context.canvas.height = image.height
-  context.drawImage(image, 0, 0)
-
-  encoder.addFrame(context)
 }
 
 async function recordVideo(duration) {
@@ -1704,6 +1720,15 @@ async function gifToUint8Array(dataURL) {
   return uint8Array
 }
 
+function download(buf, filename, type) {
+  const blob = buf instanceof Blob ? buf : new Blob([buf], { type })
+  const url = URL.createObjectURL(blob)
+  const anchor = document.createElement('a')
+  anchor.href = url
+  anchor.download = filename
+  anchor.click()
+}
+
 async function loadImage(src) {
   const image = new Image()
   image.src = src
@@ -1713,4 +1738,71 @@ async function loadImage(src) {
   })
   console.log('Image has loaded')
   return image
+}
+
+function convertURIToImageData(URI) {
+  return new Promise(function (resolve, reject) {
+    if (URI == null) return reject()
+    var canvas = document.createElement('canvas'),
+      context = canvas.getContext('2d'),
+      image = new Image()
+    image.addEventListener(
+      'load',
+      function () {
+        canvas.width = image.width
+        canvas.height = image.height
+        context.drawImage(image, 0, 0, canvas.width, canvas.height)
+        resolve(context.getImageData(0, 0, canvas.width, canvas.height))
+      },
+      false
+    )
+    image.src = URI
+  })
+}
+
+async function getImage() {
+  const r3fCanvas: any = document.getElementById('gradientCanvas')
+    ?.children[0] as HTMLCanvasElement
+  const dataURL = r3fCanvas.toDataURL('image/png', 1.0) // full quality
+  const image = await loadImage(dataURL)
+
+  // add the image to the encoder
+  const canvas = document.createElement('canvas')
+  const context: any = canvas.getContext('2d')
+
+  context.canvas.width = image.width
+  context.canvas.height = image.height
+  context.drawImage(image, 0, 0)
+
+  return [
+    new ImageData(
+      context.getImageData(
+        0,
+        0,
+        context.canvas.width,
+        context.canvas.height
+      ).data,
+      context.canvas.width,
+      context.canvas.height
+    ),
+    image.width,
+    image.height,
+  ]
+}
+
+const base64_arraybuffer = async (data) => {
+  // Use a FileReader to generate a base64 data URI
+  const base64url = await new Promise((r) => {
+    const reader = new FileReader()
+    reader.onload = () => r(reader.result)
+    reader.readAsDataURL(new Blob([data]))
+  })
+
+  /*
+  The result looks like 
+  "data:application/octet-stream;base64,<your base64 data>", 
+  so we split off the beginning:
+  */
+  // @ts-ignore
+  return base64url.substring(base64url.indexOf(',') + 1)
 }

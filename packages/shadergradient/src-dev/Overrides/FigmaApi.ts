@@ -1577,7 +1577,7 @@ async function captureCanvas() {
 
     const image = await loadImage(dataURL)
     const view: any = await imageToUint8Array(image)
-    console.log(`${view.length} bytes!`)
+    console.log(`${view.length} bytes!.`)
     resolve(view)
   })
 }

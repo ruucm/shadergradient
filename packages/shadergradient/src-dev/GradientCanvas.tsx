@@ -16,7 +16,7 @@ export function GradientCanvas({
       {/* <style>{`#gradientCanvas canvas { pointer-events: none; }`}</style> */}
       <Canvas
         id='gradientCanvas'
-        key={fov}
+        key={pixelDensity + fov}
         resize={{ offsetSize: true }}
         {...canvasProps(pixelDensity, fov)}
         style={{ pointerEvents }}

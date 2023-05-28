@@ -1633,7 +1633,7 @@ async function captureGIF(option, callback) {
     // Get a direct typed array view into the buffer to avoid copying it
     const buffer = gif.bytesView()
 
-    download(buffer, 'animation.gif', { type: 'image/gif' })
+    // download(buffer, 'animation.gif', { type: 'image/gif' })
 
     const b64 = await base64_arraybuffer(buffer)
 

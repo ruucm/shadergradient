@@ -1609,7 +1609,7 @@ async function captureGIF(option, callback) {
       // a t value 0..1 to animate the frame
       const playhead = loopStart + i / fps
       // render target frame
-      setUTime(playhead)
+      setUTime(playhead) // TODO: this make progress state not updating UI.
 
       const [imageData, width, height]: any = await getImage()
       const { data } = imageData

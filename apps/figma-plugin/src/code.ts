@@ -31,6 +31,17 @@ figma.ui.onmessage = (msg) => {
         console.log('complete')
       })
       break
+    case 'SNAPSHOT_GIF':
+      console.log('figma.currentUser - SNAPSHOT_GIF', figma.currentUser)
+
+      Promise.all(
+        figma.currentPage.selection.map((selected) =>
+          replaceToNewImage(selected, msg.bytes)
+        )
+      ).then(() => {
+        console.log('complete')
+      })
+      break
   }
 }
 

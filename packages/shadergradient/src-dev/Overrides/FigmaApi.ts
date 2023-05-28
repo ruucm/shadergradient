@@ -1543,7 +1543,7 @@ export const postFigmaMessageForCreateGIF = async (option, callback) => {
   parent.postMessage(
     {
       pluginMessage: {
-        type: 'SNAPSHOT',
+        type: 'SNAPSHOT_GIF',
         code: getCodeString(callback),
         bytes,
       },

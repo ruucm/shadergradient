@@ -1,9 +1,9 @@
 export type MeshT = {
   type?: 'plane' | 'sphere' | 'waterPlane'
   animate?: 'on' | 'off'
-  loop?: 'enabled' | 'disabled'
-  loopStart?: number
-  loopEnd?: number
+  range?: 'enabled' | 'disabled'
+  rangeStart?: number
+  rangeEnd?: number
   uTime?: number
   uSpeed?: number
   uStrength?: number

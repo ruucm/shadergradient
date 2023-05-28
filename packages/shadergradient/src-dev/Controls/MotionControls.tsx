@@ -12,9 +12,9 @@ export const MotionControls: React.FC<MotionControlsPropsT> = () => {
   const [animate, setAnimate] = useQueryState('animate')
   const [uTime, setUTime] = useQueryState('uTime')
   const [uSpeed, setUSpeed] = useQueryState('uSpeed')
-  const [loop, setLoop] = useQueryState('loop')
-  const [loopStart, setLoopStart] = useQueryState('loopStart')
-  const [loopEnd, setLoopEnd] = useQueryState('loopEnd')
+  const [range, setRange] = useQueryState('range')
+  const [rangeStart, setRangeStart] = useQueryState('rangeStart')
+  const [rangeEnd, setRangeEnd] = useQueryState('rangeEnd')
   const [isHovered, setIsHovered] = React.useState('')
 
   return (
@@ -72,21 +72,21 @@ export const MotionControls: React.FC<MotionControlsPropsT> = () => {
             }}
           >
             <Radio
-              name='loop'
+              name='range'
               value='enabled'
-              setValue={setLoop}
-              check={loop === 'enabled'}
+              setValue={setRange}
+              check={range === 'enabled'}
               label='On'
             />
             <Radio
-              name='loop'
+              name='range'
               value='disabled'
-              setValue={setLoop}
-              check={loop === 'disabled'}
+              setValue={setRange}
+              check={range === 'disabled'}
               label='Off'
             />
           </InputPanel>
-          {loop === 'enabled' && (
+          {range === 'enabled' && (
             <InputPanel
               title='Range Start/End'
               info={true}
@@ -100,14 +100,14 @@ export const MotionControls: React.FC<MotionControlsPropsT> = () => {
               }}
             >
               <RangeSlider
-                defaultValue={[loopStart, loopEnd]}
+                defaultValue={[rangeStart, rangeEnd]}
                 setValue={(value) => {
                   const [start, end] = value
-                  if (loopStart !== start) {
+                  if (rangeStart !== start) {
                     setUTime(start)
-                    setLoopStart(start)
+                    setRangeStart(start)
                   }
-                  if (loopEnd !== end) setLoopEnd(end)
+                  if (rangeEnd !== end) setRangeEnd(end)
                 }}
                 step={0.1}
                 min={0}

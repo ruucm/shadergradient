@@ -13,7 +13,7 @@ export const clock = new THREE.Clock()
 
 const increment = 20
 
-export function useTimeAnimation({ animate, loop, loopStart, loopEnd }) {
+export function useTimeAnimation({ animate, range, rangeStart, rangeEnd }) {
   const material: any = useRef()
   const linemat: any = useRef()
 
@@ -22,12 +22,12 @@ export function useTimeAnimation({ animate, loop, loopStart, loopEnd }) {
     if (material.current) {
       let elapsed = clock.getElapsedTime()
 
-      if (loop === 'enabled') {
-        elapsed = loopStart
+      if (range === 'enabled') {
+        elapsed = rangeStart
         elapsed = elapsed + clock.getElapsedTime()
 
-        if (elapsed >= loopEnd) {
-          elapsed = loopStart
+        if (elapsed >= rangeEnd) {
+          elapsed = rangeStart
           clock.start() // restart the clock
         }
       }
@@ -53,7 +53,7 @@ export function useTimeAnimation({ animate, loop, loopStart, loopEnd }) {
         }
       }
 
-      // loop animation
+      // range animation
       if (animate === 'on') {
         material.current.userData.uTime.value = elapsed
         if (linemat.current !== undefined) {

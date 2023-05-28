@@ -64,12 +64,12 @@ export function extractGIF(Component): ComponentType {
 
     const [animate, setAnimate] = useQueryState('animate')
     const [, setUTime] = useQueryState('uTime')
-    const [loop] = useQueryState('loop')
-    const [loopStart] = useQueryState('loopStart')
-    const [loopEnd] = useQueryState('loopEnd')
+    const [range] = useQueryState('range')
+    const [rangeStart] = useQueryState('rangeStart')
+    const [rangeEnd] = useQueryState('rangeEnd')
 
-    const valid = animate === 'on' && loop === 'enabled'
-    const option = { loopStart, loopEnd, setAnimate, setUTime }
+    const valid = animate === 'on' && range === 'enabled'
+    const option = { rangeStart, rangeEnd, setAnimate, setUTime }
 
     return (
       <Component

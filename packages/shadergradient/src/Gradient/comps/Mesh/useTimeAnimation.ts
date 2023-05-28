@@ -43,7 +43,7 @@ export function useTimeAnimation({ animate }) {
         }
       }
 
-      // loop animation
+      // range animation
       if (animate === 'on') {
         material.current.userData.uTime.value = elapsed
         if (linemat.current !== undefined) {

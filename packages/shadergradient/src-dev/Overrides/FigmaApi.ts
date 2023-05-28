@@ -1590,10 +1590,10 @@ const fpsInterval = 1 / fps
 const delay = fpsInterval * 1000
 
 async function captureGIF(option, callback) {
-  const { loopStart, loopEnd, setAnimate, setUTime } = option
+  const { rangeStart, rangeEnd, setAnimate, setUTime } = option
   setAnimate('off')
-  setUTime(loopStart)
-  const duration = loopEnd - loopStart // seconds
+  setUTime(rangeStart)
+  const duration = rangeEnd - rangeStart // seconds
   const totalFrames = Math.ceil(duration * fps)
   console.log('totalFrames', totalFrames)
   console.log('duration', duration)
@@ -1607,7 +1607,7 @@ async function captureGIF(option, callback) {
     // We use for 'of' to loop with async await
     for (let i of frames) {
       // a t value 0..1 to animate the frame
-      const playhead = loopStart + i / fps
+      const playhead = rangeStart + i / fps
       // render target frame
       setUTime(playhead) // TODO: this make progress state not updating UI.
 

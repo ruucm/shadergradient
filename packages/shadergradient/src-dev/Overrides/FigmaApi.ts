@@ -1513,6 +1513,7 @@ interface ActiveUser extends User {
 
 // https://github.com/mattdesl/gifenc
 import { GIFEncoder, quantize, applyPalette } from './lib'
+import { sleep } from './utils'
 
 //@ts-ignore
 export const figma: PluginAPI = {}
@@ -1665,9 +1666,6 @@ async function recordVideo(duration) {
     }
   )
 }
-function wait(delayInMS) {
-  return new Promise((resolve) => setTimeout(resolve, delayInMS))
-}
 function startRecording(stream, lengthInMS) {
   let recorder = new MediaRecorder(stream)
   let data = []
@@ -1681,7 +1679,7 @@ function startRecording(stream, lengthInMS) {
     recorder.onerror = (event: any) => reject(event.name)
   })
 
-  let recorded = wait(lengthInMS).then(() => {
+  let recorded = sleep(lengthInMS * 1000).then(() => {
     if (recorder.state === 'recording') {
       recorder.stop()
     }

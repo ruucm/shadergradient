@@ -64,13 +64,6 @@ async function serve(mode) {
 
         const isDev = mode === 'devMode' || devIPs.includes(clientIp)
         console.log('isDev', isDev)
-        const options = {
-          hostname: '0.0.0.0',
-          port: isDev ? devPort : prodPort,
-          path: req.url,
-          method: req.method,
-          headers: req.headers,
-        }
 
         // Forward each incoming request to esbuild
         const debugInfo = {
@@ -86,7 +79,14 @@ async function serve(mode) {
           return
         }
 
-        const proxyReq = http.request(options, (proxyRes) => {
+        const proxyOptions = {
+          hostname: '0.0.0.0',
+          port: isDev ? devPort : prodPort,
+          path: req.url,
+          method: req.method,
+          headers: req.headers,
+        }
+        const proxyReq = http.request(proxyOptions, (proxyRes) => {
           // If esbuild returns "not found", send a custom 404 page
           if (proxyRes.statusCode === 404) {
             res.writeHead(404, { 'Content-Type': 'text/html' })

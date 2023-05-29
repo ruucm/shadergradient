@@ -45,56 +45,70 @@ async function main(mode) {
     console.log('pathname', pathname)
 
     if (pathname === '/debug') {
-      requestIp.mw()(req, res, async () => {
-        const clientIp = req.clientIp
-        console.log('clientIp', clientIp)
-        const devIPs = await getDevIPs()
-        console.log('devIPs', devIPs)
-
-        const isDev = mode === 'devMode' || devIPs.includes(clientIp)
-        console.log('isDev', isDev)
-
-        res.writeHead(200, { 'Content-Type': 'text/plain' })
-        res.end(
-          `Your IP address is: ${clientIp} / mode: ${mode} / isDev: ${isDev}`
-        )
-        return
-      })
+      res.writeHead(200, { 'Content-Type': 'text/plain' })
+      res.end(`some debug infos`)
+    } else if (pathname === '/hello') {
+      res.writeHead(200, { 'Content-Type': 'text/plain' })
+      res.end('hello')
+    } else if (pathname === '/') {
+      res.writeHead(200, { 'Content-Type': 'text/plain' })
+      res.end('home')
     } else {
-      requestIp.mw()(req, res, async () => {
-        const clientIp = req.clientIp
-        console.log('clientIp', clientIp)
-        const devIPs = await getDevIPs()
-        console.log('devIPs', devIPs)
-
-        const isDev = mode === 'devMode' || devIPs.includes(clientIp)
-        console.log('isDev', isDev)
-
-        // serve built files publically
-        const proxyOptions = {
-          hostname: '0.0.0.0',
-          port: isDev ? devPort : prodPort,
-          path: req.url,
-          method: req.method,
-          headers: req.headers,
-        }
-        const proxyReq = http.request(proxyOptions, (proxyRes) => {
-          // If esbuild returns "not found", send a custom 404 page
-          if (proxyRes.statusCode === 404) {
-            res.writeHead(404, { 'Content-Type': 'text/html' })
-            res.end(`<h1>A custom 404 page</h1>`)
-            return
-          }
-
-          // Otherwise, forward the response from esbuild to the client
-          res.writeHead(proxyRes.statusCode, proxyRes.headers)
-          proxyRes.pipe(res, { end: true })
-        })
-
-        // Forward the body of the request to esbuild
-        req.pipe(proxyReq, { end: true })
-      })
+      res.writeHead(404)
+      res.end('not found')
     }
+
+    // if (pathname === '/debug') {
+    //   requestIp.mw()(req, res, async () => {
+    //     const clientIp = req.clientIp
+    //     console.log('clientIp', clientIp)
+    //     const devIPs = await getDevIPs()
+    //     console.log('devIPs', devIPs)
+
+    //     const isDev = mode === 'devMode' || devIPs.includes(clientIp)
+    //     console.log('isDev', isDev)
+
+    //     res.writeHead(200, { 'Content-Type': 'text/plain' })
+    //     res.end(
+    //       `Your IP address is: ${clientIp} / mode: ${mode} / isDev: ${isDev}`
+    //     )
+    //     return
+    //   })
+    // } else {
+    //   requestIp.mw()(req, res, async () => {
+    //     const clientIp = req.clientIp
+    //     console.log('clientIp', clientIp)
+    //     const devIPs = await getDevIPs()
+    //     console.log('devIPs', devIPs)
+
+    //     const isDev = mode === 'devMode' || devIPs.includes(clientIp)
+    //     console.log('isDev', isDev)
+
+    //     // serve built files publically
+    //     const proxyOptions = {
+    //       hostname: '0.0.0.0',
+    //       port: isDev ? devPort : prodPort,
+    //       path: req.url,
+    //       method: req.method,
+    //       headers: req.headers,
+    //     }
+    //     const proxyReq = http.request(proxyOptions, (proxyRes) => {
+    //       // If esbuild returns "not found", send a custom 404 page
+    //       if (proxyRes.statusCode === 404) {
+    //         res.writeHead(404, { 'Content-Type': 'text/html' })
+    //         res.end(`<h1>A custom 404 page</h1>`)
+    //         return
+    //       }
+
+    //       // Otherwise, forward the response from esbuild to the client
+    //       res.writeHead(proxyRes.statusCode, proxyRes.headers)
+    //       proxyRes.pipe(res, { end: true })
+    //     })
+
+    //     // Forward the body of the request to esbuild
+    //     req.pipe(proxyReq, { end: true })
+    //   })
+    // }
   })
 
   server.listen(port, () => {

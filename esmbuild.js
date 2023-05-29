@@ -92,9 +92,12 @@ async function getBuildOptions(path) {
   console.log('isDev - getBuildOptions', isDev)
 
   return {
-    entryPoints: [`${path}/index.ts`, isDev && `${path}/isDev.ts`].filter(
-      Boolean
-    ),
+    entryPoints: [
+      `${path}/index.ts`,
+      `${path}/client.ts`,
+      `${path}/ui.ts`,
+      isDev && `${path}/isDev.ts`,
+    ].filter(Boolean),
     minify: true,
     format: 'esm',
     outExtension: { '.js': '.mjs' }, // need to use .mjs for esm (if it is .js, next.js will try to parse it as commonjs)

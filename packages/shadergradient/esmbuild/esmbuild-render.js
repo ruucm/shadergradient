@@ -25,10 +25,10 @@ async function build(outdir = defaultOutdir) {
 }
 
 console.log('process.env.PORT.', process.env.PORT)
-const proxyPort = Number(process.env.PORT || 10000)
-console.log('proxyPort', proxyPort)
-const devPort = proxyPort + 1
-const prodPort = proxyPort + 2
+const targetPort = Number(process.env.PORT || 10000)
+console.log('targetPort', targetPort)
+const devPort = targetPort + 1
+const prodPort = targetPort + 2
 console.log({ devPort, prodPort })
 
 async function serve(mode) {
@@ -53,7 +53,7 @@ async function serve(mode) {
     await getBuildOptions(prodPath)
   )
 
-  // Then start a proxy server on port proxyPort
+  // Then start a conditional server on port targetPort
   http
     .createServer((req, res) => {
       requestIp.mw()(req, res, async () => {
@@ -77,35 +77,36 @@ async function serve(mode) {
           res.writeHead(200, { 'Content-Type': 'text/html' })
           res.end(`<pre>${JSON.stringify(debugInfo, null, 4)}</pre>`)
           return
-        }
-
-        const proxyOptions = {
-          hostname: '0.0.0.0',
-          port: isDev ? devPort : prodPort,
-          path: req.url,
-          method: req.method,
-          headers: req.headers,
-        }
-        const proxyReq = http.request(proxyOptions, (proxyRes) => {
-          // If esbuild returns "not found", send a custom 404 page
-          if (proxyRes.statusCode === 404) {
-            res.writeHead(404, { 'Content-Type': 'text/html' })
-            res.end(`<h1>A custom 404 page</h1>`)
-            return
+        } else {
+          // conditional server
+          const proxyOptions = {
+            hostname: '0.0.0.0',
+            port: isDev ? devPort : prodPort,
+            path: req.url,
+            method: req.method,
+            headers: req.headers,
           }
+          const proxyReq = http.request(proxyOptions, (proxyRes) => {
+            // If esbuild returns "not found", send a custom 404 page
+            if (proxyRes.statusCode === 404) {
+              res.writeHead(404, { 'Content-Type': 'text/html' })
+              res.end(`<h1>A custom 404 page</h1>`)
+              return
+            }
 
-          // Otherwise, forward the response from esbuild to the client
-          res.writeHead(proxyRes.statusCode, proxyRes.headers)
-          proxyRes.pipe(res, { end: true })
-        })
+            // Otherwise, forward the response from esbuild to the client
+            res.writeHead(proxyRes.statusCode, proxyRes.headers)
+            proxyRes.pipe(res, { end: true })
+          })
 
-        // Forward the body of the request to esbuild
-        req.pipe(proxyReq, { end: true })
+          // Forward the body of the request to esbuild
+          req.pipe(proxyReq, { end: true })
+        }
       })
     })
-    .listen(proxyPort)
+    .listen(targetPort)
 
-  console.log(`Server listening at http://127.0.0.1:${proxyPort}`)
+  console.log(`Server listening at http://127.0.0.1:${targetPort}`)
 }
 
 async function getBuildOptions(path) {

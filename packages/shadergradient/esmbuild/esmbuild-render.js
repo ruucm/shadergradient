@@ -12,28 +12,8 @@ const color = (n, v) => `\x1b[${n}m${v}\x1b[0m`
 // const defaultPath = join(process.cwd(), 'src')
 const defaultOutdir = join(process.cwd(), 'dist')
 
-async function getBuildOptions(path) {
-  return {
-    entryPoints: [`${path}/index.ts`, `${path}/client.ts`, `${path}/ui.ts`],
-    minify: true,
-    format: 'esm',
-    outExtension: { '.js': '.mjs' }, // need to use .mjs for esm (if it is .js, next.js will try to parse it as commonjs)
-    bundle: true,
-    external: [
-      'react',
-      'react/jsx-runtime',
-      'react-dom',
-      '@react-three/drei',
-      '@react-three/drei',
-      '@react-three/fiber',
-      'three',
-      'framer',
-      'framer-motion',
-      'zustand',
-    ],
-    plugins: [cssPlugin({ inject: true }), glsl({ minify: true }), dtsPlugin()],
-  }
-}
+const devPath = join(process.cwd(), 'src-dev')
+const prodPath = join(process.cwd(), 'src')
 
 async function build(path = defaultPath, outdir = defaultOutdir) {
   outdir = resolve(outdir)
@@ -44,8 +24,6 @@ async function build(path = defaultPath, outdir = defaultOutdir) {
   console.log(`Build done at ${outdir}`)
 }
 
-const devPath = join(process.cwd(), 'src-dev')
-const prodPath = join(process.cwd(), 'src')
 console.log('process.env.PORT.', process.env.PORT)
 const proxyPort = Number(process.env.PORT || 10000)
 console.log('proxyPort', proxyPort)
@@ -53,7 +31,8 @@ const devPort = proxyPort + 1
 const prodPort = proxyPort + 2
 console.log({ devPort, prodPort })
 
-async function serve() {
+async function serve(mode) {
+  console.log('mode - serve', mode)
   function onRequest(info) {
     const status = color(
       info.status.toString().startsWith('2') ? 32 : 31,
@@ -83,7 +62,7 @@ async function serve() {
         const devIPs = await getDevIPs()
         console.log('devIPs', devIPs)
 
-        const isDev = devIPs.includes(clientIp)
+        const isDev = mode === 'devMode' || devIPs.includes(clientIp)
         console.log('isDev', isDev)
         const options = {
           hostname: '0.0.0.0',
@@ -116,14 +95,49 @@ async function serve() {
   console.log(`Server listening at http://127.0.0.1:${proxyPort}`)
 }
 
-let [a, b, command, path, option] = process.argv
+async function getBuildOptions(path) {
+  const isDev = path === devPath
+  console.log('path', path)
+  console.log('isDev - getBuildOptions', isDev)
 
-path = path && resolve(join(process.cwd(), path))
+  return {
+    entryPoints: [
+      `${path}/index.ts`,
+      `${path}/client.ts`,
+      `${path}/ui.ts`,
+      isDev && `${path}/isDev.ts`,
+    ].filter(Boolean),
+    minify: true,
+    format: 'esm',
+    outExtension: { '.js': '.mjs' }, // need to use .mjs for esm (if it is .js, next.js will try to parse it as commonjs)
+    bundle: true,
+    external: [
+      'react',
+      'react/jsx-runtime',
+      'react-dom',
+      '@react-three/drei',
+      '@react-three/drei',
+      '@react-three/fiber',
+      'three',
+      'framer',
+      'framer-motion',
+      'zustand',
+    ],
+    plugins: [cssPlugin({ inject: true }), glsl({ minify: true }), dtsPlugin()],
+  }
+}
+
+let [a, b, command, mode] = process.argv
+
+console.log('mode -  process.argv', mode)
+
+// path = path && resolve(join(process.cwd(), path))
+const path = '' // remove this later
 
 if (command === 'serve') {
-  serve(path, option && parseInt(option))
+  serve(mode)
 } else if (command === 'build') {
-  build(path, option && resolve(join(process.cwd(), option)))
+  build(path, mode)
 } else {
   console.log(`Usage:\n  $ esbuild serve src 8000\n  $ esbuild build src dist`)
 }

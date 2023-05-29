@@ -48,6 +48,7 @@ async function main(mode) {
       const isDev = mode === 'devMode' || devIPs.includes(clientIp)
       console.log('isDev', isDev)
 
+      console.log('req.url', req.url)
       if (req.url === '/debug') {
         res.writeHead(200, { 'Content-Type': 'text/plain' })
         res.end(

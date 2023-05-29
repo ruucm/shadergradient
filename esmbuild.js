@@ -42,7 +42,7 @@ async function main(mode) {
   const server = http.createServer((req, res) => {
     console.log('req.url', req.url)
     let pathname = url.parse(req.url, true).pathname
-    console.log('pathname', pathname)
+    console.log('pathname.', pathname)
 
     // if (pathname === '/debug') {
     //   res.writeHead(200, { 'Content-Type': 'text/plain' })

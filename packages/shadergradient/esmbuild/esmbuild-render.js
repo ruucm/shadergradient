@@ -83,6 +83,7 @@ async function serve(mode) {
           // Print debug information
           res.writeHead(200, { 'Content-Type': 'text/html' })
           res.end(`<pre>${JSON.stringify(debugInfo, null, 4)}</pre>`)
+          return
         }
 
         const proxyReq = http.request(options, (proxyRes) => {

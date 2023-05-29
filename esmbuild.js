@@ -1,5 +1,6 @@
 const { join } = require('path')
 const http = require('http')
+const url = require('url')
 const requestIp = require('request-ip')
 const { getDevIPs } = require('./utils')
 const esbuild = require('esbuild')
@@ -39,22 +40,35 @@ async function main(mode) {
 
   // start server
   const server = http.createServer((req, res) => {
-    requestIp.mw()(req, res, async () => {
-      const clientIp = req.clientIp
-      console.log('clientIp', clientIp)
-      const devIPs = await getDevIPs()
-      console.log('devIPs', devIPs)
+    console.log('req.url', req.url)
+    let pathname = url.parse(req.url, true).pathname
+    console.log('pathname', pathname)
 
-      const isDev = mode === 'devMode' || devIPs.includes(clientIp)
-      console.log('isDev', isDev)
+    if (pathname === '/debug') {
+      requestIp.mw()(req, res, async () => {
+        const clientIp = req.clientIp
+        console.log('clientIp', clientIp)
+        const devIPs = await getDevIPs()
+        console.log('devIPs', devIPs)
 
-      if (req.url === '/debug') {
+        const isDev = mode === 'devMode' || devIPs.includes(clientIp)
+        console.log('isDev', isDev)
+
         res.writeHead(200, { 'Content-Type': 'text/plain' })
         res.end(
           `Your IP address is: ${clientIp} / mode: ${mode} / isDev: ${isDev}`
         )
-        return
-      } else {
+      })
+    } else {
+      requestIp.mw()(req, res, async () => {
+        const clientIp = req.clientIp
+        console.log('clientIp', clientIp)
+        const devIPs = await getDevIPs()
+        console.log('devIPs', devIPs)
+
+        const isDev = mode === 'devMode' || devIPs.includes(clientIp)
+        console.log('isDev', isDev)
+
         // serve built files publically
         const proxyOptions = {
           hostname: '0.0.0.0',
@@ -78,8 +92,8 @@ async function main(mode) {
 
         // Forward the body of the request to esbuild
         req.pipe(proxyReq, { end: true })
-      }
-    })
+      })
+    }
   })
 
   server.listen(port, () => {
@@ -89,7 +103,6 @@ async function main(mode) {
 
 async function getBuildOptions(path) {
   const isDev = path === devPath
-  console.log('path', path)
   console.log('isDev - getBuildOptions', isDev)
 
   return {

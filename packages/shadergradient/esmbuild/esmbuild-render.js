@@ -72,6 +72,7 @@ async function serve(mode) {
           devIPs,
           isDev,
         }
+        console.log('req.url', req.url)
         if (req.url === '/debug') {
           // Print debug information
           res.writeHead(200, { 'Content-Type': 'text/html' })

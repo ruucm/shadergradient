@@ -13,6 +13,16 @@
     "version-packages": "changeset version",
     "release": "turbo run build --filter=shadergradient && changeset publish"
   },
+  "dependencies": {
+    "esbuild": "^0.16.9",
+    "esbuild-plugin-glsl": "^1.1.0",
+    "request-ip": "^3.3.0",
+    "fs-extra": "^10.0.1",
+    "sass": "^1.57.1",
+    "postcss": "^8.3.5",
+    "postcss-modules": "^4.3.1",
+    "tmp": "^0.2.1"
+  },
   "devDependencies": {
     "@changesets/cli": "^2.26.1",
     "eslint": "^7.32.0",

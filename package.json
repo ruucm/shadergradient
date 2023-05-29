@@ -4,6 +4,8 @@
     "build": "turbo run build",
     "dev": "node esmbuild serve devMode",
     "start": "node esmbuild serve",
+    "render:start": "node packages/shadergradient/esmbuild/esmbuild-render serve",
+    "render:dev": "node packages/shadergradient/esmbuild/esmbuild-render serve devMode",
     "lint": "turbo run lint",
     "clean": "turbo run clean",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",

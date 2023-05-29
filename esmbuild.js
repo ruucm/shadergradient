@@ -58,6 +58,7 @@ async function main(mode) {
         res.end(
           `Your IP address is: ${clientIp} / mode: ${mode} / isDev: ${isDev}`
         )
+        return
       })
     } else {
       requestIp.mw()(req, res, async () => {

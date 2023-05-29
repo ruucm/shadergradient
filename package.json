@@ -2,26 +2,16 @@
   "private": true,
   "scripts": {
     "build": "turbo run build",
-    "dev": "node esmbuild serve devMode",
-    "start": "node esmbuild serve",
-    "render:start": "node packages/shadergradient/esmbuild/esmbuild-render serve",
-    "render:dev": "node packages/shadergradient/esmbuild/esmbuild-render serve devMode",
+    "dev": "turbo run dev --parallel",
+    "start": "PORT=8000 turbo run start --parallel",
+    "render:dev": "node esmbuild serve devMode",
+    "render:start": "node esmbuild serve",
     "lint": "turbo run lint",
     "clean": "turbo run clean",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "changeset": "changeset add",
     "version-packages": "changeset version",
     "release": "turbo run build --filter=shadergradient && changeset publish"
-  },
-  "dependencies": {
-    "esbuild": "^0.16.9",
-    "esbuild-plugin-glsl": "^1.1.0",
-    "request-ip": "^3.3.0",
-    "fs-extra": "^10.0.1",
-    "sass": "^1.57.1",
-    "postcss": "^8.3.5",
-    "postcss-modules": "^4.3.1",
-    "tmp": "^0.2.1"
   },
   "devDependencies": {
     "@changesets/cli": "^2.26.1",

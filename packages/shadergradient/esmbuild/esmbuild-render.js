@@ -15,11 +15,11 @@ const defaultOutdir = join(process.cwd(), 'dist')
 const devPath = join(process.cwd(), 'src-dev')
 const prodPath = join(process.cwd(), 'src')
 
-async function build(path = defaultPath, outdir = defaultOutdir) {
+async function build(outdir = defaultOutdir) {
   outdir = resolve(outdir)
   await esbuild.build({
     outdir,
-    ...(await getBuildOptions(path)),
+    ...(await getBuildOptions(prodPath)),
   })
   console.log(`Build done at ${outdir}`)
 }
@@ -131,13 +131,10 @@ let [a, b, command, mode] = process.argv
 
 console.log('mode -  process.argv', mode)
 
-// path = path && resolve(join(process.cwd(), path))
-const path = '' // remove this later
-
 if (command === 'serve') {
   serve(mode)
 } else if (command === 'build') {
-  build(path, mode)
+  build(mode)
 } else {
   console.log(`Usage:\n  $ esbuild serve src 8000\n  $ esbuild build src dist`)
 }

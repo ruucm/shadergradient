@@ -73,11 +73,23 @@ async function serve(mode) {
         }
 
         // Forward each incoming request to esbuild
+        const info = {
+          mode,
+          clientIp,
+          devIPs,
+          isDev,
+        }
         const proxyReq = http.request(options, (proxyRes) => {
           // If esbuild returns "not found", send a custom 404 page
           if (proxyRes.statusCode === 404) {
             res.writeHead(404, { 'Content-Type': 'text/html' })
-            res.end('<h1>A custom 404 page</h1>')
+            res.end(
+              `<h1>A custom 404 page</h1><pre>${JSON.stringify(
+                info,
+                null,
+                4
+              )}</pre>`
+            )
             return
           }
 

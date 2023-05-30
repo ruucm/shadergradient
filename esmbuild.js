@@ -38,6 +38,9 @@ async function main(mode) {
     await getBuildOptions(prodPath)
   )
 
+  const devIPs = await getDevIPs()
+  console.log('devIPs (main)', devIPs)
+
   // start server
   const server = http.createServer((req, res) => {
     requestIp.mw()(req, res, async () => {
@@ -48,8 +51,6 @@ async function main(mode) {
       if (pathname === '/debug') {
         const clientIp = req.clientIp
         console.log('clientIp', clientIp)
-        const devIPs = await getDevIPs()
-        console.log('devIPs', devIPs)
 
         const isDev = mode === 'devMode' || devIPs.includes(clientIp)
         console.log('isDev', isDev)
@@ -67,8 +68,6 @@ async function main(mode) {
         // res.end('not found')
         const clientIp = req.clientIp
         console.log('clientIp', clientIp)
-        const devIPs = await getDevIPs()
-        console.log('devIPs', devIPs)
 
         const isDev = mode === 'devMode' || devIPs.includes(clientIp)
         console.log('isDev', isDev)

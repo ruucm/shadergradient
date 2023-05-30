@@ -40,9 +40,36 @@ async function main(mode) {
 
   // start server
   const server = http.createServer((req, res) => {
-    console.log('req.url', req.url)
-    let pathname = url.parse(req.url, true).pathname
-    console.log('pathname.', pathname)
+    requestIp.mw()(req, res, async () => {
+      console.log('req.url', req.url)
+      let pathname = url.parse(req.url, true).pathname
+      console.log('pathname.', pathname)
+
+      if (pathname === '/debug') {
+        const clientIp = req.clientIp
+        console.log('clientIp', clientIp)
+        const devIPs = await getDevIPs()
+        console.log('devIPs', devIPs)
+
+        const isDev = mode === 'devMode' || devIPs.includes(clientIp)
+        console.log('isDev', isDev)
+
+        res.writeHead(200, { 'Content-Type': 'text/plain' })
+        res.end(
+          `Your IP address is: ${clientIp} / mode: ${mode} / isDev: ${isDev}`
+        )
+        return
+      } else if (pathname === '/hello') {
+        res.writeHead(200, { 'Content-Type': 'text/plain' })
+        res.end('hello')
+      } else if (pathname === '/') {
+        res.writeHead(200, { 'Content-Type': 'text/plain' })
+        res.end('home')
+      } else {
+        res.writeHead(404)
+        res.end('not found')
+      }
+    })
 
     // if (pathname === '/debug') {
     //   res.writeHead(200, { 'Content-Type': 'text/plain' })
@@ -58,29 +85,6 @@ async function main(mode) {
     //   res.end('not found')
     // }
 
-    if (pathname === '/debug') {
-      requestIp.mw()(req, res, async () => {
-        const clientIp = req.clientIp
-        console.log('clientIp', clientIp)
-        const devIPs = await getDevIPs()
-        console.log('devIPs', devIPs)
-
-        const isDev = mode === 'devMode' || devIPs.includes(clientIp)
-        console.log('isDev', isDev)
-
-        res.writeHead(200, { 'Content-Type': 'text/plain' })
-        res.end(
-          `Your IP address is: ${clientIp} / mode: ${mode} / isDev: ${isDev}`
-        )
-        return
-      })
-    } else if (pathname === '/hello') {
-      res.writeHead(200, { 'Content-Type': 'text/plain' })
-      res.end('hello')
-    } else {
-      res.writeHead(404)
-      res.end('not found')
-    }
     // } else {
     //   requestIp.mw()(req, res, async () => {
     //     const clientIp = req.clientIp

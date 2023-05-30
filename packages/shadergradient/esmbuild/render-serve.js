@@ -1,7 +1,7 @@
 const http = require('http')
 const requestIp = require('request-ip')
 const { getDevIPs } = require('./utils')
-const { resolve, extname } = require('path')
+const { resolve, extname, join, relative } = require('path')
 const fs = require('fs')
 
 const port = Number(process.env.PORT || 10000)
@@ -22,9 +22,20 @@ function main() {
       console.log('url ', url)
 
       if (url === '/') {
-        res.writeHead(200, { 'Content-Type': 'text/plain' })
-        res.end(`home!
-Your IP address is: ${clientIp}${isDev ? ` (You're in DEV mode.)` : ''}`)
+        // Get the current directory
+        const directoryPath = resolve(__dirname, '../dist')
+
+        // Read the files in the directory
+        const fileLinks = getFileLinks(directoryPath)
+
+        res.setHeader('Content-Type', 'text/html')
+        res.setHeader('Cache-Control', 'public, max-age=86400')
+
+        res.end(
+          `home!<br/><br/>Your IP address is: ${clientIp}${
+            isDev ? ` (You're in DEV mode.)` : ''
+          }<br/><br/><br/><br/>` + fileLinks.join('<br>')
+        )
       } else {
         // Resolve the file path based on the requested URL
         const fileName = url.substring(1)
@@ -69,6 +80,30 @@ Your IP address is: ${clientIp}${isDev ? ` (You're in DEV mode.)` : ''}`)
   server.listen(port, () => {
     console.log(`Server listening on port ${port}`)
   })
+}
+
+function getFileLinks(directoryPath, currentPath = '') {
+  let fileLinks = []
+
+  const files = fs.readdirSync(directoryPath)
+
+  files.forEach((file) => {
+    const filePath = join(directoryPath, file)
+    const stat = fs.statSync(filePath)
+
+    const relativeFilePath = join(currentPath, file)
+
+    if (stat.isDirectory()) {
+      const nestedFileLinks = getFileLinks(filePath, relativeFilePath)
+      fileLinks = fileLinks.concat(nestedFileLinks)
+    } else {
+      const fileUrl = `/${relative(__dirname, filePath)}`
+      const fileLink = `<a href="${fileUrl}">${relativeFilePath}</a>`
+      fileLinks.push(fileLink)
+    }
+  })
+
+  return fileLinks
 }
 
 main()

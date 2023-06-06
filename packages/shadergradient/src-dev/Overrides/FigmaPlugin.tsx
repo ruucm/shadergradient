@@ -17,7 +17,6 @@ import {
 } from './FigmaApi'
 import { cx } from '@/utils'
 import { clock } from '@/Gradient/comps/Mesh/useTimeAnimation'
-import { sleep } from './utils'
 
 // example from https://github.com/sonnylazuardi/framer-sites-figma-plugin/
 export function createRectangle(Component): ComponentType {
@@ -76,10 +75,9 @@ export function extractGIF(Component): ComponentType {
         {...props}
         key={progress} // need to flush Framer button
         style={{ ...style, cursor: 'pointer', opacity: enabled ? 1 : 0.5 }}
-        onTapGIF={async () => {
+        onTapGIF={() => {
           if (enabled && valid) {
             setProgress(0)
-            await sleep(0.1)
             console.log('startTime', Date.now())
             clock.start() // restart the clock
             postFigmaMessageForCreateGIF(option, setProgress)

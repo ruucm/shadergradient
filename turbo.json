@@ -2,13 +2,21 @@
   "$schema": "https://turbo.build/schema.json",
   "pipeline": {
     "build": {
-      "dependsOn": ["^build"],
-      "outputs": ["dist/**", ".next/**"]
+      "dependsOn": [
+        "^build"
+      ],
+      "outputs": [
+        "dist/**",
+        ".next/**"
+      ]
     },
     "lint": {
       "outputs": []
     },
     "dev": {
+      "dependsOn": [
+        "^dev"
+      ],
       "cache": false
     },
     "start": {
@@ -18,5 +26,7 @@
       "cache": false
     }
   },
-  "globalEnv": ["NODE_ENV"]
+  "globalEnv": [
+    "NODE_ENV"
+  ]
 }

@@ -1635,9 +1635,9 @@ async function captureGIF(option, callback) {
     const buffer = gif.bytesView()
 
     // download(buffer, 'animation.gif', { type: 'image/gif' })
+    setAnimate('on')
 
     const b64 = await base64_arraybuffer(buffer)
-
     const dataURL = 'data:image/gif;base64,' + b64
 
     resolve(gifToUint8Array(dataURL))

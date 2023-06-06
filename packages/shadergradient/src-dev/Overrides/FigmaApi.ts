@@ -1591,7 +1591,7 @@ const delay = fpsInterval * 1000
 
 async function captureGIF(option, callback) {
   const { rangeStart, rangeEnd, setAnimate, setUTime } = option
-  setAnimate('off')
+  setAnimate('off') // animate is always "on" before exporting GIFs
   setUTime(rangeStart)
   const duration = rangeEnd - rangeStart // seconds
   const totalFrames = Math.ceil(duration * fps)

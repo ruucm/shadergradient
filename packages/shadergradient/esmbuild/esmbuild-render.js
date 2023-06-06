@@ -16,19 +16,10 @@ const devPort = port + 1
 const prodPort = port + 2
 
 const servedir = join(process.cwd(), 'dist')
-function onRequest(info) {
-  const status = color(
-    info.status.toString().startsWith('2') ? 32 : 31,
-    info.status
-  )
-  const line = color(
-    37,
-    `${info.method} ${status} ${info.path} [${info.timeInMS}ms]`
-  )
-  console.log(line)
-}
 
 async function main(mode) {
+  const isLocalDev = mode === 'localDev'
+
   // serve built files locally
   const devServeOpt = { port: devPort, onRequest, servedir }
   await esbuild.serve(devServeOpt, await getBuildOptions(devPath))
@@ -36,6 +27,13 @@ async function main(mode) {
     { port: prodPort, onRequest, servedir },
     await getBuildOptions(prodPath)
   )
+
+  /**
+   * watch changes & build
+   *
+   * onEnd isn't being triggered when serving (https://github.com/evanw/esbuild/issues/1384) so we need to setup a regular build to get a callback whenever a build is completed
+   */
+  if (isLocalDev) await build()
 
   // start server
   const server = http.createServer((req, res) => {
@@ -45,7 +43,7 @@ async function main(mode) {
       const devIPs = await getDevIPs()
       console.log('devIPs', devIPs)
 
-      const isDev = mode === 'devMode' || devIPs.includes(clientIp)
+      const isDev = isLocalDev || devIPs.includes(clientIp)
       console.log('isDev', isDev)
 
       if (req.url === '/debug') {
@@ -86,6 +84,30 @@ async function main(mode) {
   })
 }
 
+async function build() {
+  await esbuild.build({
+    outdir: servedir,
+    ...(await getBuildOptions(devPath)),
+    watch: {
+      onRebuild(error, result) {
+        // io.emit('build')
+      },
+    },
+  })
+}
+
+function onRequest(info) {
+  const status = color(
+    info.status.toString().startsWith('2') ? 32 : 31,
+    info.status
+  )
+  const line = color(
+    37,
+    `${info.method} ${status} ${info.path} [${info.timeInMS}ms]`
+  )
+  console.log(line)
+}
+
 async function getBuildOptions(path) {
   const isDev = path === devPath
   console.log('path', path)
@@ -115,7 +137,7 @@ async function getBuildOptions(path) {
   }
 }
 
-let [a, b, command, mode] = process.argv
+let [a, b, mode] = process.argv
 
 console.log('mode -  process.argv', mode)
 main(mode)

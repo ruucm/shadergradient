@@ -318,7 +318,7 @@ function useFigmaSelections() {
     parent.postMessage({ pluginMessage: { type: 'UI_READY' } }, '*') // init selection
     onmessage = (event) => {
       const msg = event.data.pluginMessage
-      if (msg.type === 'SELECTION')
+      if (msg?.type === 'SELECTION')
         setSelection(event.data.pluginMessage.selection.length)
     }
   }, [])

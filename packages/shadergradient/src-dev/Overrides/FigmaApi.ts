@@ -1576,6 +1576,7 @@ async function captureCanvas() {
     const dataURL = r3fCanvas.toDataURL('image/png', 1.0) // full quality
 
     const image = await loadImage(dataURL)
+    console.log('Image has loaded')
     const view: any = await imageToUint8Array(image)
     console.log(`${view.length} bytes!.`)
     resolve(view)
@@ -1625,6 +1626,7 @@ async function captureGIF(option, callback) {
 
       // Write frame into GIF
       await gif.writeFrame(index, width, height, { palette, delay })
+      console.log('GIF Frame has written')
 
       await sleep(0.01) // add a break to share UI state updates (setProgress)
       callback(i / (totalFrames - 1))
@@ -1736,7 +1738,6 @@ async function loadImage(src) {
     image.onload = resolve
     image.onerror = reject
   })
-  console.log('Image has loaded')
   return image
 }
 

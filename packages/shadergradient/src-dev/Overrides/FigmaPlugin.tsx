@@ -53,6 +53,7 @@ export function insertCanvasAsImage(Component): ComponentType {
   }
 }
 
+const dummyLeftSlot = 1 // make it to 0, to see the upgrade variant
 export function extractGIF(Component): ComponentType {
   return ({ style, ...props }: any) => {
     const [progress, setProgress] = useState(-1)
@@ -60,6 +61,8 @@ export function extractGIF(Component): ComponentType {
 
     const [figma] = useFigma()
     const enabled = figma.selection > 0
+    // @ts-ignore
+    const needSubscribe = dummyLeftSlot === 0
 
     const [animate, setAnimate] = useQueryState('animate')
     const [, setUTime] = useQueryState('uTime')
@@ -77,12 +80,17 @@ export function extractGIF(Component): ComponentType {
         style={{ ...style, cursor: 'pointer', opacity: enabled ? 1 : 0.5 }}
         onTapGIF={() => {
           if (enabled && valid) {
-            setProgress(0)
-            console.log('startTime', Date.now())
-            clock.start() // restart the clock
-            postFigmaMessageForCreateGIF(option, setProgress)
+            if (needSubscribe) props?.onTapGIFU() // move to the upgrade variant
+            else {
+              // start to extract GIF
+              setProgress(0)
+              console.log('startTime', Date.now())
+              clock.start() // restart the clock
+              postFigmaMessageForCreateGIF(option, setProgress)
+            }
           } else props?.onTapGIF() // move to the alert variant
         }}
+        onTapGIFU={() => console.log('onTapGIFU')} // ignore the default event
         progress={progress * 100}
         variant={loading ? 'loading' : 'default'}
       />
@@ -96,6 +104,19 @@ export function extractGIFDEV(Component): ComponentType {
         {...props}
         style={{ ...style, cursor: 'pointer' }}
         onClick={() => alert('This feature is under development.')}
+      />
+    )
+  }
+}
+
+export function subscribeLink(Component): ComponentType {
+  return (props) => {
+    const [figma] = useFigma()
+
+    return (
+      <Component
+        {...props}
+        href={`https://buy.stripe.com/test_00g6qAa5o9Gp608bII?client_reference_id=${figma.user?.id}`}
       />
     )
   }

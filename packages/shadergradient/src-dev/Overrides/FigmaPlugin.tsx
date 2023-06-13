@@ -78,6 +78,7 @@ export function extractGIF(Component): ComponentType {
         key={progress} // need to flush Framer button
         style={{ ...style, cursor: 'pointer', opacity: enabled ? 1 : 0.5 }}
         onTapGIF={() => {
+          console.log({ dummyLeftSlot, needSubscribe })
           if (enabled && valid) {
             if (needSubscribe) props?.onTapGIFU() // move to the upgrade variant
             else {

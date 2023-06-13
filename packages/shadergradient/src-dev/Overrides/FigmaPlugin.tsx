@@ -53,7 +53,7 @@ export function insertCanvasAsImage(Component): ComponentType {
   }
 }
 
-const dummyLeftSlot = 1 // make it to 0, to see the upgrade variant
+let dummyLeftSlot = 1 // make it to 0, to see the upgrade variant
 export function extractGIF(Component): ComponentType {
   return ({ style, ...props }: any) => {
     const [progress, setProgress] = useState(-1)
@@ -61,7 +61,6 @@ export function extractGIF(Component): ComponentType {
 
     const [figma] = useFigma()
     const enabled = figma.selection > 0
-    // @ts-ignore
     const needSubscribe = dummyLeftSlot === 0
 
     const [animate, setAnimate] = useQueryState('animate')
@@ -87,6 +86,7 @@ export function extractGIF(Component): ComponentType {
               console.log('startTime', Date.now())
               clock.start() // restart the clock
               postFigmaMessageForCreateGIF(option, setProgress)
+              dummyLeftSlot--
             }
           } else props?.onTapGIF() // move to the alert variant
         }}

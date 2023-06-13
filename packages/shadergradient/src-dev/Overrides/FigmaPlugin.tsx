@@ -1,5 +1,6 @@
 import { ComponentType, useEffect, useState } from 'react'
 import React from 'react'
+import { useAnimationControls } from 'framer-motion'
 import * as qs from 'query-string'
 import {
   updateGradientState,
@@ -68,9 +69,10 @@ export function extractGIF(Component): ComponentType {
     const [range] = useQueryState('range')
     const [rangeStart] = useQueryState('rangeStart')
     const [rangeEnd] = useQueryState('rangeEnd')
+    const [frameRate] = useQueryState('frameRate')
 
     const valid = animate === 'on' && range === 'enabled'
-    const option = { rangeStart, rangeEnd, setAnimate, setUTime }
+    const option = { rangeStart, rangeEnd, setAnimate, setUTime, frameRate }
 
     return (
       <Component
@@ -359,4 +361,79 @@ function useFigmaMessage() {
       }
     }
   }, [])
+}
+
+export function GIFStatusOverride(Component): ComponentType {
+  return ({ ...props }: any) => {
+    const [rangeStart] = useQueryState('rangeStart')
+    const [rangeEnd] = useQueryState('rangeEnd')
+    const [pixelDensity] = useQueryState('pixelDensity')
+    const [frameRate] = useQueryState('frameRate')
+
+    const sizeLimit = 300
+
+    const [duration, setDuration] = useState(0)
+    const [size, setSize] = useState(0)
+    useEffect(() => {
+      setDuration(rangeEnd - rangeStart)
+    }, [rangeStart, rangeEnd])
+
+    useEffect(() => {
+      setSize(0.72 * duration * frameRate * pixelDensity)
+    }, [duration, pixelDensity, frameRate])
+
+    return (
+      <Component
+        {...props}
+        size={`${Math.ceil(size * 10) / 10}MB`}
+        duration={`(${Math.ceil(duration * 10) / 10}s)`}
+        variant={size > sizeLimit ? 'Error' : 'Default'}
+      />
+    )
+  }
+}
+
+export function Timeline(Component): ComponentType {
+  return ({ ...props }: any) => {
+    const controls = useAnimationControls()
+
+    const [rangeStart] = useQueryState('rangeStart')
+    const [rangeEnd] = useQueryState('rangeEnd')
+    const [uTime] = useQueryState('uTime')
+
+    const [duration, setDuration] = useState(0)
+
+    const sequence = async () => {
+      await controls.start({ width: 0, transition: { duration: 0 } })
+      return await controls.start({
+        width: '100%',
+        transition: {
+          duration: rangeEnd - rangeStart,
+          repeat: Infinity,
+          repeatType: 'loop',
+          ease: 'linear',
+        },
+      })
+    }
+    useEffect(() => {
+      setDuration(rangeEnd - rangeStart)
+      clock.start()
+      sequence()
+    }),
+      [rangeEnd, rangeStart]
+
+    return (
+      <Component
+        {...props}
+        // style={{
+        //   ...style,
+        //   width: (clock / (rangeEnd - rangeStart)) * 100 + '%',
+        // }}
+        // initial={{ width: '0%' }}
+        // animate={{ width: '100%' }}
+        animate={controls}
+        // transition={}
+      />
+    )
+  }
 }

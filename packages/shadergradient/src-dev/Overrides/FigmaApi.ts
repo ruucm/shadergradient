@@ -1588,14 +1588,15 @@ const fps = 10
 // const fps = 60
 
 const fpsInterval = 1 / fps
-const delay = fpsInterval * 1000
+// const delay = fpsInterval * 1000
 
 async function captureGIF(option, callback) {
-  const { rangeStart, rangeEnd, setAnimate, setUTime } = option
+  const { rangeStart, rangeEnd, setAnimate, setUTime, frameRate } = option
+  let delay = (1 / frameRate) * 1000
   setAnimate('off') // animate is always "on" before exporting GIFs
   setUTime(rangeStart)
   const duration = rangeEnd - rangeStart // seconds
-  const totalFrames = Math.ceil(duration * fps)
+  const totalFrames = Math.ceil(duration * frameRate)
   console.log('totalFrames', totalFrames)
   console.log('duration', duration)
 
@@ -1608,7 +1609,7 @@ async function captureGIF(option, callback) {
     // We use for 'of' to loop with async await
     for (let i of frames) {
       // a t value 0..1 to animate the frame
-      const playhead = rangeStart + i / fps
+      const playhead = rangeStart + i / frameRate
       // render target frame
       setUTime(playhead)
 

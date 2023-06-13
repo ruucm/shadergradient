@@ -285,7 +285,11 @@ export function LoadViewAfterStyleSheet(Component): ComponentType {
     return (
       <Component
         {...props}
-        style={{ ...props.style, opacity: foundStylesheet ? 1 : 0 }}
+        style={{
+          ...props.style,
+          opacity: foundStylesheet ? 1 : 0,
+          zIndex: 2147483640,
+        }}
       />
     )
   }

@@ -7,7 +7,7 @@ import {
   PRESETS,
   useURLQueryState,
   useQueryState,
-  useSelection,
+  useFigma,
 } from '../store'
 import {
   figma,
@@ -37,8 +37,8 @@ export function createRectangle(Component): ComponentType {
 
 export function insertCanvasAsImage(Component): ComponentType {
   return ({ style, ...props }: any) => {
-    const selection = useFigmaSelections() // need to attatch once to listen figma selection changes
-    const enabled = selection > 0
+    const [figma] = useFigma() // need to attatch once to listen figma selection changes
+    const enabled = figma.selection > 0
 
     return (
       <Component
@@ -58,8 +58,8 @@ export function extractGIF(Component): ComponentType {
     const [progress, setProgress] = useState(-1)
     const loading = progress >= 0 && progress < 1
 
-    const [selection] = useSelection()
-    const enabled = selection > 0
+    const [figma] = useFigma()
+    const enabled = figma.selection > 0
 
     const [animate, setAnimate] = useQueryState('animate')
     const [, setUTime] = useQueryState('uTime')
@@ -271,6 +271,7 @@ export function UrlInput(Component): ComponentType {
 
 export function LoadViewAfterStyleSheet(Component): ComponentType {
   return (props: any) => {
+    useFigmaMessage()
     const [foundStylesheet, setFoundStylesheet] = useState(false)
 
     useEffect(() => {
@@ -313,16 +314,27 @@ export function HideScrollBar(Component): ComponentType {
   )
 }
 
-function useFigmaSelections() {
-  const [selection, setSelection] = useSelection()
+// Share Figma states to UI
+function useFigmaMessage() {
+  const [, setFigma] = useFigma()
 
   useEffect(() => {
     parent.postMessage({ pluginMessage: { type: 'UI_READY' } }, '*') // init selection
     onmessage = (event) => {
       const msg = event.data.pluginMessage
-      if (msg?.type === 'SELECTION')
-        setSelection(event.data.pluginMessage.selection.length)
+
+      switch (msg?.type) {
+        case 'SELECTION':
+          setFigma({ selection: msg.selection.length })
+          break
+
+        case 'USER_INFO':
+          setFigma({ user: msg.user })
+          break
+
+        default:
+          break
+      }
     }
   }, [])
-  return selection
 }

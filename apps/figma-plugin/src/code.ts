@@ -21,6 +21,7 @@ figma.ui.onmessage = (msg) => {
       break
     case 'UI_READY':
       postMessageSelection()
+      postMessageUserInfo()
       break
     case 'SNAPSHOT':
       Promise.all(
@@ -74,4 +75,9 @@ async function replaceToNewImage(node, bytes) {
 function postMessageSelection() {
   const selection = figma.currentPage.selection
   figma.ui.postMessage({ type: 'SELECTION', selection })
+}
+
+function postMessageUserInfo() {
+  const user = figma.currentUser
+  figma.ui.postMessage({ type: 'USER_INFO', user })
 }

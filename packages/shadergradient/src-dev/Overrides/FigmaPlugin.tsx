@@ -54,7 +54,28 @@ export function insertCanvasAsImage(Component): ComponentType {
   }
 }
 
-let dummyLeftSlot = 1 // make it to 0, to see the upgrade variant
+export function checkEnabled(Component): ComponentType {
+  return ({ style, ...props }: any) => {
+    const [figma] = useFigma()
+    const enabled = figma.selection > 0
+    return (
+      <Component
+        {...props}
+        style={{ ...style, cursor: 'pointer', opacity: enabled ? 1 : 0.5 }}
+        onTap={() => {
+          if (enabled === false) {
+            props?.onError()
+          } else props?.onTap()
+        }}
+        onError={() => {
+          console.log('error')
+        }}
+      />
+    )
+  }
+}
+
+let dummyLeftSlot = 2 // make it to 0, to see the upgrade variant
 export function extractGIF(Component): ComponentType {
   return ({ style, ...props }: any) => {
     const [progress, setProgress] = useState(-1)
@@ -70,8 +91,20 @@ export function extractGIF(Component): ComponentType {
     const [rangeStart] = useQueryState('rangeStart')
     const [rangeEnd] = useQueryState('rangeEnd')
     const [frameRate] = useQueryState('frameRate')
+    const [pixelDensity] = useQueryState('pixelDensity')
 
-    const valid = animate === 'on' && range === 'enabled'
+    const [duration, setDuration] = useState(0)
+    const [size, setSize] = useState(0)
+
+    useEffect(() => {
+      setDuration(rangeEnd - rangeStart)
+    }, [rangeStart, rangeEnd])
+
+    useEffect(() => {
+      setSize(0.72 * duration * frameRate * pixelDensity)
+    }, [duration, pixelDensity, frameRate])
+
+    const valid = animate === 'on' && range === 'enabled' && size < 300
     const option = { rangeStart, rangeEnd, setAnimate, setUTime, frameRate }
 
     return (
@@ -95,7 +128,18 @@ export function extractGIF(Component): ComponentType {
         }}
         onTapGIFU={() => console.log('onTapGIFU')} // ignore the default event
         progress={progress * 100}
-        variant={loading ? 'loading' : 'default'}
+        title={dummyLeftSlot < 1 ? 'Upgrade to Pro' : 'Extract GIF'}
+        credit={'(' + dummyLeftSlot + ' credit left)'}
+        isFreeUser={dummyLeftSlot > 0}
+        variant={
+          loading
+            ? 'loading'
+            : size > 300
+            ? 'error'
+            : needSubscribe
+            ? 'upgrade'
+            : 'default'
+        }
       />
     )
   }
@@ -422,18 +466,6 @@ export function Timeline(Component): ComponentType {
     }),
       [rangeEnd, rangeStart]
 
-    return (
-      <Component
-        {...props}
-        // style={{
-        //   ...style,
-        //   width: (clock / (rangeEnd - rangeStart)) * 100 + '%',
-        // }}
-        // initial={{ width: '0%' }}
-        // animate={{ width: '100%' }}
-        animate={controls}
-        // transition={}
-      />
-    )
+    return <Component {...props} animate={controls} />
   }
 }

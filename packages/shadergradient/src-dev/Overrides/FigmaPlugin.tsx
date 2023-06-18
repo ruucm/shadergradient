@@ -445,7 +445,6 @@ export function Timeline(Component): ComponentType {
 
     const [rangeStart] = useQueryState('rangeStart')
     const [rangeEnd] = useQueryState('rangeEnd')
-    const [uTime] = useQueryState('uTime')
 
     const [duration, setDuration] = useState(0)
 

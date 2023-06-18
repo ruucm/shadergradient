@@ -4,7 +4,7 @@ import * as React from 'react'
 type ControlTypeTitlePropsT = {
   content?: string
   isHovered?: boolean
-  centered?: boolean
+  position?: string
   downward?: boolean
 } & React.DetailedHTMLProps<
   React.HTMLAttributes<HTMLDivElement>,
@@ -15,8 +15,10 @@ export const HoverBox: React.FC<ControlTypeTitlePropsT> = ({
   content,
   onClick,
   isHovered,
-  centered = false,
+  position = 'left', // center, left, right
+  // centered = false,
   downward = true,
+
   ...rest
 }) => {
   return (
@@ -24,9 +26,14 @@ export const HoverBox: React.FC<ControlTypeTitlePropsT> = ({
       className={cx('text-sm font-medium text-white z-hoverBox')}
       style={{
         position: 'absolute',
-        marginLeft: centered === true ? 0 : -10,
+        marginLeft: position === 'center' ? 0 : -10,
         visibility: isHovered ? 'visible' : 'hidden',
-        marginTop: isHovered ? 10 : 0,
+        marginTop:
+          isHovered === true && downward === true
+            ? 10
+            : isHovered === true && downward === false
+            ? -10
+            : 0,
         transitionDuration: '0.3s',
         opacity: isHovered ? 1 : 0,
       }}
@@ -49,6 +56,7 @@ export const HoverBox: React.FC<ControlTypeTitlePropsT> = ({
             zIndex: 0,
           }}
         >
+          {/* tooltip */}
           <div
             className={cx('bg-primary')}
             style={{
@@ -57,8 +65,14 @@ export const HoverBox: React.FC<ControlTypeTitlePropsT> = ({
               background: 'rgb(255, 67, 10)',
               transform: 'rotate(45deg)',
               position: 'absolute',
-              left: centered === true ? 'calc(50% - 15px)' : 12,
-              top: -7,
+              left:
+                position === 'center'
+                  ? 'calc(50% - 15px)'
+                  : position === 'right'
+                  ? 'calc(100% - 12px - 15px)'
+                  : 12, // position left
+              top: downward === true ? -7 : null,
+              bottom: downward === false ? -7 : null,
               borderRadius: 3,
             }}
           ></div>

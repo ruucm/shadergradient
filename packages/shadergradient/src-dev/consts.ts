@@ -40,8 +40,8 @@ export const hdrBase =
 // loading animations
 export const mainLoading = {
   // mesh animation
-  meshDelay: 2,
-  meshDur: 1.8,
+  meshDelay: 0,
+  meshDur: 0,
 
   // rotation animation
   rotDelay: 1.7,

@@ -8,6 +8,8 @@ const { cssPlugin } = require('./plugin.css')
 const { dtsPlugin } = require('./plugin.dts')
 
 // consts
+const devOutdir = join(process.cwd(), 'dist/dev')
+const prodOutdir = join(process.cwd(), 'dist/prod')
 const devPath = join(process.cwd(), 'src-dev')
 const prodPath = join(process.cwd(), 'src')
 
@@ -17,7 +19,7 @@ const prodPort = port + 2
 
 const servedir = join(process.cwd(), 'dist')
 
-async function main(mode) {
+async function serve(mode) {
   const isLocalDev = mode === 'localDev'
 
   // serve built files locally
@@ -33,7 +35,7 @@ async function main(mode) {
    *
    * onEnd isn't being triggered when serving (https://github.com/evanw/esbuild/issues/1384) so we need to setup a regular build to get a callback whenever a build is completed
    */
-  if (isLocalDev) await build()
+  if (isLocalDev) await localBuild()
 
   // start server
   const server = http.createServer((req, res) => {
@@ -84,7 +86,7 @@ async function main(mode) {
   })
 }
 
-async function build() {
+async function localBuild() {
   await esbuild.build({
     outdir: servedir,
     ...(await getBuildOptions(devPath)),
@@ -94,6 +96,18 @@ async function build() {
       },
     },
   })
+}
+
+async function build() {
+  await esbuild.build({
+    outdir: devOutdir,
+    ...(await getBuildOptions(devPath)),
+  })
+  await esbuild.build({
+    outdir: prodOutdir,
+    ...(await getBuildOptions(prodPath)),
+  })
+  console.log(`Build done`)
 }
 
 function onRequest(info) {
@@ -141,7 +155,14 @@ async function getBuildOptions(path) {
   }
 }
 
-let [a, b, mode] = process.argv
+let [a, b, command, mode] = process.argv
 
 console.log('mode -  process.argv', mode)
-main(mode)
+
+if (command === 'serve') {
+  serve(mode)
+} else if (command === 'build') {
+  build()
+} else {
+  console.log(`Usage:\n  $ esbuild serve src 8000\n  $ esbuild build src dist`)
+}

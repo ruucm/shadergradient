@@ -126,7 +126,7 @@ export function extractGIF(Component): ComponentType {
               clock.start() // restart the clock
               postFigmaMessageForCreateGIF(option, setProgress)
 
-              if (userDB)
+              if (userDB.id)
                 updateRow({ id: userDB.id, credits: userDB.credits - 1 })
               else insertRow({ figma_user_id })
             }

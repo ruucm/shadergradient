@@ -18,6 +18,7 @@ import {
 } from './FigmaApi'
 import { cx } from '@/utils'
 import { clock } from '@/Gradient/comps/Mesh/useTimeAnimation'
+import { useDBTable } from 'https://framer.com/m/SupabaseConnector-ARlr.js'
 
 // example from https://github.com/sonnylazuardi/framer-sites-figma-plugin/
 export function createRectangle(Component): ComponentType {
@@ -75,7 +76,6 @@ export function checkEnabled(Component): ComponentType {
   }
 }
 
-let dummyLeftSlot = 2 // make it to 0, to see the upgrade variant
 export function extractGIF(Component): ComponentType {
   return ({ style, ...props }: any) => {
     const [progress, setProgress] = useState(-1)
@@ -83,7 +83,6 @@ export function extractGIF(Component): ComponentType {
 
     const [figma] = useFigma()
     const enabled = figma.selection > 0
-    const needSubscribe = dummyLeftSlot === 0
 
     const [animate, setAnimate] = useQueryState('animate')
     const [, setUTime] = useQueryState('uTime')
@@ -95,6 +94,11 @@ export function extractGIF(Component): ComponentType {
 
     const [duration, setDuration] = useState(0)
     const [size, setSize] = useState(0)
+
+    const figma_user_id = figma.user?.id
+    const [rows, insertRow, updateRow] = useDBTable('users', 'sg-figma')
+    const userDB = rows.find((r) => r.figma_user_id === figma_user_id) || {}
+    const needSubscribe = userDB.credits === 0
 
     useEffect(() => {
       setDuration(rangeEnd - rangeStart)
@@ -113,7 +117,6 @@ export function extractGIF(Component): ComponentType {
         key={progress} // need to flush Framer button
         style={{ ...style, cursor: 'pointer' }}
         onTapGIF={() => {
-          console.log({ dummyLeftSlot, needSubscribe })
           if (enabled && valid) {
             if (needSubscribe) props?.onTapGIFU() // move to the upgrade variant
             else {
@@ -122,15 +125,18 @@ export function extractGIF(Component): ComponentType {
               console.log('startTime', Date.now())
               clock.start() // restart the clock
               postFigmaMessageForCreateGIF(option, setProgress)
-              dummyLeftSlot--
+
+              if (userDB)
+                updateRow({ id: userDB.id, credits: userDB.credits - 1 })
+              else insertRow({ figma_user_id })
             }
           } else props?.onTapGIF() // move to the alert variant
         }}
         onTapGIFU={() => console.log('onTapGIFU')} // ignore the default event
         progress={progress * 100}
-        title={dummyLeftSlot < 1 ? 'Upgrade to Pro' : 'Extract GIF'}
-        credit={'(' + dummyLeftSlot + ' credit left)'}
-        isFreeUser={dummyLeftSlot > 0}
+        title={userDB.credits < 1 ? 'Upgrade to Pro' : 'Extract GIF'}
+        credit={'(' + userDB.credits + ' credit left)'}
+        isFreeUser={userDB.credits > 0}
         variant={
           loading
             ? 'loading'

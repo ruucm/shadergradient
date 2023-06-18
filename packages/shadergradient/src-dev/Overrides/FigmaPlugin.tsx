@@ -97,8 +97,9 @@ export function extractGIF(Component): ComponentType {
 
     const figma_user_id = figma.user?.id
     const [rows, insertRow, updateRow] = useDBTable('users', 'sg-figma')
-    const userDB = rows.find((r) => r.figma_user_id === figma_user_id) || {}
-    const needSubscribe = userDB.credits === 0
+    const userDB = rows.find((r) => r.figma_user_id === figma_user_id)
+    const credits = userDB?.credits || 5 // initial credits when there is no user in DB.
+    const needSubscribe = credits === 0
 
     useEffect(() => {
       setDuration(rangeEnd - rangeStart)
@@ -126,17 +127,15 @@ export function extractGIF(Component): ComponentType {
               clock.start() // restart the clock
               postFigmaMessageForCreateGIF(option, setProgress)
 
-              if (userDB.id)
-                updateRow({ id: userDB.id, credits: userDB.credits - 1 })
+              if (userDB) updateRow({ id: userDB.id, credits: credits - 1 })
               else insertRow({ figma_user_id })
             }
           } else props?.onTapGIF() // move to the alert variant
         }}
         onTapGIFU={() => console.log('onTapGIFU')} // ignore the default event
         progress={progress * 100}
-        title={userDB.credits < 1 ? 'Upgrade to Pro' : 'Extract GIF'}
-        credit={'(' + userDB.credits + ' credit left)'}
-        isFreeUser={userDB.credits > 0}
+        title={credits < 1 ? 'Upgrade to Pro' : 'Extract GIF'}
+        credit={'(' + credits + ' credit left)'}
         variant={
           loading
             ? 'loading'

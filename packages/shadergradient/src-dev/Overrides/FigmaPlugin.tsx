@@ -98,7 +98,7 @@ export function extractGIF(Component): ComponentType {
     const figma_user_id = figma.user?.id
     const [rows, insertRow, updateRow] = useDBTable('users', 'sg-figma')
     const userDB = rows.find((r) => r.figma_user_id === figma_user_id)
-    const credits = userDB?.credits || 5 // initial credits when there is no user in DB.
+    const credits = userDB ? userDB.credits : 5 // initial credits when there is no user in DB.
     const needSubscribe = credits === 0
 
     useEffect(() => {

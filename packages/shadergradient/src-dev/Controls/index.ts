@@ -7,6 +7,7 @@ export { ColorControls } from './ColorControls'
 export { MotionControls } from './MotionControls'
 export { ViewControls } from './ViewControls'
 export { BackgroundControls } from './BackgroundControls'
+export { GIFControls } from './GIFControls'
 export {
   Tools,
   ToolsBox,

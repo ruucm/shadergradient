@@ -30,6 +30,7 @@ export type GradientT = MeshT & {
   control?: 'query' | 'props'
   isFigmaPlugin?: boolean
   dampingFactor?: number
+  frameRate?: number
 
   // View (camera) props
   cAzimuthAngle?: number

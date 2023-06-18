@@ -1,5 +1,6 @@
 import { ComponentType, useEffect, useState } from 'react'
 import React from 'react'
+import { useAnimationControls } from 'framer-motion'
 import * as qs from 'query-string'
 import {
   updateGradientState,
@@ -17,6 +18,7 @@ import {
 } from './FigmaApi'
 import { cx } from '@/utils'
 import { clock } from '@/Gradient/comps/Mesh/useTimeAnimation'
+import { useDBTable } from 'https://framer.com/m/SupabaseConnector-ARlr.js'
 
 // example from https://github.com/sonnylazuardi/framer-sites-figma-plugin/
 export function createRectangle(Component): ComponentType {
@@ -53,7 +55,27 @@ export function insertCanvasAsImage(Component): ComponentType {
   }
 }
 
-let dummyLeftSlot = 1 // make it to 0, to see the upgrade variant
+export function checkEnabled(Component): ComponentType {
+  return ({ style, ...props }: any) => {
+    const [figma] = useFigma()
+    const enabled = figma.selection > 0
+    return (
+      <Component
+        {...props}
+        style={{ ...style, cursor: 'pointer', opacity: enabled ? 1 : 0.5 }}
+        onTap={() => {
+          if (enabled === false) {
+            props?.onError()
+          } else props?.onTap()
+        }}
+        onError={() => {
+          console.log('error')
+        }}
+      />
+    )
+  }
+}
+
 export function extractGIF(Component): ComponentType {
   return ({ style, ...props }: any) => {
     const [progress, setProgress] = useState(-1)
@@ -61,24 +83,41 @@ export function extractGIF(Component): ComponentType {
 
     const [figma] = useFigma()
     const enabled = figma.selection > 0
-    const needSubscribe = dummyLeftSlot === 0
 
     const [animate, setAnimate] = useQueryState('animate')
     const [, setUTime] = useQueryState('uTime')
     const [range] = useQueryState('range')
     const [rangeStart] = useQueryState('rangeStart')
     const [rangeEnd] = useQueryState('rangeEnd')
+    const [frameRate] = useQueryState('frameRate')
+    const [pixelDensity] = useQueryState('pixelDensity')
 
-    const valid = animate === 'on' && range === 'enabled'
-    const option = { rangeStart, rangeEnd, setAnimate, setUTime }
+    const [duration, setDuration] = useState(0)
+    const [size, setSize] = useState(0)
+
+    const figma_user_id = figma.user?.id
+    const [rows, insertRow, updateRow] = useDBTable('users', 'sg-figma')
+    const userDB = rows.find((r) => r.figma_user_id === figma_user_id)
+    const credits = userDB ? userDB.credits : 5 // initial credits when there is no user in DB.
+    const needSubscribe = credits === 0
+
+    useEffect(() => {
+      setDuration(rangeEnd - rangeStart)
+    }, [rangeStart, rangeEnd])
+
+    useEffect(() => {
+      setSize(0.72 * duration * frameRate * pixelDensity)
+    }, [duration, pixelDensity, frameRate])
+
+    const valid = animate === 'on' && range === 'enabled' && size < 300
+    const option = { rangeStart, rangeEnd, setAnimate, setUTime, frameRate }
 
     return (
       <Component
         {...props}
         key={progress} // need to flush Framer button
-        style={{ ...style, cursor: 'pointer', opacity: enabled ? 1 : 0.5 }}
+        style={{ ...style, cursor: 'pointer' }}
         onTapGIF={() => {
-          console.log({ dummyLeftSlot, needSubscribe })
           if (enabled && valid) {
             if (needSubscribe) props?.onTapGIFU() // move to the upgrade variant
             else {
@@ -87,13 +126,27 @@ export function extractGIF(Component): ComponentType {
               console.log('startTime', Date.now())
               clock.start() // restart the clock
               postFigmaMessageForCreateGIF(option, setProgress)
-              dummyLeftSlot--
+
+              if (userDB) updateRow({ id: userDB.id, credits: credits - 1 })
+              else insertRow({ figma_user_id })
             }
           } else props?.onTapGIF() // move to the alert variant
         }}
         onTapGIFU={() => console.log('onTapGIFU')} // ignore the default event
         progress={progress * 100}
-        variant={loading ? 'loading' : 'default'}
+        title={credits < 1 ? 'Upgrade to Pro' : 'Extract GIF'}
+        credit={'(' + credits + ' credit left)'}
+        variant={
+          loading
+            ? 'loading'
+            : size > 300
+            ? 'error-1'
+            : needSubscribe
+            ? 'upgrade'
+            : enabled === false
+            ? 'error-2'
+            : 'default'
+        }
       />
     )
   }
@@ -359,4 +412,65 @@ function useFigmaMessage() {
       }
     }
   }, [])
+}
+
+export function GIFStatusOverride(Component): ComponentType {
+  return ({ ...props }: any) => {
+    const [rangeStart] = useQueryState('rangeStart')
+    const [rangeEnd] = useQueryState('rangeEnd')
+    const [pixelDensity] = useQueryState('pixelDensity')
+    const [frameRate] = useQueryState('frameRate')
+
+    const sizeLimit = 300
+
+    const [duration, setDuration] = useState(0)
+    const [size, setSize] = useState(0)
+    useEffect(() => {
+      setDuration(rangeEnd - rangeStart)
+    }, [rangeStart, rangeEnd])
+
+    useEffect(() => {
+      setSize(0.72 * duration * frameRate * pixelDensity)
+    }, [duration, pixelDensity, frameRate])
+
+    return (
+      <Component
+        {...props}
+        size={`${Math.ceil(size * 10) / 10}MB`}
+        duration={`(${Math.ceil(duration * 10) / 10}s)`}
+        variant={size > sizeLimit ? 'Error' : 'Default'}
+      />
+    )
+  }
+}
+
+export function Timeline(Component): ComponentType {
+  return ({ ...props }: any) => {
+    const controls = useAnimationControls()
+
+    const [rangeStart] = useQueryState('rangeStart')
+    const [rangeEnd] = useQueryState('rangeEnd')
+
+    const [duration, setDuration] = useState(0)
+
+    const sequence = async () => {
+      await controls.start({ width: 0, transition: { duration: 0 } })
+      return await controls.start({
+        width: '100%',
+        transition: {
+          duration: rangeEnd - rangeStart,
+          repeat: Infinity,
+          repeatType: 'loop',
+          ease: 'linear',
+        },
+      })
+    }
+    useEffect(() => {
+      setDuration(rangeEnd - rangeStart)
+      clock.start()
+      sequence()
+    }, [rangeEnd, rangeStart])
+
+    return <Component {...props} animate={controls} />
+  }
 }

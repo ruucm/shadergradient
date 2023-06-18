@@ -56,12 +56,16 @@ export function useControlValues(
   const [toggleAxis] = useQueryState('toggleAxis')
   const hoverState = useCursorStore((state: any) => state.hoverState)
 
+  // figma
+  const [frameRate] = useQueryState('frameRate')
+
   const queryProps = {
     type,
     animate,
     range,
     rangeStart,
     rangeEnd,
+    frameRate,
     uTime,
     uSpeed,
     uStrength,

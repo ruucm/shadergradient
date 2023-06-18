@@ -72,7 +72,7 @@ export const GIFControls: React.FC<GIFControlsPropsT> = () => {
       <InputPanel
         title='Pixel Density'
         info={true}
-        hoverContent='The higher the pixel density, the more detailed the image is. If you want to extract a large image, set the value higher.'
+        hoverContent='The higher the pixel density, the more detailed the image is. If you want to extract a large GIF, set the value higher.'
         isHovered={isHovered}
         onMouseEnter={() => {
           setIsHovered('Pixel Density')
@@ -86,7 +86,7 @@ export const GIFControls: React.FC<GIFControlsPropsT> = () => {
           setValue={setPixelDensity}
           step={1}
           min={1}
-          max={10}
+          max={9}
         />
       </InputPanel>
     </div>

@@ -16,9 +16,7 @@ export const HoverBox: React.FC<ControlTypeTitlePropsT> = ({
   onClick,
   isHovered,
   position = 'left', // center, left, right
-  // centered = false,
   downward = true,
-
   ...rest
 }) => {
   return (
@@ -67,9 +65,9 @@ export const HoverBox: React.FC<ControlTypeTitlePropsT> = ({
               position: 'absolute',
               left:
                 position === 'center'
-                  ? 'calc(50% - 15px)'
+                  ? 'calc(50% - 15px)' //position center
                   : position === 'right'
-                  ? 'calc(100% - 12px - 15px)'
+                  ? 'calc(100% - 12px - 15px)' //position right
                   : 12, // position left
               top: downward === true ? -7 : null,
               bottom: downward === false ? -7 : null,

@@ -469,8 +469,7 @@ export function Timeline(Component): ComponentType {
       setDuration(rangeEnd - rangeStart)
       clock.start()
       sequence()
-    }),
-      [rangeEnd, rangeStart]
+    }, [rangeEnd, rangeStart])
 
     return <Component {...props} animate={controls} />
   }

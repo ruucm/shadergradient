@@ -1583,16 +1583,12 @@ async function captureCanvas() {
   })
 }
 
-const fps = 10
-// const fps = 30
-// const fps = 60
-
-const fpsInterval = 1 / fps
-// const delay = fpsInterval * 1000
-
 async function captureGIF(option, callback) {
   const { rangeStart, rangeEnd, setAnimate, setUTime, frameRate } = option
-  let delay = (1 / frameRate) * 1000
+
+  const frameRateInterval = 1 / frameRate
+  const delay = frameRateInterval * 1000
+
   setAnimate('off') // animate is always "on" before exporting GIFs
   setUTime(rangeStart)
   const duration = rangeEnd - rangeStart // seconds

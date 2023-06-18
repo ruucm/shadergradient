@@ -111,7 +111,7 @@ export function extractGIF(Component): ComponentType {
       <Component
         {...props}
         key={progress} // need to flush Framer button
-        style={{ ...style, cursor: 'pointer', opacity: enabled ? 1 : 0.5 }}
+        style={{ ...style, cursor: 'pointer' }}
         onTapGIF={() => {
           console.log({ dummyLeftSlot, needSubscribe })
           if (enabled && valid) {
@@ -135,9 +135,11 @@ export function extractGIF(Component): ComponentType {
           loading
             ? 'loading'
             : size > 300
-            ? 'error'
+            ? 'error-1'
             : needSubscribe
             ? 'upgrade'
+            : enabled === false
+            ? 'error-2'
             : 'default'
         }
       />

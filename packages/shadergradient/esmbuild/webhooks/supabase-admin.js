@@ -132,6 +132,5 @@ module.exports = {
   stripe,
   upsertProductRecord,
   upsertPriceRecord,
-  createOrRetrieveCustomer,
   manageSubscriptionStatusChange,
 }

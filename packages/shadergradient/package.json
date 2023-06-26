@@ -65,6 +65,8 @@
     "react-intersection-observer": "^9.4.1",
     "react-merge-refs": "^1.1.0",
     "react-slider": "^2.0.4",
+    "stripe": "^11.13.0",
+    "@supabase/supabase-js": "^2.10.0",
     "zustand": "^4.1.5"
   }
 }

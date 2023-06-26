@@ -4,6 +4,7 @@ const { getDevIPs } = require('./utils')
 const { resolve, extname, join, relative } = require('path')
 const fs = require('fs')
 
+const debugESM = false
 const port = Number(process.env.PORT || 10000)
 
 function main() {
@@ -11,15 +12,17 @@ function main() {
   const server = http.createServer((req, res) => {
     requestIp.mw()(req, res, async () => {
       const clientIp = req.clientIp
-      console.log('clientIp', clientIp)
       const devIPs = await getDevIPs()
-      console.log('devIPs', devIPs)
-
       const isDev = devIPs.includes(clientIp)
-      console.log('isDev', isDev)
 
       const { url } = req
-      console.log('url ', url)
+
+      if (debugESM) {
+        console.log('clientIp', clientIp)
+        console.log('devIPs', devIPs)
+        console.log('isDev', isDev)
+        console.log('url ', url)
+      }
 
       if (url === '/') {
         // Get the current directory
@@ -40,7 +43,6 @@ function main() {
         // Resolve the file path based on the requested URL
         const fileName = url.substring(1)
         const extension = extname(fileName)
-        console.log({ fileName, extension })
 
         let contentType = 'text/plain'
         if (extension === '.mjs') contentType = 'application/javascript'
@@ -51,7 +53,11 @@ function main() {
           directory = isDev ? '../dist/dev' : '../dist/prod'
 
         const filePath = resolve(__dirname, directory, url.slice(1))
-        console.log('filePath', filePath)
+
+        if (debugESM) {
+          console.log({ fileName, extension })
+          console.log('filePath', filePath)
+        }
 
         // Serve the file if it exists; otherwise, respond with a 404 error
         try {

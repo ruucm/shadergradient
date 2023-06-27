@@ -103,7 +103,7 @@ export function extractGIF(Component): ComponentType {
     const userDB = rows.find((r) => r.figma_user_id === figma_user_id)
     const credits = userDB ? userDB.credits : 5 // initial credits when there is no user in DB.
     const [subscription, subDBLoading] = useSubscription('sub1')
-    const needSubscribe = credits === 0 && !subDBLoading && !subscription
+    const needSubscribe = credits <= 0 && !subDBLoading && !subscription
     const titleText = needSubscribe ? 'Upgrade to Pro' : 'Extract GIF'
     const creditText = subscription ? `(Pro User)` : `(${credits} credit left)`
 

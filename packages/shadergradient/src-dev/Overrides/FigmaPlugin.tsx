@@ -96,10 +96,16 @@ export function extractGIF(Component): ComponentType {
     const [size, setSize] = useState(0)
 
     const figma_user_id = figma.user?.id
-    const [rows, insertRow, updateRow] = useDBTable('users', 'sg-figma')
+    const [rows, dbLoading, insertRow, updateRow] = useDBTable(
+      'users',
+      'sg-figma'
+    )
     const userDB = rows.find((r) => r.figma_user_id === figma_user_id)
     const credits = userDB ? userDB.credits : 5 // initial credits when there is no user in DB.
-    const needSubscribe = credits === 0
+    const [subscription, subDBLoading] = useSubscription('sub1')
+    const needSubscribe = credits === 0 && !subDBLoading && !subscription
+    const titleText = needSubscribe ? 'Upgrade to Pro' : 'Extract GIF'
+    const creditText = subscription ? `(Pro User)` : `(${credits} credit left)`
 
     useEffect(() => {
       setDuration(rangeEnd - rangeStart)
@@ -111,6 +117,14 @@ export function extractGIF(Component): ComponentType {
 
     const valid = animate === 'on' && range === 'enabled' && size < 300
     const option = { rangeStart, rangeEnd, setAnimate, setUTime, frameRate }
+
+    let variant = 'dbLoading'
+    if (loading) variant = 'loading'
+    else if (size > 300) variant = 'error-1'
+    else if (!enabled) variant = 'error-2'
+    // when all datas are ready
+    else if (userDB && !subDBLoading) variant = 'default'
+    else if (needSubscribe) variant = 'upgrade'
 
     return (
       <Component
@@ -134,23 +148,36 @@ export function extractGIF(Component): ComponentType {
         }}
         onTapGIFU={() => console.log('onTapGIFU')} // ignore the default event
         progress={progress * 100}
-        title={credits < 1 ? 'Upgrade to Pro' : 'Extract GIF'}
-        credit={'(' + credits + ' credit left)'}
-        variant={
-          loading
-            ? 'loading'
-            : size > 300
-            ? 'error-1'
-            : needSubscribe
-            ? 'upgrade'
-            : enabled === false
-            ? 'error-2'
-            : 'default'
-        }
+        title={titleText}
+        credit={creditText}
+        variant={variant}
       />
     )
   }
 }
+
+export function isUpgraded(Component): ComponentType {
+  return (props) => {
+    const [subscription] = useSubscription(props['data-framer-name'])
+    if (subscription) return <Component {...props} />
+  }
+}
+export function upgradingText(Component): ComponentType {
+  return (props) => {
+    const [subscription] = useSubscription(props['data-framer-name'])
+    // if (subscription)
+    return (
+      <Component {...props} text={subscription ? 'Upgraded!' : 'Waiting..'} />
+    )
+  }
+}
+export function userEmail(Component): ComponentType {
+  return (props) => {
+    const [userDB] = useUserDB()
+    return <Component {...props} text={userDB?.email || ''} />
+  }
+}
+
 export function extractGIFDEV(Component): ComponentType {
   return ({ style, ...props }: any) => {
     return (
@@ -473,4 +500,23 @@ export function Timeline(Component): ComponentType {
 
     return <Component {...props} animate={controls} />
   }
+}
+
+function useUserDB() {
+  const [figma] = useFigma()
+  const figma_user_id = figma.user?.id
+
+  const [rows, dbLoading] = useDBTable('users', 'sg-figma-hook')
+  return [rows.find((r) => r.figma_user_id === figma_user_id), dbLoading]
+}
+function useSubscription(subId) {
+  const [userDB, userDBLoading] = useUserDB()
+  const userId = userDB?.id
+
+  const [subscriptionRows, dbLoading] = useDBTable('subscriptions', subId)
+  const subscription = subscriptionRows.find(
+    (r) => r.user_id === userId && r.status === 'active'
+  )
+
+  return [subscription, userDBLoading || dbLoading]
 }

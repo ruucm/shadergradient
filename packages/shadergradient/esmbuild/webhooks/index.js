@@ -81,7 +81,8 @@ const handler = async (req, res) => {
                 subscriptionId,
                 checkoutSession.customer,
                 true,
-                checkoutSession.client_reference_id
+                checkoutSession.client_reference_id,
+                checkoutSession.customer_details
               )
             }
 

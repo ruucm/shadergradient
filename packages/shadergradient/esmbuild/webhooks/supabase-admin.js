@@ -92,7 +92,8 @@ const manageSubscriptionStatusChange = async (
   subscriptionId,
   customerId,
   createAction = false,
-  client_reference_id = ''
+  client_reference_id = '',
+  customer_details = {}
 ) => {
   console.log('customerId', customerId)
   // Get customer's UUID from mapping table.
@@ -128,6 +129,7 @@ const manageSubscriptionStatusChange = async (
   const subscription = await stripe.subscriptions.retrieve(subscriptionId, {
     expand: ['default_payment_method'],
   })
+  console.log('subscription - manageSubscriptionStatusChange', subscription)
   // Upsert the latest status of the subscription object.
   const subscriptionData = {
     id: subscription.id,
@@ -171,14 +173,52 @@ const manageSubscriptionStatusChange = async (
     `Inserted/updated subscription [${subscription.id}] for user [${uuid}]`
   )
 
+  console.log({ createAction, uuid })
+  console.log(
+    'subscription.default_payment_method',
+    subscription.default_payment_method
+  )
+
   // For a new subscription copy the billing details to the customer object.
   // NOTE: This is a costly operation and should happen at the very end.
-  // if (createAction && subscription.default_payment_method && uuid)
-  //   //@ts-ignore
-  //   await copyBillingDetailsToCustomer(
-  //     uuid,
-  //     subscription.default_payment_method
-  //   )
+  if (createAction && subscription.default_payment_method && uuid)
+    //@ts-ignore
+    await copyBillingDetailsToCustomer(
+      uuid,
+      subscription.default_payment_method,
+      customer_details
+    )
+}
+
+/**
+ * Copies the billing details from the payment method to the customer object.
+ */
+const copyBillingDetailsToCustomer = async (
+  uuid,
+  payment_method,
+  customer_details
+) => {
+  console.log('copyBillingDetailsToCustomer!')
+  const customer = payment_method.customer
+  console.log('payment_method - copyBillingDetailsToCustomer', payment_method)
+  console.log('customer - copyBillingDetailsToCustomer', customer)
+  const { name, address } = payment_method.billing_details
+  console.log({ name, address })
+  if (!name || !address) return
+  //@ts-ignore
+  await stripe.customers.update(customer, { name, address })
+  console.log('stripe.customers.update')
+  const { error } = await supabaseAdmin
+    .from('users')
+    .update({
+      email: customer_details.email,
+      billing_address: { ...address },
+      payment_method: { ...payment_method[payment_method.type] },
+    })
+    .eq('id', uuid)
+
+  console.log('error (users update)', error)
+  if (error) throw error
 }
 
 module.exports = {

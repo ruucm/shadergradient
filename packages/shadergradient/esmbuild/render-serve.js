@@ -1,6 +1,7 @@
 const http = require('http')
 const requestIp = require('request-ip')
 const { getDevIPs } = require('./utils')
+const webhooksHandler = require('./webhooks')
 const { resolve, extname, join, relative } = require('path')
 const fs = require('fs')
 
@@ -39,7 +40,8 @@ function main() {
             isDev ? ` (You're in DEV mode.)` : ''
           }<br/><br/><br/><br/>` + fileLinks.join('<br>')
         )
-      } else {
+      } else if (url === '/webhooks') webhooksHandler(req, res)
+      else {
         // Resolve the file path based on the requested URL
         const fileName = url.substring(1)
         const extension = extname(fileName)

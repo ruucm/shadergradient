@@ -478,20 +478,21 @@ export function Timeline(Component): ComponentType {
     const [rangeStart] = useQueryState('rangeStart')
     const [rangeEnd] = useQueryState('rangeEnd')
 
-    const [duration, setDuration] = useState(0)
+    const [duration, setDuration] = useState(rangeEnd - rangeStart)
 
     const sequence = async () => {
-      await controls.start({ width: 0, transition: { duration: 0 } })
+      controls.set({ width: '0%', transition: { duration: 0 } })
       return await controls.start({
         width: '100%',
         transition: {
-          duration: rangeEnd - rangeStart,
+          duration: duration,
           repeat: Infinity,
           repeatType: 'loop',
           ease: 'linear',
         },
       })
     }
+
     useEffect(() => {
       setDuration(rangeEnd - rangeStart)
       clock.start()

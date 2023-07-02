@@ -19,6 +19,7 @@ import {
 import { cx } from '@/utils'
 import { clock } from '@/Gradient/comps/Mesh/useTimeAnimation'
 import { useDBTable } from 'https://framer.com/m/SupabaseConnector-ARlr.js'
+import { STRIPE_BILLING_URL } from '@/consts'
 
 // example from https://github.com/sonnylazuardi/framer-sites-figma-plugin/
 export function createRectangle(Component): ComponentType {
@@ -175,6 +176,33 @@ export function userEmail(Component): ComponentType {
   return (props) => {
     const [userDB] = useUserDB()
     return <Component {...props} text={userDB?.email || ''} />
+  }
+}
+
+export function userInfo(Component): ComponentType {
+  return (props) => {
+    const [subscription, subDBLoading] = useSubscription(
+      props['data-framer-name']
+    )
+    const [userDB] = useUserDB()
+
+    return (
+      <Component
+        {...props}
+        supportLink={`${STRIPE_BILLING_URL}?prefilled_email=${encodeURIComponent(
+          userDB?.email
+        )}`}
+        status={subscription ? 'PRO USER' : 'FREE USER'}
+        email={userDB ? `(${userDB?.email})` : ''}
+        variant={
+          subDBLoading
+            ? 'Loading'
+            : subscription && !subDBLoading
+            ? 'Pro'
+            : 'Free'
+        }
+      />
+    )
   }
 }
 

@@ -181,10 +181,13 @@ export function userEmail(Component): ComponentType {
 
 export function userInfo(Component): ComponentType {
   return (props) => {
-    const [subscription, subDBLoading] = useSubscription(
-      props['data-framer-name']
-    )
+    const [subscription, subDBLoading] = useSubscription('userInfo-channel')
     const [userDB] = useUserDB()
+
+    let variant = 'Loading'
+    if (subDBLoading) variant = 'Loading'
+    else if (subscription) variant = 'Pro'
+    else variant = 'Free'
 
     return (
       <Component
@@ -194,13 +197,7 @@ export function userInfo(Component): ComponentType {
         )}`}
         status={subscription ? 'PRO USER' : 'FREE USER'}
         email={userDB ? `(${userDB?.email})` : ''}
-        variant={
-          subDBLoading
-            ? 'Loading'
-            : subscription && !subDBLoading
-            ? 'Pro'
-            : 'Free'
-        }
+        variant={variant}
       />
     )
   }

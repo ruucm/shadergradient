@@ -178,6 +178,22 @@ export function userEmail(Component): ComponentType {
   }
 }
 
+export function userEmailBracket(Component): ComponentType {
+  return (props) => {
+    const [userDB] = useUserDB()
+    return <Component {...props} text={'(' + userDB?.email + ')' || ''} />
+  }
+}
+
+export function userStatus(Component): ComponentType {
+  return (props) => {
+    const [subscription] = useSubscription(props['data-framer-name'])
+    return (
+      <Component {...props} text={subscription ? '🔥PRO USER' : 'FREE USER'} />
+    )
+  }
+}
+
 export function extractGIFDEV(Component): ComponentType {
   return ({ style, ...props }: any) => {
     return (

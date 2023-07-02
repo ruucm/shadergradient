@@ -70,7 +70,7 @@ export function checkEnabled(Component): ComponentType {
           } else props?.onTap()
         }}
         onError={() => {
-          console.log('error')
+          console.log('error (checkEnabled)')
         }}
       />
     )

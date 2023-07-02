@@ -19,7 +19,7 @@ import {
 import { cx } from '@/utils'
 import { clock } from '@/Gradient/comps/Mesh/useTimeAnimation'
 import { useDBTable } from 'https://framer.com/m/SupabaseConnector-ARlr.js'
-import { STRIPE_BILLING_URL } from '@/consts'
+import { STRIPE_BILLING_URL, STRIPE_BUY_URL } from '@/consts'
 
 // example from https://github.com/sonnylazuardi/framer-sites-figma-plugin/
 export function createRectangle(Component): ComponentType {
@@ -225,7 +225,7 @@ export function subscribeLink(Component): ComponentType {
     return (
       <Component
         {...props}
-        href={`https://buy.stripe.com/test_00g6qAa5o9Gp608bII?client_reference_id=${figma.user?.id}`}
+        href={`${STRIPE_BUY_URL}?client_reference_id=${figma.user?.id}`}
       />
     )
   }

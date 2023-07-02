@@ -2,6 +2,7 @@ const {
   stripe,
   upsertProductRecord,
   upsertPriceRecord,
+  createOrRetrieveCustomer,
   manageSubscriptionStatusChange,
 } = require('./supabase-admin')
 
@@ -36,7 +37,8 @@ const handler = async (req, res) => {
       event = stripe.webhooks.constructEvent(buf, sig, webhookSecret)
     } catch (err) {
       console.log(`❌ Error message: ${err.message}`)
-      return res.status(400).send(`Webhook Error: ${err.message}`)
+      res.writeHead(400, { 'Content-Type': 'text/plain' })
+      res.end(`Webhook Error: ${err.message}`)
     }
 
     console.log('event.type', event.type)
@@ -52,14 +54,21 @@ const handler = async (req, res) => {
           case 'price.updated':
             await upsertPriceRecord(event.data.object)
             break
+
           case 'customer.subscription.created':
           case 'customer.subscription.updated':
           case 'customer.subscription.deleted':
-            await manageSubscriptionStatusChange({
-              subscriptionId: event.data.object.id,
-              customerId: event.data.object.customer,
-              createAction: event.type === 'customer.subscription.created',
-            })
+            const subscription = event.data.object
+            console.log(
+              'subscription - customer.subscription.[created/updated/deleted]',
+              subscription
+            )
+
+            await manageSubscriptionStatusChange(
+              subscription.id,
+              subscription.customer,
+              event.type === 'customer.subscription.created'
+            )
             // TODO: might need to redploy site after subscription status change
             // or some subscription expired users have a problem to preview site with request cookies.
             break
@@ -71,7 +80,9 @@ const handler = async (req, res) => {
               await manageSubscriptionStatusChange(
                 subscriptionId,
                 checkoutSession.customer,
-                true
+                true,
+                checkoutSession.client_reference_id,
+                checkoutSession.customer_details
               )
             }
 
@@ -81,16 +92,17 @@ const handler = async (req, res) => {
         }
       } catch (error) {
         console.log('webhook error', error)
-        return res
-          .status(400)
-          .send('Webhook error: "Webhook handler failed. View logs."')
+        res.writeHead(400, { 'Content-Type': 'text/plain' })
+        res.end('Webhook error: "Webhook handler failed. View logs."')
+        return
       }
     }
 
-    res.json({ received: true })
+    res.statusCode = 200
+    res.setHeader('Content-Type', 'application/json')
+    res.end(JSON.stringify({ received: true }))
   } else {
     res.setHeader('Allow', 'POST')
-    // res.status(405).end('Method Not Allowed')
     res.writeHead(405, { 'Content-Type': 'text/plain' })
     res.end('Method Not Allowed')
   }

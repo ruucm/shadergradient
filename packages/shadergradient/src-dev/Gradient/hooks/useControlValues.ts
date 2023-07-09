@@ -58,7 +58,8 @@ export function useControlValues(
 
   // figma
   const [frameRate] = useQueryState('frameRate')
-
+  const [destination] = useQueryState('destination')
+  const [format] = useQueryState('format')
   const queryProps = {
     type,
     animate,
@@ -66,6 +67,8 @@ export function useControlValues(
     rangeStart,
     rangeEnd,
     frameRate,
+    destination,
+    format,
     uTime,
     uSpeed,
     uStrength,

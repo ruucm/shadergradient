@@ -92,6 +92,7 @@ export function extractGIF(Component): ComponentType {
     const [rangeEnd] = useQueryState('rangeEnd')
     const [frameRate] = useQueryState('frameRate')
     const [pixelDensity] = useQueryState('pixelDensity')
+    const [destination] = useQueryState('destination')
 
     const [duration, setDuration] = useState(0)
     const [size, setSize] = useState(0)
@@ -105,7 +106,11 @@ export function extractGIF(Component): ComponentType {
     const credits = userDB ? userDB.credits : 5 // initial credits when there is no user in DB.
     const [subscription, subDBLoading] = useSubscription('sub1')
     const needSubscribe = credits <= 0 && !subDBLoading && !subscription
-    const titleText = needSubscribe ? 'Upgrade to Pro' : 'Extract GIF'
+    const titleText = needSubscribe
+      ? 'Upgrade to Pro'
+      : destination === 'onCanvas'
+      ? 'Add GIF to canvas'
+      : 'Download'
     const creditText = subscription ? `(Pro User)` : `(${credits} credit left)`
 
     useEffect(() => {
@@ -472,6 +477,7 @@ export function GIFStatusOverride(Component): ComponentType {
     const [rangeEnd] = useQueryState('rangeEnd')
     const [pixelDensity] = useQueryState('pixelDensity')
     const [frameRate] = useQueryState('frameRate')
+    const [destination] = useQueryState('destination')
 
     const sizeLimit = 300
 
@@ -490,7 +496,13 @@ export function GIFStatusOverride(Component): ComponentType {
         {...props}
         size={`${Math.ceil(size * 10) / 10}MB`}
         duration={`(${Math.ceil(duration * 10) / 10}s)`}
-        variant={size > sizeLimit ? 'Error' : 'Default'}
+        variant={
+          size > sizeLimit && destination === 'onCanvas'
+            ? 'Error'
+            : destination === 'localFile'
+            ? 'Export'
+            : 'Default'
+        }
       />
     )
   }

@@ -52,6 +52,12 @@ export function insertCanvasAsImage(Component): ComponentType {
   }
 }
 
+export function checkEnabled(Component): ComponentType {
+  return (props) => {
+    return <Component {...props} />
+  }
+}
+
 export function extractGIF(Component): ComponentType {
   return ({ style, ...props }: any) => {
     const [progress, setProgress] = useState(0)
@@ -73,6 +79,28 @@ export function extractGIF(Component): ComponentType {
     )
   }
 }
+
+export function isUpgraded(Component): ComponentType {
+  return (props) => {
+    return <Component {...props} />
+  }
+}
+export function upgradingText(Component): ComponentType {
+  return (props) => {
+    return <Component {...props} />
+  }
+}
+export function userEmail(Component): ComponentType {
+  return (props) => {
+    return <Component {...props} />
+  }
+}
+
+export function userInfo(Component): ComponentType {
+  return (props) => {
+    return <Component {...props} />
+  }
+}
 export function extractGIFDEV(Component): ComponentType {
   return ({ style, ...props }: any) => {
     return (
@@ -82,6 +110,12 @@ export function extractGIFDEV(Component): ComponentType {
         onClick={() => alert('This feature is under development.')}
       />
     )
+  }
+}
+
+export function subscribeLink(Component): ComponentType {
+  return (props) => {
+    return <Component {...props} />
   }
 }
 
@@ -291,6 +325,18 @@ export function HideScrollBar(Component): ComponentType {
   return ({ className, ...props }: any) => (
     <Component {...props} className={cx('hide-scrollbar', className)} />
   )
+}
+
+export function GIFStatusOverride(Component): ComponentType {
+  return (props) => {
+    return <Component {...props} />
+  }
+}
+
+export function Timeline(Component): ComponentType {
+  return (props) => {
+    return <Component {...props} />
+  }
 }
 
 function useFigmaSelections() {

@@ -53,7 +53,7 @@ const nextConfig = {
           'https://fonts.gstatic.com/',
           'https://ga.jspm.io/',
           'https://jspm.dev/',
-          'https://gh.ruucm.work',
+          'https://ruucm.github.io',
           'http://localhost:8001',
           'http://127.0.0.1:8001',
         ],

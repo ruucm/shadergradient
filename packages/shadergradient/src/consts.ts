@@ -35,7 +35,7 @@ export const aboutRotations = [0, 10, 50]
 export const aboutMobilePositions = [0, 20, 0]
 
 export const hdrBase =
-  'https://gh.ruucm.work/shadergradient/shadergradient@1.0.0'
+  'https://ruucm.github.io/shadergradient/shadergradient@1.0.0'
 
 // loading animations
 export const mainLoading = {
@@ -60,4 +60,4 @@ export const mainLoading = {
 
 // environment hdr
 export const envBasePath =
-  'https://gh.ruucm.work/shadergradient/shadergradient@1.0.0/hdr/'
+  'https://ruucm.github.io/shadergradient/shadergradient@1.0.0/hdr/'

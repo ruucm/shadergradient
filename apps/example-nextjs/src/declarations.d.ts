@@ -1,2 +1,2 @@
 declare module 'https://cdn.skypack.dev/*'
-declare module 'https://gh.ruucm.work/*'
+declare module 'https://ruucm.github.io/*'

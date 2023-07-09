@@ -1,5 +1,5 @@
 import { Gradient } from 'shadergradient'
-// import { Gradient } from 'https://gh.ruucm.work/shadergradient/shadergradient@1.1.5/index.mjs' (Types are not supported)
+// import { Gradient } from 'https://ruucm.github.io/shadergradient/shadergradient@1.1.5/index.mjs' (Types are not supported)
 import confetti from 'https://cdn.skypack.dev/canvas-confetti'
 import { useEffect } from 'react'
 

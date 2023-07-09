@@ -13,7 +13,7 @@ const nextConfig = {
   //   styledComponents: true,
   // },
   experimental: {
-    urlImports: ['https://cdn.skypack.dev', 'https://gh.ruucm.work'],
+    urlImports: ['https://cdn.skypack.dev', 'https://ruucm.github.io'],
   },
   images: {},
   reactStrictMode: true, // Recommended for the `pages` directory, default in `app`.

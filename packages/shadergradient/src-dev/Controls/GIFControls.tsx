@@ -15,6 +15,8 @@ export const GIFControls: React.FC<GIFControlsPropsT> = () => {
   const [isHovered, setIsHovered] = React.useState('')
   const [pixelDensity, setPixelDensity] = useQueryState('pixelDensity')
   const [frameRate, setFrameRate] = useQueryState('frameRate')
+  const [destination, setDestination] = useQueryState('destination')
+  const [format, setFormat] = useQueryState('format')
 
   React.useEffect(() => {
     setFrameRate(10)
@@ -89,6 +91,52 @@ export const GIFControls: React.FC<GIFControlsPropsT> = () => {
           max={9}
         />
       </InputPanel>
+
+      <InputPanel
+        title='Destination'
+        info={true}
+        hoverContent='Add the extracted file into the Figma canvas, or download in your device'
+        isHovered={isHovered}
+        onMouseEnter={() => {
+          setIsHovered('Destination')
+        }}
+        onMouseLeave={() => {
+          setIsHovered('')
+        }}
+      >
+        <Radio
+          name='destination'
+          value='onCanvas'
+          setValue={setDestination}
+          check={destination === 'onCanvas'}
+          label='On canvas'
+        />
+        <Radio
+          name='destination'
+          value='localFile'
+          setValue={setDestination}
+          check={destination === 'localFile'}
+          label='Local file'
+        />
+      </InputPanel>
+      {destination === 'localFile' && (
+        <InputPanel title='Format'>
+          <Radio
+            name='format'
+            value='webm'
+            setValue={setFormat}
+            check={format === 'webm'}
+            label='.webm'
+          />
+          <Radio
+            name='format'
+            value='gif'
+            setValue={setFormat}
+            check={format === 'gif'}
+            label='.gif'
+          />
+        </InputPanel>
+      )}
     </div>
   )
 }

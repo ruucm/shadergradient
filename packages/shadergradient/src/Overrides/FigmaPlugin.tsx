@@ -53,8 +53,19 @@ export function insertCanvasAsImage(Component): ComponentType {
 }
 
 export function checkEnabled(Component): ComponentType {
-  return (props) => {
-    return <Component {...props} />
+  return ({ style, ...props }: any) => {
+    return (
+      <Component
+        {...props}
+        style={{ ...style, cursor: 'pointer', opacity: 0.49 }}
+        onTap={() => {
+          alert('This feature is under development.')
+        }}
+        onError={() => {
+          console.log('error (checkEnabled)')
+        }}
+      />
+    )
   }
 }
 

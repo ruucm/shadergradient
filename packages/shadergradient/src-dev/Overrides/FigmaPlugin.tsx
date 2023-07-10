@@ -14,7 +14,7 @@ import {
   figma,
   postFigmaMessage,
   postFigmaMessageForSnapShot,
-  postFigmaMessageForCreateGIF,
+  postFigmaMessageForExport,
 } from './FigmaApi'
 import { cx } from '@/utils'
 import { clock } from '@/Gradient/comps/Mesh/useTimeAnimation'
@@ -93,6 +93,7 @@ export function extractGIF(Component): ComponentType {
     const [frameRate] = useQueryState('frameRate')
     const [pixelDensity] = useQueryState('pixelDensity')
     const [destination] = useQueryState('destination')
+    const [format] = useQueryState('format')
 
     const [duration, setDuration] = useState(0)
     const [size, setSize] = useState(0)
@@ -122,7 +123,15 @@ export function extractGIF(Component): ComponentType {
     }, [duration, pixelDensity, frameRate])
 
     const valid = animate === 'on' && range === 'enabled' && size < 300
-    const option = { rangeStart, rangeEnd, setAnimate, setUTime, frameRate }
+    const option = {
+      rangeStart,
+      rangeEnd,
+      setAnimate,
+      setUTime,
+      frameRate,
+      destination,
+      format,
+    }
 
     let variant = 'dbLoading'
     if (loading) variant = 'loading'
@@ -145,7 +154,7 @@ export function extractGIF(Component): ComponentType {
               setProgress(0)
               console.log('startTime', Date.now())
               clock.start() // restart the clock
-              postFigmaMessageForCreateGIF(option, setProgress)
+              postFigmaMessageForExport(option, setProgress)
 
               if (userDB) updateRow({ id: userDB.id, credits: credits - 1 })
               else insertRow({ figma_user_id })

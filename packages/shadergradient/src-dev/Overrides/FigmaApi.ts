@@ -1513,6 +1513,7 @@ interface ActiveUser extends User {
 
 import { exportGIF } from './exportGIF'
 import { exportImage } from './exportImage'
+import { exportVideo } from './exportVideo'
 
 //@ts-ignore
 export const figma: PluginAPI = {}
@@ -1536,19 +1537,24 @@ export const postFigmaMessage = async (func) => {
   )
 }
 
-export const postFigmaMessageForCreateGIF = async (option, callback) => {
-  const bytes = await exportGIF(option, callback)
+export const postFigmaMessageForExport = async (option, callback) => {
+  if (option.destination === 'onCanvas') {
+    const bytes = await exportGIF(option, callback)
 
-  parent.postMessage(
-    {
-      pluginMessage: {
-        type: 'SNAPSHOT_GIF',
-        code: getCodeString(callback),
-        bytes,
+    parent.postMessage(
+      {
+        pluginMessage: {
+          type: 'SNAPSHOT_GIF',
+          code: getCodeString(callback),
+          bytes,
+        },
       },
-    },
-    '*'
-  )
+      '*'
+    )
+  } else if (option.destination === 'localFile') {
+    if (option.format === 'gif') await exportGIF(option, callback)
+    else if (option.format === 'webm') await exportVideo(option, callback)
+  }
 }
 
 export const postFigmaMessageForSnapShot = async (func) => {

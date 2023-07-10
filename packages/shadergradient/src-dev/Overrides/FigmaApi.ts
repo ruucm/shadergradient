@@ -1511,9 +1511,8 @@ interface ActiveUser extends User {
   readonly selection: string[]
 }
 
-// https://github.com/mattdesl/gifenc
-import { GIFEncoder, quantize, applyPalette } from './lib'
-import { sleep } from './utils'
+import { exportGIF } from './exportGIF'
+import { exportImage } from './exportImage'
 
 //@ts-ignore
 export const figma: PluginAPI = {}
@@ -1538,7 +1537,7 @@ export const postFigmaMessage = async (func) => {
 }
 
 export const postFigmaMessageForCreateGIF = async (option, callback) => {
-  const bytes = await captureGIF(option, callback)
+  const bytes = await exportGIF(option, callback)
 
   parent.postMessage(
     {
@@ -1553,7 +1552,7 @@ export const postFigmaMessageForCreateGIF = async (option, callback) => {
 }
 
 export const postFigmaMessageForSnapShot = async (func) => {
-  const bytes = await captureCanvas()
+  const bytes = await exportImage()
 
   parent.postMessage(
     {
@@ -1566,241 +1565,4 @@ export const postFigmaMessageForSnapShot = async (func) => {
     },
     '*'
   )
-}
-
-async function captureCanvas() {
-  return new Promise(async (resolve, reject) => {
-    const r3fCanvas = document.getElementById('gradientCanvas')
-      .children[0] as HTMLCanvasElement
-
-    const dataURL = r3fCanvas.toDataURL('image/png', 1.0) // full quality
-
-    const image = await loadImage(dataURL)
-    console.log('Image has loaded')
-    const view: any = await imageToUint8Array(image)
-    console.log(`${view.length} bytes!.`)
-    resolve(view)
-  })
-}
-
-async function captureGIF(option, callback) {
-  const { rangeStart, rangeEnd, setAnimate, setUTime, frameRate } = option
-
-  const frameRateInterval = 1 / frameRate
-  const delay = frameRateInterval * 1000
-
-  setAnimate('off') // animate is always "on" before exporting GIFs
-  setUTime(rangeStart)
-  const duration = rangeEnd - rangeStart // seconds
-  const totalFrames = Math.ceil(duration * frameRate)
-  console.log('totalFrames', totalFrames)
-  console.log('duration', duration)
-
-  return new Promise(async (resolve, reject) => {
-    const frames = new Array(totalFrames).fill(0).map((_, i) => i)
-
-    // Setup an encoder that we will write frames into
-    const gif = GIFEncoder()
-
-    // We use for 'of' to loop with async await
-    for (let i of frames) {
-      // a t value 0..1 to animate the frame
-      const playhead = rangeStart + i / frameRate
-      // render target frame
-      setUTime(playhead)
-
-      const [imageData, width, height]: any = await getImage()
-      const { data } = imageData
-
-      // Choose a pixel format: rgba4444, rgb444, rgb565
-      const format = 'rgb444'
-
-      // If necessary, quantize your colors to a reduced palette
-      const palette = quantize(data, 256, { format })
-
-      // Apply palette to RGBA data to get an indexed bitmap
-      const index = applyPalette(data, palette, format)
-
-      // Write frame into GIF
-      await gif.writeFrame(index, width, height, { palette, delay })
-      console.log('GIF Frame has written')
-
-      await sleep(0.01) // add a break to share UI state updates (setProgress)
-      callback(i / (totalFrames - 1))
-    }
-
-    // Finalize stream
-    gif.finish()
-
-    // Get a direct typed array view into the buffer to avoid copying it
-    const buffer = gif.bytesView()
-
-    // download(buffer, 'animation.gif', { type: 'image/gif' })
-    setAnimate('on')
-
-    const b64 = await base64_arraybuffer(buffer)
-    const dataURL = 'data:image/gif;base64,' + b64
-
-    resolve(gifToUint8Array(dataURL))
-  })
-}
-
-async function recordVideo(duration) {
-  const recordingTimeMS = duration * 1000
-  const preview: any = document.getElementById('gradientCanvas')
-    ?.children[0] as HTMLCanvasElement
-
-  preview.captureStream = preview.captureStream || preview.mozCaptureStream
-
-  startRecording(preview.captureStream(), recordingTimeMS).then(
-    (recordedChunks) => {
-      let recordedBlob = new Blob(recordedChunks, { type: 'video/webm' })
-      const videoUrl = URL.createObjectURL(recordedBlob)
-      const videoElement = document.createElement('video')
-      videoElement.controls = true
-      videoElement.src = videoUrl
-      document.body.appendChild(videoElement)
-
-      console.log(
-        `Successfully recorded ${recordedBlob.size} bytes of ${recordedBlob.type} media.`
-      )
-    }
-  )
-}
-function startRecording(stream, lengthInMS) {
-  let recorder = new MediaRecorder(stream)
-  let data = []
-
-  recorder.ondataavailable = (event) => data.push(event.data)
-  recorder.start()
-  console.log(`${recorder.state} for ${lengthInMS / 1000} seconds…`)
-
-  let stopped = new Promise((resolve, reject) => {
-    recorder.onstop = resolve
-    recorder.onerror = (event: any) => reject(event.name)
-  })
-
-  let recorded = sleep(lengthInMS * 1000).then(() => {
-    if (recorder.state === 'recording') {
-      recorder.stop()
-    }
-  })
-
-  return Promise.all([stopped, recorded]).then(() => data)
-}
-
-async function imageToUint8Array(image) {
-  return new Promise((resolve, reject) => {
-    // create a canvas for converto image to uint8array
-    const canvas = document.createElement('canvas')
-    const context = canvas.getContext('2d')
-
-    context.canvas.width = image.width
-    context.canvas.height = image.height
-    context.drawImage(image, 0, 0)
-
-    context.canvas.toBlob((blob) =>
-      blob
-        .arrayBuffer()
-        .then((buffer) => resolve(new Uint8Array(buffer)))
-        .catch(reject)
-    )
-  })
-}
-
-async function gifToUint8Array(dataURL) {
-  // Convert base64 data URL to binary string
-  const binaryString = atob(dataURL.split(',')[1])
-  // Convert binary string to Uint8Array
-  const uint8Array = new Uint8Array(binaryString.length)
-  for (let i = 0; i < binaryString.length; i++)
-    uint8Array[i] = binaryString.charCodeAt(i)
-
-  return uint8Array
-}
-
-function download(buf, filename, type) {
-  const blob = buf instanceof Blob ? buf : new Blob([buf], { type })
-  const url = URL.createObjectURL(blob)
-  const anchor = document.createElement('a')
-  anchor.href = url
-  anchor.download = filename
-  anchor.click()
-}
-
-async function loadImage(src) {
-  const image = new Image()
-  image.src = src
-  await new Promise((resolve, reject) => {
-    image.onload = resolve
-    image.onerror = reject
-  })
-  return image
-}
-
-function convertURIToImageData(URI) {
-  return new Promise(function (resolve, reject) {
-    if (URI == null) return reject()
-    var canvas = document.createElement('canvas'),
-      context = canvas.getContext('2d'),
-      image = new Image()
-    image.addEventListener(
-      'load',
-      function () {
-        canvas.width = image.width
-        canvas.height = image.height
-        context.drawImage(image, 0, 0, canvas.width, canvas.height)
-        resolve(context.getImageData(0, 0, canvas.width, canvas.height))
-      },
-      false
-    )
-    image.src = URI
-  })
-}
-
-async function getImage() {
-  const r3fCanvas: any = document.getElementById('gradientCanvas')
-    ?.children[0] as HTMLCanvasElement
-  const dataURL = r3fCanvas.toDataURL('image/png', 1.0) // full quality
-  const image = await loadImage(dataURL)
-
-  // add the image to the encoder
-  const canvas = document.createElement('canvas')
-  const context: any = canvas.getContext('2d')
-
-  context.canvas.width = image.width
-  context.canvas.height = image.height
-  context.drawImage(image, 0, 0)
-
-  return [
-    new ImageData(
-      context.getImageData(
-        0,
-        0,
-        context.canvas.width,
-        context.canvas.height
-      ).data,
-      context.canvas.width,
-      context.canvas.height
-    ),
-    image.width,
-    image.height,
-  ]
-}
-
-const base64_arraybuffer = async (data) => {
-  // Use a FileReader to generate a base64 data URI
-  const base64url = await new Promise((r) => {
-    const reader = new FileReader()
-    reader.onload = () => r(reader.result)
-    reader.readAsDataURL(new Blob([data]))
-  })
-
-  /*
-  The result looks like 
-  "data:application/octet-stream;base64,<your base64 data>", 
-  so we split off the beginning:
-  */
-  // @ts-ignore
-  return base64url.substring(base64url.indexOf(',') + 1)
 }

@@ -112,7 +112,7 @@ export function extractGIF(Component): ComponentType {
       : destination === 'onCanvas'
       ? 'Add GIF to canvas'
       : 'Download'
-    const creditText = subscription ? `(Pro User)` : `(${credits} credit left)`
+    const creditText = !subscription && `(${credits} credit left)`
 
     useEffect(() => {
       setDuration(rangeEnd - rangeStart)

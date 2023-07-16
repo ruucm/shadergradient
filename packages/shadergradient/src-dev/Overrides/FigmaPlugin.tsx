@@ -172,18 +172,19 @@ export function extractGIF(Component): ComponentType {
           variant={variant}
         />
         {/* clickable layer on exporting */}
-        <div
-          onClick={() => controller.abort()}
-          style={{
-            position: 'absolute',
-            width: '100%',
-            height: '100%',
-            top: 0,
-            left: 0,
-            cursor: 'wait',
-            pointerEvents: variant === 'loading' ? 'initial' : 'none',
-          }}
-        />
+        {variant === 'loading' && (
+          <div
+            onClick={() => controller.abort()}
+            style={{
+              position: 'absolute',
+              width: '100%',
+              height: '100%',
+              top: 0,
+              left: 0,
+              cursor: 'wait',
+            }}
+          />
+        )}
       </>
     )
   }

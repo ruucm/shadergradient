@@ -66,7 +66,7 @@ export async function exportGIF(option, callback, controller) {
     // Get a direct typed array view into the buffer to avoid copying it
     const buffer = gif.bytesView()
 
-    if (option.destination === 'localFile')
+    if (option.destination === 'localFile' && !stopLoop)
       download(buffer, 'shadergradient.gif', { type: 'image/gif' })
     setAnimate('on')
 

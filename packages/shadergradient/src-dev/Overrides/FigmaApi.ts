@@ -1556,7 +1556,8 @@ export const postFigmaMessageForExport = async (
     )
   } else if (option.destination === 'localFile') {
     if (option.format === 'gif') await exportGIF(option, callback, controller)
-    else if (option.format === 'webm') await exportVideo(option, callback)
+    else if (option.format === 'webm')
+      await exportVideo(option, callback, controller)
   }
 }
 

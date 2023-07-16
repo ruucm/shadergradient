@@ -1,9 +1,19 @@
 import { sleep } from './utils'
 
-export async function exportVideo(option, callback) {
+let stopped = false
+export async function exportVideo(option, callback, controller) {
   const { rangeStart, rangeEnd } = option
   const duration = rangeEnd - rangeStart // seconds
+
+  stopped = false
   recordVideo(duration)
+  const signal = controller.signal
+  signal.addEventListener('abort', () => {
+    callback(-1)
+    stopped = true
+    clearInterval(interval)
+    mediaRecorder.stop()
+  })
 
   // setProgress
   const interval = setInterval(() => {
@@ -33,7 +43,7 @@ export async function recordVideo(duration) {
   })
 
   mediaRecorder.addEventListener('stop', () => {
-    downloadVideo()
+    if (!stopped) downloadVideo()
   })
 
   mediaRecorder.start()

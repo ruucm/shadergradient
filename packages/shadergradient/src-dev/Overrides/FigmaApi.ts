@@ -1537,10 +1537,13 @@ export const postFigmaMessage = async (func) => {
   )
 }
 
-export const postFigmaMessageForExport = async (option, callback) => {
+export const postFigmaMessageForExport = async (
+  option,
+  callback,
+  controller
+) => {
   if (option.destination === 'onCanvas') {
-    const bytes = await exportGIF(option, callback)
-
+    const bytes = await exportGIF(option, callback, controller)
     parent.postMessage(
       {
         pluginMessage: {
@@ -1552,7 +1555,7 @@ export const postFigmaMessageForExport = async (option, callback) => {
       '*'
     )
   } else if (option.destination === 'localFile') {
-    if (option.format === 'gif') await exportGIF(option, callback)
+    if (option.format === 'gif') await exportGIF(option, callback, controller)
     else if (option.format === 'webm') await exportVideo(option, callback)
   }
 }

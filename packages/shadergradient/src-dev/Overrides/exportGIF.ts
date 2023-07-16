@@ -2,7 +2,9 @@
 import { GIFEncoder, quantize, applyPalette } from './lib'
 import { loadImage, sleep } from './utils'
 
-export async function exportGIF(option, callback) {
+let stopLoop = false
+export async function exportGIF(option, callback, controller) {
+  stopLoop = false
   const { rangeStart, rangeEnd, setAnimate, setUTime, frameRate } = option
 
   const frameRateInterval = 1 / frameRate
@@ -20,9 +22,19 @@ export async function exportGIF(option, callback) {
 
     // Setup an encoder that we will write frames into
     const gif = GIFEncoder()
+    const signal = controller.signal
+
+    signal.addEventListener('abort', () => {
+      stopLoop = true
+      reject(new Error('Long-await function was cancelled.'))
+    })
 
     // We use for 'of' to loop with async await
     for (let i of frames) {
+      if (stopLoop) {
+        callback(-1)
+        break
+      }
       // a t value 0..1 to animate the frame
       const playhead = rangeStart + i / frameRate
       // render target frame

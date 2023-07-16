@@ -77,6 +77,7 @@ export function checkEnabled(Component): ComponentType {
   }
 }
 
+let controller
 export function extractGIF(Component): ComponentType {
   return ({ style, ...props }: any) => {
     const [progress, setProgress] = useState(-1)
@@ -142,31 +143,48 @@ export function extractGIF(Component): ComponentType {
     else if (needSubscribe) variant = 'upgrade'
 
     return (
-      <Component
-        {...props}
-        key={progress} // need to flush Framer button
-        style={{ ...style, cursor: 'pointer' }}
-        onTapGIF={() => {
-          if (enabled && valid) {
-            if (needSubscribe) props?.onTapGIFU() // move to the upgrade variant
-            else {
-              // start to extract GIF
-              setProgress(0)
-              console.log('startTime', Date.now())
-              clock.start() // restart the clock
-              postFigmaMessageForExport(option, setProgress)
+      <>
+        <Component
+          {...props}
+          key={progress} // need to flush Framer button
+          style={{ ...style, cursor: 'pointer' }}
+          onTapGIF={() => {
+            controller = new AbortController() // need to make a new one on every exportings
 
-              if (userDB) updateRow({ id: userDB.id, credits: credits - 1 })
-              else insertRow({ figma_user_id })
-            }
-          } else props?.onTapGIF() // move to the alert variant
-        }}
-        onTapGIFU={() => console.log('onTapGIFU')} // ignore the default event
-        progress={progress * 100}
-        title={titleText}
-        credit={creditText}
-        variant={variant}
-      />
+            if (enabled && valid) {
+              if (needSubscribe)
+                props?.onTapGIFU() // move to the upgrade variant
+              else {
+                // start to extract GIF
+                setProgress(0)
+                console.log('startTime', Date.now())
+                clock.start() // restart the clock
+                postFigmaMessageForExport(option, setProgress, controller)
+                if (userDB) updateRow({ id: userDB.id, credits: credits - 1 })
+                else insertRow({ figma_user_id })
+              }
+            } else props?.onTapGIF() // move to the alert variant
+          }}
+          onTapGIFU={() => console.log('onTapGIFU')} // ignore the default event
+          progress={progress * 100}
+          title={titleText}
+          credit={creditText}
+          variant={variant}
+        />
+        {/* clickable layer on exporting */}
+        <div
+          onClick={() => controller.abort()}
+          style={{
+            position: 'absolute',
+            width: '100%',
+            height: '100%',
+            top: 0,
+            left: 0,
+            cursor: 'wait',
+            pointerEvents: variant === 'loading' ? 'initial' : 'none',
+          }}
+        />
+      </>
     )
   }
 }

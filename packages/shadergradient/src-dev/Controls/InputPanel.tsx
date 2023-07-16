@@ -27,7 +27,7 @@ export const InputPanel: React.FC<InputPanelPropsT> = ({
 }) => {
   return (
     <div className='flex justify-between items-center gap-3.5' {...rest}>
-      <span className='font-semibold text-primary w-[50%] text-base'>
+      <span className='font-semibold text-primary w-[50%] text-base relative'>
         {title}{' '}
         <span
           className='cursor-pointer'
@@ -38,7 +38,11 @@ export const InputPanel: React.FC<InputPanelPropsT> = ({
           {info === true && <Info size={14} color='rgb(255,67,10)' />}
         </span>
         {hoverContent && (
-          <HoverBox content={hoverContent} isHovered={isHovered === title} />
+          <HoverBox
+            content={hoverContent}
+            isHovered={isHovered === title}
+            downward={false}
+          />
         )}
       </span>
       <div className='flex justify-between w-full'>

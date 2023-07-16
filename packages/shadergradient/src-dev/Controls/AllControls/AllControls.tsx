@@ -98,8 +98,6 @@ export const AllControls: React.FC<Props> = ({ isMobile, isFigma = false }) => {
           {children}
         </HorizontalControl>
       )}
-      {/* add space to the bottom of controls to prevent overlap with the bottom bar */}
-      {isFigma && <div style={{ height: 88 }} />}
     </div>
   )
 }

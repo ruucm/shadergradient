@@ -40,10 +40,12 @@ export const PropertyControls: React.FC<Props> = ({
         padding: activeTab === 'none' ? 0 : 20,
         overflow: activeTab === 'none' ? 'hidden' : 'visible',
         borderRadius: isMobile === true ? 0 : '4px 4px 0 0',
-        marginBottom: isMobile === true ? 56 : 0, // make space for the overlapping horizontal control bar
+        marginBottom: isMobile === true && isFigma === false ? 56 : 0, // make space for the overlapping horizontal control bar
       }}
       transition={{
         duration: 0.72,
+        padding: { duration: 0 },
+        maxHeight: { duration: 0 },
         overflow: { delay: activeTab !== 'none' ? 0.72 : 0 },
       }}
     >

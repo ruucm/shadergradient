@@ -2,9 +2,9 @@
 import { GIFEncoder, quantize, applyPalette } from './lib'
 import { loadImage, sleep } from './utils'
 
-let stopLoop = false
+let stopped = false
 export async function exportGIF(option, callback, controller) {
-  stopLoop = false
+  stopped = false
   const { rangeStart, rangeEnd, setAnimate, setUTime, frameRate } = option
 
   const frameRateInterval = 1 / frameRate
@@ -25,13 +25,13 @@ export async function exportGIF(option, callback, controller) {
     const signal = controller.signal
 
     signal.addEventListener('abort', () => {
-      stopLoop = true
+      stopped = true
       reject(new Error('Long-await function was cancelled.'))
     })
 
     // We use for 'of' to loop with async await
     for (let i of frames) {
-      if (stopLoop) {
+      if (stopped) {
         callback(-1)
         break
       }
@@ -66,7 +66,7 @@ export async function exportGIF(option, callback, controller) {
     // Get a direct typed array view into the buffer to avoid copying it
     const buffer = gif.bytesView()
 
-    if (option.destination === 'localFile' && !stopLoop)
+    if (option.destination === 'localFile' && !stopped)
       download(buffer, 'shadergradient.gif', { type: 'image/gif' })
     setAnimate('on')
 

@@ -44,6 +44,8 @@ export const PropertyControls: React.FC<Props> = ({
       }}
       transition={{
         duration: 0.72,
+        padding: { duration: 0 },
+        maxHeight: { duration: 0 },
         overflow: { delay: activeTab !== 'none' ? 0.72 : 0 },
       }}
     >

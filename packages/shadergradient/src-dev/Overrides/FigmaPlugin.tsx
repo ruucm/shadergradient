@@ -1,4 +1,4 @@
-import { ComponentType, useEffect, useState } from 'react'
+import { ComponentType, useEffect, useLayoutEffect, useState } from 'react'
 import React from 'react'
 import { useAnimationControls } from 'framer-motion'
 import * as qs from 'query-string'
@@ -521,12 +521,18 @@ export function GIFStatusOverride(Component): ComponentType {
       setSize(0.72 * duration * frameRate * pixelDensity)
 
       setTimeout(() => {
-        const r3fCanvas: any = document.getElementById('gradientCanvas')
-          ?.children[0] as HTMLCanvasElement
-        setWidth(r3fCanvas.offsetWidth * pixelDensity)
-        setHeight(r3fCanvas.offsetHeight * pixelDensity)
+        updateResolution({ setWidth, setHeight, pixelDensity })
       }, 100) // need a delay until the canvas dom mounted
     }, [duration, pixelDensity, frameRate])
+
+    // handle resize plugin
+    useLayoutEffect(() => {
+      function updateSize() {
+        updateResolution({ setWidth, setHeight, pixelDensity })
+      }
+      window.addEventListener('resize', updateSize)
+      return () => window.removeEventListener('resize', updateSize)
+    }, [])
 
     return (
       <Component
@@ -595,4 +601,11 @@ function useSubscription(subId) {
   )
 
   return [subscription, userDBLoading || dbLoading]
+}
+
+function updateResolution({ setWidth, setHeight, pixelDensity }) {
+  const r3fCanvas: any = document.getElementById('gradientCanvas')
+    ?.children[0] as HTMLCanvasElement
+  setWidth(r3fCanvas.offsetWidth * pixelDensity)
+  setHeight(r3fCanvas.offsetHeight * pixelDensity)
 }

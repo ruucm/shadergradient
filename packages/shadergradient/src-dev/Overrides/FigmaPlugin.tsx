@@ -532,7 +532,7 @@ export function GIFStatusOverride(Component): ComponentType {
       }
       window.addEventListener('resize', updateSize)
       return () => window.removeEventListener('resize', updateSize)
-    }, [])
+    }, [pixelDensity])
 
     return (
       <Component

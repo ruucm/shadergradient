@@ -606,6 +606,8 @@ function useSubscription(subId) {
 function updateResolution({ setWidth, setHeight, pixelDensity }) {
   const r3fCanvas: any = document.getElementById('gradientCanvas')
     ?.children[0] as HTMLCanvasElement
-  setWidth(r3fCanvas.offsetWidth * pixelDensity)
-  setHeight(r3fCanvas.offsetHeight * pixelDensity)
+  const { width, height } = r3fCanvas.getBoundingClientRect()
+
+  setWidth(Math.round(width * pixelDensity))
+  setHeight(Math.round(height * pixelDensity))
 }

@@ -506,6 +506,8 @@ export function GIFStatusOverride(Component): ComponentType {
     const [pixelDensity] = useQueryState('pixelDensity')
     const [frameRate] = useQueryState('frameRate')
     const [destination] = useQueryState('destination')
+    const [width, setWidth] = useState(333)
+    const [height, setHeight] = useState(333)
 
     const sizeLimit = 300
 
@@ -524,6 +526,7 @@ export function GIFStatusOverride(Component): ComponentType {
         {...props}
         size={`${Math.ceil(size * 10) / 10}MB`}
         duration={`(${Math.ceil(duration * 10) / 10}s)`}
+        resolution={`${width} x ${height} px`}
         variant={
           size > sizeLimit && destination === 'onCanvas'
             ? 'Error'

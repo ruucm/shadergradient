@@ -519,6 +519,13 @@ export function GIFStatusOverride(Component): ComponentType {
 
     useEffect(() => {
       setSize(0.72 * duration * frameRate * pixelDensity)
+
+      setTimeout(() => {
+        const r3fCanvas: any = document.getElementById('gradientCanvas')
+          ?.children[0] as HTMLCanvasElement
+        setWidth(r3fCanvas.offsetWidth * pixelDensity)
+        setHeight(r3fCanvas.offsetHeight * pixelDensity)
+      }, 100) // need a delay until the canvas dom mounted
     }, [duration, pixelDensity, frameRate])
 
     return (

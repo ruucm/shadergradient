@@ -17,24 +17,13 @@ export const GIFControls: React.FC<GIFControlsPropsT> = () => {
   const [frameRate, setFrameRate] = useQueryState('frameRate')
   const [destination, setDestination] = useQueryState('destination')
   const [format, setFormat] = useQueryState('format')
-  const endRef = React.useRef(null)
-
-  const scrollToBottom = () => {
-    endRef.current?.scrollIntoView({ behavior: 'smooth', block: 'end' })
-  }
 
   React.useEffect(() => {
     setFrameRate(10)
   }, [])
 
-  React.useEffect(() => {
-    if (destination === 'localFile') {
-      scrollToBottom()
-    }
-  }, [destination])
-
   return (
-    <div className='flex flex-col gap-3' ref={endRef}>
+    <div className='flex flex-col gap-3'>
       <InputPanel
         title='Start/End'
         info={true}

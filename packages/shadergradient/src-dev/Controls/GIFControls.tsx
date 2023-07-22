@@ -120,7 +120,7 @@ export const GIFControls: React.FC<GIFControlsPropsT> = () => {
         />
       </InputPanel>
       {destination === 'localFile' && (
-        <InputPanel title='Format'>
+        <InputPanel title='Format' autoScroll>
           <Radio
             name='format'
             value='webm'

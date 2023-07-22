@@ -56,6 +56,7 @@
     "typescript": "^4.5.2"
   },
   "dependencies": {
+    "@supabase/supabase-js": "^2.10.0",
     "@uiw/color-convert": "^1.1.1",
     "@uiw/react-color-shade-slider": "^1.1.1",
     "@uiw/react-color-wheel": "^1.1.1",
@@ -65,8 +66,8 @@
     "react-intersection-observer": "^9.4.1",
     "react-merge-refs": "^1.1.0",
     "react-slider": "^2.0.4",
+    "scroll-into-view-if-needed": "^3.0.10",
     "stripe": "^11.13.0",
-    "@supabase/supabase-js": "^2.10.0",
     "zustand": "^4.1.5"
   }
 }

@@ -1,6 +1,8 @@
 import * as React from 'react'
 import { Info } from 'react-feather'
 import { HoverBox, Spacing } from '@/ui'
+import { useEffect, useRef } from 'react'
+import scrollIntoView from 'scroll-into-view-if-needed'
 
 type InputPanelPropsT = {
   title?: string
@@ -9,6 +11,7 @@ type InputPanelPropsT = {
   info?: boolean
   hoverContent?: string
   isHovered?: string
+  autoScroll?: boolean
 } & React.DetailedHTMLProps<
   React.HTMLAttributes<HTMLDivElement>,
   HTMLDivElement
@@ -23,10 +26,22 @@ export const InputPanel: React.FC<InputPanelPropsT> = ({
   isHovered,
   onMouseEnter,
   onMouseLeave,
+  autoScroll = false,
   ...rest
 }) => {
+  const ref = useRef(null)
+  useEffect(() => {
+    const el = ref.current
+    if (el && autoScroll)
+      scrollIntoView(el, { scrollMode: 'if-needed', behavior: 'smooth' })
+  }, [ref, autoScroll])
+
   return (
-    <div className='flex justify-between items-center gap-3.5' {...rest}>
+    <div
+      ref={ref}
+      className='flex justify-between items-center gap-3.5'
+      {...rest}
+    >
       <span className='font-semibold text-primary w-[50%] text-base relative select-none'>
         {title}{' '}
         <span

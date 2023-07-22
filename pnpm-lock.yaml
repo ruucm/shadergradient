@@ -394,6 +394,9 @@ importers:
       react-slider:
         specifier: ^2.0.4
         version: 2.0.4(react@18.2.0)
+      scroll-into-view-if-needed:
+        specifier: ^3.0.10
+        version: 3.0.10
       stripe:
         specifier: ^11.13.0
         version: 11.13.0
@@ -5969,6 +5972,10 @@ packages:
       vary: 1.1.2
     transitivePeerDependencies:
       - supports-color
+    dev: false
+
+  /compute-scroll-into-view@3.0.3:
+    resolution: {integrity: sha512-nadqwNxghAGTamwIqQSG433W6OADZx2vCo3UXHNrzTRHK/htu+7+L0zhjEoaeaQVNAi3YgqWDv8+tzf0hRfR+A==}
     dev: false
 
   /concat-map@0.0.1:
@@ -13249,6 +13256,12 @@ packages:
       ajv: 8.11.2
       ajv-formats: 2.1.1(ajv@8.11.2)
       ajv-keywords: 5.1.0(ajv@8.11.2)
+    dev: false
+
+  /scroll-into-view-if-needed@3.0.10:
+    resolution: {integrity: sha512-t44QCeDKAPf1mtQH3fYpWz8IM/DyvHLjs8wUvvwMYxk5moOqCzrMSxK6HQVD0QVmVjXFavoFIPRVrMuJPKAvtg==}
+    dependencies:
+      compute-scroll-into-view: 3.0.3
     dev: false
 
   /select-hose@2.0.0:

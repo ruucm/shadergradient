@@ -120,8 +120,8 @@ export function extractGIF(Component): ComponentType {
     }, [rangeStart, rangeEnd])
 
     useEffect(() => {
-      setSize(0.72 * duration * frameRate * pixelDensity)
-    }, [duration, pixelDensity, frameRate])
+      setSize(estimateSize({ format, duration, frameRate, pixelDensity }))
+    }, [format, duration, pixelDensity, frameRate])
 
     const valid = animate === 'on' && range === 'enabled' && size < 300
     const option = {
@@ -508,6 +508,7 @@ export function GIFStatusOverride(Component): ComponentType {
     const [destination] = useQueryState('destination')
     const [width, setWidth] = useState(333)
     const [height, setHeight] = useState(333)
+    const [format] = useQueryState('format')
 
     const sizeLimit = 300
 
@@ -518,12 +519,12 @@ export function GIFStatusOverride(Component): ComponentType {
     }, [rangeStart, rangeEnd])
 
     useEffect(() => {
-      setSize(0.72 * duration * frameRate * pixelDensity)
+      setSize(estimateSize({ format, duration, frameRate, pixelDensity }))
 
       setTimeout(() => {
         updateResolution({ setWidth, setHeight, pixelDensity })
       }, 100) // need a delay until the canvas dom mounted
-    }, [duration, pixelDensity, frameRate])
+    }, [format, duration, pixelDensity, frameRate])
 
     // handle resize plugin
     useLayoutEffect(() => {
@@ -610,4 +611,10 @@ function updateResolution({ setWidth, setHeight, pixelDensity }) {
 
   setWidth(Math.round(width * pixelDensity))
   setHeight(Math.round(height * pixelDensity))
+}
+
+function estimateSize({ format, duration, frameRate, pixelDensity }) {
+  const p = format === 'webm' ? 0.00745 : 0.149
+  const value = p * duration * frameRate * pixelDensity * pixelDensity
+  return Math.round(value * 10) / 10 // round to at most 2 decimal places
 }

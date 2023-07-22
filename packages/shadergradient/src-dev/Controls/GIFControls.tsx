@@ -107,7 +107,10 @@ export const GIFControls: React.FC<GIFControlsPropsT> = () => {
         <Radio
           name='destination'
           value='onCanvas'
-          setValue={setDestination}
+          setValue={(value) => {
+            setDestination(value)
+            setFormat('gif')
+          }}
           check={destination === 'onCanvas'}
           label='On canvas'
         />

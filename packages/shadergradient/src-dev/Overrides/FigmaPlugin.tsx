@@ -201,7 +201,10 @@ export function upgradingText(Component): ComponentType {
     const [subscription] = useSubscription(props['data-framer-name'])
     // if (subscription)
     return (
-      <Component {...props} text={subscription ? 'Upgraded!' : 'Waiting..'} />
+      <Component
+        {...props}
+        text={subscription ? 'Upgraded!' : `Check\nyour browser`}
+      />
     )
   }
 }

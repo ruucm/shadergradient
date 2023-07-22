@@ -122,6 +122,7 @@ export const GIFControls: React.FC<GIFControlsPropsT> = () => {
           label='Local file'
         />
       </InputPanel>
+
       {destination === 'localFile' && (
         <InputPanel title='Format' autoScroll>
           <Radio

@@ -9,6 +9,7 @@ import {
   useURLQueryState,
   useQueryState,
   useFigma,
+  useBillingInterval,
 } from '../store'
 import {
   figma,
@@ -19,7 +20,11 @@ import {
 import { cx } from '@/utils'
 import { clock } from '@/Gradient/comps/Mesh/useTimeAnimation'
 import { useDBTable } from 'https://framer.com/m/SupabaseConnector-ARlr.js'
-import { STRIPE_BILLING_URL, STRIPE_BUY_URL } from '@/consts'
+import {
+  STRIPE_BILLING_URL,
+  STRIPE_BUY_YEARLY_URL,
+  STRIPE_BUY_MONTHLY_URL,
+} from '@/consts'
 
 // example from https://github.com/sonnylazuardi/framer-sites-figma-plugin/
 export function createRectangle(Component): ComponentType {
@@ -256,12 +261,69 @@ export function extractGIFDEV(Component): ComponentType {
 export function subscribeLink(Component): ComponentType {
   return (props) => {
     const [figma] = useFigma()
+    const [billingInterval] = useBillingInterval()
+    const isYearly = billingInterval === 'year'
 
     return (
       <Component
         {...props}
-        href={`${STRIPE_BUY_URL}?client_reference_id=${figma.user?.id}`}
+        href={`${
+          isYearly ? STRIPE_BUY_YEARLY_URL : STRIPE_BUY_MONTHLY_URL
+        }?client_reference_id=${figma.user?.id}`}
       />
+    )
+  }
+}
+
+export function TogglePrice(Component): ComponentType {
+  return (props) => {
+    const [, setBillingInterval] = useBillingInterval()
+
+    return (
+      <Component
+        {...props}
+        onMonthly={() => setBillingInterval('year')}
+        onYearly={() => setBillingInterval('month')}
+      />
+    )
+  }
+}
+export function Price(Component): ComponentType {
+  return ({ style, ...props }: any) => {
+    const [billingInterval] = useBillingInterval()
+
+    return (
+      <Component
+        {...props}
+        text={billingInterval === 'year' ? '$2' : '$4'}
+        style={{
+          color: 'blue',
+          ...style,
+        }}
+      />
+    )
+  }
+}
+export function PriceText(Component): ComponentType {
+  return (props) => {
+    const [billingInterval] = useBillingInterval()
+    const isYearly = billingInterval === 'year'
+
+    return (
+      <Component
+        {...props}
+        text={isYearly ? ' — just $2 a month' : ' — just $4 a month'}
+      />
+    )
+  }
+}
+export function SaleTag(Component): ComponentType {
+  return (props) => {
+    const [billingInterval] = useBillingInterval()
+    const isYearly = billingInterval === 'year'
+
+    return (
+      <Component {...props} opacity={isYearly ? 1 : 0} y={isYearly ? 10 : 0} />
     )
   }
 }

@@ -63,6 +63,8 @@ export const envBasePath =
   'https://ruucm.github.io/shadergradient/shadergradient@1.0.0/hdr/'
 
 // ----------------------------- [FIGMA PLUGIN] ----------------------------------
-export const STRIPE_BUY_URL = 'https://buy.stripe.com/8wM3e83hX9jV6J2eUU'
+export const STRIPE_BUY_YEARLY_URL = 'https://buy.stripe.com/eVa7uocSxgMnaZi5kl'
+export const STRIPE_BUY_MONTHLY_URL =
+  'https://buy.stripe.com/28o01W05LeEfgjC5km'
 export const STRIPE_BILLING_URL =
   'https://billing.stripe.com/p/login/cN27vf1dL52j5c4cMM'

@@ -55,9 +55,23 @@ const useFigmaStore = create((set) => ({
   setFigma: (payload) =>
     set((prev) => ({ figma: { ...prev.figma, ...payload } })),
 }))
-
 export function useFigma() {
   const figma = useFigmaStore((state: any) => state.figma)
   const setFigma = useFigmaStore((state: any) => state.setFigma)
   return [figma, setFigma]
+}
+
+export const useBillingIntervalStore = create((set) => ({
+  billingInterval: 'year',
+  setBillingInterval: (payload) =>
+    set((state) => ({ billingInterval: payload })),
+}))
+export function useBillingInterval() {
+  const billingInterval = useBillingIntervalStore(
+    (state: any) => state.billingInterval
+  )
+  const setBillingInterval = useBillingIntervalStore(
+    (state: any) => state.setBillingInterval
+  )
+  return [billingInterval, setBillingInterval]
 }

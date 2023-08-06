@@ -78,6 +78,8 @@ export function checkEnabled(Component): ComponentType {
 }
 
 let controller
+const trials = 7
+
 export function extractGIF(Component): ComponentType {
   return ({ style, ...props }: any) => {
     const [progress, setProgress] = useState(-1)
@@ -105,15 +107,15 @@ export function extractGIF(Component): ComponentType {
       'sg-figma'
     )
     const userDB = rows.find((r) => r.figma_user_id === figma_user_id)
-    const credits = userDB ? userDB.credits : 5 // initial credits when there is no user in DB.
+    const trialLeft = getTrialLeft(userDB?.trial_started_at)
     const [subscription, subDBLoading] = useSubscription('sub1')
-    const needSubscribe = credits <= 0 && !subDBLoading && !subscription
+    const needSubscribe = trialLeft <= 0
     const titleText = needSubscribe
       ? 'Upgrade to Pro'
       : destination === 'onCanvas'
       ? 'Add GIF to canvas'
       : 'Download'
-    const creditText = !subscription && `(${credits} credit left)`
+    const creditText = !subscription && `(${trialLeft} days left)`
 
     useEffect(() => {
       setDuration(rangeEnd - rangeStart)
@@ -139,7 +141,7 @@ export function extractGIF(Component): ComponentType {
     else if (size > 300) variant = 'error-1'
     else if (!enabled) variant = 'error-2'
     // when all datas are ready
-    else if (userDB && !subDBLoading) variant = 'default'
+    else if (!subDBLoading) variant = 'default'
     else if (needSubscribe) variant = 'upgrade'
 
     return (
@@ -160,8 +162,8 @@ export function extractGIF(Component): ComponentType {
                 console.log('startTime', Date.now())
                 clock.start() // restart the clock
                 postFigmaMessageForExport(option, setProgress, controller)
-                if (userDB) updateRow({ id: userDB.id, credits: credits - 1 })
-                else insertRow({ figma_user_id })
+                if (!userDB)
+                  insertRow({ figma_user_id, trial_started_at: new Date() })
               }
             } else props?.onTapGIF() // move to the alert variant
           }}
@@ -620,4 +622,16 @@ function estimateSize({ format, duration, frameRate, pixelDensity }) {
   const p = format === 'webm' ? 0.00745 : 0.149
   const value = p * duration * frameRate * pixelDensity * pixelDensity
   return Math.round(value * 10) / 10 // round to at most 2 decimal places
+}
+
+function getTrialLeft(trial_started_at) {
+  if (!trial_started_at) return trials
+
+  let currentDate = new Date()
+  let diffInTime = currentDate.getTime() - new Date(trial_started_at).getTime()
+  let diffInDays = trials - diffInTime / (1000 * 3600 * 24)
+
+  // console.log('diffInDays', diffInDays)
+  if (diffInDays < 0) return 0
+  return Math.round(diffInDays)
 }

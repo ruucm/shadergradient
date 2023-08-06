@@ -220,7 +220,7 @@ export function userEmail(Component): ComponentType {
 export function userInfo(Component): ComponentType {
   return (props) => {
     const [subscription, subDBLoading] = useSubscription('userInfo-channel')
-    const [userDB] = useUserDB()
+    const [userDB] = useUserDB('sg-info')
 
     let variant = 'Loading'
     if (subDBLoading) variant = 'Loading'
@@ -590,11 +590,11 @@ export function Timeline(Component): ComponentType {
   }
 }
 
-function useUserDB() {
+function useUserDB(channel = 'sg-figma-hook') {
   const [figma] = useFigma()
   const figma_user_id = figma.user?.id
 
-  const [rows, dbLoading] = useDBTable('users', 'sg-figma-hook')
+  const [rows, dbLoading] = useDBTable('users', channel)
   return [rows.find((r) => r.figma_user_id === figma_user_id), dbLoading]
 }
 function useSubscription(subId) {

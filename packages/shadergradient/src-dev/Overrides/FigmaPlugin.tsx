@@ -109,7 +109,7 @@ export function extractGIF(Component): ComponentType {
     const userDB = rows.find((r) => r.figma_user_id === figma_user_id)
     const trialLeft = getTrialLeft(userDB?.trial_started_at)
     const [subscription, subDBLoading] = useSubscription('sub1')
-    const needSubscribe = trialLeft <= 0
+    const needSubscribe = trialLeft <= 0 && !subDBLoading && !subscription
     const titleText = needSubscribe
       ? 'Upgrade to Pro'
       : destination === 'onCanvas'

@@ -41,9 +41,23 @@ const handler = async (req, res) => {
       res.end(`Webhook Error: ${err.message}`)
     }
 
-    console.log('event.type', event.type)
+    let isFromShaderGradient = true
+    switch (event.type) {
+      case 'customer.subscription.created':
+      case 'customer.subscription.deleted':
+        if (event.data.object.plan?.nickname) isFromShaderGradient = false
+        break
+      case 'checkout.session.completed':
+        if (!event.data.object.client_reference_id) isFromShaderGradient = false
+        break
+      default:
+        break
+    }
 
-    if (relevantEvents.has(event.type)) {
+    console.log('event.type (from notion.to)', event.type)
+    console.log('isFromShaderGradient', isFromShaderGradient)
+
+    if (relevantEvents.has(event.type) && isFromShaderGradient) {
       try {
         switch (event.type) {
           case 'product.created':
@@ -100,7 +114,7 @@ const handler = async (req, res) => {
 
     res.statusCode = 200
     res.setHeader('Content-Type', 'application/json')
-    res.end(JSON.stringify({ received: true }))
+    res.end(JSON.stringify({ received: true, isFromShaderGradient }))
   } else {
     res.setHeader('Allow', 'POST')
     res.writeHead(405, { 'Content-Type': 'text/plain' })

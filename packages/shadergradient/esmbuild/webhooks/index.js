@@ -44,6 +44,7 @@ const handler = async (req, res) => {
     let isFromShaderGradient = true
     switch (event.type) {
       case 'customer.subscription.created':
+      case 'customer.subscription.updated':
       case 'customer.subscription.deleted':
         if (event.data.object.plan?.nickname) isFromShaderGradient = false
         break

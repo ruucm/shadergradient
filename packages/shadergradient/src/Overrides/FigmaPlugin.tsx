@@ -363,3 +363,25 @@ function useFigmaSelections() {
   }, [])
   return selection
 }
+
+export function TogglePrice(Component): ComponentType {
+  return (props) => {
+    return <Component {...props} />
+  }
+}
+export function PriceText(Component): ComponentType {
+  return (props) => {
+    return <Component {...props} />
+  }
+}
+export function Price(Component): ComponentType {
+  return (props) => {
+    return <Component {...props} />
+  }
+}
+
+export function SaleTag(Component): ComponentType {
+  return (props) => {
+    return <Component {...props} />
+  }
+}

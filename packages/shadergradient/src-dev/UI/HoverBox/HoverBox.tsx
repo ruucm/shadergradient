@@ -27,11 +27,12 @@ export const HoverBox: React.FC<ControlTypeTitlePropsT> = ({
         marginLeft: position === 'center' ? 0 : -10,
         visibility: isHovered ? 'visible' : 'hidden',
         margin: isHovered === true ? '10px 0' : 0,
-        top: downward === true ? 0 : 'inherit',
+        top: downward === true ? 0 : 'unset',
         bottom: downward === false ? '100%' : 'inherit',
         transitionDuration: '0.3s',
         opacity: isHovered ? 1 : 0,
         minWidth: 230,
+        height: 'fit-content',
       }}
     >
       <div
@@ -73,7 +74,13 @@ export const HoverBox: React.FC<ControlTypeTitlePropsT> = ({
             }}
           ></div>
         </div>
-        <p style={{ padding: 8, zIndex: 20, position: 'relative' }}>
+        <p
+          style={{
+            padding: 8,
+            zIndex: 20,
+            position: 'relative',
+          }}
+        >
           {content}
         </p>
       </div>

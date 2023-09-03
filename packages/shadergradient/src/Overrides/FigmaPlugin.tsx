@@ -37,9 +37,8 @@ export function createRectangle(Component): ComponentType {
 export function insertCanvasAsImage(Component): ComponentType {
   return ({ style, ...props }: any) => {
     const selection = useFigmaSelections() // need to attatch once to listen figma selection changes
-    console.log('selection', selection)
-    const enabled = selection > 0
-    console.log('enabled', enabled)
+    // const enabled = selection > 0 // not works
+    const enabled = true
 
     return (
       <Component

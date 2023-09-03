@@ -289,21 +289,18 @@ export function TogglePrice(Component): ComponentType {
   }
 }
 export function Price(Component): ComponentType {
-  return ({ style, ...props }: any) => {
+  return (props) => {
     const [billingInterval] = useBillingInterval()
 
     return (
       <Component
         {...props}
-        text={billingInterval === 'year' ? '$2' : '$4'}
-        style={{
-          color: 'blue',
-          ...style,
-        }}
+        variant={billingInterval === 'year' ? 'year' : 'month'}
       />
     )
   }
 }
+
 export function PriceText(Component): ComponentType {
   return (props) => {
     const [billingInterval] = useBillingInterval()

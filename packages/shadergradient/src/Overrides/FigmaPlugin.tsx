@@ -46,8 +46,9 @@ export function insertCanvasAsImage(Component): ComponentType {
         {...props}
         style={{ ...style, cursor: 'pointer', opacity: enabled ? 1 : 0.5 }}
         onTap={() => {
-          if (enabled) postFigmaMessageForSnapShot(() => void 0)
-          else props?.onTap() // move to the alert variant
+          postFigmaMessageForSnapShot(() => void 0)
+          // if (enabled) postFigmaMessageForSnapShot(() => void 0)
+          // else props?.onTap() // move to the alert variant
         }}
       />
     )
@@ -362,6 +363,7 @@ function useFigmaSelections() {
 
   useEffect(() => {
     parent.postMessage({ pluginMessage: { type: 'UI_READY' } }, '*') // init selection
+    console.log('parent.postMessage!')
     onmessage = (event) => {
       const msg = event.data.pluginMessage
       console.log('msg', msg)

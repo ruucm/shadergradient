@@ -288,26 +288,19 @@ export function TogglePrice(Component): ComponentType {
     )
   }
 }
-export function Price(span): ComponentType {
+export function Price(Component): ComponentType {
   return (props) => {
     const [billingInterval] = useBillingInterval()
 
     return (
-      <span // using span tag instead, to override the text color
+      <Component
         {...props}
-        style={{
-          fontSize: 30,
-          textAlign: 'center',
-          fontWeight: 600,
-          lineHeight: 1.2,
-          color: billingInterval === 'year' ? '#FF430A' : 'black',
-        }}
-      >
-        {billingInterval === 'year' ? '$2' : '$4'}
-      </span>
+        variant={billingInterval === 'year' ? 'year' : 'month'}
+      />
     )
   }
 }
+
 export function PriceText(Component): ComponentType {
   return (props) => {
     const [billingInterval] = useBillingInterval()

@@ -11,6 +11,7 @@ figma.clientStorage
   .catch((err) => {})
 
 figma.ui.onmessage = (msg) => {
+  console.log('msg.type (figma.ui.onmessage)', msg.type)
   switch (msg.type) {
     case 'resize':
       figma.ui.resize(msg.size.w, msg.size.h)
@@ -73,7 +74,9 @@ async function replaceToNewImage(node, bytes) {
 }
 
 function postMessageSelection() {
+  console.log('postMessageSelection')
   const selection = figma.currentPage.selection
+  console.log('selection', selection)
   figma.ui.postMessage({ type: 'SELECTION', selection })
 }
 

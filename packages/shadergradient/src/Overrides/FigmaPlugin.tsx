@@ -357,6 +357,7 @@ export function Timeline(Component): ComponentType {
 }
 
 function useFigmaSelections() {
+  console.log('useFigmaSelections!')
   const [selection, setSelection] = useSelection()
 
   useEffect(() => {
@@ -366,10 +367,10 @@ function useFigmaSelections() {
       console.log('msg', msg)
       console.log(
         'event.data.pluginMessage.selection.length',
-        event.data.pluginMessage.selection.length
+        event.data.pluginMessage.selection?.length
       )
       if (msg.type === 'SELECTION')
-        setSelection(event.data.pluginMessage.selection.length)
+        setSelection(event.data.pluginMessage.selection?.length)
     }
   }, [])
   return selection

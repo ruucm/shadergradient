@@ -37,7 +37,9 @@ export function createRectangle(Component): ComponentType {
 export function insertCanvasAsImage(Component): ComponentType {
   return ({ style, ...props }: any) => {
     const selection = useFigmaSelections() // need to attatch once to listen figma selection changes
+    console.log('selection', selection)
     const enabled = selection > 0
+    console.log('enabled', enabled)
 
     return (
       <Component
@@ -361,6 +363,11 @@ function useFigmaSelections() {
     parent.postMessage({ pluginMessage: { type: 'UI_READY' } }, '*') // init selection
     onmessage = (event) => {
       const msg = event.data.pluginMessage
+      console.log('msg', msg)
+      console.log(
+        'event.data.pluginMessage.selection.length',
+        event.data.pluginMessage.selection.length
+      )
       if (msg.type === 'SELECTION')
         setSelection(event.data.pluginMessage.selection.length)
     }

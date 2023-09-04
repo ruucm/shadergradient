@@ -35,7 +35,7 @@ export async function recordVideo(duration) {
   recordedChunks = []
   const stream = canvas.captureStream()
   mediaRecorder = new MediaRecorder(stream, {
-    mimeType: 'video/webm',
+    mimeType: 'video/webm;codecs=h264',
     videoBitsPerSecond: 8000000, // 8 Mbps
   })
 

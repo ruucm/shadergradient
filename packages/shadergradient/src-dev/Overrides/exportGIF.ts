@@ -1,6 +1,5 @@
 import { GIFEncoder as GIFEncoderFast, quantize, applyPalette } from './lib'
 import { loadImage, sleep } from './utils'
-import GIF from './lib/gif.js/gif'
 import { workerStrBlob } from './lib/gif.js/workerStr'
 
 let stopped = false
@@ -78,6 +77,7 @@ export async function exportGIF(option, callback, controller) {
       resolve(gifToUint8Array(dataURL))
     } else {
       // https://github.com/jnordberg/gif.js
+      // @ts-ignore // included GIF lib from head - addScript("https://jnordberg.github.io/gif.js/gif.js?v=3")
       var gif = new GIF({
         workers: 2,
         quality: 10,

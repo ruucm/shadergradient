@@ -1,5 +1,7 @@
 import { GIFEncoder as GIFEncoderFast, quantize, applyPalette } from './lib'
 import { loadImage, sleep } from './utils'
+import GIF from './lib/gif.js/gif'
+import { workerStrBlob } from './lib/gif.js/workerStr'
 
 let stopped = false
 export async function exportGIF(option, callback, controller) {
@@ -75,13 +77,25 @@ export async function exportGIF(option, callback, controller) {
 
       resolve(gifToUint8Array(dataURL))
     } else {
-      // https://github.com/eugeneware/gifencoder
-      const encoder = new GIFEncoder()
-      encoder.setRepeat(0) // 0  -> loop forever
-      encoder.setDelay(100) // go to next frame every n milliseconds
-      encoder.setQuality(20)
+      // https://github.com/jnordberg/gif.js
+      var gif = new GIF({
+        workers: 2,
+        quality: 10,
+        workerScript: URL.createObjectURL(workerStrBlob),
+        dither: 'Atkinson', // FloydSteinberg, FalseFloydSteinberg, Stucki, Atkinson
+      })
+      gif.on('finished', async (blob) => {
+        if (option.destination === 'localFile' && !stopped)
+          downloadBlob(blob, 'shadergradient.gif')
+        setAnimate('on')
 
-      encoder.start()
+        const dataURL = await blobToDataURL(blob)
+        resolve(gifToUint8Array(dataURL))
+      })
+      gif.on('progress', (p) => callback(p))
+
+      const canvas = document.createElement('canvas')
+      const ctx: any = canvas.getContext('2d')
 
       for (let i of frames) {
         if (stopped) {
@@ -93,44 +107,33 @@ export async function exportGIF(option, callback, controller) {
         // render target frame
         setUTime(playhead)
 
-        await gifAddFrame(encoder)
-        console.log('GIF Frame has written (Heavy Encode)')
-
-        await sleep(0.01) // add a break to share UI state updates (setProgress)
-        callback(i / (totalFrames - 1))
+        // capture image & add it to que
+        await gifAddFrame(ctx, gif)
       }
 
-      encoder.finish()
-      console.log('endTime', Date.now())
-
-      if (option.destination === 'localFile' && !stopped)
-        encoder.download('download.gif')
-      setAnimate('on')
-
-      const binary_gif = encoder.stream().getData()
-      const dataURL = 'data:image/gif;base64,' + encode64(binary_gif)
-
-      resolve(gifToUint8Array(dataURL))
+      gif.render()
     }
   })
 }
 
-async function gifAddFrame(encoder) {
+async function gifAddFrame(ctx, gif) {
   const r3fCanvas: any = document.getElementById('gradientCanvas')
     ?.children[0] as HTMLCanvasElement
   const dataURL = r3fCanvas.toDataURL('image/png', 1.0) // full quality
-
   const image = await loadImage(dataURL)
 
-  // add the image to the encoder
-  const canvas = document.createElement('canvas')
-  const context: any = canvas.getContext('2d')
+  ctx.canvas.width = image.width
+  ctx.canvas.height = image.height
+  ctx.drawImage(image, 0, 0)
 
-  context.canvas.width = image.width
-  context.canvas.height = image.height
-  context.drawImage(image, 0, 0)
-
-  encoder.addFrame(context)
+  gif.addFrame(
+    new ImageData(
+      ctx.getImageData(0, 0, ctx.canvas.width, ctx.canvas.height).data,
+      ctx.canvas.width,
+      ctx.canvas.height
+    ),
+    { delay: 100 }
+  )
 }
 
 async function gifToUint8Array(dataURL) {
@@ -146,6 +149,9 @@ async function gifToUint8Array(dataURL) {
 
 function download(buf, filename, type) {
   const blob = buf instanceof Blob ? buf : new Blob([buf], { type })
+  downloadBlob(blob, filename)
+}
+function downloadBlob(blob, filename) {
   const url = URL.createObjectURL(blob)
   const anchor = document.createElement('a')
   anchor.href = url
@@ -218,4 +224,17 @@ const base64_arraybuffer = async (data) => {
   */
   // @ts-ignore
   return base64url.substring(base64url.indexOf(',') + 1)
+}
+
+async function blobToDataURL(blob) {
+  return new Promise((resolve, reject) => {
+    var reader = new FileReader()
+    reader.onload = function () {
+      resolve(reader.result)
+    }
+    reader.onerror = function () {
+      reject(new Error('Failed to convert Blob to Data URL'))
+    }
+    reader.readAsDataURL(blob)
+  })
 }

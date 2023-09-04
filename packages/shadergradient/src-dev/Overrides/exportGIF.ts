@@ -1,11 +1,12 @@
 // https://github.com/mattdesl/gifenc
-import { GIFEncoder, quantize, applyPalette } from './lib'
+import { GIFEncoder as GIFEncoderFast, quantize, applyPalette } from './lib'
 import { loadImage, sleep } from './utils'
 
 let stopped = false
 export async function exportGIF(option, callback, controller) {
   stopped = false
-  const { rangeStart, rangeEnd, setAnimate, setUTime, frameRate } = option
+  const { rangeStart, rangeEnd, setAnimate, setUTime, frameRate, grain } =
+    option
 
   const frameRateInterval = 1 / frameRate
   const delay = frameRateInterval * 1000
@@ -19,62 +20,113 @@ export async function exportGIF(option, callback, controller) {
 
   return new Promise(async (resolve, reject) => {
     const frames = new Array(totalFrames).fill(0).map((_, i) => i)
-
-    // Setup an encoder that we will write frames into
-    const gif = GIFEncoder()
     const signal = controller.signal
-
     signal.addEventListener('abort', () => {
       stopped = true
       reject(new Error('Long-await function was cancelled.'))
     })
 
-    // We use for 'of' to loop with async await
-    for (let i of frames) {
-      if (stopped) {
-        callback(-1)
-        break
+    if (grain === 'on') {
+      // Setup an encoder that we will write frames into
+      const gif = GIFEncoderFast()
+
+      // We use for 'of' to loop with async await
+      for (let i of frames) {
+        if (stopped) {
+          callback(-1)
+          break
+        }
+        // a t value 0..1 to animate the frame
+        const playhead = rangeStart + i / frameRate
+        // render target frame
+        setUTime(playhead)
+
+        const [imageData, width, height]: any = await getImage()
+        const { data } = imageData
+
+        // Choose a pixel format: rgba4444, rgb444, rgb565
+        const format = 'rgb444'
+
+        // If necessary, quantize your colors to a reduced palette
+        const palette = quantize(data, 256, { format })
+
+        // Apply palette to RGBA data to get an indexed bitmap
+        const index = applyPalette(data, palette, format)
+
+        // Write frame into GIF
+        await gif.writeFrame(index, width, height, { palette, delay })
+        console.log('GIF Frame has written')
+
+        await sleep(0.01) // add a break to share UI state updates (setProgress)
+        callback(i / (totalFrames - 1))
       }
-      // a t value 0..1 to animate the frame
-      const playhead = rangeStart + i / frameRate
-      // render target frame
-      setUTime(playhead)
 
-      const [imageData, width, height]: any = await getImage()
-      const { data } = imageData
+      // Finalize stream
+      gif.finish()
 
-      // Choose a pixel format: rgba4444, rgb444, rgb565
-      const format = 'rgb444'
+      // Get a direct typed array view into the buffer to avoid copying it
+      const buffer = gif.bytesView()
 
-      // If necessary, quantize your colors to a reduced palette
-      const palette = quantize(data, 256, { format })
+      if (option.destination === 'localFile' && !stopped)
+        download(buffer, 'shadergradient.gif', { type: 'image/gif' })
+      setAnimate('on')
 
-      // Apply palette to RGBA data to get an indexed bitmap
-      const index = applyPalette(data, palette, format)
+      const b64 = await base64_arraybuffer(buffer)
+      const dataURL = 'data:image/gif;base64,' + b64
 
-      // Write frame into GIF
-      await gif.writeFrame(index, width, height, { palette, delay })
-      console.log('GIF Frame has written')
+      resolve(gifToUint8Array(dataURL))
+    } else {
+      const encoder = new GIFEncoder()
+      encoder.setRepeat(0) // 0  -> loop forever
+      encoder.setDelay(100) // go to next frame every n milliseconds
+      encoder.setQuality(20)
 
-      await sleep(0.01) // add a break to share UI state updates (setProgress)
-      callback(i / (totalFrames - 1))
+      encoder.start()
+
+      for (let i of frames) {
+        // a t value 0..1 to animate the frame
+        const playhead = rangeStart + i / frameRate
+        // render target frame
+        setUTime(playhead)
+
+        await gifAddFrame(encoder)
+        console.log('GIF Frame has written (Heavy Encode)')
+
+        await sleep(0.01) // add a break to share UI state updates (setProgress)
+        callback(i / (totalFrames - 1))
+      }
+
+      encoder.finish()
+      console.log('endTime', Date.now())
+
+      if (option.destination === 'localFile' && !stopped)
+        encoder.download('download.gif')
+      setAnimate('on')
+
+      const binary_gif = encoder.stream().getData()
+      const dataURL = 'data:image/gif;base64,' + encode64(binary_gif)
+
+      resolve(gifToUint8Array(dataURL))
     }
-
-    // Finalize stream
-    gif.finish()
-
-    // Get a direct typed array view into the buffer to avoid copying it
-    const buffer = gif.bytesView()
-
-    if (option.destination === 'localFile' && !stopped)
-      download(buffer, 'shadergradient.gif', { type: 'image/gif' })
-    setAnimate('on')
-
-    const b64 = await base64_arraybuffer(buffer)
-    const dataURL = 'data:image/gif;base64,' + b64
-
-    resolve(gifToUint8Array(dataURL))
   })
+}
+
+async function gifAddFrame(encoder) {
+  const r3fCanvas: any = document.getElementById('gradientCanvas')
+    ?.children[0] as HTMLCanvasElement
+  const dataURL = r3fCanvas.toDataURL('image/png', 1.0) // full quality
+
+  const image = await loadImage(dataURL)
+
+  // add the image to the encoder
+  const canvas = document.createElement('canvas')
+  const context: any = canvas.getContext('2d')
+
+  context.canvas.width = image.width
+  context.canvas.height = image.height
+  context.drawImage(image, 0, 0)
+
+  encoder.addFrame(context)
 }
 
 async function gifToUint8Array(dataURL) {

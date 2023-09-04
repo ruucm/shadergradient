@@ -102,6 +102,7 @@ export function extractGIF(Component): ComponentType {
     const [pixelDensity] = useQueryState('pixelDensity')
     const [destination] = useQueryState('destination')
     const [format] = useQueryState('format')
+    const [grain] = useQueryState('grain')
 
     const [duration, setDuration] = useState(0)
     const [size, setSize] = useState(0)
@@ -139,6 +140,7 @@ export function extractGIF(Component): ComponentType {
       frameRate,
       destination,
       format,
+      grain,
     }
 
     let variant = 'dbLoading'

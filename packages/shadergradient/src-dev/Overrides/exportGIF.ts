@@ -82,7 +82,7 @@ export async function exportGIF(option, callback, controller) {
         workers: 2,
         quality: 10,
         workerScript: URL.createObjectURL(workerStrBlob),
-        dither: 'Atkinson', // FloydSteinberg, FalseFloydSteinberg, Stucki, Atkinson
+        dither: 'Atkinson', // FloydSteinberg, FalseFloydSteinberg, Stucki, Atkinson (or -serpentine)
       })
       gif.on('finished', async (blob) => {
         if (option.destination === 'localFile' && !stopped)

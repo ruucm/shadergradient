@@ -1,4 +1,3 @@
-// https://github.com/mattdesl/gifenc
 import { GIFEncoder as GIFEncoderFast, quantize, applyPalette } from './lib'
 import { loadImage, sleep } from './utils'
 
@@ -27,7 +26,7 @@ export async function exportGIF(option, callback, controller) {
     })
 
     if (grain === 'on') {
-      // Setup an encoder that we will write frames into
+      // https://github.com/mattdesl/gifenc
       const gif = GIFEncoderFast()
 
       // We use for 'of' to loop with async await
@@ -76,6 +75,7 @@ export async function exportGIF(option, callback, controller) {
 
       resolve(gifToUint8Array(dataURL))
     } else {
+      // https://github.com/eugeneware/gifencoder
       const encoder = new GIFEncoder()
       encoder.setRepeat(0) // 0  -> loop forever
       encoder.setDelay(100) // go to next frame every n milliseconds

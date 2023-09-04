@@ -84,6 +84,10 @@ export async function exportGIF(option, callback, controller) {
       encoder.start()
 
       for (let i of frames) {
+        if (stopped) {
+          callback(-1)
+          break
+        }
         // a t value 0..1 to animate the frame
         const playhead = rangeStart + i / frameRate
         // render target frame

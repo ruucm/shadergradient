@@ -164,17 +164,21 @@ export function extractGIF(Component): ComponentType {
               if (needSubscribe)
                 props?.onTapGIFU() // move to the upgrade variant
               else {
-                // start to extract GIF
-                setProgress(0)
-                console.log('startTime', Date.now())
-                clock.start() // restart the clock
-                postFigmaMessageForExport(option, setProgress, controller)
-                if (!userDB)
+                if (!userDB) {
                   insertRow({ figma_user_id, trial_started_at: new Date() })
+                  props?.onTapGIFN()
+                } else {
+                  // start to extract GIF
+                  setProgress(0)
+                  console.log('startTime', Date.now())
+                  clock.start() // restart the clock
+                  postFigmaMessageForExport(option, setProgress, controller)
+                }
               }
             } else props?.onTapGIF() // move to the alert variant
           }}
-          onTapGIFU={() => console.log('onTapGIFU')} // ignore the default event
+          onTapGIFU={() => console.log('onTapGIFU (ignore the default event)')}
+          onTapGIFN={() => console.log('onTapGIFN (ignore the default event)')}
           progress={progress * 100}
           title={titleText}
           credit={creditText}

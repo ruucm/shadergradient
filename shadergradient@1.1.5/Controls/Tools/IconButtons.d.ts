@@ -1,6 +1,7 @@
 import * as React from 'react';
+import { IconName } from './Feather';
 type ControlTypeTitlePropsT = {
-    icon?: string;
+    icon?: IconName;
     content?: string;
     active?: boolean;
 } & React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>;

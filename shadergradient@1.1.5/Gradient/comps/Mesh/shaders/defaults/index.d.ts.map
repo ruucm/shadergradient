@@ -1,1 +1,1 @@
-{"version":3,"file":"index.d.ts","sourceRoot":"","sources":["../../../../../../src/Gradient/comps/Mesh/shaders/defaults/index.ts"],"names":[],"mappings":"AAAA,OAAO,KAAK,KAAK,MAAM,eAAe,CAAA;AACtC,OAAO,KAAK,MAAM,MAAM,gBAAgB,CAAA;AACxC,OAAO,KAAK,UAAU,MAAM,oBAAoB,CAAA"}
+{"version":3,"file":"index.d.ts","sourceRoot":"","sources":["../../../../../../src-dev/Gradient/comps/Mesh/shaders/defaults/index.ts"],"names":[],"mappings":"AAAA,OAAO,KAAK,KAAK,MAAM,eAAe,CAAA;AACtC,OAAO,KAAK,MAAM,MAAM,gBAAgB,CAAA;AACxC,OAAO,KAAK,UAAU,MAAM,oBAAoB,CAAA"}

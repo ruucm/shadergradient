@@ -1,1 +1,1 @@
-{"version":3,"file":"index.d.ts","sourceRoot":"","sources":["../../src/Gradient/index.ts"],"names":[],"mappings":"AAAA,cAAc,YAAY,CAAA;AAC1B,cAAc,cAAc,CAAA"}
+{"version":3,"file":"index.d.ts","sourceRoot":"","sources":["../../src-dev/Gradient/index.ts"],"names":[],"mappings":"AAAA,cAAc,YAAY,CAAA;AAC1B,cAAc,cAAc,CAAA"}

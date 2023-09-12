@@ -69,6 +69,7 @@ export function checkEnabled(Component): ComponentType {
     const [, setRangeStart] = useQueryState('rangeStart')
     const [, setRangeEnd] = useQueryState('rangeEnd')
     const [, setPixelDensity] = useQueryState('pixelDensity')
+    const [, setToggleAxis] = useQueryState('toggleAxis')
 
     return (
       <Component
@@ -83,6 +84,7 @@ export function checkEnabled(Component): ComponentType {
             setRangeStart(5)
             setRangeEnd(8)
             setPixelDensity(2)
+            setToggleAxis(false)
           }
         }}
         onError={() => {

@@ -68,6 +68,7 @@ export function checkEnabled(Component): ComponentType {
 
     const [, setRangeStart] = useQueryState('rangeStart')
     const [, setRangeEnd] = useQueryState('rangeEnd')
+    const [, setPixelDensity] = useQueryState('pixelDensity')
 
     return (
       <Component
@@ -78,9 +79,10 @@ export function checkEnabled(Component): ComponentType {
             props?.onError()
           } else {
             props?.onTap()
-            // init gradient ranges
+            // init gradient ranges, density
             setRangeStart(5)
             setRangeEnd(8)
+            setPixelDensity(2)
           }
         }}
         onError={() => {

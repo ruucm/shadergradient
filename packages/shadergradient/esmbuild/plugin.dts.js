@@ -8,6 +8,10 @@ exports.dtsPlugin = () => {
       build.onEnd((result) => {
         if (result.errors.length > 0) return
         try {
+          const files = execSync('ls').toString()
+          console.log('[Files in the current directory]:')
+          console.log(files)
+
           execSync('tsc --emitDeclarationOnly --outDir dist')
         } catch (error) {
           console.log('[tsc error]', error)

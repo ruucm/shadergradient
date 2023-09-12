@@ -65,6 +65,13 @@ export function checkEnabled(Component): ComponentType {
   return ({ style, ...props }: any) => {
     const [figma] = useFigma()
     const enabled = figma.selection > 0
+
+    const [, setRangeStart] = useQueryState('rangeStart')
+    const [, setRangeEnd] = useQueryState('rangeEnd')
+    const [, setPixelDensity] = useQueryState('pixelDensity')
+    const [, setToggleAxis] = useQueryState('toggleAxis')
+    const [, setZoomOut] = useQueryState('zoomOut')
+
     return (
       <Component
         {...props}
@@ -72,7 +79,15 @@ export function checkEnabled(Component): ComponentType {
         onTap={() => {
           if (enabled === false) {
             props?.onError()
-          } else props?.onTap()
+          } else {
+            props?.onTap()
+            // init gradient ranges, density
+            setRangeStart(5)
+            setRangeEnd(8)
+            setPixelDensity(2)
+            setToggleAxis(false)
+            setZoomOut(false)
+          }
         }}
         onError={() => {
           console.log('error (checkEnabled)')
@@ -85,6 +100,12 @@ export function checkEnabled(Component): ComponentType {
 let controller
 const trials = 7
 
+export function goBack(Component): ComponentType {
+  return (props) => {
+    // cancel extract
+    return <Component {...props} onClick={() => controller.abort()} />
+  }
+}
 export function extractGIF(Component): ComponentType {
   return ({ style, ...props }: any) => {
     const [progress, setProgress] = useState(-1)

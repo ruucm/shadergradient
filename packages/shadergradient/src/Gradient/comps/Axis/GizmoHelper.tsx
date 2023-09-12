@@ -77,7 +77,9 @@ export const GizmoHelper = ({
 }: GizmoHelperProps): any => {
   const size = useThree(({ size }) => size)
   const mainCamera = useThree(({ camera }) => camera)
-  const defaultControls = useThree(({ controls }) => controls) as ControlsProto
+  const defaultControls = useThree(
+    ({ controls }) => controls
+  ) as unknown as ControlsProto
   const gl = useThree(({ gl }) => gl)
   const scene = useThree(({ scene }) => scene)
   const invalidate = useThree(({ invalidate }) => invalidate)

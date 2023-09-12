@@ -8,6 +8,7 @@ exports.dtsPlugin = () => {
       build.onEnd((result) => {
         if (result.errors.length > 0) return
         try {
+          execSync('ls')
           execSync('tsc --emitDeclarationOnly --outDir dist')
         } catch (error) {
           console.log('[tsc error]', error)

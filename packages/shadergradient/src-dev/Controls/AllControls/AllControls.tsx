@@ -11,7 +11,11 @@ type Props = {
   // All other props
   [x: string]: any
 }
-export const AllControls: React.FC<Props> = ({ isMobile, isFigma = false }) => {
+export const AllControls: React.FC<Props> = ({
+  isMobile,
+  isFigma = false,
+  isGIF = false,
+}) => {
   const isWeb = !isMobile && !isFigma
   const [activeTab, setActiveTab] = useState(isWeb ? 'none' : 'shape')
 
@@ -37,11 +41,12 @@ export const AllControls: React.FC<Props> = ({ isMobile, isFigma = false }) => {
         setActiveTab={setActiveTab}
         isFigma={isFigma}
         isMobile={isMobile}
+        isGIF={isGIF}
       />
       <div
         style={{
           width: '100%',
-          display: 'flex',
+          display: isGIF === true ? 'none' : 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
           cursor: 'pointer',
@@ -86,6 +91,7 @@ export const AllControls: React.FC<Props> = ({ isMobile, isFigma = false }) => {
               </motion.div>
             </motion.div>
           )}
+
           {children}
         </div>
       ) : (

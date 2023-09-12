@@ -1,10 +1,10 @@
 import { IconHoverBox } from '@/ui'
 import { cx } from '@/utils'
 import * as React from 'react'
-import { Feather } from './Feather'
+import { Feather, IconName } from './Feather'
 
 type ControlTypeTitlePropsT = {
-  icon?: string
+  icon?: IconName
   content?: string
   active?: boolean
 } & React.DetailedHTMLProps<

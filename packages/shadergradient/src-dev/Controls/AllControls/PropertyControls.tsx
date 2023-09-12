@@ -8,6 +8,7 @@ import {
   MotionControls,
   ShapeControls,
   ViewControls,
+  GIFControls,
 } from '../index'
 
 type Props = {
@@ -21,6 +22,7 @@ export const PropertyControls: React.FC<Props> = ({
   setActiveTab,
   isFigma,
   isMobile,
+  isGIF,
 }) => {
   const [type] = useQueryState('type')
   // even if there is activeTab, queryState should be have value before return below controls
@@ -46,10 +48,13 @@ export const PropertyControls: React.FC<Props> = ({
         overflow: { delay: activeTab !== 'none' ? 0.72 : 0 },
       }}
     >
-      {activeTab === 'shape' && <ShapeControls />}
-      {activeTab === 'colors' && <ColorControls isFigma={isFigma} />}
-      {activeTab === 'motion' && <MotionControls />}
-      {activeTab === 'view' && <ViewControls />}
+      {activeTab === 'shape' && isGIF === false && <ShapeControls />}
+      {activeTab === 'colors' && isGIF === false && (
+        <ColorControls isFigma={isFigma} />
+      )}
+      {activeTab === 'motion' && isGIF === false && <MotionControls />}
+      {activeTab === 'view' && isGIF === false && <ViewControls />}
+      {isGIF === true && <GIFControls />}
     </motion.div>
   )
 }

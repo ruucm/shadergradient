@@ -65,6 +65,10 @@ export function checkEnabled(Component): ComponentType {
   return ({ style, ...props }: any) => {
     const [figma] = useFigma()
     const enabled = figma.selection > 0
+
+    const [, setRangeStart] = useQueryState('rangeStart')
+    const [, setRangeEnd] = useQueryState('rangeEnd')
+
     return (
       <Component
         {...props}
@@ -72,7 +76,12 @@ export function checkEnabled(Component): ComponentType {
         onTap={() => {
           if (enabled === false) {
             props?.onError()
-          } else props?.onTap()
+          } else {
+            props?.onTap()
+            // init gradient ranges
+            setRangeStart(5)
+            setRangeEnd(8)
+          }
         }}
         onError={() => {
           console.log('error (checkEnabled)')

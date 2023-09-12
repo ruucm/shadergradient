@@ -70,6 +70,7 @@ export function checkEnabled(Component): ComponentType {
     const [, setRangeEnd] = useQueryState('rangeEnd')
     const [, setPixelDensity] = useQueryState('pixelDensity')
     const [, setToggleAxis] = useQueryState('toggleAxis')
+    const [, setZoomOut] = useQueryState('zoomOut')
 
     return (
       <Component
@@ -85,6 +86,7 @@ export function checkEnabled(Component): ComponentType {
             setRangeEnd(8)
             setPixelDensity(2)
             setToggleAxis(false)
+            setZoomOut(false)
           }
         }}
         onError={() => {

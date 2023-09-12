@@ -8,7 +8,7 @@ exports.dtsPlugin = () => {
       build.onEnd((result) => {
         if (result.errors.length > 0) return
         try {
-          execSync('tsc -p ./tsconfig.json --emitDeclarationOnly --outDir dist')
+          execSync('tsc --emitDeclarationOnly --outDir dist')
         } catch (error) {
           console.log('[tsc error]', error)
         }

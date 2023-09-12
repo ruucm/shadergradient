@@ -13,4 +13,5 @@ export declare const useUIStore: import("zustand").UseBoundStore<import("zustand
     setMode: (data: any) => void;
     setLoadingPercentage: (data: any) => void;
 }>>;
+export declare function useSelection(): any[];
 //# sourceMappingURL=store.d.ts.map

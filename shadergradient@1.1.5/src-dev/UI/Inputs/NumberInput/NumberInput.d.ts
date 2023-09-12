@@ -6,6 +6,6 @@ type NumberInputPropsT = {
     value?: number;
     step?: number;
 } & React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>;
-export declare const NumberInput: React.ForwardRefExoticComponent<Pick<NumberInputPropsT, "label" | "key" | "setValue" | keyof React.InputHTMLAttributes<HTMLInputElement> | "arrow"> & React.RefAttributes<HTMLInputElement>>;
+export declare const NumberInput: React.ForwardRefExoticComponent<Pick<NumberInputPropsT, "label" | "key" | "setValue" | "arrow" | keyof React.InputHTMLAttributes<HTMLInputElement>> & React.RefAttributes<HTMLInputElement>>;
 export {};
 //# sourceMappingURL=NumberInput.d.ts.map

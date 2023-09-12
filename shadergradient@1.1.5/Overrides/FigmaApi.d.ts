@@ -1006,7 +1006,7 @@ interface ActiveUser extends User {
 export declare const figma: PluginAPI;
 export declare const getCodeString: (func: any) => any;
 export declare const postFigmaMessage: (func: any) => Promise<void>;
-export declare const postFigmaMessageForCreateGIF: (callback: any) => Promise<void>;
+export declare const postFigmaMessageForExport: (option: any, callback: any, controller: any) => Promise<void>;
 export declare const postFigmaMessageForSnapShot: (func: any) => Promise<void>;
 export {};
 //# sourceMappingURL=FigmaApi.d.ts.map

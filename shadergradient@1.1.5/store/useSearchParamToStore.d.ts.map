@@ -1,1 +1,1 @@
-{"version":3,"file":"useSearchParamToStore.d.ts","sourceRoot":"","sources":["../../src/store/useSearchParamToStore.ts"],"names":[],"mappings":"AAGA,wBAAgB,qBAAqB,SAOpC"}
+{"version":3,"file":"useSearchParamToStore.d.ts","sourceRoot":"","sources":["../../src-dev/store/useSearchParamToStore.ts"],"names":[],"mappings":"AAGA,wBAAgB,qBAAqB,SAOpC"}

@@ -5,6 +5,7 @@ import ShadeSlider from '@uiw/react-color-shade-slider'
 import Wheel from '@uiw/react-color-wheel'
 import { useOnClickOutside } from '@/UI/hooks/useOnClickOutside'
 import { Spacing } from '@/UI/Spacing'
+import { usePropState } from '@/UI/hooks/usePropState'
 
 type ColorInputPropsT = {
   label?: string
@@ -17,7 +18,7 @@ type ColorInputPropsT = {
 
 export const ColorInput = React.forwardRef<HTMLInputElement, ColorInputPropsT>(
   ({ label = '', defaultValue, setValue }: ColorInputPropsT, ref) => {
-    const [sharedValue, setSharedValue] = useState<any>(defaultValue)
+    const [sharedValue, setSharedValue] = usePropState(defaultValue)
     const [toggle, setToggle] = useState(false)
     useEffect(() => {
       setSharedValue(defaultValue) // init once with the passed value (from search params)

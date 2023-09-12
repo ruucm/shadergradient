@@ -67,4 +67,4 @@ export const STRIPE_BUY_YEARLY_URL = 'https://buy.stripe.com/eVa7uocSxgMnaZi5kl'
 export const STRIPE_BUY_MONTHLY_URL =
   'https://buy.stripe.com/28o01W05LeEfgjC5km'
 export const STRIPE_BILLING_URL =
-  'https://billing.stripe.com/p/login/cN27vf1dL52j5c4cMM'
+  'https://billing.stripe.com/p/login/cN27vf1dL52j5c4cMM' // Customer Portal

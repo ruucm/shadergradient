@@ -6,7 +6,6 @@ type InputPanelPropsT = {
     info?: boolean;
     hoverContent?: string;
     isHovered?: string;
-    autoScroll?: boolean;
 } & React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>;
 export declare const InputPanel: React.FC<InputPanelPropsT>;
 export {};

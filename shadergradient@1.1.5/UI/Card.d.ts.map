@@ -1,1 +1,1 @@
-{"version":3,"file":"Card.d.ts","sourceRoot":"","sources":["../../src-dev/UI/Card.tsx"],"names":[],"mappings":"AAGA,eAAO,MAAM,IAAI,mBAYhB,CAAA"}
+{"version":3,"file":"Card.d.ts","sourceRoot":"","sources":["../../src/UI/Card.tsx"],"names":[],"mappings":"AAGA,eAAO,MAAM,IAAI,mBAYhB,CAAA"}

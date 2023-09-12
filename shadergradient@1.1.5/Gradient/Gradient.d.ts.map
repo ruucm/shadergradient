@@ -1,1 +1,1 @@
-{"version":3,"file":"Gradient.d.ts","sourceRoot":"","sources":["../../src-dev/Gradient/Gradient.tsx"],"names":[],"mappings":"AAGA,OAAO,EAAE,SAAS,EAAE,MAAM,UAAU,CAAA;AAEpC,wBAAgB,QAAQ,CAAC,EACvB,OAAiB,EACjB,aAAa,EACb,eAAe,EACf,eAAe,EACf,aAAqB,EACrB,GAAG,KAAK,EACT,EAAE,SAAS,eAyBX"}
+{"version":3,"file":"Gradient.d.ts","sourceRoot":"","sources":["../../src/Gradient/Gradient.tsx"],"names":[],"mappings":"AAGA,OAAO,EAAE,SAAS,EAAE,MAAM,UAAU,CAAA;AAEpC,wBAAgB,QAAQ,CAAC,EACvB,OAAiB,EACjB,aAAa,EACb,eAAe,EACf,eAAe,EACf,aAAqB,EACrB,GAAG,KAAK,EACT,EAAE,SAAS,eAyBX"}

@@ -1,9 +1,6 @@
 export type MeshT = {
     type?: 'plane' | 'sphere' | 'waterPlane';
     animate?: 'on' | 'off';
-    range?: 'enabled' | 'disabled';
-    rangeStart?: number;
-    rangeEnd?: number;
     uTime?: number;
     uSpeed?: number;
     uStrength?: number;
@@ -29,7 +26,6 @@ export type GradientT = MeshT & {
     control?: 'query' | 'props';
     isFigmaPlugin?: boolean;
     dampingFactor?: number;
-    frameRate?: number;
     cAzimuthAngle?: number;
     cPolarAngle?: number;
     cDistance?: number;

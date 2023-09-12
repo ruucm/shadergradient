@@ -1,9 +1,5 @@
-export declare const clock: any;
-export declare function useTimeAnimation({ animate, range, rangeStart, rangeEnd }: {
+export declare function useTimeAnimation({ animate }: {
     animate: any;
-    range: any;
-    rangeStart: any;
-    rangeEnd: any;
 }): {
     material: any;
     linemat: any;

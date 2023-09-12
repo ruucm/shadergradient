@@ -1,1 +1,1 @@
-{"version":3,"file":"useCameraAnimation.d.ts","sourceRoot":"","sources":["../../../../src-dev/Gradient/comps/CameraControl/useCameraAnimation.ts"],"names":[],"mappings":"AAWA,wBAAgB,kBAAkB,CAAC,EACjC,IAAI,EACJ,aAAa,EACb,WAAW,EACX,SAAS,EACT,UAAU,EACV,OAAO,GACR;;;;;;;CAAA,OAoCA"}
+{"version":3,"file":"useCameraAnimation.d.ts","sourceRoot":"","sources":["../../../../src/Gradient/comps/CameraControl/useCameraAnimation.ts"],"names":[],"mappings":"AAWA,wBAAgB,kBAAkB,CAAC,EACjC,IAAI,EACJ,aAAa,EACb,WAAW,EACX,SAAS,EACT,UAAU,EACV,OAAO,GACR;;;;;;;CAAA,OAoCA"}

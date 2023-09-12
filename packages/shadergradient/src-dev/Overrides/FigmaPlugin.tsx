@@ -100,6 +100,12 @@ export function checkEnabled(Component): ComponentType {
 let controller
 const trials = 7
 
+export function goBack(Component): ComponentType {
+  return (props) => {
+    // cancel extract
+    return <Component {...props} onClick={() => controller.abort()} />
+  }
+}
 export function extractGIF(Component): ComponentType {
   return ({ style, ...props }: any) => {
     const [progress, setProgress] = useState(-1)

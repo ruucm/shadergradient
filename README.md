@@ -8,8 +8,15 @@ Curated and customizable 3d gradient package, in modern design tools (Framer, Fi
 
 Install below dependencies on your React app.
 
-```
+```sh
+# with yarn
 yarn add three @types/three @react-three/fiber shadergradient framer-motion
+
+# with npm
+$ npm i three @types/three @react-three/fiber shadergradient framer-motion
+
+# with pnpm
+$ pnpm add three @types/three @react-three/fiber shadergradient framer-motion
 ```
 
 # Available Platforms

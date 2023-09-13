@@ -52,6 +52,8 @@ Drop the gradient component on your canvas. Then you can customize it with props
 
 ## React
 
+### Available Gradient Properties (Types)
+
 ```ts
 type MeshT = {
   type?: 'plane' | 'sphere' | 'waterPlane'
@@ -102,17 +104,7 @@ type GradientT = MeshT & {
 }
 ```
 
-# Examples
-
-## Figma
-
-## Framer
-
-[Framer Remix (Login required)](https://framer.com/projects/new?duplicate=sJitbgOn6on6Savojbyk)
-
-## React
-
-[CodeSandbox](https://codesandbox.io/p/sandbox/github/ruucm/shadergradient/tree/main/apps/example-cra?file=%2Fsrc%2FApp.tsx)
+### Configure Gradient Properties
 
 ```tsx
 import React from 'react'
@@ -136,7 +128,7 @@ function App() {
 }
 ```
 
-or just copy paste url of gradients.
+or just copy and paste URL of the gradients. (Grab the URL from [shadergradient.co/customize](www.shadergradient.co/customize))
 
 ```tsx
 import React from 'react'
@@ -163,9 +155,18 @@ function App() {
 }
 ```
 
-## Next.js
+# Examples
 
-[CodeSandbox](https://codesandbox.io/p/sandbox/zjxeci?file=%2Fsrc%2Fpages%2Findex.tsx)
+## Figma
+
+## Framer
+
+[Framer Remix (Login required)](https://framer.com/projects/new?duplicate=sJitbgOn6on6Savojbyk)
+
+## React
+
+- CRA Starter: [CodeSandbox](https://codesandbox.io/p/sandbox/github/ruucm/shadergradient/tree/main/apps/example-cra?file=%2Fsrc%2FApp.tsx)
+- Next.js Starter: [CodeSandbox](https://codesandbox.io/p/sandbox/zjxeci?file=%2Fsrc%2Fpages%2Findex.tsx)
 
 # Contributing
 

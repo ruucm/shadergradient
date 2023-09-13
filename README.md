@@ -1,8 +1,8 @@
 # Shader Gradient
 
-![Intro](./intro.gif)
-
 Curated and customizable 3d gradient package, in modern design tools (Framer, Figma) and React.
+
+![Intro](./intro.gif)
 
 # Installation
 

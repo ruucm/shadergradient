@@ -96,7 +96,7 @@ Drop the gradient component on your canvas. Then you can customize it with props
 ## React
 
 ```ts
-export type MeshT = {
+type MeshT = {
   type?: 'plane' | 'sphere' | 'waterPlane'
   animate?: 'on' | 'off'
   uTime?: number
@@ -121,7 +121,7 @@ export type MeshT = {
   posSpringOption?: any
 }
 
-export type GradientT = MeshT & {
+type GradientT = MeshT & {
   control?: 'query' | 'props'
   isFigmaPlugin?: boolean
   dampingFactor?: number
@@ -156,11 +156,11 @@ pnpm install
 ## Start development
 
 ```
-yarn dev
+pnpm dev
 ```
 
 # Future Plan
 
 - [ ] Detatch framer-motion peer depenency (Seperate UI & Store Pacakge)
-- [ ] Figma GIF Support
+- [x] Figma GIF Support
 - [ ] More Shaders

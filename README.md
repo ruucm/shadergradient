@@ -1,6 +1,6 @@
 # Shader Gradient
 
-Curated and customizable 3d gradient package, in modern design tools (Framer, Figma) and React.
+Customizable 3D, moving gradient package for React. Also available on modern design tools like Figma and Framer.
 
 ![Intro](./intro.gif)
 

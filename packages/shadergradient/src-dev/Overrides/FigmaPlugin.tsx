@@ -256,6 +256,7 @@ export function userInfo(Component): ComponentType {
 
     let variant = 'Loading'
     if (subDBLoading) variant = 'Loading'
+    else if (!userDB) variant = 'NoUser'
     else if (subscription) variant = 'Pro'
     else variant = 'Free'
 

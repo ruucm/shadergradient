@@ -154,6 +154,7 @@ export default function Page() {
           <Link href='https://instagram.com/shadergradient' target='_blank'>
             <TextHover
               fontSize={14}
+              font={'Inter'}
               color={PRESETS[activePreset].color}
               content={'shadergradient'}
               delay={0}

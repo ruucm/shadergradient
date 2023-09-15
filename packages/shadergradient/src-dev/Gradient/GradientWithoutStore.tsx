@@ -2,7 +2,7 @@ import { usePostProcessing } from './hooks/usePostProcessing'
 import { Lights, Mesh, Axis, CameraControl } from './comps-without-store'
 import { GradientT } from '../types'
 
-export function GradientWithouStore({
+export function GradientWithoutStore({
   control = 'props',
   dampingFactor,
   rotSpringOption,

@@ -11,6 +11,9 @@ export function useControlValues(
   // shape
   const [type] = useQueryState('type')
   const [animate] = useQueryState('animate')
+  const [range] = useQueryState('range')
+  const [rangeStart] = useQueryState('rangeStart')
+  const [rangeEnd] = useQueryState('rangeEnd')
   const [uTime] = useQueryState('uTime')
   const [uSpeed] = useQueryState('uSpeed')
   const [uStrength] = useQueryState('uStrength')
@@ -53,9 +56,19 @@ export function useControlValues(
   const [toggleAxis] = useQueryState('toggleAxis')
   const hoverState = useCursorStore((state: any) => state.hoverState)
 
+  // figma
+  const [frameRate] = useQueryState('frameRate')
+  const [destination] = useQueryState('destination')
+  const [format] = useQueryState('format')
   const queryProps = {
     type,
     animate,
+    range,
+    rangeStart,
+    rangeEnd,
+    frameRate,
+    destination,
+    format,
     uTime,
     uSpeed,
     uStrength,

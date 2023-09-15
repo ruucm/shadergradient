@@ -47,11 +47,6 @@ export const AxisButton: React.FC<ControlTypeTitlePropsT> = ({
       }}
       onClick={onClick}
     >
-      {/* <Feather
-        name={icon}
-        size={20}
-        color={active ? 'white' : 'rgb(255,67,10)'}
-      /> */}
       <svg xmlns='http://www.w3.org/2000/svg' width='24' height='24'>
         <path
           d='M 0 0 L 0 8.5'

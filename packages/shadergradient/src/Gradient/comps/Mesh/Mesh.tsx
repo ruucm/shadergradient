@@ -19,6 +19,9 @@ const meshLineCount = 36
 export const Mesh: React.FC<MeshT> = ({
   type,
   animate,
+  range,
+  rangeStart,
+  rangeEnd,
   uTime,
   uSpeed,
   uStrength,
@@ -65,7 +68,12 @@ export const Mesh: React.FC<MeshT> = ({
     uAmplitude,
   })
 
-  const { material, linemat } = useTimeAnimation({ animate })
+  const { material, linemat } = useTimeAnimation({
+    animate,
+    range,
+    rangeStart,
+    rangeEnd,
+  })
 
   // change position/rotation for about page
   const position = [positionX, positionY, positionZ]

@@ -44,7 +44,7 @@ export const NumberInput = React.forwardRef<
             className='font-medium text-primary bg-transparent h-input w-control-number-input text-center outline-none text-base'
             ref={ref}
             value={value}
-            onChange={(e) => setValue(e.target.value)}
+            onChange={(e) => setValue(e.target.valueAsNumber)}
             step={step}
             {...inputProps} // step.. etc
           />

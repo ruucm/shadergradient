@@ -50,13 +50,28 @@ export const useUIStore = create(
 )
 
 // store for Figma Plugin
-const useSelectionStore = create((set) => ({
-  selection: 0,
-  setSelection: (payload) => set({ selection: payload }),
+const useFigmaStore = create((set) => ({
+  figma: { selection: 0, user: null },
+  setFigma: (payload) =>
+    set((prev) => ({ figma: { ...prev.figma, ...payload } })),
 }))
+export function useFigma() {
+  const figma = useFigmaStore((state: any) => state.figma)
+  const setFigma = useFigmaStore((state: any) => state.setFigma)
+  return [figma, setFigma]
+}
 
-export function useSelection() {
-  const selection = useSelectionStore((state: any) => state.selection)
-  const setSelection = useSelectionStore((state: any) => state.setSelection)
-  return [selection, setSelection]
+export const useBillingIntervalStore = create((set) => ({
+  billingInterval: 'year',
+  setBillingInterval: (payload) =>
+    set((state) => ({ billingInterval: payload })),
+}))
+export function useBillingInterval() {
+  const billingInterval = useBillingIntervalStore(
+    (state: any) => state.billingInterval
+  )
+  const setBillingInterval = useBillingIntervalStore(
+    (state: any) => state.setBillingInterval
+  )
+  return [billingInterval, setBillingInterval]
 }

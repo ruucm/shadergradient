@@ -4,9 +4,10 @@
 export { TestControl } from './TestControl'
 export { ShapeControls } from './ShapeControls'
 export { ColorControls } from './ColorControls'
-export { EffectControls } from './EffectControls'
+export { MotionControls } from './MotionControls'
 export { ViewControls } from './ViewControls'
 export { BackgroundControls } from './BackgroundControls'
+export { GIFControls } from './GIFControls'
 export {
   Tools,
   ToolsBox,

@@ -14,18 +14,16 @@ type SliderPropsT = {
 >
 
 export const RangeSlider: React.FC<SliderPropsT> = ({
+  defaultValue,
   setValue,
   step,
   min,
   max,
 }) => {
-  const [rangeStart, setRangeStart] = useState<any>(min)
-  const [rangeEnd, setRangeEnd] = useState<any>(max)
-
-  useEffect(() => {
-    setRangeStart(min)
-    setRangeEnd(max)
-  }, [])
+  const defaultStart = defaultValue?.[0] || min
+  const defaultEnd = defaultValue?.[1] || max
+  const [rangeStart, setRangeStart] = useState<any>(defaultStart)
+  const [rangeEnd, setRangeEnd] = useState<any>(defaultEnd)
 
   useEffect(() => {
     setValue([rangeStart, rangeEnd])
@@ -53,7 +51,7 @@ export const RangeSlider: React.FC<SliderPropsT> = ({
         // styles
         className='bg-primary h-[8px] w-full bg-opacity-20 rounded-full'
         marks={[(min + max) / 2]}
-        markClassName='w-mark h-mark bg-primary top-1/2 transform -translate-y-1/2 slider-mark-center-x'
+        markClassName='w-mark h-mark bg-primary top-1/2 transform translate-x-1 -translate-y-1/2 slider-mark-center-x'
         thumbClassName='bg-primary w-thumb h-thumb rounded-full top-1/2 transform -translate-y-1/2 outline-none cursor-pointer'
         trackClassName='bg-primary h-[8px] rounded-full relative'
         renderTrack={(props, state) => (

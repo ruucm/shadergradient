@@ -1,5 +1,6 @@
-import { ComponentType, useEffect, useState } from 'react'
+import { ComponentType, useEffect, useLayoutEffect, useState } from 'react'
 import React from 'react'
+import { useAnimationControls } from 'framer-motion'
 import * as qs from 'query-string'
 import {
   updateGradientState,
@@ -7,15 +8,23 @@ import {
   PRESETS,
   useURLQueryState,
   useQueryState,
-  useSelection,
+  useFigma,
+  useBillingInterval,
 } from '../store'
 import {
   figma,
   postFigmaMessage,
   postFigmaMessageForSnapShot,
-  postFigmaMessageForCreateGIF,
+  postFigmaMessageForExport,
 } from './FigmaApi'
 import { cx } from '@/utils'
+import { clock } from '@/Gradient/comps/Mesh/useTimeAnimation'
+import { useDBTable } from 'https://framer.com/m/SupabaseConnector-ARlr.js'
+import {
+  STRIPE_BILLING_URL,
+  STRIPE_BUY_YEARLY_URL,
+  STRIPE_BUY_MONTHLY_URL,
+} from '@/consts'
 
 // example from https://github.com/sonnylazuardi/framer-sites-figma-plugin/
 export function createRectangle(Component): ComponentType {
@@ -36,9 +45,8 @@ export function createRectangle(Component): ComponentType {
 
 export function insertCanvasAsImage(Component): ComponentType {
   return ({ style, ...props }: any) => {
-    const selection = useFigmaSelections() // need to attatch once to listen figma selection changes
-    // const enabled = selection > 0 // not works
-    const enabled = true
+    const [figma] = useFigma() // need to attatch once to listen figma selection changes
+    const enabled = figma.selection > 0
 
     return (
       <Component
@@ -55,12 +63,31 @@ export function insertCanvasAsImage(Component): ComponentType {
 
 export function checkEnabled(Component): ComponentType {
   return ({ style, ...props }: any) => {
+    const [figma] = useFigma()
+    const enabled = figma.selection > 0
+
+    const [, setRangeStart] = useQueryState('rangeStart')
+    const [, setRangeEnd] = useQueryState('rangeEnd')
+    const [, setPixelDensity] = useQueryState('pixelDensity')
+    const [, setToggleAxis] = useQueryState('toggleAxis')
+    const [, setZoomOut] = useQueryState('zoomOut')
+
     return (
       <Component
         {...props}
-        style={{ ...style, cursor: 'pointer', opacity: 0.49 }}
+        style={{ ...style, cursor: 'pointer', opacity: enabled ? 1 : 0.5 }}
         onTap={() => {
-          alert('This feature is under development.')
+          if (enabled === false) {
+            props?.onError()
+          } else {
+            props?.onTap()
+            // init gradient ranges, density
+            setRangeStart(5)
+            setRangeEnd(8)
+            setPixelDensity(2)
+            setToggleAxis(false)
+            setZoomOut(false)
+          }
         }}
         onError={() => {
           console.log('error (checkEnabled)')
@@ -70,49 +97,183 @@ export function checkEnabled(Component): ComponentType {
   }
 }
 
+let controller
+const trials = 7
+
+export function goBack(Component): ComponentType {
+  return (props) => {
+    // cancel extract
+    return <Component {...props} onClick={() => controller.abort()} />
+  }
+}
 export function extractGIF(Component): ComponentType {
   return ({ style, ...props }: any) => {
-    const [progress, setProgress] = useState(0)
-    const loading = progress > 0 && progress < 1
+    const [progress, setProgress] = useState(-1)
+    const loading = progress >= 0 && progress < 1
 
-    const [selection] = useSelection()
-    const enabled = selection > 0
+    const [figma] = useFigma()
+    const enabled = figma.selection > 0
+
+    const [animate, setAnimate] = useQueryState('animate')
+    const [, setUTime] = useQueryState('uTime')
+    const [range] = useQueryState('range')
+    const [rangeStart] = useQueryState('rangeStart')
+    const [rangeEnd] = useQueryState('rangeEnd')
+    const [frameRate] = useQueryState('frameRate')
+    const [pixelDensity] = useQueryState('pixelDensity')
+    const [destination] = useQueryState('destination')
+    const [format] = useQueryState('format')
+    const [grain] = useQueryState('grain')
+
+    const [duration, setDuration] = useState(0)
+    const [size, setSize] = useState(0)
+
+    const figma_user_id = figma.user?.id
+    const [rows, dbLoading, insertRow, updateRow] = useDBTable(
+      'users',
+      'sg-figma'
+    )
+    const userDB = rows.find((r) => r.figma_user_id === figma_user_id)
+    const trialLeft = getTrialLeft(userDB?.trial_started_at)
+    const [subscription, subDBLoading] = useSubscription('sub1')
+    const needSubscribe = trialLeft <= 0 && !subDBLoading && !subscription
+    const titleText = needSubscribe
+      ? 'Upgrade to Pro'
+      : destination === 'onCanvas'
+      ? 'Add GIF to canvas'
+      : 'Download'
+    const creditText = !subscription && `(${trialLeft} days left)`
+
+    useEffect(() => {
+      setDuration(rangeEnd - rangeStart)
+    }, [rangeStart, rangeEnd])
+
+    useEffect(() => {
+      setSize(estimateSize({ format, duration, frameRate, pixelDensity }))
+    }, [format, duration, pixelDensity, frameRate])
+
+    const valid = animate === 'on' && range === 'enabled' && size < 300
+    const option = {
+      rangeStart,
+      rangeEnd,
+      setAnimate,
+      setUTime,
+      frameRate,
+      destination,
+      format,
+      grain,
+    }
+
+    let variant = 'dbLoading'
+    if (loading) variant = 'loading'
+    else if (size > 300) variant = 'error-1'
+    else if (!enabled) variant = 'error-2'
+    // when all datas are ready
+    else if (!subDBLoading) variant = 'default'
+    else if (needSubscribe) variant = 'upgrade'
 
     return (
-      <Component
-        {...props}
-        style={{ ...style, cursor: 'pointer', opacity: enabled ? 1 : 0.5 }}
-        tap={() => {
-          if (enabled) postFigmaMessageForCreateGIF(setProgress)
-          else props?.tap() // move to the alert variant
-        }}
-        variant={loading ? 'loading' : 'default'}
-      />
+      <>
+        <Component
+          {...props}
+          key={progress} // need to flush Framer button
+          style={{ ...style, cursor: 'pointer' }}
+          onTapGIF={() => {
+            controller = new AbortController() // need to make a new one on every exportings
+
+            if (enabled && valid) {
+              if (needSubscribe)
+                props?.onTapGIFU() // move to the upgrade variant
+              else {
+                if (!userDB) {
+                  insertRow({ figma_user_id, trial_started_at: new Date() })
+                  props?.onTapGIFN()
+                } else {
+                  // start to extract GIF
+                  setProgress(0)
+                  console.log('startTime', Date.now())
+                  clock.start() // restart the clock
+                  postFigmaMessageForExport(option, setProgress, controller)
+                }
+              }
+            } else props?.onTapGIF() // move to the alert variant
+          }}
+          onTapGIFU={() => console.log('onTapGIFU (ignore the default event)')}
+          onTapGIFN={() => console.log('onTapGIFN (ignore the default event)')}
+          progress={progress * 100}
+          title={titleText}
+          credit={creditText}
+          variant={variant}
+        />
+        {/* clickable layer on exporting */}
+        {variant === 'loading' && (
+          <div
+            onClick={() => controller.abort()}
+            style={{
+              position: 'absolute',
+              width: '100%',
+              height: '100%',
+              top: 0,
+              left: 0,
+              cursor: 'wait',
+            }}
+          />
+        )}
+      </>
     )
   }
 }
 
 export function isUpgraded(Component): ComponentType {
   return (props) => {
-    return <Component {...props} />
+    const [subscription] = useSubscription(props['data-framer-name'])
+    if (subscription) return <Component {...props} />
   }
 }
 export function upgradingText(Component): ComponentType {
   return (props) => {
-    return <Component {...props} />
+    const [subscription] = useSubscription(props['data-framer-name'])
+    // if (subscription)
+    return (
+      <Component
+        {...props}
+        text={subscription ? 'Upgraded!' : `Check\nyour browser`}
+      />
+    )
   }
 }
 export function userEmail(Component): ComponentType {
   return (props) => {
-    return <Component {...props} />
+    const [userDB] = useUserDB()
+    return <Component {...props} text={userDB?.email || ''} />
   }
 }
 
 export function userInfo(Component): ComponentType {
   return (props) => {
-    return <Component {...props} />
+    const [subscription, subDBLoading] = useSubscription('userInfo-channel')
+    const [userDB] = useUserDB('sg-info')
+
+    let variant = 'Loading'
+    if (subDBLoading) variant = 'Loading'
+    else if (!userDB) variant = 'NoUser'
+    else if (subscription) variant = 'Pro'
+    else variant = 'Free'
+
+    return (
+      <Component
+        {...props}
+        supportLink={`${STRIPE_BILLING_URL}?prefilled_email=${encodeURIComponent(
+          userDB?.email
+        )}`}
+        status={subscription ? 'PRO USER' : 'FREE USER'}
+        email={userDB ? `(${userDB?.email})` : ''}
+        variant={variant}
+      />
+    )
   }
 }
+
 export function extractGIFDEV(Component): ComponentType {
   return ({ style, ...props }: any) => {
     return (
@@ -127,7 +288,68 @@ export function extractGIFDEV(Component): ComponentType {
 
 export function subscribeLink(Component): ComponentType {
   return (props) => {
-    return <Component {...props} />
+    const [figma] = useFigma()
+    const [billingInterval] = useBillingInterval()
+    const isYearly = billingInterval === 'year'
+
+    return (
+      <Component
+        {...props}
+        href={`${
+          isYearly ? STRIPE_BUY_YEARLY_URL : STRIPE_BUY_MONTHLY_URL
+        }?client_reference_id=${figma.user?.id}`}
+      />
+    )
+  }
+}
+
+export function TogglePrice(Component): ComponentType {
+  return (props) => {
+    const [, setBillingInterval] = useBillingInterval()
+
+    return (
+      <Component
+        {...props}
+        onMonthly={() => setBillingInterval('year')}
+        onYearly={() => setBillingInterval('month')}
+      />
+    )
+  }
+}
+export function Price(Component): ComponentType {
+  return (props) => {
+    const [billingInterval] = useBillingInterval()
+
+    return (
+      <Component
+        {...props}
+        variant={billingInterval === 'year' ? 'year' : 'month'}
+      />
+    )
+  }
+}
+
+export function PriceText(Component): ComponentType {
+  return (props) => {
+    const [billingInterval] = useBillingInterval()
+    const isYearly = billingInterval === 'year'
+
+    return (
+      <Component
+        {...props}
+        text={isYearly ? ' — just $2 a month' : ' — just $4 a month'}
+      />
+    )
+  }
+}
+export function SaleTag(Component): ComponentType {
+  return (props) => {
+    const [billingInterval] = useBillingInterval()
+    const isYearly = billingInterval === 'year'
+
+    return (
+      <Component {...props} opacity={isYearly ? 1 : 0} y={isYearly ? 10 : 0} />
+    )
   }
 }
 
@@ -301,6 +523,7 @@ export function UrlInput(Component): ComponentType {
 
 export function LoadViewAfterStyleSheet(Component): ComponentType {
   return (props: any) => {
+    useFigmaMessage()
     const [foundStylesheet, setFoundStylesheet] = useState(false)
 
     useEffect(() => {
@@ -343,50 +566,159 @@ export function HideScrollBar(Component): ComponentType {
   )
 }
 
-export function GIFStatusOverride(Component): ComponentType {
-  return (props) => {
-    return <Component {...props} />
-  }
-}
-
-export function Timeline(Component): ComponentType {
-  return (props) => {
-    return <Component {...props} />
-  }
-}
-
-function useFigmaSelections() {
-  const [selection, setSelection] = useSelection()
+// Share Figma states to UI
+function useFigmaMessage() {
+  const [, setFigma] = useFigma()
 
   useEffect(() => {
     parent.postMessage({ pluginMessage: { type: 'UI_READY' } }, '*') // init selection
     onmessage = (event) => {
       const msg = event.data.pluginMessage
-      if (msg.type === 'SELECTION')
-        setSelection(event.data.pluginMessage.selection.length)
+
+      switch (msg?.type) {
+        case 'SELECTION':
+          setFigma({ selection: msg.selection.length })
+          break
+
+        case 'USER_INFO':
+          setFigma({ user: msg.user })
+          break
+
+        default:
+          break
+      }
     }
   }, [])
-  return selection
 }
 
-export function TogglePrice(Component): ComponentType {
-  return (props) => {
-    return <Component {...props} />
-  }
-}
-export function PriceText(Component): ComponentType {
-  return (props) => {
-    return <Component {...props} />
-  }
-}
-export function Price(Component): ComponentType {
-  return (props) => {
-    return <Component {...props} />
+export function GIFStatusOverride(Component): ComponentType {
+  return ({ ...props }: any) => {
+    const [rangeStart] = useQueryState('rangeStart')
+    const [rangeEnd] = useQueryState('rangeEnd')
+    const [pixelDensity] = useQueryState('pixelDensity')
+    const [frameRate] = useQueryState('frameRate')
+    const [destination] = useQueryState('destination')
+    const [width, setWidth] = useState(333)
+    const [height, setHeight] = useState(333)
+    const [format] = useQueryState('format')
+
+    const sizeLimit = 300
+
+    const [duration, setDuration] = useState(0)
+    const [size, setSize] = useState(0)
+    useEffect(() => {
+      setDuration(rangeEnd - rangeStart)
+    }, [rangeStart, rangeEnd])
+
+    useEffect(() => {
+      setSize(estimateSize({ format, duration, frameRate, pixelDensity }))
+
+      setTimeout(() => {
+        updateResolution({ setWidth, setHeight, pixelDensity })
+      }, 100) // need a delay until the canvas dom mounted
+    }, [format, duration, pixelDensity, frameRate])
+
+    // handle resize plugin
+    useLayoutEffect(() => {
+      function updateSize() {
+        updateResolution({ setWidth, setHeight, pixelDensity })
+      }
+      window.addEventListener('resize', updateSize)
+      return () => window.removeEventListener('resize', updateSize)
+    }, [pixelDensity])
+
+    return (
+      <Component
+        {...props}
+        size={`${Math.ceil(size * 10) / 10}MB`}
+        duration={`(${Math.ceil(duration * 10) / 10}s)`}
+        resolution={`${width} x ${height} px`}
+        variant={
+          size > sizeLimit && destination === 'onCanvas'
+            ? 'Error'
+            : destination === 'localFile'
+            ? 'Export'
+            : 'Default'
+        }
+      />
+    )
   }
 }
 
-export function SaleTag(Component): ComponentType {
-  return (props) => {
-    return <Component {...props} />
+export function Timeline(Component): ComponentType {
+  return ({ ...props }: any) => {
+    const controls = useAnimationControls()
+
+    const [rangeStart] = useQueryState('rangeStart')
+    const [rangeEnd] = useQueryState('rangeEnd')
+
+    const [duration, setDuration] = useState(rangeEnd - rangeStart)
+
+    const sequence = async () => {
+      controls.set({ width: '0%', transition: { duration: 0 } })
+      return await controls.start({
+        width: '100%',
+        transition: {
+          duration: duration,
+          repeat: Infinity,
+          repeatType: 'loop',
+          ease: 'linear',
+        },
+      })
+    }
+
+    useEffect(() => {
+      setDuration(rangeEnd - rangeStart)
+      clock.start()
+      sequence()
+    }, [rangeEnd, rangeStart])
+
+    return <Component {...props} animate={controls} />
   }
+}
+
+function useUserDB(channel = 'sg-figma-hook') {
+  const [figma] = useFigma()
+  const figma_user_id = figma.user?.id
+
+  const [rows, dbLoading] = useDBTable('users', channel)
+  return [rows.find((r) => r.figma_user_id === figma_user_id), dbLoading]
+}
+function useSubscription(subId) {
+  const [userDB, userDBLoading] = useUserDB()
+  const userId = userDB?.id
+
+  const [subscriptionRows, dbLoading] = useDBTable('subscriptions', subId)
+  const subscription = subscriptionRows.find(
+    (r) => r.user_id === userId && r.status === 'active'
+  )
+
+  return [subscription, userDBLoading || dbLoading]
+}
+
+function updateResolution({ setWidth, setHeight, pixelDensity }) {
+  const r3fCanvas: any = document.getElementById('gradientCanvas')
+    ?.children[0] as HTMLCanvasElement
+  const { width, height } = r3fCanvas.getBoundingClientRect()
+
+  setWidth(Math.round(width * pixelDensity))
+  setHeight(Math.round(height * pixelDensity))
+}
+
+function estimateSize({ format, duration, frameRate, pixelDensity }) {
+  const p = format === 'webm' ? 0.00745 : 0.149
+  const value = p * duration * frameRate * pixelDensity * pixelDensity
+  return Math.round(value * 10) / 10 // round to at most 2 decimal places
+}
+
+function getTrialLeft(trial_started_at) {
+  if (!trial_started_at) return trials
+
+  let currentDate = new Date()
+  let diffInTime = currentDate.getTime() - new Date(trial_started_at).getTime()
+  let diffInDays = trials - diffInTime / (1000 * 3600 * 24)
+
+  // console.log('diffInDays', diffInDays)
+  if (diffInDays < 0) return 0
+  return Math.round(diffInDays)
 }

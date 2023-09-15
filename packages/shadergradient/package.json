@@ -6,8 +6,8 @@
     "./*": "./dist/*",
     "./styles.css": "./dist/styles.css"
   },
-  "main": "dist/index.mjs",
-  "types": "./dist/index.d.ts",
+  "main": "dist/without-store.mjs",
+  "types": "./dist/without-store.d.ts",
   "files": [
     "dist"
   ],

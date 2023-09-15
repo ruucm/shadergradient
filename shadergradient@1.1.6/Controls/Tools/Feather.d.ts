@@ -1,5 +1,4 @@
-import * as icons from 'react-feather';
-export type IconName = keyof typeof icons;
+export type IconName = 'Info' | 'CornerUpLeft' | 'Minimize2';
 type IconProps = {
     name: IconName;
 };

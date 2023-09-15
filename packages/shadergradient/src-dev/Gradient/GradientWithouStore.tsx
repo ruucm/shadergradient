@@ -1,5 +1,5 @@
 import { usePostProcessing } from './hooks'
-import { Lights, Mesh, Axis, CameraControl } from './comps'
+import { Lights, Mesh, Axis, CameraControl } from './comps-without-store'
 import { GradientT } from '../types'
 
 export function GradientWithouStore({

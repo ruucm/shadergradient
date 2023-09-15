@@ -46,7 +46,8 @@ export function createRectangle(Component): ComponentType {
 export function insertCanvasAsImage(Component): ComponentType {
   return ({ style, ...props }: any) => {
     const [figma] = useFigma() // need to attatch once to listen figma selection changes
-    const enabled = figma.selection > 0
+    // const enabled = figma.selection > 0
+    const enabled = true
 
     return (
       <Component
@@ -64,7 +65,8 @@ export function insertCanvasAsImage(Component): ComponentType {
 export function checkEnabled(Component): ComponentType {
   return ({ style, ...props }: any) => {
     const [figma] = useFigma()
-    const enabled = figma.selection > 0
+    // const enabled = figma.selection > 0
+    const enabled = true
 
     const [, setRangeStart] = useQueryState('rangeStart')
     const [, setRangeEnd] = useQueryState('rangeEnd')
@@ -112,7 +114,8 @@ export function extractGIF(Component): ComponentType {
     const loading = progress >= 0 && progress < 1
 
     const [figma] = useFigma()
-    const enabled = figma.selection > 0
+    // const enabled = figma.selection > 0
+    const enabled = true
 
     const [animate, setAnimate] = useQueryState('animate')
     const [, setUTime] = useQueryState('uTime')

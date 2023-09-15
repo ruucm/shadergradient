@@ -18,3 +18,6 @@ export {
   aboutAngles,
 } from './consts'
 export { cx } from './utils'
+
+export * from './ShaderGradientCanvas'
+export * from './Gradient/ShaderGradient'

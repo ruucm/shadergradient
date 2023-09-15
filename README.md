@@ -159,6 +159,8 @@ function App() {
 
 ## Figma
 
+[Figma GIF Example](https://framer.com/projects/shadergradient-co-package-origin--zugKWPH3hb4TzPLbtN8y-aV7Di?node=v1ySO756L)
+
 ## Framer
 
 [Framer Remix (Login required)](https://framer.com/projects/new?duplicate=sJitbgOn6on6Savojbyk)

@@ -1,4 +1,4 @@
-import { usePostProcessing } from './hooks'
+import { usePostProcessing } from './hooks/usePostProcessing'
 import { Lights, Mesh, Axis, CameraControl } from './comps-without-store'
 import { GradientT } from '../types'
 

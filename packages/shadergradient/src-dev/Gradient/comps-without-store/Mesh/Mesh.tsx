@@ -3,7 +3,6 @@ import { dToRArr } from '@/utils'
 import { animated, useSpring } from '@react-spring/three'
 import { useMaterials } from './useMaterials'
 import { useTimeAnimation } from './useTimeAnimation'
-import { useHoverColorInfo } from './useHoverColorInfo'
 import { MeshT } from '@/types'
 
 // @ts-ignore
@@ -55,11 +54,10 @@ export const Mesh: React.FC<MeshT> = ({
     config: { duration: 300 }, // default transition
   }),
 }) => {
-  const [hoverState, colors] = useHoverColorInfo({ color1, color2, color3 })
   const materialMounted = useMaterials({
     type,
     shader,
-    ...colors,
+    ...{ color1, color2, color3 },
     uTime,
     uSpeed,
     uDensity,
@@ -103,7 +101,7 @@ export const Mesh: React.FC<MeshT> = ({
           renderOrder={1}
           position={position}
           rotation={rotation}
-          visible={hoverState !== 0 ? true : false}
+          visible={false}
         >
           {type === 'plane' && (
             <planeGeometry args={[10, 10, 1, meshLineCount]} />

@@ -1,13 +1,8 @@
-import { useUIStore } from '@/store'
 import { EnvironmentMap } from './Environment'
 import { Suspense, useEffect } from 'react'
 import { useProgress } from './useProgress'
 
 export function Lights({ lightType, brightness, envPreset }) {
-  const setLoadingPercentage = useUIStore(
-    (state: any) => state.setLoadingPercentage
-  )
-
   return (
     <>
       {lightType === '3d' && <ambientLight intensity={brightness || 1} />}
@@ -16,7 +11,7 @@ export function Lights({ lightType, brightness, envPreset }) {
           <EnvironmentMap
             envPreset={envPreset}
             background={false}
-            loadingCallback={setLoadingPercentage}
+            loadingCallback={() => void 0}
           />
         </Suspense>
       )}

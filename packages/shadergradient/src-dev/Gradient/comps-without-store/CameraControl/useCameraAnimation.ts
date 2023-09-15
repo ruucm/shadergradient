@@ -7,7 +7,6 @@ import {
 } from '@/consts'
 import { dToR } from '@/utils'
 import { useFrame } from '@react-three/fiber'
-import { useCursorStore } from '@/store'
 
 export function useCameraAnimation({
   type,
@@ -28,9 +27,8 @@ export function useCameraAnimation({
   }, [control, cAzimuthAngle, cPolarAngle])
 
   // zoom-out tool
-  const hoverState = useCursorStore((state: any) => state.hoverState)
   useEffect(() => {
-    if (zoomOut || hoverState !== 0) {
+    if (zoomOut) {
       // fixed distance & zoom
       if (type === 'sphere') {
         control?.dollyTo(zoomOutSphere.distance, true)
@@ -49,7 +47,7 @@ export function useCameraAnimation({
         control?.zoomTo(defaultPlanesZoom, true)
       }
     }
-  }, [control, zoomOut, hoverState, type, cameraZoom, cDistance])
+  }, [control, zoomOut, type, cameraZoom, cDistance])
 
   return ref
 }

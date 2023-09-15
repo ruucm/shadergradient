@@ -146,6 +146,7 @@ async function getBuildOptions(path) {
       `${path}/client.ts`,
       `${path}/ui.ts`,
       `${path}/with-store.ts`,
+      `${path}/without-store.ts`,
       isDev && `${path}/isDev.ts`,
     ].filter(Boolean),
     minify: true,

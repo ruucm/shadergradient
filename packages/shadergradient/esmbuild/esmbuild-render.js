@@ -6,6 +6,7 @@ const esbuild = require('esbuild')
 const { glsl } = require('esbuild-plugin-glsl')
 const { cssPlugin } = require('./plugin.css')
 const { dtsPlugin } = require('./plugin.dts')
+const fs = require('fs')
 
 // consts
 const devOutdir = join(process.cwd(), 'dist/dev')
@@ -99,14 +100,26 @@ async function localBuild() {
 }
 
 async function build() {
-  await esbuild.build({
+  const devResult = await esbuild.build({
     outdir: devOutdir,
+    metafile: true,
     ...(await getBuildOptions(devPath)),
   })
-  await esbuild.build({
+  const prodResult = await esbuild.build({
     outdir: prodOutdir,
+    metafile: true,
     ...(await getBuildOptions(prodPath)),
   })
+
+  fs.writeFileSync(
+    './dist/meta-devResult.json',
+    JSON.stringify(devResult.metafile)
+  )
+  fs.writeFileSync(
+    './dist/meta-prodResult.json',
+    JSON.stringify(prodResult.metafile)
+  )
+
   console.log(`Build done`)
 }
 

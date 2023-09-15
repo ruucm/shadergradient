@@ -24,6 +24,7 @@ export type MeshT = {
     shader?: string;
     rotSpringOption?: any;
     posSpringOption?: any;
+    urlString?: string;
 };
 export type GradientT = MeshT & {
     control?: 'query' | 'props';

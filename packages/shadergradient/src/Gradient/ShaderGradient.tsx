@@ -4,7 +4,7 @@ import { GradientT } from '../types'
 import * as qs from 'query-string'
 import { formatUrlString } from '@/utils'
 
-export function GradientWithoutStore({
+export function ShaderGradient({
   control = 'props',
   dampingFactor,
   rotSpringOption,

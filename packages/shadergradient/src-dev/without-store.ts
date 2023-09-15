@@ -1,2 +1,2 @@
-export * from './GradientCanvasWithoutStore'
-export * from './Gradient/GradientWithoutStore'
+export * from './ShaderGradientCanvas'
+export * from './Gradient/ShaderGradient'

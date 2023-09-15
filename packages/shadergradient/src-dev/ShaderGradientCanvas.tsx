@@ -1,7 +1,7 @@
 import { Canvas } from '@react-three/fiber'
 import { canvasProps } from './consts'
 
-export function GradientCanvasWithoutStore({
+export function ShaderGradientCanvas({
   children,
   pointerEvents = 'none',
   pixelDensity = 1,

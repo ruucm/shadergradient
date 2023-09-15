@@ -1,8 +1,8 @@
 import * as React from 'react'
-import { Info } from 'react-feather'
 import { HoverBox, Spacing } from '@/ui'
 import { useEffect, useRef } from 'react'
 import scrollIntoView from 'scroll-into-view-if-needed'
+import { Feather } from './Tools'
 
 type InputPanelPropsT = {
   title?: string
@@ -50,7 +50,7 @@ export const InputPanel: React.FC<InputPanelPropsT> = ({
           onMouseEnter={onMouseEnter}
           onMouseLeave={onMouseLeave}
         >
-          {info === true && <Info size={14} color='rgb(255,67,10)' />}
+          {info === true && <Feather name='Info' />}
         </span>
         {hoverContent && (
           <HoverBox

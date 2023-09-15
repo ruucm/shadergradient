@@ -1,5 +1,11 @@
 # shadergradient
 
+## 1.2.0
+
+### Minor Changes
+
+- 1.0 launch
+
 ## 1.1.6
 
 ### Patch Changes

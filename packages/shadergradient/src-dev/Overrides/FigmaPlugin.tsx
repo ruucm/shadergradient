@@ -79,6 +79,7 @@ export function checkEnabled(Component): ComponentType {
         {...props}
         style={{ ...style, cursor: 'pointer', opacity: enabled ? 1 : 0.5 }}
         onTap={() => {
+          // @ts-ignore
           if (enabled === false) {
             props?.onError()
           } else {

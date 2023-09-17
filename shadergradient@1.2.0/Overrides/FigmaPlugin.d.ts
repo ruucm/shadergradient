@@ -26,4 +26,5 @@ export declare function LoadViewAfterStyleSheet(Component: any): ComponentType;
 export declare function HideScrollBar(Component: any): ComponentType;
 export declare function GIFStatusOverride(Component: any): ComponentType;
 export declare function Timeline(Component: any): ComponentType;
+export declare function StartTrial(Component: any): ComponentType;
 //# sourceMappingURL=FigmaPlugin.d.ts.map

@@ -9,8 +9,8 @@ type ButtonPropsT = {
 >
 
 const ButtonKind = {
-  primary: 'bg-primary-dev text-white',
-  secondary: 'ring-1 ring-primary text-primary-dev',
+  primary: 'bg-primary text-white',
+  secondary: 'ring-1 ring-primary text-primary',
 }
 
 export const Button: React.FC<ButtonPropsT> = ({

@@ -189,10 +189,8 @@ export function extractGIF(Component): ComponentType {
               if (needSubscribe)
                 props?.onTapGIFU() // move to the upgrade variant
               else {
-                if (!userDB) {
-                  insertRow({ figma_user_id, trial_started_at: new Date() })
-                  props?.onTapGIFN()
-                } else {
+                if (!userDB) props?.onTapGIFN()
+                else {
                   // start to extract GIF
                   setProgress(0)
                   console.log('startTime', Date.now())
@@ -293,6 +291,7 @@ export function extractGIFDEV(Component): ComponentType {
 export function subscribeLink(Component): ComponentType {
   return (props) => {
     const [figma] = useFigma()
+    const [userDB] = useUserDB()
     const [billingInterval] = useBillingInterval()
     const isYearly = billingInterval === 'year'
 
@@ -301,7 +300,9 @@ export function subscribeLink(Component): ComponentType {
         {...props}
         href={`${
           isYearly ? STRIPE_BUY_YEARLY_URL : STRIPE_BUY_MONTHLY_URL
-        }?client_reference_id=${figma.user?.id}`}
+        }?prefilled_email=${encodeURIComponent(
+          userDB?.email
+        )}&client_reference_id=${figma.user?.id}`}
       />
     )
   }
@@ -725,4 +726,22 @@ function getTrialLeft(trial_started_at) {
   // console.log('diffInDays', diffInDays)
   if (diffInDays < 0) return 0
   return Math.round(diffInDays)
+}
+
+export function StartTrial(Component): ComponentType {
+  return (props: any) => {
+    const [, , insertRow] = useDBTable('users', 'sg-figma')
+    const [figma] = useFigma()
+    const figma_user_id = figma.user?.id
+
+    return (
+      <Component
+        {...props}
+        onSubmit={(email) => {
+          insertRow({ email, figma_user_id, trial_started_at: new Date() })
+          props?.onSubmit()
+        }}
+      />
+    )
+  }
 }

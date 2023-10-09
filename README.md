@@ -128,7 +128,7 @@ function App() {
 }
 ```
 
-or just copy and paste URL of the gradients. (Grab the URL from [shadergradient.co/customize](www.shadergradient.co/customize))
+or just copy and paste URL of the gradients. (Grab the URL from [shadergradient.co/customize](https://www.shadergradient.co/customize))
 
 ```tsx
 import React from 'react'

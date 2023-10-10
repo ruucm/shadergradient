@@ -31,7 +31,7 @@
   },
   "license": "MIT",
   "scripts": {
-    "build": "node esmbuild/esmbuild build ./src dist && tailwindcss -i ./src/styles.css -o ./dist/styles.css --minify",
+    "build": "node esmbuild/esmbuild-render build ./src dist && tailwindcss -i ./src/styles.css -o ./dist/styles.css --minify",
     "render:build": "tailwindcss -i ./src/styles.css -o ./dist/styles.css --minify && node esmbuild/esmbuild-render build",
     "render:serve": "node esmbuild/render-serve",
     "start": "tailwindcss -i ./src/styles.css -o ./dist/styles.css && node esmbuild/esmbuild-render serve",

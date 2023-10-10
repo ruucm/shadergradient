@@ -11,6 +11,7 @@ const fs = require('fs')
 // consts
 const devOutdir = join(process.cwd(), 'dist/dev')
 const prodOutdir = join(process.cwd(), 'dist/prod')
+const baseOutdir = join(process.cwd(), 'dist')
 const devPath = join(process.cwd(), 'src-dev')
 const prodPath = join(process.cwd(), 'src')
 
@@ -100,27 +101,33 @@ async function localBuild() {
 }
 
 async function build() {
-  const devResult = await esbuild.build({
-    outdir: devOutdir,
-    metafile: true,
-    ...(await getBuildOptions(devPath)),
-  })
-  const prodResult = await esbuild.build({
-    outdir: prodOutdir,
-    metafile: true,
+  // const devResult = await esbuild.build({
+  //   outdir: devOutdir,
+  //   metafile: true,
+  //   ...(await getBuildOptions(devPath)),
+  // })
+  // const prodResult = await esbuild.build({
+  //   outdir: prodOutdir,
+  //   metafile: true,
+  //   ...(await getBuildOptions(prodPath)),
+  // })
+
+  // fs.writeFileSync(
+  //   './dist/meta-devResult.json',
+  //   JSON.stringify(devResult.metafile)
+  // )
+  // fs.writeFileSync(
+  //   './dist/meta-prodResult.json',
+  //   JSON.stringify(prodResult.metafile)
+  // )
+
+  // console.log(`Build done`)
+
+  await esbuild.build({
+    outdir: baseOutdir,
     ...(await getBuildOptions(prodPath)),
   })
-
-  fs.writeFileSync(
-    './dist/meta-devResult.json',
-    JSON.stringify(devResult.metafile)
-  )
-  fs.writeFileSync(
-    './dist/meta-prodResult.json',
-    JSON.stringify(prodResult.metafile)
-  )
-
-  console.log(`Build done`)
+  console.log(`Build done at ${baseOutdir}`)
 }
 
 function onRequest(info) {

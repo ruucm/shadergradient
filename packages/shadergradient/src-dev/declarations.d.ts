@@ -18,3 +18,11 @@ declare global {
   function GIFEncoder(): void
   function encode64(input: string): string
 }
+
+// for common modules
+declare module '*.glsl'
+
+declare module '*.module.css'
+declare module '*.module.scss'
+
+declare module 'https://framer.com/m/*'

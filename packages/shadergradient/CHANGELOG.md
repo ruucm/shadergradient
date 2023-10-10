@@ -1,5 +1,11 @@
 # shadergradient
 
+## 1.2.2
+
+### Patch Changes
+
+- sync src-dev to src (prod)
+
 ## 1.2.1
 
 ### Patch Changes

@@ -163,7 +163,7 @@ For general React environments (with separated store code):
 
 `'shadergradient' → '/dist/without-store.mjs'`
 
-For React (convenient for use with store code and control UI components - used in apps/web & shadergradient-web.vercel.app):
+For React (convenient for use with store code and control UI components - used in apps/web: [shadergradient-web.vercel.app/customize](https://shadergradient-web.vercel.app/customize)):
 
 `'shadergradient/with-store' → '/dist/with-store.mjs'`
 

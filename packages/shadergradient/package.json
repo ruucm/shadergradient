@@ -1,16 +1,19 @@
 {
   "name": "shadergradient",
   "version": "1.2.2",
+  "files": [
+    "dist/"
+  ],
+  "main": "dist/without-store.mjs",
   "exports": {
-    ".": "./dist",
+    ".": {
+      "import": "./dist/without-store.mjs",
+      "types": "./dist/without-store.d.ts"
+    },
     "./*": "./dist/*",
     "./styles.css": "./dist/styles.css"
   },
-  "main": "dist/without-store.mjs",
   "types": "./dist/without-store.d.ts",
-  "files": [
-    "dist"
-  ],
   "license": "MIT",
   "scripts": {
     "build": "node esmbuild/esmbuild build ./src dist && tailwindcss -i ./src/styles.css -o ./dist/styles.css --minify",

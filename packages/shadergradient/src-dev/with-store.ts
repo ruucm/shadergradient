@@ -1,5 +1,6 @@
 export * from './StoreGradientCanvas'
 export * from './Gradient/StoreGradient'
+export * from './Gradient/Background'
 
 // TODO: separate controls as a package (to do we should remove store stuff in the Gradient package first)
 export * from './controls'

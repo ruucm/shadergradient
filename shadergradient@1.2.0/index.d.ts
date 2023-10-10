@@ -1,5 +1,5 @@
-export * from './GradientCanvas';
-export * from './Gradient';
+export * from './ShaderGradientCanvas';
+export * from './Gradient/ShaderGradient';
 export * from './controls';
 export { useUIStore, useCursorStore, updateGradientState, PRESETS, } from './store';
 export { mainLoading, aboutPositions, aboutRotations, aboutAngles, } from './consts';

@@ -100,34 +100,38 @@ async function localBuild() {
   })
 }
 
+// build for npm
 async function build() {
-  // const devResult = await esbuild.build({
-  //   outdir: devOutdir,
-  //   metafile: true,
-  //   ...(await getBuildOptions(devPath)),
-  // })
-  // const prodResult = await esbuild.build({
-  //   outdir: prodOutdir,
-  //   metafile: true,
-  //   ...(await getBuildOptions(prodPath)),
-  // })
-
-  // fs.writeFileSync(
-  //   './dist/meta-devResult.json',
-  //   JSON.stringify(devResult.metafile)
-  // )
-  // fs.writeFileSync(
-  //   './dist/meta-prodResult.json',
-  //   JSON.stringify(prodResult.metafile)
-  // )
-
-  // console.log(`Build done`)
-
   await esbuild.build({
     outdir: baseOutdir,
     ...(await getBuildOptions(prodPath)),
   })
   console.log(`Build done at ${baseOutdir}`)
+}
+
+// build for dynamic serve of built files on render.com
+async function renderBuild() {
+  const devResult = await esbuild.build({
+    outdir: devOutdir,
+    metafile: true,
+    ...(await getBuildOptions(devPath)),
+  })
+  const prodResult = await esbuild.build({
+    outdir: prodOutdir,
+    metafile: true,
+    ...(await getBuildOptions(prodPath)),
+  })
+
+  fs.writeFileSync(
+    './dist/meta-devResult.json',
+    JSON.stringify(devResult.metafile)
+  )
+  fs.writeFileSync(
+    './dist/meta-prodResult.json',
+    JSON.stringify(prodResult.metafile)
+  )
+
+  console.log(`Build done`)
 }
 
 function onRequest(info) {
@@ -185,6 +189,8 @@ if (command === 'serve') {
   serve(mode)
 } else if (command === 'build') {
   build()
+} else if (command === 'renderBuild') {
+  renderBuild()
 } else {
   console.log(`Usage:\n  $ esbuild serve src 8000\n  $ esbuild build src dist`)
 }

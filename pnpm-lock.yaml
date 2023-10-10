@@ -69,7 +69,7 @@ importers:
         specifier: 5.0.1
         version: 5.0.1(@babel/plugin-syntax-flow@7.18.6)(@babel/plugin-transform-react-jsx@7.21.0)(eslint@8.36.0)(react@18.2.0)(typescript@4.9.5)
       shadergradient:
-        specifier: workspace:*
+        specifier: ^1.2.2
         version: link:../../packages/shadergradient
       three:
         specifier: ^0.150.1
@@ -111,7 +111,7 @@ importers:
         specifier: ^18.2.0
         version: 18.2.0(react@18.2.0)
       shadergradient:
-        specifier: workspace:*
+        specifier: ^1.2.2
         version: link:../../packages/shadergradient
       three:
         specifier: ^0.150.1

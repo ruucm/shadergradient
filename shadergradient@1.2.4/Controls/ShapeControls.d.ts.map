@@ -1,0 +1,1 @@
+{"version":3,"file":"ShapeControls.d.ts","sourceRoot":"","sources":["../../src-dev/Controls/ShapeControls.tsx"],"names":[],"mappings":"AAAA,OAAO,KAAK,KAAK,MAAM,OAAO,CAAA;AAK9B,KAAK,mBAAmB,GAAG,KAAK,CAAC,iBAAiB,CAChD,KAAK,CAAC,cAAc,CAAC,cAAc,CAAC,EACpC,cAAc,CACf,CAAA;AAED,eAAO,MAAM,aAAa,EAAE,KAAK,CAAC,EAAE,CAAC,mBAAmB,CA0JvD,CAAA"}

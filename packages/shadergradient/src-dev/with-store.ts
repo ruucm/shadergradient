@@ -1,3 +1,6 @@
+export * from './StoreGradientCanvas'
+export * from './Gradient/StoreGradient'
+
 // TODO: separate controls as a package (to do we should remove store stuff in the Gradient package first)
 export * from './controls'
 
@@ -15,5 +18,3 @@ export {
   aboutAngles,
 } from './consts'
 export { cx } from './utils'
-
-export * from './Overrides'

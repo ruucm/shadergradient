@@ -147,6 +147,7 @@ async function getBuildOptions(path) {
       `${path}/ui.ts`,
       `${path}/with-store.ts`,
       `${path}/without-store.ts`,
+      `${path}/figma-overrides.ts`,
       isDev && `${path}/isDev.ts`,
     ].filter(Boolean),
     minify: true,

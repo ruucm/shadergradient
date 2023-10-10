@@ -10,10 +10,25 @@
       "import": "./dist/without-store.mjs",
       "types": "./dist/without-store.d.ts"
     },
+    "./with-store": {
+      "import": "./dist/with-store.mjs",
+      "types": "./dist/with-store.d.ts"
+    },
+    "./figma-overrides": {
+      "import": "./dist/figma-overrides.mjs",
+      "types": "./dist/figma-overrides.d.ts"
+    },
     "./*": "./dist/*",
     "./styles.css": "./dist/styles.css"
   },
-  "types": "./dist/without-store.d.ts",
+  "typesVersions": {
+    "*": {
+      "*": [
+        "./dist/*.d.ts",
+        "./dist/index.d.ts"
+      ]
+    }
+  },
   "license": "MIT",
   "scripts": {
     "build": "node esmbuild/esmbuild build ./src dist && tailwindcss -i ./src/styles.css -o ./dist/styles.css --minify",

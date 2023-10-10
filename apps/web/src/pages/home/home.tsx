@@ -1,13 +1,13 @@
 import Link from 'next/link'
 import { useState, useEffect } from 'react'
 import {
-  Gradient,
+  StoreGradient,
   PresetTitles,
   useUIStore,
   mainLoading,
   PRESETS,
   useCursorStore,
-} from 'shadergradient'
+} from 'shadergradient/with-store'
 import { TextHover, LoaderRoot } from 'shadergradient/ui'
 import styles from './Home.module.scss'
 import { motion } from 'framer-motion'
@@ -165,7 +165,7 @@ export default function Page(props) {
 // It will receive same props as the Page component (from getStaticProps, etc.)
 Page.canvas = (props) => (
   <>
-    <Gradient />
+    <StoreGradient />
   </>
 )
 

@@ -1,9 +1,9 @@
 import {
-  Gradient,
+  StoreGradient,
   TestControl,
   AllControls,
   PresetTitles,
-} from 'shadergradient'
+} from 'shadergradient/with-store'
 import { Button, Card, NumberInput } from 'shadergradient/ui'
 
 // Dom components go here
@@ -23,7 +23,7 @@ export default function Page(props) {
 
 Page.canvas = (props) => (
   <>
-    <Gradient control='query' />
+    <StoreGradient control='query' />
   </>
 )
 

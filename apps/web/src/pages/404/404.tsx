@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { Gradient } from 'shadergradient'
+import { StoreGradient } from 'shadergradient/with-store'
 import { TextHover } from 'shadergradient/ui'
 
 // custom pages/404.jsx !! Do not remove please or it will break build
@@ -43,7 +43,7 @@ export default function Page() {
 }
 
 Page.canvas = (props) => (
-  <Gradient
+  <StoreGradient
     positionX={0}
     positionY={-3}
     positionZ={0}

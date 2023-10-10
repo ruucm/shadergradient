@@ -4,7 +4,7 @@ import { motion } from 'framer-motion'
 import dynamic from 'next/dynamic'
 import Link from 'next/link'
 import { Instagram } from 'react-feather'
-import { Gradient, PRESETS, useUIStore } from 'shadergradient'
+import { StoreGradient, PRESETS, useUIStore } from 'shadergradient/with-store'
 import { TextHover } from 'shadergradient/ui'
 
 import styles from '../home/Home.module.scss'
@@ -168,7 +168,9 @@ export default function Page() {
 }
 
 // canvas components goes here
-Page.canvas = (props) => <Gradient dampingFactor={0.03} type='waterPlane' />
+Page.canvas = (props) => (
+  <StoreGradient dampingFactor={0.03} type='waterPlane' />
+)
 
 const WaitlistInput: any = dynamic(
   () =>

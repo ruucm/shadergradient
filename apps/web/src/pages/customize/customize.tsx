@@ -6,8 +6,8 @@ import {
   // PreviewWrapper,
   PresetTitles,
   AllControls,
-  Gradient,
-} from 'shadergradient'
+  StoreGradient,
+} from 'shadergradient/with-store'
 import styles from '../home/Home.module.scss'
 
 // Dynamic import is used to prevent a payload when the website start that will include threejs r3f etc..
@@ -78,7 +78,7 @@ export default function Page() {
 
 Page.canvas = (props) => (
   <>
-    <Gradient />
+    <StoreGradient />
   </>
 )
 

@@ -3,13 +3,13 @@ import { motion } from 'framer-motion'
 
 import {
   useUIStore,
-  Gradient,
+  StoreGradient,
   aboutPositions,
   aboutRotations,
   aboutAngles,
   // Links,
   cx,
-} from 'shadergradient'
+} from 'shadergradient/with-store'
 import { TextAnimation, TextHoverBox } from 'shadergradient/ui'
 
 export default function Page() {
@@ -186,7 +186,7 @@ export default function Page() {
   )
 }
 Page.canvas = (props) => (
-  <Gradient
+  <StoreGradient
     zoomOut={true}
     animate={'on'}
     cAzimuthAngle={aboutAngles[0]}

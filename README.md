@@ -159,27 +159,24 @@ function App() {
 
 ### [npm]
 
-For general React environments (with separated store code):
+1. For general React environments (with separated store code):
+   `'shadergradient' → '/dist/without-store.mjs'`
 
-`'shadergradient' → '/dist/without-store.mjs'`
-
-For React (convenient for use with control UI components\*):
-
-`'shadergradient/with-store' → '/dist/with-store.mjs'`
-
-e.g) [shadergradient-web.vercel.app/customize](https://shadergradient-web.vercel.app/customize) (Next.js)
+2. For React (convenient for use with control UI components\*):
+   `'shadergradient/with-store' → '/dist/with-store.mjs'`
+   e.g) [shadergradient-web.vercel.app/customize](https://shadergradient-web.vercel.app/customize) (Next.js)
 
 ### [esm]
 
-For ESM-supported React applications: https://esm-shadergradient.onrender.com/without-store.mjs
+1. For ESM-supported React applications: https://esm-shadergradient.onrender.com/without-store.mjs
 
-For use in the Framer canvas (convenient for use with control UI components\*) : https://esm-shadergradient.onrender.com/with-store.mjs
+   For use in the Framer canvas (convenient for use with control UI components\*) : https://esm-shadergradient.onrender.com/with-store.mjs
 
-e.g) [shadergradient.co/customize](https://www.shadergradient.co/customize) (Framer Sites)
+   e.g) [shadergradient.co/customize](https://www.shadergradient.co/customize) (Framer Sites)
 
-For use in Figma plugins (mixed with DB code): https://esm-shadergradient.onrender.com/figma-overrides.mjs
+2. For use in Figma plugins (mixed with DB code): https://esm-shadergradient.onrender.com/figma-overrides.mjs
 
-(All ESM modules are dynamically served based on client ips. We call it as "ESM Editor" and used it for dev purposes.)
+   (All ESM modules are dynamically served based on client ips. We call it as "ESM Editor" and used it for dev purposes.)
 
 \* `with-store.mjs` includes store codes (zustand) that is also used on the control UIs. So can sync states of gradient & controls without adding any codes.
 

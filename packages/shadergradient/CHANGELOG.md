@@ -1,5 +1,11 @@
 # shadergradient
 
+## 1.2.3
+
+### Patch Changes
+
+- restore shadergradient/with-store
+
 ## 1.2.2
 
 ### Patch Changes

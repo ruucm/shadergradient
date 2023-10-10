@@ -175,7 +175,9 @@ For use in the Framer canvas (convenient for use with control UI components\*) :
 
 For use in Figma plugins (mixed with DB code): https://esm-shadergradient.onrender.com/figma-overrides.mjs
 
-- `with-store.mjs` includes store codes (zustand) that is also used on the control UIs. So can sync states of gradient & controls without adding any codes.
+(All ESM modules are dynamically served based on client ips. We call it as "ESM Editor" and used it for dev purposes.)
+
+\* `with-store.mjs` includes store codes (zustand) that is also used on the control UIs. So can sync states of gradient & controls without adding any codes.
 
 # Examples
 

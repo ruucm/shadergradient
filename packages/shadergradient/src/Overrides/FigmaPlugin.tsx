@@ -730,7 +730,7 @@ function getTrialLeft(trial_started_at) {
 
 export function StartTrial(Component): ComponentType {
   return (props: any) => {
-    const [, , insertRow] = useDBTable('users', 'sg-figma')
+    const [, , insertRow] = useDBTable('users', 'sg-figma-t')
     const [figma] = useFigma()
     const figma_user_id = figma.user?.id
 

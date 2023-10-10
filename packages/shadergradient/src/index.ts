@@ -1,5 +1,5 @@
-export * from './GradientCanvas'
-export * from './Gradient'
+export * from './ShaderGradientCanvas'
+export * from './Gradient/ShaderGradient'
 
 // TODO: separate controls as a package (to do we should remove store stuff in the Gradient package first)
 export * from './controls'

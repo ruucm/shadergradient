@@ -3,6 +3,13 @@ import { Lights, Mesh, Axis, CameraControl } from './comps-without-store'
 import { GradientT } from '../types'
 import * as qs from 'query-string'
 import { formatUrlString } from '@/utils'
+import { PRESETS } from '@/store/presets'
+
+const defaultProps = qs.parse(formatUrlString(PRESETS[0].url), {
+  parseNumbers: true,
+  parseBooleans: true,
+  arrayFormat: 'index',
+}) // from the Halo preset
 
 export function ShaderGradient({
   control = 'props',
@@ -12,7 +19,7 @@ export function ShaderGradient({
   isFigmaPlugin = false,
   ...props
 }: GradientT) {
-  let controlProps = props
+  let controlProps = { ...defaultProps, ...props }
   if (control === 'query')
     controlProps = qs.parse(formatUrlString(props.urlString), {
       parseNumbers: true,

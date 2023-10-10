@@ -184,6 +184,20 @@ pnpm install
 pnpm dev
 ```
 
+## Release
+
+```
+pnpm changeset
+```
+
+```
+pnpm version-packages
+```
+
+```
+pnpm release
+```
+
 # Future Plan
 
 - [ ] Detatch framer-motion peer depenency (Seperate UI & Store Pacakge)

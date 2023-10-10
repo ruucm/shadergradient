@@ -62,14 +62,14 @@ const nextConfig = {
 
     return config
   },
-  async redirects() {
-    if (isDev) return []
-    return ['/404', '/about', '/customize', '/', '/figma-plugin'].map((p) => ({
-      source: p,
-      destination: '/comingsoon',
-      permanent: true,
-    }))
-  },
+  // async redirects() {
+  //   if (isDev) return []
+  //   return ['/404', '/about', '/customize', '/', '/figma-plugin'].map((p) => ({
+  //     source: p,
+  //     destination: '/comingsoon',
+  //     permanent: true,
+  //   }))
+  // },
   pageExtensions: ['page.ts', 'page.tsx', 'api.ts', 'api.tsx'],
 }
 

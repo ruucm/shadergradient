@@ -155,6 +155,26 @@ function App() {
 }
 ```
 
+## More Package Details
+
+### [npm]
+
+For general React environments (with separated store code):
+
+`'shadergradient' → '/dist/without-store.mjs'`
+
+For React (convenient for use with store code and control UI components - used in apps/web & shadergradient-web.vercel.app):
+
+`'shadergradient/with-store' → '/dist/with-store.mjs'`
+
+### [esm]
+
+For ESM-supported React applications: https://esm-shadergradient.onrender.com/without-store.mjs
+
+For use in the Framer canvas: https://esm-shadergradient.onrender.com/with-store.mjs
+
+For use in Figma plugins (mixed with DB code): https://esm-shadergradient.onrender.com/figma-overrides.mjs
+
 # Examples
 
 ## Figma

@@ -24,10 +24,11 @@ figma.ui.onmessage = (msg) => {
       postMessageUserInfo()
       break
     case 'SNAPSHOT':
+      let selections = figma.currentPage.selection
+      if (selections.length === 0) selections = [createRect()]
+      console.log('selections (SNAPSHOT)', selections)
       Promise.all(
-        figma.currentPage.selection.map((selected) =>
-          replaceToNewImage(selected, msg.bytes)
-        )
+        selections.map((selected) => replaceToNewImage(selected, msg.bytes))
       ).then(() => {
         console.log('complete')
       })
@@ -80,4 +81,11 @@ function postMessageSelection() {
 function postMessageUserInfo() {
   const user = figma.currentUser
   figma.ui.postMessage({ type: 'USER_INFO', user })
+}
+
+function createRect() {
+  const rectangle = figma.createRectangle()
+  rectangle.resize(300, 300)
+
+  return rectangle
 }

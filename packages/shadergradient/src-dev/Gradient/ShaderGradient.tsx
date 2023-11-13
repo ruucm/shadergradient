@@ -29,7 +29,7 @@ export function ShaderGradient({
   const { lightType, envPreset, brightness, grain, toggleAxis, ...others } =
     controlProps
 
-  usePostProcessing(grain === 'off')
+  // usePostProcessing(grain === 'off')
 
   return (
     <>

@@ -5,9 +5,9 @@ import { useEffect, useRef } from 'react'
 
 // const figmaPluginSite =
 // 'https://violet-reservation-285715.framer.app/figma-plugin' // dev
-// const figmaPluginSite =
-// 'https://thriving-instance-690163.framer.app/figma-plugin' // staging
-const figmaPluginSite = 'https://shadergradient.co/figma-plugin'
+const figmaPluginSite =
+  'https://thriving-instance-690163.framer.app/figma-plugin' // staging
+// const figmaPluginSite = 'https://shadergradient.co/figma-plugin'
 
 const App = () => {
   useShareMessages()

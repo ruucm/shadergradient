@@ -19,3 +19,6 @@ export {
   aboutAngles,
 } from './consts'
 export { cx } from './utils'
+
+// to use the same store in the FigmaPlugin
+export * from './Overrides/FigmaPlugin'

@@ -175,7 +175,7 @@ function App() {
 
    e.g) [shadergradient.co/customize](https://www.shadergradient.co/customize) (Framer Sites)
 
-2. For use in Figma plugins (mixed with DB code): https://esm-shadergradient.onrender.com/figma-overrides.mjs
+2. For use in Figma plugins (mixed with DB code / Use the same store of the StoreGradient): https://esm-shadergradient.onrender.com/with-store.mjs
 
    (All ESM modules are dynamically served based on client ips. We call it as "ESM Editor" and used it for dev purposes.)
 

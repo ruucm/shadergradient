@@ -14,10 +14,6 @@
       "import": "./dist/with-store.mjs",
       "types": "./dist/with-store.d.ts"
     },
-    "./figma-overrides": {
-      "import": "./dist/figma-overrides.mjs",
-      "types": "./dist/figma-overrides.d.ts"
-    },
     "./*": "./dist/*",
     "./styles.css": "./dist/styles.css"
   },

@@ -1,0 +1,7 @@
+{
+  "https://framer.com/m/SupabaseConnector-ARlr.js": { "resolved": "https://framerusercontent.com/modules/q5QEwtxMKZ2Zx3ZpypmB/tpcy2qcLp3Y8rdTpKqeS/SupabaseConnector.js", "integrity": "sha512-TpT7X7s4N88nHLZ7ek3Zv1mqSUq32rwqBlbAGH/x+tLgMB6SF78JGLebypzC08t7r7MTvW0S5FEwgbkUOdpLDw==", "contentType": "text/javascript; charset=UTF-8" },
+  "https://framer.com/m/framer/store.js@^1.0.0": { "resolved": "https://framerusercontent.com/modules/vj7bFUjvEQFgEzNBkdoG/vf3CKm378wlVcBk7IhSU/createStore.js", "integrity": "sha512-FsD279LYALM6A2zduNzJlmlfjGR+p1GPcdrMyBgJnwmBvWdzsIE1Zb7yfzOmxlPmRxPgYAtAAa4er6bQvrcF2A==", "contentType": "text/javascript; charset=UTF-8" },
+  "https://framerusercontent.com/modules/3ItvfWmwH8GWpeRKSZ68/fzJLukTnIn25s81PICFt/useDBTable.js": { "integrity": "sha512-uyGniRmfl5ZwHV/961VciYQP6wOkSS2Qyv9bBHev15cMgtZbGQFwCtaXpkASsRd92PeKjriWH8J+B+AxQy7kTA==", "contentType": "text/javascript; charset=UTF-8" },
+  "https://framerusercontent.com/modules/UM8FQLBBXHSBlSiHbdjS/Bf8dlUJr0dMPWq5PVfmL/globals.js": { "integrity": "sha512-GMUzjfECIOZVfxPbXycmTBXoQnJ2sUZLazPgLPHyuDOBxJhbgkp2MoLZf4tGnyLzAgtmKGtUc/cszvGZhqWvUQ==", "contentType": "text/javascript; charset=UTF-8" },
+  "version": 1
+}

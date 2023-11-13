@@ -84,8 +84,14 @@ function postMessageUserInfo() {
 }
 
 function createRect() {
+  // Create a Rectangle
   const rectangle = figma.createRectangle()
-  rectangle.resize(300, 300)
+  rectangle.resize(300, 200)
+
+  // Position the Rectangle at the Center of the Current Viewport
+  const viewportCenter = figma.viewport.center
+  rectangle.x = viewportCenter.x - rectangle.width / 2
+  rectangle.y = viewportCenter.y - rectangle.height / 2
 
   return rectangle
 }

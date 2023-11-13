@@ -1,15 +1,15 @@
 import { useState } from 'react'
 
 export function useContextLostFallback() {
-  const [contextLost, setContextLost] = useState(false)
+  const [contextLost, setContextLost] = useState(-1)
 
   const handleContextEvents = (state) => {
     const renderer = state.gl.domElement
 
     const handleContextLost = (event) => {
       event.preventDefault()
-      setContextLost(true)
-      console.log('[Context Lost.]')
+      setContextLost(1)
+      console.log('[Context Lost]')
       //   console.log('renderer', renderer)
 
       //   const gl = renderer.getContext('webgl')
@@ -21,8 +21,8 @@ export function useContextLostFallback() {
     }
 
     const handleContextRestored = () => {
-      setContextLost(false)
-      console.log('[Context Restored.]')
+      setContextLost(0)
+      console.log('[Context Restored]')
       // Additional reinitialization if needed
     }
 

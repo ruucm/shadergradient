@@ -10,31 +10,32 @@ export function useContextLostFallback() {
       event.preventDefault()
       setContextLost(1)
       console.log('[Context Lost]')
-      const canvas = event.srcElement
-      console.log('canvas', canvas)
-
-      // const gl = canvas.getContext('webgl')
-      // console.log('gl', gl)
-      //   const ext = gl.getExtension('WEBGL_lose_context')
-      //   console.log('ext', ext)
     }
 
     const handleContextRestored = (event) => {
       setContextLost(0)
       console.log('[Context Restored]')
-      const canvas = event.srcElement
-      console.log('canvas (restored)', canvas)
       // Additional reinitialization if needed
+    }
+
+    const handleContextError = (event) => {
+      setContextLost(2)
+      console.log('[Context Error]')
     }
 
     renderer.addEventListener('webglcontextlost', handleContextLost)
     renderer.addEventListener('webglcontextrestored', handleContextRestored)
+    renderer.addEventListener('webglcontextcreationerror', handleContextError)
 
     return () => {
       renderer.removeEventListener('webglcontextlost', handleContextLost)
       renderer.removeEventListener(
         'webglcontextrestored',
         handleContextRestored
+      )
+      renderer.removeEventListener(
+        'webglcontextcreationerror',
+        handleContextError
       )
     }
   }

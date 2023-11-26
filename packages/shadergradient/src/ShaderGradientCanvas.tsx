@@ -11,7 +11,7 @@ export function ShaderGradientCanvas({
 }: any) {
   const [contextLost, handleContextEvents]: any = useContextLostFallback()
 
-  if (contextLost === 1) return <WebGLContextLostPlaceholder />
+  if (contextLost === 1) return <Placeholder />
   return (
     <>
       {/* Disable drag rotations of gradeint (for Framer & Figma) */}
@@ -31,7 +31,9 @@ export function ShaderGradientCanvas({
   )
 }
 
-function WebGLContextLostPlaceholder() {
+export function Placeholder({
+  title = 'The graphics context has been lost. Please wait while we try to restore it...',
+}) {
   return (
     <div
       style={{
@@ -40,7 +42,7 @@ function WebGLContextLostPlaceholder() {
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
-        background: 'linear-gradient(to right, #ff7e5f, #feb47b)', // Example gradient
+        background: 'linear-gradient(to right, #ff7e5f, #feb47b)',
         color: 'white',
         fontSize: '20px',
         textAlign: 'center',
@@ -49,10 +51,7 @@ function WebGLContextLostPlaceholder() {
         fontWeight: '500',
       }}
     >
-      <p>
-        The graphics context has been lost. Please wait while we try to restore
-        it...
-      </p>
+      <p>{title}</p>
     </div>
   )
 }

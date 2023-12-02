@@ -50,6 +50,7 @@ export function TextHover({
   onClick = () => void 0,
   border = false,
   fontWeight = 400,
+  isFramerCanvas = false,
 }) {
   return (
     // @ts-ignore
@@ -71,7 +72,7 @@ export function TextHover({
       >
         <motion.h1
           variants={letterContainerVariants}
-          initial={'initial'}
+          initial={isFramerCanvas ? 'default' : 'initial'}
           whileInView={'default'}
           whileHover={'hover'}
           style={{

@@ -16,6 +16,7 @@ export function PresetTitle({
   fontSize = 120,
   isMobile = false,
   arrowOn = true,
+  isFramerCanvas = false,
 }) {
   const activePreset = useUIStore((state) => state.activePreset)
   const setActivePreset = useUIStore((state) => state.setActivePreset)
@@ -140,6 +141,7 @@ export function PresetTitle({
             yBefore={50}
             //default 120, for mobile title 80, for customize 50
             content={isMobile === true ? title.substring(3) : title}
+            isFramerCanvas={isFramerCanvas}
           />
         </div>
         <div

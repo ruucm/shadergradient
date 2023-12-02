@@ -5,6 +5,7 @@ export function PresetTitles({
   isMobile = false,
   fontSize = 120,
   arrowOn = true,
+  isFramerCanvas = false,
 }) {
   return (
     <>
@@ -22,6 +23,7 @@ export function PresetTitles({
             isMobile={isMobile}
             arrowOn={arrowOn}
             fontSize={fontSize}
+            isFramerCanvas={isFramerCanvas}
           ></PresetTitle>
         )
       })}

@@ -12,6 +12,7 @@ export function TextAnimation({
   font = null,
   textCenter = false,
   yBefore = 20,
+  isFramerCanvas = false,
 }) {
   //   const splitted = referer?.split('/') || []
 
@@ -74,7 +75,7 @@ export function TextAnimation({
           <motion.h1
             variants={letterContainerVariants}
             ref={ref}
-            initial={'before'}
+            initial={isFramerCanvas ? 'after' : 'before'}
             animate={controls}
           >
             <div

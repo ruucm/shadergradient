@@ -83,7 +83,11 @@ export const Mesh: React.FC<MeshT> = ({
   return (
     <group>
       {/* @ts-ignore */}
-      <animated.mesh position={animatedPosition} rotation={animatedRotation}>
+      <animated.mesh
+        position={animatedPosition}
+        rotation={animatedRotation}
+        name='shadergradient-mesh'
+      >
         {type === 'plane' && <planeGeometry args={[10, 10, 1, meshCount]} />}
         {type === 'sphere' && <icosahedronGeometry args={[1, meshCount / 3]} />}
         {type === 'waterPlane' && (

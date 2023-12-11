@@ -1,5 +1,11 @@
 # shadergradient
 
+## 1.2.5
+
+### Patch Changes
+
+- use r3f with the shadergradient
+
 ## 1.2.4
 
 ### Patch Changes

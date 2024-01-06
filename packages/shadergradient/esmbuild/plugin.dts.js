@@ -12,7 +12,7 @@ exports.dtsPlugin = () => {
             'tsc -p ./src-dev/tsconfig.json --emitDeclarationOnly --outDir dist'
           )
         } catch (error) {
-          console.log('[tsc error]', error)
+          // console.log('[tsc error]', error)
         }
       })
     },

@@ -20,6 +20,7 @@ const App = () => {
         loading='lazy'
         style={{ width: '100%', height: '100%', border: 'none' }}
       ></iframe>
+      {/* @ts-ignore */}
       <Corner />
     </div>
   )
@@ -83,4 +84,5 @@ function useShareMessages() {
   }, [])
 }
 
+// @ts-ignore
 ReactDOM.render(<App />, document.getElementById('react-page'))

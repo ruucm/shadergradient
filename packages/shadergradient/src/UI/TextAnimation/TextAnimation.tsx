@@ -79,7 +79,12 @@ export function TextAnimation({
             animate={controls}
           >
             <div
-              style={{ textAlign: 'left', fontSize: fontSize, color: color }}
+              style={{
+                textAlign: 'left',
+                fontSize: fontSize,
+                color: color,
+                fontWeight: 500,
+              }}
             >
               {content.split(' ').map((word: string, wordI: number) => (
                 <div

@@ -53,96 +53,93 @@ export function TextHover({
   isFramerCanvas = false,
 }) {
   return (
-    // @ts-ignore
-    <AnimatePresence>
-      <motion.div
+    <motion.div
+      style={{
+        position: 'relative',
+        wordBreak: 'break-word',
+        maxWidth: width === 0 ? 'fit-content' : width,
+        width: 'fit-content',
+        height: 'fit-content',
+        fontFamily: '"' + font + '", san-serif',
+        display: 'flex',
+        flexDirection: 'column',
+        color: color,
+        whiteSpace: 'nowrap',
+        userSelect: 'none',
+      }}
+    >
+      <motion.h1
+        variants={letterContainerVariants}
+        initial={isFramerCanvas ? 'default' : 'initial'}
+        whileInView={'default'}
+        whileHover={'hover'}
         style={{
-          position: 'relative',
-          wordBreak: 'break-word',
-          maxWidth: width === 0 ? 'fit-content' : width,
+          fontWeight: fontWeight,
+          margin: 0,
           width: 'fit-content',
-          height: 'fit-content',
-          fontFamily: '"' + font + '", san-serif',
-          display: 'flex',
-          flexDirection: 'column',
-          color: color,
-          whiteSpace: 'nowrap',
           userSelect: 'none',
         }}
+        transition={{ delay: delay }}
       >
-        <motion.h1
-          variants={letterContainerVariants}
-          initial={isFramerCanvas ? 'default' : 'initial'}
-          whileInView={'default'}
-          whileHover={'hover'}
+        <div
           style={{
-            fontWeight: fontWeight,
-            margin: 0,
-            width: 'fit-content',
-            userSelect: 'none',
+            textAlign: 'left',
+            fontSize: fontSize,
+            color: color,
+            display: 'flex',
+            flexWrap: 'wrap',
+            alignItems: 'center',
+            height: 'fit-content',
           }}
-          transition={{ delay: delay }}
         >
-          <div
-            style={{
-              textAlign: 'left',
-              fontSize: fontSize,
-              color: color,
-              display: 'flex',
-              flexWrap: 'wrap',
-              alignItems: 'center',
-              height: 'fit-content',
-            }}
-          >
-            {content.split(' ').map((word, wordI) => (
-              <div
-                key={`word-${word}-${wordI}`}
-                style={{
-                  height: 'fit-content',
-                  display: 'flex',
-                  alignItems: 'center',
-                }}
-              >
-                {Array.from(word).map((letter, index) => (
-                  <motion.div
-                    key={`${index}-${letter}`}
+          {content.split(' ').map((word, wordI) => (
+            <div
+              key={`word-${word}-${wordI}`}
+              style={{
+                height: 'fit-content',
+                display: 'flex',
+                alignItems: 'center',
+              }}
+            >
+              {Array.from(word).map((letter, index) => (
+                <motion.div
+                  key={`${index}-${letter}`}
+                  style={{
+                    width: 'fit-content',
+                    height: 'fit-content',
+                    overflow: 'hidden',
+                    position: 'relative',
+                    display: 'inline-block',
+                  }}
+                >
+                  <motion.span
+                    variants={letterVariants}
+                    transition={{ duration: 0.5 }}
                     style={{
-                      width: 'fit-content',
-                      height: 'fit-content',
-                      overflow: 'hidden',
                       position: 'relative',
                       display: 'inline-block',
-                    }}
+                    }} // Position elements
                   >
-                    <motion.span
-                      variants={letterVariants}
-                      transition={{ duration: 0.5 }}
-                      style={{
-                        position: 'relative',
-                        display: 'inline-block',
-                      }} // Position elements
-                    >
-                      {/* @ts-ignore */}
-                      {letter === ' ' ? '\u00A0' : letter}
-                    </motion.span>
-                  </motion.div>
-                ))}
-                {/* remove the last spacing */}
-                {wordI !== content.split(' ').length - 1 ? '\u00A0' : null}
-              </div>
-            ))}
-          </div>
-          {/* border */}
-          {border && (
-            <motion.div
-              style={{ background: color, height: 2, marginTop: 3 }}
-              initial={{ width: 0 }}
-              animate={{ width: '100%' }}
-              transition={{ delay: delay + 0.5 }}
-            />
-          )}
-        </motion.h1>
-      </motion.div>
-    </AnimatePresence>
+                    {/* @ts-ignore */}
+                    {letter === ' ' ? '\u00A0' : letter}
+                  </motion.span>
+                </motion.div>
+              ))}
+              {/* remove the last spacing */}
+              {wordI !== content.split(' ').length - 1 ? '\u00A0' : null}
+            </div>
+          ))}
+        </div>
+        {/* border */}
+        {border && (
+          <motion.div
+            style={{ background: color, height: 2, marginTop: 3 }}
+            initial={{ width: 0 }}
+            animate={{ width: '100%' }}
+            transition={{ delay: delay + 0.5 }}
+          />
+        )}
+      </motion.h1>
+    </motion.div>
   )
 }

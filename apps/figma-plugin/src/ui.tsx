@@ -5,10 +5,10 @@ import { useEffect, useRef } from 'react'
 
 // const figmaPluginSite =
 // 'https://violet-reservation-285715.framer.app/figma-plugin' // dev
-// const figmaPluginSite =
-//   'https://thriving-instance-690163.framer.app/figma-plugin' // staging
 const figmaPluginSite =
-  'https://thriving-instance-690163-0640d7d27.framer.app/figma-plugin' // 0640d7d27
+  'https://thriving-instance-690163.framer.app/figma-plugin' // staging
+// const figmaPluginSite =
+// 'https://thriving-instance-690163-0640d7d27.framer.app/figma-plugin' // 0640d7d27
 // const figmaPluginSite = 'https://shadergradient.co/figma-plugin'
 
 const App = () => {

@@ -194,7 +194,8 @@ function App() {
 ## React
 
 - CRA Starter: [CodeSandbox](https://codesandbox.io/p/sandbox/github/ruucm/shadergradient/tree/main/apps/example-cra?file=%2Fsrc%2FApp.tsx)
-- Next.js Starter: [CodeSandbox](https://codesandbox.io/p/sandbox/zjxeci?file=%2Fsrc%2Fpages%2Findex.tsx)
+- Next.js Starter (App Router): [CodeSandbox](https://codesandbox.io/p/sandbox/github/ruucm/shadergradient/tree/main/apps/example-nextjs-approuter)
+- Next.js Starter: [CodeSandbox](https://codesandbox.io/p/sandbox/github/ruucm/shadergradient/tree/main/apps/example-nextjs)
 
 # Contributing
 

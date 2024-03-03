@@ -120,7 +120,7 @@ export function extractGIF(Component): ComponentType {
 
     const [animate, setAnimate] = useQueryState('animate')
     const [, setUTime] = useQueryState('uTime')
-    const [range] = useQueryState('range')
+    const [range, setRange] = useQueryState('range')
     const [rangeStart] = useQueryState('rangeStart')
     const [rangeEnd] = useQueryState('rangeEnd')
     const [frameRate] = useQueryState('frameRate')
@@ -184,6 +184,8 @@ export function extractGIF(Component): ComponentType {
           style={{ ...style, cursor: 'pointer' }}
           onTapGIF={() => {
             controller = new AbortController() // need to make a new one on every exportings
+
+            setRange('enabled')
 
             if (enabled && valid) {
               if (needSubscribe)

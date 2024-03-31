@@ -49,4 +49,6 @@ export type GradientT = MeshT & {
   zoomOut?: boolean
   toggleAxis?: boolean
   hoverState?: string
+
+  enableTransition?: boolean
 }

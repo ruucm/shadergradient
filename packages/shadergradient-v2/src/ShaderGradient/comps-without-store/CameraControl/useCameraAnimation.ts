@@ -15,6 +15,7 @@ export function useCameraAnimation({
   cDistance,
   cameraZoom,
   zoomOut,
+  enableTransition,
 }) {
   const ref: any = useRef()
   const control = ref.current
@@ -23,7 +24,7 @@ export function useCameraAnimation({
 
   // rorate the camera
   useEffect(() => {
-    control?.rotateTo(dToR(cAzimuthAngle), dToR(cPolarAngle), true)
+    control?.rotateTo(dToR(cAzimuthAngle), dToR(cPolarAngle), enableTransition)
   }, [control, cAzimuthAngle, cPolarAngle])
 
   // zoom-out tool
@@ -31,20 +32,20 @@ export function useCameraAnimation({
     if (zoomOut) {
       // fixed distance & zoom
       if (type === 'sphere') {
-        control?.dollyTo(zoomOutSphere.distance, true)
-        control?.zoomTo(zoomOutSphere.zoom, true)
+        control?.dollyTo(zoomOutSphere.distance, enableTransition)
+        control?.zoomTo(zoomOutSphere.zoom, enableTransition)
       } else {
-        control?.dollyTo(zoomOutPlanes.distance, true)
-        control?.zoomTo(zoomOutPlanes.zoom, true)
+        control?.dollyTo(zoomOutPlanes.distance, enableTransition)
+        control?.zoomTo(zoomOutPlanes.zoom, enableTransition)
       }
     } else {
       // control distance for planes & zoom for sphere
       if (type === 'sphere') {
-        control?.zoomTo(cameraZoom, true)
-        control?.dollyTo(defaultSphereDistance, true)
+        control?.zoomTo(cameraZoom, enableTransition)
+        control?.dollyTo(defaultSphereDistance, enableTransition)
       } else {
-        control?.dollyTo(cDistance, true)
-        control?.zoomTo(defaultPlanesZoom, true)
+        control?.dollyTo(cDistance, enableTransition)
+        control?.zoomTo(defaultPlanesZoom, enableTransition)
       }
     }
   }, [control, zoomOut, type, cameraZoom, cDistance])

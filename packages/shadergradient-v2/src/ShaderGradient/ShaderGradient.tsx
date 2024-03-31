@@ -17,6 +17,7 @@ export function ShaderGradient({
   rotSpringOption,
   posSpringOption,
   isFigmaPlugin = false,
+  enableTransition = true,
   ...props
 }: GradientT) {
   let controlProps = { ...defaultProps, ...props }
@@ -45,7 +46,11 @@ export function ShaderGradient({
         posSpringOption={posSpringOption}
       />
       {toggleAxis && <Axis isFigmaPlugin={isFigmaPlugin} />}
-      <CameraControl dampingFactor={dampingFactor} {...others} />
+      <CameraControl
+        dampingFactor={dampingFactor}
+        enableTransition={enableTransition}
+        {...others}
+      />
     </>
   )
 }

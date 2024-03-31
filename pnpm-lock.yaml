@@ -48,11 +48,11 @@ importers:
         specifier: ^16.18.21
         version: 16.18.21
       '@types/react':
-        specifier: ^18.0.30
-        version: 18.0.30
+        specifier: ^18.2.73
+        version: 18.2.73
       '@types/react-dom':
-        specifier: ^18.0.11
-        version: 18.0.11
+        specifier: ^18.2.23
+        version: 18.2.23
       '@types/three':
         specifier: ^0.150.0
         version: 0.150.0
@@ -102,10 +102,10 @@ importers:
         specifier: ^16.18.21
         version: 16.18.21
       '@types/react':
-        specifier: ^18.0.30
+        specifier: ^18.2.73
         version: 18.2.73
       '@types/react-dom':
-        specifier: ^18.0.11
+        specifier: ^18.2.23
         version: 18.2.23
       '@types/three':
         specifier: ^0.150.0
@@ -184,8 +184,8 @@ importers:
         specifier: ^18.15.10
         version: 18.15.10
       '@types/react':
-        specifier: ^18.0.30
-        version: 18.0.30
+        specifier: ^18.2.73
+        version: 18.2.73
       autoprefixer:
         specifier: ^10.4.12
         version: 10.4.13(postcss@8.4.21)
@@ -263,7 +263,7 @@ importers:
         version: 2.28.7(three@0.150.0)
       tunnel-rat:
         specifier: ^0.1.2
-        version: 0.1.2(@types/react@18.2.45)(react@18.2.0)
+        version: 0.1.2(@types/react@18.2.73)(react@18.2.0)
     devDependencies:
       '@next/bundle-analyzer':
         specifier: ^13.4.13
@@ -272,8 +272,8 @@ importers:
         specifier: ^20.10.4
         version: 20.10.4
       '@types/react':
-        specifier: ^18.2.45
-        version: 18.2.45
+        specifier: ^18.2.73
+        version: 18.2.73
       autoprefixer:
         specifier: ^10.4.14
         version: 10.4.16(postcss@8.4.31)
@@ -339,11 +339,11 @@ importers:
         specifier: ^16.7.1
         version: 16.18.11
       '@types/react':
-        specifier: ^18.0.26
-        version: 18.0.26
+        specifier: ^18.2.73
+        version: 18.2.73
       '@types/react-dom':
-        specifier: ^18.0.9
-        version: 18.0.9
+        specifier: ^18.2.23
+        version: 18.2.23
       css-loader:
         specifier: ^6.2.0
         version: 6.7.3(webpack@5.75.0)
@@ -442,8 +442,8 @@ importers:
         specifier: ^18.11.16
         version: 18.11.16
       '@types/react':
-        specifier: ^18.0.26
-        version: 18.0.26
+        specifier: ^18.2.73
+        version: 18.2.73
       autoprefixer:
         specifier: ^10.4.12
         version: 10.4.13(postcss@8.4.19)
@@ -560,11 +560,11 @@ importers:
         version: 4.1.5(react@18.2.0)
     devDependencies:
       '@types/react':
-        specifier: ^18.0.26
-        version: 18.0.26
+        specifier: ^18.2.73
+        version: 18.2.73
       '@types/react-dom':
-        specifier: ^18.0.9
-        version: 18.0.9
+        specifier: ^18.2.23
+        version: 18.2.23
       concurrently:
         specifier: ^7.2.2
         version: 7.6.0
@@ -657,10 +657,10 @@ importers:
         version: 2.28.7(three@0.150.0)
     devDependencies:
       '@types/react':
-        specifier: ^18.2.61
+        specifier: ^18.2.73
         version: 18.2.73
       '@types/react-dom':
-        specifier: ^18.2.19
+        specifier: ^18.2.23
         version: 18.2.23
       esbuild-plugin-glsl:
         specifier: ^1.1.0
@@ -692,11 +692,11 @@ importers:
   packages/ui:
     devDependencies:
       '@types/react':
-        specifier: ^18.0.26
-        version: 18.0.26
+        specifier: ^18.2.73
+        version: 18.2.73
       '@types/react-dom':
-        specifier: ^18.0.9
-        version: 18.0.9
+        specifier: ^18.2.23
+        version: 18.2.23
       concurrently:
         specifier: ^7.2.2
         version: 7.6.0
@@ -4796,7 +4796,7 @@ packages:
     dependencies:
       '@babel/runtime': 7.20.6
       '@testing-library/dom': 8.20.0
-      '@types/react-dom': 18.0.11
+      '@types/react-dom': 18.2.23
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
     dev: false
@@ -5069,18 +5069,6 @@ packages:
       '@types/react': 17.0.52
     dev: false
 
-  /@types/react-dom@18.0.11:
-    resolution: {integrity: sha512-O38bPbI2CWtgw/OoQoY+BRelw7uysmXbWvw3nLWO21H1HSh+GOlqPuXshJfjmpNlKiiSDG9cc1JZAaMmVdcTlw==}
-    dependencies:
-      '@types/react': 18.2.45
-    dev: false
-
-  /@types/react-dom@18.0.9:
-    resolution: {integrity: sha512-qnVvHxASt/H7i+XG1U1xMiY5t+IHcPGUK7TDMDzom08xa7e86eCeKOiLZezwCKVxJn6NEiiy2ekgX8aQssjIKg==}
-    dependencies:
-      '@types/react': 18.2.73
-    dev: true
-
   /@types/react-dom@18.2.23:
     resolution: {integrity: sha512-ZQ71wgGOTmDYpnav2knkjr3qXdAFu0vsk8Ci5w3pGAIdj7/kKAyn+VsQDhXsmzzzepAiI9leWMmubXz690AI/A==}
     dependencies:
@@ -5106,28 +5094,6 @@ packages:
       csstype: 3.1.1
     dev: false
 
-  /@types/react@18.0.26:
-    resolution: {integrity: sha512-hCR3PJQsAIXyxhTNSiDFY//LhnMZWpNNr5etoCqx/iUfGc5gXWtQR2Phl908jVR6uPXacojQWTg4qRpkxTuGug==}
-    dependencies:
-      '@types/prop-types': 15.7.5
-      '@types/scheduler': 0.16.2
-      csstype: 3.1.1
-    dev: true
-
-  /@types/react@18.0.30:
-    resolution: {integrity: sha512-AnME2cHDH11Pxt/yYX6r0w448BfTwQOLEhQEjCdwB7QskEI7EKtxhGUsExTQe/MsY3D9D5rMtu62WRocw9A8FA==}
-    dependencies:
-      '@types/prop-types': 15.7.5
-      '@types/scheduler': 0.16.2
-      csstype: 3.1.1
-
-  /@types/react@18.2.45:
-    resolution: {integrity: sha512-TtAxCNrlrBp8GoeEp1npd5g+d/OejJHFxS3OWmrPBMFaVQMSN0OFySozJio5BHxTuTeug00AVXVAjfDSfk+lUg==}
-    dependencies:
-      '@types/prop-types': 15.7.5
-      '@types/scheduler': 0.16.2
-      csstype: 3.1.1
-
   /@types/react@18.2.73:
     resolution: {integrity: sha512-XcGdod0Jjv84HOC7N5ziY3x+qL0AfmubvKOZ9hJjJ2yd5EE+KYjWhdOjt387e9HPheHkdggF9atTifMRtyAaRA==}
     dependencies:
@@ -5146,6 +5112,7 @@ packages:
 
   /@types/scheduler@0.16.2:
     resolution: {integrity: sha512-hppQEBDmlwhFAXKJX2KnWLYu5yMfi91yazPb2l+lbJiwW+wdo1gNeRA+3RgNSO39WYX2euey41KEwnqesU2Jew==}
+    dev: false
 
   /@types/semver@6.2.3:
     resolution: {integrity: sha512-KQf+QAMWKMrtBMsB8/24w53tEsxllMj6TuA80TT/5igJalLI/zm0L3oXRbIAl4Ohfc85gyHX/jhMwsVkmhLU4A==}
@@ -16992,10 +16959,10 @@ packages:
       yargs: 17.7.1
     dev: true
 
-  /tunnel-rat@0.1.2(@types/react@18.2.45)(react@18.2.0):
+  /tunnel-rat@0.1.2(@types/react@18.2.73)(react@18.2.0):
     resolution: {integrity: sha512-lR5VHmkPhzdhrM092lI2nACsLO4QubF0/yoOhzX7c+wIpbN1GjHNzCc91QlpxBi+cnx8vVJ+Ur6vL5cEoQPFpQ==}
     dependencies:
-      zustand: 4.4.7(@types/react@18.2.45)(react@18.2.0)
+      zustand: 4.4.7(@types/react@18.2.73)(react@18.2.0)
     transitivePeerDependencies:
       - '@types/react'
       - immer
@@ -18419,7 +18386,7 @@ packages:
       use-sync-external-store: 1.2.0(react@18.2.0)
     dev: false
 
-  /zustand@4.4.7(@types/react@18.2.45)(react@18.2.0):
+  /zustand@4.4.7(@types/react@18.2.73)(react@18.2.0):
     resolution: {integrity: sha512-QFJWJMdlETcI69paJwhSMJz7PPWjVP8Sjhclxmxmxv/RYI7ZOvR5BHX+ktH0we9gTWQMxcne8q1OY8xxz604gw==}
     engines: {node: '>=12.7.0'}
     peerDependencies:
@@ -18434,7 +18401,7 @@ packages:
       react:
         optional: true
     dependencies:
-      '@types/react': 18.2.45
+      '@types/react': 18.2.73
       react: 18.2.0
       use-sync-external-store: 1.2.0(react@18.2.0)
     dev: false

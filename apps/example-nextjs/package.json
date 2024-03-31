@@ -23,7 +23,7 @@
   "devDependencies": {
     "@next/bundle-analyzer": "^13.1.6",
     "@types/node": "^18.15.10",
-    "@types/react": "^18.0.30",
+    "@types/react": "^18.2.73",
     "autoprefixer": "^10.4.12",
     "eslint": "^8.33.0",
     "eslint-config-next": "^13.1.6",

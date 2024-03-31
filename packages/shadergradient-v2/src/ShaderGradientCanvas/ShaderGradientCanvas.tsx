@@ -2,6 +2,15 @@ import { Canvas } from '@react-three/fiber'
 import { canvasProps } from '@/consts'
 import { useContextLostFallback } from './useContextLostFallback'
 import { Placeholder } from './Placeholder'
+import { CSSProperties, ReactNode } from 'react'
+
+type ShaderGradientCanvasT = {
+  children: ReactNode
+  pointerEvents?: CSSProperties['pointerEvents']
+  pixelDensity?: number
+  fov?: number
+  [x: string]: any
+}
 
 export function ShaderGradientCanvas({
   children,
@@ -9,7 +18,7 @@ export function ShaderGradientCanvas({
   pixelDensity = 1,
   fov = 45,
   ...rest
-}: any) {
+}: ShaderGradientCanvasT) {
   const [contextLost, handleContextEvents]: any = useContextLostFallback()
 
   if (contextLost === 1)

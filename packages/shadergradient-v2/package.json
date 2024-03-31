@@ -25,8 +25,8 @@
     "three-stdlib": "*"
   },
   "devDependencies": {
-    "@types/react": "^18.2.61",
-    "@types/react-dom": "^18.2.19",
+    "@types/react": "^18.2.73",
+    "@types/react-dom": "^18.2.23",
     "esbuild-plugin-glsl": "^1.1.0",
     "eslint": "^8.57.0",
     "react": "^18.2.0",

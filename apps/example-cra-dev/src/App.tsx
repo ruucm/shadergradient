@@ -10,9 +10,7 @@ import './App.css'
 function App() {
   return (
     <div className='App'>
-      {/* @ts-ignore */}
       <ShaderGradientCanvas style={{ position: 'absolute' }}>
-        {/* @ts-ignore */}
         <Gradient />
       </ShaderGradientCanvas>
       <header className='App-header'>
@@ -45,7 +43,6 @@ function Gradient() {
   })
 
   return (
-    // @ts-ignore
     <ShaderGradient
       cDistance={32}
       cPolarAngle={125}

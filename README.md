@@ -221,6 +221,8 @@ pnpm changeset
 pnpm version-packages
 ```
 
+then commit changes (message with like v1.x.x)
+
 ```
 pnpm release
 ```

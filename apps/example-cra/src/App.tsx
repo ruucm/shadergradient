@@ -37,7 +37,7 @@ function Gradient() {
   const { scene } = useThree()
 
   useFrame(() => {
-    const mesh = scene.getObjectByName('shadergradient-mesh')
+    const mesh: any = scene.getObjectByName('shadergradient-mesh')
 
     if (mesh.material.userData.uNoiseStrength) {
       mesh.material.userData.uNoiseStrength.value = 10

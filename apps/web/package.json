@@ -8,6 +8,7 @@
     "@react-three/drei": "9.47.1",
     "@react-three/fiber": "8.9.1",
     "@studio-freight/lenis": "^0.2.26",
+    "@react-spring/three": "^9.7.3",
     "framer": "^2.2.1",
     "framer-motion": "^8.0.1",
     "glsl-random": "^0.0.5",
@@ -22,7 +23,7 @@
     "sass": "^1.57.1",
     "shadergradient": "workspace:*",
     "three": "0.147.0",
-    "three-stdlib": "2.20.5",
+    "three-stdlib": "^2.29.6",
     "to-querystring": "^1.1.1",
     "ui": "workspace:*"
   },

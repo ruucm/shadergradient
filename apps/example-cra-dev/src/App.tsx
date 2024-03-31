@@ -3,7 +3,7 @@ import {
   ShaderGradient,
   useThree,
   useFrame,
-} from 'shadergradient-v2'
+} from 'shadergradient'
 import logo from './logo.svg'
 import './App.css'
 

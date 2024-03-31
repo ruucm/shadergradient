@@ -1,0 +1,55 @@
+{
+  "name": "shadergradient-v2",
+  "version": "0.0.0",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "sideEffects": false,
+  "license": "MIT",
+  "files": [
+    "dist/**"
+  ],
+  "scripts": {
+    "build": "tsup src/index.tsx --format esm,cjs --dts --external react",
+    "dev": "tsup",
+    "lint": "eslint \"src/**/*.ts*\"",
+    "clean": "rm -rf .turbo && rm -rf node_modules && rm -rf dist"
+  },
+  "peerDependencies": {
+    "@react-spring/three": "*",
+    "@react-three/drei": "*",
+    "@react-three/fiber": "*",
+    "framer-motion": "*",
+    "react": "*",
+    "three": "0.150.0",
+    "three-stdlib": "*"
+  },
+  "devDependencies": {
+    "tsconfig": "workspace:*",
+    "@types/react": "^18.2.61",
+    "@types/react-dom": "^18.2.19",
+    "eslint": "^8.57.0",
+    "react": "^18.2.0",
+    "esbuild-plugin-glsl": "^1.1.0",
+    "tsup": "^8.0.2",
+    "typescript": "^5.3.3"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.10.0",
+    "@uiw/color-convert": "^1.1.1",
+    "@uiw/react-color-shade-slider": "^1.1.1",
+    "@uiw/react-color-wheel": "^1.1.1",
+    "camera-controls": "^1.37.4",
+    "query-string": "^7.1.1",
+    "react-feather": "^2.0.10",
+    "react-intersection-observer": "^9.4.1",
+    "react-merge-refs": "^1.1.0",
+    "react-slider": "^2.0.4",
+    "scroll-into-view-if-needed": "^3.0.10",
+    "stripe": "^11.13.0",
+    "zustand": "^4.1.5"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

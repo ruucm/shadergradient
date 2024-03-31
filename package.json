@@ -17,7 +17,7 @@
     "eslint-config-custom": "workspace:*",
     "prettier": "^2.7.1",
     "prettier-plugin-tailwindcss": "^0.1.11",
-    "turbo": "latest"
+    "turbo": "^1.10.12"
   },
   "packageManager": "pnpm@7.15.0",
   "version": "0.0.1"

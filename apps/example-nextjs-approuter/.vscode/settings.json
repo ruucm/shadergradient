@@ -2,7 +2,7 @@
   "editor.formatOnPaste": true,
   "editor.formatOnSave": true,
   "editor.codeActionsOnSave": {
-    "source.fixAll": true
+    "source.fixAll": "explicit"
   },
   "eslint.validate": ["javascript"],
   "eslint.workingDirectories": [{ "mode": "auto" }]

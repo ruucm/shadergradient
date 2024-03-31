@@ -1,5 +1,11 @@
 # shadergradient
 
+## 1.2.6
+
+### Patch Changes
+
+- enableTransition prop
+
 ## 1.2.5
 
 ### Patch Changes

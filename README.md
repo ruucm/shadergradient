@@ -231,7 +231,7 @@ pnpm release
 
 # Future Plan
 
-- [ ] Detatch framer-motion peer depenency (Seperate UI & Store Pacakge)
+- [ ] Detatch framer-motion peer depenency (Seperate UI & Store Package)
 - [x] Figma GIF Support
 - [ ] More Shaders
 

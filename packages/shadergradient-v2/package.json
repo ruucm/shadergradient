@@ -21,24 +21,23 @@
     "@react-three/drei": "*",
     "@react-three/fiber": "*",
     "react": "*",
-    "three": "0.150.0",
-    "three-stdlib": "*"
+    "three": "*"
   },
   "devDependencies": {
+    "@types/node": "^20.12.7",
     "@types/react": "^18.2.73",
     "@types/react-dom": "^18.2.23",
+    "camera-controls": "^1.37.4",
+    "esbuild": "^0.16.9",
     "esbuild-plugin-glsl": "^1.1.0",
     "eslint": "^8.57.0",
-    "react": "^18.2.0",
+    "query-string": "^7.1.1",
+    "react-intersection-observer": "^9.4.1",
+    "react-merge-refs": "^1.1.0",
+    "three-stdlib": "^2.29.6",
     "tsconfig": "workspace:*",
     "tsup": "^8.0.2",
     "typescript": "^5.3.3"
-  },
-  "dependencies": {
-    "camera-controls": "^1.37.4",
-    "query-string": "^7.1.1",
-    "react-intersection-observer": "^9.4.1",
-    "react-merge-refs": "^1.1.0"
   },
   "publishConfig": {
     "access": "public"

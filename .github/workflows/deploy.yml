@@ -46,7 +46,7 @@ jobs:
           cd main
           pnpm install --no-frozen-lockfile
           pnpm --filter=shadergradient release
-          cp -rf packages/shadergradient/release/* $GITHUB_WORKSPACE/pages/
+          cp -rf packages/shadergradient-v2/release/* $GITHUB_WORKSPACE/pages/
       - name: Commit & Push
         run: |
           cd pages

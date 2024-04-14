@@ -7,11 +7,13 @@ import path from 'path'
 const plugin = glsl({ minify: true })
 
 export default defineConfig((options): any => {
+  const isDev = options.watch
+
   return {
     entry: ['src/index.ts'],
     format: ['esm', 'cjs'],
     dts: true,
-    minify: !options.watch,
+    minify: !isDev,
     external: [
       'react',
       '@react-spring/three',
@@ -21,6 +23,8 @@ export default defineConfig((options): any => {
     ],
     esbuildPlugins: [plugin],
     async onSuccess() {
+      if (!isDev) return
+
       // Create the HTTP server
       const server = http.createServer((req, res) => {
         // Construct the file path

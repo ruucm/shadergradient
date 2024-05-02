@@ -27,10 +27,10 @@ export function ShaderGradient({
       parseBooleans: true,
       arrayFormat: 'index',
     })
-  const { lightType, envPreset, brightness, grain, toggleAxis, ...others } =
+  const { lightType, envPreset, brightness, grain, grainBlending, toggleAxis, ...others } =
     controlProps
 
-  usePostProcessing(grain === 'off')
+  usePostProcessing(grain === 'off', grainBlending)
 
   return (
     <>

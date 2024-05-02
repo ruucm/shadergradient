@@ -21,7 +21,7 @@ export function usePostProcessing(disable, grainBlending) {
       rotateB: (Math.PI / 12) * 2,
       rotateG: (Math.PI / 12) * 3,
       scatter: 1,
-      blending: grainBlending ?? 1,
+      blending: grainBlending,
       blendingMode: 1,
       greyscale: false,
       disable,

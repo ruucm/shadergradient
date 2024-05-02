@@ -96,6 +96,7 @@ type GradientT = MeshT & {
   brightness?: number
   envPreset?: 'city' | 'dawn' | 'lobby'
   grain?: 'on' | 'off'
+  grainBlending?: number
 
   // Tool props
   zoomOut?: boolean

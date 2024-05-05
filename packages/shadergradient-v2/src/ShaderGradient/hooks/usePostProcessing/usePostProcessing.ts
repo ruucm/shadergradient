@@ -4,7 +4,7 @@ import { RenderPass } from './lib/pp/from-threejs/postprocessing/RenderPass'
 import { HalftonePass } from './lib/pp/HalftonePass'
 import { useThree, useFrame } from '@react-three/fiber'
 
-export function usePostProcessing(disable) {
+export function usePostProcessing(disable, grainBlending) {
   const { gl, scene, camera, size } = useThree()
 
   const composer = useMemo(() => {
@@ -21,7 +21,7 @@ export function usePostProcessing(disable) {
       rotateB: (Math.PI / 12) * 2,
       rotateG: (Math.PI / 12) * 3,
       scatter: 1,
-      blending: 1,
+      blending: grainBlending,
       blendingMode: 1,
       greyscale: false,
       disable,
@@ -34,7 +34,7 @@ export function usePostProcessing(disable) {
     effectComposer.addPass(halftonePass)
 
     return effectComposer
-  }, [gl, scene, camera, size, disable])
+  }, [gl, scene, camera, size, disable, grainBlending])
 
   useEffect(() => composer?.setSize(size.width, size.height), [composer, size])
   useFrame(

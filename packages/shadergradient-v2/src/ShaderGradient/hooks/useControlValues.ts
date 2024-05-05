@@ -49,6 +49,7 @@ export function useControlValues(
   const [brightness] = useQueryState('brightness')
   const [envPreset] = useQueryState('envPreset')
   const [grain] = useQueryState('grain')
+  const [grainBlending] = useQueryState('grainBlending')
   const [reflection] = useQueryState('reflection')
 
   // tools
@@ -94,6 +95,7 @@ export function useControlValues(
     brightness,
     envPreset,
     grain,
+    grainBlending,
     reflection,
     zoomOut,
     toggleAxis,

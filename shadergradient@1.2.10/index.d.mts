@@ -52,6 +52,7 @@ type GradientT = MeshT & {
     brightness?: number;
     envPreset?: 'city' | 'dawn' | 'lobby';
     grain?: 'on' | 'off';
+    grainBlending?: number;
     zoomOut?: boolean;
     toggleAxis?: boolean;
     hoverState?: string;

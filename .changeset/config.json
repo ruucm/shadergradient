@@ -7,5 +7,5 @@
   "access": "public",
   "baseBranch": "main",
   "updateInternalDependencies": "patch",
-  "ignore": ["web", "figma-plugin", "example-cra", "example-nextjs"]
+  "ignore": ["example-cra", "example-nextjs", "example-nextjs-approuter"]
 }

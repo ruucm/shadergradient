@@ -226,8 +226,12 @@ pnpm version-packages
 
 then commit changes (message with like v1.x.x)
 
-```
+```sh
+# Release to npm
 pnpm release
+
+# Release it as ES Module (Hosted by GitHub Pages)
+git push origin main
 ```
 
 # Future Plan

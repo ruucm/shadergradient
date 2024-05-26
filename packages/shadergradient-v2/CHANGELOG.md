@@ -1,5 +1,11 @@
 # shadergradient
 
+## 1.2.13
+
+### Patch Changes
+
+- upgrade three-stdlib to ^2.30.1
+
 ## 1.2.12
 
 ### Patch Changes

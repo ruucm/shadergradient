@@ -1,5 +1,11 @@
 import * as THREE from 'three'
 
+// Fix Error: Can not resolve #include <uv2_pars_vertex>, <... (it is needed from three.js version 0.151.3)
+THREE.ShaderChunk['uv2_pars_vertex'] = ``
+THREE.ShaderChunk['uv2_vertex'] = ``
+THREE.ShaderChunk['uv2_pars_fragment'] = ``
+THREE.ShaderChunk['encodings_fragment'] = ``
+
 export function shaderMaterial(
   uniforms: {
     [name: string]:

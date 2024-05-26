@@ -72,14 +72,14 @@ importers:
         specifier: 5.0.1
         version: 5.0.1(@babel/plugin-syntax-flow@7.18.6)(@babel/plugin-transform-react-jsx@7.21.0)(eslint@8.57.0)(react@18.2.0)(typescript@4.9.5)
       shadergradient:
-        specifier: ^1.2.11
+        specifier: ^1.2.12
         version: link:../../packages/shadergradient-v2
       three:
         specifier: ^0.150.1
         version: 0.150.1
       three-stdlib:
-        specifier: ^2.29.6
-        version: 2.29.6(three@0.150.1)
+        specifier: ^2.30.1
+        version: 2.30.1(three@0.150.1)
       typescript:
         specifier: ^4.9.5
         version: 4.9.5
@@ -138,8 +138,8 @@ importers:
         specifier: ^0.150.1
         version: 0.150.1
       three-stdlib:
-        specifier: ^2.29.6
-        version: 2.29.6(three@0.150.1)
+        specifier: ^2.30.1
+        version: 2.30.1(three@0.150.1)
       typescript:
         specifier: ^4.9.5
         version: 4.9.5
@@ -180,14 +180,14 @@ importers:
         specifier: ^18.2.0
         version: 18.2.0(react@18.2.0)
       shadergradient:
-        specifier: ^1.2.11
+        specifier: ^1.2.12
         version: link:../../packages/shadergradient-v2
       three:
         specifier: ^0.150.1
         version: 0.150.1
       three-stdlib:
-        specifier: ^2.29.6
-        version: 2.29.6(three@0.150.1)
+        specifier: ^2.30.1
+        version: 2.30.1(three@0.150.1)
     devDependencies:
       '@next/bundle-analyzer':
         specifier: ^13.1.6
@@ -265,14 +265,14 @@ importers:
         specifier: ^18.2.0
         version: 18.2.0(react@18.2.0)
       shadergradient:
-        specifier: ^1.2.11
+        specifier: ^1.2.12
         version: link:../../packages/shadergradient-v2
       three:
         specifier: 0.150.0
         version: 0.150.0
       three-stdlib:
-        specifier: ^2.24.2
-        version: 2.29.6(three@0.150.0)
+        specifier: ^2.30.1
+        version: 2.30.1(three@0.150.0)
       tunnel-rat:
         specifier: ^0.1.2
         version: 0.1.2(@types/react@18.2.73)(react@18.2.0)
@@ -456,8 +456,8 @@ importers:
         specifier: 0.150.0
         version: 0.150.0
       three-stdlib:
-        specifier: '*'
-        version: 2.20.4(three@0.150.0)
+        specifier: ^2.30.1
+        version: 2.30.1(three@0.150.0)
       zustand:
         specifier: ^4.1.5
         version: 4.1.5(react@18.2.0)
@@ -578,8 +578,8 @@ importers:
         specifier: ^1.1.0
         version: 1.1.0
       three-stdlib:
-        specifier: ^2.29.6
-        version: 2.29.6(three@0.150.1)
+        specifier: ^2.30.1
+        version: 2.30.1(three@0.150.1)
       tsconfig:
         specifier: workspace:*
         version: link:../tsconfig
@@ -2304,29 +2304,6 @@ packages:
       prettier: 2.8.7
     dev: true
 
-  /@chevrotain/cst-dts-gen@10.4.2:
-    resolution: {integrity: sha512-0+4bNjlndNWMoVLH/+y4uHnf6GrTipsC+YTppJxelVJo+xeRVQ0s2PpkdDCVTsu7efyj+8r1gFiwVXsp6JZ0iQ==}
-    dependencies:
-      '@chevrotain/gast': 10.4.2
-      '@chevrotain/types': 10.4.2
-      lodash: 4.17.21
-    dev: false
-
-  /@chevrotain/gast@10.4.2:
-    resolution: {integrity: sha512-4ZAn8/mjkmYonilSJ60gGj1tAF0cVWYUMlIGA0e4ATAc3a648aCnvpBw7zlPHDQjFp50XC13iyWEgWAKiRKTOA==}
-    dependencies:
-      '@chevrotain/types': 10.4.2
-      lodash: 4.17.21
-    dev: false
-
-  /@chevrotain/types@10.4.2:
-    resolution: {integrity: sha512-QzSCjg6G4MvIoLeIgOiMR0IgzkGEQqrNJJIr3T5ETRa7l4Av4AMIiEctV99mvDr57iXwwk0/kr3RJxiU36Nevw==}
-    dev: false
-
-  /@chevrotain/utils@10.4.2:
-    resolution: {integrity: sha512-V34dacxWLwKcvcy32dx96ADJVdB7kOJLm7LyBkBQw5u5HC9WdEFw2G17zml+U3ivavGTrGPJHl8o9/UJm0PlUw==}
-    dev: false
-
   /@choojs/findup@0.2.1:
     resolution: {integrity: sha512-YstAqNb0MCN8PjdLCDfRsBcGVRN41f3vgLvaI0IrIcBp4AqILRSS0DeWNGkicC+f/zRIPJLc+9RURVSepwvfBw==}
     hasBin: true
@@ -3870,7 +3847,7 @@ packages:
       suspend-react: 0.0.8(react@18.2.0)
       three: 0.150.0
       three-mesh-bvh: 0.5.19(three@0.150.0)
-      three-stdlib: 2.29.6(three@0.150.0)
+      three-stdlib: 2.30.1(three@0.150.0)
       troika-three-text: 0.47.1(three@0.150.0)
       utility-types: 3.10.0
       zustand: 3.7.2(react@18.2.0)
@@ -3907,7 +3884,7 @@ packages:
       suspend-react: 0.0.8(react@18.2.0)
       three: 0.150.1
       three-mesh-bvh: 0.5.23(three@0.150.1)
-      three-stdlib: 2.29.6(three@0.150.1)
+      three-stdlib: 2.30.1(three@0.150.1)
       troika-three-text: 0.47.1(three@0.150.1)
       utility-types: 3.10.0
       zustand: 3.7.2(react@18.2.0)
@@ -3949,7 +3926,7 @@ packages:
       suspend-react: 0.1.3(react@18.2.0)
       three: 0.150.0
       three-mesh-bvh: 0.6.8(three@0.150.0)
-      three-stdlib: 2.29.6(three@0.150.0)
+      three-stdlib: 2.30.1(three@0.150.0)
       troika-three-text: 0.47.2(three@0.150.0)
       utility-types: 3.10.0
       uuid: 9.0.1
@@ -3992,7 +3969,7 @@ packages:
       suspend-react: 0.1.3(react@18.2.0)
       three: 0.150.1
       three-mesh-bvh: 0.6.8(three@0.150.1)
-      three-stdlib: 2.29.6(three@0.150.1)
+      three-stdlib: 2.30.1(three@0.150.1)
       troika-three-text: 0.47.2(three@0.150.1)
       utility-types: 3.10.0
       uuid: 9.0.1
@@ -5383,10 +5360,6 @@ packages:
       '@webassemblyjs/ast': 1.11.1
       '@xtuc/long': 4.2.2
 
-  /@webgpu/glslang@0.0.15:
-    resolution: {integrity: sha512-niT+Prh3Aff8Uf1MVBVUsaNjFj9rJAKDXuoHIKiQbB+6IUP/3J3JIhBNyZ7lDhytvXxw6ppgnwKZdDJ08UMj4Q==}
-    dev: false
-
   /@webpack-cli/configtest@1.2.0(webpack-cli@4.10.0)(webpack@5.75.0):
     resolution: {integrity: sha512-4FB8Tj6xyVkyqjj1OaTqCjXYULB9FMkqQ8yGrZjRDrYh0nOE+7Lhs45WioWQQMV+ceFlE368Ukhe6xdvJM9Egg==}
     peerDependencies:
@@ -6465,17 +6438,6 @@ packages:
 
   /check-types@11.2.2:
     resolution: {integrity: sha512-HBiYvXvn9Z70Z88XKjz3AEKd4HJhBXsa3j7xFnITAzoS8+q6eIGi8qDB8FKPBAjtuxjI/zFpwuiCb8oDtKOYrA==}
-    dev: false
-
-  /chevrotain@10.4.2:
-    resolution: {integrity: sha512-gzF5GxE0Ckti5kZVuKEZycLntB5X2aj9RVY0r4/220GwQjdnljU+/t3kP74/FMWC7IzCDDEjQ9wsFUf0WCdSHg==}
-    dependencies:
-      '@chevrotain/cst-dts-gen': 10.4.2
-      '@chevrotain/gast': 10.4.2
-      '@chevrotain/types': 10.4.2
-      '@chevrotain/utils': 10.4.2
-      lodash: 4.17.21
-      regexp-to-ast: 0.5.0
     dev: false
 
   /chokidar@3.5.3:
@@ -11690,10 +11652,6 @@ packages:
     engines: {node: '>= 8'}
     dev: false
 
-  /ktx-parse@0.4.5:
-    resolution: {integrity: sha512-MK3FOody4TXbFf8Yqv7EBbySw7aPvEcPX++Ipt6Sox+/YMFvR5xaTyhfNSk1AEmMy+RYIw81ctN4IMxCB8OAlg==}
-    dev: false
-
   /language-subtag-registry@0.3.22:
     resolution: {integrity: sha512-tN0MCzyWnoz/4nHS6uxdlFWoUZT7ABptwKPQ52Ea7URk6vll88bWBVhodtnlfEuCcKWNGoc+uGbw1cwa9IKh/w==}
 
@@ -12162,10 +12120,6 @@ packages:
       minimist: 1.2.7
     dev: false
 
-  /mmd-parser@1.0.4:
-    resolution: {integrity: sha512-Qi0VCU46t2IwfGv5KF0+D/t9cizcDug7qnNoy9Ggk7aucp0tssV8IwTMkBlDbm+VqAf3cdQHTCARKSsuS2MYFg==}
-    dev: false
-
   /mrmime@1.0.1:
     resolution: {integrity: sha512-hzzEagAgDyoU1Q6yg5uI+AorQgdvMCur3FcKf7NhMKWsaYg+RnbTyHRa/9IlLF9rf455MOCtcqqrQQ83pPP7Uw==}
     engines: {node: '>=10'}
@@ -12576,15 +12530,6 @@ packages:
     resolution: {integrity: sha512-ur5UIdyw5Y7yEj9wLzhqXiy6GZ3Mwx0yGI+5sMn2r0N0v3cKJvUmFH5yPP+WXh9e0xfyzyJX95D8l088DNFj7A==}
     hasBin: true
     dev: true
-
-  /opentype.js@1.3.4:
-    resolution: {integrity: sha512-d2JE9RP/6uagpQAVtJoF0pJJA/fgai89Cc50Yp0EJHk+eLp6QQ7gBoblsnubRULNY132I0J1QKMJ+JTbMqz4sw==}
-    engines: {node: '>= 8.0.0'}
-    hasBin: true
-    dependencies:
-      string.prototype.codepointat: 0.2.1
-      tiny-inflate: 1.0.3
-    dev: false
 
   /optionator@0.8.3:
     resolution: {integrity: sha512-+IW9pACdk3XWmmTXG8m3upGUJst5XRGzxMRjXzAuJ1XnIFNvfhjjIuYkDvysnPQ7qzqVzLt78BCruntqRhWQbA==}
@@ -14451,10 +14396,6 @@ packages:
     resolution: {integrity: sha512-jbD/FT0+9MBU2XAZluI7w2OBs1RBi6p9M83nkoZayQXXU9e8Robt69FcZc7wU4eJD/YFTjn1JdCk3rbMJajz8Q==}
     dev: false
 
-  /regexp-to-ast@0.5.0:
-    resolution: {integrity: sha512-tlbJqcMHnPKI9zSrystikWKwHkBqu2a/Sgw01h3zFjvYrMxEDYHzzoMZnUrbIfpTFEsoRnnviOXNCzFiSc54Qw==}
-    dev: false
-
   /regexp.prototype.flags@1.4.3:
     resolution: {integrity: sha512-fjggEOO3slI6Wvgjwflkc4NFRCTZAu5CnNfBd5qOMYhWdn67nJBBu34/TkD++eeFmd8C9r9jfXJ27+nSiRkSUA==}
     engines: {node: '>= 0.4'}
@@ -15417,10 +15358,6 @@ packages:
       is-fullwidth-code-point: 3.0.0
       strip-ansi: 6.0.1
 
-  /string.prototype.codepointat@0.2.1:
-    resolution: {integrity: sha512-2cBVCj6I4IOvEnjgO/hWqXjqBGsY+zwPmHl12Srk9IXSZ56Jwwmy+66XO5Iut/oQVR7t5ihYdLB0GMa4alEUcg==}
-    dev: false
-
   /string.prototype.matchall@4.0.8:
     resolution: {integrity: sha512-6zOCOcJ+RJAQshcTvXPHoxoQGONa3e/Lqx90wUA+wEzX78sg5Bo+1tQo4N0pohS0erG9qtCqJDjNCQBjeWVxyg==}
     dependencies:
@@ -16011,27 +15948,8 @@ packages:
       three: 0.150.1
     dev: false
 
-  /three-stdlib@2.20.4(three@0.150.0):
-    resolution: {integrity: sha512-Ksy7h//nnH5dhohbmE6mT/gM54dtmcAjaC9Srx7AJ7xpmCEX3IASkZyUkVqNXv3NZFqx79Swq3sSSVqL4pF79Q==}
-    peerDependencies:
-      three: '>=0.122.0'
-    dependencies:
-      '@babel/runtime': 7.20.1
-      '@types/offscreencanvas': 2019.7.0
-      '@webgpu/glslang': 0.0.15
-      chevrotain: 10.4.2
-      draco3d: 1.5.5
-      fflate: 0.6.10
-      ktx-parse: 0.4.5
-      mmd-parser: 1.0.4
-      opentype.js: 1.3.4
-      potpack: 1.0.2
-      three: 0.150.0
-      zstddec: 0.0.2
-    dev: false
-
-  /three-stdlib@2.29.6(three@0.150.0):
-    resolution: {integrity: sha512-nj9bHkzhhwfmqQcM/keC2RDb0bHhbw6bRXTy81ehzi8F1rtp6pJ5eS0/vl1Eg5RMFqXOMyxJ6sDHPoLU+IrVZg==}
+  /three-stdlib@2.30.1(three@0.150.0):
+    resolution: {integrity: sha512-3WHpc6rB5aiqkrbVA0h09NcwwCdcZ/bTN/01BbjcxzLQLjclhi163JUA02VZ93jR5zN7und6gfrWwewNHQTMog==}
     peerDependencies:
       three: '>=0.128.0'
     dependencies:
@@ -16044,8 +15962,8 @@ packages:
       three: 0.150.0
     dev: false
 
-  /three-stdlib@2.29.6(three@0.150.1):
-    resolution: {integrity: sha512-nj9bHkzhhwfmqQcM/keC2RDb0bHhbw6bRXTy81ehzi8F1rtp6pJ5eS0/vl1Eg5RMFqXOMyxJ6sDHPoLU+IrVZg==}
+  /three-stdlib@2.30.1(three@0.150.1):
+    resolution: {integrity: sha512-3WHpc6rB5aiqkrbVA0h09NcwwCdcZ/bTN/01BbjcxzLQLjclhi163JUA02VZ93jR5zN7und6gfrWwewNHQTMog==}
     peerDependencies:
       three: '>=0.128.0'
     dependencies:
@@ -16092,10 +16010,6 @@ packages:
       globalyzer: 0.1.0
       globrex: 0.1.2
     dev: true
-
-  /tiny-inflate@1.0.3:
-    resolution: {integrity: sha512-pkY1fj1cKHb2seWDy0B16HeWyczlJA9/WW3u3c4z/NiWDsO3DOU5D7nhTLE9CF0yXv/QZFY7sEJmj24dK+Rrqw==}
-    dev: false
 
   /tmp@0.0.33:
     resolution: {integrity: sha512-jRCJlojKnZ3addtTOjdIqoRuPEKBvNXcGYqzO6zWZX8KfKEpnGY5jfggJQ3EjKuu8D4bJRr0y+cYJFmYbImXGw==}
@@ -17894,10 +17808,6 @@ packages:
   /yocto-queue@0.1.0:
     resolution: {integrity: sha512-rVksvsnNCdJ/ohGc6xgPwyN8eheCxsiLM8mxuE/t/mOVqJewPuO1miLpTHQiRgTKCLexL4MeAFVagts7HmNZ2Q==}
     engines: {node: '>=10'}
-
-  /zstddec@0.0.2:
-    resolution: {integrity: sha512-DCo0oxvcvOTGP/f5FA6tz2Z6wF+FIcEApSTu0zV5sQgn9hoT5lZ9YRAKUraxt9oP7l4e8TnNdi8IZTCX6WCkwA==}
-    dev: false
 
   /zustand@3.7.2(react@18.2.0):
     resolution: {integrity: sha512-PIJDIZKtokhof+9+60cpockVOq05sJzHCriyvaLBmEJixseQ1a5Kdov6fWZfWOu5SK9c+FhH1jU0tntLxRJYMA==}

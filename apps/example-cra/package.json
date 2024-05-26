@@ -19,7 +19,7 @@
     "react-scripts": "5.0.1",
     "shadergradient": "^1.2.12",
     "three": "^0.150.1",
-    "three-stdlib": "^2.29.6",
+    "three-stdlib": "^2.30.1",
     "typescript": "^4.9.5",
     "web-vitals": "^2.1.4"
   },

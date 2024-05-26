@@ -43,7 +43,7 @@
     "framer-motion": "*",
     "react": "*",
     "three": "0.150.0",
-    "three-stdlib": "*"
+    "three-stdlib": "^2.30.1"
   },
   "devDependencies": {
     "@types/react": "^18.2.73",

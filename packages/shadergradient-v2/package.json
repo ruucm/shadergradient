@@ -22,7 +22,7 @@
     "@react-three/drei": "*",
     "@react-three/fiber": "*",
     "react": "*",
-    "three": "*"
+    "three": "0.154.0"
   },
   "devDependencies": {
     "@types/node": "^20.12.7",

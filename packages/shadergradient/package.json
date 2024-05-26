@@ -42,7 +42,7 @@
     "@react-three/fiber": "*",
     "framer-motion": "*",
     "react": "*",
-    "three": "0.150.0",
+    "three": "0.154.0",
     "three-stdlib": "^2.30.1"
   },
   "devDependencies": {

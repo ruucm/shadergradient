@@ -21,8 +21,7 @@
     "@react-spring/three": "*",
     "@react-three/drei": "*",
     "@react-three/fiber": "*",
-    "react": "*",
-    "three": "0.154.0"
+    "react": "*"
   },
   "devDependencies": {
     "@types/node": "^20.12.7",
@@ -35,6 +34,7 @@
     "query-string": "^7.1.1",
     "react-intersection-observer": "^9.4.1",
     "react-merge-refs": "^1.1.0",
+    "three": "0.154.0",
     "three-stdlib": "^2.30.1",
     "tsconfig": "workspace:*",
     "tsup": "^8.0.2",

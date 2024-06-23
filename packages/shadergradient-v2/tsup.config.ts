@@ -19,7 +19,6 @@ export default defineConfig((options): any => {
       '@react-spring/three',
       '@react-three/drei',
       '@react-three/fiber',
-      'three',
     ],
     esbuildPlugins: [plugin],
     async onSuccess() {

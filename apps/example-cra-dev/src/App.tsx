@@ -6,6 +6,8 @@ import {
 } from 'shadergradient'
 import logo from './logo.svg'
 import './App.css'
+import { Button } from 'ui'
+import 'ui/styles.css'
 
 function App() {
   return (
@@ -27,6 +29,7 @@ function App() {
           Learn React
         </a>
       </header>
+      <Button>Button Test</Button>
     </div>
   )
 }

@@ -14,6 +14,7 @@
     "clean": "rm -rf dist"
   },
   "devDependencies": {
+    "@types/node": "^20.12.7",
     "@types/react": "^18.2.73",
     "@types/react-dom": "^18.2.23",
     "concurrently": "^7.2.2",

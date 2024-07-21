@@ -32,7 +32,6 @@ function App() {
 
         <TextAnimation
           delay={0}
-          font='"Lora", serif'
           color='#FF430A'
           fontSize={32}
           yBefore={50}

@@ -521,6 +521,14 @@ video {
   display: inline-block;
 }
 
+.flex {
+  display: flex;
+}
+
+.hidden {
+  display: none;
+}
+
 .h-button {
   height: 55px;
 }
@@ -531,6 +539,10 @@ video {
 
 .rounded {
   border-radius: 9px;
+}
+
+.border {
+  border-width: 1px;
 }
 
 .bg-primary {

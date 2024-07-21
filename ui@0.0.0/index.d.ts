@@ -16,4 +16,16 @@ declare function TextAnimation({ fontSize, color, content, delay, width, yBefore
     isFramerCanvas?: boolean;
 }): react_jsx_runtime.JSX.Element;
 
-export { Button, TextAnimation };
+declare function TextHover({ fontSize, color, content, delay, width, font, border, fontWeight, isFramerCanvas, }: {
+    fontSize: any;
+    color: any;
+    content: any;
+    delay?: number;
+    width?: any;
+    font?: any;
+    border?: boolean;
+    fontWeight?: number;
+    isFramerCanvas?: boolean;
+}): react_jsx_runtime.JSX.Element;
+
+export { Button, TextAnimation, TextHover };

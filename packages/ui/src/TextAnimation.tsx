@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { motion, useAnimation, AnimatePresence } from 'framer-motion'
+import { motion, useAnimation } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
 
 export function TextAnimation({
@@ -57,7 +57,7 @@ export function TextAnimation({
     setActivePresetInView(true)
   }, delay)
   return (
-    <AnimatePresence>
+    <>
       {activePresetInView && (
         <motion.div
           style={{
@@ -109,6 +109,6 @@ export function TextAnimation({
           </motion.h1>
         </motion.div>
       )}
-    </AnimatePresence>
+    </>
   )
 }

@@ -6,7 +6,7 @@ import {
 } from 'shadergradient'
 import logo from './logo.svg'
 import './App.css'
-import { Button } from 'ui'
+import { Button, TextAnimation } from 'ui'
 import 'ui/styles.css'
 
 function App() {
@@ -28,8 +28,17 @@ function App() {
         >
           Learn React
         </a>
+        <Button>Button Test</Button>
+
+        <TextAnimation
+          delay={0}
+          font='"Lora", serif'
+          color='#FF430A'
+          fontSize={32}
+          yBefore={50}
+          content='Text Animation'
+        />
       </header>
-      <Button>Button Test</Button>
     </div>
   )
 }

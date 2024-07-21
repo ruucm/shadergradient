@@ -14,6 +14,12 @@
     "dev": "concurrently \"tsup src/index.tsx --format esm,cjs --dts --external react --watch\" \"tailwindcss -i ./src/styles.css -o ./dist/styles.css --watch\"",
     "clean": "rm -rf dist"
   },
+  "peerDependencies": {
+    "framer-motion": "*"
+  },
+  "dependencies": {
+    "react-intersection-observer": "^9.4.1"
+  },
   "devDependencies": {
     "@types/node": "^20.12.7",
     "@types/react": "^18.2.73",

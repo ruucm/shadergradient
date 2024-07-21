@@ -602,6 +602,13 @@ importers:
   packages/tsconfig: {}
 
   packages/ui:
+    dependencies:
+      framer-motion:
+        specifier: '*'
+        version: 10.9.2(react-dom@18.2.0)(react@18.2.0)
+      react-intersection-observer:
+        specifier: ^9.4.1
+        version: 9.4.1(react@18.2.0)
     devDependencies:
       '@types/node':
         specifier: ^20.12.7

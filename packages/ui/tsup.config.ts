@@ -11,13 +11,7 @@ export default defineConfig((options): any => {
     format: ['esm', 'cjs'],
     dts: true,
     minify: !isDev,
-    external: [
-      'react',
-      '@react-spring/three',
-      '@react-three/drei',
-      '@react-three/fiber',
-      'three',
-    ],
+    external: ['react', 'framer-motion'],
     async onSuccess() {
       if (!isDev) return
 

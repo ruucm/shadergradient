@@ -2,9 +2,14 @@ export type IconName = 'Info' | 'CornerUpLeft' | 'Minimize2'
 
 type IconProps = {
   name: IconName
+  color?: string
 }
 
-export function Feather({ name, ...rest }: IconProps) {
+export function Feather({
+  name,
+  color = 'rgb(255,67,10)',
+  ...rest
+}: IconProps) {
   switch (name) {
     case 'Info':
       return (
@@ -14,7 +19,7 @@ export function Feather({ name, ...rest }: IconProps) {
           height='14'
           viewBox='0 0 24 24'
           fill='none'
-          stroke='rgb(255,67,10)'
+          stroke={color}
           strokeWidth='2'
           strokeLinecap='round'
           strokeLinejoin='round'
@@ -33,7 +38,7 @@ export function Feather({ name, ...rest }: IconProps) {
           height='20'
           viewBox='0 0 24 24'
           fill='none'
-          stroke='rgb(255,67,10)'
+          stroke={color}
           strokeWidth='2'
           strokeLinecap='round'
           strokeLinejoin='round'
@@ -51,7 +56,7 @@ export function Feather({ name, ...rest }: IconProps) {
           height='20'
           viewBox='0 0 24 24'
           fill='none'
-          stroke='rgb(255,67,10)'
+          stroke={color}
           strokeWidth='2'
           strokeLinecap='round'
           strokeLinejoin='round'

@@ -10,6 +10,7 @@ export function TextAnimation({
   width = null,
   yBefore = 20,
   isFramerCanvas = false,
+  fontFamily = '"Lora", serif',
 }) {
   const letterContainerVariants = {
     before: { transition: { staggerChildren: 0.015 } },
@@ -63,7 +64,7 @@ export function TextAnimation({
           style={{
             position: 'relative',
             wordBreak: 'break-word',
-            width: width,
+            width: width === 0 ? 'fit-content' : width,
           }}
         >
           <motion.h1
@@ -78,6 +79,7 @@ export function TextAnimation({
                 fontSize: fontSize,
                 color: color,
                 fontWeight: 500,
+                fontFamily: fontFamily,
               }}
             >
               {content.split(' ').map((word: string, wordI: number) => (

@@ -6,7 +6,7 @@ type ButtonPropsT = {
 } & React.DetailedHTMLProps<React.ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>;
 declare const Button: React.FC<ButtonPropsT>;
 
-declare function TextAnimation({ fontSize, color, content, delay, width, yBefore, isFramerCanvas, }: {
+declare function TextAnimation({ fontSize, color, content, delay, width, yBefore, isFramerCanvas, fontFamily, }: {
     fontSize: any;
     color: any;
     content: any;
@@ -14,6 +14,7 @@ declare function TextAnimation({ fontSize, color, content, delay, width, yBefore
     width?: any;
     yBefore?: number;
     isFramerCanvas?: boolean;
+    fontFamily?: string;
 }): react_jsx_runtime.JSX.Element;
 
 declare function TextHover({ fontSize, color, content, delay, width, font, border, fontWeight, isFramerCanvas, }: {

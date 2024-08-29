@@ -29,13 +29,16 @@ Install below dependencies on your React app.
 
 ```sh
 # with yarn
-yarn add three @types/three @react-three/fiber shadergradient framer-motion
+yarn add three @react-three/fiber shadergradient framer-motion
+yarn add -D @types/three
 
 # with npm
-$ npm i three @types/three @react-three/fiber shadergradient framer-motion
+npm i three @react-three/fiber shadergradient framer-motion
+npm i -D @types/three
 
 # with pnpm
-$ pnpm add three @types/three @react-three/fiber shadergradient framer-motion
+pnpm add three @react-three/fiber shadergradient framer-motion
+pnpm add -D @types/three
 ```
 
 # Usage

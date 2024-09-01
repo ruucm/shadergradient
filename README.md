@@ -238,7 +238,8 @@ git push origin main
 
 - [ ] Detatch framer-motion peer depenency (Seperate UI & Store Package)
 - [x] Figma GIF Support
-- [ ] More Shaders
+- [ ] More Shaders (Metalic, Glass, etc.)
+- [ ] Three.js version upgrade
 
 # License
 

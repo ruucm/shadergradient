@@ -163,29 +163,71 @@ function App() {
 
 ## More Package Details
 
-### [npm]
+### Package Versions
+- **without-store.mjs (v2)**:
+  - Current version
+  - Stateless React components
+  - More flexible and easier to integrate into various state management systems
+  - Will continue to be developed and improved
+- **with-store.mjs (v1)**:
+  - Legacy version
+  - Includes built-in state management (using Zustand)
+  - Useful for quick setup but less flexible
+  - Will be maintained but not actively developed
 
-1. For general React environments (with separated store code):
-   `'shadergradient' → '/dist/without-store.mjs'`
+### npm Usage
 
-2. For React (Storized Control UI\*):
-   `'shadergradient/with-store' → '/dist/with-store.mjs'`
+1. For general React environments (current version, stateless):
 
-   e.g) [shadergradient-web.vercel.app/customize](https://shadergradient-web.vercel.app/customize) (Next.js)
+   ```
+   import { ShaderGradient } from 'shadergradient'
+   ```
 
-### [esm]
+   This imports from `/dist/without-store.mjs`
 
-1. For ESM-supported React applications: https://esm-shadergradient.onrender.com/without-store.mjs
+2. For React with legacy Storized Control UI:
 
-   For use in the Framer canvas (Storized Control UI\*) : https://esm-shadergradient.onrender.com/with-store.mjs
+   ```
+   import { ShaderGradient } from 'shadergradient/with-store'
+   ```
 
-   e.g) [shadergradient.co/customize](https://www.shadergradient.co/customize) (Framer Sites)
+   This imports from `/dist/with-store.mjs`
 
-2. For use in Figma plugins (mixed with DB code / Use the same store of the StoreGradient): https://esm-shadergradient.onrender.com/with-store.mjs
+   Example: [shadergradient-web.vercel.app/customize](https://shadergradient-web.vercel.app/customize) (Next.js)
 
-   (All ESM modules are dynamically served based on client ips. We call it as "ESM Editor" and used it for dev purposes.)
+### ESM Usage
 
-\* Storized Control UI: `with-store.mjs` includes store codes (zustand) that is also used on the control UIs. So can sync states of gradient & controls without adding any codes.
+1.  For ESM-supported React applications (current version, stateless):
+    `https://esm-shadergradient.onrender.com/without-store.mjs`
+2.  For use in the Framer canvas (legacy Storized Control UI):
+    `https://esm-shadergradient.onrender.com/with-store.mjs`
+        Example: [shadergradient.co/customize](https://www.shadergradient.co/customize) (Framer Sites)
+3.  For use in Figma plugins:
+    `https://esm-shadergradient.onrender.com/with-store.mjs`
+        This version is mixed with DB code and uses the same store as StoreGradient.
+
+Note: All ESM modules are dynamically served based on client IPs. We refer to this system as "ESM Editor" and use it for development purposes.
+
+### Source Code Structure and Version Management
+
+```
+shadergradient/
+├─ src/
+│  ├─ (current version code)
+├─ src-dev/
+   ├─ (previously used for staging new features)
+
+```
+
+The `src` and `src-dev` folders exist only within the shadergradient package directory. Previously, `src-dev` was used as a staging area for new versions due to version management limitations in Framer.
+
+However, we are phasing out this approach:
+
+1. The `src-dev` folder is no longer actively used for development.
+2. We will no longer maintain separate `src` and `src-dev` directories for version management.
+3. Future version management and development will be handled directly within the Framer project.
+
+This change will simplify our development process and align it more closely with standard practices. All new features and updates will be developed and tested within the Framer project environment, ensuring better integration and easier maintenance.
 
 # Examples
 

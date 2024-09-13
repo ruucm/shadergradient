@@ -1,29 +1,41 @@
 import { defineConfig } from 'tsup'
-import { glsl } from 'esbuild-plugin-glsl'
 import http from 'http'
 import fs from 'fs'
 import path from 'path'
+import { Server as SocketIO } from 'socket.io'
+import { globby } from 'globby'
 
-const plugin = glsl({ minify: true })
-
-export default defineConfig((options): any => {
+export default defineConfig(async (options) => {
   const isDev = options.watch
+  let io: SocketIO | null = null
+
+  if (isDev) {
+    // Create socket server
+    const socketServer = http.createServer()
+    io = new SocketIO(socketServer, {
+      cors: {
+        origin: '*',
+        credentials: true,
+        methods: ['GET', 'POST', 'OPTIONS', 'PUT', 'PATCH', 'DELETE', 'HEAD'],
+      },
+    })
+    socketServer.listen(8001, '0.0.0.0')
+  }
+
+  const basePath = path.join(process.cwd(), 'src')
 
   return {
-    entry: ['src/index.ts'],
-    format: ['esm', 'cjs'],
+    entry: await globby([`${basePath}/**/*.(t|j)s*`, `!${basePath}/**/*.d.ts`]),
+    platform: 'browser',
+    format: ['esm'],
     dts: true,
     minify: !isDev,
-    external: [
-      'react',
-      '@react-spring/three',
-      '@react-three/drei',
-      '@react-three/fiber',
-      'three',
-    ],
-    esbuildPlugins: [plugin],
+    clean: true,
+    external: ['react', 'framer', 'framer-motion', 'react-reconciler'], // react-reconciler need to be external, cause esbuild can't resolve it (Error "Dynamic require of "react" is not supported")
     async onSuccess() {
       if (!isDev) return
+
+      io?.emit('build')
 
       // Create the HTTP server
       const server = http.createServer((req, res) => {
@@ -31,9 +43,15 @@ export default defineConfig((options): any => {
         let filePath = path.join(
           __dirname,
           'dist',
-          req.url === '/' ? 'index.html' : req.url
+          req.url === '/' || !req.url ? 'index.html' : req.url
         )
         let extname = String(path.extname(filePath)).toLowerCase()
+        // need to remove query from extname
+        extname = extname.split('?')[0]
+        filePath = filePath.split('?')[0]
+
+        console.log('extname', extname)
+        console.log('filePath', filePath)
 
         // Map file extensions to Content-Type
         const mimeTypes = {

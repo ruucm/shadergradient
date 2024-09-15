@@ -5,6 +5,20 @@ import path from 'path'
 import { Server as SocketIO } from 'socket.io'
 import { globby } from 'globby'
 
+// Add this GLSL loader plugin
+const glslLoader = {
+  name: 'glsl-loader',
+  setup(build) {
+    build.onLoad({ filter: /\.(glsl|vs|fs|vert|frag)$/ }, async (args) => {
+      const contents = await fs.promises.readFile(args.path, 'utf8')
+      return {
+        contents: `export default ${JSON.stringify(contents)};`,
+        loader: 'js',
+      }
+    })
+  },
+}
+
 export default defineConfig(async (options) => {
   const isDev = options.watch
   let io: SocketIO | null = null
@@ -32,6 +46,7 @@ export default defineConfig(async (options) => {
     minify: !isDev,
     clean: true,
     external: ['react', 'framer', 'framer-motion', 'react-reconciler'], // react-reconciler need to be external, cause esbuild can't resolve it (Error "Dynamic require of "react" is not supported")
+    esbuildPlugins: [glslLoader],
     async onSuccess() {
       if (!isDev) return
 

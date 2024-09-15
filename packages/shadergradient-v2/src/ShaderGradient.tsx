@@ -2,6 +2,9 @@ import React, { useRef } from 'react'
 import { Canvas, useFrame } from '@react-three/fiber'
 import { OrbitControls } from '@react-three/drei'
 import { degToRad } from './utils'
+import { Mesh } from './Plane'
+
+// import fragmentShader from './Plain/shader/fragment.glsl'
 
 const amplitude = 0.9
 const width = 10
@@ -41,43 +44,43 @@ void main() {
 }
 `
 
-function Mesh() {
-  const materialRef = useRef()
+// function Mesh() {
+//   const materialRef = useRef()
 
-  useFrame(({ clock }) => {
-    const elapsedTime = clock.getElapsedTime()
-    if (materialRef.current) {
-      materialRef.current.uniforms.u_time.value = elapsedTime
-      materialRef.current.uniforms.u_amplitude.value = amplitude
-    }
-  })
+//   useFrame(({ clock }) => {
+//     const elapsedTime = clock.getElapsedTime()
+//     if (materialRef.current) {
+//       materialRef.current.uniforms.u_time.value = elapsedTime
+//       materialRef.current.uniforms.u_amplitude.value = amplitude
+//     }
+//   })
 
-  return (
-    <mesh
-      rotation={[degToRad(0), degToRad(0), degToRad(0)]}
-      position={[0, 0, 2]}
-    >
-      <planeGeometry args={[width, height, 1, 1]} />
-      <shaderMaterial
-        ref={materialRef}
-        attach='material'
-        vertexShader={vertexShader}
-        fragmentShader={fragmentShader}
-        uniforms={{
-          u_time: { value: 0.7 },
-          u_amplitude: { value: amplitude },
-          u_width: { value: width },
-          u_height: { value: height },
-        }}
-      />
-    </mesh>
-  )
-}
+//   return (
+//     <mesh
+//       rotation={[degToRad(0), degToRad(0), degToRad(0)]}
+//       position={[0, 0, 2]}
+//     >
+//       <planeGeometry args={[width, height, 1, 1]} />
+//       <shaderMaterial
+//         ref={materialRef}
+//         attach='material'
+//         vertexShader={vertexShader}
+//         fragmentShader={fragmentShader}
+//         uniforms={{
+//           u_time: { value: 0.7 },
+//           u_amplitude: { value: amplitude },
+//           u_width: { value: width },
+//           u_height: { value: height },
+//         }}
+//       />
+//     </mesh>
+//   )
+// }
 
-export function Plane() {
+export function ShaderGradient() {
   return (
     <Canvas resize={{ offsetSize: true }}>
-      <Mesh />
+      <Mesh width={width} height={height} />
       <OrbitControls />
     </Canvas>
   )

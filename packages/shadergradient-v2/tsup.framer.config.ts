@@ -47,13 +47,7 @@ export default defineConfig(async (options) => {
     },
     minify: !isDev,
     clean: true,
-    external: [
-      'react',
-      'framer',
-      '@react-three/fiber',
-      '@react-three/drei',
-      'three',
-    ], // react-reconciler need to be external, cause esbuild can't resolve it (Error "Dynamic require of "react" is not supported")
+    external: ['react', 'framer', 'react-reconciler'], // react-reconciler need to be external, cause esbuild can't resolve it (Error "Dynamic require of "react" is not supported")
     esbuildPlugins: [glslLoader],
     async onSuccess() {
       if (!isDev) return

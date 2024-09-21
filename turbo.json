@@ -12,6 +12,10 @@
       "cache": false,
       "persistent": true
     },
+    "dev:framer": {
+      "cache": false,
+      "persistent": true
+    },
     "start": {
       "cache": false
     },

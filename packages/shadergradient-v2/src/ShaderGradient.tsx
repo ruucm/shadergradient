@@ -9,7 +9,31 @@ import { ControlType } from 'framer'
 const width = 10
 const height = 10
 
-export function ShaderGradient({ position, rotation, type }) {
+type ShaderGradientType = 'plane' | 'waterPlane' | 'sphere'
+
+interface Position {
+  positionX: number
+  positionY: number
+  positionZ: number
+}
+
+interface Rotation {
+  rotationX: number
+  rotationY: number
+  rotationZ: number
+}
+
+interface ShaderGradientProps {
+  position: Position
+  rotation: Rotation
+  type: ShaderGradientType
+}
+
+export const ShaderGradient: React.FC<ShaderGradientProps> = ({
+  position,
+  rotation,
+  type,
+}) => {
   return (
     <Canvas resize={{ offsetSize: true }}>
       {type === 'plane' && (

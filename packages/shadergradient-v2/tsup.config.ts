@@ -42,7 +42,9 @@ export default defineConfig(async (options) => {
     entry: await globby([`${basePath}/**/*.(t|j)s*`, `!${basePath}/**/*.d.ts`]),
     platform: 'browser',
     format: ['esm'],
-    dts: true,
+    dts: {
+      entry: 'src/index.tsx',
+    },
     minify: !isDev,
     clean: true,
     external: ['react', 'framer', 'framer-motion', 'react-reconciler'], // react-reconciler need to be external, cause esbuild can't resolve it (Error "Dynamic require of "react" is not supported")

@@ -31,7 +31,6 @@
     "render:build": "tailwindcss -i ./src/styles.css -o ./dist/styles.css --minify && node esmbuild/esmbuild-render renderBuild",
     "render:serve": "node esmbuild/render-serve",
     "start": "tailwindcss -i ./src/styles.css -o ./dist/styles.css && node esmbuild/esmbuild-render serve",
-    "dev": "concurrently \"tailwindcss -i ./src-dev/styles.css -o ./dist/styles.css --watch\" \"node esmbuild/esmbuild-render serve localDev\"",
     "release": "yarn run build && mkdir -p release && cp -Rf dist release/$npm_package_name@$npm_package_version && cp -Rf hdr release/$npm_package_name@$npm_package_version",
     "deploy": "yarn version; git push --tags; git push",
     "clean": "rm -rf dist"

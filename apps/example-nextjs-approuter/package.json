@@ -40,7 +40,6 @@
   },
   "scripts": {
     "lint": "next lint --fix --dir app",
-    "dev": "next dev -p 3003",
     "build": "next build",
     "analyze": "ANALYZE=true next build",
     "start": "next start",

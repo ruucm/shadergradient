@@ -1,4 +1,5 @@
 {
+  "name": "shadergradient-monorepo",
   "private": true,
   "scripts": {
     "build": "turbo run build",
@@ -18,7 +19,7 @@
     "eslint-config-custom": "workspace:*",
     "prettier": "^2.7.1",
     "prettier-plugin-tailwindcss": "^0.1.11",
-    "turbo": "^1.10.12"
+    "turbo": "^2.1.2"
   },
   "packageManager": "pnpm@7.15.0",
   "version": "0.0.1"

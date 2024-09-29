@@ -10,5 +10,5 @@ void main() {
     vec3 newPosition = vec3(position.x, position.y, position.z + zOffset);
     
     fragPos = newPosition;
-    gl_Position = projectionMatrix * modelViewMatrix * vec4(newPosition, 1.0);
+    gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
 }

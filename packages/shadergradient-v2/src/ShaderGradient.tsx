@@ -28,11 +28,11 @@ interface ShaderGradientProps {
   type: ShaderGradientType
 }
 
-export const ShaderGradient: React.FC<ShaderGradientProps> = ({
+export function ShaderGradient({
   position,
   rotation,
   type,
-}) => {
+}: ShaderGradientProps): JSX.Element {
   return (
     <Canvas resize={{ offsetSize: true }}>
       {type === 'plane' && (

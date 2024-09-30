@@ -1,5 +1,8 @@
-import { ShaderGradient } from './ShaderGradient'
+import { ShaderGradient as OriginalShaderGradient } from './ShaderGradient'
 import { ControlType } from 'framer'
+import { ShaderGradientWithControls } from './types'
+
+const ShaderGradient = OriginalShaderGradient as ShaderGradientWithControls
 
 ShaderGradient.propertyControls = {
   type: {
@@ -57,6 +60,15 @@ ShaderGradient.propertyControls = {
         defaultValue: 0,
       },
     },
+  },
+  uAmplitude: {
+    title: 'uAmplitude',
+    type: ControlType.Number,
+    min: 0,
+    max: 7,
+    step: 0.1,
+    displayStepper: true,
+    defaultValue: 2,
   },
 }
 

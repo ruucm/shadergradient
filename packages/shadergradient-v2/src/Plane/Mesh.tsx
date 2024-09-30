@@ -3,10 +3,15 @@ import { vertexShader, fragmentShader } from './shader'
 import { useFrame } from '@react-three/fiber'
 import { degToRad } from '@/utils'
 import * as THREE from 'three'
+import { MeshT } from '@/types'
 
-const amplitude = 2
-
-export function Mesh({ width, height, position, rotation }) {
+export function Mesh({
+  width,
+  height,
+  position,
+  rotation,
+  uAmplitude,
+}: MeshT) {
   const materialRef = useRef()
   const { positionX, positionY, positionZ } = position
   const { rotationX, rotationY, rotationZ } = rotation
@@ -15,7 +20,7 @@ export function Mesh({ width, height, position, rotation }) {
     const elapsedTime = clock.getElapsedTime()
     if (materialRef.current) {
       materialRef.current.uniforms.u_time.value = elapsedTime
-      materialRef.current.uniforms.u_amplitude.value = amplitude
+      materialRef.current.uniforms.u_amplitude.value = uAmplitude
     }
   })
 
@@ -34,7 +39,7 @@ export function Mesh({ width, height, position, rotation }) {
         // wireframe={true}
         uniforms={{
           u_time: { value: 0.0 },
-          u_amplitude: { value: amplitude },
+          u_amplitude: { value: uAmplitude },
           u_width: { value: width },
           u_height: { value: height },
         }}

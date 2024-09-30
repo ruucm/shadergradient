@@ -4,34 +4,16 @@ import { OrbitControls } from '@react-three/drei'
 import { Mesh as PlaneMesh } from './Plane'
 import { Mesh as WaterPlaneMesh } from './WaterPlane'
 import { Mesh as SphereMesh } from './Sphere'
+import { ShaderGradientProps } from './types'
 
 const width = 10
 const height = 10
 
-type ShaderGradientType = 'plane' | 'waterPlane' | 'sphere'
-
-interface Position {
-  positionX: number
-  positionY: number
-  positionZ: number
-}
-
-interface Rotation {
-  rotationX: number
-  rotationY: number
-  rotationZ: number
-}
-
-interface ShaderGradientProps {
-  position: Position
-  rotation: Rotation
-  type: ShaderGradientType
-}
-
 export function ShaderGradient({
+  type,
   position,
   rotation,
-  type,
+  uAmplitude,
 }: ShaderGradientProps): JSX.Element {
   return (
     <Canvas resize={{ offsetSize: true }}>
@@ -41,6 +23,7 @@ export function ShaderGradient({
           height={height}
           position={position}
           rotation={rotation}
+          uAmplitude={uAmplitude}
         />
       )}
       {type === 'waterPlane' && (
@@ -49,6 +32,7 @@ export function ShaderGradient({
           height={height}
           position={position}
           rotation={rotation}
+          uAmplitude={uAmplitude}
         />
       )}
       {type === 'sphere' && (
@@ -57,6 +41,7 @@ export function ShaderGradient({
           height={height}
           position={position}
           rotation={rotation}
+          uAmplitude={uAmplitude}
         />
       )}
       <OrbitControls />

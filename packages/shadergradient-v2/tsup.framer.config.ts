@@ -43,7 +43,7 @@ export default defineConfig(async (options) => {
     platform: 'browser',
     format: ['esm'],
     dts: {
-      entry: 'src/index.tsx',
+      entry: 'src/index.ts',
     },
     minify: !isDev,
     clean: true,

@@ -5,13 +5,7 @@ import { degToRad } from '@/utils'
 import * as THREE from 'three'
 import { MeshT } from '@/types'
 
-export function Mesh({
-  width,
-  height,
-  position,
-  rotation,
-  uAmplitude,
-}: MeshT) {
+export function Mesh({ width, height, position, rotation, uAmplitude }: MeshT) {
   const materialRef = useRef()
   const { positionX, positionY, positionZ } = position
   const { rotationX, rotationY, rotationZ } = rotation
@@ -20,7 +14,6 @@ export function Mesh({
     const elapsedTime = clock.getElapsedTime()
     if (materialRef.current) {
       materialRef.current.uniforms.u_time.value = elapsedTime
-      materialRef.current.uniforms.u_amplitude.value = uAmplitude
     }
   })
 

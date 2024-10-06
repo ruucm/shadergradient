@@ -13,9 +13,9 @@
     "react-dom": "^18",
     "next": "14.2.13",
     "shadergradient": "workspace:*",
-    "three": "^0.168.0",
-    "@react-three/drei": "^9.112.0",
-    "@react-three/fiber": "^8.17.7"
+    "three": "0.154.0",
+    "@react-three/drei": "9.56.5",
+    "@react-three/fiber": "8.12.0"
   },
   "devDependencies": {
     "typescript": "^5",

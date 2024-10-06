@@ -21,8 +21,9 @@
     "react": "*"
   },
   "devDependencies": {
-    "@react-three/drei": "^9.112.0",
-    "@react-three/fiber": "^8.17.7",
+    "@react-three/drei": "9.56.5",
+    "@react-three/fiber": "8.12.0",
+    "@react-spring/three": "^9.7.3",
     "@types/socket.io": "^3.0.2",
     "concurrently": "^9.0.0",
     "framer": "^2.4.1",
@@ -31,7 +32,7 @@
     "socket.io": "^4.7.5",
     "socket.io-client": "^4.7.5",
     "tailwindcss": "^3.4.10",
-    "three": "^0.168.0",
+    "three": "0.154.0",
     "tsup": "^8.2.4",
     "typescript": "^5.5.4"
   }

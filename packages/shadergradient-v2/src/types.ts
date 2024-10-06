@@ -17,6 +17,9 @@ export interface Rotation {
 export interface ShaderGradientProps {
   position: Position
   rotation: Rotation
+  color1: string
+  color2: string
+  color3: string
   type: ShaderGradientType
   uAmplitude?: number
 }

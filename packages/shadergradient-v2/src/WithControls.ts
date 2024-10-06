@@ -70,6 +70,18 @@ ShaderGradient.propertyControls = {
     displayStepper: true,
     defaultValue: 2,
   },
+  color1: {
+    type: ControlType.Color,
+    defaultValue: '#ff5005',
+  },
+  color2: {
+    type: ControlType.Color,
+    defaultValue: '#dbba95',
+  },
+  color3: {
+    type: ControlType.Color,
+    defaultValue: '#d0bce1',
+  },
 }
 
 export { ShaderGradient }

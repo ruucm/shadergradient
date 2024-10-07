@@ -1,3 +1,7 @@
 export function Lights(): JSX.Element {
-  return <></>
+  return (
+    <>
+      <ambientLight intensity={1} />
+    </>
+  )
 }

@@ -39,7 +39,7 @@ export const Materials = ({
     const material = new THREE.MeshPhysicalMaterial({
       userData: uniformValues, // sync uniform and userData to update uniforms from outside (MeshPhysicalMaterial)
 
-      metalness: 0.2,
+      metalness: 0.2, // similar effects reducing -0.2 intensity of the ambient light
       side: THREE.DoubleSide,
       onBeforeCompile: (shader) => {
         shader.uniforms = {
@@ -50,6 +50,7 @@ export const Materials = ({
         shader.vertexShader = vertexShader
         shader.fragmentShader = fragmentShader
       },
+      // wireframe: true,
     })
 
     entries.forEach(([name]) =>

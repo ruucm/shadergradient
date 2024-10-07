@@ -14,9 +14,12 @@ export interface Rotation {
   rotationZ: number
 }
 
+export type typeT = 'plane' | 'sphere' | 'waterPlane'
+export type animateT = 'on' | 'off'
+
 export type MeshT = {
-  type?: 'plane' | 'sphere' | 'waterPlane'
-  animate?: 'on' | 'off'
+  type?: typeT
+  animate?: animateT
   uTime?: number
   uSpeed?: number
   uStrength?: number

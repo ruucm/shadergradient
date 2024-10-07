@@ -1,3 +1,5 @@
+import { animateT, typeT } from './types'
+
 export const presets = {
   base: {
     title: 'Base',
@@ -20,7 +22,9 @@ export const presets = {
     title: 'Halo',
     color: 'white',
     props: {
-      uAmplitude: 0,
+      type: 'plane' as typeT,
+
+      uAmplitude: 1,
       uDensity: 1.3,
       uSpeed: 0.4,
       uStrength: 4,
@@ -32,7 +36,6 @@ export const presets = {
       frameRate: 10,
       destination: 'onCanvas',
       format: 'gif',
-      animate: 'on',
       axesHelper: 'off',
       brightness: 1.2,
       cAzimuthAngle: 180,
@@ -57,7 +60,9 @@ export const presets = {
       rotationY: 10,
       rotationZ: 50,
       shader: 'defaults',
-      type: 'plane',
+
+      animate: 'on' as animateT,
+
       wireframe: false,
     },
   },

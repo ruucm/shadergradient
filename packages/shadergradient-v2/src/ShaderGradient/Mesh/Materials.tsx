@@ -1,47 +1,70 @@
-import { extend, useFrame } from '@react-three/fiber'
-import { shaderMaterial } from '@/shaders/shaderMaterial'
-import * as sceneShader from '@/shaders/a'
-import { useRef, useEffect, useState } from 'react'
+import React, { useEffect, useMemo } from 'react'
+import * as THREE from 'three'
+import { colorToRgb, formatColor } from '@/utils'
 
-export function Materials({ color1, color2, color3 }): JSX.Element {
-  const extended = useExtend({ color1, color2, color3 })
-  const materialRef = useRef()
-
-  useFrame(({ clock }) => {
-    const elapsedTime = clock.getElapsedTime()
-    if (materialRef.current) {
-      materialRef.current.userData.uTime.value = elapsedTime
+// Define the material component
+export const Materials = ({
+  uniforms,
+  vertexShader,
+  fragmentShader,
+  onInit,
+}) => {
+  const material = useMemo(() => {
+    const entries = Object.entries(uniforms)
+    const colors = uniforms.colors
+    const uC1 = colorToRgb(colors[0])
+    const uC2 = colorToRgb(colors[1])
+    const uC3 = colorToRgb(colors[2])
+    const rgbColors = {
+      uC1r: { value: formatColor(uC1?.r) },
+      uC1g: { value: formatColor(uC1?.g) },
+      uC1b: { value: formatColor(uC1?.b) },
+      uC2r: { value: formatColor(uC2?.r) },
+      uC2g: { value: formatColor(uC2?.g) },
+      uC2b: { value: formatColor(uC2?.b) },
+      uC3r: { value: formatColor(uC3?.r) },
+      uC3g: { value: formatColor(uC3?.g) },
+      uC3b: { value: formatColor(uC3?.b) },
     }
-  })
 
-  return (
-    <>
-      {/* @ts-ignore */}
-      {extended && <colorShiftMaterial ref={materialRef} />}
-    </>
-  )
-}
+    const uniformValues = entries.reduce((acc, [name, value]) => {
+      const uniform = THREE.UniformsUtils.clone({ [name]: { value } })
+      return {
+        ...acc,
+        ...uniform,
+      }
+    }, {})
 
-function useExtend({ color1, color2, color3 }) {
-  const [extended, setExtended] = useState(false)
-
-  useEffect(() => {
-    const ColorShiftMaterial = shaderMaterial(
-      {
-        colors: [color1, color2, color3],
-        uTime: 0.0,
-        uWidth: 10,
-        uHeight: 10,
-
-        uAmplitude: 2,
+    const material = new THREE.MeshPhysicalMaterial({
+      metalness: 0.2,
+      side: THREE.DoubleSide,
+      onBeforeCompile: (shader) => {
+        shader.uniforms = {
+          ...shader.uniforms,
+          ...uniformValues,
+          ...rgbColors,
+        }
+        shader.vertexShader = vertexShader
+        shader.fragmentShader = fragmentShader
       },
-      sceneShader.vertexShader,
-      sceneShader.fragmentShader
+    })
+
+    entries.forEach(([name]) =>
+      Object.defineProperty(material, name, {
+        get: () => material.uniforms[name].value,
+        set: (v) => (material.uniforms[name].value = v),
+      })
     )
 
-    extend({ ColorShiftMaterial })
-    setExtended(true)
-  }, [])
+    if (onInit) onInit(material)
+    return material
+  }, [uniforms, vertexShader, fragmentShader, onInit])
 
-  return extended
+  useEffect(() => {
+    return () => {
+      material.dispose()
+    }
+  }, [material])
+
+  return <primitive attach='material' object={material} />
 }

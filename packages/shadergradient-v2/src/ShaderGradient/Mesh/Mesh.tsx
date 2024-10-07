@@ -2,8 +2,9 @@ import { useFrame } from '@react-three/fiber'
 import { Geometry } from './Geometry'
 import { useMaterials } from './useMaterials'
 import { useRef } from 'react'
+import { MeshT } from '@/types'
 
-export function Mesh({ type, color1, color2, color3 }): JSX.Element {
+export function Mesh({ type, color1, color2, color3 }: MeshT): JSX.Element {
   const materialRef: any = useRef()
   useMaterials({ color1, color2, color3 })
 

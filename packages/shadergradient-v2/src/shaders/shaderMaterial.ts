@@ -28,9 +28,9 @@ export function shaderMaterial(
       const entries = Object.entries(uniforms)
       // Create unforms and shaders
       const colors = uniforms.colors
-      const uC1 = rgbStringToRgb(colors[0])
-      const uC2 = rgbStringToRgb(colors[1])
-      const uC3 = rgbStringToRgb(colors[2])
+      const uC1 = colorToRgb(colors[0])
+      const uC2 = colorToRgb(colors[1])
+      const uC3 = colorToRgb(colors[2])
       const rgbColors = {
         uC1r: { value: formatColor(uC1?.r) },
         uC1g: { value: formatColor(uC1?.g) },
@@ -99,6 +99,18 @@ function rgbStringToRgb(rgbString: string) {
         b: parseInt(result[3]),
       }
     : null
+}
+
+// if color is hex, use hexToRgb
+// if color is rgb, use rgbStringToRgb
+function colorToRgb(color: string) {
+  if (color.startsWith('#')) {
+    return hexToRgb(color)
+  } else if (color.startsWith('rgb')) {
+    return rgbStringToRgb(color)
+  } else {
+    throw new Error('Invalid color format')
+  }
 }
 
 function formatColor(color = 0) {

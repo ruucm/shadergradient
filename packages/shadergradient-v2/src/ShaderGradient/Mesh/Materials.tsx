@@ -1,6 +1,7 @@
 import React, { useEffect, useMemo } from 'react'
 import * as THREE from 'three'
 import { colorToRgb, formatColor } from '@/utils'
+import { useFrame } from '@react-three/fiber'
 
 // Define the material component
 export const Materials = ({
@@ -36,6 +37,8 @@ export const Materials = ({
     }, {})
 
     const material = new THREE.MeshPhysicalMaterial({
+      userData: uniformValues, // sync uniform and userData to update uniforms from outside (MeshPhysicalMaterial)
+
       metalness: 0.2,
       side: THREE.DoubleSide,
       onBeforeCompile: (shader) => {
@@ -65,6 +68,13 @@ export const Materials = ({
       material.dispose()
     }
   }, [material])
+
+  // Animate uTime with useFrame
+  useFrame(({ clock }) => {
+    if (material.userData.uTime) {
+      material.userData.uTime.value = clock.getElapsedTime()
+    }
+  })
 
   return <primitive attach='material' object={material} />
 }

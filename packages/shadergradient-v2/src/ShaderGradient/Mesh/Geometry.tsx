@@ -1,3 +1,5 @@
+import React from 'react'
+
 const meshCount = 192
 
 export function Geometry({ type }): JSX.Element {

@@ -26,12 +26,8 @@ export type MeshT = {
   uDensity?: number
   uFrequency?: number
   uAmplitude?: number
-  positionX?: number
-  positionY?: number
-  positionZ?: number
-  rotationX?: number
-  rotationY?: number
-  rotationZ?: number
+  position?: Position
+  rotation?: Rotation
   color1?: string
   color2?: string
   color3?: string

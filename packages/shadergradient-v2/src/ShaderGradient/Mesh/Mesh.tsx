@@ -5,13 +5,8 @@ import { vertexShader, fragmentShader } from '@/shaders/a'
 // import { vertexShader, fragmentShader } from '@/shaders/base'
 
 export function Mesh({
-  positionX,
-  positionY,
-  positionZ,
-  rotationX,
-  rotationY,
-  rotationZ,
-
+  position,
+  rotation,
   type,
   color1,
   color2,
@@ -25,8 +20,8 @@ export function Mesh({
 }: MeshT): JSX.Element {
   return (
     <mesh
-      position={[positionX, positionY, positionZ]}
-      rotation={[rotationX, rotationY, rotationZ]}
+      position={[position.positionX, position.positionY, position.positionZ]}
+      rotation={[rotation.rotationX, rotation.rotationY, rotation.rotationZ]}
     >
       <Geometry type={type} />
       <Materials

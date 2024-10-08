@@ -5,12 +5,16 @@ export const presets = {
     title: 'Base',
     color: 'white',
     props: {
-      positionX: 0,
-      positionY: 0,
-      positionZ: 0,
-      rotationX: 0,
-      rotationY: 0,
-      rotationZ: 0,
+      position: {
+        positionX: -1.4,
+        positionY: 0,
+        positionZ: 0,
+      },
+      rotation: {
+        rotationX: 0,
+        rotationY: 10,
+        rotationZ: 50,
+      },
       uAmplitude: 2,
 
       color1: '#ff5005',
@@ -23,7 +27,16 @@ export const presets = {
     color: 'white',
     props: {
       type: 'plane' as typeT,
-
+      position: {
+        positionX: -1.4,
+        positionY: 0,
+        positionZ: 0,
+      },
+      rotation: {
+        rotationX: 0,
+        rotationY: 10,
+        rotationZ: 50,
+      },
       uAmplitude: 1,
       uDensity: 1.3,
       uSpeed: 0.4,
@@ -52,17 +65,8 @@ export const presets = {
       lightType: '3d',
       pixelDensity: 1,
       fov: 45,
-      positionX: -1.4,
-      positionY: 0,
-      positionZ: 0,
-      reflection: 0.1,
-      rotationX: 0,
-      rotationY: 10,
-      rotationZ: 50,
       shader: 'defaults',
-
       animate: 'on' as animateT,
-
       wireframe: false,
     },
   },

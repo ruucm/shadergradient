@@ -7,6 +7,7 @@ import { Lights } from './Lights'
 import { PostProcessing } from './PostProcessing'
 import { Controls } from './Controls'
 import * as THREE from 'three'
+import { canvasProps } from '@/consts'
 
 export function ShaderGradient(passedProps: GradientT): JSX.Element {
   const props = { ...presets.halo.props, ...passedProps }
@@ -14,7 +15,7 @@ export function ShaderGradient(passedProps: GradientT): JSX.Element {
   useShaderChunkFix()
 
   return (
-    <Canvas resize={{ offsetSize: true }}>
+    <Canvas resize={{ offsetSize: true }} {...canvasProps(1, 45)}>
       <Mesh {...props} />
       <Lights />
       <PostProcessing />

@@ -33,7 +33,7 @@
     "socket.io": "^4.7.5",
     "socket.io-client": "^4.7.5",
     "tailwindcss": "^3.4.10",
-    "three": "0.154.0",
+    "three": "^0.169.0",
     "tsup": "^8.2.4",
     "typescript": "^5.5.4"
   }

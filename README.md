@@ -91,7 +91,9 @@ type GradientT = MeshT & {
   // View (camera) props
   cAzimuthAngle?: number
   cPolarAngle?: number
+  // for both plane and waterPlane type
   cDistance?: number
+  // only for sphere type
   cameraZoom?: number
 
   // Effect props
@@ -164,6 +166,7 @@ function App() {
 ## More Package Details
 
 ### Package Versions
+
 - **without-store.mjs (v2)**:
   - Current version
   - Stateless React components
@@ -201,10 +204,10 @@ function App() {
     `https://esm-shadergradient.onrender.com/without-store.mjs`
 2.  For use in the Framer canvas (legacy Storized Control UI):
     `https://esm-shadergradient.onrender.com/with-store.mjs`
-        Example: [shadergradient.co/customize](https://www.shadergradient.co/customize) (Framer Sites)
+    Example: [shadergradient.co/customize](https://www.shadergradient.co/customize) (Framer Sites)
 3.  For use in Figma plugins:
     `https://esm-shadergradient.onrender.com/with-store.mjs`
-        This version is mixed with DB code and uses the same store as StoreGradient.
+    This version is mixed with DB code and uses the same store as StoreGradient.
 
 Note: All ESM modules are dynamically served based on client IPs. We refer to this system as "ESM Editor" and use it for development purposes.
 

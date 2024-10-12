@@ -595,6 +595,9 @@ importers:
       '@types/socket.io':
         specifier: ^3.0.2
         version: 3.0.2
+      camera-controls:
+        specifier: 2.9.0
+        version: 2.9.0(three@0.154.0)
       concurrently:
         specifier: ^9.0.0
         version: 9.0.1
@@ -3989,7 +3992,7 @@ packages:
       '@react-spring/core': 9.7.3(react@18.3.1)
       '@react-spring/shared': 9.7.3(react@18.3.1)
       '@react-spring/types': 9.7.3
-      '@react-three/fiber': 8.12.0(react-dom@18.2.0)(react@18.3.1)(three@0.154.0)
+      '@react-three/fiber': 8.12.0(react-dom@18.3.1)(react@18.3.1)(three@0.154.0)
       react: 18.3.1
       three: 0.154.0
 
@@ -4174,7 +4177,7 @@ packages:
       '@react-spring/three': 9.7.3(@react-three/fiber@8.12.0)(react@18.3.1)(three@0.154.0)
       '@react-three/fiber': 8.12.0(react-dom@18.3.1)(react@18.3.1)(three@0.154.0)
       '@use-gesture/react': 10.2.25(react@18.3.1)
-      camera-controls: 2.7.3(three@0.154.0)
+      camera-controls: 2.9.0(three@0.154.0)
       detect-gpu: 5.0.37
       glsl-noise: 0.0.0
       lodash.clamp: 4.0.3
@@ -4348,6 +4351,7 @@ packages:
       suspend-react: 0.0.8(react@18.3.1)
       three: 0.154.0
       zustand: 3.7.2(react@18.3.1)
+    dev: false
 
   /@react-three/fiber@8.12.0(react-dom@18.3.1)(react@18.3.1)(three@0.154.0):
     resolution: {integrity: sha512-o6DkNtNHqcOFRbxaiY5xayelE/9+Z0z9wWu5awqjVbc0c/1QM6AttJH6rKW0U/O6LWxSfxDTARXVzknZqpDJ7A==}
@@ -4382,7 +4386,6 @@ packages:
       suspend-react: 0.0.8(react@18.3.1)
       three: 0.154.0
       zustand: 3.7.2(react@18.3.1)
-    dev: true
 
   /@react-three/fiber@8.17.7(react-dom@18.3.1)(react@18.3.1)(three@0.154.0):
     resolution: {integrity: sha512-52/TZ0pGdEtjs1bSCePrJe8+5hzYzC8/O4bwx0NXc3GZ3uRCr5Eu+CVsr7BUn2uxd825Zjbup0OXKSDRQ70qiQ==}
@@ -6922,6 +6925,7 @@ packages:
       three: '>=0.126.1'
     dependencies:
       three: 0.154.0
+    dev: false
 
   /camera-controls@2.7.3(three@0.168.0):
     resolution: {integrity: sha512-L4mxjBd3u8qiOLozdWrH2P8ZybSsDXBF7iyNyqNEFJhPUkovmuARWR8JTc1B/qlclOIg6FvZZA/0uAZMMim0mw==}
@@ -6930,6 +6934,14 @@ packages:
     dependencies:
       three: 0.168.0
     dev: false
+
+  /camera-controls@2.9.0(three@0.154.0):
+    resolution: {integrity: sha512-TpCujnP0vqPppTXXJRYpvIy0xq9Tro6jQf2iYUxlDpPCNxkvE/XGaTuwIxnhINOkVP/ob2CRYXtY3iVYXeMEzA==}
+    peerDependencies:
+      three: '>=0.126.1'
+    dependencies:
+      three: 0.154.0
+    dev: true
 
   /caniuse-api@3.0.0:
     resolution: {integrity: sha512-bsTwuIg/BZZK/vreVTYYbSWoe2F+71P7K5QGEX+pT250DZbfU1MQ5prOKpPR+LL6uWKK3KMwMCAS74QB3Um1uw==}
@@ -14831,6 +14843,7 @@ packages:
       loose-envify: 1.4.0
       react: 18.3.1
       scheduler: 0.23.0
+    dev: false
 
   /react-dom@18.3.1(react@18.3.1):
     resolution: {integrity: sha512-5m4nQKp+rZRb09LNH59GM4BxTh9251/ylbKIbpe7TpGxfJ+9kv6BLkLBXIjjspbgbnIBNqlI23tRnTWT0snUIw==}
@@ -15133,6 +15146,7 @@ packages:
       debounce: 1.2.1
       react: 18.3.1
       react-dom: 18.2.0(react@18.3.1)
+    dev: false
 
   /react-use-measure@2.1.1(react-dom@18.3.1)(react@18.3.1):
     resolution: {integrity: sha512-nocZhN26cproIiIduswYpV5y5lQpSQS1y/4KuvUCjSKmw7ZWIS/+g3aFnX3WdBkyuGUtTLif3UTqnLLhbDoQig==}
@@ -15143,7 +15157,6 @@ packages:
       debounce: 1.2.1
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
-    dev: true
 
   /react@17.0.2:
     resolution: {integrity: sha512-gnhPt75i/dq/z3/6q/0asP78D0u592D5L1pd7M8P+dck6Fu/jJeL6iVVK23fptSUZj8Vjf++7wXA8UNclGQcbA==}
@@ -15651,6 +15664,7 @@ packages:
     resolution: {integrity: sha512-CtuThmgHNg7zIZWAXi3AsyIzA3n4xx7aNyjwC2VJldO2LMVDhFK+63xGqq6CsJH4rTAt6/M+N4GhZiDYPx9eUw==}
     dependencies:
       loose-envify: 1.4.0
+    dev: false
 
   /scheduler@0.23.2:
     resolution: {integrity: sha512-UOShsPwz7NrMUqhR6t0hWjFduvOzbtv7toDH1/hIrfRNIDBnnBWd0CwJTGvTpngVlmwGCdP9/Zl/tVrDqcuYzQ==}

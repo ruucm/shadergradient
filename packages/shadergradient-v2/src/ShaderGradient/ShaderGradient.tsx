@@ -19,7 +19,7 @@ export function ShaderGradient(passedProps: GradientT): JSX.Element {
       <Lights />
       <PostProcessing />
 
-      <Controls />
+      <Controls {...props} />
     </Canvas>
   )
 }

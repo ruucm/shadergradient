@@ -17,11 +17,7 @@
     "skipLibCheck": true,
     "strict": false,
 
-
-   "lib": [
-      "ES2017",
-      "dom"
-    ],
+    "lib": ["ES2017", "dom"],
     "module": "ESNext",
     "target": "ES6",
     "jsx": "react-jsx",

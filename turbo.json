@@ -1,6 +1,7 @@
 {
   "$schema": "https://turbo.build/schema.json",
-  "pipeline": {
+  "ui": "tui",
+  "tasks": {
     "build": {
       "dependsOn": ["^build"],
       "outputs": ["dist/**", ".next/**"]
@@ -9,6 +10,10 @@
       "outputs": []
     },
     "dev": {
+      "cache": false,
+      "persistent": true
+    },
+    "dev:framer": {
       "cache": false,
       "persistent": true
     },

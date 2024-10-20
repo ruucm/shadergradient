@@ -1,56 +1,39 @@
-import { usePostProcessing } from './hooks/usePostProcessing'
-import { Lights, Mesh, Axis, CameraControl } from './comps-without-store'
-import { GradientT } from '@/types'
-import * as qs from 'query-string'
-import { formatUrlString } from '@/utils'
-import { PRESETS } from '@/consts'
+import React, { useEffect } from 'react'
+import { Canvas } from '@react-three/fiber'
+import { GradientT } from '../types'
+import { presets } from '../presets'
+import { Mesh } from './Mesh'
+import { Lights } from './Lights'
+import { PostProcessing } from './PostProcessing'
+import { Controls } from './Controls'
+import * as THREE from 'three'
+import { canvasProps } from '@/consts'
 
-const defaultProps = qs.parse(formatUrlString(PRESETS[0].url), {
-  parseNumbers: true,
-  parseBooleans: true,
-  arrayFormat: 'index',
-}) // from the Halo preset
+export function ShaderGradient(passedProps: GradientT): JSX.Element {
+  const { pixelDensity, fov, ...props } = {
+    ...presets.halo.props,
+    ...passedProps,
+  }
 
-export function ShaderGradient({
-  control = 'props',
-  dampingFactor,
-  rotSpringOption,
-  posSpringOption,
-  isFigmaPlugin = false,
-  enableTransition = true,
-  ...props
-}: GradientT) {
-  let controlProps = { ...defaultProps, ...props }
-  if (control === 'query')
-    controlProps = qs.parse(formatUrlString(props.urlString), {
-      parseNumbers: true,
-      parseBooleans: true,
-      arrayFormat: 'index',
-    })
-  const { lightType, envPreset, brightness, grain, grainBlending, toggleAxis, ...others } =
-    controlProps
-
-  usePostProcessing(grain === 'off', grainBlending || 1)
+  useShaderChunkFix()
 
   return (
-    <>
-      <Lights
-        lightType={lightType}
-        brightness={brightness}
-        envPreset={envPreset}
-      />
-      <Mesh
-        key={JSON.stringify(others)}
-        {...others}
-        rotSpringOption={rotSpringOption}
-        posSpringOption={posSpringOption}
-      />
-      {toggleAxis && <Axis isFigmaPlugin={isFigmaPlugin} />}
-      <CameraControl
-        dampingFactor={dampingFactor}
-        enableTransition={enableTransition}
-        {...others}
-      />
-    </>
+    <Canvas resize={{ offsetSize: true }} {...canvasProps(pixelDensity, fov)}>
+      <Mesh {...props} />
+      <Lights />
+      <PostProcessing />
+
+      <Controls {...props} />
+    </Canvas>
   )
+}
+
+function useShaderChunkFix() {
+  useEffect(() => {
+    // Fix Error: Can not resolve #include <uv2_pars_vertex>, <... (it is needed from three.js version 0.151.3)
+    THREE.ShaderChunk['uv2_pars_vertex'] = ``
+    THREE.ShaderChunk['uv2_vertex'] = ``
+    THREE.ShaderChunk['uv2_pars_fragment'] = ``
+    THREE.ShaderChunk['encodings_fragment'] = ``
+  }, [])
 }

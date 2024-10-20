@@ -284,10 +284,13 @@ git push origin main
 
 # Future Plan
 
-- [ ] Detatch framer-motion peer depenency (Seperate UI & Store Package)
+- [x] Detatch framer-motion peer depenency (Seperate UI & Store Package)
 - [x] Figma GIF Support
 - [ ] More Shaders (Metalic, Glass, etc.)
-- [ ] Three.js version upgrade
+- [x] Three.js version upgrade
+- [x] Separate framer component bundles & shader gradient bundles
+- [ ] Separate shader codes as a separate package, and make it reusable for JS, Vue, etc.
+- [ ] Framer Plugin
 
 # License
 

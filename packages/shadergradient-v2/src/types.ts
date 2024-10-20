@@ -1,9 +1,25 @@
+import { PropertyControls } from 'framer'
+
+export type ShaderGradientType = 'plane' | 'waterPlane' | 'sphere'
+
+export interface Position {
+  positionX: number
+  positionY: number
+  positionZ: number
+}
+
+export interface Rotation {
+  rotationX: number
+  rotationY: number
+  rotationZ: number
+}
+
+export type typeT = 'plane' | 'sphere' | 'waterPlane'
+export type animateT = 'on' | 'off'
+
 export type MeshT = {
-  type?: 'plane' | 'sphere' | 'waterPlane'
-  animate?: 'on' | 'off'
-  range?: 'enabled' | 'disabled'
-  rangeStart?: number
-  rangeEnd?: number
+  type?: typeT
+  animate?: animateT
   uTime?: number
   uSpeed?: number
   uStrength?: number
@@ -24,14 +40,12 @@ export type MeshT = {
   shader?: string
   rotSpringOption?: any
   posSpringOption?: any
-  urlString?: string
 }
 
 export type GradientT = MeshT & {
   control?: 'query' | 'props'
   isFigmaPlugin?: boolean
   dampingFactor?: number
-  frameRate?: number
 
   // View (camera) props
   cAzimuthAngle?: number
@@ -52,4 +66,8 @@ export type GradientT = MeshT & {
   hoverState?: string
 
   enableTransition?: boolean
+}
+
+export interface ShaderGradientWithControls extends React.FC<GradientT> {
+  propertyControls?: PropertyControls<GradientT>
 }

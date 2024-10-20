@@ -3,7 +3,8 @@
   "version": "0.1.6",
   "private": true,
   "dependencies": {
-    "@react-three/fiber": "^8.12.0",
+    "@react-three/drei": "^9.112.0",
+    "@react-three/fiber": "^8.17.7",
     "@react-spring/three": "^9.7.3",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
@@ -14,28 +15,21 @@
     "@types/react-dom": "^18.2.23",
     "@types/three": "^0.150.0",
     "framer-motion": "^10.9.2",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
     "react-scripts": "5.0.1",
     "shadergradient": "workspace:*",
-    "ui": "workspace:*",
-    "three": "0.154.0",
+    "three": "^0.168.0",
     "three-stdlib": "^2.30.1",
     "typescript": "^4.9.5",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
     "start": "PORT=5001 BROWSER=none react-scripts start",
-    "dev": "PORT=5001 react-scripts start",
+    "dev": "PORT=5001 BROWSER=none react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
   },
   "browserslist": {
     "production": [

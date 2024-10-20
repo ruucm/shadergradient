@@ -25,7 +25,6 @@
   },
   "scripts": {
     "start": "PORT=3001 BROWSER=none react-scripts start",
-    "dev": "PORT=3001 BROWSER=none react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"

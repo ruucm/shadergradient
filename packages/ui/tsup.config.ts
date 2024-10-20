@@ -59,7 +59,7 @@ export default defineConfig((options): any => {
           }
         })
       })
-      server.listen(8001)
+      server.listen(9000)
       return () => {
         server.close()
       }

@@ -1,5 +1,11 @@
 # shadergradient
 
+## 1.3.0
+
+### Minor Changes
+
+- separate framer bundle & use the latest three.js
+
 ## 1.2.14
 
 ### Patch Changes

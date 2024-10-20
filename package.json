@@ -24,7 +24,7 @@
   "packageManager": "pnpm@8.14.0",
   "engines": {
     "node": ">=14.0.0",
-    "pnpm": "^8.14.0"
+    "pnpm": ">=8.14.0"
   },
   "version": "0.0.1"
 }

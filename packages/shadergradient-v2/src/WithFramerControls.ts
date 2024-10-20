@@ -1,3 +1,4 @@
+import { ShaderGradientCanvas } from './ShaderGradientCanvas'
 import { ShaderGradient as OriginalShaderGradient } from './ShaderGradient'
 import { ControlType } from 'framer'
 import { ShaderGradientWithControls } from './types'
@@ -84,4 +85,4 @@ ShaderGradient.propertyControls = {
   },
 }
 
-export { ShaderGradient }
+export { ShaderGradientCanvas, ShaderGradient }

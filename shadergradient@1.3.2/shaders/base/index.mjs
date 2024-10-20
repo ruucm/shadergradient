@@ -1,4 +1,4 @@
-import"../../chunk-GMCKMPCO.mjs";var o=`varying vec3 fragPos;
+import"../../chunk-FLVFHPBB.mjs";var o=`varying vec3 fragPos;
 uniform float uTime;
 uniform float uAmplitude;
 

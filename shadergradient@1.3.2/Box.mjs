@@ -1,4 +1,4 @@
-import{a as t}from"./chunk-47YO7RYP.mjs";import"./chunk-F3ULA5MU.mjs";import"./chunk-GMCKMPCO.mjs";import{useRef as u}from"react";import{Canvas as m,useFrame as l}from"@react-three/fiber";import{OrbitControls as c}from"@react-three/drei";import{jsx as i,jsxs as n}from"react/jsx-runtime";var a=.9,o=10,r=10;var h=`
+import{a as n}from"./chunk-6VT5V4LC.mjs";import{a as t}from"./chunk-47YO7RYP.mjs";import"./chunk-F3ULA5MU.mjs";import{c as a,d as r}from"./chunk-GDSL66KB.mjs";import"./chunk-UWMHRNBJ.mjs";import"./chunk-FLVFHPBB.mjs";import{useRef as c}from"react";import{jsx as i,jsxs as u}from"react/jsx-runtime";var s=.9,o=10,f=10;var h=`
 varying vec3 fragPos;
 uniform float u_time;
 uniform float u_amplitude;
@@ -28,4 +28,4 @@ void main() {
 
     gl_FragColor = vec4(x, y, z, 1.0);
 }
-`;function d(){let e=u();return l(({clock:s})=>{let f=s.getElapsedTime();e.current&&(e.current.uniforms.u_time.value=f,e.current.uniforms.u_amplitude.value=a)}),n("mesh",{rotation:[t(30),t(45),t(0)],position:[0,0,-o],children:[i("boxGeometry",{args:[o,r,o]}),i("shaderMaterial",{ref:e,attach:"material",vertexShader:h,fragmentShader:p,uniforms:{u_time:{value:.7},u_amplitude:{value:a},u_width:{value:o},u_height:{value:r}}})]})}function w(){return n(m,{resize:{offsetSize:!0},children:[i(d,{}),i(c,{})]})}export{w as Box};
+`;function d(){let e=c();return a(({clock:m})=>{let l=m.getElapsedTime();e.current&&(e.current.uniforms.u_time.value=l,e.current.uniforms.u_amplitude.value=s)}),u("mesh",{rotation:[t(30),t(45),t(0)],position:[0,0,-o],children:[i("boxGeometry",{args:[o,f,o]}),i("shaderMaterial",{ref:e,attach:"material",vertexShader:h,fragmentShader:p,uniforms:{u_time:{value:.7},u_amplitude:{value:s},u_width:{value:o},u_height:{value:f}}})]})}function w(){return u(r,{resize:{offsetSize:!0},children:[i(d,{}),i(n,{})]})}export{w as Box};

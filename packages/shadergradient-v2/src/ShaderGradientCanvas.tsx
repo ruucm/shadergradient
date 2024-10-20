@@ -5,17 +5,23 @@ import * as THREE from 'three'
 
 export function ShaderGradientCanvas({
   children,
+  style = {},
   pixelDensity = 1,
   fov = 45,
 }: {
   children: React.ReactNode
+  style?: React.CSSProperties
   pixelDensity?: number
   fov?: number
 }): JSX.Element {
   useShaderChunkFix()
 
   return (
-    <Canvas resize={{ offsetSize: true }} {...canvasProps(pixelDensity, fov)}>
+    <Canvas
+      style={style}
+      resize={{ offsetSize: true }}
+      {...canvasProps(pixelDensity, fov)}
+    >
       {children}
     </Canvas>
   )

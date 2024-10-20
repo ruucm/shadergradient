@@ -10,12 +10,15 @@ import * as THREE from 'three'
 import { canvasProps } from '@/consts'
 
 export function ShaderGradient(passedProps: GradientT): JSX.Element {
-  const props = { ...presets.halo.props, ...passedProps }
+  const { pixelDensity, fov, ...props } = {
+    ...presets.halo.props,
+    ...passedProps,
+  }
 
   useShaderChunkFix()
 
   return (
-    <Canvas resize={{ offsetSize: true }} {...canvasProps(1, 45)}>
+    <Canvas resize={{ offsetSize: true }} {...canvasProps(pixelDensity, fov)}>
       <Mesh {...props} />
       <Lights />
       <PostProcessing />

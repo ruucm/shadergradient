@@ -1,0 +1,1 @@
+import{a as r}from"./chunk-TQY4VD4T.mjs";import{a as o}from"./chunk-GMCKMPCO.mjs";import{Fragment as m,jsx as t}from"react/jsx-runtime";function C(n){return t(m,{children:t(r,o({},n))})}export{C as a};

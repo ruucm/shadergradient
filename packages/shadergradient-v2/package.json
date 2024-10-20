@@ -14,8 +14,9 @@
     "build": "tsup",
     "dev": "tsup --config tsup.config.ts --watch",
     "dev:framer": "concurrently \"tsup --config tsup.framer.config.ts --watch\" \"pnpm ngrok\"",
-    "ngrok": "ngrok http --domain=esm.ngrok.dev 8000",
-    "release": "pnpm run build && mkdir -p release && cp -Rf dist release/$npm_package_name@$npm_package_version"
+    "build:framer": "tsup --config tsup.framer.config.ts",
+    "release:framer": "pnpm run build:framer && mkdir -p release && cp -Rf dist release/$npm_package_name@$npm_package_version",
+    "ngrok": "ngrok http --domain=esm.ngrok.dev 8000"
   },
   "peerDependencies": {
     "react": "*"

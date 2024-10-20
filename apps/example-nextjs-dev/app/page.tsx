@@ -1,15 +1,19 @@
 'use client'
 
-import { ShaderGradient } from 'shadergradient'
+import { ShaderGradientCanvas, ShaderGradient } from 'shadergradient'
 
 export default function Home() {
   return (
     <>
       <div className='w-screen h-[50vh]'>
-        <ShaderGradient />
+        <ShaderGradientCanvas>
+          <ShaderGradient />
+        </ShaderGradientCanvas>
       </div>
       <div className='w-screen h-[50vh]'>
-        <ShaderGradient type='plane' color1='#0D77E0' />
+        <ShaderGradientCanvas>
+          <ShaderGradient type='plane' color1='#0D77E0' />
+        </ShaderGradientCanvas>
       </div>
     </>
   )

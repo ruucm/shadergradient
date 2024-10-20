@@ -1,4 +1,4 @@
-import { ShaderGradient } from 'shadergradient'
+import { ShaderGradientCanvas, ShaderGradient } from 'shadergradient'
 import logo from './logo.svg'
 import './App.css'
 
@@ -7,11 +7,9 @@ function App() {
     <div className='App'>
       <header className='App-header'>
         <img src={logo} className='App-logo' alt='logo' />
-        <ShaderGradient
-          type='plane'
-          position={{ positionX: 0, positionY: 0, positionZ: 0 }}
-          rotation={{ rotationX: 0, rotationY: 0, rotationZ: 0 }}
-        />
+        <ShaderGradientCanvas>
+          <ShaderGradient type='plane' />
+        </ShaderGradientCanvas>
         <p>
           Edit <code>src/App.tsx</code> and save to reload.
         </p>

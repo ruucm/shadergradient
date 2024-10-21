@@ -25,6 +25,7 @@ export function Mesh({
 }: MeshT): JSX.Element {
   return (
     <mesh
+      name='shadergradient-mesh'
       position={[positionX, positionY, positionZ]}
       rotation={[rotationX, rotationY, rotationZ]}
     >

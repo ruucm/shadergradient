@@ -1,11 +1,5 @@
-import {
-  ShaderGradientCanvas,
-  ShaderGradient,
-  // @ts-ignore
-  useThree,
-  // @ts-ignore
-  useFrame,
-} from 'shadergradient'
+import { ShaderGradientCanvas, ShaderGradient } from 'shadergradient'
+import { useThree, useFrame } from '@react-three/fiber'
 import logo from './logo.svg'
 import './App.css'
 

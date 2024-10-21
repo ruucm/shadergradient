@@ -1,0 +1,1 @@
+function e(t){return t*(Math.PI/180)}function r(t){return t/180*Math.PI}function o(t){return t.replace("http://localhost:3001/customize","").replace("https://shadergradient.co/customize","").replace("https://www.shadergradient.co/customize","")}export{e as a,r as b,o as c};

@@ -6,9 +6,14 @@ import './App.css'
 function App() {
   return (
     <div className='App'>
-      <ShaderGradientCanvas style={{ position: 'absolute' }}>
+      <ShaderGradientCanvas style={{ width: '100vw', height: '50vh' }}>
         <Gradient />
       </ShaderGradientCanvas>
+      <div style={{ width: '100vw', height: '50vh' }}>
+        <ShaderGradientCanvas>
+          <ShaderGradient type='plane' />
+        </ShaderGradientCanvas>
+      </div>
       <header className='App-header'>
         <img src={logo} className='App-logo' alt='logo' />
         <p>

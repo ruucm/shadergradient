@@ -66,6 +66,8 @@ export type GradientT = MeshT & {
   hoverState?: string
 
   enableTransition?: boolean
+
+  urlString?: string
 }
 
 export interface ShaderGradientWithControls extends React.FC<GradientT> {

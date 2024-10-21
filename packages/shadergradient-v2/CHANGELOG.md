@@ -1,5 +1,11 @@
 # shadergradient
 
+## 1.3.4
+
+### Patch Changes
+
+- restore urlString prop
+
 ## 1.3.3
 
 ### Patch Changes

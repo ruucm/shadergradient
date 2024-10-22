@@ -1,5 +1,11 @@
 # shadergradient
 
+## 1.3.6
+
+### Patch Changes
+
+- FramerShaderGradient
+
 ## 1.3.5
 
 ### Patch Changes

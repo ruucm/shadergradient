@@ -108,4 +108,5 @@ FramerShaderGradient.propertyControls = {
   color3: { type: ControlType.Color, defaultValue: '#d0bce1' },
 }
 
+export * from './ShaderGradientCanvas'
 export { FramerShaderGradient }

@@ -19,7 +19,7 @@ function FramerShaderGradient({
   position,
   rotation,
   ...rest
-}: FramerShaderGradientProps) {
+}: FramerShaderGradientProps): JSX.Element {
   const { positionX, positionY, positionZ } = position
   const { rotationX, rotationY, rotationZ } = rotation
   return (

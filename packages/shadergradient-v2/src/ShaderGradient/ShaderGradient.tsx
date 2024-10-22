@@ -28,7 +28,7 @@ export function ShaderGradient(passedProps: GradientT): JSX.Element {
     <>
       <Mesh {...props} />
       <Lights />
-      <PostProcessing />
+      {grain !== 'off' && <PostProcessing />}
 
       <Controls {...props} />
     </>

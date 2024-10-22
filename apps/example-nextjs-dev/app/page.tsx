@@ -12,7 +12,7 @@ export default function Home() {
       </div>
       <div className='w-screen h-[50vh]'>
         <ShaderGradientCanvas>
-          <ShaderGradient type='plane' color1='#0D77E0' />
+          <ShaderGradient type='plane' color1='#0D77E0' grain='off' />
         </ShaderGradientCanvas>
       </div>
     </>

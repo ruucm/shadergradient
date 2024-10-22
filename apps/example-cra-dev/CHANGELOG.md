@@ -1,5 +1,12 @@
 # example-cra-dev
 
+## 0.1.12
+
+### Patch Changes
+
+- Updated dependencies
+  - shadergradient@1.3.5
+
 ## 0.1.11
 
 ### Patch Changes

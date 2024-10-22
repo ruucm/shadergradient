@@ -1,5 +1,11 @@
 # shadergradient
 
+## 1.3.5
+
+### Patch Changes
+
+- restore grain prop
+
 ## 1.3.4
 
 ### Patch Changes

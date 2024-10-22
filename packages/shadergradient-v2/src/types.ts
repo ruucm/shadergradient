@@ -1,5 +1,3 @@
-import { PropertyControls } from 'framer'
-
 export type ShaderGradientType = 'plane' | 'waterPlane' | 'sphere'
 
 export interface Position {
@@ -66,8 +64,4 @@ export type GradientT = MeshT & {
   hoverState?: string
 
   enableTransition?: boolean
-}
-
-export interface ShaderGradientWithControls extends React.FC<GradientT> {
-  propertyControls?: PropertyControls<GradientT>
 }

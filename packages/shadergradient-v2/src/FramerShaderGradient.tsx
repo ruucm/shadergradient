@@ -1,11 +1,41 @@
-import { ShaderGradientCanvas } from './ShaderGradientCanvas'
-import { ShaderGradient as OriginalShaderGradient } from './ShaderGradient'
+import { ShaderGradient } from './ShaderGradient'
 import { ControlType } from 'framer'
-import { ShaderGradientWithControls } from './types'
+import { GradientT } from './types'
 
-const ShaderGradient = OriginalShaderGradient as ShaderGradientWithControls
+type FramerShaderGradientProps = GradientT & {
+  position?: {
+    positionX: number
+    positionY: number
+    positionZ: number
+  }
+  rotation?: {
+    rotationX: number
+    rotationY: number
+    rotationZ: number
+  }
+}
 
-ShaderGradient.propertyControls = {
+function FramerShaderGradient({
+  position,
+  rotation,
+  ...rest
+}: FramerShaderGradientProps): JSX.Element {
+  const { positionX, positionY, positionZ } = position
+  const { rotationX, rotationY, rotationZ } = rotation
+  return (
+    <ShaderGradient
+      positionX={positionX}
+      positionY={positionY}
+      positionZ={positionZ}
+      rotationX={rotationX}
+      rotationY={rotationY}
+      rotationZ={rotationZ}
+      {...rest}
+    />
+  )
+}
+
+FramerShaderGradient.propertyControls = {
   type: {
     type: ControlType.Enum,
     options: ['plane', 'sphere', 'waterPlane'],
@@ -25,11 +55,13 @@ ShaderGradient.propertyControls = {
         type: ControlType.Number,
         step: 0.1,
         displayStepper: true,
+        defaultValue: 0,
       },
       positionZ: {
         type: ControlType.Number,
         step: 0.1,
         displayStepper: true,
+        defaultValue: 0,
       },
     },
   },
@@ -71,18 +103,9 @@ ShaderGradient.propertyControls = {
     displayStepper: true,
     defaultValue: 2,
   },
-  color1: {
-    type: ControlType.Color,
-    defaultValue: '#ff5005',
-  },
-  color2: {
-    type: ControlType.Color,
-    defaultValue: '#dbba95',
-  },
-  color3: {
-    type: ControlType.Color,
-    defaultValue: '#d0bce1',
-  },
+  color1: { type: ControlType.Color, defaultValue: '#ff5005' },
+  color2: { type: ControlType.Color, defaultValue: '#dbba95' },
+  color3: { type: ControlType.Color, defaultValue: '#d0bce1' },
 }
 
-export { ShaderGradientCanvas, ShaderGradient }
+export { FramerShaderGradient }

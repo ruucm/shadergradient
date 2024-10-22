@@ -1,5 +1,5 @@
 import { ShaderGradient } from './ShaderGradient'
-import { addPropertyControls, ControlType } from 'framer'
+import { ControlType } from 'framer'
 import { GradientT } from './types'
 
 type FramerShaderGradientProps = GradientT & {
@@ -35,7 +35,7 @@ function FramerShaderGradient({
   )
 }
 
-addPropertyControls(FramerShaderGradient, {
+FramerShaderGradient.propertyControls = {
   type: {
     type: ControlType.Enum,
     options: ['plane', 'sphere', 'waterPlane'],
@@ -106,6 +106,6 @@ addPropertyControls(FramerShaderGradient, {
   color1: { type: ControlType.Color, defaultValue: '#ff5005' },
   color2: { type: ControlType.Color, defaultValue: '#dbba95' },
   color3: { type: ControlType.Color, defaultValue: '#d0bce1' },
-})
+}
 
-export { FramerShaderGradient as ShaderGradient }
+export { FramerShaderGradient }

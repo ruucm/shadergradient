@@ -4,7 +4,7 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev:framer": "vite",
+    "dev": "vite",
     "build": "vite build",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
@@ -17,6 +17,10 @@
     "vite-plugin-mkcert": "^1"
   },
   "devDependencies": {
+    "@react-three/fiber": "^8.17.10",
+    "@react-spring/three": "^9.7.3",
+    "three": "^0.169.0",
+    "shadergradient": "workspace:*",
     "@eslint/js": "^9",
     "@types/react-dom": "^18",
     "@types/react": "^18",

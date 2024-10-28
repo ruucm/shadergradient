@@ -114,6 +114,18 @@ FramerShaderGradient.propertyControls = {
     optionTitles: ['On', 'Off'],
     displaySegmentedControl: true,
   },
+
+  control: {
+    type: ControlType.Enum,
+    options: ['props', 'query'],
+    optionTitles: ['Props', 'Query'],
+    displaySegmentedControl: true,
+  },
+  urlString: {
+    type: ControlType.String,
+    placeholder: 'URL from shadergradient.co',
+    hidden: (props) => props.control === 'props',
+  },
 }
 
 export * from './ShaderGradientCanvas'

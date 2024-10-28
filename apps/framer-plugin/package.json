@@ -20,7 +20,7 @@
     "@react-three/fiber": "^8.17.10",
     "@react-spring/three": "^9.7.3",
     "three": "^0.169.0",
-    "shadergradient": "workspace:*",
+    "@shadergradient/react": "workspace:*",
     "@eslint/js": "^9",
     "@types/react-dom": "^18",
     "@types/react": "^18",

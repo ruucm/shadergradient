@@ -25,6 +25,22 @@ Customizable 3D, moving gradient package for React. Also available on modern des
 
 ## React
 
+⚠️ **New Version (from v2.0.0)**
+
+```
+# with yarn
+yarn add three @react-three/fiber @react-spring/three @shadergradient/react
+yarn add -D @types/three
+
+# with npm
+npm i three @react-three/fiber @react-spring/three @shadergradient/react
+npm i -D @types/three
+
+# with pnpm
+pnpm add three @react-three/fiber @react-spring/three @shadergradient/react
+pnpm add -D @types/three
+```
+
 Install below dependencies on your React app.
 
 ```sh

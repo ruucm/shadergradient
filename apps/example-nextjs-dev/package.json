@@ -12,7 +12,7 @@
     "react": "^18",
     "react-dom": "^18",
     "next": "14.2.13",
-    "shadergradient": "workspace:*",
+    "@shadergradient/react": "workspace:*",
     "three": "^0.169.0",
     "@react-three/drei": "9.56.5",
     "@react-three/fiber": "8.12.0"

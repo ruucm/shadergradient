@@ -132,15 +132,12 @@ type GradientT = MeshT & {
 
 ```tsx
 import React from 'react'
-import { ShaderGradientCanvas, ShaderGradient } from 'shadergradient'
+import { ShaderGradientCanvas, ShaderGradient } from '@shadergradient/react'
 import * as reactSpring from '@react-spring/three'
-import * as drei from '@react-three/drei'
-import * as fiber from '@react-three/fiber'
 
 function App() {
   return (
     <ShaderGradientCanvas
-      importedFiber={{ ...fiber, ...drei, ...reactSpring }}
       style={{
         position: 'absolute',
         top: 0,
@@ -156,15 +153,12 @@ or just copy and paste URL of the gradients. (Grab the URL from [shadergradient.
 
 ```tsx
 import React from 'react'
-import { ShaderGradientCanvas, ShaderGradient } from 'shadergradient'
+import { ShaderGradientCanvas, ShaderGradient } from '@shadergradient/react'
 import * as reactSpring from '@react-spring/three'
-import * as drei from '@react-three/drei'
-import * as fiber from '@react-three/fiber'
 
 function App() {
   return (
     <ShaderGradientCanvas
-      importedFiber={{ ...fiber, ...drei, ...reactSpring }}
       style={{
         position: 'absolute',
         top: 0,
@@ -199,7 +193,7 @@ function App() {
 1. For general React environments (current version, stateless):
 
    ```
-   import { ShaderGradient } from 'shadergradient'
+   import { ShaderGradient } from '@shadergradient/react'
    ```
 
    This imports from `/dist/without-store.mjs`

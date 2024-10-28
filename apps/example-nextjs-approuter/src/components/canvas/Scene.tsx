@@ -1,6 +1,6 @@
 'use client'
 
-import { ShaderGradientCanvas } from 'shadergradient'
+import { ShaderGradientCanvas } from '@shadergradient/react'
 import { Canvas } from '@react-three/fiber'
 import { Preload } from '@react-three/drei'
 import { r3f } from '@/helpers/global'

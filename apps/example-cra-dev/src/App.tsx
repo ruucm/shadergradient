@@ -1,4 +1,4 @@
-import { ShaderGradientCanvas, ShaderGradient } from 'shadergradient'
+import { ShaderGradientCanvas, ShaderGradient } from '@shadergradient/react'
 import logo from './logo.svg'
 import './App.css'
 

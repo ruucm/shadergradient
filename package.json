@@ -11,7 +11,7 @@
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "changeset": "changeset add",
     "version-packages": "changeset version",
-    "release": "turbo run build --filter=shadergradient && changeset publish"
+    "release": "turbo run build --filter=@shadergradient/react && changeset publish"
   },
   "devDependencies": {
     "@changesets/cli": "^2.26.1",

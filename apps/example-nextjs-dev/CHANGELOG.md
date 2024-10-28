@@ -1,5 +1,12 @@
 # example-nextjs-dev
 
+## 0.1.8
+
+### Patch Changes
+
+- Updated dependencies
+  - @shadergradient/react@2.0.0
+
 ## 0.1.7
 
 ### Patch Changes

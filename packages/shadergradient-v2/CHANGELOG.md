@@ -1,5 +1,11 @@
 # shadergradient
 
+## 2.0.0
+
+### Major Changes
+
+- @shadergradient/react
+
 ## 1.3.6
 
 ### Patch Changes

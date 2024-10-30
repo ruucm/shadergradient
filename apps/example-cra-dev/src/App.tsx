@@ -1,27 +1,16 @@
-import { ShaderGradientCanvas, ShaderGradient } from '@shadergradient/react'
-import logo from './logo.svg'
-import './App.css'
+import { ShaderGradient, ShaderGradientCanvas } from '@shadergradient/react'
 
 function App() {
   return (
-    <div className='App'>
-      <header className='App-header'>
-        <img src={logo} className='App-logo' alt='logo' />
-        <ShaderGradientCanvas>
-          <ShaderGradient type='plane' />
-        </ShaderGradientCanvas>
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className='App-link'
-          href='https://reactjs.org'
-          target='_blank'
-          rel='noopener noreferrer'
-        >
-          Learn React
-        </a>
-      </header>
+    <div style={{ width: '100vw', height: '100vh' }}>
+      <ShaderGradientCanvas>
+        <ShaderGradient
+          cDistance={24}
+          color1='#ff5005'
+          color2='#dbba95'
+          color3='#d0bce1'
+        />
+      </ShaderGradientCanvas>
     </div>
   )
 }

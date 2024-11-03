@@ -21,7 +21,7 @@ Customizable 3D, moving gradient package for React. Also available on modern des
 
 ## Framer
 
-[Framer ESM (Copy this URL and paste it on Framer Canvas)](https://framer.com/m/ShaderGradient-Iog3.js)
+[Framer ESM (Copy this URL and paste it on Framer Canvas)](https://framer.com/m/ShaderGradient-oWuS.js)
 
 ## React
 

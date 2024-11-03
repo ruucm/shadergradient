@@ -5,10 +5,12 @@ import { ShaderGradient, ShaderGradientCanvas } from '@shadergradient/react'
 
 framer.showUI({
   position: 'top right',
-  width: 240,
-  height: 95,
-  resizable: true,
+  width: 330,
+  height: 510,
+  // resizable: true,
 })
+
+const framerPluginURLOrigin = 'https://delicious-statuses-566068.framer.app'
 
 function useSelection() {
   const [selection, setSelection] = useState<CanvasNode[]>([])
@@ -20,35 +22,46 @@ function useSelection() {
   return selection
 }
 
+const handleAddShaderGradient = async (controls) => {
+  await framer.addComponentInstance({
+    url: 'https://framer.com/m/ShaderGradientStaging-8Yhr.js',
+    attributes: {
+      controls: controls,
+    },
+  })
+}
+
+function handleMessage(event) {
+  if (event.origin === framerPluginURLOrigin) {
+    console.log(event)
+
+    if (event.data.message === 'ADD_TO_CANVAS') {
+      handleAddShaderGradient(event.data)
+    }
+  }
+}
 export function App() {
   const selection = useSelection()
-  const layer = selection.length === 1 ? 'layer' : 'layers'
 
-  const handleAddSvg = async () => {
-    await framer.addSVG({
-      svg: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"><path fill="#999" d="M20 0v8h-8L4 0ZM4 8h8l8 8h-8v8l-8-8Z"/></svg>`,
-      name: 'Logo.svg',
-    })
-  }
+  useEffect(() => {
+    window.addEventListener('message', handleMessage, false)
+  }, [])
 
   return (
-    <main>
-      <ShaderGradientCanvas>
-        <ShaderGradient type='plane' />
-      </ShaderGradientCanvas>
-      <p>
-        Welcome! Check out the{' '}
-        <a
-          href='https://framer.com/developers/plugins/introduction'
-          target='_blank'
-        >
-          Docs
-        </a>{' '}
-        to start. You have {selection.length} {layer} selected.
-      </p>
-      <button className='framer-button-primary' onClick={handleAddSvg}>
-        Insert Logo
-      </button>
+    <main style={{ position: 'absolute', overflow: 'hidden' }}>
+      <div>
+        <iframe
+          id='framer-plugin-site'
+          src={framerPluginURLOrigin + '/framer-plugin'}
+          style={{
+            outline: 'none',
+            border: 'none',
+            width: 300,
+            height: 600,
+            overflow: 'hidden',
+          }}
+        />
+      </div>
     </main>
   )
 }

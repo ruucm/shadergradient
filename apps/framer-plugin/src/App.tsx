@@ -1,37 +1,28 @@
-import { framer, CanvasNode } from 'framer-plugin'
-import { useState, useEffect } from 'react'
+import { framer } from 'framer-plugin'
+import { useEffect } from 'react'
 import './App.css'
-import { ShaderGradient, ShaderGradientCanvas } from '@shadergradient/react'
 
 framer.showUI({
   position: 'top right',
   width: 330,
-  height: 510,
-  // resizable: true,
+  height: 446,
 })
 
 const framerPluginURLOrigin = 'https://delicious-statuses-566068.framer.app'
 
-function useSelection() {
-  const [selection, setSelection] = useState<CanvasNode[]>([])
-
-  useEffect(() => {
-    return framer.subscribeToSelection(setSelection)
-  }, [])
-
-  return selection
-}
-
-const handleAddShaderGradient = async (controls) => {
+const handleAddShaderGradient = async (controls: { message: string }) => {
   await framer.addComponentInstance({
-    url: 'https://framer.com/m/ShaderGradientStaging-8Yhr.js',
+    url: 'https://framer.com/m/ShaderGradientStaging-8Yhr.js', //staging
+    // url: 'https://framer.com/m/ShaderGradient-oWuS.js', // upgraded shadergradient
     attributes: {
+      width: '900px',
+      height: '600px',
       controls: controls,
     },
   })
 }
 
-function handleMessage(event) {
+function handleMessage(event: { origin: string; data: { message: string } }) {
   if (event.origin === framerPluginURLOrigin) {
     console.log(event)
 
@@ -41,14 +32,12 @@ function handleMessage(event) {
   }
 }
 export function App() {
-  const selection = useSelection()
-
   useEffect(() => {
     window.addEventListener('message', handleMessage, false)
   }, [])
 
   return (
-    <main style={{ position: 'absolute', overflow: 'hidden' }}>
+    <main>
       <div>
         <iframe
           id='framer-plugin-site'
@@ -57,7 +46,7 @@ export function App() {
             outline: 'none',
             border: 'none',
             width: 300,
-            height: 600,
+            height: 446,
             overflow: 'hidden',
           }}
         />

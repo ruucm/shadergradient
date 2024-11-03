@@ -1,4 +1,4 @@
-import { animateT, typeT } from './types'
+import { animateT, EnvironmentPresetT, LightTypeT, typeT } from './types'
 
 export const presets = {
   base: {
@@ -46,10 +46,10 @@ export const presets = {
       color2: '#dbba95',
       color3: '#d0bce1',
       embedMode: 'off',
-      envPreset: 'city',
+      envPreset: 'city' as EnvironmentPresetT,
       gizmoHelper: 'hide',
       grain: 'on',
-      lightType: '3d',
+      lightType: '3d' as LightTypeT,
       pixelDensity: 1,
       fov: 45,
       positionX: -1.4,

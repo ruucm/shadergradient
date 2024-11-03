@@ -40,6 +40,15 @@ export type MeshT = {
   posSpringOption?: any
 }
 
+export type LightTypeT = '3d' | 'env'
+export type EnvironmentPresetT = 'city' | 'dawn' | 'lobby'
+
+export type LightsT = {
+  lightType: LightTypeT
+  brightness: number
+  envPreset: EnvironmentPresetT
+}
+
 export type GradientT = MeshT & {
   control?: 'query' | 'props'
   isFigmaPlugin?: boolean
@@ -52,9 +61,9 @@ export type GradientT = MeshT & {
   cameraZoom?: number
 
   // Effect props
-  lightType?: '3d' | 'env'
+  lightType?: LightTypeT
   brightness?: number
-  envPreset?: 'city' | 'dawn' | 'lobby'
+  envPreset?: EnvironmentPresetT
   grain?: 'on' | 'off'
   grainBlending?: number
 

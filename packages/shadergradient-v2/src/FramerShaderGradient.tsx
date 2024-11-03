@@ -88,6 +88,7 @@ FramerShaderGradient.propertyControls = {
     step: 0.1,
     min: 0.1,
     displayStepper: true,
+    defaultValue: 0.4,
     hidden: (props) =>
       props.animate === 'off' ||
       props.control === 'query' ||
@@ -131,6 +132,7 @@ FramerShaderGradient.propertyControls = {
     step: 0.1,
     min: 0.1,
     displayStepper: true,
+    defaultValue: 1,
     hidden: (props) =>
       props.type !== 'sphere' ||
       props.control === 'query' ||
@@ -142,6 +144,7 @@ FramerShaderGradient.propertyControls = {
     min: 0,
     max: 3,
     displayStepper: true,
+    defaultValue: 1,
     hidden: (props) => props.control === 'query' || props.activeTab !== 'Shape',
   },
   // Effects
@@ -158,6 +161,7 @@ FramerShaderGradient.propertyControls = {
     options: ['env', '3d'],
     optionTitles: ['Env', 'Light'],
     displaySegmentedControl: true,
+    defaultValue: '3d',
     hidden: (props) =>
       props.control === 'query' || props.activeTab !== 'Effects',
   },
@@ -176,6 +180,7 @@ FramerShaderGradient.propertyControls = {
     step: 0.1,
     min: 0.1,
     max: 3,
+    defaultValue: 1.2,
     hidden: (props) =>
       props.lightType === 'env' ||
       props.control === 'query' ||
@@ -187,6 +192,7 @@ FramerShaderGradient.propertyControls = {
     step: 0.1,
     min: 0,
     max: 1,
+    defaultValue: 0.1,
     hidden: (props) =>
       props.lightType === '3d' ||
       props.control === 'query' ||
@@ -196,16 +202,19 @@ FramerShaderGradient.propertyControls = {
   // Colors
   color1: {
     type: ControlType.Color,
+    defaultValue: '#ff5005',
     hidden: (props) =>
       props.control === 'query' || props.activeTab !== 'Colors',
   },
   color2: {
     type: ControlType.Color,
+    defaultValue: '#dbba95',
     hidden: (props) =>
       props.control === 'query' || props.activeTab !== 'Colors',
   },
   color3: {
     type: ControlType.Color,
+    defaultValue: '#d0bce1',
     hidden: (props) =>
       props.control === 'query' || props.activeTab !== 'Colors',
   },
@@ -216,6 +225,7 @@ FramerShaderGradient.propertyControls = {
     displayStepper: true,
     min: 0,
     max: 20,
+    defaultValue: 3.6,
     hidden: (props) =>
       props.type === 'sphere' ||
       props.control === 'query' ||
@@ -227,6 +237,7 @@ FramerShaderGradient.propertyControls = {
     step: 0.1,
     min: 0.1,
     max: 30,
+    defaultValue: 1,
     hidden: (props) =>
       props.type !== 'sphere' ||
       props.control === 'query' ||
@@ -269,11 +280,13 @@ FramerShaderGradient.propertyControls = {
         type: ControlType.Number,
         step: 0.1,
         displayStepper: true,
+        defaultValue: 0,
       },
       positionZ: {
         type: ControlType.Number,
         step: 0.1,
         displayStepper: true,
+        defaultValue: 0,
       },
     },
     hidden: (props) => props.control === 'query' || props.activeTab !== 'View',
@@ -312,6 +325,8 @@ FramerShaderGradient.propertyControls = {
   urlString: {
     type: ControlType.String,
     placeholder: 'URL from shadergradient.co',
+    defaultValue:
+      'https://www.shadergradient.co/customize?animate=on&axesHelper=off&bgColor1=%23000000&bgColor2=%23000000&brightness=1.2&cAzimuthAngle=180&cDistance=3.6&cPolarAngle=90&cameraZoom=1&color1=%23ff5005&color2=%23dbba95&color3=%23d0bce1&destination=onCanvas&embedMode=off&envPreset=city&format=gif&fov=45&frameRate=10&gizmoHelper=hide&grain=on&lightType=3d&pixelDensity=1&positionX=-1.4&positionY=0&positionZ=0&range=enabled&rangeEnd=40&rangeStart=0&reflection=0.1&rotationX=0&rotationY=10&rotationZ=50&shader=defaults&type=plane&uDensity=1.3&uFrequency=5.5&uSpeed=0.4&uStrength=4&uTime=0&wireframe=false',
     hidden: (props) => props.control === 'props',
   },
   // Tools (🧰)

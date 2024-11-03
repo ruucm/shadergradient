@@ -1,6 +1,6 @@
 {
-  "name": "shadergradient",
-  "version": "1.3.6",
+  "name": "@shadergradient/react",
+  "version": "2.0.0",
   "main": "./dist/index.mjs",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.mts",
@@ -15,7 +15,7 @@
     "dev": "tsup --config tsup.config.ts --watch",
     "dev:framer": "concurrently \"tsup --config tsup.framer.config.ts --watch\" \"pnpm ngrok\"",
     "build:framer": "tsup --config tsup.framer.config.ts",
-    "release:framer": "pnpm run build:framer && mkdir -p release && cp -Rf dist release/$npm_package_name@$npm_package_version",
+    "release:framer": "pnpm run build:framer && mkdir -p release && cp -Rf dist release/shadergradient@$npm_package_version",
     "ngrok": "ngrok http --domain=esm.ngrok.dev 8000"
   },
   "peerDependencies": {

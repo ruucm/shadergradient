@@ -1,6 +1,6 @@
 'use client'
 
-import { ShaderGradientCanvas, ShaderGradient } from 'shadergradient'
+import { ShaderGradientCanvas, ShaderGradient } from '@shadergradient/react'
 
 export default function Home() {
   return (

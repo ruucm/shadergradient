@@ -27,6 +27,24 @@ Customizable 3D, moving gradient package for React. Also available on modern des
 
 Install below dependencies on your React app.
 
+⚠️ **New Version (from v2.0.0)**
+
+```
+# with yarn
+yarn add three @react-three/fiber @react-spring/three @shadergradient/react
+yarn add -D @types/three
+
+# with npm
+npm i three @react-three/fiber @react-spring/three @shadergradient/react
+npm i -D @types/three
+
+# with pnpm
+pnpm add three @react-three/fiber @react-spring/three @shadergradient/react
+pnpm add -D @types/three
+```
+
+⚠️ **Old Version (v1.x.x)**
+
 ```sh
 # with yarn
 yarn add three @react-three/fiber @react-spring/three shadergradient
@@ -116,15 +134,12 @@ type GradientT = MeshT & {
 
 ```tsx
 import React from 'react'
-import { ShaderGradientCanvas, ShaderGradient } from 'shadergradient'
+import { ShaderGradientCanvas, ShaderGradient } from '@shadergradient/react'
 import * as reactSpring from '@react-spring/three'
-import * as drei from '@react-three/drei'
-import * as fiber from '@react-three/fiber'
 
 function App() {
   return (
     <ShaderGradientCanvas
-      importedFiber={{ ...fiber, ...drei, ...reactSpring }}
       style={{
         position: 'absolute',
         top: 0,
@@ -140,15 +155,12 @@ or just copy and paste URL of the gradients. (Grab the URL from [shadergradient.
 
 ```tsx
 import React from 'react'
-import { ShaderGradientCanvas, ShaderGradient } from 'shadergradient'
+import { ShaderGradientCanvas, ShaderGradient } from '@shadergradient/react'
 import * as reactSpring from '@react-spring/three'
-import * as drei from '@react-three/drei'
-import * as fiber from '@react-three/fiber'
 
 function App() {
   return (
     <ShaderGradientCanvas
-      importedFiber={{ ...fiber, ...drei, ...reactSpring }}
       style={{
         position: 'absolute',
         top: 0,
@@ -183,7 +195,7 @@ function App() {
 1. For general React environments (current version, stateless):
 
    ```
-   import { ShaderGradient } from 'shadergradient'
+   import { ShaderGradient } from '@shadergradient/react'
    ```
 
    This imports from `/dist/without-store.mjs`

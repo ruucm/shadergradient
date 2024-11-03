@@ -1,6 +1,7 @@
 import { framer, CanvasNode } from 'framer-plugin'
 import { useState, useEffect } from 'react'
 import './App.css'
+import { ShaderGradient, ShaderGradientCanvas } from '@shadergradient/react'
 
 framer.showUI({
   position: 'top right',

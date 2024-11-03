@@ -39,6 +39,7 @@
     "url-loader": "^4.1.1"
   },
   "scripts": {
+    "dev:examples": "next dev --port 5003",
     "lint": "next lint --fix --dir app",
     "build": "next build",
     "analyze": "ANALYZE=true next build",

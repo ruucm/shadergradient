@@ -1,4 +1,6 @@
 import vertexShader from './vertex.glsl'
 import fragmentShader from './fragment.glsl'
 
-export { vertexShader, fragmentShader }
+import vertexSphere from './vertexSphere.glsl'
+
+export { vertexShader, fragmentShader, vertexSphere }

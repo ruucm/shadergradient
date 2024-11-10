@@ -1,7 +1,7 @@
 import { Geometry } from './Geometry'
 import { MeshT } from '@/types'
 import { Materials } from './Materials'
-import { vertexShader, fragmentShader } from '@/shaders/a'
+import { vertexShader, fragmentShader, vertexSphere } from '@/shaders/a'
 // import { vertexShader, fragmentShader } from '@/shaders/base'
 
 export function Mesh({
@@ -44,7 +44,7 @@ export function Mesh({
           uAmplitude,
           uIntensity: 0.5,
         }}
-        vertexShader={vertexShader}
+        vertexShader={type === 'sphere' ? vertexSphere : vertexShader}
         fragmentShader={fragmentShader}
         onInit={(material) => {
           console.log('material (onInit)', material)

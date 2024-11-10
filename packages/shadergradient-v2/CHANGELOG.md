@@ -1,5 +1,11 @@
 # shadergradient
 
+## 2.0.3
+
+### Patch Changes
+
+- vertexSphere, Framer noise controls
+
 ## 2.0.2
 
 ### Patch Changes

@@ -17,17 +17,23 @@ type FramerShaderGradientProps = GradientT & {
     cAzimuthAngle: number
     cPolarAngle: number
   }
+  noise?: {
+    uDensity: number
+    uStrength: number
+  }
 }
 
 function FramerShaderGradient({
   position,
   rotation,
   cameraAngle,
+  noise,
   ...rest
 }: FramerShaderGradientProps): JSX.Element {
   const { positionX, positionY, positionZ } = position
   const { rotationX, rotationY, rotationZ } = rotation
   const { cAzimuthAngle, cPolarAngle } = cameraAngle
+  const { uDensity, uStrength } = noise
 
   return (
     <ShaderGradient
@@ -39,6 +45,8 @@ function FramerShaderGradient({
       rotationZ={rotationZ}
       cAzimuthAngle={cAzimuthAngle}
       cPolarAngle={cPolarAngle}
+      uDensity={uDensity}
+      uStrength={uStrength}
       {...rest}
     />
   )

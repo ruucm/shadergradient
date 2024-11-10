@@ -4,7 +4,7 @@ import { useCameraAnimation } from './useCameraAnimation'
 import { extend, useThree, useFrame } from '@react-three/fiber'
 
 export function CameraControl({
-  dampingFactor = 0.05, // default dampingFactor of "camera-conrols"
+  smoothTime = 0.05, // default smoothTime of "camera-conrols"
   ...props
 }: any): JSX.Element {
   CameraControls.install({ THREE })
@@ -21,7 +21,7 @@ export function CameraControl({
       ref={ref}
       args={[camera, gl.domElement]}
       enableDamping={true}
-      dampingFactor={dampingFactor}
+      smoothTime={smoothTime}
       zoomSpeed={10}
       dollySpeed={10}
       // zoomSpeed={5}

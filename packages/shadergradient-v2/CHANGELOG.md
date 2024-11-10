@@ -1,5 +1,11 @@
 # shadergradient
 
+## 2.0.4
+
+### Patch Changes
+
+- fix rotation (radian)
+
 ## 2.0.3
 
 ### Patch Changes

@@ -1,5 +1,11 @@
 # shadergradient
 
+## 2.0.2
+
+### Patch Changes
+
+- dampingFactor to smoothTime
+
 ## 2.0.1
 
 ### Patch Changes

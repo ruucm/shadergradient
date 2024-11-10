@@ -8,6 +8,9 @@ export * from './color'
 export function dToR(d: number) {
   return (d / 180) * Math.PI
 }
+export function dToRArr(degrees) {
+  return degrees.map((d) => dToR(d))
+}
 
 export function formatUrlString(urlString) {
   // remove domains (only search params should be left)

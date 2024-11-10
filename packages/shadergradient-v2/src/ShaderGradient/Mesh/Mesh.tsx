@@ -3,6 +3,7 @@ import { MeshT } from '@/types'
 import { Materials } from './Materials'
 import { vertexShader, fragmentShader, vertexSphere } from '@/shaders/a'
 // import { vertexShader, fragmentShader } from '@/shaders/base'
+import { dToRArr } from '@/utils'
 
 export function Mesh({
   positionX,
@@ -27,7 +28,7 @@ export function Mesh({
     <mesh
       name='shadergradient-mesh'
       position={[positionX, positionY, positionZ]}
-      rotation={[rotationX, rotationY, rotationZ]}
+      rotation={dToRArr([rotationX, rotationY, rotationZ])}
     >
       <Geometry type={type} />
       <Materials

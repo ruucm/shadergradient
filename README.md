@@ -84,6 +84,7 @@ type MeshT = {
   uStrength?: number
   uDensity?: number
   uFrequency?: number
+  // renamed to Sprial on Framer & shadergradient.co
   uAmplitude?: number
   positionX?: number
   positionY?: number

@@ -21,7 +21,12 @@ export default function Home() {
       </div>
       <div className='flex-1 h-screen'>
         <ShaderGradientCanvas>
-          <ShaderGradient type='plane' color1={color1} grain='off' />
+          <ShaderGradient
+            type='plane'
+            color1={color1}
+            grain='off'
+            animate='off'
+          />
         </ShaderGradientCanvas>
         <button
           onClick={() => setColor1('#FF5005')}

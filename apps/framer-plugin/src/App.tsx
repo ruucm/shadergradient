@@ -8,7 +8,7 @@ framer.showUI({
   height: 446,
 })
 
-const framerPluginURLOrigin = 'https://amicable-interface-702205.framer.app' // shadergradient.co origin
+const framerPluginURLOrigin = 'https://shadergradient-v2.framer.website' // shadergradient.co origin
 
 const handleAddShaderGradient = async (controls: { message: string }) => {
   await framer.addComponentInstance({

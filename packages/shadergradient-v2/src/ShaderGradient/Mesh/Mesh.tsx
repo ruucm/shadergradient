@@ -6,6 +6,8 @@ import { vertexShader, fragmentShader, vertexSphere } from '@/shaders/a'
 import { dToRArr } from '@/utils'
 
 export function Mesh({
+  animate,
+
   positionX,
   positionY,
   positionZ,
@@ -32,6 +34,7 @@ export function Mesh({
     >
       <Geometry type={type} />
       <Materials
+        animate={animate}
         uniforms={{
           colors: [color1, color2, color3],
           uTime,

@@ -1,5 +1,11 @@
 # shadergradient
 
+## 2.0.6
+
+### Patch Changes
+
+- fragmentSphere
+
 ## 2.0.5
 
 ### Patch Changes

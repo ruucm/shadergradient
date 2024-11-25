@@ -10,6 +10,15 @@
   "files": [
     "dist/**"
   ],
+  "exports": {
+    ".": {
+      "import": "./dist/index.mjs",
+      "types": "./dist/index.d.mts"
+    },
+    "./stateless": {
+      "import": "./dist/ShaderGradientStateless/index.mjs"
+    }
+  },
   "scripts": {
     "build": "tsup",
     "dev": "tsup --config tsup.config.ts --watch",

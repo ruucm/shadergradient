@@ -54,6 +54,9 @@ export default defineConfig(async (options) => {
       '@react-three/fiber',
       '@react-three/drei',
       'three',
+      // zustand need to be external
+      // it is a dependency of @react-three/fiber
+      'zustand',
     ],
     esbuildPlugins: [glslLoader],
     async onSuccess() {

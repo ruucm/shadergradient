@@ -1,1 +1,1 @@
-import{a}from"../../chunk-NT2YB4PR.mjs";import"../../chunk-FLVFHPBB.mjs";export{a as Geometry};
+import{Fragment as o,jsx as n,jsxs as r}from"react/jsx-runtime";function t({type:e}){return r(o,{children:[e==="plane"&&n("planeGeometry",{args:[10,10,1,192]}),e==="sphere"&&n("icosahedronGeometry",{args:[1,192/3]}),e==="waterPlane"&&n("planeGeometry",{args:[10,10,192,192]})]})}export{t as Geometry};

@@ -16,7 +16,8 @@
       "types": "./dist/index.d.mts"
     },
     "./stateless": {
-      "import": "./dist/ShaderGradientStateless/index.mjs"
+      "import": "./dist/ShaderGradientStateless/index.mjs",
+      "types": "./dist/ShaderGradientStateless/index.d.mts"
     }
   },
   "scripts": {

@@ -36,8 +36,8 @@ importers:
         specifier: ^8.12.0
         version: 8.12.0(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(three@0.169.0)
       '@shadergradient/react':
-        specifier: ^2.0.6
-        version: 2.0.6(react@18.2.0)
+        specifier: ^2.0.7
+        version: link:../../packages/shadergradient-v2
       '@testing-library/jest-dom':
         specifier: ^5.16.5
         version: 5.16.5
@@ -162,8 +162,8 @@ importers:
         specifier: ^8.12.0
         version: 8.12.0(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(three@0.169.0)
       '@shadergradient/react':
-        specifier: ^2.0.6
-        version: 2.0.6(react@18.2.0)
+        specifier: ^2.0.7
+        version: link:../../packages/shadergradient-v2
       '@types/three':
         specifier: ^0.150.0
         version: 0.150.0
@@ -256,8 +256,8 @@ importers:
         specifier: ^8.12.0
         version: 8.12.0(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(three@0.169.0)
       '@shadergradient/react':
-        specifier: ^2.0.6
-        version: 2.0.6(react@18.2.0)
+        specifier: ^2.0.7
+        version: link:../../packages/shadergradient-v2
       glsl-random:
         specifier: ^0.0.5
         version: 0.0.5

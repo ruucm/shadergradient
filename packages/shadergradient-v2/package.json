@@ -1,6 +1,6 @@
 {
   "name": "@shadergradient/react",
-  "version": "2.0.6",
+  "version": "2.0.8",
   "main": "./dist/index.mjs",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.mts",
@@ -10,6 +10,16 @@
   "files": [
     "dist/**"
   ],
+  "exports": {
+    ".": {
+      "import": "./dist/index.mjs",
+      "types": "./dist/index.d.mts"
+    },
+    "./stateless": {
+      "import": "./dist/ShaderGradientStateless/index.mjs",
+      "types": "./dist/ShaderGradientStateless/index.d.mts"
+    }
+  },
   "scripts": {
     "build": "tsup",
     "dev": "tsup --config tsup.config.ts --watch",

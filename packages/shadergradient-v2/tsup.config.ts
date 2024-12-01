@@ -43,7 +43,7 @@ export default defineConfig(async (options) => {
     platform: 'browser',
     format: ['esm'],
     dts: {
-      entry: 'src/index.ts',
+      entry: ['src/index.ts', 'src/ShaderGradientStateless/index.ts'],
     },
     minify: !isDev,
     clean: true,
@@ -54,6 +54,9 @@ export default defineConfig(async (options) => {
       '@react-three/fiber',
       '@react-three/drei',
       'three',
+      // zustand need to be external
+      // it is a dependency of @react-three/fiber
+      'zustand',
     ],
     esbuildPlugins: [glslLoader],
     async onSuccess() {

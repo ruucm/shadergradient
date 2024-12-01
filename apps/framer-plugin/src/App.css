@@ -9,3 +9,11 @@ main {
   gap: 15px;
   overflow: hidden;
 }
+
+[data-framer-theme='dark'] #light-iframe {
+  display: none;
+}
+
+[data-framer-theme='light'] #dark-iframe {
+  display: none;
+}

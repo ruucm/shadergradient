@@ -27,16 +27,17 @@ const handleAddShaderGradient = async (controls: { message: string }) => {
   })
 }
 
-function handleMessage(event: { origin: string; data: { message: string } }) {
-  if (event.origin === framerPluginURLOrigin) {
-    console.log(event)
+export function App() {
+  function handleMessage(event: { origin: string; data: { message: string } }) {
+    if (event.origin === framerPluginURLOrigin) {
+      console.log(event)
 
-    if (event.data.message === 'ADD_TO_CANVAS') {
-      handleAddShaderGradient(event.data)
+      if (event.data.message === 'ADD_TO_CANVAS') {
+        handleAddShaderGradient(event.data)
+      }
     }
   }
-}
-export function App() {
+
   useEffect(() => {
     window.addEventListener('message', handleMessage, false)
   }, [])
@@ -44,7 +45,7 @@ export function App() {
   return (
     <main>
       <iframe
-        id='framer-plugin-site'
+        id='light-iframe'
         src={framerPluginURLOrigin + '/framer-plugin'}
         style={{
           outline: 'none',
@@ -52,6 +53,19 @@ export function App() {
           width: 300,
           height: 446,
           overflow: 'hidden',
+          position: 'absolute',
+        }}
+      />
+      <iframe
+        id='dark-iframe'
+        src={framerPluginURLOrigin + '/framer-plugin-dark'}
+        style={{
+          outline: 'none',
+          border: 'none',
+          width: 300,
+          height: 446,
+          overflow: 'hidden',
+          position: 'absolute',
         }}
       />
     </main>

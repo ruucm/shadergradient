@@ -81,6 +81,6 @@
     "react-slider": "^2.0.4",
     "scroll-into-view-if-needed": "^3.0.10",
     "stripe": "^11.13.0",
-    "zustand": "^4.1.5"
+    "zustand": "5.0.1"
   }
 }

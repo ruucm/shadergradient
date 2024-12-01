@@ -4,6 +4,7 @@ import fs from 'fs'
 import path from 'path'
 import { Server as SocketIO } from 'socket.io'
 import { globby } from 'globby'
+import commonjsPlugin from '@chialab/esbuild-plugin-commonjs'
 
 // Add this GLSL loader plugin
 const glslLoader = {
@@ -52,7 +53,7 @@ export default defineConfig(async (options) => {
     // ['@react-spring/three', '@react-three/fiber', '@react-three/drei', 'three']
 
     external: ['react', 'framer', 'react-reconciler'], // react-reconciler need to be external, cause esbuild can't resolve it (Error "Dynamic require of "react" is not supported")
-    esbuildPlugins: [glslLoader],
+    esbuildPlugins: [glslLoader, commonjsPlugin()],
     async onSuccess() {
       if (!isDev) return
 

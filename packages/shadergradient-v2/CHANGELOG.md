@@ -1,5 +1,11 @@
 # shadergradient
 
+## 2.0.9
+
+### Patch Changes
+
+- bundle zustand on framer build
+
 ## 2.0.8
 
 ### Patch Changes

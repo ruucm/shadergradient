@@ -1,0 +1,1 @@
+import{b as i,e as a}from"./chunk-ZNKMISOY.mjs";import{b as r}from"./chunk-LQKEBLTR.mjs";import{useEffect as n}from"react";var s=!1;function f(){let t=a(e=>e.activePreset);n(()=>{var o;let e;!s&&((o=window.location.search)!=null&&o.includes("pixelDensity"))?e=window.location.search:e=r[t].url,i(e),s=!0},[t])}export{f as a};

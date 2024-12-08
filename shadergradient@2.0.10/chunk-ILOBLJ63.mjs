@@ -1,0 +1,1 @@
+import{a as e}from"./chunk-ZCTVLHR2.mjs";import{a as n}from"./chunk-XYNDFOQL.mjs";import{a as t}from"./chunk-CAV3RDYR.mjs";import{b as o}from"./chunk-XV5JMMUO.mjs";import{jsx as m}from"react/jsx-runtime";function f(r){e();let a=n(r.control,r);return m(t,o({},a))}export{f as a};

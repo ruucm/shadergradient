@@ -15,6 +15,7 @@ export const updateGradientState = (querystate: object | string) => {
   let state = querystate
   if (isString) state = parseState(querystate)
 
+  // @ts-ignore
   useQueryStore.setState(state, isString) // replace true if it's a string
 }
 

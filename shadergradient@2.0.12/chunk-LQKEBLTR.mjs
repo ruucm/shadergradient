@@ -1,0 +1,1 @@
+import{a as e}from"./chunk-RGCVIJIQ.mjs";var u=0,P=a(e),m=P[0].url;function a(n){return Object.entries(n).map(([g,o])=>{let{title:s,color:i,props:c}=o,S=new URLSearchParams(Object.entries(c).reduce((r,[E,t])=>(r[E]=String(t),r),{})).toString();return{title:s,color:i,url:`?${S}`}})}export{u as a,P as b,m as c};

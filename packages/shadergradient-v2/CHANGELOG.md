@@ -1,5 +1,11 @@
 # shadergradient
 
+## 2.0.15
+
+### Patch Changes
+
+- minify: false
+
 ## 2.0.14
 
 ### Patch Changes

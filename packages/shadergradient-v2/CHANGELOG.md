@@ -1,5 +1,11 @@
 # shadergradient
 
+## 2.0.12
+
+### Patch Changes
+
+- unexport updateGradientState
+
 ## 2.0.11
 
 ### Patch Changes

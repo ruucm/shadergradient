@@ -1,5 +1,11 @@
 # shadergradient
 
+## 2.0.14
+
+### Patch Changes
+
+- splitting: false (tsup.framer.config.ts)
+
 ## 2.0.13
 
 ### Patch Changes

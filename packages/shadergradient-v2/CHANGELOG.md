@@ -1,5 +1,11 @@
 # shadergradient
 
+## 2.0.13
+
+### Patch Changes
+
+- restore minify & splitting
+
 ## 2.0.12
 
 ### Patch Changes

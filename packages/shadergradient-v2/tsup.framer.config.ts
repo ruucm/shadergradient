@@ -48,6 +48,7 @@ export default defineConfig(async (options) => {
     },
     minify: !isDev,
     clean: true,
+    splitting: false,
 
     // internal bundles
     // ['@react-spring/three', '@react-three/fiber', '@react-three/drei', 'three']

@@ -46,11 +46,8 @@ export default defineConfig(async (options) => {
     dts: {
       entry: 'src/index.ts',
     },
-    // minify: !isDev,
+    minify: !isDev,
     clean: true,
-
-    minify: false,
-    splitting: false,
 
     // internal bundles
     // ['@react-spring/three', '@react-three/fiber', '@react-three/drei', 'three']

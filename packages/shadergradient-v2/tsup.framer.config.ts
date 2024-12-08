@@ -53,7 +53,10 @@ export default defineConfig(async (options) => {
     // ['@react-spring/three', '@react-three/fiber', '@react-three/drei', 'three']
 
     external: ['react', 'framer', 'react-reconciler'], // react-reconciler need to be external, cause esbuild can't resolve it (Error "Dynamic require of "react" is not supported")
-    esbuildPlugins: [glslLoader, commonjsPlugin()],
+    esbuildPlugins: [
+      glslLoader,
+      commonjsPlugin(), // this is for zustand
+    ],
     async onSuccess() {
       if (!isDev) return
 

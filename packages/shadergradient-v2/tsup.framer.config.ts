@@ -46,7 +46,7 @@ export default defineConfig(async (options) => {
     dts: {
       entry: 'src/index.ts',
     },
-    minify: false,
+    minify: false, // disable minify for framer (minified build has react-reconciler error)
     clean: true,
 
     // internal bundles

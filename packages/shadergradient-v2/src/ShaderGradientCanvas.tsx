@@ -9,6 +9,7 @@ export function ShaderGradientCanvas({
   pixelDensity = 1,
   fov = 45,
   pointerEvents,
+  className,
 }: {
   children: React.ReactNode
   style?: React.CSSProperties
@@ -22,6 +23,7 @@ export function ShaderGradientCanvas({
     <Canvas
       style={{ ...style, pointerEvents }}
       resize={{ offsetSize: true }}
+      className={className}
       {...canvasProps(pixelDensity, fov)}
     >
       {children}

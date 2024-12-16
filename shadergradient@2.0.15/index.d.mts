@@ -1,9 +1,10 @@
-declare function ShaderGradientCanvas({ children, style, pixelDensity, fov, pointerEvents, }: {
+declare function ShaderGradientCanvas({ children, style, pixelDensity, fov, pointerEvents, className, }: {
     children: React.ReactNode;
     style?: React.CSSProperties;
     pixelDensity?: number;
     fov?: number;
     pointerEvents?: 'none' | 'auto';
+    className?: string;
 }): JSX.Element;
 
 type typeT = 'plane' | 'sphere' | 'waterPlane';

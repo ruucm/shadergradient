@@ -1,6 +1,6 @@
 import {
   ShaderGradientCanvas
-} from "./chunk-7QDAWG6V.mjs";
+} from "./chunk-RNORR4OK.mjs";
 import "./chunk-35NIH65G.mjs";
 import {
   ShaderGradient

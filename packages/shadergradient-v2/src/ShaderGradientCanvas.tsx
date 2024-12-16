@@ -16,6 +16,7 @@ export function ShaderGradientCanvas({
   pixelDensity?: number
   fov?: number
   pointerEvents?: 'none' | 'auto'
+  className?: string
 }): JSX.Element {
   useShaderChunkFix()
 
@@ -23,7 +24,7 @@ export function ShaderGradientCanvas({
     <Canvas
       style={{ ...style, pointerEvents }}
       resize={{ offsetSize: true }}
-      className?={className}
+      className={className}
       {...canvasProps(pixelDensity, fov)}
     >
       {children}

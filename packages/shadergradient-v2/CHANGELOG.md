@@ -1,5 +1,11 @@
 # shadergradient
 
+## 2.0.16
+
+### Patch Changes
+
+- Adding of the className into the ShaderGradientCanvas
+
 ## 2.0.15
 
 ### Patch Changes

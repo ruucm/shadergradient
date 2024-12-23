@@ -1,5 +1,11 @@
 # shadergradient
 
+## 2.0.18
+
+### Patch Changes
+
+- .npmignore
+
 ## 2.0.17
 
 ### Patch Changes

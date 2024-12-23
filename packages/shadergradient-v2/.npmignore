@@ -1,18 +1,28 @@
-# Source files
-src/ShaderGradientUI
-src/ShaderGradientUI/**
+# Exclude everything by default
+*
 
-# Development files
-node_modules
+# Then explicitly include only the necessary dist files
+!dist/**/*.mjs
+!dist/**/*.d.mts
+!dist/**/*.d.ts
+
+# Exclude UI components even from dist
+dist/**/ShaderGradientUI/**
+
+# Exclude unnecessary files even from dist
+dist/**/*.map
+dist/**/*.test.*
+dist/**/tests/**
+dist/**/__tests__/**
+
+# Development files (redundant but explicit)
+node_modules/
+src/
+examples/
+public/
 .turbo
-.DS_Store
-.env
-.env.*
 .cache
 .next
-.vercel
-.output
-.vscode
 
 # Build files
 tsup.config.ts

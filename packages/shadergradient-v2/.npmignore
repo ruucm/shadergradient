@@ -1,0 +1,24 @@
+# Source files
+src/ShaderGradientUI
+src/ShaderGradientUI/**
+
+# Development files
+node_modules
+.turbo
+.DS_Store
+.env
+.env.*
+.cache
+.next
+.vercel
+.output
+.vscode
+
+# Build files
+tsup.config.ts
+tsup.framer.config.ts
+
+# Misc
+.git
+.gitignore
+README.md 

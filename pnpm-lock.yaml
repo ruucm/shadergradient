@@ -36,7 +36,7 @@ importers:
         specifier: ^8.12.0
         version: 8.12.0(react-dom@18.2.0)(react@18.2.0)(three@0.169.0)
       '@shadergradient/react':
-        specifier: ^2.0.12
+        specifier: ^2.0.16
         version: link:../../packages/shadergradient-v2
       '@testing-library/jest-dom':
         specifier: ^5.16.5
@@ -162,7 +162,7 @@ importers:
         specifier: ^8.12.0
         version: 8.12.0(react-dom@18.2.0)(react@18.2.0)(three@0.169.0)
       '@shadergradient/react':
-        specifier: ^2.0.12
+        specifier: ^2.0.16
         version: link:../../packages/shadergradient-v2
       '@types/three':
         specifier: ^0.150.0
@@ -256,7 +256,7 @@ importers:
         specifier: ^8.12.0
         version: 8.12.0(react-dom@18.2.0)(react@18.2.0)(three@0.169.0)
       '@shadergradient/react':
-        specifier: ^2.0.12
+        specifier: ^2.0.16
         version: link:../../packages/shadergradient-v2
       glsl-random:
         specifier: ^0.0.5
@@ -668,6 +668,9 @@ importers:
       react:
         specifier: ^18.3.1
         version: 18.3.1
+      react-slider:
+        specifier: ^2.0.4
+        version: 2.0.6(react@18.3.1)
       socket.io:
         specifier: ^4.7.5
         version: 4.7.5
@@ -16235,7 +16238,6 @@ packages:
     dependencies:
       prop-types: 15.8.1
       react: 18.3.1
-    dev: false
 
   /react-use-measure@2.1.1(react-dom@18.2.0)(react@18.2.0):
     resolution: {integrity: sha512-nocZhN26cproIiIduswYpV5y5lQpSQS1y/4KuvUCjSKmw7ZWIS/+g3aFnX3WdBkyuGUtTLif3UTqnLLhbDoQig==}

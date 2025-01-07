@@ -10,6 +10,8 @@ import {
 // import { vertexShader, fragmentShader } from '@/shaders/base'
 import { dToRArr } from '@/utils'
 
+declare const __DEV__: boolean;
+
 export function Mesh({
   animate,
 
@@ -56,7 +58,9 @@ export function Mesh({
         vertexShader={type === 'sphere' ? vertexSphere : vertexShader}
         fragmentShader={type === 'sphere' ? fragmentSphere : fragmentShader}
         onInit={(material) => {
-          console.log('material (onInit)', material)
+          if (__DEV__) {
+            console.debug('material (onInit)', material);
+          }
         }}
       />
     </mesh>

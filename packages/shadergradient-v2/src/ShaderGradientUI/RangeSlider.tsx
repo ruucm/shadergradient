@@ -2,47 +2,41 @@ import ReactSlider from 'react-slider'
 import { useState, useEffect } from 'react'
 import './slider.css'
 
-type SliderPropsT = {
+type RangeSliderPropsT = {
   title: string
-  defaultValue: number
-  setValue: any
+  defaultValue: [number, number]
+  value: [number, number]
+  setValue: (value: [number, number]) => void
   step: number
   min: number
   max: number
-} & React.DetailedHTMLProps<
-  React.InputHTMLAttributes<HTMLInputElement>,
-  HTMLInputElement
->
+}
 
-export function Slider({
+export function RangeSlider({
   title,
   defaultValue,
   setValue,
   step,
   min,
   max,
-}: SliderPropsT): JSX.Element {
-  const [sharedValue, setSharedValue] = useState<any>(defaultValue)
-  const [isMouseOver, setIsMouseOver] = useState<boolean>(false)
+}: RangeSliderPropsT): JSX.Element {
+  const [rangeValue, setRangeValue] = useState<[number, number]>(defaultValue)
+  const [isMouseOver, setIsMouseOver] = useState(false)
 
   useEffect(() => {
-    setSharedValue(defaultValue) // init once with the passed value (from search params)
-  }, [])
-
-  useEffect(() => {
-    setValue(sharedValue)
-  }, [sharedValue])
-
-  useEffect(() => {
-    setSharedValue(defaultValue)
+    setRangeValue(defaultValue)
   }, [defaultValue])
+
+  useEffect(() => {
+    setValue(rangeValue)
+  }, [rangeValue])
 
   return (
     <div
       className='flex items-center w-full h-[26px] flex-row gap-2'
       style={{ fontFamily: 'Inter Medium' }}
     >
-      <div className='w-[100px] flex items-center flex-shrink-0'>
+      <div className='w-[100px] flex-shrink-0 flex items-center'>
         <p className='font-medium whitespace-nowrap'>{title}</p>
       </div>
       <div
@@ -50,13 +44,27 @@ export function Slider({
         onMouseOver={() => setIsMouseOver(true)}
         onMouseLeave={() => setIsMouseOver(false)}
       >
+        <input
+          type='number'
+          value={rangeValue[0]}
+          onChange={(e) => {
+            setRangeValue([Number(e.target.value), rangeValue[1]])
+          }}
+          min={0}
+          className={
+            'font-medium w-[42px] h-[26px] outline-none text-center bg-[#F2F2F2] rounded-md flex items-center justify-center [&::-webkit-inner-spin-button]:appearance-none ' +
+            (isMouseOver === true ? 'text-[#ff340a]' : 'text-[#000000]')
+          }
+          step={step}
+        />
         <ReactSlider
-          value={Number(sharedValue)}
+          value={rangeValue}
           step={step}
           min={min}
           max={max}
-          onChange={(value, index) => setSharedValue(value)}
-          //styles
+          onChange={(values) => {
+            setRangeValue(values as [number, number])
+          }}
           className={
             'w-full rounded-md bg-[#F2F2F2] cursor-ew-resize overflow-hidden transition-height duration-300 ' +
             (isMouseOver === true ? 'h-[26px]' : 'h-[5px]')
@@ -74,7 +82,7 @@ export function Slider({
               }
               style={{
                 ...props.style,
-                opacity: state.index === 1 ? 0 : 1,
+                opacity: state.index === 1 ? 1 : 0,
               }}
             />
           )}
@@ -94,15 +102,16 @@ export function Slider({
         />
         <input
           type='number'
-          value={sharedValue}
-          onChange={(e) => setSharedValue(e.target.value)}
+          value={rangeValue[1]}
+          onChange={(e) => {
+            setRangeValue([rangeValue[0], Number(e.target.value)])
+          }}
           className={
             'font-medium w-[42px] h-[26px] outline-none text-center bg-[#F2F2F2] rounded-md flex items-center justify-center [&::-webkit-inner-spin-button]:appearance-none ' +
             (isMouseOver === true ? 'text-[#ff340a]' : 'text-[#000000]')
           }
-          min={min}
-          max={max}
           step={step}
+          max={max}
         />
       </div>
     </div>

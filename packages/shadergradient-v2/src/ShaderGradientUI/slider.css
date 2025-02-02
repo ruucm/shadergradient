@@ -1,0 +1,11 @@
+/* Hide arrow buttons on number inputs */
+input[type='number']::-webkit-inner-spin-button,
+input[type='number']::-webkit-outer-spin-button {
+  -webkit-appearance: none; /* For Chrome, Safari, and Opera */
+  margin: 0; /* Remove margin */
+}
+
+input[type='number'] {
+  -moz-appearance: textfield; /* For Firefox */
+  appearance: textfield; /* For other browsers */
+}

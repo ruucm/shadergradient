@@ -650,6 +650,15 @@ importers:
       '@types/socket.io':
         specifier: ^3.0.2
         version: 3.0.2
+      '@uiw/color-convert':
+        specifier: ^1.1.1
+        version: 1.4.3(@babel/runtime@7.23.6)
+      '@uiw/react-color-shade-slider':
+        specifier: ^1.1.1
+        version: 1.4.3(@babel/runtime@7.23.6)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      '@uiw/react-color-wheel':
+        specifier: ^1.1.1
+        version: 1.4.3(@babel/runtime@7.23.6)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       camera-controls:
         specifier: 2.9.0
         version: 2.9.0(three@0.169.0)

@@ -1,2 +1,3 @@
-export * from './Slider'
-export * from './Test'
+export { Slider } from './Slider'
+export { ColorInput } from './ColorInput'
+export { RangeSlider } from './RangeSlider'

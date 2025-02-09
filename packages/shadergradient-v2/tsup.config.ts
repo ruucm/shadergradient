@@ -1,3 +1,4 @@
+// TODO: exclude UI components from dist
 import { defineConfig } from 'tsup'
 import http from 'http'
 import fs from 'fs'

@@ -22,8 +22,8 @@
   "devDependencies": {
     "@chialab/esbuild-plugin-commonjs": "^0.18.0",
     "@types/node": "^20.12.7",
-    "@types/react": "^18.2.73",
-    "@types/react-dom": "^18.2.23",
+    "@types/react": "18.2.73",
+    "@types/react-dom": "18.2.23",
     "@types/socket.io": "^3.0.2",
     "@uiw/color-convert": "^1.1.1",
     "@uiw/react-color-shade-slider": "^1.1.1",

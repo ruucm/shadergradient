@@ -31,10 +31,10 @@ importers:
     dependencies:
       '@react-spring/three':
         specifier: ^9.7.3
-        version: 9.7.5(@react-three/fiber@8.17.14(@types/react@18.3.18)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(three@0.169.0))(react@18.3.1)(three@0.169.0)
+        version: 9.7.5(@react-three/fiber@8.17.14(@types/react@18.2.73)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(three@0.169.0))(react@18.3.1)(three@0.169.0)
       '@react-three/fiber':
         specifier: ^8.12.0
-        version: 8.17.14(@types/react@18.3.18)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(three@0.169.0)
+        version: 8.17.14(@types/react@18.2.73)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(three@0.169.0)
       '@shadergradient/react':
         specifier: ^2.0.21
         version: 2.0.21(react@18.3.1)
@@ -43,7 +43,7 @@ importers:
         version: 5.17.0
       '@testing-library/react':
         specifier: ^13.4.0
-        version: 13.4.0(@types/react@18.3.18)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+        version: 13.4.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@testing-library/user-event':
         specifier: ^13.5.0
         version: 13.5.0(@testing-library/dom@8.20.1)
@@ -54,11 +54,11 @@ importers:
         specifier: ^16.18.21
         version: 16.18.126
       '@types/react':
-        specifier: ^18.2.73
-        version: 18.3.18
+        specifier: 18.2.73
+        version: 18.2.73
       '@types/react-dom':
-        specifier: ^18.2.23
-        version: 18.3.5(@types/react@18.3.18)
+        specifier: 18.2.23
+        version: 18.2.23
       '@types/three':
         specifier: ^0.150.0
         version: 0.150.2
@@ -91,13 +91,13 @@ importers:
     dependencies:
       '@react-spring/three':
         specifier: ^9.7.3
-        version: 9.7.5(@react-three/fiber@8.17.14(@types/react@18.3.18)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(three@0.169.0))(react@18.3.1)(three@0.169.0)
+        version: 9.7.5(@react-three/fiber@8.17.14(@types/react@18.2.73)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(three@0.169.0))(react@18.3.1)(three@0.169.0)
       '@react-three/drei':
         specifier: ^9.112.0
-        version: 9.121.4(@react-three/fiber@8.17.14(@types/react@18.3.18)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(three@0.169.0))(@types/react@18.3.18)(@types/three@0.150.2)(immer@9.0.21)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(three@0.169.0)(use-sync-external-store@1.4.0(react@18.3.1))
+        version: 9.121.4(@react-three/fiber@8.17.14(@types/react@18.2.73)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(three@0.169.0))(@types/react@18.2.73)(@types/three@0.150.2)(immer@9.0.21)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(three@0.169.0)(use-sync-external-store@1.4.0(react@18.3.1))
       '@react-three/fiber':
         specifier: ^8.17.7
-        version: 8.17.14(@types/react@18.3.18)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(three@0.169.0)
+        version: 8.17.14(@types/react@18.2.73)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(three@0.169.0)
       '@shadergradient/react':
         specifier: workspace:*
         version: link:../../packages/shadergradient-v2
@@ -106,7 +106,7 @@ importers:
         version: 5.17.0
       '@testing-library/react':
         specifier: ^13.4.0
-        version: 13.4.0(@types/react@18.3.18)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+        version: 13.4.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@testing-library/user-event':
         specifier: ^13.5.0
         version: 13.5.0(@testing-library/dom@8.20.1)
@@ -117,11 +117,11 @@ importers:
         specifier: ^16.18.21
         version: 16.18.126
       '@types/react':
-        specifier: ^18.2.73
-        version: 18.3.18
+        specifier: 18.2.73
+        version: 18.2.73
       '@types/react-dom':
-        specifier: ^18.2.23
-        version: 18.3.5(@types/react@18.3.18)
+        specifier: 18.2.23
+        version: 18.2.23
       '@types/three':
         specifier: ^0.150.0
         version: 0.150.2
@@ -154,13 +154,13 @@ importers:
     dependencies:
       '@react-spring/three':
         specifier: ^9.7.3
-        version: 9.7.5(@react-three/fiber@8.17.14(@types/react@18.3.18)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(three@0.169.0))(react@18.3.1)(three@0.169.0)
+        version: 9.7.5(@react-three/fiber@8.17.14(@types/react@18.2.73)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(three@0.169.0))(react@18.3.1)(three@0.169.0)
       '@react-three/drei':
         specifier: ^9.56.5
-        version: 9.121.4(@react-three/fiber@8.17.14(@types/react@18.3.18)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(three@0.169.0))(@types/react@18.3.18)(@types/three@0.150.2)(immer@9.0.21)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(three@0.169.0)(use-sync-external-store@1.4.0(react@18.3.1))
+        version: 9.121.4(@react-three/fiber@8.17.14(@types/react@18.2.73)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(three@0.169.0))(@types/react@18.2.73)(@types/three@0.150.2)(immer@9.0.21)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(three@0.169.0)(use-sync-external-store@1.4.0(react@18.3.1))
       '@react-three/fiber':
         specifier: ^8.12.0
-        version: 8.17.14(@types/react@18.3.18)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(three@0.169.0)
+        version: 8.17.14(@types/react@18.2.73)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(three@0.169.0)
       '@shadergradient/react':
         specifier: ^2.0.21
         version: 2.0.21(react@18.3.1)
@@ -199,8 +199,8 @@ importers:
         specifier: ^18.15.10
         version: 18.19.75
       '@types/react':
-        specifier: ^18.2.73
-        version: 18.3.18
+        specifier: 18.2.73
+        version: 18.2.73
       autoprefixer:
         specifier: ^10.4.12
         version: 10.4.20(postcss@8.5.1)
@@ -251,10 +251,10 @@ importers:
         version: 9.7.2(@types/babel__core@7.20.5)(next@14.2.13(@babel/core@7.26.8)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(sass@1.84.0))(webpack@5.97.1)
       '@react-three/drei':
         specifier: ^9.56.5
-        version: 9.121.4(@react-three/fiber@8.17.14(@types/react@18.3.18)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(three@0.169.0))(@types/react@18.3.18)(@types/three@0.150.2)(immer@9.0.21)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(three@0.169.0)(use-sync-external-store@1.4.0(react@18.3.1))
+        version: 9.121.4(@react-three/fiber@8.17.14(@types/react@18.2.73)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(three@0.169.0))(@types/react@18.2.73)(@types/three@0.150.2)(immer@9.0.21)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(three@0.169.0)(use-sync-external-store@1.4.0(react@18.3.1))
       '@react-three/fiber':
         specifier: ^8.12.0
-        version: 8.17.14(@types/react@18.3.18)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(three@0.169.0)
+        version: 8.17.14(@types/react@18.2.73)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(three@0.169.0)
       '@shadergradient/react':
         specifier: ^2.0.21
         version: 2.0.21(react@18.3.1)
@@ -278,7 +278,7 @@ importers:
         version: 2.35.13(three@0.169.0)
       tunnel-rat:
         specifier: ^0.1.2
-        version: 0.1.2(@types/react@18.3.18)(immer@9.0.21)(react@18.3.1)
+        version: 0.1.2(@types/react@18.2.73)(immer@9.0.21)(react@18.3.1)
     devDependencies:
       '@next/bundle-analyzer':
         specifier: ^13.4.13
@@ -287,8 +287,8 @@ importers:
         specifier: ^20.10.4
         version: 20.17.17
       '@types/react':
-        specifier: ^18.2.73
-        version: 18.3.18
+        specifier: 18.2.73
+        version: 18.2.73
       autoprefixer:
         specifier: ^10.4.14
         version: 10.4.20(postcss@8.5.1)
@@ -403,11 +403,11 @@ importers:
         specifier: ^16.7.1
         version: 16.18.126
       '@types/react':
-        specifier: ^18.2.73
-        version: 18.3.18
+        specifier: 18.2.73
+        version: 18.2.73
       '@types/react-dom':
-        specifier: ^18.2.23
-        version: 18.3.5(@types/react@18.3.18)
+        specifier: 18.2.23
+        version: 18.2.23
       css-loader:
         specifier: ^6.2.0
         version: 6.11.0(webpack@5.97.1)
@@ -510,13 +510,13 @@ importers:
     dependencies:
       '@react-spring/three':
         specifier: '*'
-        version: 9.7.5(@react-three/fiber@8.17.14(@types/react@18.3.18)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(three@0.169.0))(react@18.3.1)(three@0.169.0)
+        version: 9.7.5(@react-three/fiber@8.17.14(@types/react@18.2.73)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(three@0.169.0))(react@18.3.1)(three@0.169.0)
       '@react-three/drei':
         specifier: '*'
-        version: 9.121.4(@react-three/fiber@8.17.14(@types/react@18.3.18)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(three@0.169.0))(@types/react@18.3.18)(@types/three@0.150.2)(immer@9.0.21)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(three@0.169.0)(use-sync-external-store@1.4.0(react@18.3.1))
+        version: 9.121.4(@react-three/fiber@8.17.14(@types/react@18.2.73)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(three@0.169.0))(@types/react@18.2.73)(@types/three@0.150.2)(immer@9.0.21)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(three@0.169.0)(use-sync-external-store@1.4.0(react@18.3.1))
       '@react-three/fiber':
         specifier: '*'
-        version: 8.17.14(@types/react@18.3.18)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(three@0.169.0)
+        version: 8.17.14(@types/react@18.2.73)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(three@0.169.0)
       '@supabase/supabase-js':
         specifier: ^2.10.0
         version: 2.48.1
@@ -567,14 +567,14 @@ importers:
         version: 2.35.13(three@0.169.0)
       zustand:
         specifier: 5.0.1
-        version: 5.0.1(@types/react@18.3.18)(immer@9.0.21)(react@18.3.1)(use-sync-external-store@1.4.0(react@18.3.1))
+        version: 5.0.1(@types/react@18.2.73)(immer@9.0.21)(react@18.3.1)(use-sync-external-store@1.4.0(react@18.3.1))
     devDependencies:
       '@types/react':
-        specifier: ^18.2.73
-        version: 18.3.18
+        specifier: 18.2.73
+        version: 18.2.73
       '@types/react-dom':
-        specifier: ^18.2.23
-        version: 18.3.5(@types/react@18.3.18)
+        specifier: 18.2.23
+        version: 18.2.23
       concurrently:
         specifier: ^7.2.2
         version: 7.6.0
@@ -714,11 +714,11 @@ importers:
         specifier: ^20.12.7
         version: 20.17.17
       '@types/react':
-        specifier: ^18.2.73
-        version: 18.3.18
+        specifier: 18.2.73
+        version: 18.2.73
       '@types/react-dom':
-        specifier: ^18.2.23
-        version: 18.3.5(@types/react@18.3.18)
+        specifier: 18.2.23
+        version: 18.2.23
       '@types/socket.io':
         specifier: ^3.0.2
         version: 3.0.2
@@ -3303,6 +3303,9 @@ packages:
     peerDependencies:
       '@types/react': ^17.0.0
 
+  '@types/react-dom@18.2.23':
+    resolution: {integrity: sha512-ZQ71wgGOTmDYpnav2knkjr3qXdAFu0vsk8Ci5w3pGAIdj7/kKAyn+VsQDhXsmzzzepAiI9leWMmubXz690AI/A==}
+
   '@types/react-dom@18.3.5':
     resolution: {integrity: sha512-P4t6saawp+b/dFrUr2cvkVsfvPguwsxtH6dNIYRllMsefqFzkZk5UIjzyDOv5g1dXIPdG4Sp1yCR4Z6RCUsG/Q==}
     peerDependencies:
@@ -3318,6 +3321,9 @@ packages:
 
   '@types/react@17.0.83':
     resolution: {integrity: sha512-l0m4ArKJvmFtR4e8UmKrj1pB4tUgOhJITf+mADyF/p69Ts1YAR/E+G9XEM0mHXKVRa1dQNHseyyDNzeuAXfXQw==}
+
+  '@types/react@18.2.73':
+    resolution: {integrity: sha512-XcGdod0Jjv84HOC7N5ziY3x+qL0AfmubvKOZ9hJjJ2yd5EE+KYjWhdOjt387e9HPheHkdggF9atTifMRtyAaRA==}
 
   '@types/react@18.3.18':
     resolution: {integrity: sha512-t4yC+vtgnkYjNSKlFx1jkAhH8LgTo2N/7Qvi83kdEaUtMDiwpbLAktKDaAMlRcJ5eSxZkH74eEGt1ky31d7kfQ==}
@@ -11772,6 +11778,16 @@ snapshots:
       react: 18.3.1
       three: 0.169.0
 
+  '@react-spring/three@9.7.5(@react-three/fiber@8.17.14(@types/react@18.2.73)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(three@0.169.0))(react@18.3.1)(three@0.169.0)':
+    dependencies:
+      '@react-spring/animated': 9.7.5(react@18.3.1)
+      '@react-spring/core': 9.7.5(react@18.3.1)
+      '@react-spring/shared': 9.7.5(react@18.3.1)
+      '@react-spring/types': 9.7.5
+      '@react-three/fiber': 8.17.14(@types/react@18.2.73)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(three@0.169.0)
+      react: 18.3.1
+      three: 0.169.0
+
   '@react-spring/three@9.7.5(@react-three/fiber@8.17.14(@types/react@18.3.18)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(three@0.169.0))(react@18.3.1)(three@0.169.0)':
     dependencies:
       '@react-spring/animated': 9.7.5(react@18.3.1)
@@ -11784,13 +11800,13 @@ snapshots:
 
   '@react-spring/types@9.7.5': {}
 
-  '@react-three/drei@9.121.4(@react-three/fiber@8.17.14(@types/react@18.3.18)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(three@0.169.0))(@types/react@18.3.18)(@types/three@0.150.2)(immer@9.0.21)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(three@0.169.0)(use-sync-external-store@1.4.0(react@18.3.1))':
+  '@react-three/drei@9.121.4(@react-three/fiber@8.17.14(@types/react@18.2.73)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(three@0.169.0))(@types/react@18.2.73)(@types/three@0.150.2)(immer@9.0.21)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(three@0.169.0)(use-sync-external-store@1.4.0(react@18.3.1))':
     dependencies:
       '@babel/runtime': 7.26.7
       '@mediapipe/tasks-vision': 0.10.17
       '@monogrid/gainmap-js': 3.1.0(three@0.169.0)
-      '@react-spring/three': 9.7.5(@react-three/fiber@8.17.14(@types/react@18.3.18)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(three@0.169.0))(react@18.3.1)(three@0.169.0)
-      '@react-three/fiber': 8.17.14(@types/react@18.3.18)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(three@0.169.0)
+      '@react-spring/three': 9.7.5(@react-three/fiber@8.17.14(@types/react@18.2.73)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(three@0.169.0))(react@18.3.1)(three@0.169.0)
+      '@react-three/fiber': 8.17.14(@types/react@18.2.73)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(three@0.169.0)
       '@use-gesture/react': 10.3.1(react@18.3.1)
       camera-controls: 2.9.0(three@0.169.0)
       cross-env: 7.0.3
@@ -11808,9 +11824,9 @@ snapshots:
       three-mesh-bvh: 0.7.8(three@0.169.0)
       three-stdlib: 2.35.13(three@0.169.0)
       troika-three-text: 0.52.3(three@0.169.0)
-      tunnel-rat: 0.1.2(@types/react@18.3.18)(immer@9.0.21)(react@18.3.1)
+      tunnel-rat: 0.1.2(@types/react@18.2.73)(immer@9.0.21)(react@18.3.1)
       utility-types: 3.11.0
-      zustand: 5.0.1(@types/react@18.3.18)(immer@9.0.21)(react@18.3.1)(use-sync-external-store@1.4.0(react@18.3.1))
+      zustand: 5.0.1(@types/react@18.2.73)(immer@9.0.21)(react@18.3.1)(use-sync-external-store@1.4.0(react@18.3.1))
     optionalDependencies:
       react-dom: 18.3.1(react@18.3.1)
     transitivePeerDependencies:
@@ -11859,6 +11875,26 @@ snapshots:
       react-use-measure: 2.1.7(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       scheduler: 0.21.0
       suspend-react: 0.0.8(react@18.3.1)
+      three: 0.169.0
+      zustand: 3.7.2(react@18.3.1)
+    optionalDependencies:
+      react-dom: 18.3.1(react@18.3.1)
+    transitivePeerDependencies:
+      - '@types/react'
+
+  '@react-three/fiber@8.17.14(@types/react@18.2.73)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(three@0.169.0)':
+    dependencies:
+      '@babel/runtime': 7.26.7
+      '@types/react-reconciler': 0.26.7
+      '@types/webxr': 0.5.21
+      base64-js: 1.5.1
+      buffer: 6.0.3
+      its-fine: 1.2.5(@types/react@18.2.73)(react@18.3.1)
+      react: 18.3.1
+      react-reconciler: 0.27.0(react@18.3.1)
+      react-use-measure: 2.1.7(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      scheduler: 0.21.0
+      suspend-react: 0.1.3(react@18.3.1)
       three: 0.169.0
       zustand: 3.7.2(react@18.3.1)
     optionalDependencies:
@@ -12196,15 +12232,13 @@ snapshots:
       lodash: 4.17.21
       redent: 3.0.0
 
-  '@testing-library/react@13.4.0(@types/react@18.3.18)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
+  '@testing-library/react@13.4.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
       '@babel/runtime': 7.26.7
       '@testing-library/dom': 8.20.1
-      '@types/react-dom': 18.3.5(@types/react@18.3.18)
+      '@types/react-dom': 18.2.23
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
-    transitivePeerDependencies:
-      - '@types/react'
 
   '@testing-library/user-event@13.5.0(@testing-library/dom@8.20.1)':
     dependencies:
@@ -12380,13 +12414,21 @@ snapshots:
     dependencies:
       '@types/react': 17.0.83
 
+  '@types/react-dom@18.2.23':
+    dependencies:
+      '@types/react': 18.2.73
+
   '@types/react-dom@18.3.5(@types/react@18.3.18)':
     dependencies:
       '@types/react': 18.3.18
 
   '@types/react-reconciler@0.26.7':
     dependencies:
-      '@types/react': 18.3.18
+      '@types/react': 18.2.73
+
+  '@types/react-reconciler@0.28.9(@types/react@18.2.73)':
+    dependencies:
+      '@types/react': 18.2.73
 
   '@types/react-reconciler@0.28.9(@types/react@18.3.18)':
     dependencies:
@@ -12396,6 +12438,11 @@ snapshots:
     dependencies:
       '@types/prop-types': 15.7.14
       '@types/scheduler': 0.16.8
+      csstype: 3.1.3
+
+  '@types/react@18.2.73':
+    dependencies:
+      '@types/prop-types': 15.7.14
       csstype: 3.1.3
 
   '@types/react@18.3.18':
@@ -16289,6 +16336,13 @@ snapshots:
       has-symbols: 1.1.0
       set-function-name: 2.0.2
 
+  its-fine@1.2.5(@types/react@18.2.73)(react@18.3.1):
+    dependencies:
+      '@types/react-reconciler': 0.28.9(@types/react@18.2.73)
+      react: 18.3.1
+    transitivePeerDependencies:
+      - '@types/react'
+
   its-fine@1.2.5(@types/react@18.3.18)(react@18.3.1):
     dependencies:
       '@types/react-reconciler': 0.28.9(@types/react@18.3.18)
@@ -19512,9 +19566,9 @@ snapshots:
       tslib: 1.14.1
       typescript: 5.7.3
 
-  tunnel-rat@0.1.2(@types/react@18.3.18)(immer@9.0.21)(react@18.3.1):
+  tunnel-rat@0.1.2(@types/react@18.2.73)(immer@9.0.21)(react@18.3.1):
     dependencies:
-      zustand: 4.5.6(@types/react@18.3.18)(immer@9.0.21)(react@18.3.1)
+      zustand: 4.5.6(@types/react@18.2.73)(immer@9.0.21)(react@18.3.1)
     transitivePeerDependencies:
       - '@types/react'
       - immer
@@ -20352,13 +20406,20 @@ snapshots:
     optionalDependencies:
       react: 18.3.1
 
-  zustand@4.5.6(@types/react@18.3.18)(immer@9.0.21)(react@18.3.1):
+  zustand@4.5.6(@types/react@18.2.73)(immer@9.0.21)(react@18.3.1):
     dependencies:
       use-sync-external-store: 1.4.0(react@18.3.1)
     optionalDependencies:
-      '@types/react': 18.3.18
+      '@types/react': 18.2.73
       immer: 9.0.21
       react: 18.3.1
+
+  zustand@5.0.1(@types/react@18.2.73)(immer@9.0.21)(react@18.3.1)(use-sync-external-store@1.4.0(react@18.3.1)):
+    optionalDependencies:
+      '@types/react': 18.2.73
+      immer: 9.0.21
+      react: 18.3.1
+      use-sync-external-store: 1.4.0(react@18.3.1)
 
   zustand@5.0.1(@types/react@18.3.18)(immer@9.0.21)(react@18.3.1)(use-sync-external-store@1.4.0(react@18.3.1)):
     optionalDependencies:

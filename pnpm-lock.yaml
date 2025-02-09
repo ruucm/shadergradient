@@ -36,7 +36,7 @@ importers:
         specifier: ^8.12.0
         version: 8.12.0(react-dom@18.2.0)(react@18.2.0)(three@0.169.0)
       '@shadergradient/react':
-        specifier: ^2.0.20
+        specifier: ^2.0.21
         version: link:../../packages/shadergradient-v2
       '@testing-library/jest-dom':
         specifier: ^5.16.5
@@ -162,7 +162,7 @@ importers:
         specifier: ^8.12.0
         version: 8.12.0(react-dom@18.2.0)(react@18.2.0)(three@0.169.0)
       '@shadergradient/react':
-        specifier: ^2.0.20
+        specifier: ^2.0.21
         version: link:../../packages/shadergradient-v2
       '@types/three':
         specifier: ^0.150.0
@@ -256,7 +256,7 @@ importers:
         specifier: ^8.12.0
         version: 8.12.0(react-dom@18.2.0)(react@18.2.0)(three@0.169.0)
       '@shadergradient/react':
-        specifier: ^2.0.20
+        specifier: ^2.0.21
         version: link:../../packages/shadergradient-v2
       glsl-random:
         specifier: ^0.0.5
@@ -705,7 +705,7 @@ importers:
     dependencies:
       framer-motion:
         specifier: '*'
-        version: 10.9.2(react-dom@18.2.0)(react@18.2.0)
+        version: 10.9.2(react-dom@18.3.1)(react@18.2.0)
     devDependencies:
       '@chialab/esbuild-plugin-commonjs':
         specifier: ^0.18.0
@@ -11354,6 +11354,24 @@ packages:
       '@emotion/is-prop-valid': 0.8.8
     dev: false
 
+  /framer-motion@10.9.2(react-dom@18.3.1)(react@18.2.0):
+    resolution: {integrity: sha512-qNhnSAO0rd4A2GI93Y5SlljdBQEP6u/y98tX6esz48WxGPhHfePRfEmp9acUHOvxE+e9p3M/RbSDsoGkXTeqRA==}
+    peerDependencies:
+      react: ^18.0.0
+      react-dom: ^18.0.0
+    peerDependenciesMeta:
+      react:
+        optional: true
+      react-dom:
+        optional: true
+    dependencies:
+      react: 18.2.0
+      react-dom: 18.3.1(react@18.2.0)
+      tslib: 2.5.0
+    optionalDependencies:
+      '@emotion/is-prop-valid': 0.8.8
+    dev: false
+
   /framer-motion@10.9.2(react-dom@18.3.1)(react@18.3.1):
     resolution: {integrity: sha512-qNhnSAO0rd4A2GI93Y5SlljdBQEP6u/y98tX6esz48WxGPhHfePRfEmp9acUHOvxE+e9p3M/RbSDsoGkXTeqRA==}
     peerDependencies:
@@ -16058,7 +16076,6 @@ packages:
       loose-envify: 1.4.0
       react: 18.2.0
       scheduler: 0.23.2
-    dev: true
 
   /react-dom@18.3.1(react@18.3.1):
     resolution: {integrity: sha512-5m4nQKp+rZRb09LNH59GM4BxTh9251/ylbKIbpe7TpGxfJ+9kv6BLkLBXIjjspbgbnIBNqlI23tRnTWT0snUIw==}

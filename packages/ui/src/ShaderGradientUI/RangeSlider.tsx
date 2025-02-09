@@ -1,6 +1,7 @@
 import ReactSlider from 'react-slider'
 import { useState, useEffect } from 'react'
-import './slider.css'
+// import './slider.css'
+import { InputTitle } from './InputTitle'
 
 type RangeSliderPropsT = {
   title: string
@@ -10,6 +11,9 @@ type RangeSliderPropsT = {
   step: number
   min: number
   max: number
+  info: boolean
+  infoContent: string
+  condition: boolean
 }
 
 export function RangeSlider({
@@ -19,6 +23,9 @@ export function RangeSlider({
   step,
   min,
   max,
+  info,
+  infoContent,
+  condition,
 }: RangeSliderPropsT): JSX.Element {
   const [rangeValue, setRangeValue] = useState<[number, number]>(defaultValue)
   const [isMouseOver, setIsMouseOver] = useState(false)
@@ -36,9 +43,12 @@ export function RangeSlider({
       className='flex items-center w-full h-[26px] flex-row gap-2'
       style={{ fontFamily: 'Inter Medium' }}
     >
-      <div className='w-[100px] flex-shrink-0 flex items-center'>
-        <p className='font-medium whitespace-nowrap'>{title}</p>
-      </div>
+      <InputTitle
+        title={title}
+        info={info}
+        infoContent={infoContent}
+        condition={condition}
+      />
       <div
         className='flex items-center w-full h-fit flex-row gap-2'
         onMouseOver={() => setIsMouseOver(true)}

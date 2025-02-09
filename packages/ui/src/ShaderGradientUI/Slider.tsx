@@ -1,6 +1,7 @@
 import ReactSlider from 'react-slider'
 import { useState, useEffect } from 'react'
-import './slider.css'
+// import './slider.css'
+import { InputTitle } from './InputTitle'
 
 type SliderPropsT = {
   title: string
@@ -9,6 +10,9 @@ type SliderPropsT = {
   step: number
   min: number
   max: number
+  info: boolean
+  infoContent: string
+  condition: boolean
 } & React.DetailedHTMLProps<
   React.InputHTMLAttributes<HTMLInputElement>,
   HTMLInputElement
@@ -21,6 +25,9 @@ export function Slider({
   step,
   min,
   max,
+  info,
+  infoContent,
+  condition,
 }: SliderPropsT): JSX.Element {
   const [sharedValue, setSharedValue] = useState<any>(defaultValue)
   const [isMouseOver, setIsMouseOver] = useState<boolean>(false)
@@ -42,9 +49,12 @@ export function Slider({
       className='flex items-center w-full h-[26px] flex-row gap-2'
       style={{ fontFamily: 'Inter Medium' }}
     >
-      <div className='w-[100px] flex items-center flex-shrink-0'>
-        <p className='font-medium whitespace-nowrap'>{title}</p>
-      </div>
+      <InputTitle
+        title={title}
+        info={info}
+        infoContent={infoContent}
+        condition={condition}
+      />
       <div
         className='flex items-center w-full h-fit flex-row gap-2'
         onMouseOver={() => setIsMouseOver(true)}

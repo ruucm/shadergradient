@@ -38,7 +38,7 @@ jobs:
         name: Install pnpm
         id: pnpm-install
         with:
-          version: 8.14
+          version: 10.2.1
           run_install: false
 
       - name: Generate Pages

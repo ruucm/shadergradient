@@ -3,7 +3,7 @@ import { hexToHsva, hsvaToHex } from '@uiw/color-convert'
 import ShadeSlider from '@uiw/react-color-shade-slider'
 import Wheel from '@uiw/react-color-wheel'
 import { useOnClickOutside } from '@/utils/hooks/useOnClickOutside'
-import './slider.css'
+// import './slider.css'
 
 type ColorInputPropsT = {
   defaultValue: number

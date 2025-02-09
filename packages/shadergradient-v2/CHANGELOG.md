@@ -1,5 +1,11 @@
 # shadergradient
 
+## 2.0.20
+
+### Patch Changes
+
+- ShaderGradientUI (only for framer esm)
+
 ## 2.0.19
 
 ### Patch Changes

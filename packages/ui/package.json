@@ -1,5 +1,5 @@
 {
-  "name": "ui",
+  "name": "@shadergradient/ui",
   "version": "0.0.0",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -9,6 +9,8 @@
   },
   "license": "MIT",
   "scripts": {
+    "dev:ui": "concurrently \"tsup --config tsup.framer.config.ts --watch\" \"pnpm ngrok\"",
+    "ngrok": "ngrok http --domain=esm.ngrok.dev 8000",
     "build": "tsup src/index.tsx --format esm,cjs --dts --external react && tailwindcss -i ./src/styles.css -o ./dist/styles.css",
     "release": "pnpm run build && mkdir -p release && cp -Rf dist release/$npm_package_name@$npm_package_version",
     "dev": "concurrently \"tsup src/index.tsx --format esm,cjs --dts --external react --watch\" \"tailwindcss -i ./src/styles.css -o ./dist/styles.css --watch\"",
@@ -18,18 +20,26 @@
     "framer-motion": "*"
   },
   "devDependencies": {
+    "@chialab/esbuild-plugin-commonjs": "^0.18.0",
     "@types/node": "^20.12.7",
     "@types/react": "^18.2.73",
     "@types/react-dom": "^18.2.23",
+    "@types/socket.io": "^3.0.2",
+    "@uiw/color-convert": "^1.1.1",
+    "@uiw/react-color-shade-slider": "^1.1.1",
+    "@uiw/react-color-wheel": "^1.1.1",
     "concurrently": "^7.2.2",
     "eslint": "^7.32.0",
     "eslint-config-custom": "workspace:*",
+    "globby": "^14.0.2",
     "react": "^18.2.0",
     "react-intersection-observer": "^9.4.1",
+    "react-slider": "^2.0.4",
+    "socket.io": "^4.7.5",
     "tailwind-config": "workspace:*",
     "tailwindcss": "^3.1.5",
     "tsconfig": "workspace:*",
-    "tsup": "^6.1.3",
-    "typescript": "^4.5.2"
+    "tsup": "^8.2.4",
+    "typescript": "^5.5.4"
   }
 }

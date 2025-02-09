@@ -2,8 +2,8 @@ import * as React from 'react'
 import { hexToHsva, hsvaToHex } from '@uiw/color-convert'
 import ShadeSlider from '@uiw/react-color-shade-slider'
 import Wheel from '@uiw/react-color-wheel'
-import { useOnClickOutside } from '@/utils/hooks/useOnClickOutside'
 import './slider.css'
+import { useOnClickOutside } from '@/utils'
 
 type ColorInputPropsT = {
   defaultValue: number

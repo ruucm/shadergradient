@@ -1,6 +1,7 @@
 import * as React$1 from 'react';
 import React__default from 'react';
 import * as react_jsx_runtime from 'react/jsx-runtime';
+import * as zustand from 'zustand';
 
 type ButtonPropsT = {
     kind?: 'primary' | 'secondary';
@@ -71,4 +72,14 @@ type InputTitlePropsT = {
 } & React__default.DetailedHTMLProps<React__default.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>;
 declare function InputTitle({ title, info, infoContent, condition, }: InputTitlePropsT): JSX.Element;
 
-export { Button, ColorInput, InputTitle, RangeSlider, Slider, TextAnimation, TextHover };
+declare const useUIStore: zustand.UseBoundStore<zustand.StoreApi<Omit<{
+    activePreset: number;
+    mode: string;
+    loadingPercentage: number;
+}, "setActivePreset" | "setMode" | "setLoadingPercentage"> & {
+    setActivePreset: (by: number) => void;
+    setMode: (data: any) => void;
+    setLoadingPercentage: (data: any) => void;
+}>>;
+
+export { Button, ColorInput, InputTitle, RangeSlider, Slider, TextAnimation, TextHover, useUIStore };

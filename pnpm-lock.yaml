@@ -398,7 +398,7 @@ importers:
     devDependencies:
       '@figma/plugin-typings':
         specifier: '*'
-        version: 1.107.0-beta.2
+        version: 1.107.0
       '@types/node':
         specifier: ^16.7.1
         version: 16.18.126
@@ -770,6 +770,9 @@ importers:
       typescript:
         specifier: ^5.5.4
         version: 5.7.3
+      zustand:
+        specifier: 5.0.1
+        version: 5.0.1(@types/react@18.2.73)(immer@9.0.21)(react@18.3.1)(use-sync-external-store@1.4.0(react@18.3.1))
 
 packages:
 
@@ -2302,8 +2305,8 @@ packages:
     resolution: {integrity: sha512-lB05FkqEdUg2AA0xEbUz0SnkXT1LcCTa438W4IWTUh4hdOnVbQyOJ81OrDXsJk/LSiJHubgGEFoR5EHq1NsH1A==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
 
-  '@figma/plugin-typings@1.107.0-beta.2':
-    resolution: {integrity: sha512-EFTasm6l3p4QtmnUgCGb0Neeczizk62CqTSNcVh9vYybpctY65kO1w/Da0yuT/WfrdrxD9QZjO8i/ePcZIrqzw==}
+  '@figma/plugin-typings@1.107.0':
+    resolution: {integrity: sha512-wC+Wwnk5H22W71xoq4ZQBHuXJL8Q7eMMBP+ubHZjAVybrJRysj/A9gJTIguVEcV+x2zpRsVunyVyWxg56qZr8g==}
 
   '@humanfs/core@0.19.1':
     resolution: {integrity: sha512-5DyQ4+1JEUzejeK1JGICcideyfUbGixgS9jNgex5nqkW+cY7WZhxBigmieN5Qnw9ZosSNVC9KQKyb+GUaGyKUA==}
@@ -11253,7 +11256,7 @@ snapshots:
       '@eslint/core': 0.10.0
       levn: 0.4.1
 
-  '@figma/plugin-typings@1.107.0-beta.2': {}
+  '@figma/plugin-typings@1.107.0': {}
 
   '@humanfs/core@0.19.1': {}
 

@@ -1,6 +1,6 @@
 {
   "name": "example-cra-dev",
-  "version": "0.1.35",
+  "version": "0.1.36",
   "private": true,
   "dependencies": {
     "@react-three/drei": "^9.112.0",

@@ -1,5 +1,11 @@
 # shadergradient
 
+## 2.0.22
+
+### Patch Changes
+
+- update presets
+
 ## 2.0.21
 
 ### Patch Changes

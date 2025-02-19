@@ -59,7 +59,7 @@ export const mainLoading = {
 }
 
 // environment hdr
-export const envBasePath =
+export const defaultEnvBasePath =
   'https://ruucm.github.io/shadergradient/shadergradient@1.0.0/hdr/'
 
 // ----------------------------- [FIGMA PLUGIN] ----------------------------------

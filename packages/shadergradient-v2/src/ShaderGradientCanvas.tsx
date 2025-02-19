@@ -1,7 +1,19 @@
-import { useEffect } from 'react'
+import { useEffect, createContext, useMemo, useContext } from 'react'
 import { Canvas } from '@react-three/fiber'
-import { canvasProps } from '@/consts'
+import { canvasProps, defaultEnvBasePath } from '@/consts'
 import * as THREE from 'three'
+
+type ShaderGradientCanvasContext = {
+  envBasePath: string
+}
+
+const Context = createContext<ShaderGradientCanvasContext>(
+  {} as ShaderGradientCanvasContext
+)
+
+export const useShaderGradientCanvasContext = () => {
+  return useContext<ShaderGradientCanvasContext>(Context)
+}
 
 export function ShaderGradientCanvas({
   children,
@@ -10,6 +22,7 @@ export function ShaderGradientCanvas({
   fov = 45,
   pointerEvents,
   className,
+  envBasePath,
 }: {
   children: React.ReactNode
   style?: React.CSSProperties
@@ -17,18 +30,28 @@ export function ShaderGradientCanvas({
   fov?: number
   pointerEvents?: 'none' | 'auto'
   className?: string
+  envBasePath?: string
 }): JSX.Element {
+  const contextValue = useMemo<ShaderGradientCanvasContext>(
+    () => ({
+      envBasePath: envBasePath || defaultEnvBasePath,
+    }),
+    [envBasePath]
+  )
+
   useShaderChunkFix()
 
   return (
-    <Canvas
-      style={{ ...style, pointerEvents }}
-      resize={{ offsetSize: true }}
-      className={className}
-      {...canvasProps(pixelDensity, fov)}
-    >
-      {children}
-    </Canvas>
+    <Context.Provider value={contextValue}>
+      <Canvas
+        style={{ ...style, pointerEvents }}
+        resize={{ offsetSize: true }}
+        className={className}
+        {...canvasProps(pixelDensity, fov)}
+      >
+        {children}
+      </Canvas>
+    </Context.Provider>
   )
 }
 

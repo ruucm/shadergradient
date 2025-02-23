@@ -574,6 +574,30 @@ video {
   position: relative;
 }
 
+.bottom-6 {
+  bottom: 48px;
+}
+
+.bottom-7 {
+  bottom: 1.75rem;
+}
+
+.bottom-\[-4px\] {
+  bottom: -4px;
+}
+
+.left-\[12px\] {
+  left: 12px;
+}
+
+.z-0 {
+  z-index: 0;
+}
+
+.z-20 {
+  z-index: 20;
+}
+
 .block {
   display: block;
 }
@@ -590,8 +614,8 @@ video {
   display: none;
 }
 
-.h-2 {
-  height: 12px;
+.h-3 {
+  height: 16px;
 }
 
 .h-\[26px\] {
@@ -619,12 +643,12 @@ video {
   height: 100%;
 }
 
-.w-2 {
-  width: 12px;
+.w-3 {
+  width: 16px;
 }
 
-.w-\[100px\] {
-  width: 100px;
+.w-\[105px\] {
+  width: 105px;
 }
 
 .w-\[2px\] {
@@ -643,12 +667,26 @@ video {
   width: 8px;
 }
 
+.w-fit {
+  width: -moz-fit-content;
+  width: fit-content;
+}
+
 .w-full {
   width: 100%;
 }
 
+.min-w-\[140px\] {
+  min-width: 140px;
+}
+
 .flex-shrink-0 {
   flex-shrink: 0;
+}
+
+.rotate-45 {
+  --tw-rotate: 45deg;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
 
 .transform {
@@ -675,8 +713,8 @@ video {
   justify-content: center;
 }
 
-.gap-1 {
-  gap: 8px;
+.gap-0\.5 {
+  gap: 6px;
 }
 
 .gap-2 {
@@ -707,6 +745,10 @@ video {
   border-radius: 11px;
 }
 
+.rounded-sm {
+  border-radius: 4px;
+}
+
 .border {
   border-width: 1px;
 }
@@ -731,23 +773,17 @@ video {
   background-color: rgb(255 255 255 / var(--tw-bg-opacity, 1));
 }
 
-.bg-\[blue\] {
-  --tw-bg-opacity: 1;
-  background-color: rgb(0 0 255 / var(--tw-bg-opacity, 1));
-}
-
-.bg-\[red\] {
-  --tw-bg-opacity: 1;
-  background-color: rgb(255 0 0 / var(--tw-bg-opacity, 1));
-}
-
 .bg-primary {
   --tw-bg-opacity: 1;
   background-color: rgb(255 67 10 / var(--tw-bg-opacity, 1));
 }
 
-.p-4 {
-  padding: 26px;
+.p-0\.5 {
+  padding: 6px;
+}
+
+.p-2 {
+  padding: 12px;
 }
 
 .text-center {
@@ -766,11 +802,6 @@ video {
 .text-\[\#ff340a\] {
   --tw-text-opacity: 1;
   color: rgb(255 52 10 / var(--tw-text-opacity, 1));
-}
-
-.text-\[white\] {
-  --tw-text-opacity: 1;
-  color: rgb(255 255 255 / var(--tw-text-opacity, 1));
 }
 
 .text-primary {
@@ -793,6 +824,10 @@ video {
 
 .opacity-30 {
   opacity: 0.3;
+}
+
+.opacity-80 {
+  opacity: 0.8;
 }
 
 .outline-none {

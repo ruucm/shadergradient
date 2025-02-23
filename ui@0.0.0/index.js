@@ -903,10 +903,10 @@ var p = function(p2) {
 p.displayName = "ReactSlider", p.defaultProps = { min: 0, max: 100, step: 1, pageFn: (e2) => 10 * e2, minDistance: 0, defaultValue: 0, orientation: "horizontal", className: "slider", thumbClassName: "thumb", thumbActiveClassName: "active", trackClassName: "track", markClassName: "mark", withTracks: true, pearling: false, disabled: false, snapDragDisabled: false, invert: false, marks: [], renderThumb: (e2) => import_react3.default.createElement("div", e2), renderTrack: (e2) => import_react3.default.createElement("div", e2), renderMark: (e2) => import_react3.default.createElement("span", e2) };
 var u = p;
 
-// src/ShaderGradientUI/Slider.tsx
+// src/PluginUI/Slider.tsx
 var import_react5 = require("react");
 
-// src/ShaderGradientUI/InputTitle.tsx
+// src/PluginUI/InputTitle.tsx
 var import_react4 = require("react");
 var import_jsx_runtime4 = require("react/jsx-runtime");
 function InputTitle({
@@ -961,7 +961,7 @@ function InputTitle({
   );
 }
 
-// src/ShaderGradientUI/Slider.tsx
+// src/PluginUI/Slider.tsx
 var import_jsx_runtime5 = require("react/jsx-runtime");
 function Slider({
   title,
@@ -1060,7 +1060,7 @@ function Slider({
   );
 }
 
-// src/ShaderGradientUI/ColorInput.tsx
+// src/PluginUI/ColorInput.tsx
 var React9 = __toESM(require("react"));
 
 // ../../node_modules/.pnpm/@uiw+color-convert@1.4.3_@babel+runtime@7.26.7/node_modules/@uiw/color-convert/esm/index.js
@@ -1757,7 +1757,7 @@ var Wheel = /* @__PURE__ */ import_react12.default.forwardRef((props, ref) => {
 Wheel.displayName = "Wheel";
 var esm_default4 = Wheel;
 
-// src/ShaderGradientUI/ColorInput.tsx
+// src/PluginUI/ColorInput.tsx
 var import_jsx_runtime14 = require("react/jsx-runtime");
 function ColorInput({
   defaultValue,
@@ -1926,7 +1926,7 @@ function ColorInput({
   ] });
 }
 
-// src/ShaderGradientUI/RangeSlider.tsx
+// src/PluginUI/RangeSlider.tsx
 var import_react13 = require("react");
 var import_jsx_runtime15 = require("react/jsx-runtime");
 function RangeSlider({

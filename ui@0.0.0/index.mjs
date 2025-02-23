@@ -884,10 +884,10 @@ var p = function(p2) {
 p.displayName = "ReactSlider", p.defaultProps = { min: 0, max: 100, step: 1, pageFn: (e2) => 10 * e2, minDistance: 0, defaultValue: 0, orientation: "horizontal", className: "slider", thumbClassName: "thumb", thumbActiveClassName: "active", trackClassName: "track", markClassName: "mark", withTracks: true, pearling: false, disabled: false, snapDragDisabled: false, invert: false, marks: [], renderThumb: (e2) => t.createElement("div", e2), renderTrack: (e2) => t.createElement("div", e2), renderMark: (e2) => t.createElement("span", e2) };
 var u = p;
 
-// src/ShaderGradientUI/Slider.tsx
+// src/PluginUI/Slider.tsx
 import { useState as useState4, useEffect as useEffect4 } from "react";
 
-// src/ShaderGradientUI/InputTitle.tsx
+// src/PluginUI/InputTitle.tsx
 import { useState as useState3 } from "react";
 import { jsx as jsx4, jsxs as jsxs3 } from "react/jsx-runtime";
 function InputTitle({
@@ -942,7 +942,7 @@ function InputTitle({
   );
 }
 
-// src/ShaderGradientUI/Slider.tsx
+// src/PluginUI/Slider.tsx
 import { jsx as jsx5, jsxs as jsxs4 } from "react/jsx-runtime";
 function Slider({
   title,
@@ -1041,7 +1041,7 @@ function Slider({
   );
 }
 
-// src/ShaderGradientUI/ColorInput.tsx
+// src/PluginUI/ColorInput.tsx
 import * as React9 from "react";
 
 // ../../node_modules/.pnpm/@uiw+color-convert@1.4.3_@babel+runtime@7.26.7/node_modules/@uiw/color-convert/esm/index.js
@@ -1738,7 +1738,7 @@ var Wheel = /* @__PURE__ */ React8.forwardRef((props, ref) => {
 Wheel.displayName = "Wheel";
 var esm_default4 = Wheel;
 
-// src/ShaderGradientUI/ColorInput.tsx
+// src/PluginUI/ColorInput.tsx
 import { jsx as jsx6, jsxs as jsxs5 } from "react/jsx-runtime";
 function ColorInput({
   defaultValue,
@@ -1907,7 +1907,7 @@ function ColorInput({
   ] });
 }
 
-// src/ShaderGradientUI/RangeSlider.tsx
+// src/PluginUI/RangeSlider.tsx
 import { useState as useState7, useEffect as useEffect8 } from "react";
 import { jsx as jsx7, jsxs as jsxs6 } from "react/jsx-runtime";
 function RangeSlider({

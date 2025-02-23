@@ -2,8 +2,8 @@ import React from 'react'
 import { EquirectangularReflectionMapping, Texture } from 'three'
 import * as THREE from 'three'
 import { useThree } from '@react-three/fiber'
-import { envBasePath } from '@/consts'
 import { useRGBELoader } from './useRGBELoader'
+import { useShaderGradientCanvasContext } from '@/ShaderGradientCanvas'
 
 type Props = {
   background?: boolean | 'only'
@@ -18,6 +18,7 @@ const resolveScene = (
 ) => (isRef(scene) ? scene.current : scene)
 
 export function EnvironmentMap({ background = false, envPreset }: Props) {
+  const { envBasePath } = useShaderGradientCanvasContext()
   const city = useRGBELoader('city.hdr', { path: envBasePath })
   const dawn = useRGBELoader('dawn.hdr', { path: envBasePath })
   const lobby = useRGBELoader('lobby.hdr', { path: envBasePath })

@@ -1,5 +1,11 @@
 # shadergradient
 
+## 2.0.23
+
+### Patch Changes
+
+- add custom envBasePath feature
+
 ## 2.0.22
 
 ### Patch Changes

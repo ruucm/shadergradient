@@ -20,10 +20,10 @@ export function InputTitle({
   const [isMouseOver, setIsMouseOver] = useState(false)
   return (
     <div
-      className='w-[105px] flex items-center flex-shrink-0 gap-0.5'
+      className='w-[105px] flex items-center flex-shrink-0 gap-0.5 select-none'
       style={{ fontFamily: 'Inter Medium' }}
     >
-      <p className='font-medium whitespace-nowrap user-select-none'>
+      <p className='font-medium whitespace-nowrap select-none'>
         {condition === true && <span className='opacity-30'>↳ </span>}
         {title}
       </p>

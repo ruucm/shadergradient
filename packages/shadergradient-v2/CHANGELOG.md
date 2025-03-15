@@ -1,5 +1,11 @@
 # shadergradient
 
+## 2.0.24
+
+### Patch Changes
+
+- lazyLoad prop added
+
 ## 2.0.23
 
 ### Patch Changes

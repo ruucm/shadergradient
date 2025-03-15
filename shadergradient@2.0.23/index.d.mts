@@ -1,5 +1,5 @@
 declare const useShaderGradientCanvasContext: () => any;
-declare function ShaderGradientCanvas({ children, style, pixelDensity, fov, pointerEvents, className, envBasePath, }: {
+declare function ShaderGradientCanvas({ children, style, pixelDensity, fov, pointerEvents, className, envBasePath, lazyLoad, }: {
     children: React.ReactNode;
     style?: React.CSSProperties;
     pixelDensity?: number;
@@ -7,6 +7,7 @@ declare function ShaderGradientCanvas({ children, style, pixelDensity, fov, poin
     pointerEvents?: 'none' | 'auto';
     className?: string;
     envBasePath?: string;
+    lazyLoad?: boolean;
 }): JSX.Element;
 
 type typeT = 'plane' | 'sphere' | 'waterPlane';

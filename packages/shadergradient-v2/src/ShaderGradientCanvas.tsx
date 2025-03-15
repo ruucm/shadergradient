@@ -48,11 +48,11 @@ export function ShaderGradientCanvas({
   useShaderChunkFix()
 
   return (
-    <div ref={containerRef}>
+    <div ref={containerRef} style={{ width: '100%', height: '100%', ...style }}>
       {!lazyLoad || isInView ? (
         <Context.Provider value={contextValue}>
           <Canvas
-            style={{ ...style, pointerEvents }}
+            style={{ pointerEvents }}
             resize={{ offsetSize: true }}
             className={className}
             {...canvasProps(pixelDensity, fov)}

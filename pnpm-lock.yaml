@@ -39,8 +39,8 @@ importers:
         specifier: ^8.12.0
         version: 8.17.14(@types/react@18.2.73)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(three@0.169.0)
       '@shadergradient/react':
-        specifier: ^2.0.22
-        version: 2.0.22(react@18.3.1)
+        specifier: ^2.0.23
+        version: 2.0.23(react@18.3.1)
       '@testing-library/jest-dom':
         specifier: ^5.16.5
         version: 5.17.0
@@ -165,8 +165,8 @@ importers:
         specifier: ^8.12.0
         version: 8.17.14(@types/react@18.2.73)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(three@0.169.0)
       '@shadergradient/react':
-        specifier: ^2.0.22
-        version: 2.0.22(react@18.3.1)
+        specifier: ^2.0.23
+        version: 2.0.23(react@18.3.1)
       '@types/three':
         specifier: ^0.150.0
         version: 0.150.2
@@ -259,8 +259,8 @@ importers:
         specifier: ^8.12.0
         version: 8.17.14(@types/react@18.2.73)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(three@0.169.0)
       '@shadergradient/react':
-        specifier: ^2.0.22
-        version: 2.0.22(react@18.3.1)
+        specifier: ^2.0.23
+        version: 2.0.23(react@18.3.1)
       glsl-random:
         specifier: ^0.0.5
         version: 0.0.5
@@ -2957,8 +2957,8 @@ packages:
   '@rushstack/eslint-patch@1.10.5':
     resolution: {integrity: sha512-kkKUDVlII2DQiKy7UstOR1ErJP8kUKAQ4oa+SQtM0K+lPdmmjj0YnnxBgtTVYH7mUKtbsxeFC9y0AmK7Yb78/A==}
 
-  '@shadergradient/react@2.0.22':
-    resolution: {integrity: sha512-76AUhSeb6tZ+lZ8LYe8MS2lXL4ow54P/YgI2RzUPPAa1fNURy1V2H5iNUHV6ONudwVZ+eYzdBhavISHAKPlOyA==}
+  '@shadergradient/react@2.0.23':
+    resolution: {integrity: sha512-sofk90Ykg4Gk+aGVPOg4QM4MpsTBzZfcuut3AGpxNLhYO3DEhp7z0vPaK4s0TnXIPCEZpw5bJB4cXEpZlNPt4A==}
     peerDependencies:
       react: '*'
 
@@ -12018,7 +12018,7 @@ snapshots:
 
   '@rushstack/eslint-patch@1.10.5': {}
 
-  '@shadergradient/react@2.0.22(react@18.3.1)':
+  '@shadergradient/react@2.0.23(react@18.3.1)':
     dependencies:
       react: 18.3.1
 

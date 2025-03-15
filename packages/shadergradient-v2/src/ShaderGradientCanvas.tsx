@@ -2,6 +2,8 @@ import { useEffect, createContext, useMemo, useContext } from 'react'
 import { Canvas } from '@react-three/fiber'
 import { canvasProps, defaultEnvBasePath } from '@/consts'
 import * as THREE from 'three'
+import { Placeholder } from './Placeholder'
+import { useInView } from './hooks/useInView'
 
 type ShaderGradientCanvasContext = {
   envBasePath: string
@@ -23,6 +25,7 @@ export function ShaderGradientCanvas({
   pointerEvents,
   className,
   envBasePath,
+  lazyLoad = true,
 }: {
   children: React.ReactNode
   style?: React.CSSProperties
@@ -31,7 +34,10 @@ export function ShaderGradientCanvas({
   pointerEvents?: 'none' | 'auto'
   className?: string
   envBasePath?: string
+  lazyLoad?: boolean
 }): JSX.Element {
+  const { isInView, containerRef } = useInView(lazyLoad)
+
   const contextValue = useMemo<ShaderGradientCanvasContext>(
     () => ({
       envBasePath: envBasePath || defaultEnvBasePath,
@@ -42,16 +48,26 @@ export function ShaderGradientCanvas({
   useShaderChunkFix()
 
   return (
-    <Context.Provider value={contextValue}>
-      <Canvas
-        style={{ ...style, pointerEvents }}
-        resize={{ offsetSize: true }}
-        className={className}
-        {...canvasProps(pixelDensity, fov)}
-      >
-        {children}
-      </Canvas>
-    </Context.Provider>
+    <div ref={containerRef}>
+      {!lazyLoad || isInView ? (
+        <Context.Provider value={contextValue}>
+          <Canvas
+            style={{ ...style, pointerEvents }}
+            resize={{ offsetSize: true }}
+            className={className}
+            {...canvasProps(pixelDensity, fov)}
+          >
+            {children}
+          </Canvas>
+        </Context.Provider>
+      ) : (
+        <Placeholder
+          title='Loading gradient...'
+          color1='#ff7e5f'
+          color2='#feb47b'
+        />
+      )}
+    </div>
   )
 }
 

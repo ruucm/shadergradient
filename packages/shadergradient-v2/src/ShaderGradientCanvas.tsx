@@ -2,7 +2,6 @@ import { useEffect, createContext, useMemo, useContext } from 'react'
 import { Canvas } from '@react-three/fiber'
 import { canvasProps, defaultEnvBasePath } from '@/consts'
 import * as THREE from 'three'
-import { Placeholder } from './Placeholder'
 import { useInView } from './hooks/useInView'
 
 type ShaderGradientCanvasContext = {
@@ -49,7 +48,7 @@ export function ShaderGradientCanvas({
 
   return (
     <div ref={containerRef} style={{ width: '100%', height: '100%', ...style }}>
-      {!lazyLoad || isInView ? (
+      {(!lazyLoad || isInView) && (
         <Context.Provider value={contextValue}>
           <Canvas
             style={{ pointerEvents }}
@@ -60,12 +59,6 @@ export function ShaderGradientCanvas({
             {children}
           </Canvas>
         </Context.Provider>
-      ) : (
-        <Placeholder
-          title='Loading gradient...'
-          color1='#ff7e5f'
-          color2='#feb47b'
-        />
       )}
     </div>
   )

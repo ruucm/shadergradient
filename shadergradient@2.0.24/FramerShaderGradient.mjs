@@ -368,6 +368,10 @@ FramerShaderGradient.propertyControls = {
   performantOnCanvas: {
     type: ControlType.Boolean,
     defaultValue: false
+  },
+  lazyLoad: {
+    type: ControlType.Boolean,
+    defaultValue: true
   }
 };
 export {

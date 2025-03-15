@@ -1,7 +1,7 @@
 import {
   ShaderGradientCanvas,
   useShaderGradientCanvasContext
-} from "./chunk-H7RKPVRY.mjs";
+} from "./chunk-47P77D7H.mjs";
 import "./chunk-WS7WB67W.mjs";
 import "./chunk-5HVKDCHP.mjs";
 import "./chunk-Z4XR7UL5.mjs";

@@ -75,4 +75,7 @@ export type GradientT = MeshT & {
   enableTransition?: boolean
 
   urlString?: string
+
+  // Event handlers
+  onChange?: (updates: GradientT) => void
 }

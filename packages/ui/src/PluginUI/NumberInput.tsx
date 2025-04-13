@@ -25,11 +25,16 @@ export const NumberInput = ({
     const onUpdate = (event) => {
       if (startVal) {
         const diff = event.clientX - startVal
-        const sensitivity = 0.1 // Adjust this value to control sensitivity (lower = less sensitive)
-        const newValue = snapshot + diff * sensitivity
+        const sensitivity = 0.5 // Adjust this value to control sensitivity (lower = less sensitive)
+        const rawValue = snapshot + diff * sensitivity
+        const newValue = step ? Math.round(rawValue / step) * step : rawValue
         if (min !== undefined && newValue < min) return
         if (max !== undefined && newValue > max) return
-        setValue(newValue)
+        // Get the number of decimal places from step
+        const decimalPlaces = step
+          ? step.toString().split('.')[1]?.length || 0
+          : 0
+        setValue(parseFloat(newValue.toFixed(decimalPlaces)))
       }
     }
 
@@ -43,7 +48,7 @@ export const NumberInput = ({
       document.removeEventListener('mousemove', onUpdate)
       document.removeEventListener('mouseup', onEnd)
     }
-  }, [startVal, setValue, snapshot, min, max])
+  }, [startVal, setValue, snapshot, min, max, step])
 
   return (
     <div
@@ -61,7 +66,7 @@ export const NumberInput = ({
           value={value}
           onChange={(e) => setValue(parseFloat(e.target.value))}
           className={
-            'font-medium w-[24px] h-[26px] outline-none text-center bg-[#F2F2F2] rounded-md [&::-webkit-inner-spin-button]:appearance-none overflow-visible ' +
+            'font-medium w-[24px] h-[26px] outline-none text-center bg-[#F2F2F2] rounded-md [&::-webkit-inner-spin-button]:appearance-none overflow-visible select-none ' +
             (mouseOverOn === label ? 'text-[#ff340a]' : 'text-[#000000]')
           }
           min={min}

@@ -70,38 +70,6 @@ export function TripleNumberInput({
     setSharedValueZ(defaultValueZ)
   }, [defaultValueZ])
 
-  // const NumberInput = ({
-  //   label,
-  //   value,
-  //   setValue,
-  //   mouseOverOn,
-  //   setMouseOverOn,
-  // }) => {
-  //   return (
-  //     <div
-  //       className='w-full bg-[#F2F2F2] rounded-md flex flex-row gap-0'
-  //       onMouseOver={() => setMouseOverOn(label)}
-  //       onMouseLeave={() => setMouseOverOn('')}
-  //     >
-  //       <div className='h-full w-fit flex justify-center items-center text-[8px] text-black opacity-70 capitalize'>
-  //         {label}
-  //       </div>
-  //       <input
-  //         type='number'
-  //         value={value}
-  //         onChange={(e) => setValue(e.target.value)}
-  //         className={
-  //           'font-medium w-full h-[26px] outline-none text-center bg-[#F2F2F2] rounded-md flex items-center justify-center [&::-webkit-inner-spin-button]:appearance-none ' +
-  //           (mouseOverOn === label ? 'text-[#ff340a]' : 'text-[#000000]')
-  //         }
-  //         min={min}
-  //         max={max}
-  //         step={step}
-  //       />
-  //     </div>
-  //   )
-  // }
-
   return (
     <div
       className='flex items-center w-full h-[26px] flex-row gap-2'

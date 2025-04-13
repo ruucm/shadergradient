@@ -1,4 +1,7 @@
-declare const useShaderGradientCanvasContext: () => any;
+type ShaderGradientCanvasContext = {
+    envBasePath: string;
+};
+declare const useShaderGradientCanvasContext: () => ShaderGradientCanvasContext;
 declare function ShaderGradientCanvas({ children, style, pixelDensity, fov, pointerEvents, className, envBasePath, lazyLoad, threshold, }: {
     children: React.ReactNode;
     style?: React.CSSProperties;

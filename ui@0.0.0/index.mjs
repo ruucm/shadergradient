@@ -53,9 +53,9 @@ var __toESM = (mod2, isNodeMode, target) => (target = mod2 != null ? __create(__
   mod2
 ));
 
-// ../../node_modules/.pnpm/@babel+runtime@7.26.7/node_modules/@babel/runtime/helpers/setPrototypeOf.js
+// ../../node_modules/.pnpm/@babel+runtime@7.27.0/node_modules/@babel/runtime/helpers/setPrototypeOf.js
 var require_setPrototypeOf = __commonJS({
-  "../../node_modules/.pnpm/@babel+runtime@7.26.7/node_modules/@babel/runtime/helpers/setPrototypeOf.js"(exports, module) {
+  "../../node_modules/.pnpm/@babel+runtime@7.27.0/node_modules/@babel/runtime/helpers/setPrototypeOf.js"(exports, module) {
     function _setPrototypeOf(t2, e2) {
       return module.exports = _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function(t3, e3) {
         return t3.__proto__ = e3, t3;
@@ -65,9 +65,9 @@ var require_setPrototypeOf = __commonJS({
   }
 });
 
-// ../../node_modules/.pnpm/@babel+runtime@7.26.7/node_modules/@babel/runtime/helpers/inheritsLoose.js
+// ../../node_modules/.pnpm/@babel+runtime@7.27.0/node_modules/@babel/runtime/helpers/inheritsLoose.js
 var require_inheritsLoose = __commonJS({
-  "../../node_modules/.pnpm/@babel+runtime@7.26.7/node_modules/@babel/runtime/helpers/inheritsLoose.js"(exports, module) {
+  "../../node_modules/.pnpm/@babel+runtime@7.27.0/node_modules/@babel/runtime/helpers/inheritsLoose.js"(exports, module) {
     var setPrototypeOf = require_setPrototypeOf();
     function _inheritsLoose(t2, o2) {
       t2.prototype = Object.create(o2.prototype), t2.prototype.constructor = t2, setPrototypeOf(t2, o2);
@@ -76,9 +76,9 @@ var require_inheritsLoose = __commonJS({
   }
 });
 
-// ../../node_modules/.pnpm/@babel+runtime@7.26.7/node_modules/@babel/runtime/helpers/extends.js
+// ../../node_modules/.pnpm/@babel+runtime@7.27.0/node_modules/@babel/runtime/helpers/extends.js
 var require_extends = __commonJS({
-  "../../node_modules/.pnpm/@babel+runtime@7.26.7/node_modules/@babel/runtime/helpers/extends.js"(exports, module) {
+  "../../node_modules/.pnpm/@babel+runtime@7.27.0/node_modules/@babel/runtime/helpers/extends.js"(exports, module) {
     function _extends8() {
       return module.exports = _extends8 = Object.assign ? Object.assign.bind() : function(n2) {
         for (var e2 = 1; e2 < arguments.length; e2++) {
@@ -92,9 +92,9 @@ var require_extends = __commonJS({
   }
 });
 
-// ../../node_modules/.pnpm/@babel+runtime@7.26.7/node_modules/@babel/runtime/helpers/objectWithoutPropertiesLoose.js
+// ../../node_modules/.pnpm/@babel+runtime@7.27.0/node_modules/@babel/runtime/helpers/objectWithoutPropertiesLoose.js
 var require_objectWithoutPropertiesLoose = __commonJS({
-  "../../node_modules/.pnpm/@babel+runtime@7.26.7/node_modules/@babel/runtime/helpers/objectWithoutPropertiesLoose.js"(exports, module) {
+  "../../node_modules/.pnpm/@babel+runtime@7.27.0/node_modules/@babel/runtime/helpers/objectWithoutPropertiesLoose.js"(exports, module) {
     function _objectWithoutPropertiesLoose6(r2, e2) {
       if (null == r2) return {};
       var t2 = {};
@@ -156,7 +156,7 @@ var Button = (_a) => {
 import { useState as useState2, useEffect as useEffect3 } from "react";
 import { motion, useAnimation } from "framer-motion";
 
-// ../../node_modules/.pnpm/react-intersection-observer@9.15.1_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/react-intersection-observer/dist/index.mjs
+// ../../node_modules/.pnpm/react-intersection-observer@9.16.0_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/react-intersection-observer/dist/index.mjs
 import * as React from "react";
 import * as React2 from "react";
 var observerMap = /* @__PURE__ */ new Map();
@@ -1044,13 +1044,13 @@ function Slider({
 // src/PluginUI/ColorInput.tsx
 import * as React9 from "react";
 
-// ../../node_modules/.pnpm/@uiw+color-convert@1.4.3_@babel+runtime@7.26.7/node_modules/@uiw/color-convert/esm/index.js
+// ../../node_modules/.pnpm/@uiw+color-convert@1.4.3_@babel+runtime@7.27.0/node_modules/@uiw/color-convert/esm/index.js
 var import_extends = __toESM(require_extends());
 
-// ../../node_modules/.pnpm/@uiw+color-convert@1.4.3_@babel+runtime@7.26.7/node_modules/@uiw/color-convert/esm/utils.js
+// ../../node_modules/.pnpm/@uiw+color-convert@1.4.3_@babel+runtime@7.27.0/node_modules/@uiw/color-convert/esm/utils.js
 var validHex = (hex) => /^#?([A-Fa-f0-9]{3,4}){1,2}$/.test(hex);
 
-// ../../node_modules/.pnpm/@uiw+color-convert@1.4.3_@babel+runtime@7.26.7/node_modules/@uiw/color-convert/esm/index.js
+// ../../node_modules/.pnpm/@uiw+color-convert@1.4.3_@babel+runtime@7.27.0/node_modules/@uiw/color-convert/esm/index.js
 var RGB_MAX = 255;
 var HUE_MAX = 360;
 var SV_MAX = 100;
@@ -1262,22 +1262,22 @@ var color = (str) => {
   };
 };
 
-// ../../node_modules/.pnpm/@uiw+react-color-shade-slider@1.4.3_@babel+runtime@7.26.7_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/@uiw/react-color-shade-slider/esm/index.js
+// ../../node_modules/.pnpm/@uiw+react-color-shade-slider@1.4.3_@babel+runtime@7.27.0_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/@uiw/react-color-shade-slider/esm/index.js
 var import_extends5 = __toESM(require_extends());
 var import_objectWithoutPropertiesLoose4 = __toESM(require_objectWithoutPropertiesLoose());
 import React6 from "react";
 
-// ../../node_modules/.pnpm/@uiw+react-color-alpha@1.4.3_@babel+runtime@7.26.7_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/@uiw/react-color-alpha/esm/index.js
+// ../../node_modules/.pnpm/@uiw+react-color-alpha@1.4.3_@babel+runtime@7.27.0_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/@uiw/react-color-alpha/esm/index.js
 var import_extends4 = __toESM(require_extends());
 var import_objectWithoutPropertiesLoose3 = __toESM(require_objectWithoutPropertiesLoose());
 import React5 from "react";
 
-// ../../node_modules/.pnpm/@uiw+react-drag-event-interactive@1.4.3_@babel+runtime@7.26.7_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/@uiw/react-drag-event-interactive/esm/index.js
+// ../../node_modules/.pnpm/@uiw+react-drag-event-interactive@1.4.3_@babel+runtime@7.27.0_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/@uiw/react-drag-event-interactive/esm/index.js
 var import_extends2 = __toESM(require_extends());
 var import_objectWithoutPropertiesLoose = __toESM(require_objectWithoutPropertiesLoose());
 import React3, { useRef as useRef3, useState as useState5, useCallback as useCallback2, useEffect as useEffect6 } from "react";
 
-// ../../node_modules/.pnpm/@uiw+react-drag-event-interactive@1.4.3_@babel+runtime@7.26.7_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/@uiw/react-drag-event-interactive/esm/utils.js
+// ../../node_modules/.pnpm/@uiw+react-drag-event-interactive@1.4.3_@babel+runtime@7.27.0_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/@uiw/react-drag-event-interactive/esm/utils.js
 import { useRef as useRef2, useEffect as useEffect5, useCallback } from "react";
 function useEventCallback(handler) {
   var callbackRef = useRef2(handler);
@@ -1312,7 +1312,7 @@ var getRelativePosition = (node, event) => {
   };
 };
 
-// ../../node_modules/.pnpm/@uiw+react-drag-event-interactive@1.4.3_@babel+runtime@7.26.7_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/@uiw/react-drag-event-interactive/esm/index.js
+// ../../node_modules/.pnpm/@uiw+react-drag-event-interactive@1.4.3_@babel+runtime@7.27.0_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/@uiw/react-drag-event-interactive/esm/index.js
 import { jsx as _jsx } from "react/jsx-runtime";
 var _excluded = ["prefixCls", "className", "onMove", "onDown"];
 var Interactive = /* @__PURE__ */ React3.forwardRef((props, ref) => {
@@ -1373,7 +1373,7 @@ var Interactive = /* @__PURE__ */ React3.forwardRef((props, ref) => {
 Interactive.displayName = "Interactive";
 var esm_default = Interactive;
 
-// ../../node_modules/.pnpm/@uiw+react-color-alpha@1.4.3_@babel+runtime@7.26.7_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/@uiw/react-color-alpha/esm/Pointer.js
+// ../../node_modules/.pnpm/@uiw+react-color-alpha@1.4.3_@babel+runtime@7.27.0_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/@uiw/react-color-alpha/esm/Pointer.js
 var import_extends3 = __toESM(require_extends());
 var import_objectWithoutPropertiesLoose2 = __toESM(require_objectWithoutPropertiesLoose());
 import React4 from "react";
@@ -1414,7 +1414,7 @@ var Pointer = (_ref) => {
   }));
 };
 
-// ../../node_modules/.pnpm/@uiw+react-color-alpha@1.4.3_@babel+runtime@7.26.7_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/@uiw/react-color-alpha/esm/index.js
+// ../../node_modules/.pnpm/@uiw+react-color-alpha@1.4.3_@babel+runtime@7.27.0_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/@uiw/react-color-alpha/esm/index.js
 import { jsx as _jsx3 } from "react/jsx-runtime";
 import { jsxs as _jsxs } from "react/jsx-runtime";
 var _excluded3 = ["prefixCls", "className", "hsva", "background", "bgProps", "innerProps", "pointerProps", "radius", "width", "height", "direction", "style", "onChange", "pointer"];
@@ -1495,7 +1495,7 @@ var Alpha = /* @__PURE__ */ React5.forwardRef((props, ref) => {
 Alpha.displayName = "Alpha";
 var esm_default2 = Alpha;
 
-// ../../node_modules/.pnpm/@uiw+react-color-shade-slider@1.4.3_@babel+runtime@7.26.7_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/@uiw/react-color-shade-slider/esm/index.js
+// ../../node_modules/.pnpm/@uiw+react-color-shade-slider@1.4.3_@babel+runtime@7.27.0_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/@uiw/react-color-shade-slider/esm/index.js
 import { jsx as _jsx4 } from "react/jsx-runtime";
 var _excluded4 = ["prefixCls", "className", "onChange", "direction", "hsva"];
 var ShadeSlider = /* @__PURE__ */ React6.forwardRef((props, ref) => {
@@ -1532,12 +1532,12 @@ var ShadeSlider = /* @__PURE__ */ React6.forwardRef((props, ref) => {
 ShadeSlider.displayName = "ShadeSlider";
 var esm_default3 = ShadeSlider;
 
-// ../../node_modules/.pnpm/@uiw+react-color-wheel@1.4.3_@babel+runtime@7.26.7_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/@uiw/react-color-wheel/esm/index.js
+// ../../node_modules/.pnpm/@uiw+react-color-wheel@1.4.3_@babel+runtime@7.27.0_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/@uiw/react-color-wheel/esm/index.js
 var import_extends7 = __toESM(require_extends());
 var import_objectWithoutPropertiesLoose5 = __toESM(require_objectWithoutPropertiesLoose());
 import React8 from "react";
 
-// ../../node_modules/.pnpm/@uiw+react-color-wheel@1.4.3_@babel+runtime@7.26.7_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/@uiw/react-color-wheel/esm/Pointer.js
+// ../../node_modules/.pnpm/@uiw+react-color-wheel@1.4.3_@babel+runtime@7.27.0_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/@uiw/react-color-wheel/esm/Pointer.js
 var import_extends6 = __toESM(require_extends());
 import React7 from "react";
 import { jsx as _jsx5 } from "react/jsx-runtime";
@@ -1582,7 +1582,7 @@ var Pointer2 = (_ref) => {
   });
 };
 
-// ../../node_modules/.pnpm/@uiw+react-color-wheel@1.4.3_@babel+runtime@7.26.7_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/@uiw/react-color-wheel/esm/utils.js
+// ../../node_modules/.pnpm/@uiw+react-color-wheel@1.4.3_@babel+runtime@7.27.0_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/@uiw/react-color-wheel/esm/utils.js
 var TAU = Math.PI * 2;
 var mod = (a2, n2) => (a2 % n2 + n2) % n2;
 var dist = (x, y) => Math.sqrt(x * x + y * y);
@@ -1643,7 +1643,7 @@ function getWheelValueFromInput(props, x, y) {
   };
 }
 
-// ../../node_modules/.pnpm/@uiw+react-color-wheel@1.4.3_@babel+runtime@7.26.7_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/@uiw/react-color-wheel/esm/index.js
+// ../../node_modules/.pnpm/@uiw+react-color-wheel@1.4.3_@babel+runtime@7.27.0_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/@uiw/react-color-wheel/esm/index.js
 import { jsx as _jsx6 } from "react/jsx-runtime";
 import { jsxs as _jsxs2 } from "react/jsx-runtime";
 var _excluded5 = ["prefixCls", "radius", "pointer", "className", "style", "width", "height", "oval", "direction", "angle", "color", "onChange"];
@@ -2020,7 +2020,7 @@ function RangeSlider({
   );
 }
 
-// ../../node_modules/.pnpm/zustand@5.0.1_@types+react@18.2.73_immer@9.0.21_react@18.3.1_use-sync-external-store@1.4.0_react@18.3.1_/node_modules/zustand/esm/vanilla.mjs
+// ../../node_modules/.pnpm/zustand@5.0.1_@types+react@18.2.73_immer@9.0.21_react@18.3.1_use-sync-external-store@1.5.0_react@18.3.1_/node_modules/zustand/esm/vanilla.mjs
 var createStoreImpl = (createState) => {
   let state;
   const listeners = /* @__PURE__ */ new Set();
@@ -2044,7 +2044,7 @@ var createStoreImpl = (createState) => {
 };
 var createStore = (createState) => createState ? createStoreImpl(createState) : createStoreImpl;
 
-// ../../node_modules/.pnpm/zustand@5.0.1_@types+react@18.2.73_immer@9.0.21_react@18.3.1_use-sync-external-store@1.4.0_react@18.3.1_/node_modules/zustand/esm/react.mjs
+// ../../node_modules/.pnpm/zustand@5.0.1_@types+react@18.2.73_immer@9.0.21_react@18.3.1_use-sync-external-store@1.5.0_react@18.3.1_/node_modules/zustand/esm/react.mjs
 import React10 from "react";
 var identity = (arg) => arg;
 function useStore(api, selector = identity) {
@@ -2064,7 +2064,7 @@ var createImpl = (createState) => {
 };
 var create = (createState) => createState ? createImpl(createState) : createImpl;
 
-// ../../node_modules/.pnpm/zustand@5.0.1_@types+react@18.2.73_immer@9.0.21_react@18.3.1_use-sync-external-store@1.4.0_react@18.3.1_/node_modules/zustand/esm/middleware.mjs
+// ../../node_modules/.pnpm/zustand@5.0.1_@types+react@18.2.73_immer@9.0.21_react@18.3.1_use-sync-external-store@1.5.0_react@18.3.1_/node_modules/zustand/esm/middleware.mjs
 var combine = (initialState, create2) => (...a2) => Object.assign({}, initialState, create2(...a2));
 
 // src/store.ts

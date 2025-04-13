@@ -25,6 +25,7 @@ export function ShaderGradientCanvas({
   className,
   envBasePath,
   lazyLoad = true,
+  threshold = 0.1,
 }: {
   children: React.ReactNode
   style?: React.CSSProperties
@@ -34,8 +35,9 @@ export function ShaderGradientCanvas({
   className?: string
   envBasePath?: string
   lazyLoad?: boolean
+  threshold?: number
 }): JSX.Element {
-  const { isInView, containerRef } = useInView(lazyLoad)
+  const { isInView, containerRef } = useInView(lazyLoad, threshold)
 
   const contextValue = useMemo<ShaderGradientCanvasContext>(
     () => ({

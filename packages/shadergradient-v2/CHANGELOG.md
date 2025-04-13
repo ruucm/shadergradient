@@ -1,5 +1,11 @@
 # shadergradient
 
+## 2.0.25
+
+### Patch Changes
+
+- ShaderGradientCanvas.threshold prop
+
 ## 2.0.24
 
 ### Patch Changes

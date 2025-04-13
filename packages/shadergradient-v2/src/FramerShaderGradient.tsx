@@ -377,6 +377,16 @@ FramerShaderGradient.propertyControls = {
     type: ControlType.Boolean,
     defaultValue: true,
   },
+  threshold: {
+    type: ControlType.Number,
+    min: 0,
+    max: 1,
+    step: 0.1,
+    defaultValue: 0.1,
+    displayStepper: true,
+    title: '↳ Threshold',
+    hidden: (props) => !props.lazyLoad,
+  },
 }
 
 export * from './ShaderGradientCanvas'

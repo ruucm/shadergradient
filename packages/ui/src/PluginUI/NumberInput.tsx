@@ -52,7 +52,7 @@ export const NumberInput = ({
 
   return (
     <div
-      className='w-full bg-[#F2F2F2] rounded-md flex flex-row gap-0 justify-center items-center h-full relative cursor-ew-resize'
+      className='w-full bg-[#F2F2F2] rounded-md flex flex-row gap-0 justify-center items-center h-full relative cursor-ew-resize font-["Inter"]'
       onMouseOver={() => setMouseOverOn(label)}
       onMouseLeave={() => setMouseOverOn('')}
       onMouseDown={onStart}

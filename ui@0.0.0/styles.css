@@ -598,6 +598,10 @@ video {
   z-index: 20;
 }
 
+.ml-2 {
+  margin-left: 12px;
+}
+
 .block {
   display: block;
 }
@@ -651,6 +655,10 @@ video {
   width: 105px;
 }
 
+.w-\[24px\] {
+  width: 24px;
+}
+
 .w-\[2px\] {
   width: 2px;
 }
@@ -701,6 +709,12 @@ video {
   cursor: pointer;
 }
 
+.select-none {
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+}
+
 .flex-row {
   flex-direction: row;
 }
@@ -711,6 +725,10 @@ video {
 
 .justify-center {
   justify-content: center;
+}
+
+.gap-0 {
+  gap: 0px;
 }
 
 .gap-0\.5 {
@@ -727,6 +745,10 @@ video {
 
 .overflow-hidden {
   overflow: hidden;
+}
+
+.overflow-visible {
+  overflow: visible;
 }
 
 .whitespace-nowrap {
@@ -790,8 +812,24 @@ video {
   text-align: center;
 }
 
+.font-\[\"Inter\"\] {
+  font-family: "Inter";
+}
+
+.text-\[8px\] {
+  font-size: 8px;
+}
+
+.text-\[9px\] {
+  font-size: 9px;
+}
+
 .font-medium {
   font-weight: 500;
+}
+
+.capitalize {
+  text-transform: capitalize;
 }
 
 .text-\[\#000000\] {
@@ -802,6 +840,11 @@ video {
 .text-\[\#ff340a\] {
   --tw-text-opacity: 1;
   color: rgb(255 52 10 / var(--tw-text-opacity, 1));
+}
+
+.text-black {
+  --tw-text-opacity: 1;
+  color: rgb(0 0 0 / var(--tw-text-opacity, 1));
 }
 
 .text-primary {
@@ -824,6 +867,10 @@ video {
 
 .opacity-30 {
   opacity: 0.3;
+}
+
+.opacity-70 {
+  opacity: 0.7;
 }
 
 .opacity-80 {

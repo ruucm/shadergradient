@@ -118,11 +118,13 @@ var index_exports = {};
 __export(index_exports, {
   Button: () => Button,
   ColorInput: () => ColorInput,
+  DoubleNumberInput: () => DoubleNumberInput,
   InputTitle: () => InputTitle,
   RangeSlider: () => RangeSlider,
   Slider: () => Slider,
   TextAnimation: () => TextAnimation,
   TextHover: () => TextHover,
+  TripleNumberInput: () => TripleNumberInput,
   useUIStore: () => useUIStore
 });
 module.exports = __toCommonJS(index_exports);
@@ -919,10 +921,9 @@ function InputTitle({
   return /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)(
     "div",
     {
-      className: "w-[105px] flex items-center flex-shrink-0 gap-0.5",
-      style: { fontFamily: "Inter Medium" },
+      className: 'w-[105px] flex items-center flex-shrink-0 gap-0.5 select-none font-["Inter"]',
       children: [
-        /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("p", { className: "font-medium whitespace-nowrap user-select-none", children: [
+        /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("p", { className: "font-medium whitespace-nowrap select-none", children: [
           condition === true && /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("span", { className: "opacity-30", children: "\u21B3 " }),
           title
         ] }),
@@ -988,8 +989,7 @@ function Slider({
   return /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)(
     "div",
     {
-      className: "flex items-center w-full h-[26px] flex-row gap-2",
-      style: { fontFamily: "Inter Medium" },
+      className: 'flex items-center w-full h-[26px] flex-row gap-2 font-["Inter"]',
       children: [
         /* @__PURE__ */ (0, import_jsx_runtime5.jsx)(
           InputTitle,
@@ -1951,8 +1951,7 @@ function RangeSlider({
   return /* @__PURE__ */ (0, import_jsx_runtime15.jsxs)(
     "div",
     {
-      className: "flex items-center w-full h-[26px] flex-row gap-2",
-      style: { fontFamily: "Inter Medium" },
+      className: 'flex items-center w-full h-[26px] flex-row gap-2 font-["Inter"]',
       children: [
         /* @__PURE__ */ (0, import_jsx_runtime15.jsx)(
           InputTitle,
@@ -2039,6 +2038,271 @@ function RangeSlider({
   );
 }
 
+// src/PluginUI/TripleNumberInput.tsx
+var import_react15 = require("react");
+
+// src/PluginUI/NumberInput.tsx
+var import_react14 = require("react");
+var import_jsx_runtime16 = require("react/jsx-runtime");
+var NumberInput = ({
+  label,
+  value,
+  setValue,
+  mouseOverOn,
+  setMouseOverOn,
+  min,
+  max,
+  step
+}) => {
+  const [snapshot, setSnapshot] = (0, import_react14.useState)(value);
+  const [startVal, setStartVal] = (0, import_react14.useState)(0);
+  const onStart = (0, import_react14.useCallback)(
+    (event) => {
+      setStartVal(event.clientX);
+      setSnapshot(value);
+    },
+    [value]
+  );
+  (0, import_react14.useEffect)(() => {
+    const onUpdate = (event) => {
+      var _a;
+      if (startVal) {
+        const diff = event.clientX - startVal;
+        const sensitivity = 0.5;
+        const rawValue = snapshot + diff * sensitivity;
+        const newValue = step ? Math.round(rawValue / step) * step : rawValue;
+        if (min !== void 0 && newValue < min) return;
+        if (max !== void 0 && newValue > max) return;
+        const decimalPlaces = step ? ((_a = step.toString().split(".")[1]) == null ? void 0 : _a.length) || 0 : 0;
+        setValue(parseFloat(newValue.toFixed(decimalPlaces)));
+      }
+    };
+    const onEnd = () => {
+      setStartVal(0);
+    };
+    document.addEventListener("mousemove", onUpdate);
+    document.addEventListener("mouseup", onEnd);
+    return () => {
+      document.removeEventListener("mousemove", onUpdate);
+      document.removeEventListener("mouseup", onEnd);
+    };
+  }, [startVal, setValue, snapshot, min, max, step]);
+  return /* @__PURE__ */ (0, import_jsx_runtime16.jsxs)(
+    "div",
+    {
+      className: 'w-full bg-[#F2F2F2] rounded-md flex flex-row gap-0 justify-center items-center h-full relative cursor-ew-resize font-["Inter"]',
+      onMouseOver: () => setMouseOverOn(label),
+      onMouseLeave: () => setMouseOverOn(""),
+      onMouseDown: onStart,
+      children: [
+        /* @__PURE__ */ (0, import_jsx_runtime16.jsx)("div", { className: "h-full w-fit flex justify-center items-center text-[9px] text-black opacity-70 capitalize ml-2 select-none", children: label }),
+        /* @__PURE__ */ (0, import_jsx_runtime16.jsx)("div", { className: "w-full flex justify-center items-center", children: /* @__PURE__ */ (0, import_jsx_runtime16.jsx)(
+          "input",
+          {
+            type: "number",
+            value,
+            onChange: (e2) => setValue(parseFloat(e2.target.value)),
+            className: "font-medium w-[24px] h-[26px] outline-none text-center bg-[#F2F2F2] rounded-md [&::-webkit-inner-spin-button]:appearance-none overflow-visible select-none " + (mouseOverOn === label ? "text-[#ff340a]" : "text-[#000000]"),
+            min,
+            max,
+            step
+          }
+        ) })
+      ]
+    }
+  );
+};
+
+// src/PluginUI/TripleNumberInput.tsx
+var import_jsx_runtime17 = require("react/jsx-runtime");
+function TripleNumberInput({
+  title,
+  defaultValueX,
+  defaultValueY,
+  defaultValueZ,
+  setValueX,
+  setValueY,
+  setValueZ,
+  step,
+  min,
+  max,
+  info,
+  infoContent,
+  condition
+}) {
+  const [sharedValueX, setSharedValueX] = (0, import_react15.useState)(defaultValueX);
+  const [sharedValueY, setSharedValueY] = (0, import_react15.useState)(defaultValueY);
+  const [sharedValueZ, setSharedValueZ] = (0, import_react15.useState)(defaultValueZ);
+  const [mouseOverOn, setMouseOverOn] = (0, import_react15.useState)("");
+  (0, import_react15.useEffect)(() => {
+    setSharedValueX(defaultValueX);
+    setSharedValueY(defaultValueY);
+    setSharedValueZ(defaultValueZ);
+  }, []);
+  (0, import_react15.useEffect)(() => {
+    setValueX(sharedValueX);
+  }, [sharedValueX]);
+  (0, import_react15.useEffect)(() => {
+    setValueY(sharedValueY);
+  }, [sharedValueY]);
+  (0, import_react15.useEffect)(() => {
+    setValueZ(sharedValueZ);
+  }, [sharedValueZ]);
+  (0, import_react15.useEffect)(() => {
+    setSharedValueX(defaultValueX);
+  }, [defaultValueX]);
+  (0, import_react15.useEffect)(() => {
+    setSharedValueY(defaultValueY);
+  }, [defaultValueY]);
+  (0, import_react15.useEffect)(() => {
+    setSharedValueZ(defaultValueZ);
+  }, [defaultValueZ]);
+  return /* @__PURE__ */ (0, import_jsx_runtime17.jsxs)(
+    "div",
+    {
+      className: "flex items-center w-full h-[26px] flex-row gap-2",
+      style: { fontFamily: "Inter Medium" },
+      children: [
+        /* @__PURE__ */ (0, import_jsx_runtime17.jsx)(
+          InputTitle,
+          {
+            title,
+            info,
+            infoContent,
+            condition
+          }
+        ),
+        /* @__PURE__ */ (0, import_jsx_runtime17.jsxs)("div", { className: "flex items-center w-full h-fit flex-row gap-2", children: [
+          /* @__PURE__ */ (0, import_jsx_runtime17.jsx)(
+            NumberInput,
+            {
+              label: "x",
+              value: sharedValueX,
+              setValue: setSharedValueX,
+              mouseOverOn,
+              setMouseOverOn,
+              min,
+              max,
+              step
+            }
+          ),
+          /* @__PURE__ */ (0, import_jsx_runtime17.jsx)(
+            NumberInput,
+            {
+              label: "y",
+              value: sharedValueY,
+              setValue: setSharedValueY,
+              mouseOverOn,
+              setMouseOverOn,
+              min,
+              max,
+              step
+            }
+          ),
+          /* @__PURE__ */ (0, import_jsx_runtime17.jsx)(
+            NumberInput,
+            {
+              label: "z",
+              value: sharedValueZ,
+              setValue: setSharedValueZ,
+              mouseOverOn,
+              setMouseOverOn,
+              min,
+              max,
+              step
+            }
+          )
+        ] })
+      ]
+    }
+  );
+}
+
+// src/PluginUI/DoubleNumberInput.tsx
+var import_react16 = require("react");
+var import_jsx_runtime18 = require("react/jsx-runtime");
+function DoubleNumberInput({
+  title,
+  defaultValueX,
+  defaultValueY,
+  labelX,
+  labelY,
+  setValueX,
+  setValueY,
+  step,
+  min,
+  max,
+  info,
+  infoContent,
+  condition
+}) {
+  const [sharedValueX, setSharedValueX] = (0, import_react16.useState)(defaultValueX);
+  const [sharedValueY, setSharedValueY] = (0, import_react16.useState)(defaultValueY);
+  const [mouseOverOn, setMouseOverOn] = (0, import_react16.useState)("");
+  (0, import_react16.useEffect)(() => {
+    setSharedValueX(defaultValueX);
+    setSharedValueY(defaultValueY);
+  }, []);
+  (0, import_react16.useEffect)(() => {
+    setValueX(sharedValueX);
+  }, [sharedValueX]);
+  (0, import_react16.useEffect)(() => {
+    setValueY(sharedValueY);
+  }, [sharedValueY]);
+  (0, import_react16.useEffect)(() => {
+    setSharedValueX(defaultValueX);
+  }, [defaultValueX]);
+  (0, import_react16.useEffect)(() => {
+    setSharedValueY(defaultValueY);
+  }, [defaultValueY]);
+  return /* @__PURE__ */ (0, import_jsx_runtime18.jsxs)(
+    "div",
+    {
+      className: "flex items-center w-full h-[26px] flex-row gap-2",
+      style: { fontFamily: "Inter Medium" },
+      children: [
+        /* @__PURE__ */ (0, import_jsx_runtime18.jsx)(
+          InputTitle,
+          {
+            title,
+            info,
+            infoContent,
+            condition
+          }
+        ),
+        /* @__PURE__ */ (0, import_jsx_runtime18.jsxs)("div", { className: "flex items-center w-full h-fit flex-row gap-2", children: [
+          /* @__PURE__ */ (0, import_jsx_runtime18.jsx)(
+            NumberInput,
+            {
+              label: labelX,
+              value: sharedValueX,
+              setValue: setSharedValueX,
+              mouseOverOn,
+              setMouseOverOn,
+              min,
+              max,
+              step
+            }
+          ),
+          /* @__PURE__ */ (0, import_jsx_runtime18.jsx)(
+            NumberInput,
+            {
+              label: labelY,
+              value: sharedValueY,
+              setValue: setSharedValueY,
+              mouseOverOn,
+              setMouseOverOn,
+              min,
+              max,
+              step
+            }
+          )
+        ] })
+      ]
+    }
+  );
+}
+
 // ../../node_modules/.pnpm/zustand@5.0.1_@types+react@18.2.73_immer@9.0.21_react@18.3.1_use-sync-external-store@1.5.0_react@18.3.1_/node_modules/zustand/esm/vanilla.mjs
 var createStoreImpl = (createState) => {
   let state;
@@ -2064,15 +2328,15 @@ var createStoreImpl = (createState) => {
 var createStore = (createState) => createState ? createStoreImpl(createState) : createStoreImpl;
 
 // ../../node_modules/.pnpm/zustand@5.0.1_@types+react@18.2.73_immer@9.0.21_react@18.3.1_use-sync-external-store@1.5.0_react@18.3.1_/node_modules/zustand/esm/react.mjs
-var import_react14 = __toESM(require("react"), 1);
+var import_react17 = __toESM(require("react"), 1);
 var identity = (arg) => arg;
 function useStore(api, selector = identity) {
-  const slice = import_react14.default.useSyncExternalStore(
+  const slice = import_react17.default.useSyncExternalStore(
     api.subscribe,
     () => selector(api.getState()),
     () => selector(api.getInitialState())
   );
-  import_react14.default.useDebugValue(slice);
+  import_react17.default.useDebugValue(slice);
   return slice;
 }
 var createImpl = (createState) => {
@@ -2098,10 +2362,12 @@ var useUIStore = create(
 0 && (module.exports = {
   Button,
   ColorInput,
+  DoubleNumberInput,
   InputTitle,
   RangeSlider,
   Slider,
   TextAnimation,
   TextHover,
+  TripleNumberInput,
   useUIStore
 });

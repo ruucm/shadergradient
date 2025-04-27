@@ -900,10 +900,9 @@ function InputTitle({
   return /* @__PURE__ */ jsxs3(
     "div",
     {
-      className: "w-[105px] flex items-center flex-shrink-0 gap-0.5",
-      style: { fontFamily: "Inter Medium" },
+      className: 'w-[105px] flex items-center flex-shrink-0 gap-0.5 select-none font-["Inter"]',
       children: [
-        /* @__PURE__ */ jsxs3("p", { className: "font-medium whitespace-nowrap user-select-none", children: [
+        /* @__PURE__ */ jsxs3("p", { className: "font-medium whitespace-nowrap select-none", children: [
           condition === true && /* @__PURE__ */ jsx4("span", { className: "opacity-30", children: "\u21B3 " }),
           title
         ] }),
@@ -969,8 +968,7 @@ function Slider({
   return /* @__PURE__ */ jsxs4(
     "div",
     {
-      className: "flex items-center w-full h-[26px] flex-row gap-2",
-      style: { fontFamily: "Inter Medium" },
+      className: 'flex items-center w-full h-[26px] flex-row gap-2 font-["Inter"]',
       children: [
         /* @__PURE__ */ jsx5(
           InputTitle,
@@ -1932,8 +1930,7 @@ function RangeSlider({
   return /* @__PURE__ */ jsxs6(
     "div",
     {
-      className: "flex items-center w-full h-[26px] flex-row gap-2",
-      style: { fontFamily: "Inter Medium" },
+      className: 'flex items-center w-full h-[26px] flex-row gap-2 font-["Inter"]',
       children: [
         /* @__PURE__ */ jsx7(
           InputTitle,
@@ -2020,6 +2017,271 @@ function RangeSlider({
   );
 }
 
+// src/PluginUI/TripleNumberInput.tsx
+import { useState as useState9, useEffect as useEffect10 } from "react";
+
+// src/PluginUI/NumberInput.tsx
+import { useState as useState8, useCallback as useCallback4, useEffect as useEffect9 } from "react";
+import { jsx as jsx8, jsxs as jsxs7 } from "react/jsx-runtime";
+var NumberInput = ({
+  label,
+  value,
+  setValue,
+  mouseOverOn,
+  setMouseOverOn,
+  min,
+  max,
+  step
+}) => {
+  const [snapshot, setSnapshot] = useState8(value);
+  const [startVal, setStartVal] = useState8(0);
+  const onStart = useCallback4(
+    (event) => {
+      setStartVal(event.clientX);
+      setSnapshot(value);
+    },
+    [value]
+  );
+  useEffect9(() => {
+    const onUpdate = (event) => {
+      var _a;
+      if (startVal) {
+        const diff = event.clientX - startVal;
+        const sensitivity = 0.5;
+        const rawValue = snapshot + diff * sensitivity;
+        const newValue = step ? Math.round(rawValue / step) * step : rawValue;
+        if (min !== void 0 && newValue < min) return;
+        if (max !== void 0 && newValue > max) return;
+        const decimalPlaces = step ? ((_a = step.toString().split(".")[1]) == null ? void 0 : _a.length) || 0 : 0;
+        setValue(parseFloat(newValue.toFixed(decimalPlaces)));
+      }
+    };
+    const onEnd = () => {
+      setStartVal(0);
+    };
+    document.addEventListener("mousemove", onUpdate);
+    document.addEventListener("mouseup", onEnd);
+    return () => {
+      document.removeEventListener("mousemove", onUpdate);
+      document.removeEventListener("mouseup", onEnd);
+    };
+  }, [startVal, setValue, snapshot, min, max, step]);
+  return /* @__PURE__ */ jsxs7(
+    "div",
+    {
+      className: 'w-full bg-[#F2F2F2] rounded-md flex flex-row gap-0 justify-center items-center h-full relative cursor-ew-resize font-["Inter"]',
+      onMouseOver: () => setMouseOverOn(label),
+      onMouseLeave: () => setMouseOverOn(""),
+      onMouseDown: onStart,
+      children: [
+        /* @__PURE__ */ jsx8("div", { className: "h-full w-fit flex justify-center items-center text-[9px] text-black opacity-70 capitalize ml-2 select-none", children: label }),
+        /* @__PURE__ */ jsx8("div", { className: "w-full flex justify-center items-center", children: /* @__PURE__ */ jsx8(
+          "input",
+          {
+            type: "number",
+            value,
+            onChange: (e2) => setValue(parseFloat(e2.target.value)),
+            className: "font-medium w-[24px] h-[26px] outline-none text-center bg-[#F2F2F2] rounded-md [&::-webkit-inner-spin-button]:appearance-none overflow-visible select-none " + (mouseOverOn === label ? "text-[#ff340a]" : "text-[#000000]"),
+            min,
+            max,
+            step
+          }
+        ) })
+      ]
+    }
+  );
+};
+
+// src/PluginUI/TripleNumberInput.tsx
+import { jsx as jsx9, jsxs as jsxs8 } from "react/jsx-runtime";
+function TripleNumberInput({
+  title,
+  defaultValueX,
+  defaultValueY,
+  defaultValueZ,
+  setValueX,
+  setValueY,
+  setValueZ,
+  step,
+  min,
+  max,
+  info,
+  infoContent,
+  condition
+}) {
+  const [sharedValueX, setSharedValueX] = useState9(defaultValueX);
+  const [sharedValueY, setSharedValueY] = useState9(defaultValueY);
+  const [sharedValueZ, setSharedValueZ] = useState9(defaultValueZ);
+  const [mouseOverOn, setMouseOverOn] = useState9("");
+  useEffect10(() => {
+    setSharedValueX(defaultValueX);
+    setSharedValueY(defaultValueY);
+    setSharedValueZ(defaultValueZ);
+  }, []);
+  useEffect10(() => {
+    setValueX(sharedValueX);
+  }, [sharedValueX]);
+  useEffect10(() => {
+    setValueY(sharedValueY);
+  }, [sharedValueY]);
+  useEffect10(() => {
+    setValueZ(sharedValueZ);
+  }, [sharedValueZ]);
+  useEffect10(() => {
+    setSharedValueX(defaultValueX);
+  }, [defaultValueX]);
+  useEffect10(() => {
+    setSharedValueY(defaultValueY);
+  }, [defaultValueY]);
+  useEffect10(() => {
+    setSharedValueZ(defaultValueZ);
+  }, [defaultValueZ]);
+  return /* @__PURE__ */ jsxs8(
+    "div",
+    {
+      className: "flex items-center w-full h-[26px] flex-row gap-2",
+      style: { fontFamily: "Inter Medium" },
+      children: [
+        /* @__PURE__ */ jsx9(
+          InputTitle,
+          {
+            title,
+            info,
+            infoContent,
+            condition
+          }
+        ),
+        /* @__PURE__ */ jsxs8("div", { className: "flex items-center w-full h-fit flex-row gap-2", children: [
+          /* @__PURE__ */ jsx9(
+            NumberInput,
+            {
+              label: "x",
+              value: sharedValueX,
+              setValue: setSharedValueX,
+              mouseOverOn,
+              setMouseOverOn,
+              min,
+              max,
+              step
+            }
+          ),
+          /* @__PURE__ */ jsx9(
+            NumberInput,
+            {
+              label: "y",
+              value: sharedValueY,
+              setValue: setSharedValueY,
+              mouseOverOn,
+              setMouseOverOn,
+              min,
+              max,
+              step
+            }
+          ),
+          /* @__PURE__ */ jsx9(
+            NumberInput,
+            {
+              label: "z",
+              value: sharedValueZ,
+              setValue: setSharedValueZ,
+              mouseOverOn,
+              setMouseOverOn,
+              min,
+              max,
+              step
+            }
+          )
+        ] })
+      ]
+    }
+  );
+}
+
+// src/PluginUI/DoubleNumberInput.tsx
+import { useState as useState10, useEffect as useEffect11 } from "react";
+import { jsx as jsx10, jsxs as jsxs9 } from "react/jsx-runtime";
+function DoubleNumberInput({
+  title,
+  defaultValueX,
+  defaultValueY,
+  labelX,
+  labelY,
+  setValueX,
+  setValueY,
+  step,
+  min,
+  max,
+  info,
+  infoContent,
+  condition
+}) {
+  const [sharedValueX, setSharedValueX] = useState10(defaultValueX);
+  const [sharedValueY, setSharedValueY] = useState10(defaultValueY);
+  const [mouseOverOn, setMouseOverOn] = useState10("");
+  useEffect11(() => {
+    setSharedValueX(defaultValueX);
+    setSharedValueY(defaultValueY);
+  }, []);
+  useEffect11(() => {
+    setValueX(sharedValueX);
+  }, [sharedValueX]);
+  useEffect11(() => {
+    setValueY(sharedValueY);
+  }, [sharedValueY]);
+  useEffect11(() => {
+    setSharedValueX(defaultValueX);
+  }, [defaultValueX]);
+  useEffect11(() => {
+    setSharedValueY(defaultValueY);
+  }, [defaultValueY]);
+  return /* @__PURE__ */ jsxs9(
+    "div",
+    {
+      className: "flex items-center w-full h-[26px] flex-row gap-2",
+      style: { fontFamily: "Inter Medium" },
+      children: [
+        /* @__PURE__ */ jsx10(
+          InputTitle,
+          {
+            title,
+            info,
+            infoContent,
+            condition
+          }
+        ),
+        /* @__PURE__ */ jsxs9("div", { className: "flex items-center w-full h-fit flex-row gap-2", children: [
+          /* @__PURE__ */ jsx10(
+            NumberInput,
+            {
+              label: labelX,
+              value: sharedValueX,
+              setValue: setSharedValueX,
+              mouseOverOn,
+              setMouseOverOn,
+              min,
+              max,
+              step
+            }
+          ),
+          /* @__PURE__ */ jsx10(
+            NumberInput,
+            {
+              label: labelY,
+              value: sharedValueY,
+              setValue: setSharedValueY,
+              mouseOverOn,
+              setMouseOverOn,
+              min,
+              max,
+              step
+            }
+          )
+        ] })
+      ]
+    }
+  );
+}
+
 // ../../node_modules/.pnpm/zustand@5.0.1_@types+react@18.2.73_immer@9.0.21_react@18.3.1_use-sync-external-store@1.5.0_react@18.3.1_/node_modules/zustand/esm/vanilla.mjs
 var createStoreImpl = (createState) => {
   let state;
@@ -2078,10 +2340,12 @@ var useUIStore = create(
 export {
   Button,
   ColorInput,
+  DoubleNumberInput,
   InputTitle,
   RangeSlider,
   Slider,
   TextAnimation,
   TextHover,
+  TripleNumberInput,
   useUIStore
 };

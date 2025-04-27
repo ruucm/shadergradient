@@ -72,6 +72,40 @@ type InputTitlePropsT = {
 } & React__default.DetailedHTMLProps<React__default.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>;
 declare function InputTitle({ title, info, infoContent, condition, }: InputTitlePropsT): JSX.Element;
 
+type TripleNumberInputPropsT = {
+    title: string;
+    defaultValueX: number;
+    defaultValueY: number;
+    defaultValueZ: number;
+    setValueX: any;
+    setValueY: any;
+    setValueZ: any;
+    step: number;
+    min: number;
+    max: number;
+    info: boolean;
+    infoContent: string;
+    condition: boolean;
+} & React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>;
+declare function TripleNumberInput({ title, defaultValueX, defaultValueY, defaultValueZ, setValueX, setValueY, setValueZ, step, min, max, info, infoContent, condition, }: TripleNumberInputPropsT): JSX.Element;
+
+type DoubleNumberInputPropsT = {
+    title: string;
+    labelX: string;
+    labelY: string;
+    defaultValueX: number;
+    defaultValueY: number;
+    setValueX: any;
+    setValueY: any;
+    step: number;
+    min: number;
+    max: number;
+    info: boolean;
+    infoContent: string;
+    condition: boolean;
+} & React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>;
+declare function DoubleNumberInput({ title, defaultValueX, defaultValueY, labelX, labelY, setValueX, setValueY, step, min, max, info, infoContent, condition, }: DoubleNumberInputPropsT): JSX.Element;
+
 declare const useUIStore: zustand.UseBoundStore<zustand.StoreApi<Omit<{
     activePreset: number;
     mode: string;
@@ -82,4 +116,4 @@ declare const useUIStore: zustand.UseBoundStore<zustand.StoreApi<Omit<{
     setLoadingPercentage: (data: any) => void;
 }>>;
 
-export { Button, ColorInput, InputTitle, RangeSlider, Slider, TextAnimation, TextHover, useUIStore };
+export { Button, ColorInput, DoubleNumberInput, InputTitle, RangeSlider, Slider, TextAnimation, TextHover, TripleNumberInput, useUIStore };

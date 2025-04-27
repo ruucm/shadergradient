@@ -40,8 +40,7 @@ export function RangeSlider({
 
   return (
     <div
-      className='flex items-center w-full h-[26px] flex-row gap-2'
-      style={{ fontFamily: 'Inter Medium' }}
+      className='flex items-center w-full h-[26px] flex-row gap-2 font-["Inter"]'
     >
       <InputTitle
         title={title}

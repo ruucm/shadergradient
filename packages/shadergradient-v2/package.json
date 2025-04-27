@@ -36,6 +36,8 @@
     "@react-spring/three": "^9.7.3",
     "@react-three/fiber": "^8.17.10",
     "@types/socket.io": "^3.0.2",
+    "@types/react": "18.2.73",
+    "@types/react-dom": "18.2.23",
     "camera-controls": "2.9.0",
     "concurrently": "^9.0.0",
     "framer": "^2.4.1",

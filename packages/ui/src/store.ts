@@ -2,9 +2,10 @@ import { create } from 'zustand'
 import { combine } from 'zustand/middleware'
 
 export const useUIStore = create(
-  combine({ activePreset: 0, mode: 'full', loadingPercentage: 0 }, (set) => ({
+  combine({ activePreset: 0, mode: 'full', loadingPercentage: 0, error:'' }, (set) => ({
     setActivePreset: (by: number) => set((state) => ({ activePreset: by })),
     setMode: (data: any) => set((state) => ({ ...state, mode: data })),
+    setError: (data: any) => set((state) => ({ ...state, error: data })),
     setLoadingPercentage: (data: any) =>
       set((state) => ({ ...state, loadingPercentage: data })),
   }))

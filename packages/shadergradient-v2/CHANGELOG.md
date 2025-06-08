@@ -1,5 +1,11 @@
 # shadergradient
 
+## 2.0.26
+
+### Patch Changes
+
+- id gradientCanvas
+
 ## 2.0.25
 
 ### Patch Changes

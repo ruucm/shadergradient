@@ -23,7 +23,8 @@ export function ShaderGradientStatelessCanvas({
       style={{ ...style, pointerEvents }}
       resize={{ offsetSize: true }}
       {...canvasProps(pixelDensity, fov)}
-    >
+      id='gradientCanvas' // need id to get an image to Figma export
+      >
       {children}
     </Canvas>
   )

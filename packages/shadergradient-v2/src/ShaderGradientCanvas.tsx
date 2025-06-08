@@ -57,7 +57,6 @@ export function ShaderGradientCanvas({
             resize={{ offsetSize: true }}
             className={className}
             {...canvasProps(pixelDensity, fov)}
-            id='gradientCanvas' // need id to get an image to Figma export
           >
             {children}
           </Canvas>

@@ -11,7 +11,7 @@
   "scripts": {
     "dev:ui": "concurrently \"tsup --config tsup.framer.config.ts --watch\" \"pnpm ngrok\"",
     "ngrok": "ngrok http --domain=esm.ngrok.dev 8000",
-    "build": "tsup src/index.ts --format esm,cjs --dts --external react && tailwindcss -i ./src/styles.css -o ./dist/styles.css",
+    "build": "tsup src/index.ts --format esm,cjs --dts --external react && tailwindcss -i ./src/styles.css -o ./dist/styles.css && cp -rf assets dist/assets",
     "release": "pnpm run build && mkdir -p release && cp -Rf dist release/$npm_package_name@$npm_package_version",
     "dev": "concurrently \"tsup src/index.ts --format esm,cjs --dts --external react --watch\" \"tailwindcss -i ./src/styles.css -o ./dist/styles.css --watch\"",
     "clean": "rm -rf dist"

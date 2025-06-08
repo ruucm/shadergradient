@@ -1,5 +1,12 @@
 # example-cra-dev
 
+## 0.1.41
+
+### Patch Changes
+
+- Updated dependencies
+  - @shadergradient/react@2.0.27
+
 ## 0.1.40
 
 ### Patch Changes

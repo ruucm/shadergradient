@@ -60,7 +60,7 @@ export const mainLoading = {
 
 // environment hdr
 export const defaultEnvBasePath =
-  'https://ruucm.github.io/shadergradient/shadergradient@1.0.0/hdr/'
+  'https://ruucm.github.io/shadergradient/ui@0.0.0/assets/hdr/'
 
 // ----------------------------- [FIGMA PLUGIN] ----------------------------------
 export const STRIPE_BUY_YEARLY_URL = 'https://buy.stripe.com/00g5kV0g553QcjC9AB'

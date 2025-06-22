@@ -1,5 +1,11 @@
 # shadergradient
 
+## 2.0.29
+
+### Patch Changes
+
+- use defaultEnvBasePath
+
 ## 2.0.28
 
 ### Patch Changes

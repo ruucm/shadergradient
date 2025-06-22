@@ -1,6 +1,6 @@
 import { useEffect, createContext, useMemo, useContext } from 'react'
 import { Canvas } from '@react-three/fiber'
-import { canvasProps, defaultEnvBasePath } from '@/consts'
+import { canvasProps } from '@/consts'
 import * as THREE from 'three'
 import { useInView } from './hooks/useInView'
 
@@ -40,9 +40,7 @@ export function ShaderGradientCanvas({
   const { isInView, containerRef } = useInView(lazyLoad, threshold)
 
   const contextValue = useMemo<ShaderGradientCanvasContext>(
-    () => ({
-      envBasePath: envBasePath || defaultEnvBasePath,
-    }),
+    () => ({ envBasePath }),
     [envBasePath]
   )
 

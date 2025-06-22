@@ -4,6 +4,7 @@ import * as THREE from 'three'
 import { useThree } from '@react-three/fiber'
 import { useRGBELoader } from './useRGBELoader'
 import { useShaderGradientCanvasContext } from '@/ShaderGradientCanvas'
+import { defaultEnvBasePath } from '@/consts'
 
 type Props = {
   background?: boolean | 'only'
@@ -19,9 +20,10 @@ const resolveScene = (
 
 export function EnvironmentMap({ background = false, envPreset }: Props) {
   const { envBasePath } = useShaderGradientCanvasContext()
-  const city = useRGBELoader('city.hdr', { path: envBasePath })
-  const dawn = useRGBELoader('dawn.hdr', { path: envBasePath })
-  const lobby = useRGBELoader('lobby.hdr', { path: envBasePath })
+  const path = envBasePath || defaultEnvBasePath
+  const city = useRGBELoader('city.hdr', { path })
+  const dawn = useRGBELoader('dawn.hdr', { path })
+  const lobby = useRGBELoader('lobby.hdr', { path })
   const textures = { city, dawn, lobby }
   const map: THREE.Texture = textures[envPreset]
 

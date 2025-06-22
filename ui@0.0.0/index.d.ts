@@ -1,7 +1,19 @@
+import * as zustand from 'zustand';
 import * as React$1 from 'react';
 import React__default from 'react';
 import * as react_jsx_runtime from 'react/jsx-runtime';
-import * as zustand from 'zustand';
+import { ControlType } from 'framer';
+import { MotionValue } from 'framer-motion';
+
+declare const useUIStore: zustand.UseBoundStore<zustand.StoreApi<Omit<{
+    activePreset: number;
+    mode: string;
+    loadingPercentage: number;
+}, "setActivePreset" | "setMode" | "setLoadingPercentage"> & {
+    setActivePreset: (by: number) => void;
+    setMode: (data: any) => void;
+    setLoadingPercentage: (data: any) => void;
+}>>;
 
 type ButtonPropsT = {
     kind?: 'primary' | 'secondary';
@@ -106,14 +118,63 @@ type DoubleNumberInputPropsT = {
 } & React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>;
 declare function DoubleNumberInput({ title, defaultValueX, defaultValueY, labelX, labelY, setValueX, setValueY, step, min, max, info, infoContent, condition, }: DoubleNumberInputPropsT): JSX.Element;
 
-declare const useUIStore: zustand.UseBoundStore<zustand.StoreApi<Omit<{
-    activePreset: number;
-    mode: string;
-    loadingPercentage: number;
-}, "setActivePreset" | "setMode" | "setLoadingPercentage"> & {
-    setActivePreset: (by: number) => void;
-    setMode: (data: any) => void;
-    setLoadingPercentage: (data: any) => void;
-}>>;
+declare function Icons({ iconName, color }: {
+    iconName: any;
+    color: any;
+}): react_jsx_runtime.JSX.Element;
+declare namespace Icons {
+    var propertyControls: {
+        color: {
+            type: ControlType;
+        };
+        iconName: {
+            type: ControlType;
+            options: string[];
+        };
+    };
+}
 
-export { Button, ColorInput, DoubleNumberInput, InputTitle, RangeSlider, Slider, TextAnimation, TextHover, TripleNumberInput, useUIStore };
+declare enum KnobOptions {
+    Hide = "Hide",
+    Hover = "Hover",
+    Show = "Show"
+}
+interface Props {
+    value?: number | MotionValue;
+    trackHeight?: number;
+    fillColor?: string;
+    focusColor?: string;
+    min?: number;
+    max?: number;
+    onChange?: (val: number) => void;
+    onChangeLive?: (val: number) => void;
+    onMax?: () => void;
+    onMin?: () => void;
+    trackColor?: string;
+    trackRadius?: number;
+    knobSize?: number;
+    knobColor?: string;
+    constrainKnob?: boolean;
+    shadow?: string;
+    shouldAnimateChange?: boolean;
+    transition?: {
+        [key: string]: any;
+    };
+    overdrag?: boolean;
+    knobSetting?: KnobOptions;
+    style?: React.CSSProperties;
+    height?: number;
+    width?: number;
+}
+/**
+ * SLIDER
+ *
+ * @framerIntrinsicWidth 200
+ * @framerIntrinsicHeight 20
+ *
+ * @framerSupportedLayoutWidth fixed
+ * @framerSupportedLayoutHeight any
+ */
+declare const SimpleSlider: React.ComponentType<Props>;
+
+export { Button, ColorInput, DoubleNumberInput, Icons, InputTitle, type Props, RangeSlider, SimpleSlider, Slider, TextAnimation, TextHover, TripleNumberInput, useUIStore };

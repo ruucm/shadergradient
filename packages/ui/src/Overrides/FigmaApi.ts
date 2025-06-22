@@ -1511,9 +1511,9 @@ interface ActiveUser extends User {
   readonly selection: string[]
 }
 
-// import { exportGIF } from './exportGIF'
+import { exportGIF } from './exportGIF'
 import { exportImage } from './exportImage'
-// import { exportVideo } from './exportVideo'
+import { exportVideo } from './exportVideo'
 
 //@ts-ignore
 export const figma: PluginAPI = {}
@@ -1537,29 +1537,29 @@ export const postFigmaMessage = async (func) => {
   )
 }
 
-// export const postFigmaMessageForExport = async (
-//   option,
-//   callback,
-//   controller
-// ) => {
-//   if (option.destination === 'onCanvas') {
-//     const bytes = await exportGIF(option, callback, controller)
-//     parent.postMessage(
-//       {
-//         pluginMessage: {
-//           type: 'SNAPSHOT_GIF',
-//           code: getCodeString(callback),
-//           bytes,
-//         },
-//       },
-//       '*'
-//     )
-//   } else if (option.destination === 'localFile') {
-//     if (option.format === 'gif') await exportGIF(option, callback, controller)
-//     else if (option.format === 'webm')
-//       await exportVideo(option, callback, controller)
-//   }
-// }
+export const postFigmaMessageForExport = async (
+  option,
+  callback,
+  controller
+) => {
+  if (option.destination === 'onCanvas') {
+    const bytes = await exportGIF(option, callback, controller)
+    parent.postMessage(
+      {
+        pluginMessage: {
+          type: 'SNAPSHOT_GIF',
+          code: getCodeString(callback),
+          bytes,
+        },
+      },
+      '*'
+    )
+  } else if (option.destination === 'localFile') {
+    if (option.format === 'gif') await exportGIF(option, callback, controller)
+    else if (option.format === 'webm')
+      await exportVideo(option, callback, controller)
+  }
+}
 
 export const postFigmaMessageForSnapShot = async (func) => {
   const bytes = await exportImage()

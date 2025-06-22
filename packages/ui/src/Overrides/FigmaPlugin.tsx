@@ -1,4 +1,4 @@
-import { ComponentType, useEffect, useLayoutEffect, useState } from 'react'
+import { ComponentType, useEffect, useLayoutEffect, useState, useRef, useCallback } from 'react'
 import React from 'react'
 import { useAnimationControls } from 'framer-motion'
 import {useQueryState} from "https://ruucm.github.io/shadergradient/shadergradient@2.0.27/ShaderGradientStateless/index.mjs"
@@ -17,7 +17,7 @@ import {
   figma,
   postFigmaMessage,
   postFigmaMessageForSnapShot,
-  // postFigmaMessageForExport,
+  postFigmaMessageForExport,
 } from './FigmaApi'
 // import { cx } from '@/utils'
 // import { clock } from '@/Gradient/comps/Mesh/useTimeAnimation'
@@ -87,6 +87,8 @@ export function OpenGIFPage(Component): ComponentType {
     const enabled = figma.selection > 0
     const setError = useUIStore((state) => state.setError)
 
+    const [, setRange] = useQueryState('range')
+
     const [, setRangeStart] = useQueryState('rangeStart')
     const [, setRangeEnd] = useQueryState('rangeEnd')
     const [, setPixelDensity] = useQueryState('pixelDensity')
@@ -104,7 +106,8 @@ export function OpenGIFPage(Component): ComponentType {
       <Component
         {...props}
         style={{ ...style, cursor: enabled? 'pointer' :'default' , opacity: enabled ? 1 : 0.5, PointerEvent: enabled? 'auto':'none' }}
-        onClick={() => {      
+        onClick={() => {     
+            setRange('enabled')
               setRangeStart(5)
               setRangeEnd(8)
               setPixelDensity(2)
@@ -135,11 +138,11 @@ export function extractGIF(Component): ComponentType {
     const error = useUIStore((state) => state.error)
     const setError = useUIStore((state) => state.setError)
     const loading = progress >= 0 && progress < 1
+    const controllerRef = useRef(null)
 
     const [figma] = useFigma()
     const enabled = figma.selection > 0
-    // const enabled = true
-
+    
     const [animate, setAnimate] = useQueryState('animate')
     const [, setUTime] = useQueryState('uTime')
     const [range, setRange] = useQueryState('range')
@@ -153,6 +156,8 @@ export function extractGIF(Component): ComponentType {
 
     const [duration, setDuration] = useState(0)
     const [size, setSize] = useState(0)
+    const startTimeRef = useRef(0)
+    const animationFrameRef = useRef(null)
 
     const figma_user_id = figma.user?.id
     const [rows, dbLoading, insertRow, updateRow] = useDBTable(
@@ -163,6 +168,7 @@ export function extractGIF(Component): ComponentType {
     const trialLeft = getTrialLeft(userDB?.trial_started_at)
     const [subscription, subDBLoading] = useSubscription('sub1')
     const needSubscribe = trialLeft <= 0 && !subDBLoading && !subscription
+
     const titleText = needSubscribe
       ? 'Upgrade to Pro'
       : destination === 'onCanvas'
@@ -190,67 +196,113 @@ export function extractGIF(Component): ComponentType {
       grain,
     }
 
+    // Function to update uTime based on elapsed time
+    const updateTime = useCallback(() => {
+      if (!loading) return;
+      
+      const elapsed = (Date.now() - startTimeRef.current) / 1000;
+      const playhead = rangeStart + (elapsed % duration);
+      setUTime(playhead);
+      
+      animationFrameRef.current = requestAnimationFrame(updateTime);
+    }, [loading, rangeStart, duration, setUTime]);
+
+    // Start/stop animation based on loading state
+    useEffect(() => {
+      if (loading) {
+        startTimeRef.current = Date.now();
+        updateTime();
+      } else {
+        if (animationFrameRef.current) {
+          cancelAnimationFrame(animationFrameRef.current);
+        }
+      }
+      
+      return () => {
+        if (animationFrameRef.current) {
+          cancelAnimationFrame(animationFrameRef.current);
+        }
+      };
+    }, [loading, updateTime]);
+
+    // Cleanup controller on unmount
+    useEffect(() => {
+      return () => {
+        if (controllerRef.current) {
+          controllerRef.current.abort();
+        }
+      };
+    }, []);
+
+    const handleAbort = useCallback(() => {
+      if (controllerRef.current) {
+        controllerRef.current.abort();
+        setProgress(-1);
+        setAnimate('on');
+        console.log('Export aborted');
+      }
+    }, [setAnimate]);
+
+    const startExport = useCallback(() => {
+      // Create new controller
+      controllerRef.current = new AbortController();
+      setRange('enabled');
+
+      if (enabled && valid) {
+        if (needSubscribe) {
+          props?.onTapGIFUpgrade();
+          console.log('onTapGIFUpgrade');
+        } else {
+          if (!userDB) {
+            props?.onTapGIFNoDB();
+            console.log('onTapGIFNoDB');
+          } else {
+            setProgress(0);
+            startTimeRef.current = Date.now();
+            console.log('startTime', startTimeRef.current);
+            // Only proceed with export if user has valid subscription/trial
+            if (subscription || trialLeft > 0) {
+              postFigmaMessageForExport(option, setProgress, controllerRef.current);
+            } else {
+              console.log('No valid subscription or trial');
+              props?.onTapGIFUpgrade();
+            }
+          }
+        }
+      } else {
+        props?.onTapGIF();
+      }
+    }, [enabled, valid, needSubscribe, userDB, option, setProgress, setRange, props, subscription, trialLeft]);
+
     let variant = 'dbLoading'
     if (loading) variant = 'loading'
     else if (size > 300) variant = 'error'
     else if (!enabled) variant = 'error'
-    // when all datas are ready
-    else if (!subDBLoading && !subscription) variant = 'default' // USER ON DB, NO SUBSCRIPTION, AND STILL HAS TRIAL LEFT
-    else if (!subDBLoading && subscription) variant = 'pro' // USER WITH SUBSCRIPTION
-    else if (needSubscribe) variant = 'upgrade' // USER ON DB, NO SUBSCRIPTION, AND NO TRIAL LEFT
+    else if (!subDBLoading && !subscription) variant = 'default'
+    else if (!subDBLoading && subscription) variant = 'pro'
+    else if (needSubscribe) variant = 'upgrade'
+
+useEffect(()=>{
+  console.log(subscription, userDB, 'subscription, userDB')
+  console.log(trialLeft)
+},[subscription, userDB])
 
     useEffect(() => {
-
-      if (!enabled){
+      if (!enabled) {
         setError('Select a frame on the canvas')
       }
-      if (size > 300){
-        setError('The size of the GIF is too large')
+      if (size > 300) {
+        setError('You can only add GIF under 300mb on canvas')
       }
-    }, [enabled])
-
-    useEffect(() => {
-      // if (needSubscribe){
-      //   props.onTapGIFUpgrade()
-      // }
-      console.log(props)
-    }, [needSubscribe])
+    }, [enabled, size, setError])
 
     return (
       <>
         <Component
           {...props}
-          key={progress} // need to flush Framer button
+          key={progress}
           style={{ ...style, cursor: 'pointer' }}
-          onClick={() => {
-            controller = new AbortController() // need to make a new one on every exportings
-
-            console.log('new controller')
-            setRange('enabled')
-
-            if (enabled && valid) {
-              if (needSubscribe)
-                {
-                  props?.onTapGIFUpgrade() // move to the upgrade variant
-                  console.log('onTapGIFUpgrade')
-  
-                }
-              
-              else {
-                if (!userDB) {
-                  props?.onTapGIFNoDB()
-                  console.log('onTapGIFNoDB')
-                }
-                else {
-                  // start to extract GIF
-                  setProgress(0)
-                  console.log('startTime', Date.now())
-                  // clock.start() // restart the clock
-                  // postFigmaMessageForExport(option, setProgress, controller)
-                }
-              }
-            } else props?.onTapGIF() // move to the alert variant
-          }}  
+          onClick={startExport}
           onTapGIFUpgrade={() => console.log('onTapGIFU (ignore the default event)')}
           onTapGIFNoDB={() => console.log('onTapGIFN (ignore the default event)')}
           progress={progress * 100}
@@ -258,10 +310,9 @@ export function extractGIF(Component): ComponentType {
           credit={!subscription ? creditText : null}
           variant={variant}
         />
-        {/* clickable layer on exporting */}
         {variant === 'loading' && (
           <div
-            onClick={() => controller.abort()}
+            onClick={handleAbort}
             style={{
               position: 'absolute',
               width: '100%',
@@ -269,13 +320,14 @@ export function extractGIF(Component): ComponentType {
               top: 0,
               left: 0,
               cursor: 'wait',
-              background:'yellow'
+              background: 'yellow',
+              opacity: 0.3
             }}
           />
         )}
       </>
-    )
-  }
+    );
+  };
 }
 
 export function isUpgraded(Component): ComponentType {
@@ -364,8 +416,8 @@ export function TogglePrice(Component): ComponentType {
     return (
       <Component
         {...props}
-        onMonthly={() => setBillingInterval('year')}
-        onYearly={() => setBillingInterval('month')}
+        onMonthly={() => setBillingInterval('month')}
+        onYearly={() => setBillingInterval('year')}
       />
     )
   }

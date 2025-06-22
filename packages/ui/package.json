@@ -31,6 +31,7 @@
     "concurrently": "^7.2.2",
     "eslint": "^7.32.0",
     "eslint-config-custom": "workspace:*",
+    "framer": "^2.4.1",
     "globby": "^14.0.2",
     "react": "^18.2.0",
     "react-intersection-observer": "^9.4.1",

@@ -31,101 +31,56 @@ export async function exportGIF(option, callback, controller) {
     })
 
     try {
-      if (grain === 'on') {
-        // https://github.com/mattdesl/gifenc
-        const gif = GIFEncoderFast()
+      // Always use GIFEncoderFast
+      const gif = GIFEncoderFast()
 
-        // We use for 'of' to loop with async await
-        for (let i of frames) {
-          // Check if stopped before each frame
-          if (stopped) {
-            break
-          }
-          // a t value 0..1 to animate the frame
-          const playhead = rangeStart + i / frameRate
-          // render target frame
-          setUTime(playhead)
-
-          const [imageData, width, height]: any = await getImage()
-          const { data } = imageData
-
-          // Choose a pixel format: rgba4444, rgb444, rgb565
-          const format = 'rgb444'
-
-          // If necessary, quantize your colors to a reduced palette
-          const palette = quantize(data, 256, { format })
-
-          // Apply palette to RGBA data to get an indexed bitmap
-          const index = applyPalette(data, palette, format)
-
-          // Write frame into GIF
-          await gif.writeFrame(index, width, height, { palette, delay })
-          console.log('GIF Frame has written')
-
-          await sleep(0.01) // add a break to share UI state updates (setProgress)
-          callback(i / (totalFrames - 1))
+      // We use for 'of' to loop with async await
+      for (let i of frames) {
+        // Check if stopped before each frame
+        if (stopped) {
+          break
         }
+        // a t value 0..1 to animate the frame
+        const playhead = rangeStart + i / frameRate
+        // render target frame
+        setUTime(playhead)
 
-        if (!stopped) {
-          // Finalize stream
-          gif.finish()
+        const [imageData, width, height]: any = await getImage()
+        const { data } = imageData
 
-          // Get a direct typed array view into the buffer to avoid copying it
-          const buffer = gif.bytesView()
+        // Choose a pixel format: rgba4444, rgb444, rgb565
+        const format = 'rgb444'
 
-          if (option.destination === 'localFile') {
-            download(buffer, 'shadergradient.gif', { type: 'image/gif' })
-          }
-          setAnimate('on')
+        // If necessary, quantize your colors to a reduced palette
+        const palette = quantize(data, 256, { format })
 
-          const b64 = await base64_arraybuffer(buffer)
-          const dataURL = 'data:image/gif;base64,' + b64
+        // Apply palette to RGBA data to get an indexed bitmap
+        const index = applyPalette(data, palette, format)
 
-          resolve(gifToUint8Array(dataURL))
+        // Write frame into GIF
+        await gif.writeFrame(index, width, height, { palette, delay })
+        console.log('GIF Frame has written')
+
+        await sleep(0.01) // add a break to share UI state updates (setProgress)
+        callback(i / (totalFrames - 1))
+      }
+
+      if (!stopped) {
+        // Finalize stream
+        gif.finish()
+
+        // Get a direct typed array view into the buffer to avoid copying it
+        const buffer = gif.bytesView()
+
+        if (option.destination === 'localFile') {
+          download(buffer, 'shadergradient.gif', { type: 'image/gif' })
         }
-      } else {
-        // https://github.com/jnordberg/gif.js
-        // @ts-ignore // included GIF lib from head - addScript("https://jnordberg.github.io/gif.js/gif.js?v=3")
-        var gif = new GIF({
-          workers: 2,
-          quality: 10,
-          workerScript: URL.createObjectURL(workerStrBlob),
-          dither: 'Atkinson', // FloydSteinberg, FalseFloydSteinberg, Stucki, Atkinson (or -serpentine)
-        })
-        gif.on('finished', async (blob) => {
-          if (!stopped && option.destination === 'localFile') {
-            downloadBlob(blob, 'shadergradient.gif')
-          }
-          setAnimate('on')
+        setAnimate('on')
 
-          const dataURL = await blobToDataURL(blob)
-          resolve(gifToUint8Array(dataURL))
-        })
-        gif.on('progress', (p) => {
-          if (!stopped) {
-            callback(p)
-          }
-        })
+        const b64 = await base64_arraybuffer(buffer)
+        const dataURL = 'data:image/gif;base64,' + b64
 
-        const canvas = document.createElement('canvas')
-        const ctx: any = canvas.getContext('2d')
-
-        for (let i of frames) {
-          if (stopped) {
-            break
-          }
-          // a t value 0..1 to animate the frame
-          const playhead = rangeStart + i / frameRate
-          // render target frame
-          setUTime(playhead)
-
-          // capture image & add it to que
-          await gifAddFrame(ctx, gif)
-        }
-
-        if (!stopped) {
-          gif.render()
-        }
+        resolve(gifToUint8Array(dataURL))
       }
     } catch (error) {
       console.error('Export error:', error)

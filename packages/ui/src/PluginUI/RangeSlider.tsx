@@ -74,6 +74,8 @@ export function RangeSlider({
           onChange={(values) => {
             setRangeValue(values as [number, number])
           }}
+          pearling // maintain the minDistance between two knobs
+          minDistance={0.5}
           className={
             'w-full rounded-md bg-[#F2F2F2] cursor-ew-resize overflow-hidden transition-height duration-300 ' +
             (isMouseOver === true ? 'h-[26px]' : 'h-[5px]')

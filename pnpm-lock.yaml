@@ -711,10 +711,6 @@ importers:
   packages/tsconfig: {}
 
   packages/ui:
-    dependencies:
-      framer-motion:
-        specifier: '*'
-        version: 10.18.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
     devDependencies:
       '@chialab/esbuild-plugin-commonjs':
         specifier: ^0.18.0
@@ -752,6 +748,9 @@ importers:
       framer:
         specifier: ^2.4.1
         version: 2.4.1(framer-motion@10.18.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      framer-motion:
+        specifier: ^10.9.2
+        version: 10.18.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       globby:
         specifier: ^14.0.2
         version: 14.1.0

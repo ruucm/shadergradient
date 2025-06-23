@@ -28,7 +28,7 @@ const textItems = [
 const visibleItems = 13 // This should be odd number (to center the active item)
 const visibleDelay = 0.3
 
-export default function ScrollableTextBox() {
+export function ScrollableTextBox() {
   const containerRef = useRef<HTMLDivElement>(null)
   const [activeIndex, setActiveIndex] = useState(0)
   const [, setStore] = useStore()

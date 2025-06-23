@@ -6,5 +6,3 @@ export * from './SimpleSlider'
 export * from './ScrollableBox'
 
 export * from './TriggerSection'
-
-export * from './TempControls'

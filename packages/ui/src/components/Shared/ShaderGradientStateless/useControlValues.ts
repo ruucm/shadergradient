@@ -1,7 +1,6 @@
 import { useCursorStore } from './store'
-import { GradientT } from '@/types'
+import { GradientT, formatUrlString } from '@shadergradient/react'
 import { useQueryState } from './store/useQueryState'
-import { formatUrlString } from '@/utils'
 import * as qs from 'query-string'
 
 export function useControlValues(

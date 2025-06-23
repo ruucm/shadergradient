@@ -51,6 +51,7 @@ export function ShaderGradientCanvas({
       {(!lazyLoad || isInView) && (
         <Context.Provider value={contextValue}>
           <Canvas
+            id='gradientCanvas' // need id to get an image to Figma export
             style={{ pointerEvents }}
             resize={{ offsetSize: true }}
             className={className}

@@ -3,7 +3,10 @@ import type { ComponentType } from 'react'
 import { useState, useEffect } from 'react'
 import { createStore } from 'https://framer.com/m/framer/store.js@^1.0.0'
 import { useUIStore } from '@/store'
-import { PRESETS, useURLQueryState } from '@shadergradient/react/stateless'
+import {
+  PRESETS,
+  useURLQueryState,
+} from '@/components/Shared/ShaderGradientStateless'
 
 export function ArrowLeft(Component): ComponentType {
   return ({ style, ...props }: any) => {

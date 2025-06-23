@@ -2,7 +2,7 @@ import { ControlType } from 'framer'
 import {
   useQueryState,
   useURLQueryState,
-} from '@shadergradient/react/stateless'
+} from '@/components/Shared/ShaderGradientStateless'
 
 export function ChangeColorButton() {
   const [, setColor1] = useQueryState('color1')

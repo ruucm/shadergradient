@@ -1,5 +1,4 @@
-import { GradientT } from '@/types'
-import { ShaderGradient } from '../ShaderGradient/ShaderGradient'
+import { ShaderGradient, GradientT } from '@shadergradient/react'
 import { useSearchParamToStore } from './store/useSearchParamToStore'
 import { useControlValues } from './useControlValues'
 export { PRESETS } from './store/presetURLs'

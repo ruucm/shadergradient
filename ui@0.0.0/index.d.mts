@@ -177,6 +177,8 @@ interface Props {
  */
 declare const SimpleSlider: React.ComponentType<Props>;
 
+declare function ScrollableTextBox(): react_jsx_runtime.JSX.Element;
+
 declare function HideBanner(Component: any): ComponentType;
 
 declare function ArrowLeft(Component: any): ComponentType;
@@ -209,4 +211,4 @@ declare function useBillingInterval(): any[];
 declare function TogglePrice(Component: any): ComponentType;
 declare function Price(Component: any): ComponentType;
 
-export { ArrowLeft, ArrowRight, Button, CenterCrop1, CenterCrop2, ColorInput, DoubleNumberInput, Gap, HideBanner, Icons, InputTitle, PresetIndex, PresetTitle, Price, type Props, RangeSlider, SectionObserver, SectionText, SimpleSlider, Slider, TextAnimation, TextHover, TogglePrice, TripleNumberInput, WordGradient, WordGradientText, WordHighlight, WordHighlight2, randomBtn, randomGradient, randomText, slider, sliderSmartComp, textClipper, time, toggleSmartComp, useBillingInterval, useBillingIntervalStore, useStore, useUIStore, wordHighlightText };
+export { ArrowLeft, ArrowRight, Button, CenterCrop1, CenterCrop2, ColorInput, DoubleNumberInput, Gap, HideBanner, Icons, InputTitle, PresetIndex, PresetTitle, Price, type Props, RangeSlider, ScrollableTextBox, SectionObserver, SectionText, SimpleSlider, Slider, TextAnimation, TextHover, TogglePrice, TripleNumberInput, WordGradient, WordGradientText, WordHighlight, WordHighlight2, randomBtn, randomGradient, randomText, slider, sliderSmartComp, textClipper, time, toggleSmartComp, useBillingInterval, useBillingIntervalStore, useStore, useUIStore, wordHighlightText };

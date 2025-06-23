@@ -13,7 +13,9 @@ import {
 import {
   Icons
 } from "../chunk-ZK6FQ3TL.mjs";
-import "../chunk-KLQ2U5GV.mjs";
+import {
+  ScrollableTextBox
+} from "../chunk-KLQ2U5GV.mjs";
 import {
   SimpleSlider
 } from "../chunk-HRHZDCUJ.mjs";
@@ -23,6 +25,7 @@ import "../chunk-WNQUEZJF.mjs";
 export {
   Button,
   Icons,
+  ScrollableTextBox,
   SimpleSlider,
   TextAnimation,
   TextHover

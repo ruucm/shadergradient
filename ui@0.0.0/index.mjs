@@ -20,7 +20,9 @@ import {
 import {
   Icons
 } from "./chunk-ZK6FQ3TL.mjs";
-import "./chunk-KLQ2U5GV.mjs";
+import {
+  ScrollableTextBox
+} from "./chunk-KLQ2U5GV.mjs";
 import {
   SimpleSlider
 } from "./chunk-HRHZDCUJ.mjs";
@@ -99,6 +101,7 @@ export {
   PresetTitle,
   Price,
   RangeSlider,
+  ScrollableTextBox,
   SectionObserver,
   SectionText,
   SimpleSlider,

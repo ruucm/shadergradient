@@ -6,5 +6,5 @@ import "../../chunk-ZGLKUXVB.mjs";
 import "../../chunk-2ULWCUR2.mjs";
 import "../../chunk-WNQUEZJF.mjs";
 export {
-  ScrollableTextBox as default
+  ScrollableTextBox
 };

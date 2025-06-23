@@ -5,7 +5,7 @@ import {
 import {
   __spreadProps,
   __spreadValues
-} from "../chunk-FWCSY2DS.mjs";
+} from "../chunk-WNQUEZJF.mjs";
 
 // src/PluginUI/Test.tsx
 import * as React from "react";

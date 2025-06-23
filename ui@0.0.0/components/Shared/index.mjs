@@ -5,7 +5,7 @@ import {
 import {
   TextHover
 } from "../../chunk-IK6DJNIF.mjs";
-import "../../chunk-FWCSY2DS.mjs";
+import "../../chunk-WNQUEZJF.mjs";
 export {
   TextAnimation,
   TextHover

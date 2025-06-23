@@ -1,9 +1,9 @@
 import {
   Slider
-} from "../chunk-4XHNTN3M.mjs";
+} from "../chunk-RN3PFD6H.mjs";
 import "../chunk-2FOTMNF6.mjs";
 import "../chunk-DBZGOJTR.mjs";
-import "../chunk-FWCSY2DS.mjs";
+import "../chunk-WNQUEZJF.mjs";
 export {
   Slider
 };

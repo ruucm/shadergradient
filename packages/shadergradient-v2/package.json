@@ -19,6 +19,7 @@
   "scripts": {
     "build": "tsup",
     "dev": "tsup --config tsup.config.ts --watch",
+    "dev:ui": "tsup --config tsup.config.ts",
     "dev:framer": "concurrently \"tsup --config tsup.framer.config.ts --watch\" \"pnpm ngrok\"",
     "build:framer": "tsup --config tsup.framer.config.ts",
     "release:framer": "pnpm run build:framer && mkdir -p release && cp -Rf dist release/shadergradient@$npm_package_version",

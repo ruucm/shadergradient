@@ -1,7 +1,7 @@
 import * as zustand from 'zustand';
+import * as react_jsx_runtime from 'react/jsx-runtime';
 import * as React$1 from 'react';
 import React__default, { ComponentType } from 'react';
-import * as react_jsx_runtime from 'react/jsx-runtime';
 import { ControlType } from 'framer';
 import { MotionValue } from 'framer-motion';
 
@@ -14,81 +14,6 @@ declare const useUIStore: zustand.UseBoundStore<zustand.StoreApi<Omit<{
     setMode: (data: any) => void;
     setLoadingPercentage: (data: any) => void;
 }>>;
-
-type SliderPropsT = {
-    title: string;
-    defaultValue: number;
-    setValue: any;
-    step: number;
-    min: number;
-    max: number;
-    info: boolean;
-    infoContent: string;
-    condition: boolean;
-} & React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>;
-declare function Slider({ title, defaultValue, setValue, step, min, max, info, infoContent, condition, }: SliderPropsT): JSX.Element;
-
-type ColorInputPropsT = {
-    defaultValue: number;
-    setValue: any;
-} & React$1.DetailedHTMLProps<React$1.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>;
-declare function ColorInput({ defaultValue, setValue, }: ColorInputPropsT): JSX.Element;
-
-type RangeSliderPropsT = {
-    title: string;
-    defaultValue: [number, number];
-    value: [number, number];
-    setValue: (value: [number, number]) => void;
-    step: number;
-    min: number;
-    max: number;
-    info: boolean;
-    infoContent: string;
-    condition: boolean;
-};
-declare function RangeSlider({ title, defaultValue, setValue, step, min, max, info, infoContent, condition, }: RangeSliderPropsT): JSX.Element;
-
-type InputTitlePropsT = {
-    title: string;
-    info: boolean;
-    infoContent: any;
-    condition: boolean;
-} & React__default.DetailedHTMLProps<React__default.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>;
-declare function InputTitle({ title, info, infoContent, condition, }: InputTitlePropsT): JSX.Element;
-
-type TripleNumberInputPropsT = {
-    title: string;
-    defaultValueX: number;
-    defaultValueY: number;
-    defaultValueZ: number;
-    setValueX: any;
-    setValueY: any;
-    setValueZ: any;
-    step: number;
-    min: number;
-    max: number;
-    info: boolean;
-    infoContent: string;
-    condition: boolean;
-} & React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>;
-declare function TripleNumberInput({ title, defaultValueX, defaultValueY, defaultValueZ, setValueX, setValueY, setValueZ, step, min, max, info, infoContent, condition, }: TripleNumberInputPropsT): JSX.Element;
-
-type DoubleNumberInputPropsT = {
-    title: string;
-    labelX: string;
-    labelY: string;
-    defaultValueX: number;
-    defaultValueY: number;
-    setValueX: any;
-    setValueY: any;
-    step: number;
-    min: number;
-    max: number;
-    info: boolean;
-    infoContent: string;
-    condition: boolean;
-} & React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>;
-declare function DoubleNumberInput({ title, defaultValueX, defaultValueY, labelX, labelY, setValueX, setValueY, step, min, max, info, infoContent, condition, }: DoubleNumberInputPropsT): JSX.Element;
 
 declare function TextAnimation({ fontSize, color, content, delay, width, yBefore, isFramerCanvas, fontFamily, }: {
     fontSize: any;
@@ -218,6 +143,81 @@ declare namespace ChangeButton3 {
         };
     };
 }
+
+type SliderPropsT = {
+    title: string;
+    defaultValue: number;
+    setValue: any;
+    step: number;
+    min: number;
+    max: number;
+    info: boolean;
+    infoContent: string;
+    condition: boolean;
+} & React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>;
+declare function Slider({ title, defaultValue, setValue, step, min, max, info, infoContent, condition, }: SliderPropsT): JSX.Element;
+
+type ColorInputPropsT = {
+    defaultValue: number;
+    setValue: any;
+} & React$1.DetailedHTMLProps<React$1.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>;
+declare function ColorInput({ defaultValue, setValue, }: ColorInputPropsT): JSX.Element;
+
+type RangeSliderPropsT = {
+    title: string;
+    defaultValue: [number, number];
+    value: [number, number];
+    setValue: (value: [number, number]) => void;
+    step: number;
+    min: number;
+    max: number;
+    info: boolean;
+    infoContent: string;
+    condition: boolean;
+};
+declare function RangeSlider({ title, defaultValue, setValue, step, min, max, info, infoContent, condition, }: RangeSliderPropsT): JSX.Element;
+
+type InputTitlePropsT = {
+    title: string;
+    info: boolean;
+    infoContent: any;
+    condition: boolean;
+} & React__default.DetailedHTMLProps<React__default.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>;
+declare function InputTitle({ title, info, infoContent, condition, }: InputTitlePropsT): JSX.Element;
+
+type TripleNumberInputPropsT = {
+    title: string;
+    defaultValueX: number;
+    defaultValueY: number;
+    defaultValueZ: number;
+    setValueX: any;
+    setValueY: any;
+    setValueZ: any;
+    step: number;
+    min: number;
+    max: number;
+    info: boolean;
+    infoContent: string;
+    condition: boolean;
+} & React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>;
+declare function TripleNumberInput({ title, defaultValueX, defaultValueY, defaultValueZ, setValueX, setValueY, setValueZ, step, min, max, info, infoContent, condition, }: TripleNumberInputPropsT): JSX.Element;
+
+type DoubleNumberInputPropsT = {
+    title: string;
+    labelX: string;
+    labelY: string;
+    defaultValueX: number;
+    defaultValueY: number;
+    setValueX: any;
+    setValueY: any;
+    step: number;
+    min: number;
+    max: number;
+    info: boolean;
+    infoContent: string;
+    condition: boolean;
+} & React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>;
+declare function DoubleNumberInput({ title, defaultValueX, defaultValueY, labelX, labelY, setValueX, setValueY, step, min, max, info, infoContent, condition, }: DoubleNumberInputPropsT): JSX.Element;
 
 declare function HideBanner(Component: any): ComponentType;
 

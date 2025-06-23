@@ -1,8 +1,6 @@
 import type { ComponentType } from 'react'
-import * as m from 'https://ruucm.github.io/shadergradient/shadergradient@2.0.29/ShaderGradientStateless/index.mjs'
-import { PRESETS } from 'https://ruucm.github.io/shadergradient/shadergradient@2.0.29/ShaderGradientStateless/store/presetURLs.mjs'
-import * as ui from 'https://ruucm.github.io/shadergradient/ui@0.0.0/index.mjs'
 
+import { m, ui, PRESETS } from '@/modules'
 import { useState, useEffect } from 'react'
 import { createStore } from 'https://framer.com/m/framer/store.js@^1.0.0'
 

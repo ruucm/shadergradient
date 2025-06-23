@@ -197,6 +197,28 @@ declare namespace TriggerSection {
     };
 }
 
+declare function ChangeColorButton(): react_jsx_runtime.JSX.Element;
+declare function ChangeButton2({ url }: {
+    url: any;
+}): react_jsx_runtime.JSX.Element;
+declare namespace ChangeButton2 {
+    var propertyControls: {
+        url: {
+            type: ControlType;
+        };
+    };
+}
+declare function ChangeButton3({ url }: {
+    url: any;
+}): react_jsx_runtime.JSX.Element;
+declare namespace ChangeButton3 {
+    var propertyControls: {
+        url: {
+            type: ControlType;
+        };
+    };
+}
+
 declare function HideBanner(Component: any): ComponentType;
 
 declare function ArrowLeft(Component: any): ComponentType;
@@ -229,4 +251,4 @@ declare function useBillingInterval(): any[];
 declare function TogglePrice(Component: any): ComponentType;
 declare function Price(Component: any): ComponentType;
 
-export { ArrowLeft, ArrowRight, Button, CenterCrop1, CenterCrop2, ColorInput, DoubleNumberInput, Gap, HideBanner, Icons, InputTitle, PresetIndex, PresetTitle, Price, type Props, RangeSlider, ScrollableTextBox, SectionObserver, SectionText, SimpleSlider, Slider, TextAnimation, TextHover, TogglePrice, TriggerSection, TripleNumberInput, WordGradient, WordGradientText, WordHighlight, WordHighlight2, randomBtn, randomGradient, randomText, slider, sliderSmartComp, textClipper, time, toggleSmartComp, useBillingInterval, useBillingIntervalStore, useStore, useUIStore, wordHighlightText };
+export { ArrowLeft, ArrowRight, Button, CenterCrop1, CenterCrop2, ChangeButton2, ChangeButton3, ChangeColorButton, ColorInput, DoubleNumberInput, Gap, HideBanner, Icons, InputTitle, PresetIndex, PresetTitle, Price, type Props, RangeSlider, ScrollableTextBox, SectionObserver, SectionText, SimpleSlider, Slider, TextAnimation, TextHover, TogglePrice, TriggerSection, TripleNumberInput, WordGradient, WordGradientText, WordHighlight, WordHighlight2, randomBtn, randomGradient, randomText, slider, sliderSmartComp, textClipper, time, toggleSmartComp, useBillingInterval, useBillingIntervalStore, useStore, useUIStore, wordHighlightText };

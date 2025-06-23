@@ -18,7 +18,12 @@ import {
   TripleNumberInput
 } from "./chunk-362Y6DMR.mjs";
 import "./chunk-R5CKWJGF.mjs";
-import "./chunk-FY5RR5TC.mjs";
+import "./chunk-7PXGVEQA.mjs";
+import {
+  ChangeButton2,
+  ChangeButton3,
+  ChangeColorButton
+} from "./chunk-LWAI3QYC.mjs";
 import {
   TriggerSection
 } from "./chunk-XD7M4JAW.mjs";
@@ -95,6 +100,9 @@ export {
   Button,
   CenterCrop1,
   CenterCrop2,
+  ChangeButton2,
+  ChangeButton3,
+  ChangeColorButton,
   ColorInput,
   DoubleNumberInput,
   Gap,

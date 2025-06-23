@@ -1,5 +1,11 @@
 # shadergradient
 
+## 2.1.0
+
+### Minor Changes
+
+- ui.ShaderGradientStateless
+
 ## 2.0.29
 
 ### Patch Changes

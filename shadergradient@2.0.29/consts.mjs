@@ -10,12 +10,11 @@ import {
   defaultEnvBasePath,
   defaultPlanesZoom,
   defaultSphereDistance,
-  hdrBase,
   links,
   mainLoading,
   zoomOutPlanes,
   zoomOutSphere
-} from "./chunk-JMDDQOVT.mjs";
+} from "./chunk-WPNBLVEI.mjs";
 import "./chunk-5BEQP2BQ.mjs";
 export {
   STRIPE_BILLING_URL,
@@ -29,7 +28,6 @@ export {
   defaultEnvBasePath,
   defaultPlanesZoom,
   defaultSphereDistance,
-  hdrBase,
   links,
   mainLoading,
   zoomOutPlanes,

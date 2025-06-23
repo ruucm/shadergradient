@@ -1,7 +1,7 @@
 import * as zustand from 'zustand';
-import * as React$1 from 'react';
-import React__default from 'react';
 import * as react_jsx_runtime from 'react/jsx-runtime';
+import * as React$1 from 'react';
+import React__default, { ComponentType } from 'react';
 import { ControlType } from 'framer';
 import { MotionValue } from 'framer-motion';
 
@@ -14,11 +14,6 @@ declare const useUIStore: zustand.UseBoundStore<zustand.StoreApi<Omit<{
     setMode: (data: any) => void;
     setLoadingPercentage: (data: any) => void;
 }>>;
-
-type ButtonPropsT = {
-    kind?: 'primary' | 'secondary';
-} & React$1.DetailedHTMLProps<React$1.ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>;
-declare const Button: React$1.FC<ButtonPropsT>;
 
 declare function TextAnimation({ fontSize, color, content, delay, width, yBefore, isFramerCanvas, fontFamily, }: {
     fontSize: any;
@@ -118,6 +113,43 @@ type DoubleNumberInputPropsT = {
 } & React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>;
 declare function DoubleNumberInput({ title, defaultValueX, defaultValueY, labelX, labelY, setValueX, setValueY, step, min, max, info, infoContent, condition, }: DoubleNumberInputPropsT): JSX.Element;
 
+declare function HideBanner(Component: any): ComponentType;
+
+declare function ArrowLeft(Component: any): ComponentType;
+declare function ArrowRight(Component: any): ComponentType;
+declare function PresetIndex(Component: any): ComponentType;
+declare function PresetTitle(Component: any): ComponentType;
+declare function randomGradient(Component: any): ComponentType;
+declare function randomText(Component: any): ComponentType;
+declare function randomBtn(Component: any): ComponentType;
+declare function time(Component: any): ComponentType;
+declare function slider(Component: any): ComponentType;
+declare function sliderSmartComp(Component: any): ComponentType;
+declare function toggleSmartComp(Component: any): ComponentType;
+declare function textClipper(Component: any): ComponentType;
+
+declare const useStore: any;
+declare function SectionText(Component: any): ComponentType;
+declare function SectionObserver(Component: any): ComponentType;
+declare function Gap(Component: any): ComponentType;
+declare function CenterCrop1(Component: any): ComponentType;
+declare function CenterCrop2(Component: any): ComponentType;
+declare function WordGradient(Component: ComponentType<any>): ComponentType;
+declare function WordGradientText(Component: ComponentType<any>): ComponentType;
+declare function WordHighlight2(Component: any): ComponentType;
+declare function WordHighlight(Component: any): ComponentType;
+declare function wordHighlightText(Component: any): ComponentType;
+
+declare const useBillingIntervalStore: zustand.UseBoundStore<zustand.StoreApi<unknown>>;
+declare function useBillingInterval(): any[];
+declare function TogglePrice(Component: any): ComponentType;
+declare function Price(Component: any): ComponentType;
+
+type ButtonPropsT = {
+    kind?: 'primary' | 'secondary';
+} & React$1.DetailedHTMLProps<React$1.ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>;
+declare const Button: React$1.FC<ButtonPropsT>;
+
 declare function Icons({ iconName, color }: {
     iconName: any;
     color: any;
@@ -177,4 +209,4 @@ interface Props {
  */
 declare const SimpleSlider: React.ComponentType<Props>;
 
-export { Button, ColorInput, DoubleNumberInput, Icons, InputTitle, type Props, RangeSlider, SimpleSlider, Slider, TextAnimation, TextHover, TripleNumberInput, useUIStore };
+export { ArrowLeft, ArrowRight, Button, CenterCrop1, CenterCrop2, ColorInput, DoubleNumberInput, Gap, HideBanner, Icons, InputTitle, PresetIndex, PresetTitle, Price, type Props, RangeSlider, SectionObserver, SectionText, SimpleSlider, Slider, TextAnimation, TextHover, TogglePrice, TripleNumberInput, WordGradient, WordGradientText, WordHighlight, WordHighlight2, randomBtn, randomGradient, randomText, slider, sliderSmartComp, textClipper, time, toggleSmartComp, useBillingInterval, useBillingIntervalStore, useStore, useUIStore, wordHighlightText };

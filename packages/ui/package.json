@@ -20,6 +20,7 @@
     "framer-motion": "*"
   },
   "devDependencies": {
+    "@shadergradient/react": "workspace:*",
     "@chialab/esbuild-plugin-commonjs": "^0.18.0",
     "@types/node": "^20.12.7",
     "@types/react": "18.2.73",

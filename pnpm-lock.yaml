@@ -39,8 +39,8 @@ importers:
         specifier: ^8.12.0
         version: 8.18.0(@types/react@18.2.73)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(three@0.169.0)
       '@shadergradient/react':
-        specifier: ^2.0.27
-        version: 2.0.27(react@18.3.1)
+        specifier: ^2.0.29
+        version: 2.0.29(react@18.3.1)
       '@testing-library/jest-dom':
         specifier: ^5.16.5
         version: 5.17.0
@@ -165,8 +165,8 @@ importers:
         specifier: ^8.12.0
         version: 8.18.0(@types/react@18.2.73)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(three@0.169.0)
       '@shadergradient/react':
-        specifier: ^2.0.27
-        version: 2.0.27(react@18.3.1)
+        specifier: ^2.0.29
+        version: 2.0.29(react@18.3.1)
       '@types/three':
         specifier: ^0.150.0
         version: 0.150.2
@@ -259,8 +259,8 @@ importers:
         specifier: ^8.12.0
         version: 8.18.0(@types/react@18.2.73)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(three@0.169.0)
       '@shadergradient/react':
-        specifier: ^2.0.27
-        version: 2.0.27(react@18.3.1)
+        specifier: ^2.0.29
+        version: 2.0.29(react@18.3.1)
       glsl-random:
         specifier: ^0.0.5
         version: 0.0.5
@@ -719,6 +719,9 @@ importers:
       '@chialab/esbuild-plugin-commonjs':
         specifier: ^0.18.0
         version: 0.18.0
+      '@shadergradient/react':
+        specifier: workspace:*
+        version: link:../shadergradient-v2
       '@types/node':
         specifier: ^20.12.7
         version: 20.17.30
@@ -2935,8 +2938,8 @@ packages:
   '@rushstack/eslint-patch@1.11.0':
     resolution: {integrity: sha512-zxnHvoMQVqewTJr/W4pKjF0bMGiKJv1WX7bSrkl46Hg0QjESbzBROWK0Wg4RphzSOS5Jiy7eFimmM3UgMrMZbQ==}
 
-  '@shadergradient/react@2.0.27':
-    resolution: {integrity: sha512-p1Ns8fzc2gJuUbhjCyqL0PYXrpzYFqoUjeEjk+o0+JZJUX5fJAbe0nr/Fh3wYF+lynQLN0x3i/FESHFRh3/oPQ==}
+  '@shadergradient/react@2.0.29':
+    resolution: {integrity: sha512-2A7aponEll3mQwZYnBXBLZk8a1JiAphnUTGhVP4gZyz1e0tqIeSTJOnqPt96lNHprP30NfDEOZIZORDCLaFPmg==}
     peerDependencies:
       react: '*'
 
@@ -11996,7 +11999,7 @@ snapshots:
 
   '@rushstack/eslint-patch@1.11.0': {}
 
-  '@shadergradient/react@2.0.27(react@18.3.1)':
+  '@shadergradient/react@2.0.29(react@18.3.1)':
     dependencies:
       react: 18.3.1
 

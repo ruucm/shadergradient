@@ -1,15 +1,15 @@
 import type { ComponentType } from 'react'
 
-import { m, PRESETS } from '@/modules'
 import { useState, useEffect } from 'react'
 import { createStore } from 'https://framer.com/m/framer/store.js@^1.0.0'
 import { useUIStore } from '@/store'
+import { PRESETS, useURLQueryState } from '@shadergradient/react/stateless'
 
 export function ArrowLeft(Component): ComponentType {
   return ({ style, ...props }: any) => {
     const activePreset = useUIStore((state) => state.activePreset)
     const setActivePreset = useUIStore((state) => state.setActivePreset)
-    const setQueryValue = m.useURLQueryState()
+    const setQueryValue = useURLQueryState()
 
     return (
       <Component
@@ -35,7 +35,7 @@ export function ArrowRight(Component): ComponentType {
   return ({ style, ...props }: any) => {
     const activePreset = useUIStore((state) => state.activePreset)
     const setActivePreset = useUIStore((state) => state.setActivePreset)
-    const setQueryValue = m.useURLQueryState()
+    const setQueryValue = useURLQueryState()
 
     return (
       <Component

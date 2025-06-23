@@ -1,4 +1,4 @@
 export * from './TextAnimation'
 export * from './TextHover'
 
-export * from './TempControls'
+export * from './BasicControls'

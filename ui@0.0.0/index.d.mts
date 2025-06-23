@@ -1,8 +1,8 @@
 import * as zustand from 'zustand';
 import * as react_jsx_runtime from 'react/jsx-runtime';
+import { ControlType } from 'framer';
 import * as React$1 from 'react';
 import React__default, { ComponentType } from 'react';
-import { ControlType } from 'framer';
 import { MotionValue } from 'framer-motion';
 
 declare const useUIStore: zustand.UseBoundStore<zustand.StoreApi<Omit<{
@@ -37,6 +37,18 @@ declare function TextHover({ fontSize, color, content, delay, width, font, borde
     fontWeight?: number;
     isFramerCanvas?: boolean;
 }): react_jsx_runtime.JSX.Element;
+
+declare function ChangeColorButton(): react_jsx_runtime.JSX.Element;
+declare function ChangeButton3({ url }: {
+    url: any;
+}): react_jsx_runtime.JSX.Element;
+declare namespace ChangeButton3 {
+    var propertyControls: {
+        url: {
+            type: ControlType;
+        };
+    };
+}
 
 type ButtonPropsT = {
     kind?: 'primary' | 'secondary';
@@ -118,28 +130,6 @@ declare namespace TriggerSection {
         title: {
             type: ControlType;
             defaultValue: string;
-        };
-    };
-}
-
-declare function ChangeColorButton(): react_jsx_runtime.JSX.Element;
-declare function ChangeButton2({ url }: {
-    url: any;
-}): react_jsx_runtime.JSX.Element;
-declare namespace ChangeButton2 {
-    var propertyControls: {
-        url: {
-            type: ControlType;
-        };
-    };
-}
-declare function ChangeButton3({ url }: {
-    url: any;
-}): react_jsx_runtime.JSX.Element;
-declare namespace ChangeButton3 {
-    var propertyControls: {
-        url: {
-            type: ControlType;
         };
     };
 }
@@ -253,4 +243,4 @@ declare function sliderSmartComp(Component: any): ComponentType;
 declare function toggleSmartComp(Component: any): ComponentType;
 declare function textClipper(Component: any): ComponentType;
 
-export { ArrowLeft, ArrowRight, Button, CenterCrop1, CenterCrop2, ChangeButton2, ChangeButton3, ChangeColorButton, ColorInput, DoubleNumberInput, Gap, HideBanner, Icons, InputTitle, PresetIndex, PresetTitle, Price, type Props, RangeSlider, ScrollableTextBox, SectionObserver, SectionText, SimpleSlider, Slider, TextAnimation, TextHover, TogglePrice, TriggerSection, TripleNumberInput, WordGradient, WordGradientText, WordHighlight, WordHighlight2, randomBtn, randomGradient, randomText, slider, sliderSmartComp, textClipper, time, todo, toggleSmartComp, useBillingInterval, useBillingIntervalStore, useStore, useUIStore, wordHighlightText };
+export { ArrowLeft, ArrowRight, Button, CenterCrop1, CenterCrop2, ChangeButton3, ChangeColorButton, ColorInput, DoubleNumberInput, Gap, HideBanner, Icons, InputTitle, PresetIndex, PresetTitle, Price, type Props, RangeSlider, ScrollableTextBox, SectionObserver, SectionText, SimpleSlider, Slider, TextAnimation, TextHover, TogglePrice, TriggerSection, TripleNumberInput, WordGradient, WordGradientText, WordHighlight, WordHighlight2, randomBtn, randomGradient, randomText, slider, sliderSmartComp, textClipper, time, todo, toggleSmartComp, useBillingInterval, useBillingIntervalStore, useStore, useUIStore, wordHighlightText };

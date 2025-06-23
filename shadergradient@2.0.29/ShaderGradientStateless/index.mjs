@@ -1,6 +1,6 @@
 import {
   ShaderGradientStateless
-} from "../chunk-VI7DSFXF.mjs";
+} from "../chunk-NGJJRYRX.mjs";
 import "../chunk-MLLUK2MU.mjs";
 import {
   ShaderGradientStatelessCanvas
@@ -13,7 +13,9 @@ import {
 } from "../chunk-7M4OA2CN.mjs";
 import "../chunk-DMK6CHTS.mjs";
 import "../chunk-Z57OBQKT.mjs";
-import "../chunk-RVMBOHEA.mjs";
+import {
+  PRESETS
+} from "../chunk-RVMBOHEA.mjs";
 import "../chunk-QXTH33WV.mjs";
 import "../chunk-BKMGN7IO.mjs";
 import "../chunk-3II6M4KR.mjs";
@@ -54,6 +56,7 @@ import "../chunk-WPNBLVEI.mjs";
 import "../chunk-VTSZNOAZ.mjs";
 import "../chunk-5BEQP2BQ.mjs";
 export {
+  PRESETS,
   ShaderGradientStateless,
   ShaderGradientStatelessCanvas,
   useQueryState,

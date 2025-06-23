@@ -2,7 +2,7 @@ import "./chunk-WBQAMGXK.mjs";
 import "./chunk-35NIH65G.mjs";
 import {
   ShaderGradient
-} from "./chunk-KVN7QHGT.mjs";
+} from "./chunk-DTS3VNPK.mjs";
 import "./chunk-F5B5J54Z.mjs";
 import "./chunk-RHKTMS4W.mjs";
 import "./chunk-EQTKUIXJ.mjs";
@@ -46,8 +46,9 @@ import "./chunk-WPNBLVEI.mjs";
 import {
   initialActivePreset,
   presets,
-  presetsArray
-} from "./chunk-VTSZNOAZ.mjs";
+  presetsArray,
+  propertyControls
+} from "./chunk-VX3ULAKG.mjs";
 import "./chunk-5BEQP2BQ.mjs";
 export {
   ShaderGradient,
@@ -56,5 +57,6 @@ export {
   initialActivePreset,
   presets,
   presetsArray,
+  propertyControls,
   useShaderGradientCanvasContext
 };

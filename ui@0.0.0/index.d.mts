@@ -26,6 +26,294 @@ declare const PRESETS: {
 }[];
 
 declare function ShaderGradientStateless(passedProps: GradientT): JSX.Element;
+declare namespace ShaderGradientStateless {
+    var propertyControls: {
+        control: {
+            type: any;
+            options: string[];
+            optionTitles: string[];
+            displaySegmentedControl: boolean;
+        };
+        activeTab: {
+            title: string;
+            type: any;
+            options: string[];
+            hidden: (props: any) => boolean;
+        };
+        type: {
+            type: any;
+            options: string[];
+            optionTitles: string[];
+            displaySegmentedControl: boolean;
+            hidden: (props: any) => boolean;
+        };
+        shader: {
+            type: any;
+            options: string[];
+            optionTitles: string[];
+            displaySegmentedControl: boolean;
+            hidden: (props: any) => boolean;
+        };
+        animate: {
+            type: any;
+            options: string[];
+            optionTitles: string[];
+            displaySegmentedControl: boolean;
+            hidden: (props: any) => boolean;
+        };
+        uTime: {
+            title: string;
+            type: any;
+            step: number;
+            displayStepper: boolean;
+            hidden: (props: any) => boolean;
+        };
+        uSpeed: {
+            title: string;
+            type: any;
+            step: number;
+            min: number;
+            displayStepper: boolean;
+            defaultValue: number;
+            hidden: (props: any) => boolean;
+        };
+        noise: {
+            type: any;
+            controls: {
+                uStrength: {
+                    type: any;
+                    title: string;
+                    step: number;
+                    min: number;
+                    displayStepper: boolean;
+                    defaultValue: number;
+                };
+                uDensity: {
+                    type: any;
+                    title: string;
+                    step: number;
+                    min: number;
+                    displayStepper: boolean;
+                    defaultValue: number;
+                };
+            };
+            hidden: (props: any) => boolean;
+        };
+        uAmplitude: {
+            type: any;
+            title: string;
+            step: number;
+            min: number;
+            displayStepper: boolean;
+            defaultValue: number;
+            hidden: (props: any) => boolean;
+        };
+        pixelDensity: {
+            type: any;
+            step: number;
+            min: number;
+            max: number;
+            displayStepper: boolean;
+            defaultValue: number;
+            hidden: (props: any) => boolean;
+        };
+        grain: {
+            type: any;
+            options: string[];
+            optionTitles: string[];
+            displaySegmentedControl: boolean;
+            hidden: (props: any) => boolean;
+        };
+        lightType: {
+            type: any;
+            options: string[];
+            optionTitles: string[];
+            displaySegmentedControl: boolean;
+            defaultValue: string;
+            hidden: (props: any) => boolean;
+        };
+        envPreset: {
+            type: any;
+            options: string[];
+            optionTitles: string[];
+            displaySegmentedControl: boolean;
+            hidden: (props: any) => boolean;
+        };
+        brightness: {
+            type: any;
+            step: number;
+            min: number;
+            max: number;
+            defaultValue: number;
+            hidden: (props: any) => any;
+        };
+        reflection: {
+            type: any;
+            step: number;
+            min: number;
+            max: number;
+            defaultValue: number;
+            hidden: (props: any) => any;
+        };
+        color1: {
+            type: any;
+            defaultValue: string;
+            hidden: (props: any) => boolean;
+        };
+        color2: {
+            type: any;
+            defaultValue: string;
+            hidden: (props: any) => boolean;
+        };
+        color3: {
+            type: any;
+            defaultValue: string;
+            hidden: (props: any) => boolean;
+        };
+        cDistance: {
+            title: string;
+            type: any;
+            displayStepper: boolean;
+            min: number;
+            max: number;
+            defaultValue: number;
+            hidden: (props: any) => boolean;
+        };
+        cameraZoom: {
+            type: any;
+            displayStepper: boolean;
+            step: number;
+            min: number;
+            max: number;
+            defaultValue: number;
+            hidden: (props: any) => boolean;
+        };
+        cameraAngle: {
+            type: any;
+            controls: {
+                cAzimuthAngle: {
+                    title: string;
+                    type: any;
+                    displayStepper: boolean;
+                    step: number;
+                    min: number;
+                    max: number;
+                    defaultValue: number;
+                };
+                cPolarAngle: {
+                    title: string;
+                    type: any;
+                    displayStepper: boolean;
+                    step: number;
+                    min: number;
+                    max: number;
+                    defaultValue: number;
+                };
+            };
+            hidden: (props: any) => boolean;
+        };
+        position: {
+            type: any;
+            controls: {
+                positionX: {
+                    type: any;
+                    step: number;
+                    displayStepper: boolean;
+                    defaultValue: number;
+                };
+                positionY: {
+                    type: any;
+                    step: number;
+                    displayStepper: boolean;
+                    defaultValue: number;
+                };
+                positionZ: {
+                    type: any;
+                    step: number;
+                    displayStepper: boolean;
+                    defaultValue: number;
+                };
+            };
+            hidden: (props: any) => boolean;
+        };
+        rotation: {
+            type: any;
+            controls: {
+                rotationX: {
+                    type: any;
+                    step: number;
+                    min: number;
+                    max: number;
+                    displayStepper: boolean;
+                    defaultValue: number;
+                };
+                rotationY: {
+                    type: any;
+                    step: number;
+                    min: number;
+                    max: number;
+                    displayStepper: boolean;
+                    defaultValue: number;
+                };
+                rotationZ: {
+                    type: any;
+                    step: number;
+                    min: number;
+                    max: number;
+                    displayStepper: boolean;
+                    defaultValue: number;
+                };
+            };
+            hidden: (props: any) => boolean;
+        };
+        urlString: {
+            type: any;
+            placeholder: string;
+            defaultValue: string;
+            hidden: (props: any) => boolean;
+        };
+        zoomOut: {
+            type: any;
+            title: string;
+            enabledTitle: string;
+            disabledTitle: string;
+            hidden: (props: any) => boolean;
+        };
+        toggleAxis: {
+            type: any;
+            title: string;
+            enabledTitle: string;
+            disabledTitle: string;
+            hidden: (props: any) => boolean;
+        };
+        pointerEvents: {
+            type: any;
+            title: string;
+            options: string[];
+            optionTitles: string[];
+            displaySegmentedControl: boolean;
+            hidden: (props: any) => boolean;
+        };
+        performantOnCanvas: {
+            type: any;
+            defaultValue: boolean;
+        };
+        lazyLoad: {
+            type: any;
+            defaultValue: boolean;
+        };
+        threshold: {
+            type: any;
+            min: number;
+            max: number;
+            step: number;
+            defaultValue: number;
+            displayStepper: boolean;
+            title: string;
+            hidden: (props: any) => boolean;
+        };
+    };
+}
 
 declare const ShaderGradientStatelessCanvas: typeof ShaderGradientCanvas;
 

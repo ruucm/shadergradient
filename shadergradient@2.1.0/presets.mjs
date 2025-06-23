@@ -1,11 +1,13 @@
 import {
   initialActivePreset,
   presets,
-  presetsArray
-} from "./chunk-VTSZNOAZ.mjs";
+  presetsArray,
+  propertyControls
+} from "./chunk-VX3ULAKG.mjs";
 import "./chunk-5BEQP2BQ.mjs";
 export {
   initialActivePreset,
   presets,
-  presetsArray
+  presetsArray,
+  propertyControls
 };

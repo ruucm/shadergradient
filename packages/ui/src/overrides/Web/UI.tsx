@@ -1,13 +1,14 @@
 import type { ComponentType } from 'react'
 
-import { m, ui, PRESETS } from '@/modules'
+import { m, PRESETS } from '@/modules'
 import { useState, useEffect } from 'react'
 import { createStore } from 'https://framer.com/m/framer/store.js@^1.0.0'
+import { useUIStore } from '@/store'
 
 export function ArrowLeft(Component): ComponentType {
   return ({ style, ...props }: any) => {
-    const activePreset = ui.useUIStore((state) => state.activePreset)
-    const setActivePreset = ui.useUIStore((state) => state.setActivePreset)
+    const activePreset = useUIStore((state) => state.activePreset)
+    const setActivePreset = useUIStore((state) => state.setActivePreset)
     const setQueryValue = m.useURLQueryState()
 
     return (
@@ -32,8 +33,8 @@ export function ArrowLeft(Component): ComponentType {
 
 export function ArrowRight(Component): ComponentType {
   return ({ style, ...props }: any) => {
-    const activePreset = ui.useUIStore((state) => state.activePreset)
-    const setActivePreset = ui.useUIStore((state) => state.setActivePreset)
+    const activePreset = useUIStore((state) => state.activePreset)
+    const setActivePreset = useUIStore((state) => state.setActivePreset)
     const setQueryValue = m.useURLQueryState()
 
     return (
@@ -59,7 +60,7 @@ export function ArrowRight(Component): ComponentType {
 
 export function PresetIndex(Component): ComponentType {
   return ({ style, ...props }: any) => {
-    const activePreset = ui.useUIStore((state) => state.activePreset)
+    const activePreset = useUIStore((state) => state.activePreset)
 
     return (
       <Component {...props} key={activePreset} content={`0${activePreset}`} />
@@ -69,7 +70,7 @@ export function PresetIndex(Component): ComponentType {
 
 export function PresetTitle(Component): ComponentType {
   return ({ style, ...props }: any) => {
-    const activePreset = ui.useUIStore((state) => state.activePreset)
+    const activePreset = useUIStore((state) => state.activePreset)
     const presetTitle = PRESETS[activePreset].title
 
     return <Component {...props} key={activePreset} content={presetTitle} />

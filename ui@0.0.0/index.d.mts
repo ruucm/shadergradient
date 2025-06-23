@@ -221,18 +221,7 @@ declare namespace ChangeButton3 {
 
 declare function HideBanner(Component: any): ComponentType;
 
-declare function ArrowLeft(Component: any): ComponentType;
-declare function ArrowRight(Component: any): ComponentType;
-declare function PresetIndex(Component: any): ComponentType;
-declare function PresetTitle(Component: any): ComponentType;
-declare function randomGradient(Component: any): ComponentType;
-declare function randomText(Component: any): ComponentType;
-declare function randomBtn(Component: any): ComponentType;
-declare function time(Component: any): ComponentType;
-declare function slider(Component: any): ComponentType;
-declare function sliderSmartComp(Component: any): ComponentType;
-declare function toggleSmartComp(Component: any): ComponentType;
-declare function textClipper(Component: any): ComponentType;
+declare const todo = "";
 
 declare const useStore: any;
 declare function SectionText(Component: any): ComponentType;
@@ -251,4 +240,17 @@ declare function useBillingInterval(): any[];
 declare function TogglePrice(Component: any): ComponentType;
 declare function Price(Component: any): ComponentType;
 
-export { ArrowLeft, ArrowRight, Button, CenterCrop1, CenterCrop2, ChangeButton2, ChangeButton3, ChangeColorButton, ColorInput, DoubleNumberInput, Gap, HideBanner, Icons, InputTitle, PresetIndex, PresetTitle, Price, type Props, RangeSlider, ScrollableTextBox, SectionObserver, SectionText, SimpleSlider, Slider, TextAnimation, TextHover, TogglePrice, TriggerSection, TripleNumberInput, WordGradient, WordGradientText, WordHighlight, WordHighlight2, randomBtn, randomGradient, randomText, slider, sliderSmartComp, textClipper, time, toggleSmartComp, useBillingInterval, useBillingIntervalStore, useStore, useUIStore, wordHighlightText };
+declare function ArrowLeft(Component: any): ComponentType;
+declare function ArrowRight(Component: any): ComponentType;
+declare function PresetIndex(Component: any): ComponentType;
+declare function PresetTitle(Component: any): ComponentType;
+declare function randomGradient(Component: any): ComponentType;
+declare function randomText(Component: any): ComponentType;
+declare function randomBtn(Component: any): ComponentType;
+declare function time(Component: any): ComponentType;
+declare function slider(Component: any): ComponentType;
+declare function sliderSmartComp(Component: any): ComponentType;
+declare function toggleSmartComp(Component: any): ComponentType;
+declare function textClipper(Component: any): ComponentType;
+
+export { ArrowLeft, ArrowRight, Button, CenterCrop1, CenterCrop2, ChangeButton2, ChangeButton3, ChangeColorButton, ColorInput, DoubleNumberInput, Gap, HideBanner, Icons, InputTitle, PresetIndex, PresetTitle, Price, type Props, RangeSlider, ScrollableTextBox, SectionObserver, SectionText, SimpleSlider, Slider, TextAnimation, TextHover, TogglePrice, TriggerSection, TripleNumberInput, WordGradient, WordGradientText, WordHighlight, WordHighlight2, randomBtn, randomGradient, randomText, slider, sliderSmartComp, textClipper, time, todo, toggleSmartComp, useBillingInterval, useBillingIntervalStore, useStore, useUIStore, wordHighlightText };

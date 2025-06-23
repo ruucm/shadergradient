@@ -1,4 +1,11 @@
-import "../chunk-BJZMR7WC.mjs";
+import "../chunk-R5CKWJGF.mjs";
+import "../chunk-YQ26ETHE.mjs";
+import {
+  TextAnimation
+} from "../chunk-NZMVNW4M.mjs";
+import {
+  TextHover
+} from "../chunk-IK6DJNIF.mjs";
 import "../chunk-225Q76RZ.mjs";
 import {
   Button
@@ -14,5 +21,7 @@ import "../chunk-FWCSY2DS.mjs";
 export {
   Button,
   Icons,
-  SimpleSlider
+  SimpleSlider,
+  TextAnimation,
+  TextHover
 };

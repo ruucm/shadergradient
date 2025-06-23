@@ -1,11 +1,7 @@
 import "../chunk-QUADGAK6.mjs";
 import {
-  RangeSlider
-} from "../chunk-YV4VV5NK.mjs";
-import {
   Slider
 } from "../chunk-4XHNTN3M.mjs";
-import "../chunk-2FOTMNF6.mjs";
 import {
   TripleNumberInput
 } from "../chunk-5TGYMIMA.mjs";
@@ -18,6 +14,10 @@ import {
   DoubleNumberInput
 } from "../chunk-KDYK2UNW.mjs";
 import "../chunk-3CYQJ3RF.mjs";
+import {
+  RangeSlider
+} from "../chunk-YV4VV5NK.mjs";
+import "../chunk-2FOTMNF6.mjs";
 import {
   InputTitle
 } from "../chunk-DBZGOJTR.mjs";

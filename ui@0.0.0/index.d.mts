@@ -1,4 +1,5 @@
 import * as zustand from 'zustand';
+import { GradientT, ShaderGradientCanvas } from '@shadergradient/react';
 import * as react_jsx_runtime from 'react/jsx-runtime';
 import { ControlType } from 'framer';
 import * as React$1 from 'react';
@@ -14,6 +15,19 @@ declare const useUIStore: zustand.UseBoundStore<zustand.StoreApi<Omit<{
     setMode: (data: any) => void;
     setLoadingPercentage: (data: any) => void;
 }>>;
+
+declare const useQueryState: (propName: any, defaultValue?: any) => any[];
+declare const useURLQueryState: () => (search: any) => void;
+
+declare const PRESETS: {
+    title: any;
+    color: any;
+    url: string;
+}[];
+
+declare function ShaderGradientStateless(passedProps: GradientT): JSX.Element;
+
+declare const ShaderGradientStatelessCanvas: typeof ShaderGradientCanvas;
 
 declare function TextAnimation({ fontSize, color, content, delay, width, yBefore, isFramerCanvas, fontFamily, }: {
     fontSize: any;
@@ -243,4 +257,4 @@ declare function sliderSmartComp(Component: any): ComponentType;
 declare function toggleSmartComp(Component: any): ComponentType;
 declare function textClipper(Component: any): ComponentType;
 
-export { ArrowLeft, ArrowRight, Button, CenterCrop1, CenterCrop2, ChangeButton3, ChangeColorButton, ColorInput, DoubleNumberInput, Gap, HideBanner, Icons, InputTitle, PresetIndex, PresetTitle, Price, type Props, RangeSlider, ScrollableTextBox, SectionObserver, SectionText, SimpleSlider, Slider, TextAnimation, TextHover, TogglePrice, TriggerSection, TripleNumberInput, WordGradient, WordGradientText, WordHighlight, WordHighlight2, randomBtn, randomGradient, randomText, slider, sliderSmartComp, textClipper, time, todo, toggleSmartComp, useBillingInterval, useBillingIntervalStore, useStore, useUIStore, wordHighlightText };
+export { ArrowLeft, ArrowRight, Button, CenterCrop1, CenterCrop2, ChangeButton3, ChangeColorButton, ColorInput, DoubleNumberInput, Gap, HideBanner, Icons, InputTitle, PRESETS, PresetIndex, PresetTitle, Price, type Props, RangeSlider, ScrollableTextBox, SectionObserver, SectionText, ShaderGradientStateless, ShaderGradientStatelessCanvas, SimpleSlider, Slider, TextAnimation, TextHover, TogglePrice, TriggerSection, TripleNumberInput, WordGradient, WordGradientText, WordHighlight, WordHighlight2, randomBtn, randomGradient, randomText, slider, sliderSmartComp, textClipper, time, todo, toggleSmartComp, useBillingInterval, useBillingIntervalStore, useQueryState, useStore, useUIStore, useURLQueryState, wordHighlightText };

@@ -44,7 +44,7 @@ export default defineConfig(async (options) => {
     platform: 'browser',
     format: ['esm'],
     dts: {
-      entry: ['src/index.ts', 'src/ShaderGradientStateless/index.ts'],
+      entry: ['src/index.ts'],
     },
     minify: !isDev,
     clean: true,

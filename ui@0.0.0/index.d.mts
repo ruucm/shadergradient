@@ -179,6 +179,24 @@ declare const SimpleSlider: React.ComponentType<Props>;
 
 declare function ScrollableTextBox(): react_jsx_runtime.JSX.Element;
 
+/**
+ * @framerSupportedLayoutWidth any
+ * @framerSupportedLayoutHeight any
+ */
+declare function TriggerSection({ width, height, title }: {
+    width: any;
+    height: any;
+    title: any;
+}): react_jsx_runtime.JSX.Element;
+declare namespace TriggerSection {
+    var propertyControls: {
+        title: {
+            type: ControlType;
+            defaultValue: string;
+        };
+    };
+}
+
 declare function HideBanner(Component: any): ComponentType;
 
 declare function ArrowLeft(Component: any): ComponentType;
@@ -211,4 +229,4 @@ declare function useBillingInterval(): any[];
 declare function TogglePrice(Component: any): ComponentType;
 declare function Price(Component: any): ComponentType;
 
-export { ArrowLeft, ArrowRight, Button, CenterCrop1, CenterCrop2, ColorInput, DoubleNumberInput, Gap, HideBanner, Icons, InputTitle, PresetIndex, PresetTitle, Price, type Props, RangeSlider, ScrollableTextBox, SectionObserver, SectionText, SimpleSlider, Slider, TextAnimation, TextHover, TogglePrice, TripleNumberInput, WordGradient, WordGradientText, WordHighlight, WordHighlight2, randomBtn, randomGradient, randomText, slider, sliderSmartComp, textClipper, time, toggleSmartComp, useBillingInterval, useBillingIntervalStore, useStore, useUIStore, wordHighlightText };
+export { ArrowLeft, ArrowRight, Button, CenterCrop1, CenterCrop2, ColorInput, DoubleNumberInput, Gap, HideBanner, Icons, InputTitle, PresetIndex, PresetTitle, Price, type Props, RangeSlider, ScrollableTextBox, SectionObserver, SectionText, SimpleSlider, Slider, TextAnimation, TextHover, TogglePrice, TriggerSection, TripleNumberInput, WordGradient, WordGradientText, WordHighlight, WordHighlight2, randomBtn, randomGradient, randomText, slider, sliderSmartComp, textClipper, time, toggleSmartComp, useBillingInterval, useBillingIntervalStore, useStore, useUIStore, wordHighlightText };

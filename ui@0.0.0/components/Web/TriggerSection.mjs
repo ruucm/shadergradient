@@ -1,8 +1,8 @@
 import {
-  Button
-} from "../../chunk-DSEUH52S.mjs";
+  TriggerSection
+} from "../../chunk-XD7M4JAW.mjs";
 import "../../chunk-HNS6MPBX.mjs";
 import "../../chunk-WNQUEZJF.mjs";
 export {
-  Button
+  TriggerSection
 };

@@ -1,13 +1,11 @@
 import {
-  TriggerSection,
   cx,
   isCanvas,
   isDebug,
   useOnClickOutside
-} from "./chunk-2ULWCUR2.mjs";
+} from "./chunk-HNS6MPBX.mjs";
 import "./chunk-WNQUEZJF.mjs";
 export {
-  TriggerSection,
   cx,
   isCanvas,
   isDebug,

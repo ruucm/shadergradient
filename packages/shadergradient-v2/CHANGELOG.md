@@ -1,5 +1,71 @@
 # shadergradient
 
+## 2.1.0
+
+### Minor Changes
+
+- ui.ShaderGradientStateless
+
+## 2.0.29
+
+### Patch Changes
+
+- use defaultEnvBasePath
+
+## 2.0.28
+
+### Patch Changes
+
+- fix defaultEnvBasePath
+
+## 2.0.27
+
+### Patch Changes
+
+- fix gradientCanvas id
+
+## 2.0.26
+
+### Patch Changes
+
+- id gradientCanvas
+
+## 2.0.25
+
+### Patch Changes
+
+- ShaderGradientCanvas.threshold prop
+
+## 2.0.24
+
+### Patch Changes
+
+- lazyLoad prop added
+
+## 2.0.23
+
+### Patch Changes
+
+- add custom envBasePath feature
+
+## 2.0.22
+
+### Patch Changes
+
+- update presets
+
+## 2.0.21
+
+### Patch Changes
+
+- separate @shadergradient/ui
+
+## 2.0.20
+
+### Patch Changes
+
+- ShaderGradientUI (only for framer esm)
+
 ## 2.0.19
 
 ### Patch Changes

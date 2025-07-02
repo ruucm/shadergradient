@@ -1,5 +1,82 @@
 # example-nextjs-dev
 
+## 0.1.38
+
+### Patch Changes
+
+- Updated dependencies
+  - @shadergradient/react@2.1.0
+
+## 0.1.37
+
+### Patch Changes
+
+- Updated dependencies
+  - @shadergradient/react@2.0.29
+
+## 0.1.36
+
+### Patch Changes
+
+- Updated dependencies
+  - @shadergradient/react@2.0.28
+
+## 0.1.35
+
+### Patch Changes
+
+- Updated dependencies
+  - @shadergradient/react@2.0.27
+
+## 0.1.34
+
+### Patch Changes
+
+- Updated dependencies
+  - @shadergradient/react@2.0.26
+
+## 0.1.33
+
+### Patch Changes
+
+- Updated dependencies
+  - @shadergradient/react@2.0.25
+
+## 0.1.32
+
+### Patch Changes
+
+- Updated dependencies
+  - @shadergradient/react@2.0.24
+
+## 0.1.31
+
+### Patch Changes
+
+- Updated dependencies
+  - @shadergradient/react@2.0.23
+
+## 0.1.30
+
+### Patch Changes
+
+- Updated dependencies
+  - @shadergradient/react@2.0.22
+
+## 0.1.29
+
+### Patch Changes
+
+- Updated dependencies
+  - @shadergradient/react@2.0.21
+
+## 0.1.28
+
+### Patch Changes
+
+- Updated dependencies
+  - @shadergradient/react@2.0.20
+
 ## 0.1.27
 
 ### Patch Changes

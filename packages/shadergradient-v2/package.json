@@ -1,6 +1,6 @@
 {
   "name": "@shadergradient/react",
-  "version": "2.0.19",
+  "version": "2.1.0",
   "main": "./dist/index.mjs",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.mts",
@@ -14,15 +14,12 @@
     ".": {
       "import": "./dist/index.mjs",
       "types": "./dist/index.d.mts"
-    },
-    "./stateless": {
-      "import": "./dist/ShaderGradientStateless/index.mjs",
-      "types": "./dist/ShaderGradientStateless/index.d.mts"
     }
   },
   "scripts": {
     "build": "tsup",
     "dev": "tsup --config tsup.config.ts --watch",
+    "dev:ui": "tsup --config tsup.config.ts",
     "dev:framer": "concurrently \"tsup --config tsup.framer.config.ts --watch\" \"pnpm ngrok\"",
     "build:framer": "tsup --config tsup.framer.config.ts",
     "release:framer": "pnpm run build:framer && mkdir -p release && cp -Rf dist release/shadergradient@$npm_package_version",
@@ -36,20 +33,21 @@
     "@react-spring/three": "^9.7.3",
     "@react-three/fiber": "^8.17.10",
     "@types/socket.io": "^3.0.2",
+    "@types/react": "18.2.73",
+    "@types/react-dom": "18.2.23",
     "camera-controls": "2.9.0",
     "concurrently": "^9.0.0",
     "framer": "^2.4.1",
     "globby": "^14.0.2",
     "query-string": "^7.1.1",
     "react": "^18.3.1",
-    "react-slider": "^2.0.4",
     "socket.io": "^4.7.5",
     "socket.io-client": "^4.7.5",
     "tailwindcss": "^3.4.10",
     "three": "^0.169.0",
     "three-stdlib": "^2.30.1",
     "tsup": "^8.2.4",
-    "typescript": "^5.5.4",
+    "typescript": "5.7.3",
     "zustand": "5.0.1"
   }
 }

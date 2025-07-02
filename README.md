@@ -176,7 +176,22 @@ function App() {
 }
 ```
 
-## More Package Details
+### New Package Details
+
+- **shadergradient-v2**:
+
+  - Contains the core gradient rendering functionality
+  - 🏠 Includes store modules for connecting gradients with external controls
+    - Located at `packages/shadergradient-v2/src/ShaderGradientStateless/store`
+    - Can be imported via: `import * as m from "https://ruucm.github.io/shadergradient/shadergradient@2.0.25/ShaderGradientStateless/index.mjs"`
+
+- **UI Components**:
+  - Provides various interfaces for controlling gradients:
+    - Figma Plugin implementation
+      - Uses the same import: `import * as m from "https://ruucm.github.io/shadergradient/shadergradient@2.0.25/ShaderGradientStateless/index.mjs"`
+  - 🏠 Contains dedicated store for UI-specific state management:
+    - Manages preset information (e.g., current preset)
+    - Handles Figma plugin specific state
 
 ### Package Versions
 

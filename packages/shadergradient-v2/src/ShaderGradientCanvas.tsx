@@ -1,7 +1,20 @@
-import { useEffect } from 'react'
+import { useEffect, createContext, useMemo, useContext } from 'react'
 import { Canvas } from '@react-three/fiber'
 import { canvasProps } from '@/consts'
 import * as THREE from 'three'
+import { useInView } from './hooks/useInView'
+
+type ShaderGradientCanvasContext = {
+  envBasePath: string
+}
+
+const Context = createContext<ShaderGradientCanvasContext>(
+  {} as ShaderGradientCanvasContext
+)
+
+export const useShaderGradientCanvasContext = () => {
+  return useContext<ShaderGradientCanvasContext>(Context)
+}
 
 export function ShaderGradientCanvas({
   children,
@@ -10,6 +23,9 @@ export function ShaderGradientCanvas({
   fov = 45,
   pointerEvents,
   className,
+  envBasePath,
+  lazyLoad = true,
+  threshold = 0.1,
 }: {
   children: React.ReactNode
   style?: React.CSSProperties
@@ -17,18 +33,35 @@ export function ShaderGradientCanvas({
   fov?: number
   pointerEvents?: 'none' | 'auto'
   className?: string
+  envBasePath?: string
+  lazyLoad?: boolean
+  threshold?: number
 }): JSX.Element {
+  const { isInView, containerRef } = useInView(lazyLoad, threshold)
+
+  const contextValue = useMemo<ShaderGradientCanvasContext>(
+    () => ({ envBasePath }),
+    [envBasePath]
+  )
+
   useShaderChunkFix()
 
   return (
-    <Canvas
-      style={{ ...style, pointerEvents }}
-      resize={{ offsetSize: true }}
-      className={className}
-      {...canvasProps(pixelDensity, fov)}
-    >
-      {children}
-    </Canvas>
+    <div ref={containerRef} style={{ width: '100%', height: '100%', ...style }}>
+      {(!lazyLoad || isInView) && (
+        <Context.Provider value={contextValue}>
+          <Canvas
+            id='gradientCanvas' // need id to get an image to Figma export
+            style={{ pointerEvents }}
+            resize={{ offsetSize: true }}
+            className={className}
+            {...canvasProps(pixelDensity, fov)}
+          >
+            {children}
+          </Canvas>
+        </Context.Provider>
+      )}
+    </div>
   )
 }
 

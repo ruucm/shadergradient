@@ -6,8 +6,6 @@
 !dist/**/*.d.mts
 !dist/**/*.d.ts
 
-# Exclude UI components even from dist
-dist/**/ShaderGradientUI/**
 
 # Exclude unnecessary files even from dist
 dist/**/*.map

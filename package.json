@@ -5,6 +5,7 @@
     "build": "turbo run build",
     "dev": "turbo run dev --parallel",
     "dev:framer": "turbo run dev:framer --parallel",
+    "dev:ui": "turbo run dev:ui --parallel",
     "start": "PORT=8000 turbo run start --parallel",
     "lint": "turbo run lint",
     "clean": "turbo run clean",
@@ -19,12 +20,13 @@
     "eslint-config-custom": "workspace:*",
     "prettier": "^2.7.1",
     "prettier-plugin-tailwindcss": "^0.1.11",
-    "turbo": "^2.1.2"
+    "turbo": "^2.1.2",
+    "typescript": "5.7.3"
   },
-  "packageManager": "pnpm@8.14.0",
+  "packageManager": "pnpm@10.2.1",
   "engines": {
     "node": ">=14.0.0",
-    "pnpm": ">=8.14.0"
+    "pnpm": ">=10.2.1"
   },
   "version": "0.0.1"
 }

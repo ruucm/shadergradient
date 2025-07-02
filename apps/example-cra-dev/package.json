@@ -1,6 +1,6 @@
 {
   "name": "example-cra-dev",
-  "version": "0.1.33",
+  "version": "0.1.44",
   "private": true,
   "dependencies": {
     "@react-three/drei": "^9.112.0",
@@ -11,8 +11,8 @@
     "@testing-library/user-event": "^13.5.0",
     "@types/jest": "^27.5.2",
     "@types/node": "^16.18.21",
-    "@types/react": "^18.2.73",
-    "@types/react-dom": "^18.2.23",
+    "@types/react": "18.2.73",
+    "@types/react-dom": "18.2.23",
     "@types/three": "^0.150.0",
     "framer-motion": "^10.9.2",
     "react": "^18.3.1",
@@ -21,7 +21,7 @@
     "@shadergradient/react": "workspace:*",
     "three": "^0.169.0",
     "three-stdlib": "^2.30.1",
-    "typescript": "^4.9.5",
+    "typescript": "5.7.3",
     "web-vitals": "^2.1.4"
   },
   "scripts": {

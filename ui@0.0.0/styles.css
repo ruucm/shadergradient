@@ -765,16 +765,16 @@ video {
   width: 42px;
 }
 
+.w-\[53px\] {
+  width: 53px;
+}
+
 .w-\[84px\] {
   width: 84px;
 }
 
 .w-\[8px\] {
   width: 8px;
-}
-
-.w-control-number-input {
-  width: 53px;
 }
 
 .w-fit {
@@ -979,6 +979,11 @@ video {
 .text-\[\#000000\] {
   --tw-text-opacity: 1;
   color: rgb(0 0 0 / var(--tw-text-opacity, 1));
+}
+
+.text-\[\#FF430A\] {
+  --tw-text-opacity: 1;
+  color: rgb(255 67 10 / var(--tw-text-opacity, 1));
 }
 
 .text-\[\#ff340a\] {

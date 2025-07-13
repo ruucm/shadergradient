@@ -1,5 +1,14 @@
 import "../chunk-PQRWYNOC.mjs";
-import "../chunk-FY5RR5TC.mjs";
+import "../chunk-7PXGVEQA.mjs";
+import "../chunk-FINUBD2K.mjs";
+import {
+  CustomizeSlider
+} from "../chunk-BYHCQYPA.mjs";
+import "../chunk-T4KB7YSA.mjs";
+import {
+  NumberInput
+} from "../chunk-7N2EWQB7.mjs";
+import "../chunk-SCPXGRTG.mjs";
 import {
   TriggerSection
 } from "../chunk-XD7M4JAW.mjs";
@@ -46,8 +55,12 @@ import {
 } from "../chunk-KAMY6Q6K.mjs";
 import "../chunk-4CKVDMTF.mjs";
 import {
+  ShaderGradientStatelessCanvas
+} from "../chunk-P25E5I6Z.mjs";
+import {
   ShaderGradientStateless
-} from "../chunk-FUGBNHNJ.mjs";
+} from "../chunk-V7QDXNQO.mjs";
+import "../chunk-5ZGUQ5SW.mjs";
 import "../chunk-NJB7HRGO.mjs";
 import "../chunk-WWKYGKBG.mjs";
 import "../chunk-QVCRVRUG.mjs";
@@ -55,14 +68,10 @@ import {
   useQueryState,
   useURLQueryState
 } from "../chunk-NFKSQFBK.mjs";
-import "../chunk-5ZGUQ5SW.mjs";
 import "../chunk-4R7MH75A.mjs";
 import {
   PRESETS
 } from "../chunk-6EXLVZLV.mjs";
-import {
-  ShaderGradientStatelessCanvas
-} from "../chunk-P25E5I6Z.mjs";
 import "../chunk-FYLUXGHW.mjs";
 import "../chunk-5IW7QOXI.mjs";
 import "../chunk-VEWYDM76.mjs";
@@ -78,9 +87,11 @@ export {
   ChangeButton3,
   ChangeColorButton,
   ColorInput,
+  CustomizeSlider,
   DoubleNumberInput,
   Icons,
   InputTitle,
+  NumberInput,
   PRESETS,
   RangeSlider,
   ScrollableTextBox,

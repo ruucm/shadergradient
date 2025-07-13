@@ -436,6 +436,24 @@ declare namespace TriggerSection {
     };
 }
 
+type NumberInputPropsT = {
+    label?: string;
+    setValue?: any;
+    arrow?: boolean;
+    value?: number;
+    step?: number;
+} & React__default.DetailedHTMLProps<React__default.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>;
+declare const NumberInput: React__default.ForwardRefExoticComponent<Omit<NumberInputPropsT, "ref"> & React__default.RefAttributes<HTMLInputElement>>;
+
+type SliderPropsT$1 = {
+    defaultValue: number;
+    setValue: any;
+    step: number;
+    min: number;
+    max: number;
+} & React$1.DetailedHTMLProps<React$1.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>;
+declare const CustomizeSlider: React$1.ForwardRefExoticComponent<Omit<SliderPropsT$1, "ref"> & React$1.RefAttributes<HTMLInputElement>>;
+
 type SliderPropsT = {
     title: string;
     defaultValue: number;
@@ -545,4 +563,4 @@ declare function sliderSmartComp(Component: any): ComponentType;
 declare function toggleSmartComp(Component: any): ComponentType;
 declare function textClipper(Component: any): ComponentType;
 
-export { ArrowLeft, ArrowRight, Button, CenterCrop1, CenterCrop2, ChangeButton3, ChangeColorButton, ColorInput, DoubleNumberInput, Gap, HideBanner, Icons, InputTitle, PRESETS, PresetIndex, PresetTitle, Price, type Props, RangeSlider, ScrollableTextBox, SectionObserver, SectionText, ShaderGradientStateless, ShaderGradientStatelessCanvas, SimpleSlider, Slider, TextAnimation, TextHover, TogglePrice, TriggerSection, TripleNumberInput, WordGradient, WordGradientText, WordHighlight, WordHighlight2, randomBtn, randomGradient, randomText, slider, sliderSmartComp, textClipper, time, todo, toggleSmartComp, useBillingInterval, useBillingIntervalStore, useQueryState, useStore, useUIStore, useURLQueryState, wordHighlightText };
+export { ArrowLeft, ArrowRight, Button, CenterCrop1, CenterCrop2, ChangeButton3, ChangeColorButton, ColorInput, CustomizeSlider, DoubleNumberInput, Gap, HideBanner, Icons, InputTitle, NumberInput, PRESETS, PresetIndex, PresetTitle, Price, type Props, RangeSlider, ScrollableTextBox, SectionObserver, SectionText, ShaderGradientStateless, ShaderGradientStatelessCanvas, SimpleSlider, Slider, TextAnimation, TextHover, TogglePrice, TriggerSection, TripleNumberInput, WordGradient, WordGradientText, WordHighlight, WordHighlight2, randomBtn, randomGradient, randomText, slider, sliderSmartComp, textClipper, time, todo, toggleSmartComp, useBillingInterval, useBillingIntervalStore, useQueryState, useStore, useUIStore, useURLQueryState, wordHighlightText };

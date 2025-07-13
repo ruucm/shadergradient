@@ -3,7 +3,7 @@ import "./chunk-7PXGVEQA.mjs";
 import "./chunk-FINUBD2K.mjs";
 import {
   CustomizeSlider
-} from "./chunk-BYHCQYPA.mjs";
+} from "./chunk-I4NGTMRD.mjs";
 import "./chunk-T4KB7YSA.mjs";
 import {
   NumberInput

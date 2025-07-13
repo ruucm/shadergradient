@@ -1,6 +1,6 @@
 import {
   CustomizeSlider
-} from "../../../chunk-BYHCQYPA.mjs";
+} from "../../../chunk-I4NGTMRD.mjs";
 import "../../../chunk-T4KB7YSA.mjs";
 import "../../../chunk-7N2EWQB7.mjs";
 import "../../../chunk-SCPXGRTG.mjs";

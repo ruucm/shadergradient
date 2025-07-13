@@ -15,7 +15,7 @@ type SliderPropsT = {
   HTMLInputElement
 >
 
-export const Slider = React.forwardRef<HTMLInputElement, SliderPropsT>(
+export const CustomizeSlider = React.forwardRef<HTMLInputElement, SliderPropsT>(
   ({ defaultValue, setValue, step, min, max }: SliderPropsT, ref) => {
     const [sharedValue, setSharedValue] = useState<any>(defaultValue)
 

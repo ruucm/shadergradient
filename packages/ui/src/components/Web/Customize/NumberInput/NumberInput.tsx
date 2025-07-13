@@ -32,16 +32,16 @@ export const NumberInput = React.forwardRef<
       <div className='flex items-center'>
         {label && (
           <>
-            <label className='font-semibold text-primary text-base'>
+            <label className='font-semibold text-[#FF430A] text-base'>
               {label}
             </label>
             <Spacing className='w-2' />
           </>
         )}
-        <div className='bg-primary bg-opacity-10 flex flex-row w-fit h-fit rounded items-center'>
+        <div className='bg-[#FF430A] bg-opacity-10 flex flex-row w-fit h-fit rounded items-center'>
           <input
             type='number'
-            className='font-medium text-primary bg-transparent h-input w-control-number-input text-center outline-none text-base'
+            className='font-medium text-[#FF430A] bg-transparent h-input w-[53px] text-center outline-none text-base'
             ref={ref}
             value={value}
             onChange={(e) => setValue(e.target.valueAsNumber)}
@@ -50,7 +50,7 @@ export const NumberInput = React.forwardRef<
           />
           {arrow === true && (
             <div
-              className='h-input flex flex-col text-primary justify-start items-center w-1'
+              className='h-input flex flex-col text-[#FF430A] justify-start items-center w-1'
               style={{ marginRight: 8, marginLeft: -5 }}
             >
               <motion.div

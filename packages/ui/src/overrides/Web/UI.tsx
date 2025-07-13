@@ -3,10 +3,12 @@ import type { ComponentType } from 'react'
 import { useState, useEffect } from 'react'
 import { createStore } from 'https://framer.com/m/framer/store.js@^1.0.0'
 import { useUIStore } from '@/store'
-import {
-  PRESETS,
-  useURLQueryState,
-} from '@/components/Shared/ShaderGradientStateless'
+// import {
+//   PRESETS,
+//   useURLQueryState,
+// } from '@/components/Shared/ShaderGradientStateless'
+import { ui } from "https://framer.com/m/ui-gy7Z.js"
+const { PRESETS, useURLQueryState } = ui
 
 export function ArrowLeft(Component): ComponentType {
   return ({ style, ...props }: any) => {
@@ -47,7 +49,7 @@ export function ArrowRight(Component): ComponentType {
         onClick={() => {
           console.log('onClick')
           let presetNumber
-          if (activePreset !== PRESETS.length - 1) {
+          if (activePreset !==  PRESETS.length - 1) {
             presetNumber = activePreset + 1
           } else {
             presetNumber = 0
@@ -74,7 +76,7 @@ export function PresetIndex(Component): ComponentType {
 export function PresetTitle(Component): ComponentType {
   return ({ style, ...props }: any) => {
     const activePreset = useUIStore((state) => state.activePreset)
-    const presetTitle = PRESETS[activePreset].title
+    const presetTitle =  PRESETS[activePreset].title
 
     return <Component {...props} key={activePreset} content={presetTitle} />
   }

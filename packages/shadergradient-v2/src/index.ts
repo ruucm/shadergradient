@@ -1,2 +1,5 @@
 export * from './ShaderGradientCanvas'
 export * from './ShaderGradient'
+export * from './types'
+export * from './presets'
+export { formatUrlString } from './utils'

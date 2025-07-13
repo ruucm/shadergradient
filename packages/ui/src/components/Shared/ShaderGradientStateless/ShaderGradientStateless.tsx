@@ -1,7 +1,12 @@
-import { GradientT } from '@/types'
-import { ShaderGradient } from '../ShaderGradient/ShaderGradient'
+import { ControlType } from 'framer'
+import {
+  ShaderGradient,
+  GradientT,
+  propertyControls,
+} from '@shadergradient/react'
 import { useSearchParamToStore } from './store/useSearchParamToStore'
 import { useControlValues } from './useControlValues'
+export { PRESETS } from './store/presetURLs'
 
 export function ShaderGradientStateless(passedProps: GradientT): JSX.Element {
   useSearchParamToStore() // init gradient state with url query
@@ -9,3 +14,5 @@ export function ShaderGradientStateless(passedProps: GradientT): JSX.Element {
 
   return <ShaderGradient {...props} />
 }
+
+ShaderGradientStateless.propertyControls = propertyControls(ControlType)

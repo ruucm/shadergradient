@@ -1,4 +1,4 @@
-import { presets } from '@/presets'
+import { presets } from '@shadergradient/react'
 
 export const initialActivePreset = 0
 

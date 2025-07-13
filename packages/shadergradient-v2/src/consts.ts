@@ -34,9 +34,6 @@ export const aboutPositions = [0, 10, 0]
 export const aboutRotations = [0, 10, 50]
 export const aboutMobilePositions = [0, 20, 0]
 
-export const hdrBase =
-  'https://ruucm.github.io/shadergradient/shadergradient@1.0.0'
-
 // loading animations
 export const mainLoading = {
   // mesh animation
@@ -60,7 +57,7 @@ export const mainLoading = {
 
 // environment hdr
 export const defaultEnvBasePath =
-  'https://ruucm.github.io/shadergradient/shadergradient@1.0.0/hdr/'
+  'https://ruucm.github.io/shadergradient/ui@0.0.0/assets/hdr/'
 
 // ----------------------------- [FIGMA PLUGIN] ----------------------------------
 export const STRIPE_BUY_YEARLY_URL = 'https://buy.stripe.com/00g5kV0g553QcjC9AB'

@@ -9,6 +9,7 @@ Customizable 3D, moving gradient package for React. Also available on modern des
 - 📦 [Installation](#installation)
 - 💻 [Usage](#usage)
 - 📚 [Examples](#examples)
+- 🎤 [Conference Talks](#conference-talks)
 - 📝 [Contributing](#contributing)
 - 🚀 [Future Plan](#future-plan)
 - ⚖️ [License](#license)
@@ -275,6 +276,10 @@ This change will simplify our development process and align it more closely with
 - CRA Starter: [CodeSandbox](https://codesandbox.io/p/sandbox/github/ruucm/shadergradient/tree/main/apps/example-cra?file=%2Fsrc%2FApp.tsx)
 - Next.js Starter (App Router): [CodeSandbox](https://codesandbox.io/p/sandbox/github/ruucm/shadergradient/tree/main/apps/example-nextjs-approuter)
 - Next.js Starter: [CodeSandbox](https://codesandbox.io/p/sandbox/github/ruucm/shadergradient/tree/main/apps/example-nextjs)
+
+# Conference Talks
+
+[![FEConf 2024 ShaderGradient](https://img.youtube.com/vi/CSChpoiRTIY/maxresdefault.jpg)](https://www.youtube.com/watch?v=CSChpoiRTIY)
 
 # Contributing
 

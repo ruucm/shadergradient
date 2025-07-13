@@ -1,6 +1,6 @@
 {
   "name": "@shadergradient/react",
-  "version": "2.0.27",
+  "version": "2.1.0",
   "main": "./dist/index.mjs",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.mts",
@@ -14,15 +14,12 @@
     ".": {
       "import": "./dist/index.mjs",
       "types": "./dist/index.d.mts"
-    },
-    "./stateless": {
-      "import": "./dist/ShaderGradientStateless/index.mjs",
-      "types": "./dist/ShaderGradientStateless/index.d.mts"
     }
   },
   "scripts": {
     "build": "tsup",
     "dev": "tsup --config tsup.config.ts --watch",
+    "dev:ui": "tsup --config tsup.config.ts",
     "dev:framer": "concurrently \"tsup --config tsup.framer.config.ts --watch\" \"pnpm ngrok\"",
     "build:framer": "tsup --config tsup.framer.config.ts",
     "release:framer": "pnpm run build:framer && mkdir -p release && cp -Rf dist release/shadergradient@$npm_package_version",

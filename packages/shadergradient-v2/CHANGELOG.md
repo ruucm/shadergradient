@@ -1,5 +1,23 @@
 # shadergradient
 
+## 2.1.0
+
+### Minor Changes
+
+- ui.ShaderGradientStateless
+
+## 2.0.29
+
+### Patch Changes
+
+- use defaultEnvBasePath
+
+## 2.0.28
+
+### Patch Changes
+
+- fix defaultEnvBasePath
+
 ## 2.0.27
 
 ### Patch Changes

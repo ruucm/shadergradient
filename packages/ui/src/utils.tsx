@@ -1,4 +1,5 @@
-import { useEffect } from 'react'
+import { RenderTarget, addPropertyControls, ControlType } from 'framer'
+import React, { useState, useEffect } from 'react'
 
 export const cx = (...classes) => classes.filter((a) => !!a).join(' ')
 
@@ -22,3 +23,8 @@ export function useOnClickOutside(ref: any, handler: any) {
     }
   }, [ref, handler])
 }
+
+export const isCanvas = RenderTarget.current() !== RenderTarget.preview
+
+// export const isDebug = true
+export const isDebug = false

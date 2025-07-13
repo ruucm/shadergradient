@@ -1,13 +1,8 @@
 import { Geometry } from './Geometry'
 import { MeshT } from '@/types'
 import { Materials } from './Materials'
-import {
-  vertexShader,
-  fragmentShader,
-  vertexSphere,
-  fragmentSphere,
-} from '@/shaders/a'
-// import { vertexShader, fragmentShader } from '@/shaders/base'
+import * as shaders from '@/shaders'
+
 import { dToRArr } from '@/utils'
 import { debug } from '@/utils/debug'
 
@@ -31,7 +26,11 @@ export function Mesh({
   uStrength,
   uFrequency,
   uAmplitude,
+
+  shader,
 }: MeshT): JSX.Element {
+  const { vertex, fragment } = shaders.defaults[shader][type]
+
   return (
     <mesh
       name='shadergradient-mesh'
@@ -54,10 +53,10 @@ export function Mesh({
           uAmplitude,
           uIntensity: 0.5,
         }}
-        vertexShader={type === 'sphere' ? vertexSphere : vertexShader}
-        fragmentShader={type === 'sphere' ? fragmentSphere : fragmentShader}
+        vertexShader={vertex}
+        fragmentShader={fragment}
         onInit={(material) => {
-          debug.performance('material (onInit)', material);
+          debug.performance('material (onInit)', material)
         }}
       />
     </mesh>

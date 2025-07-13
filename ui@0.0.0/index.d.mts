@@ -10,11 +10,17 @@ declare const useUIStore: zustand.UseBoundStore<zustand.StoreApi<Omit<{
     activePreset: number;
     mode: string;
     loadingPercentage: number;
-}, "setActivePreset" | "setMode" | "setLoadingPercentage"> & {
+    inputMode: string;
+    urlInput: string;
+}, "setActivePreset" | "setInputMode" | "setMode" | "setUrlInput" | "setLoadingPercentage"> & {
     setActivePreset: (by: number) => void;
+    setInputMode: (data: any) => void;
     setMode: (data: any) => void;
+    setUrlInput: (data: any) => void;
     setLoadingPercentage: (data: any) => void;
 }>>;
+declare const useBillingIntervalStore: zustand.UseBoundStore<zustand.StoreApi<unknown>>;
+declare function useBillingInterval(): any[];
 
 declare const useQueryState: (propName: any, defaultValue?: any) => any[];
 declare const useURLQueryState: () => (search: any) => void;
@@ -529,9 +535,14 @@ type DoubleNumberInputPropsT = {
 } & React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>;
 declare function DoubleNumberInput({ title, defaultValueX, defaultValueY, labelX, labelY, setValueX, setValueY, step, min, max, info, infoContent, condition, }: DoubleNumberInputPropsT): JSX.Element;
 
-declare function HideBanner(Component: any): ComponentType;
+declare function updateTheme(Component: any): ComponentType;
+declare function AddToCanvas(Component: any): ComponentType;
 
-declare const todo = "";
+declare function HideBanner(Component: any): ComponentType;
+declare function CurrentPreset(Component: any): ComponentType;
+declare function togglePreset(Component: any): ComponentType;
+declare function toggleUrl(Component: any): ComponentType;
+declare function UrlInput(Component: any): ComponentType;
 
 declare const useStore: any;
 declare function SectionText(Component: any): ComponentType;
@@ -545,8 +556,6 @@ declare function WordHighlight2(Component: any): ComponentType;
 declare function WordHighlight(Component: any): ComponentType;
 declare function wordHighlightText(Component: any): ComponentType;
 
-declare const useBillingIntervalStore: zustand.UseBoundStore<zustand.StoreApi<unknown>>;
-declare function useBillingInterval(): any[];
 declare function TogglePrice(Component: any): ComponentType;
 declare function Price(Component: any): ComponentType;
 
@@ -563,4 +572,4 @@ declare function sliderSmartComp(Component: any): ComponentType;
 declare function toggleSmartComp(Component: any): ComponentType;
 declare function textClipper(Component: any): ComponentType;
 
-export { ArrowLeft, ArrowRight, Button, CenterCrop1, CenterCrop2, ChangeButton3, ChangeColorButton, ColorInput, CustomizeSlider, DoubleNumberInput, Gap, HideBanner, Icons, InputTitle, NumberInput, PRESETS, PresetIndex, PresetTitle, Price, type Props, RangeSlider, ScrollableTextBox, SectionObserver, SectionText, ShaderGradientStateless, ShaderGradientStatelessCanvas, SimpleSlider, Slider, TextAnimation, TextHover, TogglePrice, TriggerSection, TripleNumberInput, WordGradient, WordGradientText, WordHighlight, WordHighlight2, randomBtn, randomGradient, randomText, slider, sliderSmartComp, textClipper, time, todo, toggleSmartComp, useBillingInterval, useBillingIntervalStore, useQueryState, useStore, useUIStore, useURLQueryState, wordHighlightText };
+export { AddToCanvas, ArrowLeft, ArrowRight, Button, CenterCrop1, CenterCrop2, ChangeButton3, ChangeColorButton, ColorInput, CurrentPreset, CustomizeSlider, DoubleNumberInput, Gap, HideBanner, Icons, InputTitle, NumberInput, PRESETS, PresetIndex, PresetTitle, Price, type Props, RangeSlider, ScrollableTextBox, SectionObserver, SectionText, ShaderGradientStateless, ShaderGradientStatelessCanvas, SimpleSlider, Slider, TextAnimation, TextHover, TogglePrice, TriggerSection, TripleNumberInput, UrlInput, WordGradient, WordGradientText, WordHighlight, WordHighlight2, randomBtn, randomGradient, randomText, slider, sliderSmartComp, textClipper, time, togglePreset, toggleSmartComp, toggleUrl, updateTheme, useBillingInterval, useBillingIntervalStore, useQueryState, useStore, useUIStore, useURLQueryState, wordHighlightText };

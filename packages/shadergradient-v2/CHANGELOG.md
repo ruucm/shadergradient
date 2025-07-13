@@ -1,5 +1,11 @@
 # shadergradient
 
+## 2.1.1
+
+### Patch Changes
+
+- props.shader support (defaults, positionMix)
+
 ## 2.1.0
 
 ### Minor Changes

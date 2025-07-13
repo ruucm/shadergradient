@@ -29,7 +29,7 @@ export function Mesh({
 
   shader,
 }: MeshT): JSX.Element {
-  const { vertex, fragment } = shaders.defaults[shader][type]
+  const { vertex, fragment } = shaders[shader][type]
 
   return (
     <mesh

@@ -43,12 +43,11 @@ export const CustomizeSlider = React.forwardRef<HTMLInputElement, SliderPropsT>(
           max={max}
           onChange={(value, index) => setSharedValue(value)}
           // styles
-          className='bg-primary h-slider w-full'
+          className='bg-[#FF430A] h-[2px] w-full'
           marks={[(min + max) / 2]}
-          markClassName='w-mark h-mark bg-primary top-1/2 transform -translate-y-1/2 slider-mark-center-x'
-          thumbClassName='bg-primary w-thumb h-thumb rounded-full top-1/2 transform -translate-y-1/2 outline-none cursor-pointer'
+          markClassName='w-[2px] h-[2px] bg-[#FF430A] top-1/2 transform -translate-y-1/2'
+          thumbClassName='bg-[#FF430A] w-[16px] h-[16px] rounded-full top-1/2 transform -translate-y-1/2 outline-none cursor-pointer'
           thumbActiveClassName='bg-opacity-80'
-          // trackClassName={styles.track}
         />
       </div>
     )

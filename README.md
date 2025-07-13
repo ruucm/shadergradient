@@ -2,7 +2,7 @@
 
 Customizable 3D, moving gradient package for React. Also available on modern design tools like Figma and Framer.
 
-![Intro](./intro.gif)
+![Intro](./assets/intro.gif)
 
 # Table of contents
 
@@ -66,11 +66,11 @@ Drop the gradient component on your canvas. Then you can customize it with props
 
 ## Figma
 
-![Figma](./figma.gif)
+![Figma](./assets/figma.gif)
 
 ## Framer
 
-![Framer](./framer.gif)
+![Framer](./assets/framer.gif)
 
 ## React
 
@@ -279,7 +279,7 @@ This change will simplify our development process and align it more closely with
 
 # Conference Talks
 
-[![FEConf 2024 ShaderGradient](https://img.youtube.com/vi/CSChpoiRTIY/maxresdefault.jpg)](https://www.youtube.com/watch?v=CSChpoiRTIY)
+[![FEConf 2024 ShaderGradient](./assets/feconf.png)](https://www.youtube.com/watch?v=CSChpoiRTIY)
 
 # Contributing
 

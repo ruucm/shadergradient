@@ -1,5 +1,11 @@
 # shadergradient
 
+## 2.1.2
+
+### Patch Changes
+
+- fix
+
 ## 2.1.1
 
 ### Patch Changes

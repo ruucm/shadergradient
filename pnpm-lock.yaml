@@ -39,8 +39,8 @@ importers:
         specifier: ^8.12.0
         version: 8.18.0(@types/react@18.2.73)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(three@0.169.0)
       '@shadergradient/react':
-        specifier: ^2.1.0
-        version: 2.1.0(react@18.3.1)
+        specifier: ^2.1.2
+        version: 2.1.2(react@18.3.1)
       '@testing-library/jest-dom':
         specifier: ^5.16.5
         version: 5.17.0
@@ -165,8 +165,8 @@ importers:
         specifier: ^8.12.0
         version: 8.18.0(@types/react@18.2.73)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(three@0.169.0)
       '@shadergradient/react':
-        specifier: ^2.1.0
-        version: 2.1.0(react@18.3.1)
+        specifier: ^2.1.2
+        version: 2.1.2(react@18.3.1)
       '@types/three':
         specifier: ^0.150.0
         version: 0.150.2
@@ -259,8 +259,8 @@ importers:
         specifier: ^8.12.0
         version: 8.18.0(@types/react@18.2.73)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(three@0.169.0)
       '@shadergradient/react':
-        specifier: ^2.1.0
-        version: 2.1.0(react@18.3.1)
+        specifier: ^2.1.2
+        version: 2.1.2(react@18.3.1)
       glsl-random:
         specifier: ^0.0.5
         version: 0.0.5
@@ -711,6 +711,10 @@ importers:
   packages/tsconfig: {}
 
   packages/ui:
+    dependencies:
+      framer-motion:
+        specifier: '*'
+        version: 10.18.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
     devDependencies:
       '@chialab/esbuild-plugin-commonjs':
         specifier: ^0.18.0
@@ -751,9 +755,6 @@ importers:
       framer:
         specifier: ^2.4.1
         version: 2.4.1(framer-motion@10.18.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      framer-motion:
-        specifier: ^10.9.2
-        version: 10.18.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       globby:
         specifier: ^14.0.2
         version: 14.1.0
@@ -2940,8 +2941,8 @@ packages:
   '@rushstack/eslint-patch@1.11.0':
     resolution: {integrity: sha512-zxnHvoMQVqewTJr/W4pKjF0bMGiKJv1WX7bSrkl46Hg0QjESbzBROWK0Wg4RphzSOS5Jiy7eFimmM3UgMrMZbQ==}
 
-  '@shadergradient/react@2.1.0':
-    resolution: {integrity: sha512-f7mVm9p4GdpzN2oDsWk9Y9ta4oGGBgmVlwnul7N/bTlPRULHTPLs7+l1n/hlhnMY/mzBCmFKWhrOzylvQHPnKQ==}
+  '@shadergradient/react@2.1.2':
+    resolution: {integrity: sha512-2OiwSpXw+Kp06LroNx5rrM3ibdFjszmUCnjVQBtB1pkuXXWTe9aWoaHWj8Dz5+oZuCRvYP+s/Y284tpqGdz6eA==}
     peerDependencies:
       react: '*'
 
@@ -12001,7 +12002,7 @@ snapshots:
 
   '@rushstack/eslint-patch@1.11.0': {}
 
-  '@shadergradient/react@2.1.0(react@18.3.1)':
+  '@shadergradient/react@2.1.2(react@18.3.1)':
     dependencies:
       react: 18.3.1
 

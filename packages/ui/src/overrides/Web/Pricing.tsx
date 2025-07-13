@@ -1,21 +1,5 @@
 import type { ComponentType } from 'react'
-import { create } from 'zustand'
-
-export const useBillingIntervalStore = create((set) => ({
-  billingInterval: 'year',
-  setBillingInterval: (payload) =>
-    set((state) => ({ billingInterval: payload })),
-}))
-
-export function useBillingInterval() {
-  const billingInterval = useBillingIntervalStore(
-    (state: any) => state.billingInterval
-  )
-  const setBillingInterval = useBillingIntervalStore(
-    (state: any) => state.setBillingInterval
-  )
-  return [billingInterval, setBillingInterval]
-}
+import { useBillingInterval } from '@/store'
 
 export function TogglePrice(Component): ComponentType {
   return (props) => {

@@ -1,7 +1,76 @@
 import type { ComponentType } from 'react'
+import { useUIStore } from '@/store'
+import { parseUrlForControls } from './utils'
+import { useState, useEffect } from 'react'
+import {
+  PRESETS,
+} from '@/components/Shared/ShaderGradientStateless'
+// import { ui } from "https://framer.com/m/ui-gy7Z.js"
+// const { PRESETS, useURLQueryState } = ui
 
-export function HideBanner(Component): ComponentType {
+
+export function updateTheme(Component): ComponentType {
   return (props) => {
-    return <Component {...props} style={{ zIndex: 10000000000 }} />
+      const [theme, setTheme] = useState("")
+      useEffect(() => {
+          setTheme(document.body.dataset.framerTheme)
+          console.log(props)
+      }, [])
+
+
+      return (
+          <Component
+              {...props}
+              variant={theme === "light" ? "preset" : "dark"}
+
+          />
+      )
+  }
+}
+
+
+export function AddToCanvas(Component): ComponentType {
+  return (props) => {
+
+    const activePreset = useUIStore((state) => state.activePreset)
+    const inputMode = useUIStore((state) => state.inputMode)
+    const urlInput = useUIStore((state) => state.urlInput)
+
+      return (
+          <Component
+              {...props}
+              variant={
+                  inputMode === "preset" ||
+                  (inputMode === "url" && urlInput !== "")
+                      ? "Active"
+                      : "Inactive"
+              }
+              onClick={async () => {
+                  if (inputMode === "url" && urlInput !== "") {
+                      console.log(parseUrlForControls(urlInput))
+
+                      window.parent.postMessage(
+                          {
+                              message: "ADD_TO_CANVAS",
+                              ...parseUrlForControls(urlInput),
+                          },
+                          "*"
+                      )
+                  } else if (inputMode === "preset") {
+                      const activePresetUrl =
+                          "https://shadergradient.co/customize" +
+                          PRESETS[activePreset].url
+                      console.log(parseUrlForControls(activePresetUrl))
+                      window.parent.postMessage(
+                          {
+                              message: "ADD_TO_CANVAS",
+                              ...parseUrlForControls(activePresetUrl),
+                          },
+                          "*"
+                      )
+                  }
+              }}
+          />
+      )
   }
 }

@@ -1,4 +1,4 @@
-import { addPropertyControls, ControlType } from 'framer'
+import { ControlType } from 'framer'
 import { useEffect, useState } from 'react'
 
 /**
@@ -48,9 +48,9 @@ function useTailwind(href: string) {
   return loaded
 }
 
-addPropertyControls(TailwindLoader, {
+TailwindLoader.propertyControls = {
   href: {
     type: ControlType.String,
     defaultValue: 'https://ruucm.github.io/shadergradient/ui@0.0.0/styles.css',
   },
-})
+}

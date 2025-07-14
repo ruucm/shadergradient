@@ -9,6 +9,9 @@ import {
   NumberInput
 } from "../chunk-7N2EWQB7.mjs";
 import {
+  ScrollableTextBox
+} from "../chunk-WXDHKTLM.mjs";
+import {
   SimpleSlider
 } from "../chunk-YP64RLCJ.mjs";
 import "../chunk-SCPXGRTG.mjs";
@@ -16,11 +19,14 @@ import {
   TriggerSection
 } from "../chunk-XD7M4JAW.mjs";
 import "../chunk-XZUOR47F.mjs";
-import "../chunk-MMICMJ2O.mjs";
+import "../chunk-QF4RSFDZ.mjs";
 import {
   ChangeButton3,
   ChangeColorButton
 } from "../chunk-NRS2ZQO2.mjs";
+import {
+  TailwindLoader
+} from "../chunk-ZVPEVNK7.mjs";
 import {
   TextAnimation
 } from "../chunk-NZMVNW4M.mjs";
@@ -33,9 +39,6 @@ import {
 import {
   Icons
 } from "../chunk-ZK6FQ3TL.mjs";
-import {
-  ScrollableTextBox
-} from "../chunk-WXDHKTLM.mjs";
 import {
   ColorInput
 } from "../chunk-VQ6RSUVR.mjs";
@@ -98,6 +101,7 @@ export {
   ShaderGradientStatelessCanvas,
   SimpleSlider,
   Slider,
+  TailwindLoader,
   TextAnimation,
   TextHover,
   TriggerSection,

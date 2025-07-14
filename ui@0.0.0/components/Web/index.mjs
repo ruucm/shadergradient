@@ -8,6 +8,9 @@ import {
   NumberInput
 } from "../../chunk-7N2EWQB7.mjs";
 import {
+  ScrollableTextBox
+} from "../../chunk-WXDHKTLM.mjs";
+import {
   SimpleSlider
 } from "../../chunk-YP64RLCJ.mjs";
 import "../../chunk-SCPXGRTG.mjs";
@@ -20,9 +23,6 @@ import {
 import {
   Icons
 } from "../../chunk-ZK6FQ3TL.mjs";
-import {
-  ScrollableTextBox
-} from "../../chunk-WXDHKTLM.mjs";
 import "../../chunk-2FOTMNF6.mjs";
 import "../../chunk-HNS6MPBX.mjs";
 import "../../chunk-5IW7QOXI.mjs";

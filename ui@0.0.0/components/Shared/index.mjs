@@ -1,8 +1,11 @@
-import "../../chunk-MMICMJ2O.mjs";
+import "../../chunk-QF4RSFDZ.mjs";
 import {
   ChangeButton3,
   ChangeColorButton
 } from "../../chunk-NRS2ZQO2.mjs";
+import {
+  TailwindLoader
+} from "../../chunk-ZVPEVNK7.mjs";
 import {
   TextAnimation
 } from "../../chunk-NZMVNW4M.mjs";
@@ -37,6 +40,7 @@ export {
   PRESETS,
   ShaderGradientStateless,
   ShaderGradientStatelessCanvas,
+  TailwindLoader,
   TextAnimation,
   TextHover,
   useQueryState,

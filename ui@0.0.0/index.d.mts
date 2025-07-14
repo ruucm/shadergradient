@@ -358,6 +358,14 @@ declare namespace ChangeButton3 {
     };
 }
 
+/**
+ * @framerSupportedLayoutWidth any
+ * @framerSupportedLayoutHeight any
+ */
+declare function TailwindLoader({ href }: {
+    href: string;
+}): react_jsx_runtime.JSX.Element;
+
 type ButtonPropsT = {
     kind?: 'primary' | 'secondary';
 } & React$1.DetailedHTMLProps<React$1.ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>;
@@ -572,4 +580,4 @@ declare function sliderSmartComp(Component: any): ComponentType;
 declare function toggleSmartComp(Component: any): ComponentType;
 declare function textClipper(Component: any): ComponentType;
 
-export { AddToCanvas, ArrowLeft, ArrowRight, Button, CenterCrop1, CenterCrop2, ChangeButton3, ChangeColorButton, ColorInput, CurrentPreset, CustomizeSlider, DoubleNumberInput, Gap, HideBanner, Icons, InputTitle, NumberInput, PRESETS, PresetIndex, PresetTitle, Price, type Props, RangeSlider, ScrollableTextBox, SectionObserver, SectionText, ShaderGradientStateless, ShaderGradientStatelessCanvas, SimpleSlider, Slider, TextAnimation, TextHover, TogglePrice, TriggerSection, TripleNumberInput, UrlInput, WordGradient, WordGradientText, WordHighlight, WordHighlight2, randomBtn, randomGradient, randomText, slider, sliderSmartComp, textClipper, time, togglePreset, toggleSmartComp, toggleUrl, updateTheme, useBillingInterval, useBillingIntervalStore, useQueryState, useStore, useUIStore, useURLQueryState, wordHighlightText };
+export { AddToCanvas, ArrowLeft, ArrowRight, Button, CenterCrop1, CenterCrop2, ChangeButton3, ChangeColorButton, ColorInput, CurrentPreset, CustomizeSlider, DoubleNumberInput, Gap, HideBanner, Icons, InputTitle, NumberInput, PRESETS, PresetIndex, PresetTitle, Price, type Props, RangeSlider, ScrollableTextBox, SectionObserver, SectionText, ShaderGradientStateless, ShaderGradientStatelessCanvas, SimpleSlider, Slider, TailwindLoader, TextAnimation, TextHover, TogglePrice, TriggerSection, TripleNumberInput, UrlInput, WordGradient, WordGradientText, WordHighlight, WordHighlight2, randomBtn, randomGradient, randomText, slider, sliderSmartComp, textClipper, time, togglePreset, toggleSmartComp, toggleUrl, updateTheme, useBillingInterval, useBillingIntervalStore, useQueryState, useStore, useUIStore, useURLQueryState, wordHighlightText };

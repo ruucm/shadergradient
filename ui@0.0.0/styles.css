@@ -704,6 +704,10 @@ video {
   height: 30%;
 }
 
+.h-\[34px\] {
+  height: 34px;
+}
+
 .h-\[50\%\] {
   height: 50%;
 }
@@ -723,10 +727,6 @@ video {
 
 .h-full {
   height: 100%;
-}
-
-.h-input {
-  height: 34px;
 }
 
 .w-1 {

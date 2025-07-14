@@ -26,7 +26,7 @@ import {
 } from "./chunk-NRS2ZQO2.mjs";
 import {
   TailwindLoader
-} from "./chunk-ZVPEVNK7.mjs";
+} from "./chunk-YN4646JY.mjs";
 import {
   TextAnimation
 } from "./chunk-NZMVNW4M.mjs";

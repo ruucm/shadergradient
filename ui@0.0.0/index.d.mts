@@ -365,6 +365,14 @@ declare namespace ChangeButton3 {
 declare function TailwindLoader({ href }: {
     href: string;
 }): react_jsx_runtime.JSX.Element;
+declare namespace TailwindLoader {
+    var propertyControls: {
+        href: {
+            type: ControlType;
+            defaultValue: string;
+        };
+    };
+}
 
 type ButtonPropsT = {
     kind?: 'primary' | 'secondary';

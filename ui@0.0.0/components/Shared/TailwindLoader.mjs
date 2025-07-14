@@ -1,6 +1,6 @@
 import {
   TailwindLoader
-} from "../../chunk-ZVPEVNK7.mjs";
+} from "../../chunk-YN4646JY.mjs";
 import "../../chunk-CU5I7XXF.mjs";
 export {
   TailwindLoader

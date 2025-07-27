@@ -1,5 +1,5 @@
 import * as zustand from 'zustand';
-import { GradientT, ShaderGradientCanvas } from '@shadergradient/react';
+import { GradientT } from '@shadergradient/react';
 import * as react_jsx_runtime from 'react/jsx-runtime';
 import { ControlType } from 'framer';
 import * as React$1 from 'react';
@@ -321,7 +321,7 @@ declare namespace ShaderGradientStateless {
     };
 }
 
-declare const ShaderGradientStatelessCanvas: typeof ShaderGradientCanvas;
+declare function ShaderGradientStatelessCanvas(props: any): react_jsx_runtime.JSX.Element;
 
 declare function TextAnimation({ fontSize, color, content, delay, width, yBefore, isFramerCanvas, fontFamily, }: {
     fontSize: any;

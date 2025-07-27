@@ -159,13 +159,14 @@ import {
   useFigmaStore,
   useUIStore
 } from "./chunk-ZAX22QRS.mjs";
-import {
-  ShaderGradientStatelessCanvas
-} from "./chunk-PPGA6H4R.mjs";
+import "./chunk-4CKVDMTF.mjs";
 import {
   ShaderGradientStateless
 } from "./chunk-PPHWBLVH.mjs";
 import "./chunk-OGRBUJM2.mjs";
+import {
+  ShaderGradientStatelessCanvas
+} from "./chunk-6GXQMRSR.mjs";
 import "./chunk-RMJJBZMW.mjs";
 import "./chunk-WWKYGKBG.mjs";
 import "./chunk-DT236LR5.mjs";

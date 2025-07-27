@@ -12,13 +12,19 @@ declare const useUIStore: zustand.UseBoundStore<zustand.StoreApi<Omit<{
     loadingPercentage: number;
     inputMode: string;
     urlInput: string;
-}, "setActivePreset" | "setInputMode" | "setMode" | "setUrlInput" | "setLoadingPercentage"> & {
+    error: string;
+    figmaPage: string;
+}, "setActivePreset" | "setInputMode" | "setMode" | "setUrlInput" | "setError" | "setFigmaPage" | "setLoadingPercentage"> & {
     setActivePreset: (by: number) => void;
     setInputMode: (data: any) => void;
     setMode: (data: any) => void;
     setUrlInput: (data: any) => void;
+    setError: (data: any) => void;
+    setFigmaPage: (data: any) => void;
     setLoadingPercentage: (data: any) => void;
 }>>;
+declare const useFigmaStore: zustand.UseBoundStore<zustand.StoreApi<unknown>>;
+declare function useFigma(): any[];
 declare const useBillingIntervalStore: zustand.UseBoundStore<zustand.StoreApi<unknown>>;
 declare function useBillingInterval(): any[];
 
@@ -588,4 +594,36 @@ declare function sliderSmartComp(Component: any): ComponentType;
 declare function toggleSmartComp(Component: any): ComponentType;
 declare function textClipper(Component: any): ComponentType;
 
-export { AddToCanvas, ArrowLeft, ArrowRight, Button, CenterCrop1, CenterCrop2, ChangeButton3, ChangeColorButton, ColorInput, CurrentPreset, CustomizeSlider, DoubleNumberInput, Gap, HideBanner, Icons, InputTitle, NumberInput, PRESETS, PresetIndex, PresetTitle, Price, type Props, RangeSlider, ScrollableTextBox, SectionObserver, SectionText, ShaderGradientStateless, ShaderGradientStatelessCanvas, SimpleSlider, Slider, TailwindLoader, TextAnimation, TextHover, TogglePrice, TriggerSection, TripleNumberInput, UrlInput, WordGradient, WordGradientText, WordHighlight, WordHighlight2, randomBtn, randomGradient, randomText, slider, sliderSmartComp, textClipper, time, togglePreset, toggleSmartComp, toggleUrl, updateTheme, useBillingInterval, useBillingIntervalStore, useQueryState, useStore, useUIStore, useURLQueryState, wordHighlightText };
+declare function insertCanvasAsImage(Component: any): ComponentType;
+declare function OpenGIFPage(Component: any): ComponentType;
+declare function goBack(Component: any): ComponentType;
+declare function extractGIF(Component: any): ComponentType;
+declare function Timeline(Component: any): ComponentType;
+declare function EstimatedSize(Component: any): ComponentType;
+declare function Duration(Component: any): ComponentType;
+declare function UndoButton(Component: any): ComponentType;
+declare function Error(Component: any): ComponentType;
+declare function ToggleShare(Component: any): ComponentType;
+declare function ShowCopyContent(Component: any): ComponentType;
+declare function CopyBtn(Component: any): ComponentType;
+declare function TabSwitcher(Component: any): ComponentType;
+declare function ShapeTab(Component: any): ComponentType;
+declare function ColorsTab(Component: any): ComponentType;
+declare function MotionTab(Component: any): ComponentType;
+declare function ViewTab(Component: any): ComponentType;
+declare function HighlightButton(Component: any): ComponentType;
+declare function LoadViewAfterStyleSheet(Component: any): ComponentType;
+declare function WidthFillOnLoad(Component: any): ComponentType;
+declare function createRectangle(Component: any): ComponentType;
+
+declare function userInfo(Component: any): ComponentType;
+declare function subscribeLink(Component: any): ComponentType;
+declare function isUpgraded(Component: any): ComponentType;
+declare function upgradingText(Component: any): ComponentType;
+declare function userEmail(Component: any): ComponentType;
+declare function TogglePriceFigma(Component: any): ComponentType;
+declare function PriceFigma(Component: any): ComponentType;
+declare function PriceText(Component: any): ComponentType;
+declare function StartTrial(Component: any): ComponentType;
+
+export { AddToCanvas, ArrowLeft, ArrowRight, Button, CenterCrop1, CenterCrop2, ChangeButton3, ChangeColorButton, ColorInput, ColorsTab, CopyBtn, CurrentPreset, CustomizeSlider, DoubleNumberInput, Duration, Error, EstimatedSize, Gap, HideBanner, HighlightButton, Icons, InputTitle, LoadViewAfterStyleSheet, MotionTab, NumberInput, OpenGIFPage, PRESETS, PresetIndex, PresetTitle, Price, PriceFigma, PriceText, type Props, RangeSlider, ScrollableTextBox, SectionObserver, SectionText, ShaderGradientStateless, ShaderGradientStatelessCanvas, ShapeTab, ShowCopyContent, SimpleSlider, Slider, StartTrial, TabSwitcher, TailwindLoader, TextAnimation, TextHover, Timeline, TogglePrice, TogglePriceFigma, ToggleShare, TriggerSection, TripleNumberInput, UndoButton, UrlInput, ViewTab, WidthFillOnLoad, WordGradient, WordGradientText, WordHighlight, WordHighlight2, createRectangle, extractGIF, goBack, insertCanvasAsImage, isUpgraded, randomBtn, randomGradient, randomText, slider, sliderSmartComp, subscribeLink, textClipper, time, togglePreset, toggleSmartComp, toggleUrl, updateTheme, upgradingText, useBillingInterval, useBillingIntervalStore, useFigma, useFigmaStore, useQueryState, useStore, useUIStore, useURLQueryState, userEmail, userInfo, wordHighlightText };

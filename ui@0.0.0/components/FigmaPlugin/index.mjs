@@ -7,7 +7,7 @@ import {
 } from "../../chunk-OFBNK6TZ.mjs";
 import {
   RangeSlider
-} from "../../chunk-JW3F5FUH.mjs";
+} from "../../chunk-BOPJQ7GI.mjs";
 import {
   Slider
 } from "../../chunk-JVIPEXTM.mjs";

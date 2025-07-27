@@ -3,11 +3,11 @@ import "./chunk-7PXGVEQA.mjs";
 import "./chunk-FINUBD2K.mjs";
 import {
   CustomizeSlider
-} from "./chunk-BYHCQYPA.mjs";
+} from "./chunk-MQVUQEVB.mjs";
 import "./chunk-T4KB7YSA.mjs";
 import {
   NumberInput
-} from "./chunk-7N2EWQB7.mjs";
+} from "./chunk-5HEJXUNC.mjs";
 import {
   ScrollableTextBox
 } from "./chunk-5363XVTT.mjs";
@@ -47,7 +47,7 @@ import {
 } from "./chunk-OFBNK6TZ.mjs";
 import {
   RangeSlider
-} from "./chunk-JW3F5FUH.mjs";
+} from "./chunk-BOPJQ7GI.mjs";
 import {
   Slider
 } from "./chunk-JVIPEXTM.mjs";
@@ -60,12 +60,12 @@ import "./chunk-NQRDJNYL.mjs";
 import {
   InputTitle
 } from "./chunk-KAMY6Q6K.mjs";
-import "./chunk-ZNP7VQLJ.mjs";
+import "./chunk-J35WMPEU.mjs";
 import "./chunk-JATPNCR2.mjs";
 import {
   Price,
   TogglePrice
-} from "./chunk-MNGO2WHZ.mjs";
+} from "./chunk-4A6Z5B7C.mjs";
 import {
   ArrowLeft,
   ArrowRight,
@@ -79,7 +79,55 @@ import {
   textClipper,
   time,
   toggleSmartComp
-} from "./chunk-R33YJWT3.mjs";
+} from "./chunk-XOSKZNKH.mjs";
+import {
+  PriceFigma,
+  PriceText,
+  StartTrial,
+  TogglePriceFigma,
+  isUpgraded,
+  subscribeLink,
+  upgradingText,
+  userEmail,
+  userInfo
+} from "./chunk-TAGNZAC4.mjs";
+import "./chunk-VQME7MQ6.mjs";
+import {
+  ColorsTab,
+  CopyBtn,
+  Duration,
+  Error,
+  EstimatedSize,
+  HighlightButton,
+  LoadViewAfterStyleSheet,
+  MotionTab,
+  OpenGIFPage,
+  ShapeTab,
+  ShowCopyContent,
+  TabSwitcher,
+  Timeline,
+  ToggleShare,
+  UndoButton,
+  ViewTab,
+  WidthFillOnLoad,
+  createRectangle,
+  extractGIF,
+  goBack,
+  insertCanvasAsImage
+} from "./chunk-DSLIXQOB.mjs";
+import "./chunk-TX3FXUBO.mjs";
+import "./chunk-WZNB7NSE.mjs";
+import "./chunk-YFGZA6BU.mjs";
+import "./chunk-BGA6FIQU.mjs";
+import "./chunk-CK47F4LN.mjs";
+import "./chunk-DC3YOL4Q.mjs";
+import "./chunk-BI4IT72G.mjs";
+import "./chunk-XKMCKCFY.mjs";
+import "./chunk-2WMPBKSG.mjs";
+import "./chunk-64EKMGYT.mjs";
+import "./chunk-OYRRN4FE.mjs";
+import "./chunk-2EE2NFKS.mjs";
+import "./chunk-JNRQHCKE.mjs";
 import {
   CenterCrop1,
   CenterCrop2,
@@ -96,19 +144,21 @@ import {
 import {
   AddToCanvas,
   updateTheme
-} from "./chunk-HX4FBNFY.mjs";
+} from "./chunk-A3FHSJH5.mjs";
 import {
   CurrentPreset,
   HideBanner,
   UrlInput,
   togglePreset,
   toggleUrl
-} from "./chunk-HBIXCQHV.mjs";
+} from "./chunk-TUIDOVS3.mjs";
 import {
   useBillingInterval,
   useBillingIntervalStore,
+  useFigma,
+  useFigmaStore,
   useUIStore
-} from "./chunk-DM3CGC3K.mjs";
+} from "./chunk-ZAX22QRS.mjs";
 import {
   ShaderGradientStatelessCanvas
 } from "./chunk-PPGA6H4R.mjs";
@@ -141,53 +191,85 @@ export {
   ChangeButton3,
   ChangeColorButton,
   ColorInput,
+  ColorsTab,
+  CopyBtn,
   CurrentPreset,
   CustomizeSlider,
   DoubleNumberInput,
+  Duration,
+  Error,
+  EstimatedSize,
   Gap,
   HideBanner,
+  HighlightButton,
   Icons,
   InputTitle,
+  LoadViewAfterStyleSheet,
+  MotionTab,
   NumberInput,
+  OpenGIFPage,
   PRESETS,
   PresetIndex,
   PresetTitle,
   Price,
+  PriceFigma,
+  PriceText,
   RangeSlider,
   ScrollableTextBox,
   SectionObserver,
   SectionText,
   ShaderGradientStateless,
   ShaderGradientStatelessCanvas,
+  ShapeTab,
+  ShowCopyContent,
   SimpleSlider,
   Slider,
+  StartTrial,
+  TabSwitcher,
   TailwindLoader,
   TextAnimation,
   TextHover,
+  Timeline,
   TogglePrice,
+  TogglePriceFigma,
+  ToggleShare,
   TriggerSection,
   TripleNumberInput,
+  UndoButton,
   UrlInput,
+  ViewTab,
+  WidthFillOnLoad,
   WordGradient,
   WordGradientText,
   WordHighlight,
   WordHighlight2,
+  createRectangle,
+  extractGIF,
+  goBack,
+  insertCanvasAsImage,
+  isUpgraded,
   randomBtn,
   randomGradient,
   randomText,
   slider,
   sliderSmartComp,
+  subscribeLink,
   textClipper,
   time,
   togglePreset,
   toggleSmartComp,
   toggleUrl,
   updateTheme,
+  upgradingText,
   useBillingInterval,
   useBillingIntervalStore,
+  useFigma,
+  useFigmaStore,
   useQueryState,
   useStore,
   useUIStore,
   useURLQueryState,
+  userEmail,
+  userInfo,
   wordHighlightText
 };

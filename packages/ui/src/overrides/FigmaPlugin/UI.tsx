@@ -16,13 +16,10 @@ import { createStore } from "https://framer.com/m/framer/store.js@^1.0.0"
 
 import { useDBTable } from 'https://framer.com/m/SupabaseConnector-ARlr.js'
 
-import {
-  useQueryState, useURLQueryState
-} from '@/components/Shared/ShaderGradientStateless'
 
 
-// import { ui } from "https://framer.com/m/ui-gy7Z.js"
-// const { useQueryState } = ui
+import { ui } from "https://framer.com/m/ui-gy7Z.js"
+const { useQueryState, useURLQueryState } = ui
 import { useSubscription, getTrialLeft, estimateSize, updateResolution, useFigmaMessage, parseUrlToCode, copyToClipboard } from './utils'
 
 
@@ -407,7 +404,7 @@ export function insertCanvasAsImage(Component): ComponentType {
         const [duration, setDuration] = useState(rangeEnd - rangeStart)
         const [size, setSize] = useState(0)
         const setError = useUIStore((state: any) => state.setError)
-        const page = useUIStore((state: any) => state.page)
+        const figmaPage = useUIStore((state: any) => state.figmaPage)
       
 
         useEffect(() => {
@@ -423,7 +420,7 @@ export function insertCanvasAsImage(Component): ComponentType {
                 size > 300 &&
                 destination === "onCanvas" 
                 &&
-                page === "gif"
+                figmaPage === "gif"
             ) {
                 setError("GIF size should be below 300MB on Figma." )
             } else {

@@ -13,11 +13,8 @@ import {
   STRIPE_BUY_MONTHLY_URL,
 } from './consts'
 
-// import {
-//   PRESETS,useQueryState
-// } from '@/components/Shared/ShaderGradientStateless'
-// import { ui } from "https://framer.com/m/ui-gy7Z.js"
-// const { useQueryState } = ui
+
+
 import { useSubscription, useUserDB } from './utils'
 
 

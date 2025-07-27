@@ -1,5 +1,5 @@
 import { ShaderGradientCanvas } from '@shadergradient/react'
-import { useQueryState } from '@/components/Shared/ShaderGradientStateless'
+import { useQueryState } from './store/useQueryState'
 import { canvasProps } from '@/utils'
 
 export function ShaderGradientStatelessCanvas(props) {

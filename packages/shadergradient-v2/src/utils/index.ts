@@ -19,3 +19,30 @@ export function formatUrlString(urlString) {
     .replace('https://shadergradient.co/customize', '')
     .replace('https://www.shadergradient.co/customize', '')
 }
+
+export function formatFramerProps({
+  position,
+  rotation,
+  cameraAngle,
+  noise,
+  ...rest
+}) {
+  const { positionX, positionY, positionZ } = position
+  const { rotationX, rotationY, rotationZ } = rotation
+  const { cAzimuthAngle, cPolarAngle } = cameraAngle
+  const { uDensity, uStrength } = noise
+
+  return {
+    positionX,
+    positionY,
+    positionZ,
+    rotationX,
+    rotationY,
+    rotationZ,
+    cAzimuthAngle,
+    cPolarAngle,
+    uDensity,
+    uStrength,
+    ...rest,
+  }
+}

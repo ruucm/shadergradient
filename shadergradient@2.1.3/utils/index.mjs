@@ -2,8 +2,9 @@ import {
   dToR,
   dToRArr,
   degToRad,
+  formatFramerProps,
   formatUrlString
-} from "../chunk-G7COPUKV.mjs";
+} from "../chunk-WNGYPXFW.mjs";
 import {
   colorToRgb,
   formatColor
@@ -15,5 +16,6 @@ export {
   dToRArr,
   degToRad,
   formatColor,
+  formatFramerProps,
   formatUrlString
 };

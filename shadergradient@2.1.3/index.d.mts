@@ -1260,5 +1260,23 @@ declare const propertyControls: (ControlType: any) => {
 };
 
 declare function formatUrlString(urlString: any): any;
+declare function formatFramerProps({ position, rotation, cameraAngle, noise, ...rest }: {
+    [x: string]: any;
+    position: any;
+    rotation: any;
+    cameraAngle: any;
+    noise: any;
+}): {
+    positionX: any;
+    positionY: any;
+    positionZ: any;
+    rotationX: any;
+    rotationY: any;
+    rotationZ: any;
+    cAzimuthAngle: any;
+    cPolarAngle: any;
+    uDensity: any;
+    uStrength: any;
+};
 
-export { type EnvironmentPresetT, type GradientT, type LightTypeT, type LightsT, type MeshT, type Position, type Rotation, ShaderGradient, ShaderGradientCanvas, type ShaderGradientType, type animateT, formatUrlString, initialActivePreset, presets, presetsArray, propertyControls, type typeT, useShaderGradientCanvasContext };
+export { type EnvironmentPresetT, type GradientT, type LightTypeT, type LightsT, type MeshT, type Position, type Rotation, ShaderGradient, ShaderGradientCanvas, type ShaderGradientType, type animateT, formatFramerProps, formatUrlString, initialActivePreset, presets, presetsArray, propertyControls, type typeT, useShaderGradientCanvasContext };

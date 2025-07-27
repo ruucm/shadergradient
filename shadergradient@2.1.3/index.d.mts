@@ -972,12 +972,13 @@ declare const presetsArray: ({
         wireframe: boolean;
     };
 })[];
-declare const propertyControls: (ControlType: any) => {
+declare const propertyControls: (ControlType: any, type?: string) => {
     control: {
         type: any;
         options: string[];
         optionTitles: string[];
         displaySegmentedControl: boolean;
+        defaultValue: string;
     };
     activeTab: {
         title: string;

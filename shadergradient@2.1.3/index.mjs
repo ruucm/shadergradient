@@ -2,7 +2,7 @@ import "./chunk-WBQAMGXK.mjs";
 import "./chunk-35NIH65G.mjs";
 import {
   ShaderGradient
-} from "./chunk-ML6BYWEH.mjs";
+} from "./chunk-PWLTWYDD.mjs";
 import "./chunk-WGOL3MLC.mjs";
 import "./chunk-5XTCRLBF.mjs";
 import "./chunk-2S3VJM34.mjs";
@@ -58,7 +58,7 @@ import {
   presets,
   presetsArray,
   propertyControls
-} from "./chunk-VX3ULAKG.mjs";
+} from "./chunk-E4YB42Q6.mjs";
 import "./chunk-5BEQP2BQ.mjs";
 export {
   ShaderGradient,

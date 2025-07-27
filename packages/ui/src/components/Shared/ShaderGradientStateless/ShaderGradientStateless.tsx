@@ -15,4 +15,7 @@ export function ShaderGradientStateless(passedProps: GradientT): JSX.Element {
   return <ShaderGradient {...props} />
 }
 
-ShaderGradientStateless.propertyControls = propertyControls(ControlType)
+ShaderGradientStateless.propertyControls = propertyControls(
+  ControlType,
+  'stateless'
+)

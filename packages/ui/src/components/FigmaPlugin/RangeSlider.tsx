@@ -30,6 +30,11 @@ export function RangeSlider({
   const [rangeValue, setRangeValue] = useState<[number, number]>(defaultValue)
   const [isMouseOver, setIsMouseOver] = useState(false)
 
+  // Initialize once with the passed defaultValue (similar to Slider component)
+  useEffect(() => {
+    setRangeValue(defaultValue)
+  }, [])
+
   useEffect(() => {
     setRangeValue(defaultValue)
   }, [defaultValue])

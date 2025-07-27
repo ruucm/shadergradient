@@ -1,5 +1,11 @@
 # shadergradient
 
+## 2.1.3
+
+### Patch Changes
+
+- fix ShaderGradientStatelessCanvas pixelDensity prop (useQueryState)
+
 ## 2.1.2
 
 ### Patch Changes

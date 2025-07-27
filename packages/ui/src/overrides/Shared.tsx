@@ -92,7 +92,7 @@ export function UrlInput(Component): ComponentType {
   }
 }
 
-const href = 'https://ruucm.github.io/shadergradient/ui@0.0.0/styles.css'
+const href = 'https://ruucm.github.io/shadergradient/ui@latest/styles.css'
 
 export function TailwindWrapper(Component): ComponentType {
   return (props: any) => {

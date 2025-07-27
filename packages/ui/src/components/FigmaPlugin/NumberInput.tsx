@@ -66,7 +66,7 @@ export const NumberInput = ({
           value={value}
           onChange={(e) => setValue(parseFloat(e.target.value))}
           className={
-            'font-medium w-[24px] h-[26px] outline-none text-center bg-[#F2F2F2] rounded-md [&::-webkit-inner-spin-button]:appearance-none overflow-visible select-none ' +
+            'font-medium w-[30px] h-[26px] outline-none text-center bg-[#F2F2F2] rounded-md [&::-webkit-inner-spin-button]:appearance-none overflow-visible select-none ' +
             (mouseOverOn === label ? 'text-[#ff340a]' : 'text-[#000000]')
           }
           min={min}

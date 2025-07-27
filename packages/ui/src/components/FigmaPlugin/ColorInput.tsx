@@ -186,7 +186,7 @@ export function ColorInput({
         type='text'
         value={sharedValue}
         onChange={(e) => setSharedValue(e.target.value)}
-        className='w-[84px] h-[26px] outline-none text-center bg-[#F2F2F2] rounded-md flex items-center justify-center'
+        className='font-medium w-[84px] h-[26px] outline-none text-center bg-[#F2F2F2] rounded-md flex items-center justify-center'
       />
     </div>
   )

@@ -572,6 +572,15 @@ export const propertyControls = (ControlType, type = '') => ({
     defaultValue: 1,
     hidden: (props) => props.control === 'query' || props.activeTab !== 'Shape',
   },
+  fov: {
+    type: ControlType.Number,
+    step: 1,
+    min: 10,
+    max: 180,
+    displayStepper: true,
+    defaultValue: 45,
+    hidden: (props) => props.control === 'query' || props.activeTab !== 'Shape',
+  },
   // Effects
   grain: {
     type: ControlType.Enum,

@@ -187,14 +187,10 @@ export function extractGIF(Component): ComponentType {
     const [subscription, subDBLoading] = useSubscription('sub1')
     const needSubscribe = trialLeft <= 0 && !subDBLoading && !subscription
 
-    useEffect(() => {
-      console.log(subscription, userDB, 'subscription, userDB')
-      console.log(trialLeft)
-    }, [subscription, userDB])
-
-    useEffect(() => {
-      console.log(destination, 'destination')
-    }, [destination])
+    // useEffect(() => {
+    //   console.log(subscription, userDB, 'subscription, userDB')
+    //   console.log(trialLeft)
+    // }, [subscription, userDB])
 
     const [titleText, setTitleText] = useState('')
 

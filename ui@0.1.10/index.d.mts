@@ -130,6 +130,15 @@ declare namespace ShaderGradientStateless {
             defaultValue: number;
             hidden: (props: any) => boolean;
         };
+        fov: {
+            type: any;
+            step: number;
+            min: number;
+            max: number;
+            displayStepper: boolean;
+            defaultValue: number;
+            hidden: (props: any) => boolean;
+        };
         grain: {
             type: any;
             options: string[];

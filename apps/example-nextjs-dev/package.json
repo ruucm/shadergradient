@@ -9,22 +9,22 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "react": "^18",
-    "react-dom": "^18",
-    "next": "14.2.13",
+    "@react-three/drei": "^10.7.4",
+    "@react-three/fiber": "^9.3.0",
     "@shadergradient/react": "workspace:*",
-    "three": "^0.169.0",
-    "@react-three/drei": "9.56.5",
-    "@react-three/fiber": "8.12.0"
+    "next": "^15.5.2",
+    "react": "^19.1.1",
+    "react-dom": "^19.1.1",
+    "three": "^0.169.0"
   },
   "devDependencies": {
-    "typescript": "5.7.3",
     "@types/node": "^20",
-    "@types/react": "^18",
-    "@types/react-dom": "^18",
+    "@types/react": "19.1.12",
+    "@types/react-dom": "19.1.9",
+    "eslint": "^8",
+    "eslint-config-next": "14.2.13",
     "postcss": "^8",
     "tailwindcss": "^3.4.1",
-    "eslint": "^8",
-    "eslint-config-next": "14.2.13"
+    "typescript": "5.7.3"
   }
 }

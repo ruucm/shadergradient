@@ -1,5 +1,11 @@
 # shadergradient
 
+## 2.3.0
+
+### Minor Changes
+
+- rollback to react v18 & add react v19 app example.
+
 ## 2.1.3
 
 ### Patch Changes

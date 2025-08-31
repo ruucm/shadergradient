@@ -23,6 +23,7 @@ export function Mesh({
   color1,
   color2,
   color3,
+  reflection,
   uTime,
   uSpeed,
   uDensity,
@@ -46,6 +47,7 @@ export function Mesh({
         range={range}
         rangeStart={rangeStart}
         rangeEnd={rangeEnd}
+        reflection={reflection}
         uniforms={{
           colors: [color1, color2, color3],
           uTime,

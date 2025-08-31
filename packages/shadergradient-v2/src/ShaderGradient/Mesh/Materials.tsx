@@ -9,6 +9,7 @@ export const Materials = ({
   range,
   rangeStart,
   rangeEnd,
+  reflection,
   uniforms,
   vertexShader,
   fragmentShader,
@@ -45,6 +46,7 @@ export const Materials = ({
       userData: uniformValues, // sync uniform and userData to update uniforms from outside (MeshPhysicalMaterial)
 
       metalness: 0.2, // similar effects reducing -0.2 intensity of the ambient light
+      roughness: 1 - (typeof reflection === 'number' ? reflection : 0.1),
       side: THREE.DoubleSide,
       onBeforeCompile: (shader) => {
         shader.uniforms = {
@@ -67,7 +69,7 @@ export const Materials = ({
 
     if (onInit) onInit(material)
     return material
-  }, [uniforms, vertexShader, fragmentShader, onInit])
+  }, [uniforms, vertexShader, fragmentShader, onInit, reflection])
 
   useEffect(() => {
     return () => {

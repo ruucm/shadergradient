@@ -2,11 +2,7 @@ import { LightsT } from '@/types'
 import { Suspense } from 'react'
 import { EnvironmentMap } from './Environment'
 
-export function Lights({
-  lightType,
-  brightness,
-  envPreset,
-}: LightsT): JSX.Element {
+export function Lights({ lightType, brightness, envPreset }: LightsT) {
   return (
     <>
       {/* TODO: support higher version of three 0.154.0 */}

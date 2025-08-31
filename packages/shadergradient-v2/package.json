@@ -26,7 +26,8 @@
     "ngrok": "ngrok http --domain=esm.ngrok.dev 8000"
   },
   "peerDependencies": {
-    "react": "*"
+    "react": "^18.2.0 || ^19.0.0",
+    "react-dom": "^18.2.0 || ^19.0.0"
   },
   "devDependencies": {
     "@chialab/esbuild-plugin-commonjs": "^0.18.0",

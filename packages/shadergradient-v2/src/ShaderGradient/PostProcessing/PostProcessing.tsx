@@ -4,7 +4,7 @@ import { EffectComposer as EffectComposerImpl } from './lib/pp/from-threejs/post
 import { RenderPass } from './lib/pp/from-threejs/postprocessing/RenderPass'
 import { HalftonePass } from './lib/pp/HalftonePass'
 
-export function PostProcessing({ disable = false }): JSX.Element {
+export function PostProcessing({ disable = false }) {
   const { gl, scene, camera, size } = useThree()
 
   const composer = useMemo(() => {

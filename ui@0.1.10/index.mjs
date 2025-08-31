@@ -13,7 +13,7 @@ import {
   textClipper,
   time,
   toggleSmartComp
-} from "./chunk-VM5AYL4L.mjs";
+} from "./chunk-YGE4OORG.mjs";
 import {
   PriceFigma,
   PriceText,
@@ -47,7 +47,7 @@ import {
   extractGIF,
   goBack,
   insertCanvasAsImage
-} from "./chunk-TNYTAPY2.mjs";
+} from "./chunk-MRTVSWDK.mjs";
 import "./chunk-VQME7MQ6.mjs";
 import {
   Price,
@@ -84,7 +84,7 @@ import {
 } from "./chunk-HSWJZDEP.mjs";
 import {
   CustomizeColorInput
-} from "./chunk-OCD4UQRP.mjs";
+} from "./chunk-SB2BGLAX.mjs";
 import {
   Button
 } from "./chunk-GOU4K2PB.mjs";
@@ -110,10 +110,10 @@ import "./chunk-MMICMJ2O.mjs";
 import {
   ChangeButton3,
   ChangeColorButton
-} from "./chunk-RADUNQQT.mjs";
+} from "./chunk-WSRNOZZY.mjs";
 import {
   TextAnimation
-} from "./chunk-NZMVNW4M.mjs";
+} from "./chunk-6QIOJMBP.mjs";
 import {
   TextHover
 } from "./chunk-IK6DJNIF.mjs";
@@ -132,8 +132,8 @@ import {
 } from "./chunk-5IW7QOXI.mjs";
 import {
   ColorInput
-} from "./chunk-QAJVYFFM.mjs";
-import "./chunk-QXW2HKHR.mjs";
+} from "./chunk-XEPQDKB7.mjs";
+import "./chunk-NLMIFEWB.mjs";
 import "./chunk-5DN6VBB3.mjs";
 import {
   DoubleNumberInput
@@ -154,7 +154,7 @@ import "./chunk-QNYMEATR.mjs";
 import {
   AddToCanvas,
   updateTheme
-} from "./chunk-FTYKQYE5.mjs";
+} from "./chunk-VU77YCH3.mjs";
 import {
   CurrentPreset,
   HideBanner,
@@ -162,7 +162,7 @@ import {
   UrlInput,
   togglePreset,
   toggleUrl
-} from "./chunk-TSGZLSNK.mjs";
+} from "./chunk-JIQDJP5N.mjs";
 import "./chunk-2ZZ6H7J7.mjs";
 import {
   useBillingInterval,
@@ -174,22 +174,22 @@ import {
 import "./chunk-4CKVDMTF.mjs";
 import {
   ShaderGradientStateless
-} from "./chunk-5NPSPSB3.mjs";
-import "./chunk-KR2KJOQ4.mjs";
+} from "./chunk-QLWRNOOC.mjs";
+import "./chunk-GQMKBV2H.mjs";
 import {
   ShaderGradientStatelessCanvas
-} from "./chunk-XQYCPYX4.mjs";
-import "./chunk-SD6QYBL4.mjs";
+} from "./chunk-STAW3I4C.mjs";
+import "./chunk-ULRN2YR3.mjs";
 import "./chunk-WWKYGKBG.mjs";
-import "./chunk-M2BGHN5E.mjs";
+import "./chunk-NRH3Y6WQ.mjs";
 import {
   useQueryState,
   useURLQueryState
-} from "./chunk-U6H5AWC4.mjs";
-import "./chunk-7PJ4MWZB.mjs";
+} from "./chunk-IHNYOXY2.mjs";
+import "./chunk-WT77BT2Q.mjs";
 import {
   PRESETS
-} from "./chunk-4WK5EO2N.mjs";
+} from "./chunk-V26AZFTQ.mjs";
 import "./chunk-GDIJPCEQ.mjs";
 import "./chunk-ZRY2JHRC.mjs";
 import "./chunk-CU5I7XXF.mjs";

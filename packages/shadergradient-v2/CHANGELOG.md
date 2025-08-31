@@ -1,5 +1,11 @@
 # shadergradient
 
+## 2.3.1
+
+### Patch Changes
+
+- support missing props for the gradient
+
 ## 2.3.0
 
 ### Minor Changes

@@ -52,6 +52,7 @@ export function ShaderGradientCanvas({
         <Context.Provider value={contextValue}>
           <Canvas
             id='gradientCanvas' // need id to get an image to Figma export
+            key={fov} // need to refresh the canvas when fov changes
             style={{ pointerEvents }}
             resize={{ offsetSize: true }}
             className={className}

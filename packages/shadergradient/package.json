@@ -41,8 +41,8 @@
     "@react-three/fiber": "*",
     "framer-motion": "*",
     "react": "*",
-    "three": "^0.169.0",
-    "three-stdlib": "^2.30.1"
+    "three": "^0.179.1",
+    "three-stdlib": "2.36.0"
   },
   "devDependencies": {
     "@types/react": "19.1.12",

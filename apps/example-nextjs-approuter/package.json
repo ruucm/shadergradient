@@ -14,8 +14,8 @@
     "next": "^15.5.2",
     "react": "^19.1.1",
     "react-dom": "^18.2.0",
-    "three": "^0.169.0",
-    "three-stdlib": "^2.30.1",
+    "three": "^0.179.1",
+    "three-stdlib": "2.36.0",
     "tunnel-rat": "^0.1.2",
     "@shadergradient/react": "^2.2.0"
   },

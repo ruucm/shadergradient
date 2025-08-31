@@ -1,5 +1,5 @@
 {
-  "name": "figma-plugin",
+  "name": "@shadergradient/figma-plugin",
   "version": "0.0.0",
   "main": "code.js",
   "scripts": {

@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo } from 'react'
+import React, { useEffect, useMemo, useRef } from 'react'
 import * as THREE from 'three'
 import { colorToRgb, formatColor } from '@/utils'
 import { useFrame } from '@react-three/fiber'
@@ -14,6 +14,7 @@ export const Materials = ({
   fragmentShader,
   onInit,
 }) => {
+  const localClockRef = useRef(new THREE.Clock())
   const material = useMemo(() => {
     const entries = Object.entries(uniforms)
     const colors = uniforms.colors
@@ -74,21 +75,35 @@ export const Materials = ({
     }
   }, [material])
 
-  // Animate uTime with useFrame
-  useFrame(({ clock }) => {
+  // Sync clock with animate/range changes similar to v1's useTimeAnimation
+  useEffect(() => {
+    if (animate === 'on') {
+      localClockRef.current.start()
+    } else {
+      localClockRef.current.stop()
+    }
+  }, [animate])
+
+  // Animate uTime with useFrame (v1-like behavior)
+  useFrame(() => {
     if (animate === 'on' && material.userData.uTime) {
-      const elapsed = clock.getElapsedTime()
+      let elapsed = localClockRef.current.getElapsedTime()
+
       if (
         range === 'enabled' &&
         Number.isFinite(rangeStart) &&
         Number.isFinite(rangeEnd) &&
         rangeEnd > rangeStart
       ) {
-        const duration = rangeEnd - rangeStart
-        material.userData.uTime.value = rangeStart + (elapsed % duration)
-      } else {
-        material.userData.uTime.value = elapsed
+        elapsed = (rangeStart as number) + elapsed
+        if (elapsed >= (rangeEnd as number)) {
+          elapsed = rangeStart as number
+          // restart the local clock to loop precisely from rangeStart
+          localClockRef.current.start()
+        }
       }
+
+      material.userData.uTime.value = elapsed
     }
   })
 

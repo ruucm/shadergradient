@@ -3,6 +3,7 @@ import { Canvas } from '@react-three/fiber'
 import { canvasProps } from '@/consts'
 import * as THREE from 'three'
 import { useInView } from './hooks/useInView'
+import { GradientCanvasT } from './types'
 
 type ShaderGradientCanvasContext = {
   envBasePath: string
@@ -26,17 +27,7 @@ export function ShaderGradientCanvas({
   envBasePath,
   lazyLoad = true,
   threshold = 0.1,
-}: {
-  children: React.ReactNode
-  style?: React.CSSProperties
-  pixelDensity?: number
-  fov?: number
-  pointerEvents?: 'none' | 'auto'
-  className?: string
-  envBasePath?: string
-  lazyLoad?: boolean
-  threshold?: number
-}): JSX.Element {
+}: GradientCanvasT) {
   const { isInView, containerRef } = useInView(lazyLoad, threshold)
 
   const contextValue = useMemo<ShaderGradientCanvasContext>(

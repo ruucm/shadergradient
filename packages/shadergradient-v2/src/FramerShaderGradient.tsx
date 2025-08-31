@@ -31,7 +31,7 @@ export function FramerShaderGradient({
   cameraAngle,
   noise,
   ...rest
-}: FramerShaderGradientProps): JSX.Element {
+}: FramerShaderGradientProps) {
   const props = formatFramerProps({
     position,
     rotation,

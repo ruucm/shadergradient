@@ -28,7 +28,7 @@ export function Mesh({
   uAmplitude,
 
   shader,
-}: MeshT): JSX.Element {
+}: MeshT) {
   const { vertex, fragment } = shaders[shader][type]
 
   return (

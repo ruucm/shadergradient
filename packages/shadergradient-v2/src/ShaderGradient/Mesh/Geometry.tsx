@@ -1,6 +1,6 @@
 const meshCount = 192
 
-export function Geometry({ type }): JSX.Element {
+export function Geometry({ type }) {
   return (
     <>
       {type === 'plane' && <planeGeometry args={[10, 10, 1, meshCount]} />}

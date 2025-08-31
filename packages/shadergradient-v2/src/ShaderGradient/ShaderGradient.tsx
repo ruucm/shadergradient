@@ -7,7 +7,7 @@ import { Controls } from './Controls'
 import * as qs from 'query-string'
 import { formatUrlString } from '@/utils'
 
-export function ShaderGradient(passedProps: GradientT): JSX.Element {
+export function ShaderGradient(passedProps: GradientT) {
   const { control, urlString, ...rest } = {
     ...presets.halo.props,
     ...passedProps,

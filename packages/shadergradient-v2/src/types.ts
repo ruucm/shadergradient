@@ -49,6 +49,18 @@ export type LightsT = {
   envPreset: EnvironmentPresetT
 }
 
+export type GradientCanvasT = {
+  children: React.ReactNode
+  style?: React.CSSProperties
+  pixelDensity?: number
+  fov?: number
+  pointerEvents?: 'none' | 'auto'
+  className?: string
+  envBasePath?: string
+  lazyLoad?: boolean
+  threshold?: number
+}
+
 export type GradientT = MeshT & {
   control?: 'query' | 'props'
   isFigmaPlugin?: boolean

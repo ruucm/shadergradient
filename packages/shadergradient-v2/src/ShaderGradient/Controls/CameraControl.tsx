@@ -6,7 +6,7 @@ import { extend, useThree, useFrame } from '@react-three/fiber'
 export function CameraControl({
   smoothTime = 0.05, // default smoothTime of "camera-conrols"
   ...props
-}: any): JSX.Element {
+}: any) {
   CameraControls.install({ THREE })
   extend({ CameraControls })
 

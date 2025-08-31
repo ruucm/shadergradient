@@ -1,46 +1,30 @@
 {
   "name": "example-cra-dev",
-  "version": "0.1.47",
   "private": true,
-  "dependencies": {
-    "@react-three/drei": "^10.7.4",
-    "@react-three/fiber": "^9.3.0",
-    "@react-spring/three": "^9.7.3",
-    "@testing-library/jest-dom": "^5.16.5",
-    "@testing-library/react": "^13.4.0",
-    "@testing-library/user-event": "^13.5.0",
-    "@types/jest": "^27.5.2",
-    "@types/node": "^16.18.21",
-    "@types/react": "19.1.12",
-    "@types/react-dom": "19.1.9",
-    "@types/three": "^0.150.0",
-    "framer-motion": "^10.9.2",
-    "react": "^19.1.1",
-    "react-dom": "^18.3.1",
-    "react-scripts": "5.0.1",
-    "@shadergradient/react": "workspace:*",
-    "three": "^0.169.0",
-    "three-stdlib": "^2.30.1",
-    "typescript": "5.7.3",
-    "web-vitals": "^2.1.4"
-  },
+  "version": "0.0.0",
+  "type": "module",
   "scripts": {
-    "start": "PORT=5001 BROWSER=none react-scripts start",
-    "dev": "PORT=5001 BROWSER=none react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "dev": "vite --port 5001",
+    "build": "tsc -b && vite build",
+    "lint": "eslint .",
+    "preview": "vite preview"
   },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
+  "dependencies": {
+    "react": "^19.1.1",
+    "react-dom": "^19.1.1",
+    "@shadergradient/react": "workspace:*"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.33.0",
+    "@types/react": "^19.1.10",
+    "@types/react-dom": "^19.1.7",
+    "@vitejs/plugin-react": "^5.0.0",
+    "eslint": "^9.33.0",
+    "eslint-plugin-react-hooks": "^5.2.0",
+    "eslint-plugin-react-refresh": "^0.4.20",
+    "globals": "^16.3.0",
+    "typescript": "~5.8.3",
+    "typescript-eslint": "^8.39.1",
+    "vite": "^7.1.2"
   }
 }

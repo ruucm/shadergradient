@@ -1,5 +1,11 @@
 # shadergradient
 
+## 2.3.2
+
+### Patch Changes
+
+- update gradient canvas when pixelDensity changes
+
 ## 2.3.1
 
 ### Patch Changes

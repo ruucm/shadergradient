@@ -2,6 +2,7 @@ import { ShaderGradient } from './ShaderGradient'
 import { ControlType } from 'framer'
 import { GradientT } from './types'
 import { propertyControls } from './presets'
+import { formatFramerProps } from './utils'
 
 type FramerShaderGradientProps = GradientT & {
   position?: {
@@ -31,26 +32,15 @@ export function FramerShaderGradient({
   noise,
   ...rest
 }: FramerShaderGradientProps): JSX.Element {
-  const { positionX, positionY, positionZ } = position
-  const { rotationX, rotationY, rotationZ } = rotation
-  const { cAzimuthAngle, cPolarAngle } = cameraAngle
-  const { uDensity, uStrength } = noise
+  const props = formatFramerProps({
+    position,
+    rotation,
+    cameraAngle,
+    noise,
+    ...rest,
+  })
 
-  return (
-    <ShaderGradient
-      positionX={positionX}
-      positionY={positionY}
-      positionZ={positionZ}
-      rotationX={rotationX}
-      rotationY={rotationY}
-      rotationZ={rotationZ}
-      cAzimuthAngle={cAzimuthAngle}
-      cPolarAngle={cPolarAngle}
-      uDensity={uDensity}
-      uStrength={uStrength}
-      {...rest}
-    />
-  )
+  return <ShaderGradient {...props} />
 }
 
 FramerShaderGradient.propertyControls = propertyControls(ControlType)

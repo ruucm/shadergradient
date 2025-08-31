@@ -1,6 +1,6 @@
 {
   "name": "ui",
-  "version": "0.1.1",
+  "version": "0.1.10",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "exports": {
@@ -12,7 +12,7 @@
     "dev:ui": "concurrently \"tsup --config tsup.framer.config.ts --watch\" \"pnpm ngrok\"",
     "ngrok": "ngrok http --domain=esm.ngrok.dev 8000",
     "build": "tsup --config tsup.framer.config.ts && tailwindcss -i ./src/styles.css -o ./dist/styles.css --minify && cp -rf assets dist/assets",
-    "release": "pnpm run build && mkdir -p release && cp -Rf dist release/$npm_package_name@$npm_package_version",
+    "release": "pnpm run build && mkdir -p release && cp -Rf dist release/$npm_package_name@$npm_package_version && cp -Rf dist release/$npm_package_name@latest",
     "dev": "concurrently \"tsup src/index.ts --format esm,cjs --dts --external react --watch\" \"tailwindcss -i ./src/styles.css -o ./dist/styles.css --watch\"",
     "clean": "rm -rf dist"
   },

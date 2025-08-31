@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { useEffect, useState } from 'react'
 import ReactSlider from 'react-slider'
-import { NumberInput } from './NumberInput'
+import { CustomizeNumberInput } from './CustomizeNumberInput'
 import { Spacing } from '../Spacing'
 
 type SliderPropsT = {
@@ -28,7 +28,7 @@ export const CustomizeSlider = React.forwardRef<HTMLInputElement, SliderPropsT>(
 
     return (
       <div className='flex items-center w-full'>
-        <NumberInput
+        <CustomizeNumberInput
           value={sharedValue}
           setValue={setSharedValue}
           step={step}

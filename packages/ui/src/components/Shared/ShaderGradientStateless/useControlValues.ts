@@ -1,5 +1,9 @@
 import { useCursorStore } from './store'
-import { GradientT, formatUrlString } from '@shadergradient/react'
+import {
+  GradientT,
+  formatUrlString,
+  formatFramerProps,
+} from '@shadergradient/react'
 import { useQueryState } from './store/useQueryState'
 import * as qs from 'query-string'
 
@@ -100,7 +104,8 @@ export function useControlValues(
     hoverState, // include hoverState to flush the shader when it is hovered
   }
 
-  if (control === 'props') return clean({ ...queryProps, ...props })
+  if (control === 'props')
+    return formatFramerProps(clean({ ...queryProps, ...props }) as any)
   else if (control === 'query')
     return clean(
       urlString

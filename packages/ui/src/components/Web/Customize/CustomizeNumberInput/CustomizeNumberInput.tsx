@@ -2,7 +2,7 @@ import React from 'react'
 import { motion } from 'framer-motion'
 import { Spacing } from '../../Spacing'
 
-type NumberInputPropsT = {
+type CustomizeNumberInputPropsT = {
   label?: string
   setValue?: any
   arrow?: boolean
@@ -13,9 +13,9 @@ type NumberInputPropsT = {
   HTMLInputElement
 >
 
-export const NumberInput = React.forwardRef<
+export const CustomizeNumberInput = React.forwardRef<
   HTMLInputElement,
-  NumberInputPropsT
+  CustomizeNumberInputPropsT
 >(
   (
     {
@@ -25,7 +25,7 @@ export const NumberInput = React.forwardRef<
       arrow = false,
       step = 0,
       ...inputProps
-    }: NumberInputPropsT,
+    }: CustomizeNumberInputPropsT,
     ref
   ) => {
     return (

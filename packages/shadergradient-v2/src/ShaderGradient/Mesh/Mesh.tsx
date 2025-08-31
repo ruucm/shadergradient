@@ -8,6 +8,9 @@ import { debug } from '@/utils/debug'
 
 export function Mesh({
   animate,
+  range,
+  rangeStart,
+  rangeEnd,
 
   positionX,
   positionY,
@@ -40,6 +43,9 @@ export function Mesh({
       <Geometry type={type} />
       <Materials
         animate={animate}
+        range={range}
+        rangeStart={rangeStart}
+        rangeEnd={rangeEnd}
         uniforms={{
           colors: [color1, color2, color3],
           uTime,

@@ -6,6 +6,9 @@ import { useFrame } from '@react-three/fiber'
 // Define the material component
 export const Materials = ({
   animate,
+  range,
+  rangeStart,
+  rangeEnd,
   uniforms,
   vertexShader,
   fragmentShader,
@@ -74,7 +77,18 @@ export const Materials = ({
   // Animate uTime with useFrame
   useFrame(({ clock }) => {
     if (animate === 'on' && material.userData.uTime) {
-      material.userData.uTime.value = clock.getElapsedTime()
+      const elapsed = clock.getElapsedTime()
+      if (
+        range === 'enabled' &&
+        Number.isFinite(rangeStart) &&
+        Number.isFinite(rangeEnd) &&
+        rangeEnd > rangeStart
+      ) {
+        const duration = rangeEnd - rangeStart
+        material.userData.uTime.value = rangeStart + (elapsed % duration)
+      } else {
+        material.userData.uTime.value = elapsed
+      }
     }
   })
 

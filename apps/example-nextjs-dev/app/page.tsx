@@ -16,6 +16,10 @@ export default function Home() {
             rotationX={0}
             rotationY={0}
             rotationZ={0}
+            animate='on'
+            range='enabled'
+            rangeStart={2}
+            rangeEnd={5}
           />
         </ShaderGradientCanvas>
       </div>

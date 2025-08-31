@@ -48,7 +48,7 @@ export function InputTitle({
       {info === true && (
         <div
           className={
-            'w-fit h-fit absolute z-20 min-w-[140px] pointer-events-none duration-300 ' +
+            'w-fit h-fit absolute z-20 min-w-[140px] max-w-[200px] pointer-events-none duration-300 ' +
             (isMouseOver === true
               ? 'opacity-100 bottom-7'
               : 'opacity-0 bottom-6')

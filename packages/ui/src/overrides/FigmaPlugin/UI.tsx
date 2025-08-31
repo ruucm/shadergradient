@@ -337,7 +337,7 @@ export function extractGIF(Component): ComponentType {
 
     let variant = 'dbLoading'
     if (loading) variant = 'loading'
-    else if (size > 300) variant = 'error'
+    else if (destination === 'onCanvas' && size > 300) variant = 'error'
     else if (!enabled) variant = 'error'
     else if (!subDBLoading && !subscription) variant = 'default'
     else if (!subDBLoading && subscription) variant = 'pro'
@@ -346,11 +346,12 @@ export function extractGIF(Component): ComponentType {
     useEffect(() => {
       if (!enabled) {
         setError('Select a frame on the canvas')
+      } else if (destination === 'onCanvas' && size > 300) {
+        setError('You can only add GIF under 300MB on canvas')
+      } else {
+        setError('')
       }
-      if (size > 300) {
-        setError('You can only add GIF under 300mb on canvas')
-      }
-    }, [enabled, size, setError])
+    }, [enabled, size, destination, setError])
 
     return (
       <>

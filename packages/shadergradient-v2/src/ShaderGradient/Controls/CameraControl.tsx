@@ -21,8 +21,8 @@ export function CameraControl({
     const control: any = ref.current
     if (!control) return
 
-    const { type, onUpdate } = props || {}
-    if (!onUpdate) return
+    const { type, onCameraUpdate } = props || {}
+    if (!onCameraUpdate) return
 
     const toDegrees = (radians: number) => Math.round((radians * 180) / Math.PI)
 
@@ -53,7 +53,7 @@ export function CameraControl({
     }
 
     const handleSleep = () => {
-      onUpdate({ ...getAngles(), ...getZoomDistance() })
+      onCameraUpdate({ ...getAngles(), ...getZoomDistance() })
     }
 
     control.addEventListener('sleep', handleSleep)

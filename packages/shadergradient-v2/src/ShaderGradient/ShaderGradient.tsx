@@ -8,7 +8,7 @@ import * as qs from 'query-string'
 import { formatUrlString } from '@/utils'
 
 export function ShaderGradient(passedProps: GradientT) {
-  const { control, urlString, onChange, ...rest } = {
+  const { control, urlString, onCameraUpdate, ...rest } = {
     ...presets.halo.props,
     ...passedProps,
   }
@@ -24,10 +24,6 @@ export function ShaderGradient(passedProps: GradientT) {
   const { lightType, envPreset, brightness, grain, toggleAxis, ...others } =
     props
 
-  const handleUpdate = (updates: Partial<GradientT>) => {
-    onChange?.(updates)
-  }
-
   return (
     <>
       <Mesh {...props} />
@@ -38,7 +34,7 @@ export function ShaderGradient(passedProps: GradientT) {
       />
       {grain !== 'off' && <PostProcessing />}
 
-      <Controls {...props} onUpdate={handleUpdate} />
+      <Controls {...props} onCameraUpdate={onCameraUpdate} />
     </>
   )
 }

@@ -1,5 +1,11 @@
 # shadergradient
 
+## 2.3.3
+
+### Patch Changes
+
+- cosmic shader
+
 ## 2.3.2
 
 ### Patch Changes

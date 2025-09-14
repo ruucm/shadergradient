@@ -1,11 +1,13 @@
-import "../../../../chunk-WWKYGKBG.mjs";
+import {
+  init_store
+} from "../../../../chunk-XDXMUEG4.mjs";
 import {
   usePresetToStore
-} from "../../../../chunk-GEYPL6BY.mjs";
+} from "../../../../chunk-WAQECT74.mjs";
 import {
   useQueryState,
   useURLQueryState
-} from "../../../../chunk-5OSNXF6C.mjs";
+} from "../../../../chunk-C7DIA4OH.mjs";
 import {
   updateGradientState,
   useBillingInterval,
@@ -15,14 +17,15 @@ import {
   useFigma,
   useQueryStore,
   useUIStore
-} from "../../../../chunk-GJHJKIXW.mjs";
+} from "../../../../chunk-CUAMX2IU.mjs";
 import {
   DEFAUlT_PRESET,
   PRESETS,
   initialActivePreset
-} from "../../../../chunk-EJ33MBYL.mjs";
-import "../../../../chunk-GDIJPCEQ.mjs";
-import "../../../../chunk-CU5I7XXF.mjs";
+} from "../../../../chunk-IT6KFRRW.mjs";
+import "../../../../chunk-SN2DANKP.mjs";
+import "../../../../chunk-HXGKXP63.mjs";
+init_store();
 export {
   DEFAUlT_PRESET,
   PRESETS,

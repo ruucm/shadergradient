@@ -18,7 +18,7 @@ import "../../../chunk-64EKMGYT.mjs";
 import "../../../chunk-BGA6FIQU.mjs";
 import "../../../chunk-CK47F4LN.mjs";
 import "../../../chunk-2WMPBKSG.mjs";
-import "../../../chunk-CU5I7XXF.mjs";
+import "../../../chunk-HXGKXP63.mjs";
 export {
   GIFEncoder,
   applyPalette,

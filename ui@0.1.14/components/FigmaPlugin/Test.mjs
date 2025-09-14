@@ -5,7 +5,7 @@ import {
 import {
   __spreadProps,
   __spreadValues
-} from "../../chunk-CU5I7XXF.mjs";
+} from "../../chunk-HXGKXP63.mjs";
 
 // src/components/FigmaPlugin/Test.tsx
 import * as React from "react";

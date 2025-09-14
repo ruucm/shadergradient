@@ -1,4 +1,4 @@
-import "../../../../chunk-CU5I7XXF.mjs";
+import "../../../../chunk-HXGKXP63.mjs";
 
 // src/overrides/FigmaPlugin/lib/gif.js/TypedNeuQuant.js
 var exports = {};

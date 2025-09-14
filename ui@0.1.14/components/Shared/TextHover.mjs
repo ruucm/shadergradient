@@ -1,7 +1,7 @@
 import {
   TextHover
 } from "../../chunk-IK6DJNIF.mjs";
-import "../../chunk-CU5I7XXF.mjs";
+import "../../chunk-HXGKXP63.mjs";
 export {
   TextHover
 };

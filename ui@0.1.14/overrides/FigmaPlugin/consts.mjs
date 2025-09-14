@@ -3,7 +3,7 @@ import {
   STRIPE_BUY_MONTHLY_URL,
   STRIPE_BUY_YEARLY_URL
 } from "../../chunk-VQME7MQ6.mjs";
-import "../../chunk-CU5I7XXF.mjs";
+import "../../chunk-HXGKXP63.mjs";
 export {
   STRIPE_BILLING_URL,
   STRIPE_BUY_MONTHLY_URL,

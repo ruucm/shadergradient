@@ -8,7 +8,7 @@ import {
 } from "../../../chunk-DC3YOL4Q.mjs";
 import "../../../chunk-XKMCKCFY.mjs";
 import "../../../chunk-64EKMGYT.mjs";
-import "../../../chunk-CU5I7XXF.mjs";
+import "../../../chunk-HXGKXP63.mjs";
 export {
   applyPalette,
   nearestColor,

@@ -13,7 +13,7 @@ import {
   textClipper,
   time,
   toggleSmartComp
-} from "../chunk-YUHX47TD.mjs";
+} from "../chunk-F3Y7HXSP.mjs";
 import {
   PriceFigma,
   PriceText,
@@ -24,11 +24,12 @@ import {
   upgradingText,
   userEmail,
   userInfo
-} from "../chunk-TAGNZAC4.mjs";
+} from "../chunk-JHACIICG.mjs";
 import {
   ColorsTab,
   CopyBtn,
   Duration,
+  EasyViewControl,
   Error,
   EstimatedSize,
   HighlightButton,
@@ -47,14 +48,14 @@ import {
   extractGIF,
   goBack,
   insertCanvasAsImage
-} from "../chunk-JMUXGD7X.mjs";
+} from "../chunk-D5NPG322.mjs";
 import "../chunk-VQME7MQ6.mjs";
 import {
   Price,
   TogglePrice
-} from "../chunk-4A6Z5B7C.mjs";
-import "../chunk-TX3FXUBO.mjs";
-import "../chunk-WZNB7NSE.mjs";
+} from "../chunk-HU37JLKU.mjs";
+import "../chunk-PSNTCLEE.mjs";
+import "../chunk-IF3RZN7R.mjs";
 import "../chunk-YFGZA6BU.mjs";
 import "../chunk-DC3YOL4Q.mjs";
 import "../chunk-BI4IT72G.mjs";
@@ -63,9 +64,9 @@ import "../chunk-64EKMGYT.mjs";
 import "../chunk-BGA6FIQU.mjs";
 import "../chunk-CK47F4LN.mjs";
 import "../chunk-2WMPBKSG.mjs";
-import "../chunk-OYRRN4FE.mjs";
-import "../chunk-2EE2NFKS.mjs";
-import "../chunk-JNRQHCKE.mjs";
+import "../chunk-YRFKNFWH.mjs";
+import "../chunk-FX67ZWN5.mjs";
+import "../chunk-OEWGZKCP.mjs";
 import {
   CenterCrop1,
   CenterCrop2,
@@ -78,11 +79,11 @@ import {
   WordHighlight2,
   useStore,
   wordHighlightText
-} from "../chunk-5IW7QOXI.mjs";
+} from "../chunk-EYULNDPF.mjs";
 import {
   AddToCanvas,
   updateTheme
-} from "../chunk-O4T2QHBZ.mjs";
+} from "../chunk-WCCXEJIP.mjs";
 import {
   CurrentPreset,
   HideBanner,
@@ -90,21 +91,21 @@ import {
   UrlInput,
   togglePreset,
   toggleUrl
-} from "../chunk-3Q43U4DT.mjs";
+} from "../chunk-PCLH3KXC.mjs";
 import "../chunk-2ZZ6H7J7.mjs";
-import "../chunk-ZAX22QRS.mjs";
-import "../chunk-WWEZOZWU.mjs";
-import "../chunk-EJA66YSZ.mjs";
-import "../chunk-L3MXH4ZQ.mjs";
-import "../chunk-NXWA6VM5.mjs";
-import "../chunk-TQDJUWJX.mjs";
-import "../chunk-WWKYGKBG.mjs";
-import "../chunk-GEYPL6BY.mjs";
-import "../chunk-5OSNXF6C.mjs";
-import "../chunk-GJHJKIXW.mjs";
-import "../chunk-EJ33MBYL.mjs";
-import "../chunk-GDIJPCEQ.mjs";
-import "../chunk-CU5I7XXF.mjs";
+import "../chunk-BDA275ZJ.mjs";
+import "../chunk-Z4CYNH73.mjs";
+import "../chunk-7IGTWOTM.mjs";
+import "../chunk-H7BNUQFM.mjs";
+import "../chunk-CCZYJ74O.mjs";
+import "../chunk-7RHN5MNE.mjs";
+import "../chunk-XDXMUEG4.mjs";
+import "../chunk-WAQECT74.mjs";
+import "../chunk-C7DIA4OH.mjs";
+import "../chunk-CUAMX2IU.mjs";
+import "../chunk-IT6KFRRW.mjs";
+import "../chunk-SN2DANKP.mjs";
+import "../chunk-HXGKXP63.mjs";
 export {
   AddToCanvas,
   ArrowLeft,
@@ -115,6 +116,7 @@ export {
   CopyBtn,
   CurrentPreset,
   Duration,
+  EasyViewControl,
   Error,
   EstimatedSize,
   Gap,

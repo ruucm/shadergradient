@@ -1,4 +1,5 @@
 import {
+  init_store,
   updateGradientState,
   useBillingInterval,
   useBillingIntervalStore,
@@ -7,10 +8,11 @@ import {
   useFigma,
   useQueryStore,
   useUIStore
-} from "../../../../chunk-GJHJKIXW.mjs";
-import "../../../../chunk-EJ33MBYL.mjs";
-import "../../../../chunk-GDIJPCEQ.mjs";
-import "../../../../chunk-CU5I7XXF.mjs";
+} from "../../../../chunk-CUAMX2IU.mjs";
+import "../../../../chunk-IT6KFRRW.mjs";
+import "../../../../chunk-SN2DANKP.mjs";
+import "../../../../chunk-HXGKXP63.mjs";
+init_store();
 export {
   updateGradientState,
   useBillingInterval,

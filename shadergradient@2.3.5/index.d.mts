@@ -81,6 +81,7 @@ type GradientT = MeshT & {
     hoverState?: string;
     enableTransition?: boolean;
     urlString?: string;
+    onCameraUpdate?: (updates: Partial<GradientT>) => void;
 };
 
 declare function ShaderGradient(passedProps: GradientT): react_jsx_runtime.JSX.Element;

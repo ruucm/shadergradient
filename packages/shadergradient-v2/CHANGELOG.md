@@ -1,5 +1,11 @@
 # shadergradient
 
+## 2.3.4
+
+### Patch Changes
+
+- glass shader
+
 ## 2.3.3
 
 ### Patch Changes

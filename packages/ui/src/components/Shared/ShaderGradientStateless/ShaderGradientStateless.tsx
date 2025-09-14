@@ -15,7 +15,7 @@ export function ShaderGradientStateless(passedProps: GradientT): JSX.Element {
   return (
     <ShaderGradient
       {...props}
-      onChange={(updates) => {
+      onCameraUpdate={(updates) => {
         const { cAzimuthAngle, cPolarAngle, cDistance, cameraZoom } = updates
         // defer writing to the URL store; useQueryState itself handles URL push
         if (typeof window !== 'undefined') {

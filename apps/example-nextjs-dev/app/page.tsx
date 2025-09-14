@@ -27,6 +27,7 @@ export default function Home() {
             color1={color1}
             grain='off'
             animate='off'
+            shader='cosmic'
           />
         </ShaderGradientCanvas>
         <button

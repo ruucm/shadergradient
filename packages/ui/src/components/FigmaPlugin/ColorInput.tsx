@@ -5,6 +5,19 @@ import Wheel from '@uiw/react-color-wheel'
 import './slider.css'
 import { useOnClickOutside } from '@/utils'
 
+// Helper function to validate hex color and provide fallback
+const isValidHex = (color: string): boolean => {
+  if (!color || typeof color !== 'string') return false
+  return /^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/.test(color)
+}
+
+const getValidColorOrFallback = (
+  color: string,
+  fallback: string = '#000000'
+): string => {
+  return isValidHex(color) ? color : fallback
+}
+
 type ColorInputPropsT = {
   defaultValue: number
   setValue: any
@@ -105,9 +118,9 @@ export function ColorInput({
           ref={triggerRef}
           className='w-full h-[26px] rounded-md cursor-pointer'
           style={{
-            background: sharedValue,
+            background: getValidColorOrFallback(sharedValue),
             border:
-              sharedValue === '#ffffff'
+              getValidColorOrFallback(sharedValue) === '#ffffff'
                 ? '1px solid #F2F2F2'
                 : '0px solid transparent',
           }}
@@ -144,7 +157,7 @@ export function ColorInput({
             }}
           >
             <Wheel
-              color={sharedValue}
+              color={getValidColorOrFallback(sharedValue)}
               onChange={(color) => {
                 setSharedValue(color.hex)
               }}
@@ -155,11 +168,12 @@ export function ColorInput({
               width={200}
               radius={4}
               style={{ display: 'flex', alignItems: 'center' }}
-              hsva={hexToHsva(sharedValue)}
+              hsva={hexToHsva(getValidColorOrFallback(sharedValue))}
               onChange={(color) => {
+                const validColor = getValidColorOrFallback(sharedValue)
                 setSharedValue(
                   hsvaToHex({
-                    h: hexToHsva(sharedValue).h,
+                    h: hexToHsva(validColor).h,
                     // @ts-ignore
                     s: color.s,
                     v: color.v,

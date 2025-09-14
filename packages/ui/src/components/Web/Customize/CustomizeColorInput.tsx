@@ -7,6 +7,19 @@ import { useOnClickOutside } from '@/hooks/useOnClickOutside'
 import { Spacing } from '@/components/Shared/Spacing'
 import { usePropState } from '@/hooks/usePropState'
 
+// Helper function to validate hex color and provide fallback
+const isValidHex = (color: string): boolean => {
+  if (!color || typeof color !== 'string') return false
+  return /^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/.test(color)
+}
+
+const getValidColorOrFallback = (
+  color: string,
+  fallback: string = '#000000'
+): string => {
+  return isValidHex(color) ? color : fallback
+}
+
 type ColorInputPropsT = {
   label?: string
   setValue: any
@@ -45,7 +58,7 @@ export const CustomizeColorInput = React.forwardRef<
       <div className='flex items-center gap-2 w-full relative'>
         <div
           className='w-full h-input rounded'
-          style={{ background: sharedValue }}
+          style={{ background: getValidColorOrFallback(sharedValue) }}
           onClick={() => {
             setToggle(!toggle)
           }}
@@ -80,7 +93,7 @@ export const CustomizeColorInput = React.forwardRef<
             }}
           >
             <Wheel
-              color={sharedValue}
+              color={getValidColorOrFallback(sharedValue)}
               onChange={(color) => {
                 setSharedValue(color.hex)
               }}
@@ -90,11 +103,12 @@ export const CustomizeColorInput = React.forwardRef<
             <ShadeSlider
               width={200}
               style={{ display: 'flex', alignItems: 'center' }}
-              hsva={hexToHsva(sharedValue)}
+              hsva={hexToHsva(getValidColorOrFallback(sharedValue))}
               onChange={(color) => {
+                const validColor = getValidColorOrFallback(sharedValue)
                 setSharedValue(
                   hsvaToHex({
-                    h: hexToHsva(sharedValue).h,
+                    h: hexToHsva(validColor).h,
                     // @ts-ignore
                     s: color.s,
                     v: color.v,

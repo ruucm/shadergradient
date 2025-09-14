@@ -41,6 +41,7 @@ const useStore = createStore({
   currentTab: 0,
   scrollingTo: null,
   share: 'url', // url or code
+  easyView: false,
 })
 
 // 🟢 ON 'SNAPSHOT' BUTTON
@@ -742,7 +743,22 @@ export function HighlightButton(Component): ComponentType {
             ? 'ToggleBtn - Highlight'
             : 'ToggleBtn - Default'
         }
+        onClick={() => {
+          //@ts-ignore
+          props.onClick()
+          setStore({ easyView: !store.easyView })
+        }}
       />
+    )
+  }
+}
+
+// 🟢 On the ShaderGradientStateless
+export function EasyViewControl(Component): ComponentType {
+  return (props) => {
+    const [store, setStore] = useStore()
+    return (
+      <Component {...props} pointerEvents={store.easyView ? 'auto' : 'none'} />
     )
   }
 }

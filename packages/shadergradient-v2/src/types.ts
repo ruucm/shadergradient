@@ -79,4 +79,7 @@ export type GradientT = MeshT & {
   enableTransition?: boolean
 
   urlString?: string
+
+  // Event handlers
+  onCameraUpdate?: (updates: Partial<GradientT>) => void
 }

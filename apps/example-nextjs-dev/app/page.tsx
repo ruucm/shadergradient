@@ -39,7 +39,7 @@ export default function Home() {
         </div>
       </div>
       <div className='flex flex-1'>
-        <div className='flex-1 h-[calc(100vh-120px)]'>
+        <div className='flex-1 h-[calc(100vh-120px)] bg-gradient-to-br from-purple-100 to-indigo-100'>
           <ShaderGradientCanvas>
             <ShaderGradient
               type={type}
@@ -89,8 +89,8 @@ export default function Home() {
               uFrequency={3}
               uAmplitude={0.8}
               reflection={0.8}
-              lightType='env'
-              envPreset='dawn'
+              // lightType='env'
+              // envPreset='dawn'
               brightness={1.5}
             />
           </ShaderGradientCanvas>

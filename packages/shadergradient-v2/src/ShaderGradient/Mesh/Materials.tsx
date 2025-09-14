@@ -14,6 +14,7 @@ export const Materials = ({
   vertexShader,
   fragmentShader,
   onInit,
+  shader,
 }) => {
   const localClockRef = useRef(new THREE.Clock())
   const material = useMemo(() => {
@@ -42,11 +43,14 @@ export const Materials = ({
       }
     }, {})
 
-    const material = new THREE.MeshPhysicalMaterial({
+    // Material configuration based on shader type
+    const materialConfig = {
       userData: uniformValues, // sync uniform and userData to update uniforms from outside (MeshPhysicalMaterial)
-
-      metalness: 0.2, // similar effects reducing -0.2 intensity of the ambient light
-      roughness: 1 - (typeof reflection === 'number' ? reflection : 0.1),
+      metalness: shader === 'glass' ? 0.0 : 0.2,
+      roughness:
+        shader === 'glass'
+          ? 0.1
+          : 1 - (typeof reflection === 'number' ? reflection : 0.1),
       side: THREE.DoubleSide,
       onBeforeCompile: (shader) => {
         shader.uniforms = {
@@ -58,7 +62,21 @@ export const Materials = ({
         shader.fragmentShader = fragmentShader
       },
       // wireframe: true,
-    })
+    }
+
+    // Add glass-specific material properties
+    if (shader === 'glass') {
+      materialConfig.transparent = true
+      materialConfig.opacity = 0.3
+      materialConfig.transmission = 0.9
+      materialConfig.thickness = 0.5
+      materialConfig.clearcoat = 1.0
+      materialConfig.clearcoatRoughness = 0.0
+      materialConfig.ior = 1.5
+      materialConfig.envMapIntensity = 1.0
+    }
+
+    const material = new THREE.MeshPhysicalMaterial(materialConfig)
 
     entries.forEach(([name]) =>
       Object.defineProperty(material, name, {
@@ -69,7 +87,7 @@ export const Materials = ({
 
     if (onInit) onInit(material)
     return material
-  }, [uniforms, vertexShader, fragmentShader, onInit, reflection])
+  }, [uniforms, vertexShader, fragmentShader, onInit, reflection, shader])
 
   useEffect(() => {
     return () => {

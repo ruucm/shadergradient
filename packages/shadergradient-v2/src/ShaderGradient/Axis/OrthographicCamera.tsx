@@ -2,7 +2,7 @@ import * as THREE from 'three'
 import * as React from 'react'
 import { OrthographicCamera as OrthographicCameraImpl } from 'three'
 import { useThree, useFrame } from '@react-three/fiber'
-import mergeRefs from 'react-merge-refs'
+import { mergeRefs } from './mergeRefs'
 import { useFBO } from './useFBO'
 
 const isFunction = (node: any): node is Function => typeof node === 'function'

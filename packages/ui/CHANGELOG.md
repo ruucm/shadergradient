@@ -1,5 +1,11 @@
 # ui
 
+## 0.1.15
+
+### Patch Changes
+
+- use onCameraUpdate
+
 ## 0.1.13
 
 ### Patch Changes

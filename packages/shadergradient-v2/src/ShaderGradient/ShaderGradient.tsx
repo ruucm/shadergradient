@@ -6,6 +6,7 @@ import { PostProcessing } from './PostProcessing'
 import { Controls } from './Controls'
 import * as qs from 'query-string'
 import { formatUrlString } from '@/utils'
+import { Axis } from './Axis'
 
 export function ShaderGradient(passedProps: GradientT) {
   const { control, urlString, onCameraUpdate, ...rest } = {
@@ -34,6 +35,7 @@ export function ShaderGradient(passedProps: GradientT) {
       />
       {grain !== 'off' && <PostProcessing />}
 
+      {toggleAxis && <Axis />}
       <Controls {...props} onCameraUpdate={onCameraUpdate} />
     </>
   )

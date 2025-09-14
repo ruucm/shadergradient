@@ -104,7 +104,6 @@ export function TailwindWrapper(Component): ComponentType {
         style={{
           ...props.style,
           opacity: tailwindLoaded ? 1 : 0,
-          zIndex: 2147483640,
         }}
       />
     )

@@ -1,5 +1,11 @@
 # shadergradient
 
+## 2.3.5
+
+### Patch Changes
+
+- restore Axis
+
 ## 2.3.4
 
 ### Patch Changes

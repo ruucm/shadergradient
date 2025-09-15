@@ -39,34 +39,24 @@ export default function Home() {
         </div>
       </div>
       <div className='flex flex-1'>
-        <div className='flex-1 h-[calc(100vh-120px)] bg-gradient-to-br from-purple-100 to-indigo-100'>
+        <div className='flex-1 h-[calc(100vh-120px)] bg-gradient-to-br from-purple-100 to-indigo-100 relative'>
+          <img
+            src='https://images.unsplash.com/photo-1756680967220-be6bf89275a2?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHw3fHx8ZW58MHx8fHx8'
+            alt='water'
+            className='absolute top-0 left-0 w-full h-full object-cover'
+          />
           <ShaderGradientCanvas>
             <ShaderGradient
               type={type}
-              cAzimuthAngle={180}
-              cPolarAngle={80}
-              cDistance={3.5}
-              positionX={0}
-              positionY={0}
-              positionZ={0}
-              rotationX={0}
-              rotationY={0}
-              rotationZ={0}
-              animate='on'
+              shader='water'
               grain='off'
-              shader='glass'
-              color1='#88ddff'
-              color2='#0099ff'
-              color3='#0066cc'
-              uSpeed={0.3}
-              uStrength={0.3}
-              uDensity={1.5}
-              uFrequency={5.5}
-              uAmplitude={0.5}
-              reflection={0.5}
-              lightType='3d'
-              brightness={1.2}
-              envPreset='city'
+              // animate='on'
+              // uSpeed={0.3}
+              // uStrength={0.3}
+              // uDensity={1.5}
+              // uFrequency={5.5}
+              // uAmplitude={0.5}
+              // reflection={0.5}
             />
           </ShaderGradientCanvas>
         </div>

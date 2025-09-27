@@ -327,7 +327,9 @@ git push origin main
 - [x] Three.js version upgrade
 - [x] Separate framer component bundles & shader gradient bundles
 - [ ] Separate shader codes as a separate package, and make it reusable for JS, Vue, etc.
-- [ ] Framer Plugin
+- [x] Framer Plugin
+- [ ] Webflow Support
+- [ ] Wix Support
 
 # License
 

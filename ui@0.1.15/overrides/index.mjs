@@ -48,7 +48,7 @@ import {
   extractGIF,
   goBack,
   insertCanvasAsImage
-} from "../chunk-JBWYZMP4.mjs";
+} from "../chunk-K2DG6IXP.mjs";
 import "../chunk-VQME7MQ6.mjs";
 import {
   Price,

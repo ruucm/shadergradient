@@ -21,7 +21,7 @@ import {
   extractGIF,
   goBack,
   insertCanvasAsImage
-} from "../../chunk-JBWYZMP4.mjs";
+} from "../../chunk-K2DG6IXP.mjs";
 import "../../chunk-PSNTCLEE.mjs";
 import "../../chunk-IF3RZN7R.mjs";
 import "../../chunk-YFGZA6BU.mjs";

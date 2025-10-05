@@ -1,8 +1,8 @@
 import {
   Slider
-} from "../../chunk-QSDAS2KT.mjs";
+} from "../../chunk-R6AEDQIR.mjs";
 import "../../chunk-2FOTMNF6.mjs";
-import "../../chunk-KAMY6Q6K.mjs";
+import "../../chunk-SIKJUSOK.mjs";
 import "../../chunk-HXGKXP63.mjs";
 export {
   Slider

@@ -28,6 +28,9 @@ export type MeshT = {
   range?: 'enabled' | 'disabled' | string
   rangeStart?: number
   rangeEnd?: number
+  // Loop controls
+  loop?: 'on' | 'off'
+  loopDuration?: number
   positionX?: number
   positionY?: number
   positionZ?: number

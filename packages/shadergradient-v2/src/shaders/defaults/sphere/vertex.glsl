@@ -100,6 +100,8 @@ float pnoise(vec3 P, vec3 rep)
 varying vec3 vNormal;
 uniform float uTime;
 uniform float uSpeed;
+uniform float uLoop;
+uniform float uLoopDuration;
 uniform float uNoiseDensity;
 uniform float uNoiseStrength;
 uniform float uFrequency;
@@ -170,10 +172,57 @@ void main() {
 
   //-------- start vertex ------------
   float t = uTime * uSpeed;
-  float distortion =
-      pnoise((normal + t) * uNoiseDensity, vec3(10.0)) * uNoiseStrength;
+  
+  // For seamless loops, sample noise using 4D-like circular interpolation
+  float distortion;
+  float angle;
+  
+  if (uLoop > 0.5) {
+    // Create truly dynamic seamless loop using 4D noise simulation
+    float loopProgress = uTime / uLoopDuration;
+    float loopAngle = loopProgress * 6.28318530718; // 2*PI
+    
+    // Radius scales with speed to maintain consistent visual speed
+    float radius = 5.0 * uSpeed;
+    
+    // Sample 4 noise values at cardinal points
+    vec3 offset0 = vec3(cos(loopAngle) * radius, sin(loopAngle) * radius, 0.0);
+    vec3 offset1 = vec3(cos(loopAngle + 1.57079632679) * radius, sin(loopAngle + 1.57079632679) * radius, 0.0);
+    vec3 offset2 = vec3(cos(loopAngle + 3.14159265359) * radius, sin(loopAngle + 3.14159265359) * radius, 0.0);
+    vec3 offset3 = vec3(cos(loopAngle + 4.71238898038) * radius, sin(loopAngle + 4.71238898038) * radius, 0.0);
+    
+    // Get noise at all 4 points
+    float n0 = pnoise((normal + offset0) * uNoiseDensity, vec3(10.0));
+    float n1 = pnoise((normal + offset1) * uNoiseDensity, vec3(10.0));
+    float n2 = pnoise((normal + offset2) * uNoiseDensity, vec3(10.0));
+    float n3 = pnoise((normal + offset3) * uNoiseDensity, vec3(10.0));
+    
+    // Smooth interpolation weights
+    float w0 = (cos(loopAngle) + 1.0) * 0.5;
+    float w1 = (cos(loopAngle + 1.57079632679) + 1.0) * 0.5;
+    float w2 = (cos(loopAngle + 3.14159265359) + 1.0) * 0.5;
+    float w3 = (cos(loopAngle + 4.71238898038) + 1.0) * 0.5;
+    
+    float totalWeight = w0 + w1 + w2 + w3;
+    w0 /= totalWeight;
+    w1 /= totalWeight;
+    w2 /= totalWeight;
+    w3 /= totalWeight;
+    
+    // Blend samples with amplitude boost to match single-sample strength
+    float blendedNoise = n0 * w0 + n1 * w1 + n2 * w2 + n3 * w3;
+    distortion = blendedNoise * 1.5 * uNoiseStrength;
+    
+    // Apply loop to spiral effect with blended offset
+    float angleOffset = offset0.x * w0 + offset1.x * w1 + offset2.x * w2 + offset3.x * w3;
+    angle = sin(uv.y * uFrequency + angleOffset) * uAmplitude;
+  } else {
+    // Normal linear time progression
+    distortion = pnoise((normal + t) * uNoiseDensity, vec3(10.0)) * uNoiseStrength;
+    angle = sin(uv.y * uFrequency + t) * uAmplitude;
+  }
+  
   vec3 pos = position + (normal * distortion);
-  float angle = sin(uv.y * uFrequency + t) * uAmplitude;
   pos = rotateY(pos, angle);
 
   vPos = pos;

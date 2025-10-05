@@ -113,8 +113,6 @@ export function OpenGIFPage(Component): ComponentType {
           console.log('onClick GIF')
           setAnimate('on')
           setRange('enabled')
-          setRangeStart(5)
-          setRangeEnd(8)
           setPixelDensity(2)
           setToggleAxis(false)
           setZoomOut(false)
@@ -162,11 +160,14 @@ export function extractGIF(Component): ComponentType {
     const [animate, setAnimate] = useQueryState('animate')
     const [, setUTime] = useQueryState('uTime')
     const [range, setRange] = useQueryState('range')
+    const [loop, setLoop] = useQueryState('loop')
+    const [loopDuration, setLoopDuration] = useQueryState('loopDuration')
     const [rangeStart] = useQueryState('rangeStart')
     const [rangeEnd] = useQueryState('rangeEnd')
     const [frameRate] = useQueryState('frameRate')
     const [pixelDensity] = useQueryState('pixelDensity')
     const [destination] = useQueryState('destination')
+
     const [width, setWidth] = useState(333)
     const [height, setHeight] = useState(333)
     const [format] = useQueryState('format')
@@ -220,7 +221,7 @@ export function extractGIF(Component): ComponentType {
       setTimeout(() => {
         updateResolution({ setWidth, setHeight, pixelDensity })
       }, 100) // need a delay until the canvas dom mounted
-    }, [format, duration, pixelDensity, frameRate])
+    }, [format, duration, pixelDensity, frameRate, loop, loopDuration])
 
     // handle resize plugin
     useLayoutEffect(() => {
@@ -389,13 +390,14 @@ export function extractGIF(Component): ComponentType {
   }
 }
 
-// 🟢 ON 'TIMELINE' COMPONENT (Export page)
+// 🟢 ON 'TIMELINE' COMPONENT
 export function Timeline(Component): ComponentType {
   return ({ ...props }: any) => {
     const controls = useAnimationControls()
 
     const [rangeStart] = useQueryState('rangeStart')
     const [rangeEnd] = useQueryState('rangeEnd')
+    const [loop] = useQueryState('loop')
 
     const [duration, setDuration] = useState(0)
 
@@ -404,12 +406,10 @@ export function Timeline(Component): ComponentType {
       if (rangeStart !== undefined && rangeEnd !== undefined) {
         setDuration(rangeEnd - rangeStart)
       }
-    }, [rangeStart, rangeEnd])
+    }, [rangeStart, rangeEnd, loop])
 
     // Handle animation sequence
     useEffect(() => {
-      console.log(duration, 'timeline check')
-
       const runSequence = async () => {
         try {
           controls.set({ width: '0%', transition: { duration: 0 } })
@@ -428,7 +428,7 @@ export function Timeline(Component): ComponentType {
       }
 
       runSequence()
-    }, [duration, controls])
+    }, [duration, controls, loop])
 
     return <Component {...props} animate={controls} />
   }
@@ -469,7 +469,25 @@ export function EstimatedSize(Component): ComponentType {
   }
 }
 
-// 🟢 On the duration of the GIF/video (Export page)
+// 🟢 On the duration bar whole wrapper
+export function TimelineWrapper(Component): ComponentType {
+  return ({ ...props }: any) => {
+    const [animate] = useQueryState('animate')
+    return (
+      <div
+        style={{
+          display: animate === 'on' ? 'block' : 'none',
+          width: '100%',
+          height: '100%',
+        }}
+      >
+        <Component {...props} />
+      </div>
+    )
+  }
+}
+
+// 🟢 On the duration timeline red bar
 export function Duration(Component): ComponentType {
   return ({ ...props }: any) => {
     const [rangeStart] = useQueryState('rangeStart')
@@ -754,9 +772,35 @@ export function HighlightButton(Component): ComponentType {
 }
 
 // 🟢 On the ShaderGradientStateless
-export function EasyViewControl(Component): ComponentType {
+export function StatelessOverride(Component): ComponentType {
   return (props) => {
     const [store, setStore] = useStore()
+    const [loop, setLoop] = useQueryState('loop')
+    const [loopDuration, setLoopDuration] = useQueryState('loopDuration')
+    const [range, setRange] = useQueryState('range')
+    const [rangeStart, setRangeStart] = useQueryState('rangeStart')
+    const [rangeEnd, setRangeEnd] = useQueryState('rangeEnd')
+
+    // Set defaults for loop properties if they don't exist in the url preset
+    // This runs after preset loads, so it won't be overwritten
+    useEffect(() => {
+      if (loop === undefined || loop === null) {
+        setLoop('on')
+      }
+      if (loopDuration === undefined || loopDuration === null) {
+        setLoopDuration(10)
+      }
+    }, [loop, loopDuration])
+
+    // Sync range with loop state
+    useEffect(() => {
+      if (loop === 'on' && loopDuration) {
+        setRange('enabled')
+        setRangeStart(0)
+        setRangeEnd(loopDuration)
+      }
+    }, [loop, loopDuration])
+
     return (
       <Component
         {...props}

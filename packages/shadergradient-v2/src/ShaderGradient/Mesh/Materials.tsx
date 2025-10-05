@@ -9,6 +9,8 @@ export const Materials = ({
   range,
   rangeStart,
   rangeEnd,
+  loop,
+  loopDuration,
   reflection,
   uniforms,
   vertexShader,
@@ -109,17 +111,37 @@ export const Materials = ({
     if (animate === 'on' && material.userData.uTime) {
       let elapsed = localClockRef.current.getElapsedTime()
 
-      if (
-        range === 'enabled' &&
-        Number.isFinite(rangeStart) &&
-        Number.isFinite(rangeEnd) &&
-        rangeEnd > rangeStart
-      ) {
-        elapsed = (rangeStart as number) + elapsed
-        if (elapsed >= (rangeEnd as number)) {
-          elapsed = rangeStart as number
-          // restart the local clock to loop precisely from rangeStart
-          localClockRef.current.start()
+      // Handle loop functionality
+      if (loop === 'on' && Number.isFinite(loopDuration) && loopDuration > 0) {
+        // For seamless loops, we need to ensure the time wraps around smoothly
+        // The shader will handle the circular sampling to make it truly seamless
+        elapsed = elapsed % loopDuration
+
+        // Update loop uniforms
+        if (material.userData.uLoop) {
+          material.userData.uLoop.value = 1.0
+        }
+        if (material.userData.uLoopDuration) {
+          material.userData.uLoopDuration.value = loopDuration
+        }
+      } else {
+        // Disable loop in shader
+        if (material.userData.uLoop) {
+          material.userData.uLoop.value = 0.0
+        }
+
+        if (
+          range === 'enabled' &&
+          Number.isFinite(rangeStart) &&
+          Number.isFinite(rangeEnd) &&
+          rangeEnd > rangeStart
+        ) {
+          elapsed = (rangeStart as number) + elapsed
+          if (elapsed >= (rangeEnd as number)) {
+            elapsed = rangeStart as number
+            // restart the local clock to loop precisely from rangeStart
+            localClockRef.current.start()
+          }
         }
       }
 

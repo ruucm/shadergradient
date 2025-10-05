@@ -11,6 +11,8 @@ export function Mesh({
   range,
   rangeStart,
   rangeEnd,
+  loop,
+  loopDuration,
 
   positionX,
   positionY,
@@ -46,6 +48,8 @@ export function Mesh({
     uFrequency,
     uAmplitude,
     uIntensity: 0.5,
+    uLoop: loop === 'on' ? 1.0 : 0.0,
+    uLoopDuration: loopDuration || 5.0,
   }
 
   // Add glass-specific uniforms
@@ -88,6 +92,8 @@ export function Mesh({
         range={range}
         rangeStart={rangeStart}
         rangeEnd={rangeEnd}
+        loop={loop}
+        loopDuration={loopDuration}
         reflection={reflection}
         shader={shader}
         uniforms={uniforms}

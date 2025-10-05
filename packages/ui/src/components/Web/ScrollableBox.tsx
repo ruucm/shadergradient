@@ -86,6 +86,24 @@ export function ScrollableTextBox() {
     return () => clearTimeout(timer)
   }, [])
 
+  // Restore scroll position from localStorage on mount
+  useEffect(() => {
+    const container = containerRef.current
+    if (!container || itemHeight === 0) return
+
+    // Restore scroll position based on saved activeIndex
+    const targetScrollTop = activeIndex * itemHeight
+    container.scrollTop = targetScrollTop
+
+    if (isDebug) {
+      console.log('Restored scroll position:', targetScrollTop)
+      console.log('Restored activeIndex:', activeIndex)
+    }
+
+    // Also update the store to ensure consistency
+    setStore({ highlightWord: activeIndex })
+  }, [itemHeight]) // Only run when itemHeight is calculated
+
   useEffect(() => {
     const container = containerRef.current
     if (!container) return
@@ -143,7 +161,6 @@ export function ScrollableTextBox() {
     }
 
     container.addEventListener('scroll', handleScroll)
-    handleScroll() // 초기 상태 설정
 
     return () => {
       container.removeEventListener('scroll', handleScroll)

@@ -1,5 +1,11 @@
 # ui
 
+## 0.1.16
+
+### Patch Changes
+
+- fpsCount override
+
 ## 0.1.15
 
 ### Patch Changes

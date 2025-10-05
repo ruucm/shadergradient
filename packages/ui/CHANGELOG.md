@@ -1,5 +1,11 @@
 # ui
 
+## 0.1.18
+
+### Patch Changes
+
+- zustand useScrollableBoxStore
+
 ## 0.1.17
 
 ### Patch Changes

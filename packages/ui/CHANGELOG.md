@@ -1,5 +1,11 @@
 # ui
 
+## 0.1.17
+
+### Patch Changes
+
+- improve ScrollableTextBox
+
 ## 0.1.16
 
 ### Patch Changes

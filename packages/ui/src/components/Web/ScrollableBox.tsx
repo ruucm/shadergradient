@@ -30,7 +30,14 @@ const visibleDelay = 0.3
 
 export function ScrollableTextBox() {
   const containerRef = useRef<HTMLDivElement>(null)
-  const [activeIndex, setActiveIndex] = useState(0)
+  const [activeIndex, setActiveIndex] = useState(() => {
+    // Load activeIndex from localStorage
+    if (typeof window !== 'undefined') {
+      const saved = localStorage.getItem('scrollableBox_activeIndex')
+      return saved ? parseInt(saved, 10) : 0
+    }
+    return 0
+  })
   const [, setStore] = useStore()
   const [itemHeight, setItemHeight] = useState(80)
   const [isVisible, setIsVisible] = useState(false)
@@ -75,6 +82,13 @@ export function ScrollableTextBox() {
       source.start(0)
     }
   }
+
+  // Save activeIndex to localStorage whenever it changes
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('scrollableBox_activeIndex', activeIndex.toString())
+    }
+  }, [activeIndex])
 
   // Add delay before rendering
   useEffect(() => {
@@ -142,6 +156,9 @@ export function ScrollableTextBox() {
     }
 
     container.addEventListener('scroll', handleScroll)
+
+    // Restore scroll position from saved activeIndex
+    container.scrollTop = activeIndex * itemHeight
     handleScroll() // 초기 상태 설정
 
     return () => {

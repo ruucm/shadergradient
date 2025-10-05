@@ -3,6 +3,7 @@ import { useRef, useEffect, useState } from 'react'
 import { createStore } from 'https://framer.com/m/framer/store.js@^1.0.0'
 import { useInView } from 'framer-motion'
 import { useScroll, useTransform, useMotionValueEvent } from 'framer-motion'
+import { useFPS } from './useFPS'
 
 const endSection = 14
 
@@ -366,5 +367,13 @@ export function wordHighlightText(Component): ComponentType {
     return (
       <Component {...props} text={`currentWordNum: ${store.currentWordNum}`} />
     )
+  }
+}
+
+export function fpsCount(Component): ComponentType {
+  return (props) => {
+    const { fps } = useFPS()
+
+    return <Component {...props} text={`fps: ${fps}`} />
   }
 }

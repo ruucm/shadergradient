@@ -1245,6 +1245,7 @@ declare const propertyControls: (ControlType: any, type?: string) => {
         title: string;
         enabledTitle: string;
         disabledTitle: string;
+        defaultValue: boolean;
         hidden: (props: any) => boolean;
     };
     pointerEvents: {

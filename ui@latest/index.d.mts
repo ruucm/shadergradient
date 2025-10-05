@@ -308,6 +308,7 @@ declare namespace ShaderGradientStateless {
             title: string;
             enabledTitle: string;
             disabledTitle: string;
+            defaultValue: boolean;
             hidden: (props: any) => boolean;
         };
         pointerEvents: {

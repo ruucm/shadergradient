@@ -9,7 +9,7 @@ import { formatUrlString } from '@/utils'
 import { Axis } from './Axis'
 
 export function ShaderGradient(passedProps: GradientT) {
-  const { control, urlString, ...rest } = {
+  const { control, urlString, onCameraUpdate, ...rest } = {
     ...presets.halo.props,
     ...passedProps,
   }
@@ -36,7 +36,7 @@ export function ShaderGradient(passedProps: GradientT) {
       {grain !== 'off' && <PostProcessing />}
 
       {toggleAxis && <Axis />}
-      <Controls {...props} />
+      <Controls {...props} onCameraUpdate={onCameraUpdate} />
     </>
   )
 }

@@ -778,6 +778,7 @@ export const propertyControls = (ControlType, type = '') => ({
     title: 'Axis',
     enabledTitle: 'Guide',
     disabledTitle: '-',
+    defaultValue: false,
     hidden: (props) => props.control === 'query',
   },
   pointerEvents: {

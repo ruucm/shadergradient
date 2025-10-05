@@ -7,9 +7,11 @@ import { useEffect, useRef } from 'react'
 // 'https://violet-reservation-285715.framer.app/figma-plugin' // dev
 // const figmaPluginSite =
 // 'https://thriving-instance-690163.framer.app/figma-plugin' // staging
-const figmaPluginSite =
-  'https://thriving-instance-690163-108354a58.framer.app/figma-plugin' // 108354a58
+// const figmaPluginSite =
+//   'https://thriving-instance-690163-108354a58.framer.app/figma-plugin' // 108354a58
 // const figmaPluginSite = 'https://shadergradient.co/figma-plugin'
+const figmaPluginSite =
+  'https://delicious-statuses-566068.framer.app/figma-plugin-wip' // new figma plugin test
 
 const App = () => {
   useShareMessages()

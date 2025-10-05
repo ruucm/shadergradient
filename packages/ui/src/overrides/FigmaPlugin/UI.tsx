@@ -390,13 +390,14 @@ export function extractGIF(Component): ComponentType {
   }
 }
 
-// 🟢 ON 'TIMELINE' COMPONENT (Export page)
+// 🟢 ON 'TIMELINE' COMPONENT
 export function Timeline(Component): ComponentType {
   return ({ ...props }: any) => {
     const controls = useAnimationControls()
 
     const [rangeStart] = useQueryState('rangeStart')
     const [rangeEnd] = useQueryState('rangeEnd')
+    const [loop] = useQueryState('loop')
 
     const [duration, setDuration] = useState(0)
 
@@ -405,12 +406,10 @@ export function Timeline(Component): ComponentType {
       if (rangeStart !== undefined && rangeEnd !== undefined) {
         setDuration(rangeEnd - rangeStart)
       }
-    }, [rangeStart, rangeEnd])
+    }, [rangeStart, rangeEnd, loop])
 
     // Handle animation sequence
     useEffect(() => {
-      console.log(duration, 'timeline check')
-
       const runSequence = async () => {
         try {
           controls.set({ width: '0%', transition: { duration: 0 } })
@@ -429,7 +428,7 @@ export function Timeline(Component): ComponentType {
       }
 
       runSequence()
-    }, [duration, controls])
+    }, [duration, controls, loop])
 
     return <Component {...props} animate={controls} />
   }
@@ -471,7 +470,7 @@ export function EstimatedSize(Component): ComponentType {
 }
 
 // 🟢 On the duration bar whole wrapper
-export function DurationWrapper(Component): ComponentType {
+export function TimelineWrapper(Component): ComponentType {
   return ({ ...props }: any) => {
     const [animate] = useQueryState('animate')
     return (
@@ -782,20 +781,23 @@ export function StatelessOverride(Component): ComponentType {
     const [rangeStart, setRangeStart] = useQueryState('rangeStart')
     const [rangeEnd, setRangeEnd] = useQueryState('rangeEnd')
 
+    // Set defaults for loop properties if they don't exist in the url preset
+    // This runs after preset loads, so it won't be overwritten
     useEffect(() => {
-      // for figma plugin default settings
-      setLoop('on')
-    }, [])
-
-    useEffect(() => {
-      if (loop === 'on') {
+      if (loop === undefined || loop === null) {
+        setLoop('on')
+      }
+      if (loopDuration === undefined || loopDuration === null) {
         setLoopDuration(10)
+      }
+    }, [loop, loopDuration])
+
+    // Sync range with loop state
+    useEffect(() => {
+      if (loop === 'on' && loopDuration) {
         setRange('enabled')
         setRangeStart(0)
         setRangeEnd(loopDuration)
-      } else {
-        setRangeStart(rangeStart)
-        setRangeEnd(rangeEnd)
       }
     }, [loop, loopDuration])
 

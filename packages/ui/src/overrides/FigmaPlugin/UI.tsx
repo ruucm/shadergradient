@@ -586,8 +586,8 @@ export function CopyBtn(Component): ComponentType {
       <Component
         {...props}
         btnText={
-          `${copied === false ? 'Copy ' : 'Yay, Copied '}` +
-          store.share +
+          `${copied === false ? 'Copy ' : 'Yay, copied '}` +
+          `${store.share === 'url' ? 'URL' : 'code'}` +
           `${copied === false ? '' : '!'}`
         }
         onClick={async () => {
@@ -739,13 +739,13 @@ export function HighlightButton(Component): ComponentType {
       <Component
         {...props}
         variant={
-          store.currentTab === 3
+          store.currentTab === 3 && store.easyView === false
             ? 'ToggleBtn - Highlight'
+            : store.easyView === true
+            ? 'ToggleBtn - Clicked'
             : 'ToggleBtn - Default'
         }
         onClick={() => {
-          //@ts-ignore
-          props.onClick()
           setStore({ easyView: !store.easyView })
         }}
       />
@@ -758,7 +758,10 @@ export function EasyViewControl(Component): ComponentType {
   return (props) => {
     const [store, setStore] = useStore()
     return (
-      <Component {...props} pointerEvents={store.easyView ? 'auto' : 'none'} />
+      <Component
+        {...props}
+        pointerEvents={store.easyView === true ? 'auto' : 'none'}
+      />
     )
   }
 }

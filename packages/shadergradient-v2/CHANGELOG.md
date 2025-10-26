@@ -1,5 +1,11 @@
 # shadergradient
 
+## 2.4.4
+
+### Patch Changes
+
+- lazyLoad with rootMargin
+
 ## 2.4.3
 
 ### Patch Changes

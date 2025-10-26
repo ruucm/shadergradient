@@ -1,8 +1,8 @@
 type DebugCategory = 'performance' | 'render'
 
 const debugState: { [key in DebugCategory]: boolean } = {
-  performance: true,
-  render: true
+  performance: false,
+  render: true,
 }
 
 export const debug = {
@@ -13,12 +13,12 @@ export const debug = {
     debugState[category] = false
   },
   enableAll: () => {
-    Object.keys(debugState).forEach(key => {
+    Object.keys(debugState).forEach((key) => {
       debugState[key as DebugCategory] = true
     })
   },
   disableAll: () => {
-    Object.keys(debugState).forEach(key => {
+    Object.keys(debugState).forEach((key) => {
       debugState[key as DebugCategory] = false
     })
   },
@@ -31,7 +31,7 @@ export const debug = {
     if (debugState.render) {
       console.log('[Render]', ...args)
     }
-  }
+  },
 }
 
 // Expose the 'debug' function to the global 'window' object for accessibility across the application

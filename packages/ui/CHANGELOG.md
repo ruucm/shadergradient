@@ -1,5 +1,11 @@
 # ui
 
+## 0.1.27
+
+### Patch Changes
+
+- refactor TextAnimation component
+
 ## 0.1.26
 
 ### Patch Changes

@@ -198,6 +198,7 @@ export function ScrollableTextBox() {
           scrollSnapType: 'y mandatory',
           msOverflowStyle: 'none',
           scrollbarWidth: 'none',
+          overflowX: 'hidden',
           ...(isDebug ? { background: 'rgba(0,255,0,0.25)' } : {}), // debug
         }}
       >

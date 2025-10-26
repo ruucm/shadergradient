@@ -114,8 +114,6 @@ export function randomGradient(Component): ComponentType {
   return (props) => {
     const [store, setStore] = useStore()
 
-    console.log('store.randomColor', store.randomColor)
-
     return (
       <Component
         {...props}

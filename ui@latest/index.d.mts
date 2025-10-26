@@ -380,6 +380,14 @@ declare namespace ShaderGradientStateless {
             title: string;
             hidden: (props: any) => boolean;
         };
+        rootMargin: {
+            type: any;
+            placeholder: string;
+            defaultValue: string;
+            title: string;
+            description: string;
+            hidden: (props: any) => boolean;
+        };
     };
 }
 

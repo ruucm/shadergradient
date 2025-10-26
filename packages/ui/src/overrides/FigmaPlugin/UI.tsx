@@ -7,7 +7,7 @@ import {
   useCallback,
 } from 'react'
 
-import { useFigma, useUIStore } from '../../store'
+import { useFigma, useUIStore, useFigmaPluginStore } from '../../store'
 
 import {
   figma,
@@ -17,7 +17,6 @@ import {
 } from './FigmaApi'
 
 import { useAnimationControls, useInView } from 'framer-motion'
-import { createStore } from 'https://framer.com/m/framer/store.js@^1.0.0'
 
 import { useDBTable } from 'https://framer.com/m/SupabaseConnector-ARlr.js'
 
@@ -36,13 +35,6 @@ import {
   parseUrlToCode,
   copyToClipboard,
 } from './utils'
-
-const useStore = createStore({
-  currentTab: 0,
-  scrollingTo: null,
-  share: 'url', // url or code
-  easyView: false,
-})
 
 // 🟢 ON 'SNAPSHOT' BUTTON
 export function insertCanvasAsImage(Component): ComponentType {
@@ -558,17 +550,18 @@ export function Error(Component): ComponentType {
 // 🟢 On the url<>code toggle (Share page)
 export function ToggleShare(Component): ComponentType {
   return ({ ...props }: any) => {
-    const [store, setStore] = useStore()
+    const share = useFigmaPluginStore((state) => state.share)
+    const setShare = useFigmaPluginStore((state) => state.setShare)
 
     return (
       <Component
         {...props}
-        variant={store.share}
+        variant={share}
         onClickUrl={() => {
-          setStore({ share: 'Url' })
+          setShare('Url')
         }}
         onClickCode={() => {
-          setStore({ share: 'Code' })
+          setShare('Code')
         }}
       />
     )
@@ -596,7 +589,7 @@ export function ShowCopyContent(Component): ComponentType {
 // 🟢 On the copy button (Share page)
 export function CopyBtn(Component): ComponentType {
   return (props) => {
-    const [store, setStore] = useStore()
+    const share = useFigmaPluginStore((state) => state.share)
     const [copied, setCopied] = useState(false)
     const baseURL = 'https://shadergradient.co/customize'
 
@@ -605,13 +598,13 @@ export function CopyBtn(Component): ComponentType {
         {...props}
         btnText={
           `${copied === false ? 'Copy ' : 'Yay, copied '}` +
-          `${store.share === 'url' ? 'URL' : 'code'}` +
+          `${share === 'url' ? 'URL' : 'code'}` +
           `${copied === false ? '' : '!'}`
         }
         onClick={async () => {
           setCopied(true)
           const textToCopy =
-            store.share === 'url'
+            share === 'url'
               ? baseURL + window.location.search
               : parseUrlToCode(baseURL + window.location.search)
 
@@ -630,32 +623,33 @@ export function CopyBtn(Component): ComponentType {
 // 🟢 On the tab switcher
 export function TabSwitcher(Component): ComponentType {
   return (props) => {
-    const [store, setStore] = useStore()
+    const currentTab = useFigmaPluginStore((state) => state.currentTab)
+    const setScrollingTo = useFigmaPluginStore((state) => state.setScrollingTo)
     const scrollBehavior = { behavior: 'smooth', block: 'start' }
 
     return (
       <Component
         {...props}
-        variant={'Tab' + store.currentTab}
+        variant={'Tab' + currentTab}
         tab0Click={() => {
-          setStore({ scrollingTo: 0 })
+          setScrollingTo(0)
           const tab0 = document.getElementById('tab0')
           tab0.scrollIntoView(scrollBehavior as ScrollIntoViewOptions)
         }}
         tab1Click={() => {
-          setStore({ scrollingTo: 1 })
+          setScrollingTo(1)
 
           const tab1 = document.getElementById('tab1')
           tab1.scrollIntoView(scrollBehavior as ScrollIntoViewOptions)
         }}
         tab2Click={() => {
-          setStore({ scrollingTo: 2 })
+          setScrollingTo(2)
 
           const tab2 = document.getElementById('tab2')
           tab2.scrollIntoView(scrollBehavior as ScrollIntoViewOptions)
         }}
         tab3Click={() => {
-          setStore({ scrollingTo: 3 })
+          setScrollingTo(3)
 
           const tab3 = document.getElementById('tab3')
           tab3.scrollIntoView(scrollBehavior as ScrollIntoViewOptions)
@@ -667,104 +661,114 @@ export function TabSwitcher(Component): ComponentType {
 
 export function ShapeTab(Component): ComponentType {
   return (props) => {
-    const [store, setStore] = useStore()
+    const scrollingTo = useFigmaPluginStore((state) => state.scrollingTo)
+    const setCurrentTab = useFigmaPluginStore((state) => state.setCurrentTab)
+    const setScrollingTo = useFigmaPluginStore((state) => state.setScrollingTo)
     const ref = useRef(null)
     const isInView = useInView(ref, {
       amount: 0.6, // at least 60% in view to be considered visible
     })
     useEffect(() => {
-      if (isInView && store.scrollingTo === null) {
-        setStore({ currentTab: 0 })
-      } else if (isInView && store.scrollingTo === 0) {
-        setStore({ currentTab: 0 })
+      if (isInView && scrollingTo === null) {
+        setCurrentTab(0)
+      } else if (isInView && scrollingTo === 0) {
+        setCurrentTab(0)
         setTimeout(() => {
-          setStore({ scrollingTo: null })
+          setScrollingTo(null)
         }, 100)
       }
-    }, [isInView, store.scrollingTo])
+    }, [isInView, scrollingTo])
     return <Component {...props} ref={ref} id='tab0' />
   }
 }
 
 export function ColorsTab(Component): ComponentType {
   return (props) => {
-    const [store, setStore] = useStore()
+    const scrollingTo = useFigmaPluginStore((state) => state.scrollingTo)
+    const setCurrentTab = useFigmaPluginStore((state) => state.setCurrentTab)
+    const setScrollingTo = useFigmaPluginStore((state) => state.setScrollingTo)
     const ref = useRef(null)
     const isInView = useInView(ref, {
       amount: 0.6, // at least 60% in view to be considered visible
     })
     useEffect(() => {
-      if (isInView && store.scrollingTo === null) {
-        setStore({ currentTab: 1 })
-      } else if (isInView && store.scrollingTo === 1) {
-        setStore({ currentTab: 1 })
+      if (isInView && scrollingTo === null) {
+        setCurrentTab(1)
+      } else if (isInView && scrollingTo === 1) {
+        setCurrentTab(1)
         setTimeout(() => {
-          setStore({ scrollingTo: null })
+          setScrollingTo(null)
         }, 100)
       }
-    }, [isInView, store.scrollingTo])
+    }, [isInView, scrollingTo])
     return <Component {...props} ref={ref} id='tab1' />
   }
 }
 
 export function MotionTab(Component): ComponentType {
   return (props) => {
-    const [store, setStore] = useStore()
+    const scrollingTo = useFigmaPluginStore((state) => state.scrollingTo)
+    const setCurrentTab = useFigmaPluginStore((state) => state.setCurrentTab)
+    const setScrollingTo = useFigmaPluginStore((state) => state.setScrollingTo)
     const ref = useRef(null)
     const isInView = useInView(ref, {
       amount: 0.6, // at least 60% in view to be considered visible
     })
     useEffect(() => {
-      if (isInView && store.scrollingTo === null) {
-        setStore({ currentTab: 2 })
-      } else if (isInView && store.scrollingTo === 2) {
-        setStore({ currentTab: 2 })
+      if (isInView && scrollingTo === null) {
+        setCurrentTab(2)
+      } else if (isInView && scrollingTo === 2) {
+        setCurrentTab(2)
         setTimeout(() => {
-          setStore({ scrollingTo: null })
+          setScrollingTo(null)
         }, 100)
       }
-    }, [isInView, store.scrollingTo])
+    }, [isInView, scrollingTo])
     return <Component {...props} ref={ref} id='tab2' />
   }
 }
 
 export function ViewTab(Component): ComponentType {
   return (props) => {
-    const [store, setStore] = useStore()
+    const scrollingTo = useFigmaPluginStore((state) => state.scrollingTo)
+    const setCurrentTab = useFigmaPluginStore((state) => state.setCurrentTab)
+    const setScrollingTo = useFigmaPluginStore((state) => state.setScrollingTo)
     const ref = useRef(null)
     const isInView = useInView(ref, {
       amount: 0.6, // at least 60% in view to be considered visible
     })
     useEffect(() => {
-      if (isInView && store.scrollingTo === null) {
-        setStore({ currentTab: 3 })
-      } else if (isInView && store.scrollingTo === 3) {
-        setStore({ currentTab: 3 })
+      if (isInView && scrollingTo === null) {
+        setCurrentTab(3)
+      } else if (isInView && scrollingTo === 3) {
+        setCurrentTab(3)
         setTimeout(() => {
-          setStore({ scrollingTo: null })
+          setScrollingTo(null)
         }, 100)
       }
-    }, [isInView, store.scrollingTo])
+    }, [isInView, scrollingTo])
     return <Component {...props} ref={ref} id='tab3' />
   }
 }
 
 export function HighlightButton(Component): ComponentType {
   return (props) => {
-    const [store, setStore] = useStore()
+    const currentTab = useFigmaPluginStore((state) => state.currentTab)
+    const easyView = useFigmaPluginStore((state) => state.easyView)
+    const setEasyView = useFigmaPluginStore((state) => state.setEasyView)
 
     return (
       <Component
         {...props}
         variant={
-          store.currentTab === 3 && store.easyView === false
+          currentTab === 3 && easyView === false
             ? 'ToggleBtn - Highlight'
-            : store.easyView === true
+            : easyView === true
             ? 'ToggleBtn - Clicked'
             : 'ToggleBtn - Default'
         }
         onClick={() => {
-          setStore({ easyView: !store.easyView })
+          setEasyView(!easyView)
         }}
       />
     )
@@ -774,7 +778,7 @@ export function HighlightButton(Component): ComponentType {
 // 🟢 On the ShaderGradientStateless
 export function StatelessOverride(Component): ComponentType {
   return (props) => {
-    const [store, setStore] = useStore()
+    const easyView = useFigmaPluginStore((state) => state.easyView)
     const [loop, setLoop] = useQueryState('loop')
     const [loopDuration, setLoopDuration] = useQueryState('loopDuration')
     const [range, setRange] = useQueryState('range')
@@ -804,7 +808,7 @@ export function StatelessOverride(Component): ComponentType {
     return (
       <Component
         {...props}
-        pointerEvents={store.easyView === true ? 'auto' : 'none'}
+        pointerEvents={easyView === true ? 'auto' : 'none'}
       />
     )
   }

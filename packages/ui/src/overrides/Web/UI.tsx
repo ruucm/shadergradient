@@ -1,8 +1,7 @@
 import type { ComponentType } from 'react'
 
 import { useState, useEffect } from 'react'
-import { createStore } from 'https://framer.com/m/framer/store.js@^1.0.0'
-import { useUIStore } from '@/store'
+import { useUIStore, useUIOverrideStore } from '@/store'
 import {
   PRESETS,
   useURLQueryState,
@@ -86,16 +85,6 @@ export function PresetTitle(Component): ComponentType {
  *                         GRADIENT OVERRIDES
  * -----------------------------------------------------------------*/
 
-const useStore = createStore({
-  randomColor: [
-    [100, 180, 255],
-    [92, 92, 124],
-    [200, 200, 200],
-  ],
-  slider: 0,
-  toggle: false,
-})
-
 const getRandomInt = (max) => {
   return Math.floor(Math.random() * max)
 }
@@ -112,36 +101,36 @@ const rgbToHex = (r, g, b) =>
 // FOR RANDOMIZE INTERACTION
 export function randomGradient(Component): ComponentType {
   return (props) => {
-    const [store, setStore] = useStore()
+    const randomColor = useUIOverrideStore((state) => state.randomColor)
 
     return (
       <Component
         {...props}
         color1={
           'rgb(' +
-          store.randomColor[0][0] +
+          randomColor[0][0] +
           ', ' +
-          store.randomColor[0][1] +
+          randomColor[0][1] +
           ', ' +
-          store.randomColor[0][2] +
+          randomColor[0][2] +
           ')'
         }
         color2={
           'rgb(' +
-          store.randomColor[1][0] +
+          randomColor[1][0] +
           ', ' +
-          store.randomColor[1][1] +
+          randomColor[1][1] +
           ', ' +
-          store.randomColor[1][2] +
+          randomColor[1][2] +
           ')'
         }
         color3={
           'rgb(' +
-          store.randomColor[2][0] +
+          randomColor[2][0] +
           ', ' +
-          store.randomColor[2][1] +
+          randomColor[2][1] +
           ', ' +
-          store.randomColor[2][2] +
+          randomColor[2][2] +
           ')'
         }
       />
@@ -151,23 +140,23 @@ export function randomGradient(Component): ComponentType {
 
 export function randomText(Component): ComponentType {
   return (props) => {
-    const [store, setStore] = useStore()
+    const randomColor = useUIOverrideStore((state) => state.randomColor)
 
     return (
       <Component
         {...props}
         text={`${rgbToHex(
-          store.randomColor[0][0],
-          store.randomColor[0][1],
-          store.randomColor[0][2]
+          randomColor[0][0],
+          randomColor[0][1],
+          randomColor[0][2]
         )} - ${rgbToHex(
-          store.randomColor[1][0],
-          store.randomColor[1][1],
-          store.randomColor[1][2]
+          randomColor[1][0],
+          randomColor[1][1],
+          randomColor[1][2]
         )} - ${rgbToHex(
-          store.randomColor[2][0],
-          store.randomColor[2][1],
-          store.randomColor[2][2]
+          randomColor[2][0],
+          randomColor[2][1],
+          randomColor[2][2]
         )}`}
       />
     )
@@ -176,7 +165,7 @@ export function randomText(Component): ComponentType {
 
 export function randomBtn(Component): ComponentType {
   return (props) => {
-    const [store, setStore] = useStore()
+    const setRandomColor = useUIOverrideStore((state) => state.setRandomColor)
 
     return (
       <Component
@@ -185,13 +174,11 @@ export function randomBtn(Component): ComponentType {
         // style={{ userSelect: "none" }}
         onClick={() => {
           console.log('onClick')
-          setStore({
-            randomColor: [
-              [getRandomInt(255), getRandomInt(255), getRandomInt(255)],
-              [getRandomInt(255), getRandomInt(255), getRandomInt(255)],
-              [getRandomInt(255), getRandomInt(255), getRandomInt(255)],
-            ],
-          })
+          setRandomColor([
+            [getRandomInt(255), getRandomInt(255), getRandomInt(255)],
+            [getRandomInt(255), getRandomInt(255), getRandomInt(255)],
+            [getRandomInt(255), getRandomInt(255), getRandomInt(255)],
+          ])
         }}
       />
     )
@@ -201,16 +188,16 @@ export function randomBtn(Component): ComponentType {
 // FOR SLIDER INTERACTION
 export function time(Component): ComponentType {
   return (props) => {
-    const [store, setStore] = useStore()
+    const slider = useUIOverrideStore((state) => state.slider)
     const [hour, setHour] = useState(7)
     const [min, setMin] = useState(0)
     const [totalMin, setTotalMin] = useState(0)
     useEffect(() => {
       // slider 0-> 07:00, slider 100-> 22:00
-      setTotalMin((900 * store.slider) / 100)
+      setTotalMin((900 * slider) / 100)
       setHour(7 + Math.floor(totalMin / 60))
       setMin(Math.floor(totalMin % 60))
-    }, [store.slider])
+    }, [slider])
     return (
       <Component
         {...props}
@@ -222,13 +209,13 @@ export function time(Component): ComponentType {
 
 export function slider(Component): ComponentType {
   return (props) => {
-    const [store, setStore] = useStore()
+    const setSlider = useUIOverrideStore((state) => state.setSlider)
 
     return (
       <Component
         {...props}
         onChange={(e) => {
-          setStore({ slider: e })
+          setSlider(e)
         }}
       />
     )
@@ -239,7 +226,7 @@ const toRGBArray = (rgbStr) => rgbStr?.match(/\d+/g).map(Number)
 
 export function sliderSmartComp(Component): ComponentType {
   return (props: any) => {
-    const [store, setStore] = useStore()
+    const slider = useUIOverrideStore((state) => state.slider)
     var initial1 = toRGBArray(props.initialColor1)
     var initial2 = toRGBArray(props.initialColor2)
     var initial3 = toRGBArray(props.initialColor3)
@@ -249,17 +236,11 @@ export function sliderSmartComp(Component): ComponentType {
 
     const init1 =
       'rgb(' +
-      Math.round(
-        initial1[0] - ((initial1[0] - switch1[0]) * store.slider) / 100
-      ) +
+      Math.round(initial1[0] - ((initial1[0] - switch1[0]) * slider) / 100) +
       ', ' +
-      Math.round(
-        initial1[1] - ((initial1[1] - switch1[1]) * store.slider) / 100
-      ) +
+      Math.round(initial1[1] - ((initial1[1] - switch1[1]) * slider) / 100) +
       ', ' +
-      Math.round(
-        initial1[2] - ((initial1[2] - switch1[2]) * store.slider) / 100
-      ) +
+      Math.round(initial1[2] - ((initial1[2] - switch1[2]) * slider) / 100) +
       ')'
 
     return (
@@ -268,45 +249,45 @@ export function sliderSmartComp(Component): ComponentType {
         initialColor1={
           'rgb(' +
           Math.round(
-            initial1[0] - ((initial1[0] - switch1[0]) * store.slider) / 100
+            initial1[0] - ((initial1[0] - switch1[0]) * slider) / 100
           ) +
           ', ' +
           Math.round(
-            initial1[1] - ((initial1[1] - switch1[1]) * store.slider) / 100
+            initial1[1] - ((initial1[1] - switch1[1]) * slider) / 100
           ) +
           ', ' +
           Math.round(
-            initial1[2] - ((initial1[2] - switch1[2]) * store.slider) / 100
+            initial1[2] - ((initial1[2] - switch1[2]) * slider) / 100
           ) +
           ')'
         }
         initialColor2={
           'rgb(' +
           Math.round(
-            initial2[0] - ((initial2[0] - switch2[0]) * store.slider) / 100
+            initial2[0] - ((initial2[0] - switch2[0]) * slider) / 100
           ) +
           ', ' +
           Math.round(
-            initial2[1] - ((initial2[1] - switch2[1]) * store.slider) / 100
+            initial2[1] - ((initial2[1] - switch2[1]) * slider) / 100
           ) +
           ', ' +
           Math.round(
-            initial2[2] - ((initial2[2] - switch2[2]) * store.slider) / 100
+            initial2[2] - ((initial2[2] - switch2[2]) * slider) / 100
           ) +
           ')'
         }
         initialColor3={
           'rgb(' +
           Math.round(
-            initial3[0] - ((initial3[0] - switch3[0]) * store.slider) / 100
+            initial3[0] - ((initial3[0] - switch3[0]) * slider) / 100
           ) +
           ', ' +
           Math.round(
-            initial3[1] - ((initial3[1] - switch3[1]) * store.slider) / 100
+            initial3[1] - ((initial3[1] - switch3[1]) * slider) / 100
           ) +
           ', ' +
           Math.round(
-            initial3[2] - ((initial3[2] - switch3[2]) * store.slider) / 100
+            initial3[2] - ((initial3[2] - switch3[2]) * slider) / 100
           ) +
           ')'
         }
@@ -318,13 +299,10 @@ export function sliderSmartComp(Component): ComponentType {
 // FOR TOGGLE INTERACTION
 export function toggleSmartComp(Component): ComponentType {
   return (props) => {
-    const [store, setStore] = useStore()
+    const toggle = useUIOverrideStore((state) => state.toggle)
 
     return (
-      <Component
-        {...props}
-        variant={store.toggle === true ? 'Switch' : 'Initial'}
-      />
+      <Component {...props} variant={toggle === true ? 'Switch' : 'Initial'} />
     )
   }
 }

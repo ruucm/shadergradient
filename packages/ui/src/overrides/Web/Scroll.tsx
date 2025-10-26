@@ -1,36 +1,28 @@
 import type { ComponentType } from 'react'
 import { useRef, useEffect, useState } from 'react'
-import { createStore } from 'https://framer.com/m/framer/store.js@^1.0.0'
 import { useInView } from 'framer-motion'
 import { useScroll, useTransform, useMotionValueEvent } from 'framer-motion'
 import { useFPS } from './useFPS'
+import { useScrollStore } from '@/store'
 
 const endSection = 14
 
-export const useStore = createStore({
-  // highlightVariant: "default",
-  highlightWord: 0,
-  currentSection: 0,
-})
-
 export function SectionText(Component): ComponentType {
   return (props) => {
-    const [store, setStore] = useStore()
+    const currentSection = useScrollStore((state) => state.currentSection)
 
-    return (
-      <Component {...props} text={`currentSection: ${store.currentSection}`} />
-    )
+    return <Component {...props} text={`currentSection: ${currentSection}`} />
   }
 }
 
 export function SectionObserver(Component): ComponentType {
   return (props: any) => {
-    const [store, setStore] = useStore()
+    const setCurrentSection = useScrollStore((state) => state.setCurrentSection)
     const ref = useRef(null)
     const isInView = useInView(ref)
 
     useEffect(() => {
-      if (isInView) setStore({ currentSection: props.name })
+      if (isInView) setCurrentSection(props.name)
     }, [isInView])
 
     return <Component {...props} ref={ref} />
@@ -50,9 +42,9 @@ export function Gap(Component): ComponentType {
 
 export function CenterCrop1(Component): ComponentType {
   return ({ style, ...props }: { style: React.CSSProperties }) => {
-    const [store, setStore] = useStore()
+    const currentSection = useScrollStore((state) => state.currentSection)
 
-    const opacity = isBottomSection(store.currentSection) ? 0 : 1
+    const opacity = isBottomSection(currentSection) ? 0 : 1
 
     return <Component {...props} style={{ ...style, opacity }} />
   }
@@ -60,9 +52,9 @@ export function CenterCrop1(Component): ComponentType {
 
 export function CenterCrop2(Component): ComponentType {
   return ({ style, ...props }: { style: React.CSSProperties }) => {
-    const [store, setStore] = useStore()
+    const currentSection = useScrollStore((state) => state.currentSection)
 
-    const opacity = isBottomSection(store.currentSection) ? 1 : 0
+    const opacity = isBottomSection(currentSection) ? 1 : 0
 
     return <Component {...props} style={{ ...style, opacity }} />
   }
@@ -81,7 +73,7 @@ function isBottomSection(sectionName) {
 
 export function WordGradient(Component: ComponentType<any>): ComponentType {
   return (props) => {
-    const [store, setStore] = useStore()
+    const highlightWord = useScrollStore((state) => state.highlightWord)
 
     // const { scrollY } = useScroll()
 
@@ -156,9 +148,7 @@ export function WordGradient(Component: ComponentType<any>): ComponentType {
           {...props}
           // variant={variant}
           // variant={store.variant || props.variant || "default"}
-          variant={
-            store.highlightWord ? `customize-${store.highlightWord}` : 'default'
-          }
+          variant={highlightWord ? `customize-${highlightWord}` : 'default'}
         />
       </div>
     )
@@ -168,7 +158,7 @@ export function WordGradient(Component: ComponentType<any>): ComponentType {
 export function WordGradientText(Component: ComponentType<any>): ComponentType {
   return (props: any) => {
     const targetRef = useRef<HTMLDivElement>(null)
-    const [store, setStore] = useStore()
+    const setHighlightWord = useScrollStore((state) => state.setHighlightWord)
 
     // Use element-based scroll detection
     const { scrollYProgress } = useScroll({
@@ -200,10 +190,7 @@ export function WordGradientText(Component: ComponentType<any>): ComponentType {
           // Use default variant when outside range
           const defaultVariant = props.variant || 'default'
           console.log('🔄 Using default variant:', defaultVariant)
-          setStore({
-            ...store,
-            variant: defaultVariant,
-          })
+          setHighlightWord(0)
         }
       })
 
@@ -214,15 +201,11 @@ export function WordGradientText(Component: ComponentType<any>): ComponentType {
         if (currentProgress > 0 && currentProgress < 1) {
           const roundedNumber = Math.round(latest)
           const clampedNumber = Math.max(1, Math.min(12, roundedNumber))
-          const newVariant = `customize-${clampedNumber}`
 
           console.log('📊 variantNumber:', latest.toFixed(3))
-          console.log('🎨 variant changed to:', newVariant)
+          console.log('🎨 variant changed to:', clampedNumber)
 
-          setStore({
-            ...store,
-            variant: newVariant,
-          })
+          setHighlightWord(clampedNumber)
         }
       })
 
@@ -230,7 +213,7 @@ export function WordGradientText(Component: ComponentType<any>): ComponentType {
         unsubscribeScrollY()
         unsubscribe()
       }
-    }, [variantNumber, scrollYProgress, props.variant, store, setStore])
+    }, [variantNumber, scrollYProgress, props.variant, setHighlightWord])
 
     return (
       <div ref={targetRef}>
@@ -287,7 +270,8 @@ export function WordHighlight2(Component): ComponentType {
     console.log('props', props)
     const word = props.children.props.children.props.children
 
-    const [store, setStore] = useStore()
+    const setHighlightWord = useScrollStore((state) => state.setHighlightWord)
+    const currentSection = useScrollStore((state) => state.currentSection)
 
     const container = useRef(null)
     const ref = useRef(null)
@@ -303,8 +287,8 @@ export function WordHighlight2(Component): ComponentType {
     useEffect(() => {
       console.log('word', word)
       console.log('isInView', isInView)
-      if (isInView) setStore({ currentWordNum: word })
-    }, [isInView, store.currentSection])
+      if (isInView) setHighlightWord(word)
+    }, [isInView, currentSection])
 
     return (
       <>
@@ -331,7 +315,8 @@ export function WordHighlight2(Component): ComponentType {
 export function WordHighlight(Component): ComponentType {
   return (props: any) => {
     const sectionNumber = parseInt(props.name)
-    const [store, setStore] = useStore()
+    const setHighlightWord = useScrollStore((state) => state.setHighlightWord)
+    const currentSection = useScrollStore((state) => state.currentSection)
     const ref = useRef(null)
     const isInView = useInView(ref, { margin: '0px 0px 0px 0px' })
 
@@ -352,9 +337,9 @@ export function WordHighlight(Component): ComponentType {
       // } else {
       //     setStore({ currentWordNum: -1 })
       // }
-      if (isInView === true) setStore({ currentWordNum: sectionNumber })
-      else setStore({ currentWordNum: -1 })
-    }, [isInView, store.currentSection])
+      if (isInView === true) setHighlightWord(sectionNumber)
+      else setHighlightWord(-1)
+    }, [isInView, currentSection])
 
     return <Component {...props} ref={ref} />
   }
@@ -362,11 +347,9 @@ export function WordHighlight(Component): ComponentType {
 
 export function wordHighlightText(Component): ComponentType {
   return (props) => {
-    const [store, setStore] = useStore()
+    const highlightWord = useScrollStore((state) => state.highlightWord)
 
-    return (
-      <Component {...props} text={`currentWordNum: ${store.currentWordNum}`} />
-    )
+    return <Component {...props} text={`currentWordNum: ${highlightWord}`} />
   }
 }
 

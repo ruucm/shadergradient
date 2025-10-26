@@ -72,3 +72,64 @@ export function useBillingInterval() {
   )
   return [billingInterval, setBillingInterval]
 }
+
+// Scroll store for Web/Scroll.tsx
+interface ScrollStore {
+  highlightWord: number
+  currentSection: number
+  setHighlightWord: (word: number) => void
+  setCurrentSection: (section: number) => void
+}
+
+export const useScrollStore = create<ScrollStore>()((set) => ({
+  highlightWord: 0,
+  currentSection: 0,
+  setHighlightWord: (word: number) => set({ highlightWord: word }),
+  setCurrentSection: (section: number) => set({ currentSection: section }),
+}))
+
+// UI store for Web/UI.tsx
+interface UIOverrideStore {
+  randomColor: number[][]
+  slider: number
+  toggle: boolean
+  setRandomColor: (color: number[][]) => void
+  setSlider: (slider: number) => void
+  setToggle: (toggle: boolean) => void
+}
+
+export const useUIOverrideStore = create<UIOverrideStore>()((set) => ({
+  randomColor: [
+    [100, 180, 255],
+    [92, 92, 124],
+    [200, 200, 200],
+  ],
+  slider: 0,
+  toggle: false,
+  setRandomColor: (color: number[][]) => set({ randomColor: color }),
+  setSlider: (slider: number) => set({ slider }),
+  setToggle: (toggle: boolean) => set({ toggle }),
+}))
+
+// FigmaPlugin store for FigmaPlugin/UI.tsx
+interface FigmaPluginStore {
+  currentTab: number
+  scrollingTo: number | null
+  share: string
+  easyView: boolean
+  setCurrentTab: (tab: number) => void
+  setScrollingTo: (to: number | null) => void
+  setShare: (share: string) => void
+  setEasyView: (easyView: boolean) => void
+}
+
+export const useFigmaPluginStore = create<FigmaPluginStore>()((set) => ({
+  currentTab: 0,
+  scrollingTo: null,
+  share: 'url',
+  easyView: false,
+  setCurrentTab: (tab: number) => set({ currentTab: tab }),
+  setScrollingTo: (to: number | null) => set({ scrollingTo: to }),
+  setShare: (share: string) => set({ share }),
+  setEasyView: (easyView: boolean) => set({ easyView }),
+}))

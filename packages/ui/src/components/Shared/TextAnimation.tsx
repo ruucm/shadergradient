@@ -1,6 +1,5 @@
-import { useState, useEffect } from 'react'
-import { motion, useAnimation } from 'framer-motion'
-import { useInView } from 'react-intersection-observer'
+import { useState, useEffect, useRef } from 'react'
+import { motion, useAnimation, useInView } from 'framer-motion'
 
 export function TextAnimation({
   fontSize,
@@ -43,9 +42,11 @@ export function TextAnimation({
     },
   }
 
-  const [ref, inView] = useInView()
+  const ref = useRef(null)
+  const inView = useInView(ref)
   const controls = useAnimation()
   const [activePresetInView, setActivePresetInView] = useState(false)
+
   useEffect(() => {
     if (inView) {
       controls.start('after')
@@ -54,9 +55,13 @@ export function TextAnimation({
     }
   }, [controls, inView])
 
-  setTimeout(() => {
-    setActivePresetInView(true)
-  }, delay)
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setActivePresetInView(true)
+    }, delay)
+
+    return () => clearTimeout(timer)
+  }, [delay])
   return (
     <>
       {activePresetInView && (

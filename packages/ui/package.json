@@ -36,7 +36,6 @@
     "globby": "^14.0.2",
     "query-string": "^7.1.1",
     "react": "^18.2.0",
-    "react-intersection-observer": "^9.4.1",
     "react-slider": "^2.0.4",
     "socket.io": "^4.7.5",
     "tailwind-config": "workspace:*",

@@ -110,6 +110,8 @@ varying float vDistort;
 
 uniform float uTime;
 uniform float uSpeed;
+uniform float uLoop;
+uniform float uLoopDuration;
 uniform float uNoiseDensity;
 uniform float uNoiseStrength;
 
@@ -165,8 +167,50 @@ void main() {
 
   //-------- start vertex ------------
   float t = uTime * uSpeed;
-  // Create a sine wave from top to bottom of the sphere
-  float distortion = 0.75 * cnoise(0.43 * position * uNoiseDensity + t);
+  
+  // For seamless loops, sample noise using 4D-like circular interpolation
+  vec3 noisePos = 0.43 * position * uNoiseDensity;
+  float distortion;
+  
+  if (uLoop > 0.5) {
+    // Create truly dynamic seamless loop using 4D noise simulation
+    float loopProgress = uTime / uLoopDuration;
+    float angle = loopProgress * 6.28318530718; // 2*PI
+    
+    // Radius scales with speed to maintain consistent visual speed
+    float radius = 5.0 * uSpeed;
+    
+    // Sample 4 noise values at cardinal points
+    vec3 offset0 = vec3(cos(angle) * radius, sin(angle) * radius, 0.0);
+    vec3 offset1 = vec3(cos(angle + 1.57079632679) * radius, sin(angle + 1.57079632679) * radius, 0.0);
+    vec3 offset2 = vec3(cos(angle + 3.14159265359) * radius, sin(angle + 3.14159265359) * radius, 0.0);
+    vec3 offset3 = vec3(cos(angle + 4.71238898038) * radius, sin(angle + 4.71238898038) * radius, 0.0);
+    
+    // Get noise at all 4 points
+    float n0 = cnoise(noisePos + offset0);
+    float n1 = cnoise(noisePos + offset1);
+    float n2 = cnoise(noisePos + offset2);
+    float n3 = cnoise(noisePos + offset3);
+    
+    // Smooth interpolation weights
+    float w0 = (cos(angle) + 1.0) * 0.5;
+    float w1 = (cos(angle + 1.57079632679) + 1.0) * 0.5;
+    float w2 = (cos(angle + 3.14159265359) + 1.0) * 0.5;
+    float w3 = (cos(angle + 4.71238898038) + 1.0) * 0.5;
+    
+    float totalWeight = w0 + w1 + w2 + w3;
+    w0 /= totalWeight;
+    w1 /= totalWeight;
+    w2 /= totalWeight;
+    w3 /= totalWeight;
+    
+    // Blend samples with amplitude boost to match single-sample strength
+    float blendedNoise = n0 * w0 + n1 * w1 + n2 * w2 + n3 * w3;
+    distortion = 0.75 * blendedNoise * 1.5;
+  } else {
+    // Normal linear time progression
+    distortion = 0.75 * cnoise(noisePos + t);
+  }
 
   vec3 pos = position + normal * distortion * uNoiseStrength;
   vPos = pos;

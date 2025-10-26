@@ -17,6 +17,8 @@ export function useControlValues(
   const [range] = useQueryState('range')
   const [rangeStart] = useQueryState('rangeStart')
   const [rangeEnd] = useQueryState('rangeEnd')
+  const [loop] = useQueryState('loop')
+  const [loopDuration] = useQueryState('loopDuration')
   const [uTime] = useQueryState('uTime')
   const [uSpeed] = useQueryState('uSpeed')
   const [uStrength] = useQueryState('uStrength')
@@ -69,6 +71,8 @@ export function useControlValues(
     range,
     rangeStart,
     rangeEnd,
+    loop,
+    loopDuration,
     frameRate,
     destination,
     format,

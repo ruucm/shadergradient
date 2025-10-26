@@ -1,5 +1,11 @@
 # shadergradient
 
+## 2.4.0
+
+### Minor Changes
+
+- hide debug logs
+
 ## 2.3.6
 
 ### Patch Changes

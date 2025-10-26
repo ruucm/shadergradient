@@ -1,5 +1,11 @@
 # shadergradient
 
+## 2.4.3
+
+### Patch Changes
+
+- restore ssr fixes
+
 ## 2.4.0
 
 ### Minor Changes

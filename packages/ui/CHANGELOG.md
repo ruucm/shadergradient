@@ -1,5 +1,11 @@
 # ui
 
+## 0.1.25
+
+### Patch Changes
+
+- restore ssr fixes
+
 ## 0.1.21
 
 ### Patch Changes

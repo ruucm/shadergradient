@@ -1,5 +1,11 @@
 # ui
 
+## 0.1.26
+
+### Patch Changes
+
+- replace framer's createStore with zustand
+
 ## 0.1.25
 
 ### Patch Changes

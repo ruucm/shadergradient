@@ -3,8 +3,7 @@ import { useEffect, useRef, useState } from 'react'
 import { motion } from 'framer-motion'
 import ScrollBoxText from 'https://framer.com/m/ScrollBoxText-zgHd.js'
 import { isDebug } from '@/utils'
-import { useStore } from '@/overrides/Web/Scroll'
-import { useScrollableBoxStore } from '@/store'
+import { useScrollStore, useScrollableBoxStore } from '@/store'
 
 const textItems = [
   'Shape',
@@ -32,7 +31,7 @@ const visibleDelay = 0.3
 export function ScrollableTextBox() {
   const containerRef = useRef<HTMLDivElement>(null)
   const { activeIndex, setActiveIndex } = useScrollableBoxStore()
-  const [, setStore] = useStore()
+  const setHighlightWord = useScrollStore((state) => state.setHighlightWord)
   const [itemHeight, setItemHeight] = useState(80)
   const [isVisible, setIsVisible] = useState(false)
 
@@ -101,7 +100,7 @@ export function ScrollableTextBox() {
     }
 
     // Also update the store to ensure consistency
-    setStore({ highlightWord: activeIndex })
+    setHighlightWord(activeIndex)
   }, [itemHeight]) // Only run when itemHeight is calculated
 
   useEffect(() => {
@@ -151,7 +150,7 @@ export function ScrollableTextBox() {
 
       // Update activeIndex
       setActiveIndex(result)
-      setStore({ highlightWord: result })
+      setHighlightWord(result)
 
       // Play tick sound only when index actually changes (not on repeated same index)
       if (result !== lastSoundIndexRef.current) {

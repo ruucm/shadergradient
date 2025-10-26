@@ -807,4 +807,12 @@ export const propertyControls = (ControlType, type = '') => ({
     title: '↳ Threshold',
     hidden: (props) => !props.lazyLoad,
   },
+  rootMargin: {
+    type: ControlType.String,
+    placeholder: '0px',
+    defaultValue: '0px',
+    title: '↳ Root Margin',
+    description: 'Offset before triggering (e.g., "100px", "-50px")',
+    hidden: (props) => !props.lazyLoad,
+  },
 })

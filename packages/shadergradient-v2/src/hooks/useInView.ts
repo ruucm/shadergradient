@@ -1,6 +1,10 @@
 import { useEffect, useState, useRef } from 'react'
 
-export function useInView(enabled: boolean = true, threshold: number = 0.1) {
+export function useInView(
+  enabled: boolean = true,
+  threshold: number = 0.1,
+  rootMargin: string = '0px'
+) {
   const [isInView, setIsInView] = useState(true)
   const containerRef = useRef<HTMLDivElement>(null)
 
@@ -13,6 +17,7 @@ export function useInView(enabled: boolean = true, threshold: number = 0.1) {
       },
       {
         threshold,
+        rootMargin,
       }
     )
 
@@ -21,7 +26,7 @@ export function useInView(enabled: boolean = true, threshold: number = 0.1) {
     }
 
     return () => observer.disconnect()
-  }, [enabled, threshold])
+  }, [enabled, threshold, rootMargin])
 
   return { isInView, containerRef }
 }

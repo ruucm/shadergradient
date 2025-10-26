@@ -6,7 +6,7 @@ import {
   euclideanDistance,
   euclideanDistanceSquared
 } from "../../../chunk-64EKMGYT.mjs";
-import "../../../chunk-HXGKXP63.mjs";
+import "../../../chunk-CU5I7XXF.mjs";
 export {
   colorDifferenceRGBToYIQ,
   colorDifferenceRGBToYIQSquared,

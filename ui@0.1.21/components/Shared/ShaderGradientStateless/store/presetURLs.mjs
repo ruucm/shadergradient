@@ -1,11 +1,9 @@
 import {
   DEFAUlT_PRESET,
   PRESETS,
-  init_presetURLs,
   initialActivePreset
-} from "../../../../chunk-F5OEZDUS.mjs";
-import "../../../../chunk-HXGKXP63.mjs";
-init_presetURLs();
+} from "../../../../chunk-MB44DXHQ.mjs";
+import "../../../../chunk-CU5I7XXF.mjs";
 export {
   DEFAUlT_PRESET,
   PRESETS,

@@ -1,7 +1,7 @@
 import {
   TextAnimation
 } from "../../chunk-6QIOJMBP.mjs";
-import "../../chunk-HXGKXP63.mjs";
+import "../../chunk-CU5I7XXF.mjs";
 export {
   TextAnimation
 };

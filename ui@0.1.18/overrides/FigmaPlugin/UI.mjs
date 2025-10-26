@@ -2,7 +2,6 @@ import {
   ColorsTab,
   CopyBtn,
   Duration,
-  EasyViewControl,
   Error,
   EstimatedSize,
   HighlightButton,
@@ -11,8 +10,10 @@ import {
   OpenGIFPage,
   ShapeTab,
   ShowCopyContent,
+  StatelessOverride,
   TabSwitcher,
   Timeline,
+  TimelineWrapper,
   ToggleShare,
   UndoButton,
   ViewTab,
@@ -21,7 +22,7 @@ import {
   extractGIF,
   goBack,
   insertCanvasAsImage
-} from "../../chunk-HT6I5GJI.mjs";
+} from "../../chunk-I2ZLD6NO.mjs";
 import "../../chunk-YO2HC6PA.mjs";
 import "../../chunk-R7YRQLUE.mjs";
 import "../../chunk-NAZGFUZO.mjs";
@@ -35,16 +36,16 @@ import "../../chunk-BGA6FIQU.mjs";
 import "../../chunk-RRRK7IDF.mjs";
 import "../../chunk-X4IK7C4U.mjs";
 import "../../chunk-GLEDI3OP.mjs";
-import "../../chunk-XKTSXHNT.mjs";
-import "../../chunk-A2S4WHQM.mjs";
-import "../../chunk-BGDCA552.mjs";
-import "../../chunk-UNZGITRB.mjs";
-import "../../chunk-RFLB5KK6.mjs";
-import "../../chunk-L4U2XMML.mjs";
-import "../../chunk-NLOAAFCI.mjs";
-import "../../chunk-PJKHXTM3.mjs";
-import "../../chunk-5DD7N4KU.mjs";
-import "../../chunk-LNISMEIU.mjs";
+import "../../chunk-TFO6DOEZ.mjs";
+import "../../chunk-VVZFCWVM.mjs";
+import "../../chunk-ROFOOXYF.mjs";
+import "../../chunk-EAF5J2LN.mjs";
+import "../../chunk-U3TX2OXD.mjs";
+import "../../chunk-QR337KGI.mjs";
+import "../../chunk-I4EDXEYQ.mjs";
+import "../../chunk-RC3AD5KY.mjs";
+import "../../chunk-WBJI7PTI.mjs";
+import "../../chunk-YWE2IQDV.mjs";
 import "../../chunk-P642UK3P.mjs";
 import "../../chunk-NP5XZW6Z.mjs";
 import "../../chunk-HXGKXP63.mjs";
@@ -52,7 +53,6 @@ export {
   ColorsTab,
   CopyBtn,
   Duration,
-  EasyViewControl,
   Error,
   EstimatedSize,
   HighlightButton,
@@ -61,8 +61,10 @@ export {
   OpenGIFPage,
   ShapeTab,
   ShowCopyContent,
+  StatelessOverride,
   TabSwitcher,
   Timeline,
+  TimelineWrapper,
   ToggleShare,
   UndoButton,
   ViewTab,

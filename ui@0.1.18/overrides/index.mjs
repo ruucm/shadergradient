@@ -13,7 +13,7 @@ import {
   textClipper,
   time,
   toggleSmartComp
-} from "../chunk-DP4XLE5R.mjs";
+} from "../chunk-LV4ZBGQS.mjs";
 import {
   PriceFigma,
   PriceText,
@@ -29,7 +29,6 @@ import {
   ColorsTab,
   CopyBtn,
   Duration,
-  EasyViewControl,
   Error,
   EstimatedSize,
   HighlightButton,
@@ -38,8 +37,10 @@ import {
   OpenGIFPage,
   ShapeTab,
   ShowCopyContent,
+  StatelessOverride,
   TabSwitcher,
   Timeline,
+  TimelineWrapper,
   ToggleShare,
   UndoButton,
   ViewTab,
@@ -48,7 +49,7 @@ import {
   extractGIF,
   goBack,
   insertCanvasAsImage
-} from "../chunk-HT6I5GJI.mjs";
+} from "../chunk-I2ZLD6NO.mjs";
 import "../chunk-VQME7MQ6.mjs";
 import {
   Price,
@@ -85,7 +86,7 @@ import "../chunk-425BLYMY.mjs";
 import {
   AddToCanvas,
   updateTheme
-} from "../chunk-O55HJVWJ.mjs";
+} from "../chunk-Z2C6L4NF.mjs";
 import {
   CurrentPreset,
   HideBanner,
@@ -93,18 +94,18 @@ import {
   UrlInput,
   togglePreset,
   toggleUrl
-} from "../chunk-6TRGUS5H.mjs";
+} from "../chunk-YQJ77XPS.mjs";
 import "../chunk-2ZZ6H7J7.mjs";
-import "../chunk-XKTSXHNT.mjs";
-import "../chunk-A2S4WHQM.mjs";
-import "../chunk-BGDCA552.mjs";
-import "../chunk-UNZGITRB.mjs";
-import "../chunk-RFLB5KK6.mjs";
-import "../chunk-L4U2XMML.mjs";
-import "../chunk-NLOAAFCI.mjs";
-import "../chunk-PJKHXTM3.mjs";
-import "../chunk-5DD7N4KU.mjs";
-import "../chunk-LNISMEIU.mjs";
+import "../chunk-TFO6DOEZ.mjs";
+import "../chunk-VVZFCWVM.mjs";
+import "../chunk-ROFOOXYF.mjs";
+import "../chunk-EAF5J2LN.mjs";
+import "../chunk-U3TX2OXD.mjs";
+import "../chunk-QR337KGI.mjs";
+import "../chunk-I4EDXEYQ.mjs";
+import "../chunk-RC3AD5KY.mjs";
+import "../chunk-WBJI7PTI.mjs";
+import "../chunk-YWE2IQDV.mjs";
 import "../chunk-P642UK3P.mjs";
 import "../chunk-NP5XZW6Z.mjs";
 import "../chunk-HXGKXP63.mjs";
@@ -118,7 +119,6 @@ export {
   CopyBtn,
   CurrentPreset,
   Duration,
-  EasyViewControl,
   Error,
   EstimatedSize,
   Gap,
@@ -137,9 +137,11 @@ export {
   ShapeTab,
   ShowCopyContent,
   StartTrial,
+  StatelessOverride,
   TabSwitcher,
   TailwindWrapper,
   Timeline,
+  TimelineWrapper,
   TogglePrice,
   TogglePriceFigma,
   ToggleShare,

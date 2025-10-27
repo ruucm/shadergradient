@@ -80,6 +80,7 @@ export type GradientT = MeshT & {
   hoverState?: string
 
   enableTransition?: boolean
+  enableCameraUpdate?: boolean
 
   urlString?: string
 

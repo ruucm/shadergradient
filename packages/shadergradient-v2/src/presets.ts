@@ -781,6 +781,14 @@ export const propertyControls = (ControlType, type = '') => ({
     defaultValue: false,
     hidden: (props) => props.control === 'query',
   },
+  enableCameraUpdate: {
+    type: ControlType.Boolean,
+    title: 'Camera Update',
+    enabledTitle: 'On',
+    disabledTitle: 'Off',
+    defaultValue: false,
+    hidden: (props) => type !== 'stateless',
+  },
   pointerEvents: {
     type: ControlType.Enum,
     title: 'Touch Control',

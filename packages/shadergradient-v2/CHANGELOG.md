@@ -1,5 +1,11 @@
 # shadergradient
 
+## 2.4.5
+
+### Patch Changes
+
+- enableCameraUpdate for ShaderGradientStateless component
+
 ## 2.4.4
 
 ### Patch Changes

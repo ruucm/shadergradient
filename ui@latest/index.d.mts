@@ -354,6 +354,14 @@ declare namespace ShaderGradientStateless {
             defaultValue: boolean;
             hidden: (props: any) => boolean;
         };
+        enableCameraUpdate: {
+            type: any;
+            title: string;
+            enabledTitle: string;
+            disabledTitle: string;
+            defaultValue: boolean;
+            hidden: (props: any) => boolean;
+        };
         pointerEvents: {
             type: any;
             title: string;

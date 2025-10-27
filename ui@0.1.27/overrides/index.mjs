@@ -26,7 +26,7 @@ import {
   textClipper,
   time,
   toggleSmartComp
-} from "../chunk-XFR5ZL7B.mjs";
+} from "../chunk-2GXYRLRP.mjs";
 import "../chunk-425BLYMY.mjs";
 import {
   PriceFigma,
@@ -63,7 +63,7 @@ import {
   extractGIF,
   goBack,
   insertCanvasAsImage
-} from "../chunk-PCDSJRO4.mjs";
+} from "../chunk-6JVOYWGC.mjs";
 import "../chunk-VQME7MQ6.mjs";
 import {
   Price,
@@ -85,7 +85,7 @@ import "../chunk-64AEIACY.mjs";
 import {
   AddToCanvas,
   updateTheme
-} from "../chunk-RZ66GM6S.mjs";
+} from "../chunk-VEQ4W43X.mjs";
 import {
   CurrentPreset,
   HideBanner,
@@ -93,18 +93,18 @@ import {
   UrlInput,
   togglePreset,
   toggleUrl
-} from "../chunk-SFH56TVT.mjs";
+} from "../chunk-W24QEVEO.mjs";
 import "../chunk-2ZZ6H7J7.mjs";
-import "../chunk-ACS4AVKY.mjs";
-import "../chunk-R7ONGNCK.mjs";
-import "../chunk-GILMJSZB.mjs";
-import "../chunk-QLFG5RNP.mjs";
-import "../chunk-EMVKOMKI.mjs";
-import "../chunk-YYY7RFLU.mjs";
-import "../chunk-5QBKQMVD.mjs";
-import "../chunk-FGB3Q43G.mjs";
-import "../chunk-ZZR63UA3.mjs";
-import "../chunk-YLB764RN.mjs";
+import "../chunk-2HJSN2UF.mjs";
+import "../chunk-BVBFYRDH.mjs";
+import "../chunk-TREEP67Q.mjs";
+import "../chunk-M4QCLNWM.mjs";
+import "../chunk-4DIIXGVM.mjs";
+import "../chunk-7D25FYVP.mjs";
+import "../chunk-2XH7KKNT.mjs";
+import "../chunk-PY6KCJWI.mjs";
+import "../chunk-S6AAXDTH.mjs";
+import "../chunk-LCDF6HP4.mjs";
 import "../chunk-BJ4NI3NE.mjs";
 import "../chunk-NP5XZW6Z.mjs";
 import "../chunk-HXGKXP63.mjs";

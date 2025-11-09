@@ -4,6 +4,12 @@ import { motion } from 'framer-motion'
 import ScrollBoxText from 'https://framer.com/m/ScrollBoxText-zgHd.js'
 import { isDebug } from '@/utils'
 import { useScrollStore, useScrollableBoxStore } from '@/store'
+import { addPropertyControls, ControlType } from 'framer'
+
+interface ScrollableTextBoxProps {
+  enableFadeIn?: boolean
+  fadeInDelay?: number
+}
 
 const textItems = [
   'Shape',
@@ -26,14 +32,16 @@ const textItems = [
 ]
 
 const visibleItems = 13 // This should be odd number (to center the active item)
-const visibleDelay = 0.3
 
-export function ScrollableTextBox() {
+export function ScrollableTextBox({
+  enableFadeIn = true,
+  fadeInDelay = 0.3,
+}: ScrollableTextBoxProps = {}) {
   const containerRef = useRef<HTMLDivElement>(null)
   const { activeIndex, setActiveIndex } = useScrollableBoxStore()
   const setHighlightWord = useScrollStore((state) => state.setHighlightWord)
   const [itemHeight, setItemHeight] = useState(80)
-  const [isVisible, setIsVisible] = useState(false)
+  const [isVisible, setIsVisible] = useState(!enableFadeIn)
 
   // Web Audio API setup for the tick sound
   const audioContextRef = useRef<AudioContext | null>(null)
@@ -76,14 +84,19 @@ export function ScrollableTextBox() {
     }
   }
 
-  // Add delay before rendering
+  // Fade in animation with configurable delay
   useEffect(() => {
+    if (!enableFadeIn) {
+      setIsVisible(true)
+      return
+    }
+
     const timer = setTimeout(() => {
       setIsVisible(true)
-    }, visibleDelay * 1000)
+    }, fadeInDelay * 1000)
 
     return () => clearTimeout(timer)
-  }, [])
+  }, [enableFadeIn, fadeInDelay])
 
   // Restore scroll position from localStorage on mount
   useEffect(() => {
@@ -178,8 +191,8 @@ export function ScrollableTextBox() {
         overflow: 'hidden',
         position: 'sticky',
         top: 0,
-        // opacity: isVisible ? 1 : 0,
-        // transition: 'opacity 0.5s ease-in-out',
+        opacity: isVisible ? 1 : 0,
+        transition: 'opacity 0.5s ease-in-out',
         // paddingTop: "25vh",
         // paddingBottom: "25vh",
         // top: "50%",
@@ -295,4 +308,24 @@ export function ScrollableTextBox() {
       </motion.div>
     </div>
   )
+}
+
+ScrollableTextBox.propertyControls = {
+  enableFadeIn: {
+    type: ControlType.Boolean,
+    title: 'Enable Fade In',
+    defaultValue: true,
+    description: 'Enable opacity animation on first appearance',
+  },
+  fadeInDelay: {
+    type: ControlType.Number,
+    title: 'Fade In Delay',
+    defaultValue: 0.3,
+    min: 0,
+    max: 5,
+    step: 0.1,
+    unit: 's',
+    description: 'Delay before fade in animation starts',
+    hidden: (props) => !props.enableFadeIn,
+  },
 }

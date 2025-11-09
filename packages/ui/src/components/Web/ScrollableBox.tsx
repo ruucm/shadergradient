@@ -9,6 +9,8 @@ import { addPropertyControls, ControlType } from 'framer'
 interface ScrollableTextBoxProps {
   enableFadeIn?: boolean
   fadeInDelay?: number
+  enableFadeOut?: boolean
+  fadeOutThreshold?: number
 }
 
 const textItems = [
@@ -36,12 +38,15 @@ const visibleItems = 13 // This should be odd number (to center the active item)
 export function ScrollableTextBox({
   enableFadeIn = true,
   fadeInDelay = 0.3,
+  enableFadeOut = false,
+  fadeOutThreshold = 0.8,
 }: ScrollableTextBoxProps = {}) {
   const containerRef = useRef<HTMLDivElement>(null)
   const { activeIndex, setActiveIndex } = useScrollableBoxStore()
   const setHighlightWord = useScrollStore((state) => state.setHighlightWord)
   const [itemHeight, setItemHeight] = useState(80)
   const [isVisible, setIsVisible] = useState(!enableFadeIn)
+  const [scrollOpacity, setScrollOpacity] = useState(1)
 
   // Web Audio API setup for the tick sound
   const audioContextRef = useRef<AudioContext | null>(null)
@@ -170,6 +175,22 @@ export function ScrollableTextBox({
         lastSoundIndexRef.current = result
         playTickSound()
       }
+
+      // Calculate fade out based on scroll progress
+      if (enableFadeOut) {
+        const maxScroll = container.scrollHeight - container.clientHeight
+        const scrollProgress = scrollTop / maxScroll
+
+        if (scrollProgress >= fadeOutThreshold) {
+          // Calculate opacity: 1 at threshold, 0 at end
+          const fadeRange = 1 - fadeOutThreshold
+          const fadeProgress = (scrollProgress - fadeOutThreshold) / fadeRange
+          const opacity = Math.max(0, 1 - fadeProgress)
+          setScrollOpacity(opacity)
+        } else {
+          setScrollOpacity(1)
+        }
+      }
     }
 
     container.addEventListener('scroll', handleScroll)
@@ -191,7 +212,7 @@ export function ScrollableTextBox({
         overflow: 'hidden',
         position: 'sticky',
         top: 0,
-        opacity: isVisible ? 1 : 0,
+        opacity: isVisible ? scrollOpacity : 0,
         transition: 'opacity 0.5s ease-in-out',
         // paddingTop: "25vh",
         // paddingBottom: "25vh",
@@ -327,5 +348,21 @@ ScrollableTextBox.propertyControls = {
     unit: 's',
     description: 'Delay before fade in animation starts',
     hidden: (props) => !props.enableFadeIn,
+  },
+  enableFadeOut: {
+    type: ControlType.Boolean,
+    title: 'Enable Fade Out',
+    defaultValue: false,
+    description: 'Enable opacity fade out when reaching end of scroll',
+  },
+  fadeOutThreshold: {
+    type: ControlType.Number,
+    title: 'Fade Out Threshold',
+    defaultValue: 0.8,
+    min: 0,
+    max: 1,
+    step: 0.05,
+    description: 'Scroll progress (0-1) where fade out begins',
+    hidden: (props) => !props.enableFadeOut,
   },
 }

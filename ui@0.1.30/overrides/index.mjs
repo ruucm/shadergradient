@@ -12,12 +12,15 @@ import {
   WordHighlight2,
   fpsCount,
   wordHighlightText
-} from "../chunk-OV6DHU6Z.mjs";
+} from "../chunk-ZG4T2OTY.mjs";
 import {
   ArrowLeft,
   ArrowRight,
   PresetIndex,
   PresetTitle,
+  WebEasyViewControl,
+  WebEasyViewInfo,
+  WebStatelessOverride,
   randomBtn,
   randomGradient,
   randomText,
@@ -26,7 +29,7 @@ import {
   textClipper,
   time,
   toggleSmartComp
-} from "../chunk-2GXYRLRP.mjs";
+} from "../chunk-AMCLKL5C.mjs";
 import "../chunk-425BLYMY.mjs";
 import {
   PriceFigma,
@@ -38,11 +41,12 @@ import {
   upgradingText,
   userEmail,
   userInfo
-} from "../chunk-AOFDDRDD.mjs";
+} from "../chunk-AINHY6RJ.mjs";
 import {
   ColorsTab,
   CopyBtn,
   Duration,
+  EasyViewInfo,
   Error,
   EstimatedSize,
   HighlightButton,
@@ -63,14 +67,14 @@ import {
   extractGIF,
   goBack,
   insertCanvasAsImage
-} from "../chunk-6JVOYWGC.mjs";
+} from "../chunk-LR332VAS.mjs";
 import "../chunk-VQME7MQ6.mjs";
 import {
   Price,
   TogglePrice
-} from "../chunk-LNHCJPHM.mjs";
-import "../chunk-MEXU6DSB.mjs";
-import "../chunk-ITIMCFVA.mjs";
+} from "../chunk-GVNO7YBK.mjs";
+import "../chunk-IZPXC5H7.mjs";
+import "../chunk-QHVG2EC2.mjs";
 import "../chunk-NAZGFUZO.mjs";
 import "../chunk-CK47F4LN.mjs";
 import "../chunk-DC3YOL4Q.mjs";
@@ -79,13 +83,13 @@ import "../chunk-XKMCKCFY.mjs";
 import "../chunk-2WMPBKSG.mjs";
 import "../chunk-64EKMGYT.mjs";
 import "../chunk-BGA6FIQU.mjs";
-import "../chunk-IFMXZP4J.mjs";
-import "../chunk-U6JPMAQQ.mjs";
-import "../chunk-64AEIACY.mjs";
+import "../chunk-NAN7VANW.mjs";
+import "../chunk-Z6RIGRCX.mjs";
+import "../chunk-7DA3HATF.mjs";
 import {
   AddToCanvas,
   updateTheme
-} from "../chunk-VEQ4W43X.mjs";
+} from "../chunk-SHK6S7HO.mjs";
 import {
   CurrentPreset,
   HideBanner,
@@ -93,7 +97,7 @@ import {
   UrlInput,
   togglePreset,
   toggleUrl
-} from "../chunk-W24QEVEO.mjs";
+} from "../chunk-U42L3CDW.mjs";
 import "../chunk-2ZZ6H7J7.mjs";
 import "../chunk-2HJSN2UF.mjs";
 import "../chunk-BVBFYRDH.mjs";
@@ -105,7 +109,7 @@ import "../chunk-2XH7KKNT.mjs";
 import "../chunk-PY6KCJWI.mjs";
 import "../chunk-S6AAXDTH.mjs";
 import "../chunk-LCDF6HP4.mjs";
-import "../chunk-BJ4NI3NE.mjs";
+import "../chunk-OOWSMYW2.mjs";
 import "../chunk-NP5XZW6Z.mjs";
 import "../chunk-HXGKXP63.mjs";
 export {
@@ -118,6 +122,7 @@ export {
   CopyBtn,
   CurrentPreset,
   Duration,
+  EasyViewInfo,
   Error,
   EstimatedSize,
   Gap,
@@ -147,6 +152,9 @@ export {
   UndoButton,
   UrlInput,
   ViewTab,
+  WebEasyViewControl,
+  WebEasyViewInfo,
+  WebStatelessOverride,
   WidthFillOnLoad,
   WordGradient,
   WordGradientText,

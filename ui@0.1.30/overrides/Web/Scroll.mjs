@@ -10,9 +10,9 @@ import {
   WordHighlight2,
   fpsCount,
   wordHighlightText
-} from "../../chunk-OV6DHU6Z.mjs";
+} from "../../chunk-ZG4T2OTY.mjs";
 import "../../chunk-425BLYMY.mjs";
-import "../../chunk-BJ4NI3NE.mjs";
+import "../../chunk-OOWSMYW2.mjs";
 import "../../chunk-NP5XZW6Z.mjs";
 import "../../chunk-HXGKXP63.mjs";
 export {

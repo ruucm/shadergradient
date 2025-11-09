@@ -11,6 +11,7 @@ export const useUIStore = create(
       urlInput: '', //preset or url
       error: '',
       figmaPage: '',
+      easyView: false,
     },
     (set) => ({
       setActivePreset: (by: number) => set((state) => ({ activePreset: by })),
@@ -23,6 +24,8 @@ export const useUIStore = create(
         set((state) => ({ ...state, figmaPage: data })),
       setLoadingPercentage: (data: any) =>
         set((state) => ({ ...state, loadingPercentage: data })),
+      setEasyView: (data: any) =>
+        set((state) => ({ ...state, easyView: data })),
     })
   )
 )
@@ -106,6 +109,7 @@ export const useUIOverrideStore = create<UIOverrideStore>()((set) => ({
   ],
   slider: 0,
   toggle: false,
+  easyView: false,
   setRandomColor: (color: number[][]) => set({ randomColor: color }),
   setSlider: (slider: number) => set({ slider }),
   setToggle: (toggle: boolean) => set({ toggle }),

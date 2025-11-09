@@ -775,6 +775,25 @@ export function HighlightButton(Component): ComponentType {
   }
 }
 
+// 🟢 On the EasyView info (mouse interaction guide for easy view)
+export function EasyViewInfo(Component): ComponentType {
+  return (props) => {
+    const easyView = useFigmaPluginStore((state) => state.easyView)
+
+    return (
+      <div
+        style={{
+          display: easyView === true ? 'flex' : 'none',
+          width: 'fit-content',
+          height: 'fit-content',
+        }}
+      >
+        <Component {...props} />
+      </div>
+    )
+  }
+}
+
 // 🟢 On the ShaderGradientStateless
 export function StatelessOverride(Component): ComponentType {
   return (props) => {

@@ -1,5 +1,11 @@
 # ui
 
+## 0.1.28
+
+### Patch Changes
+
+- update ScrollableTextBox anim
+
 ## 0.1.27
 
 ### Patch Changes

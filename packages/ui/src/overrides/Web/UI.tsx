@@ -1,6 +1,6 @@
 import type { ComponentType } from 'react'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { useUIStore, useUIOverrideStore } from '@/store'
 import {
   PRESETS,
@@ -78,6 +78,45 @@ export function PresetTitle(Component): ComponentType {
     const presetTitle = PRESETS[activePreset].title
 
     return <Component {...props} key={activePreset} content={presetTitle} />
+  }
+}
+
+export function withClickOutsideClosed(Component): ComponentType {
+  return (props: any) => {
+    // Ref to access the component's DOM element
+    const ref = useRef<HTMLDivElement>(null)
+
+    // Manage current variant state (initialize with value from Framer canvas)
+    const [variant, setVariant] = useState(props.variant)
+
+    useEffect(() => {
+      const handleClickOutside = (event) => {
+        // Check if the ref is attached and the click is outside the component
+        if (ref.current && !ref.current.contains(event.target)) {
+          setVariant('Closed')
+          setTimeout(() => {
+            setVariant(props.variant)
+          }, 500)
+        }
+      }
+
+      // Register click event listener on the document
+      document.addEventListener('mousedown', handleClickOutside)
+
+      // Cleanup: Remove listener when the component unmounts
+      return () => {
+        document.removeEventListener('mousedown', handleClickOutside)
+      }
+    }, [])
+
+    return (
+      <Component
+        {...props}
+        key={variant}
+        ref={ref} // 참조 연결
+        variant={variant} // 제어된 variant 전달
+      />
+    )
   }
 }
 

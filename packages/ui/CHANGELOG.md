@@ -1,5 +1,11 @@
 # ui
 
+## 0.1.37
+
+### Patch Changes
+
+- fix formatFramerProps
+
 ## 0.1.36
 
 ### Patch Changes

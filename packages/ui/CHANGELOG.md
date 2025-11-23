@@ -1,5 +1,11 @@
 # ui
 
+## 0.1.35
+
+### Patch Changes
+
+- withClickOutsideClosed
+
 ## 0.1.34
 
 ### Patch Changes

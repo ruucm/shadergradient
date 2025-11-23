@@ -321,3 +321,44 @@ export function textClipper(Component): ComponentType {
     )
   }
 }
+
+// Easy view related overrides on customize page controls
+export function WebStatelessOverride(Component): ComponentType {
+  return (props) => {
+    const easyView = useUIStore((state) => state.easyView)
+    return (
+      <Component
+        {...props}
+        pointerEvents={easyView === true ? 'auto' : 'none'}
+      />
+    )
+  }
+}
+
+export function WebEasyViewControl(Component): ComponentType {
+  return (props) => {
+    const easyView = useUIStore((state) => state.easyView)
+    const setEasyView = useUIStore((state) => state.setEasyView)
+    return (
+      <Component
+        {...props}
+        variant={easyView === true ? 'Clicked' : 'Default'}
+        onClick={() => {
+          setEasyView(!easyView)
+        }}
+      />
+    )
+  }
+}
+
+export function WebEasyViewInfo(Component): ComponentType {
+  return (props) => {
+    const easyView = useUIStore((state) => state.easyView)
+    return (
+      <Component
+        {...props}
+        style={{ display: easyView === true ? 'flex' : 'none' }}
+      />
+    )
+  }
+}

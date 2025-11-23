@@ -109,7 +109,7 @@ export function useControlValues(
   }
 
   if (control === 'props')
-    return formatFramerProps(clean({ ...queryProps, ...props }) as any)
+    return clean({ ...queryProps, ...formatFramerProps(props) }) as any
   else if (control === 'query')
     return clean(
       urlString

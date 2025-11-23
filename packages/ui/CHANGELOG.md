@@ -1,5 +1,11 @@
 # ui
 
+## 0.1.31
+
+### Patch Changes
+
+- ScrollProgress
+
 ## 0.1.30
 
 ### Patch Changes

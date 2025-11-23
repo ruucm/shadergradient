@@ -61,6 +61,20 @@ export function ArrowRight(Component): ComponentType {
     )
   }
 }
+export function InitCustomize(Component): ComponentType {
+  return (props) => {
+    const initialPresetNumber = 0
+    const setActivePreset = useUIStore((state) => state.setActivePreset)
+    const setQueryValue = useURLQueryState()
+
+    useEffect(() => {
+      setActivePreset(initialPresetNumber)
+      setQueryValue(PRESETS[initialPresetNumber].url)
+    }, [])
+
+    return <Component {...props} />
+  }
+}
 
 export function PresetIndex(Component): ComponentType {
   return ({ style, ...props }: any) => {

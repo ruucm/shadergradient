@@ -98,6 +98,12 @@ export function TailwindWrapper(Component): ComponentType {
   return (props: any) => {
     const tailwindLoaded = useTailwind(href)
 
+    // Remove Framer badge
+    useEffect(() => {
+      const badge = document.getElementById('__framer-badge-container')
+      if (badge) badge.remove()
+    }, [])
+
     return (
       <Component
         {...props}

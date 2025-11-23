@@ -71,6 +71,20 @@ function isBottomSection(sectionName) {
 
 // ---------------- highlight section
 
+export function ScrollObserver(Component: ComponentType<any>): ComponentType {
+  return (props: any) => {
+    const setHighlightWord = useScrollStore((state) => state.setHighlightWord)
+    const ref = useRef(null)
+    const isInView = useInView(ref)
+
+    useEffect(() => {
+      if (isInView) setHighlightWord(props.name)
+    }, [isInView])
+
+    return <Component {...props} ref={ref} />
+  }
+}
+
 export function WordGradient(Component: ComponentType<any>): ComponentType {
   return (props) => {
     const highlightWord = useScrollStore((state) => state.highlightWord)

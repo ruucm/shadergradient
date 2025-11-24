@@ -52,26 +52,26 @@ export function Mesh({
     uLoopDuration: loopDuration || 5.0,
   }
 
-  // Add glass-specific uniforms
+  // Add glass/liquid-specific uniforms
   const glassUniforms =
-    shader === 'glass'
+    shader === 'glass' || shader === 'liquid'
       ? {
           uColor1: colorToRgb(color1),
           uColor2: colorToRgb(color2),
           uColor3: colorToRgb(color3),
-          uTransparency: 0.1,
-          uRefraction: 1.5,
-          uChromaticAberration: 0.1,
-          uFresnelPower: 2.0,
-          uReflectivity: 0.9,
+          uTransparency: shader === 'liquid' ? 0.2 : 0.1,
+          uRefraction: shader === 'liquid' ? 1.4 : 1.5,
+          uChromaticAberration: shader === 'liquid' ? 0.2 : 0.1,
+          uFresnelPower: shader === 'liquid' ? 3.0 : 2.0,
+          uReflectivity: shader === 'liquid' ? 0.95 : 0.9,
           uWaveAmplitude: 0.02,
           uWaveFrequency: 5.0,
           uDistortion: 0.1,
           uFlowSpeed: 0.1,
           uFlowDirection: { x: 1.0, y: 0.5 },
-          uLiquidEffect: 0.5,
+          uLiquidEffect: shader === 'liquid' ? 1.0 : 0.5,
           uFoamIntensity: 0.3,
-          envMapIntensity: 1.0,
+          envMapIntensity: shader === 'liquid' ? 1.5 : 1.0,
         }
       : {}
 

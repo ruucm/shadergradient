@@ -1,5 +1,5 @@
 import { useFigma } from '@/store'
-import { useDBTable } from 'https://framer.com/m/SupabaseConnector-ARlr.js'
+import { useDBTable } from './useDBTable'
 import { useEffect } from 'react'
 
 // ---------- SUBSCRIPTION RELATED -----------
@@ -8,7 +8,7 @@ export function useUserDB(channel = 'sg-figma-hook') {
     const figma_user_id = figma.user?.id
     console.log(figma_user_id, 'figma_user_id')
   
-    const [rows, dbLoading] = useDBTable('users', channel)
+    const [rows, dbLoading] = useDBTable('users', channel, { column: 'figma_user_id', value: figma_user_id })
     return [rows.find((r) => r.figma_user_id === figma_user_id), dbLoading]
   }
   
@@ -16,7 +16,7 @@ export function useUserDB(channel = 'sg-figma-hook') {
     const [userDB, userDBLoading] = useUserDB()
     const userId = userDB?.id
   
-    const [subscriptionRows, dbLoading] = useDBTable('subscriptions',  subId)
+    const [subscriptionRows, dbLoading] = useDBTable('subscriptions',  subId, { column: 'user_id', value: userId })
     const subscription = subscriptionRows.find(
       (r) => r.user_id === userId && r.status === 'active'
     )

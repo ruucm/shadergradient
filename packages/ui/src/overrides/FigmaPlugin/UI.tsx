@@ -18,14 +18,13 @@ import {
 
 import { useAnimationControls, useInView } from 'framer-motion'
 
-import { useDBTable } from 'https://framer.com/m/SupabaseConnector-ARlr.js'
+import { useDBTable } from './useDBTable'
 
 import {
   useQueryState,
   useURLQueryState,
 } from '@/components/Shared/ShaderGradientStateless'
-// import { ui } from "https://framer.com/m/ui-gy7Z.js"
-// const { useQueryState, useURLQueryState } = ui
+
 import {
   useSubscription,
   getTrialLeft,
@@ -174,7 +173,8 @@ export function extractGIF(Component): ComponentType {
     const figma_user_id = figma.user?.id
     const [rows, dbLoading, insertRow, updateRow] = useDBTable(
       'users',
-      'sg-figma'
+      'sg-figma',
+      { column: 'figma_user_id', value: figma_user_id }
     )
     const userDB = rows.find((r) => r.figma_user_id === figma_user_id)
     const trialLeft = getTrialLeft(userDB?.trial_started_at, trials)

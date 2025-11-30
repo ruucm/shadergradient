@@ -19,7 +19,7 @@ import {
 } from './FigmaApi'
 import { cx } from '@/utils'
 import { clock } from '@/Gradient/comps/Mesh/useTimeAnimation'
-import { useDBTable } from 'https://framer.com/m/SupabaseConnector-ARlr.js'
+import { useDBTable } from './useDBTable'
 import {
   STRIPE_BILLING_URL,
   STRIPE_BUY_YEARLY_URL,
@@ -135,7 +135,8 @@ export function extractGIF(Component): ComponentType {
     const figma_user_id = figma.user?.id
     const [rows, dbLoading, insertRow, updateRow] = useDBTable(
       'users',
-      'sg-figma'
+      'sg-figma',
+      { column: 'figma_user_id', value: figma_user_id }
     )
     const userDB = rows.find((r) => r.figma_user_id === figma_user_id)
     const trialLeft = getTrialLeft(userDB?.trial_started_at)
@@ -688,14 +689,14 @@ function useUserDB(channel = 'sg-figma-hook') {
   const [figma] = useFigma()
   const figma_user_id = figma.user?.id
 
-  const [rows, dbLoading] = useDBTable('users', channel)
+  const [rows, dbLoading] = useDBTable('users', channel, { column: 'figma_user_id', value: figma_user_id })
   return [rows.find((r) => r.figma_user_id === figma_user_id), dbLoading]
 }
 function useSubscription(subId) {
   const [userDB, userDBLoading] = useUserDB()
   const userId = userDB?.id
 
-  const [subscriptionRows, dbLoading] = useDBTable('subscriptions', subId)
+  const [subscriptionRows, dbLoading] = useDBTable('subscriptions', subId, { column: 'user_id', value: userId })
   const subscription = subscriptionRows.find(
     (r) => r.user_id === userId && r.status === 'active'
   )
@@ -732,8 +733,8 @@ function getTrialLeft(trial_started_at) {
 
 export function StartTrial(Component): ComponentType {
   return (props: any) => {
-    const [, , insertRow] = useDBTable('users', 'sg-figma-t')
     const [figma] = useFigma()
+    const [, , insertRow] = useDBTable('users', 'sg-figma-t', { column: 'figma_user_id', value: figma.user?.id })
     const figma_user_id = figma.user?.id
 
     return (

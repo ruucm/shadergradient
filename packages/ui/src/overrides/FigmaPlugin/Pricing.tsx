@@ -5,7 +5,7 @@ import {
   useBillingInterval,
 } from '../../store'
 
-import { useDBTable } from 'https://framer.com/m/SupabaseConnector-ARlr.js'
+import { useDBTable } from './useDBTable'
 
 import {
   STRIPE_BILLING_URL,
@@ -152,8 +152,8 @@ export function isUpgraded(Component): ComponentType {
 // 🟢 ON EMAIL INPUT (Trial page)
 export function StartTrial(Component): ComponentType {
     return (props: any) => {
-      const [, , insertRow] = useDBTable('users', 'sg-figma-t')
       const [figma] = useFigma()
+      const [rows, , insertRow] = useDBTable('users', 'sg-figma-t', { column: 'figma_user_id', value: figma.user?.id })
       const figma_user_id = figma.user?.id
   
       return (

@@ -44,5 +44,8 @@
     "tsup": "^8.2.4",
     "typescript": "5.7.3",
     "zustand": "5.0.1"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.86.0"
   }
 }

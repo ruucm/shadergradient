@@ -1,5 +1,11 @@
 # ui
 
+## 0.1.38
+
+### Patch Changes
+
+- update HideBanner override
+
 ## 0.1.37
 
 ### Patch Changes

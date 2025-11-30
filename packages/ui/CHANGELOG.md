@@ -1,5 +1,11 @@
 # ui
 
+## 0.1.45
+
+### Patch Changes
+
+- MainGradient Radius 18px
+
 ## 0.1.42
 
 ### Patch Changes

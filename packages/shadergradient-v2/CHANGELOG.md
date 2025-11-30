@@ -1,5 +1,29 @@
 # shadergradient
 
+## 2.4.5
+
+### Patch Changes
+
+- enableCameraUpdate for ShaderGradientStateless component
+
+## 2.4.4
+
+### Patch Changes
+
+- lazyLoad with rootMargin
+
+## 2.4.3
+
+### Patch Changes
+
+- restore ssr fixes
+
+## 2.4.0
+
+### Minor Changes
+
+- hide debug logs
+
 ## 2.3.6
 
 ### Patch Changes

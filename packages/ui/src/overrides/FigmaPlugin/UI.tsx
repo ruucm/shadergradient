@@ -7,7 +7,7 @@ import {
   useCallback,
 } from 'react'
 
-import { useFigma, useUIStore } from '../../store'
+import { useFigma, useUIStore, useFigmaPluginStore } from '../../store'
 
 import {
   figma,
@@ -17,7 +17,6 @@ import {
 } from './FigmaApi'
 
 import { useAnimationControls, useInView } from 'framer-motion'
-import { createStore } from 'https://framer.com/m/framer/store.js@^1.0.0'
 
 import { useDBTable } from 'https://framer.com/m/SupabaseConnector-ARlr.js'
 
@@ -36,13 +35,6 @@ import {
   parseUrlToCode,
   copyToClipboard,
 } from './utils'
-
-const useStore = createStore({
-  currentTab: 0,
-  scrollingTo: null,
-  share: 'url', // url or code
-  easyView: false,
-})
 
 // 🟢 ON 'SNAPSHOT' BUTTON
 export function insertCanvasAsImage(Component): ComponentType {
@@ -113,8 +105,6 @@ export function OpenGIFPage(Component): ComponentType {
           console.log('onClick GIF')
           setAnimate('on')
           setRange('enabled')
-          setRangeStart(5)
-          setRangeEnd(8)
           setPixelDensity(2)
           setToggleAxis(false)
           setZoomOut(false)
@@ -162,11 +152,14 @@ export function extractGIF(Component): ComponentType {
     const [animate, setAnimate] = useQueryState('animate')
     const [, setUTime] = useQueryState('uTime')
     const [range, setRange] = useQueryState('range')
+    const [loop, setLoop] = useQueryState('loop')
+    const [loopDuration, setLoopDuration] = useQueryState('loopDuration')
     const [rangeStart] = useQueryState('rangeStart')
     const [rangeEnd] = useQueryState('rangeEnd')
     const [frameRate] = useQueryState('frameRate')
     const [pixelDensity] = useQueryState('pixelDensity')
     const [destination] = useQueryState('destination')
+
     const [width, setWidth] = useState(333)
     const [height, setHeight] = useState(333)
     const [format] = useQueryState('format')
@@ -220,7 +213,7 @@ export function extractGIF(Component): ComponentType {
       setTimeout(() => {
         updateResolution({ setWidth, setHeight, pixelDensity })
       }, 100) // need a delay until the canvas dom mounted
-    }, [format, duration, pixelDensity, frameRate])
+    }, [format, duration, pixelDensity, frameRate, loop, loopDuration])
 
     // handle resize plugin
     useLayoutEffect(() => {
@@ -389,13 +382,14 @@ export function extractGIF(Component): ComponentType {
   }
 }
 
-// 🟢 ON 'TIMELINE' COMPONENT (Export page)
+// 🟢 ON 'TIMELINE' COMPONENT
 export function Timeline(Component): ComponentType {
   return ({ ...props }: any) => {
     const controls = useAnimationControls()
 
     const [rangeStart] = useQueryState('rangeStart')
     const [rangeEnd] = useQueryState('rangeEnd')
+    const [loop] = useQueryState('loop')
 
     const [duration, setDuration] = useState(0)
 
@@ -404,12 +398,10 @@ export function Timeline(Component): ComponentType {
       if (rangeStart !== undefined && rangeEnd !== undefined) {
         setDuration(rangeEnd - rangeStart)
       }
-    }, [rangeStart, rangeEnd])
+    }, [rangeStart, rangeEnd, loop])
 
     // Handle animation sequence
     useEffect(() => {
-      console.log(duration, 'timeline check')
-
       const runSequence = async () => {
         try {
           controls.set({ width: '0%', transition: { duration: 0 } })
@@ -428,7 +420,7 @@ export function Timeline(Component): ComponentType {
       }
 
       runSequence()
-    }, [duration, controls])
+    }, [duration, controls, loop])
 
     return <Component {...props} animate={controls} />
   }
@@ -469,7 +461,25 @@ export function EstimatedSize(Component): ComponentType {
   }
 }
 
-// 🟢 On the duration of the GIF/video (Export page)
+// 🟢 On the duration bar whole wrapper
+export function TimelineWrapper(Component): ComponentType {
+  return ({ ...props }: any) => {
+    const [animate] = useQueryState('animate')
+    return (
+      <div
+        style={{
+          display: animate === 'on' ? 'block' : 'none',
+          width: '100%',
+          height: '100%',
+        }}
+      >
+        <Component {...props} />
+      </div>
+    )
+  }
+}
+
+// 🟢 On the duration timeline red bar
 export function Duration(Component): ComponentType {
   return ({ ...props }: any) => {
     const [rangeStart] = useQueryState('rangeStart')
@@ -540,17 +550,18 @@ export function Error(Component): ComponentType {
 // 🟢 On the url<>code toggle (Share page)
 export function ToggleShare(Component): ComponentType {
   return ({ ...props }: any) => {
-    const [store, setStore] = useStore()
+    const share = useFigmaPluginStore((state) => state.share)
+    const setShare = useFigmaPluginStore((state) => state.setShare)
 
     return (
       <Component
         {...props}
-        variant={store.share}
+        variant={share}
         onClickUrl={() => {
-          setStore({ share: 'Url' })
+          setShare('Url')
         }}
         onClickCode={() => {
-          setStore({ share: 'Code' })
+          setShare('Code')
         }}
       />
     )
@@ -578,7 +589,7 @@ export function ShowCopyContent(Component): ComponentType {
 // 🟢 On the copy button (Share page)
 export function CopyBtn(Component): ComponentType {
   return (props) => {
-    const [store, setStore] = useStore()
+    const share = useFigmaPluginStore((state) => state.share)
     const [copied, setCopied] = useState(false)
     const baseURL = 'https://shadergradient.co/customize'
 
@@ -586,14 +597,14 @@ export function CopyBtn(Component): ComponentType {
       <Component
         {...props}
         btnText={
-          `${copied === false ? 'Copy ' : 'Yay, Copied '}` +
-          store.share +
+          `${copied === false ? 'Copy ' : 'Yay, copied '}` +
+          `${share === 'url' ? 'URL' : 'code'}` +
           `${copied === false ? '' : '!'}`
         }
         onClick={async () => {
           setCopied(true)
           const textToCopy =
-            store.share === 'url'
+            share === 'url'
               ? baseURL + window.location.search
               : parseUrlToCode(baseURL + window.location.search)
 
@@ -612,32 +623,33 @@ export function CopyBtn(Component): ComponentType {
 // 🟢 On the tab switcher
 export function TabSwitcher(Component): ComponentType {
   return (props) => {
-    const [store, setStore] = useStore()
+    const currentTab = useFigmaPluginStore((state) => state.currentTab)
+    const setScrollingTo = useFigmaPluginStore((state) => state.setScrollingTo)
     const scrollBehavior = { behavior: 'smooth', block: 'start' }
 
     return (
       <Component
         {...props}
-        variant={'Tab' + store.currentTab}
+        variant={'Tab' + currentTab}
         tab0Click={() => {
-          setStore({ scrollingTo: 0 })
+          setScrollingTo(0)
           const tab0 = document.getElementById('tab0')
           tab0.scrollIntoView(scrollBehavior as ScrollIntoViewOptions)
         }}
         tab1Click={() => {
-          setStore({ scrollingTo: 1 })
+          setScrollingTo(1)
 
           const tab1 = document.getElementById('tab1')
           tab1.scrollIntoView(scrollBehavior as ScrollIntoViewOptions)
         }}
         tab2Click={() => {
-          setStore({ scrollingTo: 2 })
+          setScrollingTo(2)
 
           const tab2 = document.getElementById('tab2')
           tab2.scrollIntoView(scrollBehavior as ScrollIntoViewOptions)
         }}
         tab3Click={() => {
-          setStore({ scrollingTo: 3 })
+          setScrollingTo(3)
 
           const tab3 = document.getElementById('tab3')
           tab3.scrollIntoView(scrollBehavior as ScrollIntoViewOptions)
@@ -649,116 +661,174 @@ export function TabSwitcher(Component): ComponentType {
 
 export function ShapeTab(Component): ComponentType {
   return (props) => {
-    const [store, setStore] = useStore()
+    const scrollingTo = useFigmaPluginStore((state) => state.scrollingTo)
+    const setCurrentTab = useFigmaPluginStore((state) => state.setCurrentTab)
+    const setScrollingTo = useFigmaPluginStore((state) => state.setScrollingTo)
     const ref = useRef(null)
     const isInView = useInView(ref, {
       amount: 0.6, // at least 60% in view to be considered visible
     })
     useEffect(() => {
-      if (isInView && store.scrollingTo === null) {
-        setStore({ currentTab: 0 })
-      } else if (isInView && store.scrollingTo === 0) {
-        setStore({ currentTab: 0 })
+      if (isInView && scrollingTo === null) {
+        setCurrentTab(0)
+      } else if (isInView && scrollingTo === 0) {
+        setCurrentTab(0)
         setTimeout(() => {
-          setStore({ scrollingTo: null })
+          setScrollingTo(null)
         }, 100)
       }
-    }, [isInView, store.scrollingTo])
+    }, [isInView, scrollingTo])
     return <Component {...props} ref={ref} id='tab0' />
   }
 }
 
 export function ColorsTab(Component): ComponentType {
   return (props) => {
-    const [store, setStore] = useStore()
+    const scrollingTo = useFigmaPluginStore((state) => state.scrollingTo)
+    const setCurrentTab = useFigmaPluginStore((state) => state.setCurrentTab)
+    const setScrollingTo = useFigmaPluginStore((state) => state.setScrollingTo)
     const ref = useRef(null)
     const isInView = useInView(ref, {
       amount: 0.6, // at least 60% in view to be considered visible
     })
     useEffect(() => {
-      if (isInView && store.scrollingTo === null) {
-        setStore({ currentTab: 1 })
-      } else if (isInView && store.scrollingTo === 1) {
-        setStore({ currentTab: 1 })
+      if (isInView && scrollingTo === null) {
+        setCurrentTab(1)
+      } else if (isInView && scrollingTo === 1) {
+        setCurrentTab(1)
         setTimeout(() => {
-          setStore({ scrollingTo: null })
+          setScrollingTo(null)
         }, 100)
       }
-    }, [isInView, store.scrollingTo])
+    }, [isInView, scrollingTo])
     return <Component {...props} ref={ref} id='tab1' />
   }
 }
 
 export function MotionTab(Component): ComponentType {
   return (props) => {
-    const [store, setStore] = useStore()
+    const scrollingTo = useFigmaPluginStore((state) => state.scrollingTo)
+    const setCurrentTab = useFigmaPluginStore((state) => state.setCurrentTab)
+    const setScrollingTo = useFigmaPluginStore((state) => state.setScrollingTo)
     const ref = useRef(null)
     const isInView = useInView(ref, {
       amount: 0.6, // at least 60% in view to be considered visible
     })
     useEffect(() => {
-      if (isInView && store.scrollingTo === null) {
-        setStore({ currentTab: 2 })
-      } else if (isInView && store.scrollingTo === 2) {
-        setStore({ currentTab: 2 })
+      if (isInView && scrollingTo === null) {
+        setCurrentTab(2)
+      } else if (isInView && scrollingTo === 2) {
+        setCurrentTab(2)
         setTimeout(() => {
-          setStore({ scrollingTo: null })
+          setScrollingTo(null)
         }, 100)
       }
-    }, [isInView, store.scrollingTo])
+    }, [isInView, scrollingTo])
     return <Component {...props} ref={ref} id='tab2' />
   }
 }
 
 export function ViewTab(Component): ComponentType {
   return (props) => {
-    const [store, setStore] = useStore()
+    const scrollingTo = useFigmaPluginStore((state) => state.scrollingTo)
+    const setCurrentTab = useFigmaPluginStore((state) => state.setCurrentTab)
+    const setScrollingTo = useFigmaPluginStore((state) => state.setScrollingTo)
     const ref = useRef(null)
     const isInView = useInView(ref, {
       amount: 0.6, // at least 60% in view to be considered visible
     })
     useEffect(() => {
-      if (isInView && store.scrollingTo === null) {
-        setStore({ currentTab: 3 })
-      } else if (isInView && store.scrollingTo === 3) {
-        setStore({ currentTab: 3 })
+      if (isInView && scrollingTo === null) {
+        setCurrentTab(3)
+      } else if (isInView && scrollingTo === 3) {
+        setCurrentTab(3)
         setTimeout(() => {
-          setStore({ scrollingTo: null })
+          setScrollingTo(null)
         }, 100)
       }
-    }, [isInView, store.scrollingTo])
+    }, [isInView, scrollingTo])
     return <Component {...props} ref={ref} id='tab3' />
   }
 }
 
 export function HighlightButton(Component): ComponentType {
   return (props) => {
-    const [store, setStore] = useStore()
+    const currentTab = useFigmaPluginStore((state) => state.currentTab)
+    const easyView = useFigmaPluginStore((state) => state.easyView)
+    const setEasyView = useFigmaPluginStore((state) => state.setEasyView)
 
     return (
       <Component
         {...props}
         variant={
-          store.currentTab === 3
+          currentTab === 3 && easyView === false
             ? 'ToggleBtn - Highlight'
+            : easyView === true
+            ? 'ToggleBtn - Clicked'
             : 'ToggleBtn - Default'
         }
         onClick={() => {
-          //@ts-ignore
-          props.onClick()
-          setStore({ easyView: !store.easyView })
+          setEasyView(!easyView)
         }}
       />
     )
   }
 }
 
-// 🟢 On the ShaderGradientStateless
-export function EasyViewControl(Component): ComponentType {
+// 🟢 On the EasyView info (mouse interaction guide for easy view)
+export function EasyViewInfo(Component): ComponentType {
   return (props) => {
-    const [store, setStore] = useStore()
+    const easyView = useFigmaPluginStore((state) => state.easyView)
+
     return (
-      <Component {...props} pointerEvents={store.easyView ? 'auto' : 'none'} />
+      <div
+        style={{
+          display: easyView === true ? 'flex' : 'none',
+          width: 'fit-content',
+          height: 'fit-content',
+        }}
+      >
+        <Component {...props} />
+      </div>
+    )
+  }
+}
+
+// 🟢 On the ShaderGradientStateless
+export function StatelessOverride(Component): ComponentType {
+  return (props) => {
+    const easyView = useFigmaPluginStore((state) => state.easyView)
+    const [loop, setLoop] = useQueryState('loop')
+    const [loopDuration, setLoopDuration] = useQueryState('loopDuration')
+    const [range, setRange] = useQueryState('range')
+    const [rangeStart, setRangeStart] = useQueryState('rangeStart')
+    const [rangeEnd, setRangeEnd] = useQueryState('rangeEnd')
+
+    // Set defaults for loop properties if they don't exist in the url preset
+    // This runs after preset loads, so it won't be overwritten
+    useEffect(() => {
+      if (loop === undefined || loop === null) {
+        setLoop('on')
+      }
+      if (loopDuration === undefined || loopDuration === null) {
+        setLoopDuration(10)
+      }
+    }, [loop, loopDuration])
+
+    // Sync range with loop state
+    useEffect(() => {
+      if (loop === 'on' && loopDuration) {
+        setRange('enabled')
+        setRangeStart(0)
+        setRangeEnd(loopDuration)
+      }
+    }, [loop, loopDuration])
+
+    return (
+      <Component
+        {...props}
+        pointerEvents={easyView === true ? 'auto' : 'none'}
+      />
     )
   }
 }

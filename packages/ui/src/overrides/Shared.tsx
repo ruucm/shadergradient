@@ -11,7 +11,13 @@ import {
 
 export function HideBanner(Component): ComponentType {
   return (props) => {
-    return <Component {...props} style={{ zIndex: 10000000000 }} />
+    // Remove Framer badge
+    useEffect(() => {
+      const badge = document.getElementById('__framer-badge-container')
+      if (badge) badge.remove()
+    }, [])
+
+    return <Component {...props} />
   }
 }
 
@@ -97,6 +103,12 @@ const href = 'https://ruucm.github.io/shadergradient/ui@latest/styles.css'
 export function TailwindWrapper(Component): ComponentType {
   return (props: any) => {
     const tailwindLoaded = useTailwind(href)
+
+    // Remove Framer badge
+    useEffect(() => {
+      const badge = document.getElementById('__framer-badge-container')
+      if (badge) badge.remove()
+    }, [])
 
     return (
       <Component

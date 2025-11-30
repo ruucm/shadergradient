@@ -3,7 +3,15 @@ import { useEffect, useRef, useState } from 'react'
 import { motion } from 'framer-motion'
 import ScrollBoxText from 'https://framer.com/m/ScrollBoxText-zgHd.js'
 import { isDebug } from '@/utils'
-import { useStore } from '@/overrides/Web/Scroll'
+import { useScrollStore, useScrollableBoxStore } from '@/store'
+import { addPropertyControls, ControlType } from 'framer'
+
+interface ScrollableTextBoxProps {
+  enableFadeIn?: boolean
+  fadeInDelay?: number
+  enableFadeOut?: boolean
+  fadeOutThreshold?: number
+}
 
 const textItems = [
   'Shape',
@@ -26,14 +34,19 @@ const textItems = [
 ]
 
 const visibleItems = 13 // This should be odd number (to center the active item)
-const visibleDelay = 0.3
 
-export function ScrollableTextBox() {
+export function ScrollableTextBox({
+  enableFadeIn = true,
+  fadeInDelay = 0.3,
+  enableFadeOut = false,
+  fadeOutThreshold = 0.8,
+}: ScrollableTextBoxProps = {}) {
   const containerRef = useRef<HTMLDivElement>(null)
-  const [activeIndex, setActiveIndex] = useState(0)
-  const [, setStore] = useStore()
+  const { activeIndex, setActiveIndex } = useScrollableBoxStore()
+  const setHighlightWord = useScrollStore((state) => state.setHighlightWord)
   const [itemHeight, setItemHeight] = useState(80)
-  const [isVisible, setIsVisible] = useState(false)
+  const [isVisible, setIsVisible] = useState(!enableFadeIn)
+  const [scrollOpacity, setScrollOpacity] = useState(1)
 
   // Web Audio API setup for the tick sound
   const audioContextRef = useRef<AudioContext | null>(null)
@@ -76,14 +89,37 @@ export function ScrollableTextBox() {
     }
   }
 
-  // Add delay before rendering
+  // Fade in animation with configurable delay
   useEffect(() => {
+    if (!enableFadeIn) {
+      setIsVisible(true)
+      return
+    }
+
     const timer = setTimeout(() => {
       setIsVisible(true)
-    }, visibleDelay * 1000)
+    }, fadeInDelay * 1000)
 
     return () => clearTimeout(timer)
-  }, [])
+  }, [enableFadeIn, fadeInDelay])
+
+  // Restore scroll position from localStorage on mount
+  useEffect(() => {
+    const container = containerRef.current
+    if (!container || itemHeight === 0) return
+
+    // Restore scroll position based on saved activeIndex
+    const targetScrollTop = activeIndex * itemHeight
+    container.scrollTop = targetScrollTop
+
+    if (isDebug) {
+      console.log('Restored scroll position:', targetScrollTop)
+      console.log('Restored activeIndex:', activeIndex)
+    }
+
+    // Also update the store to ensure consistency
+    setHighlightWord(activeIndex)
+  }, [itemHeight]) // Only run when itemHeight is calculated
 
   useEffect(() => {
     const container = containerRef.current
@@ -132,17 +168,32 @@ export function ScrollableTextBox() {
 
       // Update activeIndex
       setActiveIndex(result)
-      setStore({ highlightWord: result })
+      setHighlightWord(result)
 
       // Play tick sound only when index actually changes (not on repeated same index)
       if (result !== lastSoundIndexRef.current) {
         lastSoundIndexRef.current = result
         playTickSound()
       }
+
+      // Calculate fade out based on scroll progress
+      if (enableFadeOut) {
+        const maxScroll = container.scrollHeight - container.clientHeight
+        const scrollProgress = scrollTop / maxScroll
+
+        if (scrollProgress >= fadeOutThreshold) {
+          // Calculate opacity: 1 at threshold, 0 at end
+          const fadeRange = 1 - fadeOutThreshold
+          const fadeProgress = (scrollProgress - fadeOutThreshold) / fadeRange
+          const opacity = Math.max(0, 1 - fadeProgress)
+          setScrollOpacity(opacity)
+        } else {
+          setScrollOpacity(1)
+        }
+      }
     }
 
     container.addEventListener('scroll', handleScroll)
-    handleScroll() // 초기 상태 설정
 
     return () => {
       container.removeEventListener('scroll', handleScroll)
@@ -161,7 +212,7 @@ export function ScrollableTextBox() {
         overflow: 'hidden',
         position: 'sticky',
         top: 0,
-        opacity: isVisible ? 1 : 0,
+        opacity: isVisible ? scrollOpacity : 0,
         transition: 'opacity 0.5s ease-in-out',
         // paddingTop: "25vh",
         // paddingBottom: "25vh",
@@ -180,6 +231,7 @@ export function ScrollableTextBox() {
           scrollSnapType: 'y mandatory',
           msOverflowStyle: 'none',
           scrollbarWidth: 'none',
+          overflowX: 'hidden',
           ...(isDebug ? { background: 'rgba(0,255,0,0.25)' } : {}), // debug
         }}
       >
@@ -277,4 +329,40 @@ export function ScrollableTextBox() {
       </motion.div>
     </div>
   )
+}
+
+ScrollableTextBox.propertyControls = {
+  enableFadeIn: {
+    type: ControlType.Boolean,
+    title: 'Enable Fade In',
+    defaultValue: true,
+    description: 'Enable opacity animation on first appearance',
+  },
+  fadeInDelay: {
+    type: ControlType.Number,
+    title: 'Fade In Delay',
+    defaultValue: 0.3,
+    min: 0,
+    max: 5,
+    step: 0.1,
+    unit: 's',
+    description: 'Delay before fade in animation starts',
+    hidden: (props) => !props.enableFadeIn,
+  },
+  enableFadeOut: {
+    type: ControlType.Boolean,
+    title: 'Enable Fade Out',
+    defaultValue: false,
+    description: 'Enable opacity fade out when reaching end of scroll',
+  },
+  fadeOutThreshold: {
+    type: ControlType.Number,
+    title: 'Fade Out Threshold',
+    defaultValue: 0.8,
+    min: 0,
+    max: 1,
+    step: 0.05,
+    description: 'Scroll progress (0-1) where fade out begins',
+    hidden: (props) => !props.enableFadeOut,
+  },
 }

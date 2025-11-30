@@ -781,6 +781,14 @@ export const propertyControls = (ControlType, type = '') => ({
     defaultValue: false,
     hidden: (props) => props.control === 'query',
   },
+  enableCameraUpdate: {
+    type: ControlType.Boolean,
+    title: 'Camera Update',
+    enabledTitle: 'On',
+    disabledTitle: 'Off',
+    defaultValue: false,
+    hidden: (props) => type !== 'stateless',
+  },
   pointerEvents: {
     type: ControlType.Enum,
     title: 'Touch Control',
@@ -805,6 +813,14 @@ export const propertyControls = (ControlType, type = '') => ({
     defaultValue: 0.1,
     displayStepper: true,
     title: '↳ Threshold',
+    hidden: (props) => !props.lazyLoad,
+  },
+  rootMargin: {
+    type: ControlType.String,
+    placeholder: '0px',
+    defaultValue: '0px',
+    title: '↳ Root Margin',
+    description: 'Offset before triggering (e.g., "100px", "-50px")',
     hidden: (props) => !props.lazyLoad,
   },
 })

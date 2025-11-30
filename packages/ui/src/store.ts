@@ -1,27 +1,57 @@
 import { create } from 'zustand'
-import { combine } from 'zustand/middleware'
+import { combine, persist, createJSONStorage } from 'zustand/middleware'
 
 export const useUIStore = create(
-  combine({ activePreset: 0, mode: 'full', loadingPercentage: 0, inputMode: 'preset', urlInput: '', //preset or url
-    error:'', figmaPage:''
-  }, (set) => ({
-    setActivePreset: (by: number) => set((state) => ({ activePreset: by })),
-    setInputMode: (data: any) => set((state) => ({ ...state, input: data })),
-    setMode: (data: any) => set((state) => ({ ...state, mode: data })),
-    setUrlInput: (data: any) => set((state) => ({ ...state, urlInput: data })),
-    setError: (data: any) => set((state) => ({ ...state, error: data })),
-    setFigmaPage: (data: any) => set((state) => ({ ...state, figmaPage: data })),
-    setLoadingPercentage: (data: any) =>
-      set((state) => ({ ...state, loadingPercentage: data })),
-  }))
+  combine(
+    {
+      activePreset: 0,
+      mode: 'full',
+      loadingPercentage: 0,
+      inputMode: 'preset',
+      urlInput: '', //preset or url
+      error: '',
+      figmaPage: '',
+      easyView: false,
+    },
+    (set) => ({
+      setActivePreset: (by: number) => set((state) => ({ activePreset: by })),
+      setInputMode: (data: any) => set((state) => ({ ...state, input: data })),
+      setMode: (data: any) => set((state) => ({ ...state, mode: data })),
+      setUrlInput: (data: any) =>
+        set((state) => ({ ...state, urlInput: data })),
+      setError: (data: any) => set((state) => ({ ...state, error: data })),
+      setFigmaPage: (data: any) =>
+        set((state) => ({ ...state, figmaPage: data })),
+      setLoadingPercentage: (data: any) =>
+        set((state) => ({ ...state, loadingPercentage: data })),
+      setEasyView: (data: any) =>
+        set((state) => ({ ...state, easyView: data })),
+    })
+  )
 )
 
+interface ScrollableBoxState {
+  activeIndex: number
+  setActiveIndex: (index: number) => void
+}
+
+export const useScrollableBoxStore = create<ScrollableBoxState>()(
+  persist(
+    (set) => ({
+      activeIndex: 0,
+      setActiveIndex: (index: number) => set({ activeIndex: index }),
+    }),
+    {
+      name: 'scrollable-box-storage',
+      storage: createJSONStorage(() => localStorage),
+    }
+  )
+)
 
 export const useFigmaStore = create((set) => ({
-  figma: { selection: 0, user: null, error:'', page:'' },
+  figma: { selection: 0, user: null, error: '', page: '' },
   setFigma: (payload) =>
     set((prev) => ({ figma: { ...prev.figma, ...payload } })),
-
 }))
 
 export function useFigma() {
@@ -45,3 +75,65 @@ export function useBillingInterval() {
   )
   return [billingInterval, setBillingInterval]
 }
+
+// Scroll store for Web/Scroll.tsx
+interface ScrollStore {
+  highlightWord: number
+  currentSection: number
+  setHighlightWord: (word: number) => void
+  setCurrentSection: (section: number) => void
+}
+
+export const useScrollStore = create<ScrollStore>()((set) => ({
+  highlightWord: 0,
+  currentSection: 0,
+  setHighlightWord: (word: number) => set({ highlightWord: word }),
+  setCurrentSection: (section: number) => set({ currentSection: section }),
+}))
+
+// UI store for Web/UI.tsx
+interface UIOverrideStore {
+  randomColor: number[][]
+  slider: number
+  toggle: boolean
+  setRandomColor: (color: number[][]) => void
+  setSlider: (slider: number) => void
+  setToggle: (toggle: boolean) => void
+}
+
+export const useUIOverrideStore = create<UIOverrideStore>()((set) => ({
+  randomColor: [
+    [100, 180, 255],
+    [92, 92, 124],
+    [200, 200, 200],
+  ],
+  slider: 0,
+  toggle: false,
+  easyView: false,
+  setRandomColor: (color: number[][]) => set({ randomColor: color }),
+  setSlider: (slider: number) => set({ slider }),
+  setToggle: (toggle: boolean) => set({ toggle }),
+}))
+
+// FigmaPlugin store for FigmaPlugin/UI.tsx
+interface FigmaPluginStore {
+  currentTab: number
+  scrollingTo: number | null
+  share: string
+  easyView: boolean
+  setCurrentTab: (tab: number) => void
+  setScrollingTo: (to: number | null) => void
+  setShare: (share: string) => void
+  setEasyView: (easyView: boolean) => void
+}
+
+export const useFigmaPluginStore = create<FigmaPluginStore>()((set) => ({
+  currentTab: 0,
+  scrollingTo: null,
+  share: 'url',
+  easyView: false,
+  setCurrentTab: (tab: number) => set({ currentTab: tab }),
+  setScrollingTo: (to: number | null) => set({ scrollingTo: to }),
+  setShare: (share: string) => set({ share }),
+  setEasyView: (easyView: boolean) => set({ easyView }),
+}))

@@ -20,7 +20,7 @@ export function InputTitle({
   const [isMouseOver, setIsMouseOver] = useState(false)
   return (
     <div
-      className='w-[105px] flex items-center flex-shrink-0 gap-0.5 select-none font-["Inter"]'
+      className='w-[105px] flex items-center flex-shrink-0 gap-0.5 select-none font-["Inter"] relative'
       // style={{ fontFamily: 'Inter' }}
     >
       <p className='font-medium whitespace-nowrap select-none'>
@@ -48,7 +48,7 @@ export function InputTitle({
       {info === true && (
         <div
           className={
-            'w-fit h-fit absolute z-20 min-w-[140px] pointer-events-none duration-300 ' +
+            'w-fit h-fit absolute z-20 pointer-events-none duration-300 ' +
             (isMouseOver === true
               ? 'opacity-100 bottom-7'
               : 'opacity-0 bottom-6')
@@ -58,7 +58,9 @@ export function InputTitle({
             {/* tooltip */}
             <div className='bg-[#ff340a] absolute w-3 h-3 rotate-45 rounded-sm bottom-[-4px] left-[12px]'></div>
           </div>
-          <p className='relative z-20 p-2 text-white'>{infoContent}</p>
+          <p className='relative z-20 p-2 text-white min-w-[200px] font-medium'>
+            {infoContent}
+          </p>
         </div>
       )}
     </div>

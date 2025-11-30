@@ -1,15 +1,18 @@
-import { useState, useEffect } from 'react'
-import { motion, useAnimation } from 'framer-motion'
-import { useInView } from 'react-intersection-observer'
+import { ControlType, RenderTarget } from 'framer'
+
+import { useState, useEffect, useRef } from 'react'
+import { motion, useAnimation, useInView } from 'framer-motion'
+
+const currentTarget = RenderTarget.current()
+const isOnCanvas = currentTarget === RenderTarget.canvas
 
 export function TextAnimation({
   fontSize,
   color,
   content,
-  delay,
+  delay = 100,
   width = null,
   yBefore = 20,
-  isFramerCanvas = false,
   fontFamily = '"Lora", serif',
 }) {
   const letterContainerVariants = {
@@ -43,9 +46,11 @@ export function TextAnimation({
     },
   }
 
-  const [ref, inView] = useInView()
+  const ref = useRef(null)
+  const inView = useInView(ref)
   const controls = useAnimation()
   const [activePresetInView, setActivePresetInView] = useState(false)
+
   useEffect(() => {
     if (inView) {
       controls.start('after')
@@ -54,63 +59,71 @@ export function TextAnimation({
     }
   }, [controls, inView])
 
-  setTimeout(() => {
-    setActivePresetInView(true)
-  }, delay)
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setActivePresetInView(true)
+    }, delay)
+
+    return () => clearTimeout(timer)
+  }, [delay])
   return (
-    <>
-      {activePresetInView && (
-        <motion.div
+    <motion.div
+      style={{
+        position: 'relative',
+        wordBreak: 'break-word',
+        width: width === 0 ? 'fit-content' : width,
+      }}
+    >
+      <motion.h1
+        variants={letterContainerVariants}
+        ref={ref}
+        initial={isOnCanvas ? 'after' : 'before'}
+        animate={isOnCanvas ? 'after' : controls}
+      >
+        <div
           style={{
-            position: 'relative',
-            wordBreak: 'break-word',
-            width: width === 0 ? 'fit-content' : width,
+            textAlign: 'left',
+            fontSize: fontSize,
+            color: color,
+            fontWeight: 500,
+            fontFamily: fontFamily,
           }}
         >
-          <motion.h1
-            variants={letterContainerVariants}
-            ref={ref}
-            initial={isFramerCanvas ? 'after' : 'before'}
-            animate={controls}
-          >
+          {content.split(' ').map((word: string, wordI: number) => (
             <div
+              key={`word-${word}-${wordI}`}
               style={{
-                textAlign: 'left',
-                fontSize: fontSize,
-                color: color,
-                fontWeight: 500,
-                fontFamily: fontFamily,
+                display: 'inline-block',
               }}
             >
-              {content.split(' ').map((word: string, wordI: number) => (
-                <div
-                  key={`word-${word}-${wordI}`}
+              {Array.from(word).map((letter, index) => (
+                <motion.span
+                  key={`${index}-${letter}`}
                   style={{
+                    position: 'relative',
                     display: 'inline-block',
-                  }}
+                    width: 'auto',
+                  }} // Position elements
+                  variants={letterVariants}
+                  // transition={{ duration: 0.5, ease: 'backInOut' }}
                 >
-                  {Array.from(word).map((letter, index) => (
-                    <motion.span
-                      key={`${index}-${letter}`}
-                      style={{
-                        position: 'relative',
-                        display: 'inline-block',
-                        width: 'auto',
-                      }} // Position elements
-                      variants={letterVariants}
-                      // transition={{ duration: 0.5, ease: 'backInOut' }}
-                    >
-                      {letter === ' ' ? '\u00A0' : letter}
-                    </motion.span>
-                  ))}
-                  {/* remove the last spacing */}
-                  {wordI !== content.split(' ').length - 1 ? '\u00A0' : null}
-                </div>
+                  {letter === ' ' ? '\u00A0' : letter}
+                </motion.span>
               ))}
+              {/* remove the last spacing */}
+              {wordI !== content.split(' ').length - 1 ? '\u00A0' : null}
             </div>
-          </motion.h1>
-        </motion.div>
-      )}
-    </>
+          ))}
+        </div>
+      </motion.h1>
+    </motion.div>
   )
+}
+
+TextAnimation.propertyControls = {
+  width: { type: ControlType.Number, defaultValue: 300 },
+  content: { type: ControlType.String, defaultValue: 'Hello World' },
+  color: { type: ControlType.Color, defaultValue: '#ffffff' },
+  fontSize: { type: ControlType.Number, defaultValue: 20 },
+  fontFamily: { type: ControlType.String, defaultValue: 'Lora' },
 }

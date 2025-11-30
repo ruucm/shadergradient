@@ -463,9 +463,6 @@ importers:
       react:
         specifier: ^18.2.0
         version: 18.3.1
-      react-intersection-observer:
-        specifier: ^9.4.1
-        version: 9.16.0(react-dom@19.1.1(react@18.3.1))(react@18.3.1)
       react-slider:
         specifier: ^2.0.4
         version: 2.0.6(react@18.3.1)

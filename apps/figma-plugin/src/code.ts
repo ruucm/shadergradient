@@ -1,6 +1,6 @@
 // import framerOnMessage from 'framer-sites-figma-plugin/lib/api'
 
-figma.showUI(__html__, { width: 450, height: 630 })
+figma.showUI(__html__, { width: 400, height: 653 })
 
 // restore previous size
 figma.clientStorage

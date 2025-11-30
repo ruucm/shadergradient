@@ -6,8 +6,6 @@ import {
   PRESETS,
   useURLQueryState,
 } from '@/components/Shared/ShaderGradientStateless'
-// import { ui } from "https://framer.com/m/ui-gy7Z.js"
-// const { PRESETS, useURLQueryState } = ui
 
 export function HideBanner(Component): ComponentType {
   return (props) => {

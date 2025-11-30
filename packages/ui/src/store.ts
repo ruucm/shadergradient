@@ -1,5 +1,6 @@
 import { create } from 'zustand'
 import { combine, persist, createJSONStorage } from 'zustand/middleware'
+import { createClient, SupabaseClient } from '@supabase/supabase-js'
 
 export const useUIStore = create(
   combine(
@@ -139,4 +140,19 @@ export const useFigmaPluginStore = create<FigmaPluginStore>()((set) => ({
   setScrollingTo: (to: number | null) => set({ scrollingTo: to }),
   setShare: (share: string) => set({ share }),
   setEasyView: (easyView: boolean) => set({ easyView }),
+}))
+
+// Supabase Store
+interface SupabaseStore {
+  supabase: SupabaseClient | null
+  initSupabase: (url: string, key: string) => void
+}
+
+export const useSupabaseStore = create<SupabaseStore>((set) => ({
+  supabase: null,
+  initSupabase: (url: string, key: string) => {
+    if (!url || !key) return
+    const client = createClient(url, key)
+    set({ supabase: client })
+  },
 }))

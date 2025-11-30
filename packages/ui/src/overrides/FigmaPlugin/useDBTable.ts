@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { supabase } from './supabaseClient'
+import { useSupabaseStore } from '../../store'
 
 type Filter = {
   column: string
@@ -10,62 +10,75 @@ export function useDBTable(
   table: string,
   channelName: string = 'any',
   filter?: Filter
-): [any[], boolean, (item: any) => void, (updates: any) => Promise<void>, (id: any) => Promise<void>] {
+): [
+  any[],
+  boolean,
+  (item: any) => void,
+  (updates: any) => Promise<void>,
+  (id: any) => Promise<void>
+] {
   const [rows, setRows] = useState<any[]>([])
   const [loading, setLoading] = useState(false)
+  const supabase = useSupabaseStore((state) => state.supabase)
 
   useEffect(() => {
+    if (!supabase) return
+
     // If filter is provided but value is undefined/null, don't fetch yet
     if (filter && (filter.value === undefined || filter.value === null)) {
       return
     }
 
-    console.log(`[useDBTable] Fetching initial data for table: ${table}`, filter ? `with filter: ${filter.column}=${filter.value}` : '')
+    console.log(
+      `[useDBTable] Fetching initial data for table: ${table}`,
+      filter ? `with filter: ${filter.column}=${filter.value}` : ''
+    )
     setLoading(true)
-    
-    let query = supabase
-      .from(table)
-      .select('*')
-      .order('id', { ascending: false })
+
+    let query = supabase.from(table).select('*').order('id', { ascending: false })
 
     if (filter) {
       query = query.eq(filter.column, filter.value)
     }
 
     query.then(({ data, error }) => {
-        if (!error && data) {
-          console.log(`[useDBTable] Fetched ${data.length} rows for ${table}`)
-          setRows(data)
-          setLoading(false)
-        } else if (error) {
-          console.error(`[useDBTable] Error fetching data for ${table}:`, error)
-          setLoading(false)
-        }
-      })
-  }, [table, filter?.column, filter?.value])
+      if (!error && data) {
+        console.log(`[useDBTable] Fetched ${data.length} rows for ${table}`)
+        setRows(data)
+        setLoading(false)
+      } else if (error) {
+        console.error(`[useDBTable] Error fetching data for ${table}:`, error)
+        setLoading(false)
+      }
+    })
+  }, [table, filter?.column, filter?.value, supabase])
 
   useEffect(() => {
+    if (!supabase) return
+
     // If filter is provided but value is undefined/null, don't subscribe yet
     if (filter && (filter.value === undefined || filter.value === null)) {
       return
     }
 
-    console.log(`[useDBTable] Subscribing to channel: ${channelName} for table: ${table}`)
-    
+    console.log(
+      `[useDBTable] Subscribing to channel: ${channelName} for table: ${table}`
+    )
+
     let channelFilter = undefined
     if (filter) {
-        channelFilter = `${filter.column}=eq.${filter.value}`
+      channelFilter = `${filter.column}=eq.${filter.value}`
     }
 
     const channel = supabase
       .channel(channelName)
       .on(
         'postgres_changes',
-        { 
-            event: '*', 
-            schema: 'public', 
-            table,
-            filter: channelFilter
+        {
+          event: '*',
+          schema: 'public',
+          table,
+          filter: channelFilter,
         },
         (payload: any) => {
           console.log(`[useDBTable] Change received on ${table}:`, payload)
@@ -90,16 +103,23 @@ export function useDBTable(
         }
       )
       .subscribe((status) => {
-        console.log(`[useDBTable] Subscription status for ${channelName}:`, status)
+        console.log(
+          `[useDBTable] Subscription status for ${channelName}:`,
+          status
+        )
       })
 
     return () => {
       console.log(`[useDBTable] Unsubscribing from channel: ${channelName}`)
       supabase.removeChannel(channel)
     }
-  }, [table, channelName, filter?.column, filter?.value])
+  }, [table, channelName, filter?.column, filter?.value, supabase])
 
   async function updateRow(updates: any) {
+    if (!supabase) {
+      console.warn('[useDBTable] Supabase client not initialized')
+      return
+    }
     console.log(`[useDBTable] Updating row in ${table}:`, updates)
     const { id, ...data } = updates
     const { error, ...result } = await supabase
@@ -114,13 +134,20 @@ export function useDBTable(
   }
 
   function insertRow(item: any) {
+    if (!supabase) {
+      console.warn('[useDBTable] Supabase client not initialized')
+      return
+    }
     console.log(`[useDBTable] Inserting row into ${table}:`, item)
     supabase
       .from(table)
       .insert(item)
       .then(({ data, error }) => {
         if (error) {
-          console.error(`[useDBTable] Error inserting row into ${table}:`, error)
+          console.error(
+            `[useDBTable] Error inserting row into ${table}:`,
+            error
+          )
         } else {
           console.log(`[useDBTable] Row inserted into ${table}:`, data)
         }
@@ -128,6 +155,10 @@ export function useDBTable(
   }
 
   async function deleteRow(id: any) {
+    if (!supabase) {
+      console.warn('[useDBTable] Supabase client not initialized')
+      return
+    }
     console.log(`[useDBTable] Deleting row from ${table} with id:`, id)
     const { error, ...data } = await supabase
       .from(table)

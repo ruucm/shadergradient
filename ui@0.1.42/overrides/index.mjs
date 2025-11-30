@@ -13,7 +13,7 @@ import {
   WordHighlight2,
   fpsCount,
   wordHighlightText
-} from "../chunk-W3IA6ZKN.mjs";
+} from "../chunk-WI47ZQ4M.mjs";
 import {
   ArrowLeft,
   ArrowRight,

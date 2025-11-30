@@ -19,7 +19,6 @@ jobs:
   build:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
-    environment: github-pages
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
@@ -43,7 +42,6 @@ jobs:
           run_install: false
 
       - name: Generate Pages
-
         run: |
           cd main
           pnpm install --no-frozen-lockfile

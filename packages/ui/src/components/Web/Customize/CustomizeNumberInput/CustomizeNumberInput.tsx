@@ -50,7 +50,7 @@ export const CustomizeNumberInput = React.forwardRef<
           />
           {arrow === true && (
             <div
-              className='h-input flex flex-col text-[#FF430A] justify-start items-center w-1'
+              className='h-input flex flex-col text-[#FF430A] justify-start items-center w-1 max-md:hidden'
               style={{ marginRight: 8, marginLeft: -5 }}
             >
               <motion.div

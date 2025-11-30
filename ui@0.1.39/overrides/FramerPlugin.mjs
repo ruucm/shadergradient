@@ -1,11 +1,7 @@
 import {
-  CurrentPreset,
-  HideBanner,
-  TailwindWrapper,
-  UrlInput,
-  togglePreset,
-  toggleUrl
-} from "../chunk-MA3ZH3TE.mjs";
+  AddToCanvas,
+  updateTheme
+} from "../chunk-SHK6S7HO.mjs";
 import "../chunk-2ZZ6H7J7.mjs";
 import "../chunk-2HJSN2UF.mjs";
 import "../chunk-5CTIJX6L.mjs";
@@ -21,10 +17,6 @@ import "../chunk-OOWSMYW2.mjs";
 import "../chunk-NP5XZW6Z.mjs";
 import "../chunk-HXGKXP63.mjs";
 export {
-  CurrentPreset,
-  HideBanner,
-  TailwindWrapper,
-  UrlInput,
-  togglePreset,
-  toggleUrl
+  AddToCanvas,
+  updateTheme
 };

@@ -1,5 +1,11 @@
 # ui
 
+## 0.1.47
+
+### Patch Changes
+
+- SupabaseClient.tsx (FigmaPlugin)
+
 ## 0.1.45
 
 ### Patch Changes

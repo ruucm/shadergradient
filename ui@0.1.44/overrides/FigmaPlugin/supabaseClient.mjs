@@ -1,6 +1,6 @@
 import {
   supabase
-} from "../../chunk-27J35DKU.mjs";
+} from "../../chunk-4HTTLOY7.mjs";
 import "../../chunk-HXGKXP63.mjs";
 export {
   supabase

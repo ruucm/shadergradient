@@ -17,7 +17,7 @@ export function SupabaseClient(props: Props) {
     }
   }, [databaseURL, anonKey])
 
-  return <div style={{ width: 50, height: 50, background: 'blue' }} />
+  return <div style={{ width: '100%', height: '100%', background: 'blue' }} />
 }
 
 SupabaseClient.propertyControls = {

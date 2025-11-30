@@ -15,7 +15,10 @@ export const useUIStore = create(
     },
     (set) => ({
       setActivePreset: (by: number) => set((state) => ({ activePreset: by })),
-      setInputMode: (data: any) => set((state) => ({ ...state, input: data })),
+      setInputMode: (data: any) => {
+        console.log('[useUIStore] setInputMode', data)
+        return set((state) => ({ ...state, inputMode: data }))
+      },
       setMode: (data: any) => set((state) => ({ ...state, mode: data })),
       setUrlInput: (data: any) =>
         set((state) => ({ ...state, urlInput: data })),

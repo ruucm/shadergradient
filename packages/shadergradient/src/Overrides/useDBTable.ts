@@ -1,19 +1,38 @@
 import { useEffect, useState } from 'react'
 import { supabase } from './supabaseClient'
 
-export function useDBTable(table: string, channelName: string = 'any'): [any[], boolean, (item: any) => void, (updates: any) => Promise<void>, (id: any) => Promise<void>] {
+type Filter = {
+  column: string
+  value: any
+}
+
+export function useDBTable(
+  table: string,
+  channelName: string = 'any',
+  filter?: Filter
+): [any[], boolean, (item: any) => void, (updates: any) => Promise<void>, (id: any) => Promise<void>] {
   const [rows, setRows] = useState<any[]>([])
   const [loading, setLoading] = useState(false)
 
   useEffect(() => {
-    // get initial rows
-    console.log(`[useDBTable] Fetching initial data for table: ${table}`)
+    // If filter is provided but value is undefined/null, don't fetch yet
+    if (filter && (filter.value === undefined || filter.value === null)) {
+      return
+    }
+
+    console.log(`[useDBTable] Fetching initial data for table: ${table}`, filter ? `with filter: ${filter.column}=${filter.value}` : '')
     setLoading(true)
-    supabase
+    
+    let query = supabase
       .from(table)
       .select('*')
       .order('id', { ascending: false })
-      .then(({ data, error }) => {
+
+    if (filter) {
+      query = query.eq(filter.column, filter.value)
+    }
+
+    query.then(({ data, error }) => {
         if (!error && data) {
           console.log(`[useDBTable] Fetched ${data.length} rows for ${table}`)
           setRows(data)
@@ -23,15 +42,31 @@ export function useDBTable(table: string, channelName: string = 'any'): [any[], 
           setLoading(false)
         }
       })
-  }, [table])
+  }, [table, filter?.column, filter?.value])
 
   useEffect(() => {
+    // If filter is provided but value is undefined/null, don't subscribe yet
+    if (filter && (filter.value === undefined || filter.value === null)) {
+      return
+    }
+
     console.log(`[useDBTable] Subscribing to channel: ${channelName} for table: ${table}`)
+    
+    let channelFilter = undefined
+    if (filter) {
+        channelFilter = `${filter.column}=eq.${filter.value}`
+    }
+
     const channel = supabase
       .channel(channelName)
       .on(
         'postgres_changes',
-        { event: '*', schema: 'public', table },
+        { 
+            event: '*', 
+            schema: 'public', 
+            table,
+            filter: channelFilter
+        },
         (payload: any) => {
           console.log(`[useDBTable] Change received on ${table}:`, payload)
           const eventType = payload.eventType
@@ -62,7 +97,7 @@ export function useDBTable(table: string, channelName: string = 'any'): [any[], 
       console.log(`[useDBTable] Unsubscribing from channel: ${channelName}`)
       supabase.removeChannel(channel)
     }
-  }, [table, channelName])
+  }, [table, channelName, filter?.column, filter?.value])
 
   async function updateRow(updates: any) {
     console.log(`[useDBTable] Updating row in ${table}:`, updates)

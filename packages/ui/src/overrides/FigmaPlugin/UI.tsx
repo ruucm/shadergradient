@@ -173,7 +173,8 @@ export function extractGIF(Component): ComponentType {
     const figma_user_id = figma.user?.id
     const [rows, dbLoading, insertRow, updateRow] = useDBTable(
       'users',
-      'sg-figma'
+      'sg-figma',
+      { column: 'figma_user_id', value: figma_user_id }
     )
     const userDB = rows.find((r) => r.figma_user_id === figma_user_id)
     const trialLeft = getTrialLeft(userDB?.trial_started_at, trials)

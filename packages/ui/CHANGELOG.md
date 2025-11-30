@@ -1,5 +1,11 @@
 # ui
 
+## 0.1.43
+
+### Patch Changes
+
+- db table module fix & override fix
+
 ## 0.1.42
 
 ### Patch Changes

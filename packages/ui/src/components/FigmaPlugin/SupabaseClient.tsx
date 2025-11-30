@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react'
-import { addPropertyControls, ControlType } from 'framer'
+import { useEffect } from 'react'
+import { ControlType } from 'framer'
 import { useSupabaseStore } from '../../store'
 
 interface Props {
@@ -17,10 +17,10 @@ export function SupabaseClient(props: Props) {
     }
   }, [databaseURL, anonKey])
 
-  return null
+  return <div style={{ width: 50, height: 50, background: 'blue' }} />
 }
 
-addPropertyControls(SupabaseClient, {
+SupabaseClient.propertyControls = {
   databaseURL: {
     title: 'DB URL',
     type: ControlType.String,
@@ -31,4 +31,4 @@ addPropertyControls(SupabaseClient, {
     type: ControlType.String,
     defaultValue: '',
   },
-})
+}

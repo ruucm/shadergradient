@@ -1,5 +1,11 @@
 # ui
 
+## 0.1.48
+
+### Patch Changes
+
+- fix SupabaseClient
+
 ## 0.1.47
 
 ### Patch Changes

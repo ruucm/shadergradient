@@ -1,6 +1,6 @@
 {
   "name": "ui",
-  "version": "0.1.47",
+  "version": "0.1.48",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "exports": {

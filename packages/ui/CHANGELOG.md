@@ -1,5 +1,11 @@
 # ui
 
+## 0.1.40
+
+### Patch Changes
+
+- fix FramerPlugin bug
+
 ## 0.1.39
 
 ### Patch Changes

@@ -37,6 +37,7 @@ export function AddToCanvas(Component): ComponentType {
     const activePreset = useUIStore((state) => state.activePreset)
     const inputMode = useUIStore((state) => state.inputMode)
     const urlInput = useUIStore((state) => state.urlInput)
+    console.log('[AddToCanvas] state', { inputMode, urlInput, activePreset })
 
       return (
           <Component
@@ -49,9 +50,10 @@ export function AddToCanvas(Component): ComponentType {
                       : "Inactive"
               }
               onClick={async () => {
+                  console.log('[AddToCanvas] click', { inputMode, urlInput, activePreset })
                   // Handle URL input mode
                   if (inputMode === "url" && urlInput !== "") {
-                      console.log(parseUrlForControls(urlInput))
+                      console.log('[AddToCanvas] parsing url input', urlInput, parseUrlForControls(urlInput))
 
                       // Send parsed URL controls to parent Framer window
                       window.parent.postMessage(
@@ -68,7 +70,7 @@ export function AddToCanvas(Component): ComponentType {
                       const activePresetUrl =
                           "https://shadergradient.co/customize" +
                           PRESETS[activePreset].url
-                      console.log(parseUrlForControls(activePresetUrl))
+                      console.log('[AddToCanvas] parsing preset', activePreset, activePresetUrl, parseUrlForControls(activePresetUrl))
                       
                       // Send parsed preset controls to parent Framer window
                       window.parent.postMessage(

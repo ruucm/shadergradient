@@ -1,5 +1,11 @@
 # ui
 
+## 0.1.44
+
+### Patch Changes
+
+- no external @supabase/supabase-js
+
 ## 0.1.43
 
 ### Patch Changes

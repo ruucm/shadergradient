@@ -1,5 +1,11 @@
 # ui
 
+## 0.1.41
+
+### Patch Changes
+
+- mobile CustomizeNumberInput
+
 ## 0.1.40
 
 ### Patch Changes

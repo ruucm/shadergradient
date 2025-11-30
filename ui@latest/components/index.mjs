@@ -76,12 +76,12 @@ import {
   ShaderGradientStateless
 } from "../chunk-5CTIJX6L.mjs";
 import "../chunk-TREEP67Q.mjs";
-import {
-  ShaderGradientStatelessCanvas
-} from "../chunk-M4QCLNWM.mjs";
 import "../chunk-WKI27XPK.mjs";
 import "../chunk-7D25FYVP.mjs";
 import "../chunk-2XH7KKNT.mjs";
+import {
+  ShaderGradientStatelessCanvas
+} from "../chunk-M4QCLNWM.mjs";
 import {
   useQueryState,
   useURLQueryState

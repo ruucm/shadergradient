@@ -29,6 +29,15 @@ export function SectionObserver(Component): ComponentType {
   }
 }
 
+// Scroll transforms by code (Framer doesn't support these properties yet)
+export function MainGradient(Component): ComponentType {
+  return (props) => {
+    const { scrollY } = useScroll()
+    const radius = useTransform(scrollY, [0, 100], [0, 40])
+
+    return <Component {...props} radius={radius} />
+  }
+}
 export function Gap(Component): ComponentType {
   return ({ style, ...props }: { style: React.CSSProperties }) => {
     const { scrollY } = useScroll()

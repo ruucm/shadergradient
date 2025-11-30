@@ -10,13 +10,13 @@ import {
 // const { PRESETS, useURLQueryState } = ui
 
 export function HideBanner(Component): ComponentType {
-  // Remove Framer badge
-  useEffect(() => {
-    const badge = document.getElementById('__framer-badge-container')
-    if (badge) badge.remove()
-  }, [])
-
   return (props) => {
+    // Remove Framer badge
+    useEffect(() => {
+      const badge = document.getElementById('__framer-badge-container')
+      if (badge) badge.remove()
+    }, [])
+
     return <Component {...props} />
   }
 }

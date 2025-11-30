@@ -19,7 +19,7 @@ import {
 } from './FigmaApi'
 import { cx } from '@/utils'
 import { clock } from '@/Gradient/comps/Mesh/useTimeAnimation'
-import { useDBTable } from 'https://framer.com/m/SupabaseConnector-ARlr.js'
+import { useDBTable } from './useDBTable'
 import {
   STRIPE_BILLING_URL,
   STRIPE_BUY_YEARLY_URL,

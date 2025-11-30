@@ -1,5 +1,5 @@
 import { useFigma } from '@/store'
-import { useDBTable } from 'https://framer.com/m/SupabaseConnector-ARlr.js'
+import { useDBTable } from './useDBTable'
 import { useEffect } from 'react'
 
 // ---------- SUBSCRIPTION RELATED -----------

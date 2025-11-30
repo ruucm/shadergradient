@@ -18,7 +18,7 @@ import {
 
 import { useAnimationControls, useInView } from 'framer-motion'
 
-import { useDBTable } from 'https://framer.com/m/SupabaseConnector-ARlr.js'
+import { useDBTable } from './useDBTable'
 
 import {
   useQueryState,

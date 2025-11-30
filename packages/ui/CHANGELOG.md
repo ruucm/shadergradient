@@ -1,5 +1,11 @@
 # ui
 
+## 0.1.39
+
+### Patch Changes
+
+- fix override
+
 ## 0.1.38
 
 ### Patch Changes

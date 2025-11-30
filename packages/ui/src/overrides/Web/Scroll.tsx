@@ -33,7 +33,7 @@ export function SectionObserver(Component): ComponentType {
 export function MainGradient(Component): ComponentType {
   return (props: any) => {
     const { scrollY } = useScroll()
-    const radius = useTransform(scrollY, [0, 100], [0, 40])
+    const radius = useTransform(scrollY, [0, 100], [0, 18])
 
     return (
       <Component {...props} style={{ ...props.style, borderRadius: radius }} />

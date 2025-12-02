@@ -135,8 +135,7 @@ export function extractGIF(Component): ComponentType {
     const figma_user_id = figma.user?.id
     const [rows, dbLoading, insertRow, updateRow] = useDBTable(
       'users',
-      'sg-figma',
-      { column: 'figma_user_id', value: figma_user_id }
+      'sg-figma'
     )
     const userDB = rows.find((r) => r.figma_user_id === figma_user_id)
     const trialLeft = getTrialLeft(userDB?.trial_started_at)
@@ -689,14 +688,14 @@ function useUserDB(channel = 'sg-figma-hook') {
   const [figma] = useFigma()
   const figma_user_id = figma.user?.id
 
-  const [rows, dbLoading] = useDBTable('users', channel, { column: 'figma_user_id', value: figma_user_id })
+  const [rows, dbLoading] = useDBTable('users', channel)
   return [rows.find((r) => r.figma_user_id === figma_user_id), dbLoading]
 }
 function useSubscription(subId) {
   const [userDB, userDBLoading] = useUserDB()
   const userId = userDB?.id
 
-  const [subscriptionRows, dbLoading] = useDBTable('subscriptions', subId, { column: 'user_id', value: userId })
+  const [subscriptionRows, dbLoading] = useDBTable('subscriptions', subId)
   const subscription = subscriptionRows.find(
     (r) => r.user_id === userId && r.status === 'active'
   )
@@ -734,7 +733,7 @@ function getTrialLeft(trial_started_at) {
 export function StartTrial(Component): ComponentType {
   return (props: any) => {
     const [figma] = useFigma()
-    const [, , insertRow] = useDBTable('users', 'sg-figma-t', { column: 'figma_user_id', value: figma.user?.id })
+    const [, , insertRow] = useDBTable('users', 'sg-figma-t')
     const figma_user_id = figma.user?.id
 
     return (

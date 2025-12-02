@@ -8,7 +8,7 @@ export function useUserDB(channel = 'sg-figma-hook') {
     const figma_user_id = figma.user?.id
     console.log('[useUserDB] figma_user_id:', figma_user_id)
   
-    const [rows, dbLoading] = useDBTable('users', channel, { column: 'figma_user_id', value: figma_user_id })
+    const [rows, dbLoading] = useDBTable('users', channel)
     console.log('[useUserDB] rows found:', rows)
     const foundUser = rows.find((r) => r.figma_user_id === figma_user_id)
     console.log('[useUserDB] foundUser:', foundUser)
@@ -19,7 +19,7 @@ export function useUserDB(channel = 'sg-figma-hook') {
     const [userDB, userDBLoading] = useUserDB()
     const userId = userDB?.id
   
-    const [subscriptionRows, dbLoading] = useDBTable('subscriptions',  subId, { column: 'user_id', value: userId })
+    const [subscriptionRows, dbLoading] = useDBTable('subscriptions', subId)
     const subscription = subscriptionRows.find(
       (r) => r.user_id === userId && r.status === 'active'
     )

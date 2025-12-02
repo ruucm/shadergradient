@@ -1,6 +1,7 @@
 import * as qs from 'query-string'
 import create from 'zustand'
 import { combine } from 'zustand/middleware'
+import { createClient, SupabaseClient } from '@supabase/supabase-js'
 import { DEFAUlT_PRESET, initialActivePreset } from './presets'
 
 // without embedMode
@@ -75,3 +76,18 @@ export function useBillingInterval() {
   )
   return [billingInterval, setBillingInterval]
 }
+
+// Supabase Store
+interface SupabaseStore {
+  supabase: SupabaseClient | null
+  initSupabase: (url: string, key: string) => void
+}
+
+export const useSupabaseStore = create<SupabaseStore>((set) => ({
+  supabase: null,
+  initSupabase: (url: string, key: string) => {
+    if (!url || !key) return
+    const client = createClient(url, key)
+    set({ supabase: client })
+  },
+}))

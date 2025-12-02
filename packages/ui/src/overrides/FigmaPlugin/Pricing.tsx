@@ -156,7 +156,7 @@ export function isUpgraded(Component): ComponentType {
 export function StartTrial(Component): ComponentType {
     return (props: any) => {
       const [figma] = useFigma()
-      const [rows, , insertRow] = useDBTable('users', 'sg-figma-t', { column: 'figma_user_id', value: figma.user?.id })
+      const [rows, , insertRow] = useDBTable('users', 'sg-figma-t')
       const figma_user_id = figma.user?.id
   
       return (

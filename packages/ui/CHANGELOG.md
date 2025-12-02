@@ -1,5 +1,11 @@
 # ui
 
+## 0.1.50
+
+### Patch Changes
+
+- restore useDBTable
+
 ## 0.1.49
 
 ### Patch Changes

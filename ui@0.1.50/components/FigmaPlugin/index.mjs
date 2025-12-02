@@ -1,7 +1,7 @@
 import "../../chunk-LSJHI6I5.mjs";
 import {
   SupabaseClient
-} from "../../chunk-75O3BIIM.mjs";
+} from "../../chunk-IGCDTADL.mjs";
 import {
   TripleNumberInput
 } from "../../chunk-SWYPZY5M.mjs";
@@ -25,7 +25,7 @@ import {
   InputTitle
 } from "../../chunk-SIKJUSOK.mjs";
 import "../../chunk-ZRY2JHRC.mjs";
-import "../../chunk-EWNMU5YT.mjs";
+import "../../chunk-UISFNSH4.mjs";
 import "../../chunk-NP5XZW6Z.mjs";
 import "../../chunk-HXGKXP63.mjs";
 export {

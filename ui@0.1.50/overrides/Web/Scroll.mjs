@@ -11,9 +11,9 @@ import {
   WordHighlight2,
   fpsCount,
   wordHighlightText
-} from "../../chunk-6FGDH2DW.mjs";
+} from "../../chunk-5QE46KZZ.mjs";
 import "../../chunk-425BLYMY.mjs";
-import "../../chunk-EWNMU5YT.mjs";
+import "../../chunk-UISFNSH4.mjs";
 import "../../chunk-NP5XZW6Z.mjs";
 import "../../chunk-HXGKXP63.mjs";
 export {

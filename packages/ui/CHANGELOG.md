@@ -1,5 +1,11 @@
 # ui
 
+## 0.1.52
+
+### Patch Changes
+
+- fix useSubscription
+
 ## 0.1.51
 
 ### Patch Changes

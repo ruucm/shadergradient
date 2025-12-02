@@ -18,11 +18,14 @@ export function useUserDB(channel = 'sg-figma-hook') {
  export function useSubscription(subId) {
     const [userDB, userDBLoading] = useUserDB()
     const userId = userDB?.id
+    console.log('[useSubscription] userId:', userId)
   
     const [subscriptionRows, dbLoading] = useDBTable('subscriptions', subId)
+    console.log('[useSubscription] subscriptionRows:', subscriptionRows)
     const subscription = subscriptionRows.find(
       (r) => r.user_id === userId && r.status === 'active'
     )
+    console.log('[useSubscription] active subscription:', subscription)
     return [subscription, userDBLoading || dbLoading]
   }
   
@@ -65,16 +68,20 @@ export function estimateSize({ format, duration, frameRate, pixelDensity }) {
     const [, setFigma] = useFigma()
   
     useEffect(() => {
+      console.log('[useFigmaMessage] Sending UI_READY message to Figma')
       parent.postMessage({ pluginMessage: { type: 'UI_READY' } }, '*') // init selection
       onmessage = (event) => {
         const msg = event.data.pluginMessage
+        console.log('[useFigmaMessage] Received message from Figma:', msg?.type, msg)
   
         switch (msg?.type) {
           case 'SELECTION':
+            console.log('[useFigmaMessage] Selection count:', msg.selection.length)
             setFigma({ selection: msg.selection.length })
             break
   
           case 'USER_INFO':
+            console.log('[useFigmaMessage] User info received:', msg.user)
             setFigma({ user: msg.user })
             break
   

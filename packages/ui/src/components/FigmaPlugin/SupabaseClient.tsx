@@ -12,8 +12,15 @@ export function SupabaseClient(props: Props) {
   const initSupabase = useSupabaseStore((state) => state.initSupabase)
 
   useEffect(() => {
+    console.log(
+      '[SupabaseClient] Component mounted with URL:',
+      databaseURL ? 'provided' : 'missing'
+    )
     if (databaseURL && anonKey) {
+      console.log('[SupabaseClient] Initializing Supabase client...')
       initSupabase(databaseURL, anonKey)
+    } else {
+      console.warn('[SupabaseClient] Missing databaseURL or anonKey')
     }
   }, [databaseURL, anonKey])
 

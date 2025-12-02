@@ -151,8 +151,14 @@ interface SupabaseStore {
 export const useSupabaseStore = create<SupabaseStore>((set) => ({
   supabase: null,
   initSupabase: (url: string, key: string) => {
-    if (!url || !key) return
+    console.log('[useSupabaseStore] initSupabase called')
+    if (!url || !key) {
+      console.warn('[useSupabaseStore] Missing URL or key, skipping initialization')
+      return
+    }
+    console.log('[useSupabaseStore] Creating Supabase client with URL:', url)
     const client = createClient(url, key)
+    console.log('[useSupabaseStore] Supabase client created successfully')
     set({ supabase: client })
   },
 }))

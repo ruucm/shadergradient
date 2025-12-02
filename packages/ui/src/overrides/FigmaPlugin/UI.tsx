@@ -171,11 +171,18 @@ export function extractGIF(Component): ComponentType {
     const animationFrameRef = useRef(null)
 
     const figma_user_id = figma.user?.id
-    const [rows, dbLoading, insertRow, updateRow] = useDBTable(
-      'users',
-      'sg-figma'
-    )
-    const userDB = rows.find((r) => r.figma_user_id === figma_user_id)
+    const {
+      rows,
+      loading: dbLoading,
+      insertRow,
+      updateRow,
+    } = useDBTable('users', 'sg-figma', {
+      filter: { column: 'figma_user_id', value: figma_user_id },
+      select: 'id, email, figma_user_id, trial_started_at',
+      limit: 1,
+      enabled: !!figma_user_id,
+    })
+    const userDB = rows[0] || null
     const trialLeft = getTrialLeft(userDB?.trial_started_at, trials)
     const [subscription, subDBLoading] = useSubscription('sub1')
     const needSubscribe = trialLeft <= 0 && !subDBLoading && !subscription

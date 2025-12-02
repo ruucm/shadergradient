@@ -133,11 +133,18 @@ export function extractGIF(Component): ComponentType {
     const [size, setSize] = useState(0)
 
     const figma_user_id = figma.user?.id
-    const [rows, dbLoading, insertRow, updateRow] = useDBTable(
-      'users',
-      'sg-figma'
-    )
-    const userDB = rows.find((r) => r.figma_user_id === figma_user_id)
+    const {
+      rows,
+      loading: dbLoading,
+      insertRow,
+      updateRow,
+    } = useDBTable('users', 'sg-figma', {
+      filter: { column: 'figma_user_id', value: figma_user_id },
+      select: 'id, email, figma_user_id, trial_started_at',
+      limit: 1,
+      enabled: !!figma_user_id,
+    })
+    const userDB = rows[0] || null
     const trialLeft = getTrialLeft(userDB?.trial_started_at)
     const [subscription, subDBLoading] = useSubscription('sub1')
     const needSubscribe = trialLeft <= 0 && !subDBLoading && !subscription
@@ -688,17 +695,28 @@ function useUserDB(channel = 'sg-figma-hook') {
   const [figma] = useFigma()
   const figma_user_id = figma.user?.id
 
-  const [rows, dbLoading] = useDBTable('users', channel)
-  return [rows.find((r) => r.figma_user_id === figma_user_id), dbLoading]
+  const { rows, loading: dbLoading } = useDBTable('users', channel, {
+    filter: { column: 'figma_user_id', value: figma_user_id },
+    select: 'id, email, figma_user_id, trial_started_at',
+    limit: 1,
+    enabled: !!figma_user_id,
+  })
+  return [rows[0] || null, dbLoading]
 }
 function useSubscription(subId) {
   const [userDB, userDBLoading] = useUserDB()
   const userId = userDB?.id
 
-  const [subscriptionRows, dbLoading] = useDBTable('subscriptions', subId)
-  const subscription = subscriptionRows.find(
-    (r) => r.user_id === userId && r.status === 'active'
+  const { rows: subscriptionRows, loading: dbLoading } = useDBTable(
+    'subscriptions',
+    subId,
+    {
+      filter: { column: 'user_id', value: userId },
+      select: 'id, user_id, status',
+      enabled: !!userId,
+    }
   )
+  const subscription = subscriptionRows.find((r) => r.status === 'active')
 
   return [subscription, userDBLoading || dbLoading]
 }
@@ -733,13 +751,19 @@ function getTrialLeft(trial_started_at) {
 export function StartTrial(Component): ComponentType {
   return (props: any) => {
     const [figma] = useFigma()
-    const [, , insertRow] = useDBTable('users', 'sg-figma-t')
     const figma_user_id = figma.user?.id
+    const { insertRow } = useDBTable('users', 'sg-figma-t', {
+      enabled: false, // No fetch needed, only use insert
+    })
 
     return (
       <Component
         {...props}
         onSubmit={(email) => {
+          if (!figma_user_id) {
+            console.error('[StartTrial] figma_user_id is missing')
+            return
+          }
           insertRow({ email, figma_user_id, trial_started_at: new Date() })
           props?.onSubmit()
         }}

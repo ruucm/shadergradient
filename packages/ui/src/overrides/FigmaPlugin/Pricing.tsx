@@ -156,13 +156,19 @@ export function isUpgraded(Component): ComponentType {
 export function StartTrial(Component): ComponentType {
     return (props: any) => {
       const [figma] = useFigma()
-      const [rows, , insertRow] = useDBTable('users', 'sg-figma-t')
       const figma_user_id = figma.user?.id
+      const { insertRow } = useDBTable('users', 'sg-figma-t', {
+        enabled: false, // No fetch needed, only use insert
+      })
   
       return (
         <Component
           {...props}
           onSubmit={(email) => {
+            if (!figma_user_id) {
+              console.error('[StartTrial] figma_user_id is missing')
+              return
+            }
             insertRow({ email, figma_user_id, trial_started_at: new Date() })
             props?.onSubmit()
           }}

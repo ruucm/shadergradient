@@ -1,10 +1,33 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useCallback } from 'react'
 import { useSupabaseStore } from '../../store'
 
-export function useDBTable(table, channelName = 'any') {
+type Filter = {
+  column: string
+  value: any
+}
+
+type UseDBTableOptions = {
+  filter?: Filter
+  select?: string // Select specific columns (default: '*')
+  limit?: number // Limit results
+  enabled?: boolean // Enable/disable query (wait until filter value is ready)
+}
+
+export function useDBTable(
+  table: string,
+  channelName = 'any',
+  options: UseDBTableOptions = {}
+) {
+  const { filter, select = '*', limit, enabled = true } = options
   const supabase = useSupabaseStore((state) => state.supabase)
-  const [rows, setRows] = useState([])
+  const [rows, setRows] = useState<any[]>([])
   const [loading, setLoading] = useState(false)
+  const [error, setError] = useState<Error | null>(null)
+
+  // Disable query when filter value is undefined or null
+  const shouldFetch =
+    enabled &&
+    (!filter || (filter.value !== undefined && filter.value !== null))
 
   useEffect(() => {
     if (!supabase) {
@@ -12,35 +35,97 @@ export function useDBTable(table, channelName = 'any') {
       return
     }
 
-    console.log(`[useDBTable] Fetching initial data for table: ${table}`)
-    setLoading(true)
-    supabase
-      ?.from(table)
-      .select('*')
-      .order('id', { ascending: false })
-      .then(({ data, error }) => {
-        if (!error) {
-          console.log(`[useDBTable] Fetched ${data?.length || 0} rows from ${table}`)
-          setRows(data)
-          setLoading(false)
-        } else {
-          console.error(`[useDBTable] Error fetching ${table}:`, error)
-          setLoading(false)
+    if (!shouldFetch) {
+      console.log(
+        `[useDBTable] Skipping fetch for ${table} - filter value not ready:`,
+        filter?.value
+      )
+      return
+    }
+
+    const fetchData = async () => {
+      console.log(
+        `[useDBTable] Fetching data for table: ${table}`,
+        filter ? `with filter: ${filter.column}=${filter.value}` : ''
+      )
+      setLoading(true)
+      setError(null)
+
+      try {
+        let query = supabase
+          .from(table)
+          .select(select)
+          .order('id', { ascending: false })
+
+        // 필터 적용 (DB 레벨에서 필터링)
+        if (filter) {
+          query = query.eq(filter.column, filter.value)
         }
-      })
-  }, [supabase, table])
+
+        // 결과 제한
+        if (limit) {
+          query = query.limit(limit)
+        }
+
+        const { data, error: fetchError } = await query
+
+        if (fetchError) {
+          console.error(`[useDBTable] Error fetching ${table}:`, fetchError)
+          setError(fetchError)
+          setRows([])
+        } else {
+          console.log(
+            `[useDBTable] Fetched ${data?.length || 0} rows from ${table}`
+          )
+          setRows(data || [])
+        }
+      } catch (err) {
+        console.error(`[useDBTable] Unexpected error fetching ${table}:`, err)
+        setError(err as Error)
+      } finally {
+        setLoading(false)
+      }
+    }
+
+    fetchData()
+  }, [
+    supabase,
+    table,
+    filter?.column,
+    filter?.value,
+    select,
+    limit,
+    shouldFetch,
+  ])
 
   useEffect(() => {
-    if (!supabase) return
+    if (!supabase || !shouldFetch) return
 
-    console.log(`[useDBTable] Subscribing to channel: ${channelName} for table: ${table}`)
-    const sub = supabase
-      ?.channel(channelName)
+    // Apply filter to Realtime subscription
+    const realtimeFilter = filter
+      ? `${filter.column}=eq.${filter.value}`
+      : undefined
+
+    console.log(
+      `[useDBTable] Subscribing to channel: ${channelName} for table: ${table}`,
+      realtimeFilter ? `with filter: ${realtimeFilter}` : ''
+    )
+
+    const channel = supabase
+      .channel(channelName)
       .on(
         'postgres_changes',
-        { event: '*', schema: 'public', table },
+        {
+          event: '*',
+          schema: 'public',
+          table,
+          filter: realtimeFilter, // Apply filter to Realtime
+        },
         (payload) => {
-          console.log(`[useDBTable] Realtime change received on ${table}:`, payload.eventType, payload)
+          console.log(
+            `[useDBTable] Realtime change received on ${table}:`,
+            payload.eventType
+          )
           const eventType = payload.eventType
           switch (eventType) {
             case 'INSERT':
@@ -56,75 +141,127 @@ export function useDBTable(table, channelName = 'any') {
               )
               break
             case 'DELETE':
-              console.log(`[useDBTable] DELETE on ${table}, id:`, payload.old?.id)
+              console.log(
+                `[useDBTable] DELETE on ${table}, id:`,
+                payload.old?.id
+              )
               setRows((prev) => prev.filter((row) => row.id !== payload.old.id))
               break
           }
         }
       )
       .subscribe((status) => {
-        console.log(`[useDBTable] Subscription status for ${channelName}:`, status)
+        console.log(
+          `[useDBTable] Subscription status for ${channelName}:`,
+          status
+        )
       })
 
     return () => {
       console.log(`[useDBTable] Unsubscribing from channel: ${channelName}`)
-      supabase?.removeChannel(sub)
+      supabase.removeChannel(channel)
     }
-  }, [supabase, table, channelName])
+  }, [supabase, table, channelName, filter?.column, filter?.value, shouldFetch])
 
-  async function updateRow(updates) {
-    console.log(`[useDBTable] Updating row in ${table}:`, updates)
-    const { id, ...data } = updates
-    const { error, ...result } = await supabase
-      .from(table)
-      .update(data)
-      .eq('id', id)
+  const updateRow = useCallback(
+    async (updates: any) => {
+      if (!supabase) {
+        console.error('[useDBTable] Cannot update: supabase not initialized')
+        return { error: new Error('Supabase not initialized') }
+      }
 
-    if (error) {
-      console.error(`[useDBTable] Error updating row in ${table}:`, error)
-    } else {
-      console.log(`[useDBTable] Row updated in ${table}:`, result)
-    }
-  }
+      console.log(`[useDBTable] Updating row in ${table}:`, updates)
+      const { id, ...data } = updates
 
-  function deleteTodo(id) {
-    console.log(`[useDBTable] Deleting todo in ${table}, id:`, id)
-    supabase
-      .from(table)
-      .delete()
-      .match({ id })
-      .then(({ data, error }) => {
-        if (error) {
-          console.error(`[useDBTable] Error deleting todo in ${table}:`, error)
-        } else {
-          console.log(`[useDBTable] Todo deleted in ${table}:`, data)
-        }
-      })
-  }
+      const { error: updateError, data: result } = await supabase
+        .from(table)
+        .update(data)
+        .eq('id', id)
+        .select()
 
-  function insertRow(item) {
-    console.log(`[useDBTable] Inserting row into ${table}:`, item)
-    supabase
-      .from(table)
-      .insert(item)
-      .then(({ data, error }) => {
-        if (error) {
-          console.error(`[useDBTable] Error inserting row into ${table}:`, error)
-        } else {
-          console.log(`[useDBTable] Row inserted into ${table}:`, data)
-        }
-      })
-  }
+      if (updateError) {
+        console.error(
+          `[useDBTable] Error updating row in ${table}:`,
+          updateError
+        )
+        return { error: updateError }
+      } else {
+        console.log(`[useDBTable] Row updated in ${table}:`, result)
+        return { data: result }
+      }
+    },
+    [supabase, table]
+  )
 
-  async function deleteRow(id) {
-    console.log(`[useDBTable] Deleting row from ${table}, id:`, id)
-    const { error, ...data } = await supabase.from(table).delete().eq('id', id)
+  const insertRow = useCallback(
+    async (item: any) => {
+      if (!supabase) {
+        console.error('[useDBTable] Cannot insert: supabase not initialized')
+        return { error: new Error('Supabase not initialized') }
+      }
 
-    if (error) {
-      console.error(`[useDBTable] Error deleting row from ${table}:`, error)
-    } else {
-      console.log(`[useDBTable] Row deleted from ${table}:`, data)
-    }
-  }
-  return [rows, loading, insertRow, updateRow, deleteRow] as any
+      console.log(`[useDBTable] Inserting row into ${table}:`, item)
+
+      const { error: insertError, data: result } = await supabase
+        .from(table)
+        .insert(item)
+        .select()
+
+      if (insertError) {
+        console.error(
+          `[useDBTable] Error inserting row into ${table}:`,
+          insertError
+        )
+        return { error: insertError }
+      } else {
+        console.log(`[useDBTable] Row inserted into ${table}:`, result)
+        return { data: result }
+      }
+    },
+    [supabase, table]
+  )
+
+  const deleteRow = useCallback(
+    async (id: any) => {
+      if (!supabase) {
+        console.error('[useDBTable] Cannot delete: supabase not initialized')
+        return { error: new Error('Supabase not initialized') }
+      }
+
+      console.log(`[useDBTable] Deleting row from ${table}, id:`, id)
+
+      const { error: deleteError } = await supabase
+        .from(table)
+        .delete()
+        .eq('id', id)
+
+      if (deleteError) {
+        console.error(
+          `[useDBTable] Error deleting row from ${table}:`,
+          deleteError
+        )
+        return { error: deleteError }
+      } else {
+        console.log(`[useDBTable] Row deleted from ${table}`)
+        return { success: true }
+      }
+    },
+    [supabase, table]
+  )
+
+  return { rows, loading, error, insertRow, updateRow, deleteRow }
+}
+
+// Legacy version that returns array for backward compatibility
+export function useDBTableLegacy(
+  table: string,
+  channelName = 'any',
+  options: UseDBTableOptions = {}
+) {
+  const { rows, loading, insertRow, updateRow, deleteRow } = useDBTable(
+    table,
+    channelName,
+    options
+  )
+  return [rows, loading, insertRow, updateRow, deleteRow] as const
 }

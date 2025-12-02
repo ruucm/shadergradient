@@ -4,162 +4,189 @@ import { useEffect } from 'react'
 
 // ---------- SUBSCRIPTION RELATED -----------
 export function useUserDB(channel = 'sg-figma-hook') {
-    const [figma] = useFigma()
-    const figma_user_id = figma.user?.id
-    console.log('[useUserDB] figma_user_id:', figma_user_id)
-  
-    const [rows, dbLoading] = useDBTable('users', channel)
-    console.log('[useUserDB] rows found:', rows)
-    const foundUser = rows.find((r) => r.figma_user_id === figma_user_id)
-    console.log('[useUserDB] foundUser:', foundUser)
-    return [foundUser, dbLoading]
-  }
-  
- export function useSubscription(subId) {
-    const [userDB, userDBLoading] = useUserDB()
-    const userId = userDB?.id
-    console.log('[useSubscription] userId:', userId)
-  
-    const [subscriptionRows, dbLoading] = useDBTable('subscriptions', subId)
-    console.log('[useSubscription] subscriptionRows:', subscriptionRows)
-    const subscription = subscriptionRows.find(
-      (r) => r.user_id === userId && r.status === 'active'
-    )
-    console.log('[useSubscription] active subscription:', subscription)
-    return [subscription, userDBLoading || dbLoading]
-  }
-  
+  const [figma] = useFigma()
+  const figma_user_id = figma.user?.id
+  console.log('[useUserDB] figma_user_id:', figma_user_id)
 
-  // ---------- EXTRACT RELATED -----------
- export function updateResolution({ setWidth, setHeight, pixelDensity }) {
-    const r3fCanvas = document.getElementById('gradientCanvas')
-    .children[0].children[0] as HTMLCanvasElement
-  
-    const { width, height } = r3fCanvas.getBoundingClientRect()
-  
-    setWidth(Math.round(width * pixelDensity))
-    setHeight(Math.round(height * pixelDensity))
-  }
-  
-export function estimateSize({ format, duration, frameRate, pixelDensity }) {
-    const p = format === 'webm' ? 0.00745 : 0.149
-    const value = p * duration * frameRate * pixelDensity * pixelDensity
-    return Math.round(value * 10) / 10 // round to at most 2 decimal places
-  }
-  
- export function getTrialLeft(trial_started_at, trials) {
-    if (!trial_started_at) return trials
-  
-    let currentDate = new Date()
-    let diffInTime = currentDate.getTime() - new Date(trial_started_at).getTime()
-    let diffInDays = trials - diffInTime / (1000 * 3600 * 24)
-  
-    // console.log('diffInDays', diffInDays)
-    if (diffInDays < 0) return 0
-    return Math.round(diffInDays)
-  }
+  // Filter by figma_user_id at DB level (no full table scan)
+  const { rows, loading: dbLoading } = useDBTable('users', channel, {
+    filter: { column: 'figma_user_id', value: figma_user_id },
+    select: 'id, email, figma_user_id, trial_started_at, created_at',
+    limit: 1,
+    enabled: !!figma_user_id, // Only query when figma_user_id exists
+  })
 
-   
-// ---------- FIGMA RELATED -----------
-
- export function useFigmaMessage() {
-      // Share Figma states to UI
-
-    const [, setFigma] = useFigma()
-  
-    useEffect(() => {
-      console.log('[useFigmaMessage] Sending UI_READY message to Figma')
-      parent.postMessage({ pluginMessage: { type: 'UI_READY' } }, '*') // init selection
-      onmessage = (event) => {
-        const msg = event.data.pluginMessage
-        console.log('[useFigmaMessage] Received message from Figma:', msg?.type, msg)
-  
-        switch (msg?.type) {
-          case 'SELECTION':
-            console.log('[useFigmaMessage] Selection count:', msg.selection.length)
-            setFigma({ selection: msg.selection.length })
-            break
-  
-          case 'USER_INFO':
-            console.log('[useFigmaMessage] User info received:', msg.user)
-            setFigma({ user: msg.user })
-            break
-  
-          default:
-            break
-        }
-      }
-    }, [])
-  }
-
-export function sleep(sec) {
-    return new Promise((resolve) => setTimeout(resolve, sec * 1000))
-  }
-  
-  export async function loadImage(src) {
-    const image = new Image()
-    image.src = src
-    await new Promise((resolve, reject) => {
-      image.onload = resolve
-      image.onerror = reject
-    })
-    return image
-  }
-  
-
-
-export function parseUrlToCode(url) {
-    try {
-        if (!url.trim().startsWith("http")) {
-            // throw new Error(
-            //     "Invalid URL: URL must start with http:// or https://"
-            // )
-        }
-
-        const parsedUrl = new URL(url)
-        const params = new URLSearchParams(parsedUrl.search)
-        let propsArray = []
-
-        params.forEach((value, key) => {
-            let formattedValue = value
-            if (
-                value === "true" ||
-                value === "false" ||
-                (!isNaN(Number(value)) && value !== "")
-            ) {
-                formattedValue = `{${value}}`
-            } else {
-                formattedValue = `"${value}"`
-            }
-            propsArray.push(`${key}=${formattedValue}`)
-        })
-
-        const formattedProps = propsArray.join("\n  ")
-        return `<ShaderGradient\n  ${formattedProps}\n/>`
-    } catch (error) {
-        console.error("Error parsing URL:", error)
-        return null
-    }
+  const foundUser = rows[0] || null
+  console.log('[useUserDB] foundUser:', foundUser)
+  return [foundUser, dbLoading] as const
 }
 
+export function useSubscription(subId: string) {
+  const [userDB, userDBLoading] = useUserDB()
+  const userId = userDB?.id
+  console.log('[useSubscription] userId:', userId)
+
+  // Filter by user_id at DB level (no full table scan)
+  const { rows: subscriptionRows, loading: dbLoading } = useDBTable(
+    'subscriptions',
+    subId,
+    {
+      filter: { column: 'user_id', value: userId },
+      select: 'id, user_id, status, created_at',
+      enabled: !!userId, // Only query when userId exists
+    }
+  )
+
+  console.log('[useSubscription] subscriptionRows:', subscriptionRows)
+
+  // Find only active subscription
+  const subscription = subscriptionRows.find((r) => r.status === 'active')
+  console.log('[useSubscription] active subscription:', subscription)
+  return [subscription, userDBLoading || dbLoading] as const
+}
+
+// ---------- EXTRACT RELATED -----------
+export function updateResolution({ setWidth, setHeight, pixelDensity }) {
+  const r3fCanvas = document.getElementById('gradientCanvas')?.children[0]
+    ?.children[0] as HTMLCanvasElement
+
+  if (!r3fCanvas) {
+    console.warn('[updateResolution] Canvas element not found')
+    return
+  }
+
+  const { width, height } = r3fCanvas.getBoundingClientRect()
+
+  setWidth(Math.round(width * pixelDensity))
+  setHeight(Math.round(height * pixelDensity))
+}
+
+export function estimateSize({ format, duration, frameRate, pixelDensity }) {
+  const p = format === 'webm' ? 0.00745 : 0.149
+  const value = p * duration * frameRate * pixelDensity * pixelDensity
+  return Math.round(value * 10) / 10 // round to at most 2 decimal places
+}
+
+export function getTrialLeft(trial_started_at, trials) {
+  if (!trial_started_at) return trials
+
+  let currentDate = new Date()
+  let diffInTime = currentDate.getTime() - new Date(trial_started_at).getTime()
+  let diffInDays = trials - diffInTime / (1000 * 3600 * 24)
+
+  if (diffInDays < 0) return 0
+  return Math.round(diffInDays)
+}
+
+// ---------- FIGMA RELATED -----------
+export function useFigmaMessage() {
+  // Share Figma states to UI
+  const [, setFigma] = useFigma()
+
+  useEffect(() => {
+    console.log('[useFigmaMessage] Sending UI_READY message to Figma')
+    parent.postMessage({ pluginMessage: { type: 'UI_READY' } }, '*')
+
+    onmessage = (event) => {
+      const msg = event.data.pluginMessage
+      if (!msg) return
+
+      console.log('[useFigmaMessage] Received message from Figma:', msg.type)
+
+      switch (msg.type) {
+        case 'SELECTION':
+          console.log(
+            '[useFigmaMessage] Selection count:',
+            msg.selection.length
+          )
+          setFigma({ selection: msg.selection.length })
+          break
+
+        case 'USER_INFO':
+          console.log('[useFigmaMessage] User info received:', msg.user?.id)
+          setFigma({ user: msg.user })
+          break
+
+        default:
+          break
+      }
+    }
+  }, [setFigma])
+}
+
+export function sleep(sec) {
+  return new Promise((resolve) => setTimeout(resolve, sec * 1000))
+}
+
+export async function loadImage(src) {
+  const image = new Image()
+  image.src = src
+  await new Promise((resolve, reject) => {
+    image.onload = resolve
+    image.onerror = reject
+  })
+  return image
+}
+
+export function parseUrlToCode(url) {
+  try {
+    if (!url.trim().startsWith('http')) {
+      return null
+    }
+
+    const parsedUrl = new URL(url)
+    const params = new URLSearchParams(parsedUrl.search)
+    let propsArray: string[] = []
+
+    params.forEach((value, key) => {
+      let formattedValue = value
+      if (
+        value === 'true' ||
+        value === 'false' ||
+        (!isNaN(Number(value)) && value !== '')
+      ) {
+        formattedValue = `{${value}}`
+      } else {
+        formattedValue = `"${value}"`
+      }
+      propsArray.push(`${key}=${formattedValue}`)
+    })
+
+    const formattedProps = propsArray.join('\n  ')
+    return `<ShaderGradient\n  ${formattedProps}\n/>`
+  } catch (error) {
+    console.error('Error parsing URL:', error)
+    return null
+  }
+}
 
 export const copyToClipboard = (text: string) => {
-    const textarea = document.createElement("textarea")
-    textarea.value = text
-    textarea.style.position = "fixed" // prevent scrolling to bottom
-    textarea.style.opacity = "0"
-    document.body.appendChild(textarea)
-    textarea.focus()
-    textarea.select()
+  // 최신 Clipboard API 우선 사용
+  if (navigator.clipboard && window.isSecureContext) {
+    navigator.clipboard.writeText(text).then(
+      () => console.log('[copyToClipboard] Copied successfully'),
+      (err) => console.error('[copyToClipboard] Failed:', err)
+    )
+    return
+  }
 
-    try {
-        const successful = document.execCommand("copy")
-        if (!successful) {
-            console.log("error")
-        }
-    } catch (err) {
-        console.error("Fallback: Copy failed", err)
-    } finally {
-        document.body.removeChild(textarea)
+  // Fallback for older browsers
+  const textarea = document.createElement('textarea')
+  textarea.value = text
+  textarea.style.position = 'fixed'
+  textarea.style.opacity = '0'
+  document.body.appendChild(textarea)
+  textarea.focus()
+  textarea.select()
+
+  try {
+    const successful = document.execCommand('copy')
+    if (!successful) {
+      console.error('[copyToClipboard] execCommand failed')
     }
+  } catch (err) {
+    console.error('[copyToClipboard] Fallback failed:', err)
+  } finally {
+    document.body.removeChild(textarea)
+  }
 }

@@ -707,15 +707,20 @@ function useSubscription(subId) {
   const [userDB, userDBLoading] = useUserDB()
   const userId = userDB?.id
 
-  const { rows: subscriptionRows, loading: dbLoading } = useDBTable(
-    'subscriptions',
-    subId,
-    {
-      filter: { column: 'user_id', value: userId },
-      select: 'id, user_id, status',
-      enabled: !!userId,
-    }
-  )
+  const {
+    rows: subscriptionRows,
+    loading: dbLoading,
+    error,
+  } = useDBTable('subscriptions', subId, {
+    filter: { column: 'user_id', value: userId },
+    // Using '*' to fetch all columns - adjust to specific columns after verifying table schema
+    select: '*',
+    enabled: !!userId,
+  })
+
+  if (error) {
+    console.error('[useSubscription] error:', error)
+  }
   const subscription = subscriptionRows.find((r) => r.status === 'active')
 
   return [subscription, userDBLoading || dbLoading]

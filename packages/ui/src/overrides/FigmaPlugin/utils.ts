@@ -27,17 +27,21 @@ export function useSubscription(subId: string) {
   console.log('[useSubscription] userId:', userId)
 
   // Filter by user_id at DB level (no full table scan)
-  const { rows: subscriptionRows, loading: dbLoading } = useDBTable(
-    'subscriptions',
-    subId,
-    {
-      filter: { column: 'user_id', value: userId },
-      select: 'id, user_id, status, created_at',
-      enabled: !!userId, // Only query when userId exists
-    }
-  )
+  const {
+    rows: subscriptionRows,
+    loading: dbLoading,
+    error,
+  } = useDBTable('subscriptions', subId, {
+    filter: { column: 'user_id', value: userId },
+    // Using '*' to fetch all columns - adjust to specific columns after verifying table schema
+    select: '*',
+    enabled: !!userId, // Only query when userId exists
+  })
 
   console.log('[useSubscription] subscriptionRows:', subscriptionRows)
+  if (error) {
+    console.error('[useSubscription] error:', error)
+  }
 
   // Find only active subscription
   const subscription = subscriptionRows.find((r) => r.status === 'active')

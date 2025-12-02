@@ -1,5 +1,11 @@
 # ui
 
+## 0.1.51
+
+### Patch Changes
+
+- improve DB usages
+
 ## 0.1.50
 
 ### Patch Changes

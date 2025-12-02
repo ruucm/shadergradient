@@ -24,13 +24,16 @@ import { useSubscription, useUserDB } from './utils'
     return (props) => {
       const [subscription, subDBLoading] = useSubscription('userInfo-channel')
       const [userDB] = useUserDB('sg-info')
-      console.log(subscription, 'subscription')
+      console.log('[userInfo] subscription:', subscription)
+      console.log('[userInfo] userDB:', userDB)
   
       let variant = 'Loading'
       if (subDBLoading) variant = 'Loading'
       else if (!userDB) variant = 'NoUser'
       else if (subscription) variant = 'Pro'
       else variant = 'Free'
+      
+      console.log('[userInfo] Determined variant:', variant)
   
       return (
         <Component

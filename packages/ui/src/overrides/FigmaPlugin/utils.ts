@@ -6,10 +6,13 @@ import { useEffect } from 'react'
 export function useUserDB(channel = 'sg-figma-hook') {
     const [figma] = useFigma()
     const figma_user_id = figma.user?.id
-    console.log(figma_user_id, 'figma_user_id')
+    console.log('[useUserDB] figma_user_id:', figma_user_id)
   
     const [rows, dbLoading] = useDBTable('users', channel, { column: 'figma_user_id', value: figma_user_id })
-    return [rows.find((r) => r.figma_user_id === figma_user_id), dbLoading]
+    console.log('[useUserDB] rows found:', rows)
+    const foundUser = rows.find((r) => r.figma_user_id === figma_user_id)
+    console.log('[useUserDB] foundUser:', foundUser)
+    return [foundUser, dbLoading]
   }
   
  export function useSubscription(subId) {

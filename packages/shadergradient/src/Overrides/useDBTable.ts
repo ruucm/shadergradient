@@ -57,7 +57,7 @@ export function useDBTable(
           .select(select)
           .order('id', { ascending: false })
 
-        // 필터 적용 (DB 레벨에서 필터링)
+        // Apply filter at DB level (filtering)
         if (filter) {
           query = query.eq(filter.column, filter.value)
         }

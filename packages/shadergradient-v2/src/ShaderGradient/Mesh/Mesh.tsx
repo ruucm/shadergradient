@@ -21,6 +21,7 @@ export function Mesh({
   positionX,
   positionY,
   positionZ,
+  meshScale,
   rotationX,
   rotationY,
   rotationZ,
@@ -78,28 +79,48 @@ export function Mesh({
       const amplitude = uAmplitude ?? 1
       const speed = uSpeed ?? 0.5
 
-      for (let i = 0; i < positionAttr.count; i++) {
-        const i3 = i * 3
-        const ox = original[i3]
-        const oy = original[i3 + 1]
-        const oz = original[i3 + 2]
+      if (type === 'waterPlane') {
+        const positions = positionAttr.array as Float32Array
+        const waveStrength = 0.3 * strength * (0.5 + amplitude * 0.5)
+        const waveFrequency = 1.5 * density
+        const timeScale = 0.8 + speed * 0.8
 
-        const noise = resinNoise.noise3d(
-          ox * 0.25 * density,
-          oz * 0.25 * density,
-          time * (0.2 + speed * 0.8)
-        )
+        for (let i = 0; i < positions.length; i += 3) {
+          const x = original[i]
+          const y = original[i + 1]
 
-        const bump = noise * 0.35 * strength * (0.5 + amplitude * 0.5)
-        positionAttr.array[i3] = ox + bump * 0.25
-        positionAttr.array[i3 + 1] = oy + bump
-        positionAttr.array[i3 + 2] = oz + bump * 0.25
+          positions[i] = x
+          positions[i + 1] = y
+          positions[i + 2] =
+            Math.sin(x * waveFrequency + time) * waveStrength +
+            Math.cos(y * waveFrequency + time * timeScale) * waveStrength +
+            Math.sin((x + y) * waveFrequency * 0.8 + time * 0.5 * timeScale) *
+              (waveStrength * 0.66)
+        }
+      } else {
+        for (let i = 0; i < positionAttr.count; i++) {
+          const i3 = i * 3
+          const ox = original[i3]
+          const oy = original[i3 + 1]
+          const oz = original[i3 + 2]
+
+          const noise = resinNoise.noise3d(
+            ox * 0.25 * density,
+            oz * 0.25 * density,
+            time * (0.2 + speed * 0.8)
+          )
+
+          const bump = noise * 0.35 * strength * (0.5 + amplitude * 0.5)
+          positionAttr.array[i3] = ox + bump * 0.25
+          positionAttr.array[i3 + 1] = oy + bump
+          positionAttr.array[i3 + 2] = oz + bump * 0.25
+        }
       }
 
       positionAttr.needsUpdate = true
       geometry.computeVertexNormals()
     },
-    [shader, uDensity, uStrength, uAmplitude, uSpeed, resinNoise]
+    [shader, type, uDensity, uStrength, uAmplitude, uSpeed, resinNoise]
   )
 
   // Prepare uniforms based on shader type
@@ -205,6 +226,7 @@ export function Mesh({
       ref={meshRef}
       position={[positionX, positionY, positionZ]}
       rotation={dToRArr([rotationX, rotationY, rotationZ])}
+      scale={[meshScale ?? 1, meshScale ?? 1, meshScale ?? 1]}
     >
       <Geometry type={type} />
       <Materials

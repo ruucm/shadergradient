@@ -80,7 +80,7 @@ export function CameraControl({
           props.type === 'sphere'
             ? (CameraControls as any).ACTION.ZOOM
             : (CameraControls as any).ACTION.DOLLY,
-        right: (CameraControls as any).ACTION.NONE, // disabling pan for now, as we don't support camera position value in props
+        right: (CameraControls as any).ACTION.TRUCK,
         wheel:
           props.type === 'sphere'
             ? (CameraControls as any).ACTION.ZOOM

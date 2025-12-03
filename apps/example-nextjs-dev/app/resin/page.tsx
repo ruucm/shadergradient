@@ -3,7 +3,7 @@
 import { ShaderGradientCanvas, ShaderGradient } from '@shadergradient/react'
 import * as THREE from 'three'
 import { folder, useControls } from 'leva'
-import { useMemo } from 'react'
+import { useEffect, useMemo, useRef } from 'react'
 
 export default function ResinPage() {
   const {
@@ -32,6 +32,7 @@ export default function ResinPage() {
     positionX,
     positionY,
     positionZ,
+    meshScale,
     // Resin surface
     transmission,
     thickness,
@@ -46,6 +47,9 @@ export default function ResinPage() {
     color1,
     color2,
     color3,
+    gradientColor1,
+    gradientColor2,
+    gradientColor3,
   } = useControls({
     Surface: folder({
       transmission: { value: 1, min: 0, max: 1 },
@@ -85,6 +89,7 @@ export default function ResinPage() {
       positionX: { value: 0, min: -5, max: 5, step: 0.05 },
       positionY: { value: 0, min: -5, max: 5, step: 0.05 },
       positionZ: { value: 0, min: -5, max: 5, step: 0.05 },
+      meshScale: { value: 1, min: 0.1, max: 5, step: 0.05 },
     }),
     Noise: folder({
       uStrength: { value: 2.0, min: 0, max: 8, step: 0.05 },
@@ -92,12 +97,22 @@ export default function ResinPage() {
       uFrequency: { value: 6.0, min: 0, max: 15, step: 0.1 },
       uAmplitude: { value: 0.9, min: 0, max: 5, step: 0.05 },
     }),
+    Background: folder({
+      gradientColor1: { value: '#f7e9ff' },
+      gradientColor2: { value: '#d2ddff' },
+      gradientColor3: { value: '#b3f4ff' },
+    }),
   })
 
   return (
     <div style={{ width: '100vw', height: '100vh', background: '#eef1f7' }}>
       <ShaderGradientCanvas pixelDensity={pixelDensity} fov={fov}>
-        <Grid />
+        <GradientBackground
+          color1={gradientColor1}
+          color2={gradientColor2}
+          color3={gradientColor3}
+        />
+        {/* <Grid /> */}
         <ShaderGradient
           control='props'
           shader='resin'
@@ -122,6 +137,7 @@ export default function ResinPage() {
           positionX={positionX}
           positionY={positionY}
           positionZ={positionZ}
+          meshScale={meshScale}
           rotationX={rotationX}
           rotationY={rotationY}
           rotationZ={rotationZ}
@@ -142,6 +158,64 @@ export default function ResinPage() {
         />
       </ShaderGradientCanvas>
     </div>
+  )
+}
+
+const GradientBackground = ({
+  color1,
+  color2,
+  color3,
+}: {
+  color1: string
+  color2: string
+  color3: string
+}) => {
+  const materialRef = useRef<THREE.ShaderMaterial>(null)
+
+  const uniforms = useMemo(
+    () => ({
+      uColor1: { value: new THREE.Color(color1) },
+      uColor2: { value: new THREE.Color(color2) },
+      uColor3: { value: new THREE.Color(color3) },
+    }),
+    [] // keep uniforms stable; we update values via effect
+  )
+
+  useEffect(() => {
+    if (!materialRef.current) return
+    materialRef.current.uniforms.uColor1.value.set(color1)
+    materialRef.current.uniforms.uColor2.value.set(color2)
+    materialRef.current.uniforms.uColor3.value.set(color3)
+    materialRef.current.uniformsNeedUpdate = true
+    materialRef.current.needsUpdate = true
+  }, [color1, color2, color3])
+
+  return (
+    <mesh position={[0, 0, -3]} scale={[4, 2.6, 1]}>
+      <planeGeometry args={[20, 12]} />
+      <shaderMaterial
+        ref={materialRef}
+        uniforms={uniforms}
+        vertexShader={`
+          varying vec2 vUv;
+          void main() {
+            vUv = uv;
+            gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+          }
+        `}
+        fragmentShader={`
+          uniform vec3 uColor1;
+          uniform vec3 uColor2;
+          uniform vec3 uColor3;
+          varying vec2 vUv;
+          void main() {
+            vec3 color = mix(uColor1, uColor2, smoothstep(0.0, 1.0, vUv.x));
+            color = mix(color, uColor3, smoothstep(0.0, 1.0, vUv.y));
+            gl_FragColor = vec4(color, 1.0);
+          }
+        `}
+      />
+    </mesh>
   )
 }
 

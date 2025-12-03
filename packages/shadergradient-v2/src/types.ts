@@ -34,6 +34,7 @@ export type MeshT = {
   positionX?: number
   positionY?: number
   positionZ?: number
+  meshScale?: number
   rotationX?: number
   rotationY?: number
   rotationZ?: number

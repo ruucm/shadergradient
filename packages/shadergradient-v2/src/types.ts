@@ -45,6 +45,17 @@ export type MeshT = {
   shader?: string
   rotSpringOption?: any
   posSpringOption?: any
+  // Resin props
+  transmission?: number
+  thickness?: number
+  ior?: number
+  chromaticAberration?: number
+  anisotropy?: number
+  distortion?: number
+  distortionScale?: number
+  temporalDistortion?: number
+  clearcoat?: number
+  clearcoatRoughness?: number
 }
 
 export type LightTypeT = '3d' | 'env'

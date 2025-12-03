@@ -6,4 +6,6 @@ import * as glass from './glass/index'
 import * as holographic from './holographic/index'
 import * as liquid from './liquid/index'
 
-export { defaults, positionMix, cosmic, glass, holographic, liquid }
+import * as resin from './resin/index'
+
+export { defaults, positionMix, cosmic, glass, holographic, liquid, resin }

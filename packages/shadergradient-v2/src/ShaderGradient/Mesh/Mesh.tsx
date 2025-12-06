@@ -134,7 +134,7 @@ export function Mesh({
       rotation={dToRArr([rotationX, rotationY, rotationZ])}
       scale={[meshScale ?? 1, meshScale ?? 1, meshScale ?? 1]}
     >
-      <Geometry type={type} />
+      <Geometry type={type} shader={shader} />
       <Materials
         animate={animate}
         range={range}

@@ -483,8 +483,8 @@ export const propertyControls = (ControlType, type = '') => ({
   },
   shader: {
     type: ControlType.Enum,
-    options: ['defaults', 'positionMix', 'glass'],
-    optionTitles: ['Type A', 'Type B', 'Type C'],
+    options: ['defaults', 'resin'],
+    optionTitles: ['Default', 'Resin'],
     displaySegmentedControl: true,
     hidden: (props) => props.control === 'query' || props.activeTab !== 'Shape',
   },

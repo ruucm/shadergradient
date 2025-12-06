@@ -1,24 +1,30 @@
 const meshCount = 192
-const waterPlaneSize = 5
-const waterPlaneSegments = 128
+const resinWaterPlaneSize = 5
+const resinWaterPlaneSegments = 128
 
-export function Geometry({ type }) {
+export function Geometry({ type, shader }) {
   return (
     <>
-      {type === 'plane' && (
-        <planeGeometry args={[10, 10, meshCount, meshCount]} />
-      )}
+      {type === 'plane' &&
+        (shader === 'resin' ? (
+          <planeGeometry args={[10, 10, meshCount, meshCount]} />
+        ) : (
+          <planeGeometry args={[10, 10, 1, meshCount]} />
+        ))}
       {type === 'sphere' && <icosahedronGeometry args={[1, meshCount / 3]} />}
-      {type === 'waterPlane' && (
-        <planeGeometry
-          args={[
-            waterPlaneSize,
-            waterPlaneSize,
-            waterPlaneSegments,
-            waterPlaneSegments,
-          ]}
-        />
-      )}
+      {type === 'waterPlane' &&
+        (shader === 'resin' ? (
+          <planeGeometry
+            args={[
+              resinWaterPlaneSize,
+              resinWaterPlaneSize,
+              resinWaterPlaneSegments,
+              resinWaterPlaneSegments,
+            ]}
+          />
+        ) : (
+          <planeGeometry args={[10, 10, meshCount, meshCount]} />
+        ))}
     </>
   )
 }

@@ -15,7 +15,7 @@
     "next": "14.2.13",
     "@shadergradient/react": "workspace:*",
     "three": "^0.169.0",
-    "@react-three/drei": "9.56.5",
+    "@react-three/drei": "^9.122.0",
     "@react-three/fiber": "8.18.0"
   },
   "devDependencies": {

@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useMemo } from 'react'
 import { useFrame } from '@react-three/fiber'
 import * as THREE from 'three'
-import { SimplexNoise } from 'three/examples/jsm/math/SimplexNoise'
+import { SimplexNoise } from 'three/examples/jsm/math/SimplexNoise.js'
 import { MeshT } from '@/types'
 import { colorToRgb } from '@/utils'
 

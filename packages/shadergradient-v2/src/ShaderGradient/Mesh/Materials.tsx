@@ -2,6 +2,7 @@ import React, { useEffect, useMemo, useRef } from 'react'
 import * as THREE from 'three'
 import { colorToRgb, formatColor } from '@/utils'
 import { useFrame } from '@react-three/fiber'
+import { ResinMaterial } from './ResinMaterial'
 
 // Define the material component
 export const Materials = ({
@@ -19,6 +20,10 @@ export const Materials = ({
   shader,
 }) => {
   const localClockRef = useRef(new THREE.Clock())
+  if (shader === 'resin') {
+    return <ResinMaterial uniforms={uniforms} />
+  }
+
   const material = useMemo(() => {
     const entries = Object.entries(uniforms)
     const colors = uniforms.colors
@@ -48,10 +53,21 @@ export const Materials = ({
     // Material configuration based on shader type
     const materialConfig = {
       userData: uniformValues, // sync uniform and userData to update uniforms from outside (MeshPhysicalMaterial)
-      metalness: shader === 'glass' ? 0.0 : 0.2,
+      metalness:
+        shader === 'glass'
+          ? 0.0
+          : shader === 'holographic'
+          ? 0.8
+          : shader === 'liquid'
+          ? 0.1
+          : 0.2,
       roughness:
         shader === 'glass'
           ? 0.1
+          : shader === 'holographic'
+          ? 0.2
+          : shader === 'liquid'
+          ? 0.05
           : 1 - (typeof reflection === 'number' ? reflection : 0.1),
       side: THREE.DoubleSide,
       onBeforeCompile: (shader) => {
@@ -64,21 +80,23 @@ export const Materials = ({
         shader.fragmentShader = fragmentShader
       },
       // wireframe: true,
-    }
+    } as any
 
-    // Add glass-specific material properties
-    if (shader === 'glass') {
+    // Add glass/liquid-specific material properties
+    if (shader === 'glass' || shader === 'liquid') {
       materialConfig.transparent = true
-      materialConfig.opacity = 0.3
-      materialConfig.transmission = 0.9
-      materialConfig.thickness = 0.5
+      materialConfig.opacity =
+        shader === 'liquid' ? 0.6 : 0.3
+      materialConfig.transmission = shader === 'liquid' ? 0.95 : 0.9
+      materialConfig.thickness = shader === 'liquid' ? 1.0 : 0.5
       materialConfig.clearcoat = 1.0
       materialConfig.clearcoatRoughness = 0.0
-      materialConfig.ior = 1.5
-      materialConfig.envMapIntensity = 1.0
+      materialConfig.ior = shader === 'liquid' ? 1.4 : 1.5
+      materialConfig.envMapIntensity = shader === 'liquid' ? 1.5 : 1.0
     }
 
     const material = new THREE.MeshPhysicalMaterial(materialConfig)
+    ;(material as any).uniforms = uniformValues
 
     entries.forEach(([name]) =>
       Object.defineProperty(material, name, {

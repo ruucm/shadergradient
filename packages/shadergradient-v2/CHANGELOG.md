@@ -1,5 +1,11 @@
 # shadergradient
 
+## 2.4.7
+
+### Patch Changes
+
+- keep the original shaders
+
 ## 2.4.6
 
 ### Patch Changes

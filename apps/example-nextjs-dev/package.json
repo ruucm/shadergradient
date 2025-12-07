@@ -1,6 +1,6 @@
 {
   "name": "example-nextjs-dev",
-  "version": "0.1.55",
+  "version": "0.1.56",
   "private": true,
   "scripts": {
     "dev": "next dev --port 3004",

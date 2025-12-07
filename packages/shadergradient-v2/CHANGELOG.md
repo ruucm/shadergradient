@@ -1,5 +1,11 @@
 # shadergradient
 
+## 2.4.11
+
+### Patch Changes
+
+- range: 'disabled' for all presets
+
 ## 2.4.10
 
 ### Patch Changes

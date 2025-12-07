@@ -1,5 +1,11 @@
 # ui
 
+## 0.1.55
+
+### Patch Changes
+
+- add new override for landing page
+
 ## 0.1.54
 
 ### Patch Changes

@@ -16,6 +16,22 @@ export function SectionText(Component): ComponentType {
   }
 }
 
+export function HideGradientsOnMobile(Component): ComponentType {
+  return (props) => {
+    const currentSection = useScrollStore((state) => state.currentSection)
+
+    if (
+      currentSection === 'intro-start' ||
+      currentSection === 'intro-end' ||
+      currentSection === 'intro' ||
+      currentSection === 'for-titles'
+    ) {
+      return <Component {...props} />
+    }
+    return <></>
+  }
+}
+
 export function SectionObserver(Component): ComponentType {
   return (props: any) => {
     const setCurrentSection = useScrollStore((state) => state.setCurrentSection)

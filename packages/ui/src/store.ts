@@ -111,16 +111,16 @@ export function useBillingInterval(): [
 // Scroll store for Web/Scroll.tsx
 interface ScrollStore {
   highlightWord: number
-  currentSection: number
+  currentSection: string
   setHighlightWord: (word: number) => void
-  setCurrentSection: (section: number) => void
+  setCurrentSection: (section: string) => void
 }
 
 export const useScrollStore = create<ScrollStore>()((set) => ({
   highlightWord: 0,
-  currentSection: 0,
+  currentSection: 'intro-start',
   setHighlightWord: (word: number) => set({ highlightWord: word }),
-  setCurrentSection: (section: number) => set({ currentSection: section }),
+  setCurrentSection: (section: string) => set({ currentSection: section }),
 }))
 
 // UI store for Web/UI.tsx

@@ -5,7 +5,20 @@ import * as THREE from 'three'
 import { useInView } from './hooks/useInView'
 
 type ShaderGradientCanvasContext = {
-  envBasePath: string
+  envBasePath?: string
+}
+
+type ShaderGradientCanvasProps = {
+  children: React.ReactNode
+  style?: React.CSSProperties
+  pixelDensity?: number
+  fov?: number
+  pointerEvents?: 'none' | 'auto'
+  className?: string
+  envBasePath?: string
+  lazyLoad?: boolean
+  threshold?: number
+  rootMargin?: string
 }
 
 const Context = createContext<ShaderGradientCanvasContext>(
@@ -27,18 +40,7 @@ export function ShaderGradientCanvas({
   lazyLoad = true,
   threshold = 0.1,
   rootMargin = '0px',
-}: {
-  children: React.ReactNode
-  style?: React.CSSProperties
-  pixelDensity?: number
-  fov?: number
-  pointerEvents?: 'none' | 'auto'
-  className?: string
-  envBasePath?: string
-  lazyLoad?: boolean
-  threshold?: number
-  rootMargin?: string
-}) {
+}: ShaderGradientCanvasProps) {
   const { isInView, containerRef } = useInView(lazyLoad, threshold, rootMargin)
 
   const contextValue = useMemo<ShaderGradientCanvasContext>(

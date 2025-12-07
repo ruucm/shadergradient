@@ -26,7 +26,7 @@ export function useCameraAnimation({
     const control = ref.current
 
     control?.rotateTo(dToR(cAzimuthAngle), dToR(cPolarAngle), enableTransition)
-  }, [ref, cAzimuthAngle, cPolarAngle])
+  }, [ref, cAzimuthAngle, cPolarAngle, enableTransition])
 
   // zoom-out tool
   useEffect(() => {
@@ -51,7 +51,7 @@ export function useCameraAnimation({
         control?.zoomTo(defaultPlanesZoom, enableTransition)
       }
     }
-  }, [ref, zoomOut, type, cameraZoom, cDistance])
+  }, [ref, zoomOut, type, cameraZoom, cDistance, enableTransition])
 
   return ref
 }

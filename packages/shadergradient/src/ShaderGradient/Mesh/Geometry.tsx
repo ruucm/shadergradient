@@ -1,6 +1,12 @@
+import { ShaderGradientType } from '@/types'
+
 const meshCount = 192
 
-export function Geometry({ type }) {
+type GeometryProps = {
+  type: ShaderGradientType
+}
+
+export function Geometry({ type }: GeometryProps) {
   return (
     <>
       {type === 'plane' && <planeGeometry args={[10, 10, 1, meshCount]} />}

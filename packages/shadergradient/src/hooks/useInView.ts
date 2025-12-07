@@ -5,7 +5,7 @@ export function useInView(
   threshold: number = 0.1,
   rootMargin: string = '0px'
 ) {
-  const [isInView, setIsInView] = useState(true)
+  const [isInView, setIsInView] = useState(!enabled)
   const containerRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {

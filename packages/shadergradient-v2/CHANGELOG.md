@@ -1,5 +1,11 @@
 # shadergradient
 
+## 2.4.10
+
+### Patch Changes
+
+- hide Framer Shader control
+
 ## 2.4.9
 
 ### Patch Changes

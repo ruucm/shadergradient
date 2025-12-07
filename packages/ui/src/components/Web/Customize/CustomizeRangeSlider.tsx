@@ -27,6 +27,16 @@ export const CustomizeRangeSlider: React.FC<SliderPropsT> = ({
   const [rangeEnd, setRangeEnd] = useState<any>(defaultEnd)
 
   useEffect(() => {
+    const nextStart = Array.isArray(defaultValue)
+      ? defaultValue?.[0] ?? min
+      : min
+    const nextEnd = Array.isArray(defaultValue) ? defaultValue?.[1] ?? max : max
+
+    setRangeStart(nextStart)
+    setRangeEnd(nextEnd)
+  }, [defaultValue, min, max])
+
+  useEffect(() => {
     setValue([rangeStart, rangeEnd])
   }, [rangeStart, rangeEnd])
 

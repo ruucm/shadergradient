@@ -20,8 +20,9 @@ export const CustomizeSlider = React.forwardRef<HTMLInputElement, SliderPropsT>(
     const [sharedValue, setSharedValue] = useState<any>(defaultValue)
 
     useEffect(() => {
-      setSharedValue(defaultValue) // init once with the passed value (from search params)
-    }, [])
+      // keep slider/input in sync when query values change externally (e.g. easyView drag)
+      setSharedValue(defaultValue)
+    }, [defaultValue])
     useEffect(() => {
       setValue(sharedValue)
     }, [sharedValue])

@@ -51,11 +51,13 @@ import {
 } from "../chunk-VOQROR62.mjs";
 import {
   ColorsTab,
+  ConnectFigmaMessage,
   CopyBtn,
   Duration,
   EasyViewInfo,
   Error,
   EstimatedSize,
+  FigmaUrlInput,
   HighlightButton,
   LoadViewAfterStyleSheet,
   MotionTab,
@@ -74,7 +76,7 @@ import {
   extractGIF,
   goBack,
   insertCanvasAsImage
-} from "../chunk-G4EWQ2DP.mjs";
+} from "../chunk-5ME2NFHD.mjs";
 import "../chunk-PH7HJQXM.mjs";
 import "../chunk-VQME7MQ6.mjs";
 import "../chunk-CF57A7Q3.mjs";
@@ -123,12 +125,14 @@ export {
   CenterCrop1,
   CenterCrop2,
   ColorsTab,
+  ConnectFigmaMessage,
   CopyBtn,
   CurrentPreset,
   Duration,
   EasyViewInfo,
   Error,
   EstimatedSize,
+  FigmaUrlInput,
   Gap,
   HideBanner,
   HighlightButton,

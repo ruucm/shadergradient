@@ -1,10 +1,12 @@
 import {
   ColorsTab,
+  ConnectFigmaMessage,
   CopyBtn,
   Duration,
   EasyViewInfo,
   Error,
   EstimatedSize,
+  FigmaUrlInput,
   HighlightButton,
   LoadViewAfterStyleSheet,
   MotionTab,
@@ -23,7 +25,7 @@ import {
   extractGIF,
   goBack,
   insertCanvasAsImage
-} from "../../chunk-G4EWQ2DP.mjs";
+} from "../../chunk-5ME2NFHD.mjs";
 import "../../chunk-PH7HJQXM.mjs";
 import "../../chunk-CF57A7Q3.mjs";
 import "../../chunk-YFGZA6BU.mjs";
@@ -38,6 +40,7 @@ import "../../chunk-N6HRX5FL.mjs";
 import "../../chunk-SY2XQFBP.mjs";
 import "../../chunk-RDD4GF6E.mjs";
 import "../../chunk-USZKSWJE.mjs";
+import "../../chunk-2ZZ6H7J7.mjs";
 import "../../chunk-4BNDWPG4.mjs";
 import "../../chunk-LVWASZSI.mjs";
 import "../../chunk-SLCEHTAV.mjs";
@@ -53,11 +56,13 @@ import "../../chunk-NP5XZW6Z.mjs";
 import "../../chunk-HXGKXP63.mjs";
 export {
   ColorsTab,
+  ConnectFigmaMessage,
   CopyBtn,
   Duration,
   EasyViewInfo,
   Error,
   EstimatedSize,
+  FigmaUrlInput,
   HighlightButton,
   LoadViewAfterStyleSheet,
   MotionTab,

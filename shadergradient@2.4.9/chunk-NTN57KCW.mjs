@@ -1,0 +1,799 @@
+// src/presets.ts
+var presets = {
+  halo: {
+    title: "Halo",
+    color: "white",
+    props: {
+      type: "plane",
+      uAmplitude: 1,
+      uDensity: 1.3,
+      uSpeed: 0.4,
+      uStrength: 4,
+      uTime: 0,
+      uFrequency: 5.5,
+      range: "disabled",
+      rangeStart: 0,
+      rangeEnd: 40,
+      frameRate: 10,
+      destination: "onCanvas",
+      format: "gif",
+      axesHelper: "off",
+      brightness: 1.2,
+      cAzimuthAngle: 180,
+      cDistance: 3.6,
+      cPolarAngle: 90,
+      cameraZoom: 1,
+      color1: "#ff5005",
+      color2: "#dbba95",
+      color3: "#d0bce1",
+      embedMode: "off",
+      envPreset: "city",
+      gizmoHelper: "hide",
+      grain: "on",
+      lightType: "3d",
+      pixelDensity: 1,
+      fov: 45,
+      positionX: -1.4,
+      positionY: 0,
+      positionZ: 0,
+      reflection: 0.1,
+      rotationX: 0,
+      rotationY: 10,
+      rotationZ: 50,
+      shader: "defaults",
+      animate: "on",
+      wireframe: false
+    }
+  },
+  pensive: {
+    title: "Pensive",
+    color: "white",
+    props: {
+      range: "enabled",
+      rangeStart: 0,
+      rangeEnd: 40,
+      frameRate: 10,
+      destination: "onCanvas",
+      format: "gif",
+      animate: "on",
+      axesHelper: "off",
+      brightness: 1.5,
+      cAzimuthAngle: 250,
+      cDistance: 1.5,
+      cPolarAngle: 140,
+      cameraZoom: 12.5,
+      color1: "#809bd6",
+      color2: "#910aff",
+      color3: "#af38ff",
+      embedMode: "off",
+      envPreset: "city",
+      gizmoHelper: "hide",
+      grain: "on",
+      lightType: "3d",
+      pixelDensity: 1,
+      fov: 45,
+      positionX: 0,
+      positionY: 0,
+      positionZ: 0,
+      reflection: 0.5,
+      rotationX: 0,
+      rotationY: 0,
+      rotationZ: 140,
+      shader: "defaults",
+      type: "sphere",
+      uAmplitude: 7,
+      uDensity: 0.8,
+      uFrequency: 5.5,
+      uSpeed: 0.3,
+      uStrength: 0.4,
+      uTime: 0,
+      wireframe: false
+    }
+  },
+  mint: {
+    title: "Mint",
+    color: "white",
+    props: {
+      range: "enabled",
+      rangeStart: 0,
+      rangeEnd: 40,
+      frameRate: 10,
+      destination: "onCanvas",
+      format: "gif",
+      animate: "on",
+      axesHelper: "off",
+      brightness: 1.2,
+      cAzimuthAngle: 170,
+      cDistance: 4.4,
+      cPolarAngle: 70,
+      cameraZoom: 1,
+      color1: "#94ffd1",
+      color2: "#6bf5ff",
+      color3: "#ffffff",
+      embedMode: "off",
+      envPreset: "city",
+      gizmoHelper: "hide",
+      grain: "off",
+      lightType: "3d",
+      pixelDensity: 1,
+      fov: 45,
+      positionX: 0,
+      positionY: 0.9,
+      positionZ: -0.3,
+      reflection: 0.1,
+      rotationX: 45,
+      rotationY: 0,
+      rotationZ: 0,
+      shader: "defaults",
+      type: "waterPlane",
+      uAmplitude: 0,
+      uDensity: 1.2,
+      uFrequency: 0,
+      uSpeed: 0.2,
+      uStrength: 3.4,
+      uTime: 0,
+      wireframe: false
+    }
+  },
+  interstella: {
+    title: "Interstella",
+    color: "white",
+    props: {
+      range: "enabled",
+      rangeStart: 0,
+      rangeEnd: 40,
+      frameRate: 10,
+      destination: "onCanvas",
+      format: "gif",
+      animate: "on",
+      axesHelper: "off",
+      brightness: 0.8,
+      cAzimuthAngle: 270,
+      cDistance: 0.5,
+      cPolarAngle: 180,
+      cameraZoom: 15.1,
+      color1: "#73bfc4",
+      color2: "#ff810a",
+      color3: "#8da0ce",
+      embedMode: "off",
+      envPreset: "city",
+      gizmoHelper: "hide",
+      grain: "on",
+      lightType: "env",
+      pixelDensity: 1,
+      fov: 45,
+      positionX: -0.1,
+      positionY: 0,
+      positionZ: 0,
+      reflection: 0.4,
+      rotationX: 0,
+      rotationY: 130,
+      rotationZ: 70,
+      shader: "defaults",
+      type: "sphere",
+      uAmplitude: 3.2,
+      uDensity: 0.8,
+      uFrequency: 5.5,
+      uSpeed: 0.3,
+      uStrength: 0.3,
+      uTime: 0,
+      wireframe: false
+    }
+  },
+  nightyNight: {
+    title: "Nighty night",
+    color: "white",
+    props: {
+      range: "enabled",
+      rangeStart: 0,
+      rangeEnd: 40,
+      frameRate: 10,
+      destination: "onCanvas",
+      format: "gif",
+      animate: "on",
+      axesHelper: "off",
+      brightness: 1,
+      cAzimuthAngle: 180,
+      cDistance: 2.8,
+      cPolarAngle: 80,
+      cameraZoom: 9.1,
+      color1: "#606080",
+      color2: "#8d7dca",
+      color3: "#212121",
+      embedMode: "off",
+      envPreset: "city",
+      gizmoHelper: "hide",
+      grain: "on",
+      lightType: "3d",
+      pixelDensity: 1,
+      fov: 45,
+      positionX: 0,
+      positionY: 0,
+      positionZ: 0,
+      reflection: 0.1,
+      rotationX: 50,
+      rotationY: 0,
+      rotationZ: -60,
+      shader: "defaults",
+      type: "waterPlane",
+      uAmplitude: 0,
+      uDensity: 1.5,
+      uFrequency: 0,
+      uSpeed: 0.3,
+      uStrength: 1.5,
+      uTime: 8,
+      wireframe: false
+    }
+  },
+  violaOrientalis: {
+    title: "Viola orientalis",
+    color: "white",
+    props: {
+      range: "enabled",
+      rangeStart: 0,
+      rangeEnd: 40,
+      frameRate: 10,
+      destination: "onCanvas",
+      format: "gif",
+      animate: "on",
+      axesHelper: "on",
+      brightness: 1.1,
+      cAzimuthAngle: 0,
+      cDistance: 7.1,
+      cPolarAngle: 140,
+      cameraZoom: 17.3,
+      color1: "#ffffff",
+      color2: "#ffbb00",
+      color3: "#0700ff",
+      embedMode: "off",
+      envPreset: "city",
+      grain: "off",
+      lightType: "3d",
+      pixelDensity: 1,
+      fov: 45,
+      positionX: 0,
+      positionY: 0,
+      positionZ: 0,
+      reflection: 0.1,
+      rotationX: 0,
+      rotationY: 0,
+      rotationZ: 0,
+      shader: "defaults",
+      type: "sphere",
+      uAmplitude: 1.4,
+      uDensity: 1.1,
+      uSpeed: 0.1,
+      uStrength: 1,
+      uTime: 0,
+      uFrequency: 5.5,
+      wireframe: false
+    }
+  },
+  universe: {
+    title: "Universe",
+    color: "white",
+    props: {
+      range: "enabled",
+      rangeStart: 0,
+      rangeEnd: 40,
+      frameRate: 10,
+      destination: "onCanvas",
+      format: "gif",
+      animate: "on",
+      axesHelper: "on",
+      brightness: 1.1,
+      cAzimuthAngle: 180,
+      cDistance: 3.9,
+      cPolarAngle: 115,
+      cameraZoom: 1,
+      color1: "#5606ff",
+      color2: "#fe8989",
+      color3: "#000000",
+      embedMode: "off",
+      envPreset: "city",
+      grain: "off",
+      lightType: "3d",
+      pixelDensity: 1,
+      fov: 45,
+      positionX: -0.5,
+      positionY: 0.1,
+      positionZ: 0,
+      reflection: 0.1,
+      rotationX: 0,
+      rotationY: 0,
+      rotationZ: 235,
+      shader: "defaults",
+      type: "waterPlane",
+      uAmplitude: 0,
+      uDensity: 1.1,
+      uSpeed: 0.1,
+      uStrength: 2.4,
+      uTime: 0.2,
+      uFrequency: 5.5,
+      wireframe: false
+    }
+  },
+  sunset: {
+    title: "Sunset",
+    color: "white",
+    props: {
+      range: "enabled",
+      rangeStart: 0,
+      rangeEnd: 40,
+      frameRate: 10,
+      destination: "onCanvas",
+      format: "gif",
+      animate: "on",
+      axesHelper: "on",
+      bgColor1: "#000000",
+      bgColor2: "#000000",
+      brightness: 1.5,
+      cAzimuthAngle: 60,
+      cDistance: 7.1,
+      cPolarAngle: 90,
+      cameraZoom: 15.3,
+      color1: "#ff7a33",
+      color2: "#33a0ff",
+      color3: "#ffc53d",
+      embedMode: "off",
+      envPreset: "dawn",
+      grain: "off",
+      lightType: "3d",
+      pixelDensity: 1,
+      fov: 45,
+      positionX: 0,
+      positionY: -0.15,
+      positionZ: 0,
+      reflection: 0.1,
+      rotationX: 0,
+      rotationY: 0,
+      rotationZ: 0,
+      shader: "defaults",
+      type: "sphere",
+      uAmplitude: 1.4,
+      uDensity: 1.1,
+      uSpeed: 0.1,
+      uStrength: 0.4,
+      uTime: 0,
+      uFrequency: 5.5,
+      wireframe: false
+    }
+  },
+  mandarin: {
+    title: "Mandarin",
+    color: "white",
+    props: {
+      range: "enabled",
+      rangeStart: 0,
+      rangeEnd: 40,
+      frameRate: 10,
+      destination: "onCanvas",
+      format: "gif",
+      animate: "on",
+      axesHelper: "on",
+      bgColor1: "#000000",
+      bgColor2: "#000000",
+      brightness: 1.2,
+      cAzimuthAngle: 180,
+      cDistance: 2.4,
+      cPolarAngle: 95,
+      cameraZoom: 1,
+      color1: "#ff6a1a",
+      color2: "#c73c00",
+      color3: "#FD4912",
+      embedMode: "off",
+      envPreset: "city",
+      grain: "off",
+      lightType: "3d",
+      pixelDensity: 1,
+      fov: 45,
+      positionX: 0,
+      positionY: -2.1,
+      positionZ: 0,
+      reflection: 0.1,
+      rotationX: 0,
+      rotationY: 0,
+      rotationZ: 225,
+      shader: "defaults",
+      type: "waterPlane",
+      uAmplitude: 0,
+      uDensity: 1.8,
+      uSpeed: 0.2,
+      uStrength: 3,
+      uTime: 0.2,
+      uFrequency: 5.5,
+      wireframe: false
+    }
+  },
+  cottonCandy: {
+    title: "Cotton Candy",
+    color: "white",
+    props: {
+      range: "enabled",
+      rangeStart: 0,
+      rangeEnd: 40,
+      frameRate: 10,
+      destination: "onCanvas",
+      format: "gif",
+      animate: "on",
+      axesHelper: "off",
+      brightness: 1.2,
+      cAzimuthAngle: 180,
+      cDistance: 2.9,
+      cPolarAngle: 120,
+      cameraZoom: 1,
+      color1: "#ebedff",
+      color2: "#f3f2f8",
+      color3: "#dbf8ff",
+      embedMode: "off",
+      envPreset: "city",
+      grain: "off",
+      lightType: "3d",
+      pixelDensity: 1,
+      fov: 45,
+      positionX: 0,
+      positionY: 1.8,
+      positionZ: 0,
+      reflection: 0.1,
+      rotationX: 0,
+      rotationY: 0,
+      rotationZ: -90,
+      shader: "defaults",
+      type: "waterPlane",
+      uAmplitude: 0,
+      uDensity: 1,
+      uSpeed: 0.3,
+      uStrength: 3,
+      uTime: 0.2,
+      uFrequency: 5.5,
+      wireframe: false
+    }
+  }
+};
+var initialActivePreset = 0;
+var presetsArray = Object.values(presets);
+var propertyControls = (ControlType, type = "") => ({
+  control: {
+    type: ControlType.Enum,
+    options: ["props", "query"],
+    optionTitles: ["Props", "Query"],
+    displaySegmentedControl: true,
+    defaultValue: type === "stateless" ? "query" : "props"
+  },
+  activeTab: {
+    title: "Settings Group",
+    type: ControlType.Enum,
+    options: ["Shape", "Colors", "Effects", "View"],
+    hidden: (props) => props.control === "query"
+  },
+  // Shape
+  type: {
+    type: ControlType.Enum,
+    options: ["plane", "sphere", "waterPlane"],
+    optionTitles: ["Plane", "Sphere", "Water"],
+    displaySegmentedControl: true,
+    hidden: (props) => props.control === "query" || props.activeTab !== "Shape"
+  },
+  shader: {
+    type: ControlType.Enum,
+    options: ["defaults", "positionMix", "glass"],
+    optionTitles: ["Type A", "Type B", "Type C"],
+    displaySegmentedControl: true,
+    hidden: (props) => props.control === "query" || props.activeTab !== "Shape"
+  },
+  animate: {
+    type: ControlType.Enum,
+    options: ["on", "off"],
+    optionTitles: ["On", "Off"],
+    displaySegmentedControl: true,
+    hidden: (props) => props.control === "query" || props.activeTab !== "Shape" && props.activeTab !== "URL"
+  },
+  uTime: {
+    title: "Movements",
+    type: ControlType.Number,
+    step: 0.1,
+    displayStepper: true,
+    hidden: (props) => props.animate === "on" || props.control === "query" || props.activeTab !== "Shape"
+  },
+  uSpeed: {
+    title: "Speed",
+    type: ControlType.Number,
+    step: 0.1,
+    min: 0.1,
+    displayStepper: true,
+    defaultValue: 0.4,
+    hidden: (props) => props.animate === "off" || props.control === "query" || props.activeTab !== "Shape"
+  },
+  noise: {
+    type: ControlType.Object,
+    controls: {
+      uStrength: {
+        type: ControlType.Number,
+        title: "Strength",
+        step: 0.1,
+        min: 0.1,
+        displayStepper: true,
+        defaultValue: 4
+      },
+      uDensity: {
+        type: ControlType.Number,
+        title: "Density",
+        step: 0.1,
+        min: 0.1,
+        displayStepper: true,
+        defaultValue: 1.3
+      }
+      // uFrequency: {
+      //     type: ControlType.Number,
+      //     step: 0.1,
+      //     min: 0.1,
+      //     displayStepper: true,
+      //     hidden: (props) =>
+      //         props.type !== "sphere" ||
+      //         props.control === "query" ||
+      //         props.activeTab !== "Shape",
+      // },
+    },
+    hidden: (props) => props.control === "query" || props.activeTab !== "Shape"
+  },
+  uAmplitude: {
+    type: ControlType.Number,
+    title: "Spiral",
+    step: 0.1,
+    min: 0.1,
+    displayStepper: true,
+    defaultValue: 1,
+    hidden: (props) => props.type !== "sphere" || props.control === "query" || props.activeTab !== "Shape"
+  },
+  pixelDensity: {
+    type: ControlType.Number,
+    step: 0.1,
+    min: 0,
+    max: 3,
+    displayStepper: true,
+    defaultValue: 1,
+    hidden: (props) => props.control === "query" || props.activeTab !== "Shape"
+  },
+  fov: {
+    type: ControlType.Number,
+    step: 1,
+    min: 10,
+    max: 180,
+    displayStepper: true,
+    defaultValue: 45,
+    hidden: (props) => props.control === "query" || props.activeTab !== "Shape"
+  },
+  // Effects
+  grain: {
+    type: ControlType.Enum,
+    options: ["on", "off"],
+    optionTitles: ["On", "Off"],
+    displaySegmentedControl: true,
+    hidden: (props) => props.control === "query" || props.activeTab !== "Effects"
+  },
+  lightType: {
+    type: ControlType.Enum,
+    options: ["env", "3d"],
+    optionTitles: ["Env", "Light"],
+    displaySegmentedControl: true,
+    defaultValue: "3d",
+    hidden: (props) => props.control === "query" || props.activeTab !== "Effects"
+  },
+  envPreset: {
+    type: ControlType.Enum,
+    options: ["city", "dawn", "lobby"],
+    optionTitles: ["City", "Dawn", "Lobby"],
+    displaySegmentedControl: true,
+    hidden: (props) => props.lightType === "3d" || props.control === "query" || props.activeTab !== "Effects"
+  },
+  brightness: {
+    type: ControlType.Number,
+    step: 0.1,
+    min: 0.1,
+    max: 3,
+    defaultValue: 1.2,
+    hidden: (props) => props.lightType === "env" || props.control === "query" || props.activeTab !== "Effects" || props.url
+  },
+  reflection: {
+    type: ControlType.Number,
+    step: 0.1,
+    min: 0,
+    max: 1,
+    defaultValue: 0.1,
+    hidden: (props) => props.lightType === "3d" || props.control === "query" || props.activeTab !== "Effects" || props.url
+  },
+  // Colors
+  color1: {
+    type: ControlType.Color,
+    defaultValue: "#ff5005",
+    hidden: (props) => props.control === "query" || props.activeTab !== "Colors"
+  },
+  color2: {
+    type: ControlType.Color,
+    defaultValue: "#dbba95",
+    hidden: (props) => props.control === "query" || props.activeTab !== "Colors"
+  },
+  color3: {
+    type: ControlType.Color,
+    defaultValue: "#d0bce1",
+    hidden: (props) => props.control === "query" || props.activeTab !== "Colors"
+  },
+  // View
+  cDistance: {
+    title: "Distance",
+    type: ControlType.Number,
+    displayStepper: true,
+    min: 0,
+    max: 20,
+    defaultValue: 3.6,
+    hidden: (props) => props.type === "sphere" || props.control === "query" || props.activeTab !== "View"
+  },
+  cameraZoom: {
+    type: ControlType.Number,
+    displayStepper: true,
+    step: 0.1,
+    min: 0.1,
+    max: 30,
+    defaultValue: 1,
+    hidden: (props) => props.type !== "sphere" || props.control === "query" || props.activeTab !== "View"
+  },
+  cameraAngle: {
+    type: ControlType.Object,
+    controls: {
+      cAzimuthAngle: {
+        title: "Azimuth",
+        type: ControlType.Number,
+        displayStepper: true,
+        step: 10,
+        min: 0,
+        max: 360,
+        defaultValue: 180
+      },
+      cPolarAngle: {
+        title: "Polar",
+        type: ControlType.Number,
+        displayStepper: true,
+        step: 10,
+        min: 0,
+        max: 180,
+        defaultValue: 90
+      }
+    },
+    hidden: (props) => props.control === "query" || props.activeTab !== "View"
+  },
+  position: {
+    type: ControlType.Object,
+    controls: {
+      positionX: {
+        type: ControlType.Number,
+        step: 0.1,
+        displayStepper: true,
+        defaultValue: -1.4
+      },
+      positionY: {
+        type: ControlType.Number,
+        step: 0.1,
+        displayStepper: true,
+        defaultValue: 0
+      },
+      positionZ: {
+        type: ControlType.Number,
+        step: 0.1,
+        displayStepper: true,
+        defaultValue: 0
+      }
+    },
+    hidden: (props) => props.control === "query" || props.activeTab !== "View"
+  },
+  rotation: {
+    type: ControlType.Object,
+    controls: {
+      rotationX: {
+        type: ControlType.Number,
+        step: 10,
+        min: -360,
+        max: 360,
+        displayStepper: true,
+        defaultValue: 0
+      },
+      rotationY: {
+        type: ControlType.Number,
+        step: 10,
+        min: -360,
+        max: 360,
+        displayStepper: true,
+        defaultValue: 10
+      },
+      rotationZ: {
+        type: ControlType.Number,
+        step: 10,
+        min: -360,
+        max: 360,
+        displayStepper: true,
+        defaultValue: 50
+      }
+    },
+    hidden: (props) => props.control === "query" || props.activeTab !== "View"
+  },
+  // urlString
+  urlString: {
+    type: ControlType.String,
+    placeholder: "URL from shadergradient.co",
+    defaultValue: type === "stateless" ? "" : "https://www.shadergradient.co/customize?animate=on&axesHelper=off&bgColor1=%23000000&bgColor2=%23000000&brightness=1.2&cAzimuthAngle=180&cDistance=3.6&cPolarAngle=90&cameraZoom=1&color1=%23ff5005&color2=%23dbba95&color3=%23d0bce1&destination=onCanvas&embedMode=off&envPreset=city&format=gif&fov=45&frameRate=10&gizmoHelper=hide&grain=on&lightType=3d&pixelDensity=1&positionX=-1.4&positionY=0&positionZ=0&range=disabled&rangeEnd=40&rangeStart=0&reflection=0.1&rotationX=0&rotationY=10&rotationZ=50&shader=defaults&type=plane&uDensity=1.3&uFrequency=5.5&uSpeed=0.4&uStrength=4&uTime=0&wireframe=false",
+    hidden: (props) => props.control === "props"
+  },
+  // Tools (🧰)
+  zoomOut: {
+    type: ControlType.Boolean,
+    title: "View",
+    enabledTitle: "Wide",
+    disabledTitle: "-",
+    defaultValue: false,
+    hidden: (props) => props.control === "query"
+  },
+  toggleAxis: {
+    type: ControlType.Boolean,
+    title: "Axis",
+    enabledTitle: "Guide",
+    disabledTitle: "-",
+    defaultValue: false,
+    hidden: (props) => props.control === "query"
+  },
+  enableTransition: {
+    type: ControlType.Boolean,
+    title: "Camera Transition",
+    enabledTitle: "Smooth",
+    disabledTitle: "Instant",
+    defaultValue: true,
+    hidden: (props) => props.control === "query"
+  },
+  enableCameraUpdate: {
+    type: ControlType.Boolean,
+    title: "Camera Update",
+    enabledTitle: "On",
+    disabledTitle: "Off",
+    defaultValue: false,
+    hidden: (props) => type !== "stateless"
+  },
+  pointerEvents: {
+    type: ControlType.Enum,
+    title: "Touch Control",
+    options: ["none", "auto"],
+    optionTitles: ["Disable", "Enable"],
+    displaySegmentedControl: true,
+    hidden: (props) => props.control === "query"
+  },
+  performantOnCanvas: {
+    type: ControlType.Boolean,
+    defaultValue: false
+  },
+  lazyLoad: {
+    type: ControlType.Boolean,
+    defaultValue: true
+  },
+  threshold: {
+    type: ControlType.Number,
+    min: 0,
+    max: 1,
+    step: 0.1,
+    defaultValue: 0.1,
+    displayStepper: true,
+    title: "\u21B3 Threshold",
+    hidden: (props) => !props.lazyLoad
+  },
+  rootMargin: {
+    type: ControlType.String,
+    placeholder: "0px",
+    defaultValue: "0px",
+    title: "\u21B3 Root Margin",
+    description: 'Offset before triggering (e.g., "100px", "-50px")',
+    hidden: (props) => !props.lazyLoad
+  }
+});
+
+export {
+  presets,
+  initialActivePreset,
+  presetsArray,
+  propertyControls
+};

@@ -1,8 +1,8 @@
 import CameraControls from 'camera-controls'
 import * as THREE from 'three'
 import { useCameraAnimation } from './useCameraAnimation'
-import { extend, useThree, useFrame } from '@react-three/fiber'
-import { useEffect } from 'react'
+import { extend, useThree } from '@react-three/fiber'
+import { useEffect, useState } from 'react'
 
 export function CameraControl({
   smoothTime = 0.05, // default smoothTime of "camera-conrols"
@@ -15,8 +15,10 @@ export function CameraControl({
   const gl = useThree((state) => state.gl)
 
   const ref = useCameraAnimation(props)
+  const [isUserControlling, setIsUserControlling] = useState(false)
 
-  // Emit compact updates when interaction ends or controls go to sleep
+  // Track user interaction and emit camera updates on 'rest' event
+  // smoothTime=0 during interaction for immediate 'rest', restored after for smooth programmatic animations
   useEffect(() => {
     const control: any = ref.current
     if (!control) return
@@ -34,7 +36,6 @@ export function CameraControl({
     const getZoomDistance = () => {
       const result: any = {}
       if (type === 'sphere') {
-        // Prefer control.zoom (if provided by camera-controls), fallback to camera.zoom
         const ctrlZoom = control?.zoom
         if (Number.isFinite(ctrlZoom)) {
           result.cameraZoom = Number(ctrlZoom.toFixed(2))
@@ -52,14 +53,21 @@ export function CameraControl({
       return result
     }
 
-    const handleSleep = () => {
+    const handleControlStart = () => {
+      setIsUserControlling(true)
+    }
+
+    const handleRest = () => {
+      setIsUserControlling(false)
       onCameraUpdate({ ...getAngles(), ...getZoomDistance() })
     }
 
-    control.addEventListener('sleep', handleSleep)
+    control.addEventListener('controlstart', handleControlStart)
+    control.addEventListener('rest', handleRest)
 
     return () => {
-      control.removeEventListener('sleep', handleSleep)
+      control.removeEventListener('controlstart', handleControlStart)
+      control.removeEventListener('rest', handleRest)
     }
   }, [ref, props])
 
@@ -68,12 +76,11 @@ export function CameraControl({
     <cameraControls
       ref={ref}
       args={[camera, gl.domElement]}
-      enableDamping={true}
-      smoothTime={smoothTime}
+      smoothTime={isUserControlling ? 0 : smoothTime}
       zoomSpeed={10}
       dollySpeed={5}
       maxDistance={1000}
-      restThreshold={0}
+      restThreshold={0.01}
       mouseButtons={{
         left: (CameraControls as any).ACTION.ROTATE,
         middle:

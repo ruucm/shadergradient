@@ -1,38 +1,47 @@
 import { create } from 'zustand'
-import { combine, persist, createJSONStorage } from 'zustand/middleware'
+import { persist, createJSONStorage } from 'zustand/middleware'
 import { createClient, SupabaseClient } from '@supabase/supabase-js'
 
-export const useUIStore = create(
-  combine(
-    {
-      activePreset: 0,
-      mode: 'full',
-      loadingPercentage: 0,
-      inputMode: 'preset',
-      urlInput: '', //preset or url
-      error: '',
-      figmaPage: '',
-      easyView: false,
-    },
-    (set) => ({
-      setActivePreset: (by: number) => set((state) => ({ activePreset: by })),
-      setInputMode: (data: any) => {
-        console.log('[useUIStore] setInputMode', data)
-        return set((state) => ({ ...state, inputMode: data }))
-      },
-      setMode: (data: any) => set((state) => ({ ...state, mode: data })),
-      setUrlInput: (data: any) =>
-        set((state) => ({ ...state, urlInput: data })),
-      setError: (data: any) => set((state) => ({ ...state, error: data })),
-      setFigmaPage: (data: any) =>
-        set((state) => ({ ...state, figmaPage: data })),
-      setLoadingPercentage: (data: any) =>
-        set((state) => ({ ...state, loadingPercentage: data })),
-      setEasyView: (data: any) =>
-        set((state) => ({ ...state, easyView: data })),
-    })
-  )
-)
+type Mode = 'full' | string
+type InputMode = 'preset' | string
+
+type UIState = {
+  activePreset: number
+  mode: Mode
+  loadingPercentage: number
+  inputMode: InputMode
+  urlInput: string
+  error: string
+  figmaPage: string
+  easyView: boolean
+  setActivePreset: (by: number) => void
+  setInputMode: (mode: InputMode) => void
+  setMode: (mode: Mode) => void
+  setUrlInput: (value: string) => void
+  setError: (message: string) => void
+  setFigmaPage: (page: string) => void
+  setLoadingPercentage: (percentage: number) => void
+  setEasyView: (easyView: boolean) => void
+}
+
+export const useUIStore = create<UIState>()((set) => ({
+  activePreset: 0,
+  mode: 'full',
+  loadingPercentage: 0,
+  inputMode: 'preset',
+  urlInput: '',
+  error: '',
+  figmaPage: '',
+  easyView: false,
+  setActivePreset: (by) => set({ activePreset: by }),
+  setInputMode: (mode) => set({ inputMode: mode }),
+  setMode: (mode) => set({ mode }),
+  setUrlInput: (value) => set({ urlInput: value }),
+  setError: (message) => set({ error: message }),
+  setFigmaPage: (page) => set({ figmaPage: page }),
+  setLoadingPercentage: (percentage) => set({ loadingPercentage: percentage }),
+  setEasyView: (easyView) => set({ easyView }),
+}))
 
 interface ScrollableBoxState {
   activeIndex: number
@@ -47,35 +56,54 @@ export const useScrollableBoxStore = create<ScrollableBoxState>()(
     }),
     {
       name: 'scrollable-box-storage',
-      storage: createJSONStorage(() => localStorage),
+      storage: createJSONStorage<ScrollableBoxState>(() => localStorage),
     }
   )
 )
 
-export const useFigmaStore = create((set) => ({
+type FigmaUser = { id?: string } | null
+type FigmaState = {
+  selection: number
+  user: FigmaUser
+  error: string
+  page: string
+}
+type FigmaStore = {
+  figma: FigmaState
+  setFigma: (payload: Partial<FigmaState>) => void
+}
+
+export const useFigmaStore = create<FigmaStore>((set) => ({
   figma: { selection: 0, user: null, error: '', page: '' },
   setFigma: (payload) =>
     set((prev) => ({ figma: { ...prev.figma, ...payload } })),
 }))
 
-export function useFigma() {
-  const figma = useFigmaStore((state: any) => state.figma)
-  const setFigma = useFigmaStore((state: any) => state.setFigma)
+export function useFigma(): [FigmaState, FigmaStore['setFigma']] {
+  const figma = useFigmaStore((state) => state.figma)
+  const setFigma = useFigmaStore((state) => state.setFigma)
 
   return [figma, setFigma]
 }
 
-export const useBillingIntervalStore = create((set) => ({
+type BillingIntervalState = {
+  billingInterval: 'year' | 'month' | string
+  setBillingInterval: (payload: BillingIntervalState['billingInterval']) => void
+}
+
+export const useBillingIntervalStore = create<BillingIntervalState>((set) => ({
   billingInterval: 'year',
-  setBillingInterval: (payload) =>
-    set((state) => ({ billingInterval: payload })),
+  setBillingInterval: (payload) => set({ billingInterval: payload }),
 }))
-export function useBillingInterval() {
+export function useBillingInterval(): [
+  BillingIntervalState['billingInterval'],
+  BillingIntervalState['setBillingInterval']
+] {
   const billingInterval = useBillingIntervalStore(
-    (state: any) => state.billingInterval
+    (state) => state.billingInterval
   )
   const setBillingInterval = useBillingIntervalStore(
-    (state: any) => state.setBillingInterval
+    (state) => state.setBillingInterval
   )
   return [billingInterval, setBillingInterval]
 }
@@ -100,6 +128,7 @@ interface UIOverrideStore {
   randomColor: number[][]
   slider: number
   toggle: boolean
+  easyView: boolean
   setRandomColor: (color: number[][]) => void
   setSlider: (slider: number) => void
   setToggle: (toggle: boolean) => void
@@ -148,17 +177,23 @@ interface SupabaseStore {
   initSupabase: (url: string, key: string) => void
 }
 
-export const useSupabaseStore = create<SupabaseStore>((set) => ({
+export const useSupabaseStore = create<SupabaseStore>((set, get) => ({
   supabase: null,
   initSupabase: (url: string, key: string) => {
     console.log('[useSupabaseStore] initSupabase called')
     if (!url || !key) {
-      console.warn('[useSupabaseStore] Missing URL or key, skipping initialization')
+      console.warn(
+        '[useSupabaseStore] Missing URL or key, skipping initialization'
+      )
       return
     }
+
+    if (get().supabase) return
+
     console.log('[useSupabaseStore] Creating Supabase client with URL:', url)
     const client = createClient(url, key)
     console.log('[useSupabaseStore] Supabase client created successfully')
+
     set({ supabase: client })
   },
 }))

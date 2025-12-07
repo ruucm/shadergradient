@@ -1,13 +1,17 @@
-import { RenderTarget, addPropertyControls, ControlType } from 'framer'
-import React, { useState, useEffect } from 'react'
+import { RenderTarget } from 'framer'
+import React, { useEffect } from 'react'
 
-export const cx = (...classes) => classes.filter((a) => !!a).join(' ')
+export const cx = (...classes: Array<string | false | null | undefined>) =>
+  classes.filter(Boolean).join(' ')
 
-export function useOnClickOutside(ref: any, handler: any) {
+export function useOnClickOutside<T extends HTMLElement>(
+  ref: React.RefObject<T>,
+  handler: (event: MouseEvent | TouchEvent) => void
+) {
   useEffect(() => {
-    const listener = (event: any) => {
+    const listener = (event: MouseEvent | TouchEvent) => {
       // Do nothing if clicking ref's element or descendent elements
-      if (!ref.current || ref.current.contains(event.target)) {
+      if (!ref.current || ref.current.contains(event.target as Node)) {
         return
       }
 
@@ -24,7 +28,13 @@ export function useOnClickOutside(ref: any, handler: any) {
   }, [ref, handler])
 }
 
-export const isCanvas = RenderTarget.current() !== RenderTarget.preview
+export const isCanvas = (() => {
+  try {
+    return RenderTarget.current() !== RenderTarget.preview
+  } catch {
+    return false
+  }
+})()
 
 // export const isDebug = true
 export const isDebug = false

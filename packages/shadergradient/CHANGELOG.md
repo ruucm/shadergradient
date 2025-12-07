@@ -1,5 +1,11 @@
 # shadergradient
 
+## 2.4.15
+
+### Patch Changes
+
+- restore grain on isMobileSafari
+
 ## 2.4.14
 
 ### Patch Changes

@@ -1,5 +1,11 @@
 # ui
 
+## 0.1.54
+
+### Patch Changes
+
+- isMobileSafari & useMemoryStats
+
 ## 0.1.53
 
 ### Patch Changes

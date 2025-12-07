@@ -1,5 +1,11 @@
 # shadergradient
 
+## 2.4.14
+
+### Patch Changes
+
+- isMobileSafari & useMemoryStats
+
 ## 2.4.13
 
 ### Patch Changes

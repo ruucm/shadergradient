@@ -1,86 +1,54 @@
 {
-  "name": "shadergradient-old",
-  "version": "1.2.7",
+  "name": "@shadergradient/react",
+  "version": "2.4.11",
+  "main": "./dist/index.mjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.mts",
+  "sideEffects": false,
+  "license": "MIT",
+  "author": "ruucm",
   "files": [
-    "dist/"
+    "dist/**"
   ],
-  "main": "dist/without-store.mjs",
   "exports": {
     ".": {
-      "import": "./dist/without-store.mjs",
-      "types": "./dist/without-store.d.ts"
-    },
-    "./with-store": {
-      "import": "./dist/with-store.mjs",
-      "types": "./dist/with-store.d.ts"
-    },
-    "./*": "./dist/*",
-    "./styles.css": "./dist/styles.css"
-  },
-  "typesVersions": {
-    "*": {
-      "*": [
-        "./dist/*.d.ts",
-        "./dist/index.d.ts"
-      ]
+      "import": "./dist/index.mjs",
+      "types": "./dist/index.d.mts"
     }
   },
-  "license": "MIT",
   "scripts": {
-    "build": "node esmbuild/esmbuild-render build ./src dist && tailwindcss -i ./src/styles.css -o ./dist/styles.css --minify",
-    "render:build": "tailwindcss -i ./src/styles.css -o ./dist/styles.css --minify && node esmbuild/esmbuild-render renderBuild",
-    "render:serve": "node esmbuild/render-serve",
-    "start": "tailwindcss -i ./src/styles.css -o ./dist/styles.css && node esmbuild/esmbuild-render serve",
-    "release": "yarn run build && mkdir -p release && cp -Rf dist release/$npm_package_name@$npm_package_version && cp -Rf hdr release/$npm_package_name@$npm_package_version",
-    "deploy": "yarn version; git push --tags; git push",
-    "clean": "rm -rf dist"
+    "build": "tsup",
+    "dev": "tsup --config tsup.config.ts --watch",
+    "dev:ui": "tsup --config tsup.config.ts",
+    "dev:framer": "concurrently \"tsup --config tsup.framer.config.ts --watch\" \"pnpm ngrok\"",
+    "build:framer": "tsup --config tsup.framer.config.ts",
+    "release:framer": "pnpm run build:framer && mkdir -p release && cp -Rf dist release/shadergradient@$npm_package_version",
+    "ngrok": "ngrok http --domain=esm.ngrok.dev 8000"
   },
   "peerDependencies": {
-    "@react-spring/three": "*",
-    "@react-three/drei": "*",
-    "@react-three/fiber": "*",
-    "framer-motion": "*",
-    "react": "*",
-    "three": "^0.169.0",
-    "three-stdlib": "^2.30.1"
+    "react": "^18.2.0 || ^19.0.0",
+    "react-dom": "^18.2.0 || ^19.0.0"
   },
   "devDependencies": {
+    "@chialab/esbuild-plugin-commonjs": "^0.18.0",
+    "@react-spring/three": "^9.7.3",
+    "@react-three/fiber": "^8.17.10",
+    "@types/socket.io": "^3.0.2",
     "@types/react": "18.2.73",
     "@types/react-dom": "18.2.23",
-    "concurrently": "^7.2.2",
-    "dotenv": "^16.0.3",
-    "esbuild": "^0.16.9",
-    "esbuild-plugin-glsl": "^1.1.0",
-    "eslint": "^7.32.0",
-    "eslint-config-custom": "workspace:*",
-    "fs-extra": "^10.0.1",
-    "globby": "^11.0.4",
-    "postcss": "^8.3.5",
-    "postcss-modules": "^4.3.1",
-    "request-ip": "^3.3.0",
-    "sass": "^1.57.1",
-    "socket.io": "^4.5.0",
-    "socket.io-client": "^4.5.0",
-    "tailwind-config": "workspace:*",
-    "tailwindcss": "^3.1.5",
-    "tmp": "^0.2.1",
-    "tsconfig": "workspace:*",
-    "tsup": "^6.1.3",
-    "typescript": "5.7.3"
-  },
-  "dependencies": {
-    "@supabase/supabase-js": "^2.10.0",
-    "@uiw/color-convert": "^1.1.1",
-    "@uiw/react-color-shade-slider": "^1.1.1",
-    "@uiw/react-color-wheel": "^1.1.1",
-    "camera-controls": "^1.37.4",
+    "camera-controls": "2.9.0",
+    "concurrently": "^9.0.0",
+    "framer": "^2.4.1",
+    "globby": "^14.0.2",
     "query-string": "^7.1.1",
-    "react-feather": "^2.0.10",
-    "react-intersection-observer": "^9.4.1",
-    "react-merge-refs": "^1.1.0",
-    "react-slider": "^2.0.4",
-    "scroll-into-view-if-needed": "^3.0.10",
-    "stripe": "^11.13.0",
+    "react": "^18.3.1",
+    "socket.io": "^4.7.5",
+    "socket.io-client": "^4.7.5",
+    "tailwindcss": "^3.4.10",
+    "three": "^0.169.0",
+    "three-stdlib": "^2.30.1",
+    "tsup": "^8.2.4",
+    "typescript": "5.7.3",
     "zustand": "5.0.1"
   }
 }

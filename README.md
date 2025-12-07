@@ -47,7 +47,7 @@ Need the stateless control surfaces? Pull them from the `@shadergradient/ui` pac
 
 # Packages
 
-- `@shadergradient/react` (shadergradient-v2)
+- `@shadergradient/react`
   - Ships only the renderer: `ShaderGradient` and `ShaderGradientCanvas`.
   - No built-in store or controls. Use your own state or pair with `@shadergradient/ui`.
 - `@shadergradient/ui`

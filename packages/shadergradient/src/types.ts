@@ -1,15 +1,36 @@
+export type ShaderGradientType = 'plane' | 'waterPlane' | 'sphere'
+
+export interface Position {
+  positionX: number
+  positionY: number
+  positionZ: number
+}
+
+export interface Rotation {
+  rotationX: number
+  rotationY: number
+  rotationZ: number
+}
+
+export type typeT = 'plane' | 'sphere' | 'waterPlane'
+export type animateT = 'on' | 'off'
+
 export type MeshT = {
-  type?: 'plane' | 'sphere' | 'waterPlane'
-  animate?: 'on' | 'off'
-  range?: 'enabled' | 'disabled'
-  rangeStart?: number
-  rangeEnd?: number
+  type?: typeT
+  animate?: animateT
   uTime?: number
   uSpeed?: number
   uStrength?: number
   uDensity?: number
   uFrequency?: number
   uAmplitude?: number
+  // Range controls
+  range?: 'enabled' | 'disabled' | string
+  rangeStart?: number
+  rangeEnd?: number
+  // Loop controls
+  loop?: 'on' | 'off'
+  loopDuration?: number
   positionX?: number
   positionY?: number
   positionZ?: number
@@ -24,14 +45,21 @@ export type MeshT = {
   shader?: string
   rotSpringOption?: any
   posSpringOption?: any
-  urlString?: string
+}
+
+export type LightTypeT = '3d' | 'env'
+export type EnvironmentPresetT = 'city' | 'dawn' | 'lobby'
+
+export type LightsT = {
+  lightType: LightTypeT
+  brightness: number
+  envPreset: EnvironmentPresetT
 }
 
 export type GradientT = MeshT & {
   control?: 'query' | 'props'
   isFigmaPlugin?: boolean
-  dampingFactor?: number
-  frameRate?: number
+  smoothTime?: number
 
   // View (camera) props
   cAzimuthAngle?: number
@@ -40,10 +68,11 @@ export type GradientT = MeshT & {
   cameraZoom?: number
 
   // Effect props
-  lightType?: '3d' | 'env'
+  lightType?: LightTypeT
   brightness?: number
-  envPreset?: 'city' | 'dawn' | 'lobby'
+  envPreset?: EnvironmentPresetT
   grain?: 'on' | 'off'
+  grainBlending?: number
 
   // Tool props
   zoomOut?: boolean
@@ -51,4 +80,10 @@ export type GradientT = MeshT & {
   hoverState?: string
 
   enableTransition?: boolean
+  enableCameraUpdate?: boolean
+
+  urlString?: string
+
+  // Event handlers
+  onCameraUpdate?: (updates: Partial<GradientT>) => void
 }

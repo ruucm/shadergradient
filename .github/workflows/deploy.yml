@@ -46,7 +46,7 @@ jobs:
           cd main
           pnpm install --no-frozen-lockfile
           pnpm --filter=@shadergradient/react release:framer
-          cp -rf packages/shadergradient-v2/release/* $GITHUB_WORKSPACE/pages/
+          cp -rf packages/shadergradient/release/* $GITHUB_WORKSPACE/pages/
           pnpm --filter=ui release
           cp -rf packages/ui/release/* $GITHUB_WORKSPACE/pages/
       - name: Commit & Push

@@ -1,5 +1,11 @@
 # shadergradient
 
+## 2.4.8
+
+### Patch Changes
+
+- fix delay in view update
+
 ## 2.4.5
 
 ### Patch Changes

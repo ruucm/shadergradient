@@ -97,12 +97,13 @@ export function withClickOutsideClosed(Component): ComponentType {
   return (props: any) => {
     // Ref to access the component's DOM element
     const ref = useRef<HTMLDivElement>(null)
-
+    const easyView = useUIStore((state) => state.easyView)
     // Manage current variant state (initialize with value from Framer canvas)
     const [variant, setVariant] = useState(props.variant)
 
     useEffect(() => {
       const handleClickOutside = (event) => {
+        if (easyView) return
         // Check if the ref is attached and the click is outside the component
         if (ref.current && !ref.current.contains(event.target)) {
           setVariant('Closed')
@@ -119,7 +120,7 @@ export function withClickOutsideClosed(Component): ComponentType {
       return () => {
         document.removeEventListener('mousedown', handleClickOutside)
       }
-    }, [])
+    }, [easyView, props.variant])
 
     return (
       <Component

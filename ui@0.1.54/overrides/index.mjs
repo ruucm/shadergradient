@@ -3,11 +3,12 @@ import "../chunk-JATPNCR2.mjs";
 import {
   Price,
   TogglePrice
-} from "../chunk-AMZYFZ5H.mjs";
+} from "../chunk-HQM3I5M3.mjs";
 import {
   CenterCrop1,
   CenterCrop2,
   Gap,
+  HideGradientsOnMobile,
   MainGradient,
   SectionObserver,
   SectionText,
@@ -18,7 +19,7 @@ import {
   fpsCount,
   memoryUsage,
   wordHighlightText
-} from "../chunk-C2YRWJU2.mjs";
+} from "../chunk-BFWE2LZI.mjs";
 import {
   ArrowLeft,
   ArrowRight,
@@ -37,7 +38,7 @@ import {
   time,
   toggleSmartComp,
   withClickOutsideClosed
-} from "../chunk-JWFEHM7O.mjs";
+} from "../chunk-SSHB3GUG.mjs";
 import "../chunk-425BLYMY.mjs";
 import "../chunk-AGDIGZ2U.mjs";
 import {
@@ -50,7 +51,7 @@ import {
   upgradingText,
   userEmail,
   userInfo
-} from "../chunk-QOWMCMCR.mjs";
+} from "../chunk-VCUKBWBQ.mjs";
 import {
   ColorsTab,
   ConnectFigmaMessage,
@@ -78,10 +79,10 @@ import {
   extractGIF,
   goBack,
   insertCanvasAsImage
-} from "../chunk-4PSBNO7V.mjs";
-import "../chunk-5E53MO6G.mjs";
+} from "../chunk-UGIWEPXP.mjs";
+import "../chunk-U6EY3HY2.mjs";
 import "../chunk-VQME7MQ6.mjs";
-import "../chunk-2QPCEGJF.mjs";
+import "../chunk-D32OJ5QG.mjs";
 import "../chunk-YFGZA6BU.mjs";
 import "../chunk-BGA6FIQU.mjs";
 import "../chunk-CK47F4LN.mjs";
@@ -90,14 +91,14 @@ import "../chunk-64EKMGYT.mjs";
 import "../chunk-BI4IT72G.mjs";
 import "../chunk-XKMCKCFY.mjs";
 import "../chunk-2WMPBKSG.mjs";
-import "../chunk-DOUL4JZG.mjs";
-import "../chunk-5MTWZWL5.mjs";
-import "../chunk-H57MZUJW.mjs";
-import "../chunk-2AVC3IOH.mjs";
+import "../chunk-JAFGZMGM.mjs";
+import "../chunk-7OIUAODU.mjs";
+import "../chunk-57TWD6TY.mjs";
+import "../chunk-XMQWNMPM.mjs";
 import {
   AddToCanvas,
   updateTheme
-} from "../chunk-EGZCRKDE.mjs";
+} from "../chunk-PE5P64FI.mjs";
 import {
   CurrentPreset,
   HideBanner,
@@ -105,7 +106,7 @@ import {
   UrlInput,
   togglePreset,
   toggleUrl
-} from "../chunk-CYUDRBCZ.mjs";
+} from "../chunk-FLS37JBB.mjs";
 import "../chunk-2ZZ6H7J7.mjs";
 import "../chunk-TSJSDA44.mjs";
 import "../chunk-HCEEURGB.mjs";
@@ -117,7 +118,7 @@ import "../chunk-HMHBZO5K.mjs";
 import "../chunk-Z5ADHNLX.mjs";
 import "../chunk-AHTPSY2H.mjs";
 import "../chunk-MPLXXSUE.mjs";
-import "../chunk-QCI3ESYR.mjs";
+import "../chunk-FJLC4ENQ.mjs";
 import "../chunk-NP5XZW6Z.mjs";
 import "../chunk-HXGKXP63.mjs";
 export {
@@ -137,6 +138,7 @@ export {
   FigmaUrlInput,
   Gap,
   HideBanner,
+  HideGradientsOnMobile,
   HighlightButton,
   InitCustomize,
   LoadViewAfterStyleSheet,

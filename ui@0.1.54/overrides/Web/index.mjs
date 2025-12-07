@@ -2,11 +2,12 @@ import "../../chunk-JATPNCR2.mjs";
 import {
   Price,
   TogglePrice
-} from "../../chunk-AMZYFZ5H.mjs";
+} from "../../chunk-HQM3I5M3.mjs";
 import {
   CenterCrop1,
   CenterCrop2,
   Gap,
+  HideGradientsOnMobile,
   MainGradient,
   SectionObserver,
   SectionText,
@@ -17,7 +18,7 @@ import {
   fpsCount,
   memoryUsage,
   wordHighlightText
-} from "../../chunk-C2YRWJU2.mjs";
+} from "../../chunk-BFWE2LZI.mjs";
 import {
   ArrowLeft,
   ArrowRight,
@@ -36,7 +37,7 @@ import {
   time,
   toggleSmartComp,
   withClickOutsideClosed
-} from "../../chunk-JWFEHM7O.mjs";
+} from "../../chunk-SSHB3GUG.mjs";
 import "../../chunk-425BLYMY.mjs";
 import "../../chunk-AGDIGZ2U.mjs";
 import "../../chunk-TSJSDA44.mjs";
@@ -49,7 +50,7 @@ import "../../chunk-HMHBZO5K.mjs";
 import "../../chunk-Z5ADHNLX.mjs";
 import "../../chunk-AHTPSY2H.mjs";
 import "../../chunk-MPLXXSUE.mjs";
-import "../../chunk-QCI3ESYR.mjs";
+import "../../chunk-FJLC4ENQ.mjs";
 import "../../chunk-NP5XZW6Z.mjs";
 import "../../chunk-HXGKXP63.mjs";
 export {
@@ -58,6 +59,7 @@ export {
   CenterCrop1,
   CenterCrop2,
   Gap,
+  HideGradientsOnMobile,
   InitCustomize,
   MainGradient,
   PresetIndex,

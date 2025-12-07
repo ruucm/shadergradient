@@ -70,9 +70,9 @@ declare function useBillingInterval(): [
 ];
 interface ScrollStore {
     highlightWord: number;
-    currentSection: number;
+    currentSection: string;
     setHighlightWord: (word: number) => void;
-    setCurrentSection: (section: number) => void;
+    setCurrentSection: (section: string) => void;
 }
 declare const useScrollStore: zustand.UseBoundStore<zustand.StoreApi<ScrollStore>>;
 interface UIOverrideStore {
@@ -766,6 +766,7 @@ declare function UrlInput(Component: any): ComponentType;
 declare function TailwindWrapper(Component: any): ComponentType;
 
 declare function SectionText(Component: any): ComponentType;
+declare function HideGradientsOnMobile(Component: any): ComponentType;
 declare function SectionObserver(Component: any): ComponentType;
 declare function MainGradient(Component: any): ComponentType;
 declare function Gap(Component: any): ComponentType;
@@ -837,4 +838,4 @@ declare function PriceFigma(Component: any): ComponentType;
 declare function PriceText(Component: any): ComponentType;
 declare function StartTrial(Component: any): ComponentType;
 
-export { AddToCanvas, ArrowLeft, ArrowRight, Button, CenterCrop1, CenterCrop2, ChangeButton3, ChangeColorButton, ColorInput, ColorsTab, ConnectFigmaMessage, CopyBtn, CurrentPreset, CustomizeColorInput, CustomizeNumberInput, CustomizeRadio, CustomizeRangeSlider, CustomizeSlider, DoubleNumberInput, Duration, EasyViewInfo, Error, EstimatedSize, FigmaUrlInput, Gap, HideBanner, HighlightButton, Icons, InitCustomize, InputTitle, LoadViewAfterStyleSheet, MainGradient, MotionTab, OpenGIFPage, PRESETS, PresetIndex, PresetTitle, Price, PriceFigma, PriceText, type Props$1 as Props, RangeSlider, ScrollableTextBox, SectionObserver, SectionText, ShaderGradientStateless, ShaderGradientStatelessCanvas, ShapeTab, ShowCopyContent, SimpleSlider, Slider, StartTrial, StatelessOverride, SupabaseClient, TabSwitcher, TailwindWrapper, TextAnimation, TextHover, Timeline, TimelineWrapper, TogglePrice, TogglePriceFigma, ToggleShare, TriggerSection, TripleNumberInput, UndoButton, UrlInput, ViewTab, WebEasyViewControl, WebEasyViewInfo, WebStatelessOverride, WidthFillOnLoad, WordGradient, WordGradientText, WordHighlight, WordHighlight2, createRectangle, extractGIF, fpsCount, goBack, insertCanvasAsImage, isUpgraded, memoryUsage, randomBtn, randomGradient, randomText, slider, sliderSmartComp, subscribeLink, textClipper, time, togglePreset, toggleSmartComp, toggleUrl, updateGradientState, updateTheme, upgradingText, useBillingInterval, useBillingIntervalStore, useFigma, useFigmaPluginStore, useFigmaStore, useQueryState, useScrollStore, useScrollableBoxStore, useSupabaseStore, useUIOverrideStore, useUIStore, useURLQueryState, userEmail, userInfo, withClickOutsideClosed, wordHighlightText };
+export { AddToCanvas, ArrowLeft, ArrowRight, Button, CenterCrop1, CenterCrop2, ChangeButton3, ChangeColorButton, ColorInput, ColorsTab, ConnectFigmaMessage, CopyBtn, CurrentPreset, CustomizeColorInput, CustomizeNumberInput, CustomizeRadio, CustomizeRangeSlider, CustomizeSlider, DoubleNumberInput, Duration, EasyViewInfo, Error, EstimatedSize, FigmaUrlInput, Gap, HideBanner, HideGradientsOnMobile, HighlightButton, Icons, InitCustomize, InputTitle, LoadViewAfterStyleSheet, MainGradient, MotionTab, OpenGIFPage, PRESETS, PresetIndex, PresetTitle, Price, PriceFigma, PriceText, type Props$1 as Props, RangeSlider, ScrollableTextBox, SectionObserver, SectionText, ShaderGradientStateless, ShaderGradientStatelessCanvas, ShapeTab, ShowCopyContent, SimpleSlider, Slider, StartTrial, StatelessOverride, SupabaseClient, TabSwitcher, TailwindWrapper, TextAnimation, TextHover, Timeline, TimelineWrapper, TogglePrice, TogglePriceFigma, ToggleShare, TriggerSection, TripleNumberInput, UndoButton, UrlInput, ViewTab, WebEasyViewControl, WebEasyViewInfo, WebStatelessOverride, WidthFillOnLoad, WordGradient, WordGradientText, WordHighlight, WordHighlight2, createRectangle, extractGIF, fpsCount, goBack, insertCanvasAsImage, isUpgraded, memoryUsage, randomBtn, randomGradient, randomText, slider, sliderSmartComp, subscribeLink, textClipper, time, togglePreset, toggleSmartComp, toggleUrl, updateGradientState, updateTheme, upgradingText, useBillingInterval, useBillingIntervalStore, useFigma, useFigmaPluginStore, useFigmaStore, useQueryState, useScrollStore, useScrollableBoxStore, useSupabaseStore, useUIOverrideStore, useUIStore, useURLQueryState, userEmail, userInfo, withClickOutsideClosed, wordHighlightText };

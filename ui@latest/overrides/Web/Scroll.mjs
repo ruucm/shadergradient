@@ -2,6 +2,7 @@ import {
   CenterCrop1,
   CenterCrop2,
   Gap,
+  HideGradientsOnMobile,
   MainGradient,
   SectionObserver,
   SectionText,
@@ -12,16 +13,17 @@ import {
   fpsCount,
   memoryUsage,
   wordHighlightText
-} from "../../chunk-C2YRWJU2.mjs";
+} from "../../chunk-BFWE2LZI.mjs";
 import "../../chunk-425BLYMY.mjs";
 import "../../chunk-AGDIGZ2U.mjs";
-import "../../chunk-QCI3ESYR.mjs";
+import "../../chunk-FJLC4ENQ.mjs";
 import "../../chunk-NP5XZW6Z.mjs";
 import "../../chunk-HXGKXP63.mjs";
 export {
   CenterCrop1,
   CenterCrop2,
   Gap,
+  HideGradientsOnMobile,
   MainGradient,
   SectionObserver,
   SectionText,

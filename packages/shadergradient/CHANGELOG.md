@@ -1,5 +1,11 @@
 # shadergradient
 
+## 2.4.12
+
+### Patch Changes
+
+- remove the old packages/shadergradient dir
+
 ## 2.4.11
 
 ### Patch Changes

@@ -481,13 +481,13 @@ export const propertyControls = (ControlType, type = '') => ({
     displaySegmentedControl: true,
     hidden: (props) => props.control === 'query' || props.activeTab !== 'Shape',
   },
-  shader: {
-    type: ControlType.Enum,
-    options: ['defaults', 'positionMix', 'glass'],
-    optionTitles: ['Type A', 'Type B', 'Type C'],
-    displaySegmentedControl: true,
-    hidden: (props) => props.control === 'query' || props.activeTab !== 'Shape',
-  },
+  // shader: {
+  //   type: ControlType.Enum,
+  //   options: ['defaults', 'positionMix', 'glass'],
+  //   optionTitles: ['Type A', 'Type B', 'Type C'],
+  //   displaySegmentedControl: true,
+  //   hidden: (props) => props.control === 'query' || props.activeTab !== 'Shape',
+  // },
   animate: {
     type: ControlType.Enum,
     options: ['on', 'off'],

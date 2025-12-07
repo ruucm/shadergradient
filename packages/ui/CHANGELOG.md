@@ -1,5 +1,11 @@
 # ui
 
+## 0.1.57
+
+### Patch Changes
+
+- no clickOutside on easyView
+
 ## 0.1.56
 
 ### Patch Changes

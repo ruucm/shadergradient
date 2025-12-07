@@ -7,6 +7,7 @@ import { Controls } from './Controls'
 import * as qs from 'query-string'
 import { formatUrlString } from '@/utils'
 import { Axis } from './Axis'
+import { isMobileSafari } from '@/utils'
 
 export function ShaderGradient(passedProps: GradientT) {
   const { control, urlString, onCameraUpdate, ...rest } = {
@@ -25,6 +26,9 @@ export function ShaderGradient(passedProps: GradientT) {
   const { lightType, envPreset, brightness, grain, toggleAxis, ...others } =
     props
 
+  const mobileSafari = isMobileSafari()
+  const shouldRenderPostProcessing = grain !== 'off' && !mobileSafari
+
   return (
     <>
       <Mesh {...props} />
@@ -33,7 +37,7 @@ export function ShaderGradient(passedProps: GradientT) {
         brightness={brightness}
         envPreset={envPreset}
       />
-      {grain !== 'off' && <PostProcessing />}
+      {shouldRenderPostProcessing && <PostProcessing />}
 
       {toggleAxis && <Axis />}
       <Controls {...props} onCameraUpdate={onCameraUpdate} />

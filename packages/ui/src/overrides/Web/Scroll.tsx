@@ -3,6 +3,7 @@ import { useRef, useEffect, useState } from 'react'
 import { useInView } from 'framer-motion'
 import { useScroll, useTransform, useMotionValueEvent } from 'framer-motion'
 import { useFPS } from './useFPS'
+import { useMemoryStats } from './useMemory'
 import { useScrollStore } from '@/store'
 
 const endSection = 14
@@ -369,5 +370,25 @@ export function fpsCount(Component): ComponentType {
     const { fps } = useFPS()
 
     return <Component {...props} text={`fps: ${fps}`} />
+  }
+}
+
+export function memoryUsage(Component): ComponentType {
+  return (props) => {
+    const { supported, usedMB, limitMB, deviceMemoryGB, message } =
+      useMemoryStats()
+
+    let text = 'memory: unavailable'
+
+    if (supported && typeof usedMB === 'number') {
+      const limitText = limitMB ? ` / ${limitMB}MB` : ''
+      text = `memory: ${usedMB}MB${limitText}`
+    } else if (deviceMemoryGB) {
+      text = `memory: ~${deviceMemoryGB}GB (browser reported)`
+    } else if (message) {
+      text = `memory: ${message}`
+    }
+
+    return <Component {...props} text={text} />
   }
 }

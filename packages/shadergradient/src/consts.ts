@@ -1,11 +1,22 @@
-export const canvasProps = (pixelDensity: number, fov: number) => ({
-  dpr: pixelDensity, //device pixel ratio - 1 default and fast, 2 detailed and slow
-  // mode: 'concurrent' as 'legacy' | 'blocking' | 'concurrent',
-  camera: { fov }, // could be replaced with zoom or distance?
-  linear: true, //sRGBEncoding
-  flat: true, //ACESFilmicToneMapping
-  gl: { preserveDrawingBuffer: true }, // to capture the canvas (Figma Plugin)
-})
+import { isMobileSafari } from './utils'
+
+export const canvasProps = (pixelDensity: number, fov: number) => {
+  const mobileSafari = isMobileSafari()
+  const dpr = mobileSafari ? Math.min(pixelDensity, 1) : pixelDensity
+
+  return {
+    dpr, //device pixel ratio - 1 default and fast, 2 detailed and slow
+    // mode: 'concurrent' as 'legacy' | 'blocking' | 'concurrent',
+    camera: { fov }, // could be replaced with zoom or distance?
+    linear: true, //sRGBEncoding
+    flat: true, //ACESFilmicToneMapping
+    // iOS Safari kills tabs when GPU memory spikes; avoid preserving buffers there
+    gl: {
+      preserveDrawingBuffer: !mobileSafari,
+      powerPreference: mobileSafari ? 'low-power' : undefined,
+    },
+  }
+}
 
 export const links = [
   {

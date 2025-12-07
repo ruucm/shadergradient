@@ -35,6 +35,8 @@ import {
   copyToClipboard,
 } from './utils'
 
+import { isValidUrl } from '../utils'
+
 // 🟢 ON 'SNAPSHOT' BUTTON
 export function insertCanvasAsImage(Component): ComponentType {
   return ({ style, ...props }: any) => {
@@ -210,8 +212,13 @@ export function extractGIF(Component): ComponentType {
     const creditText = `(${trialLeft} days left)`
 
     useEffect(() => {
-      setDuration(rangeEnd - rangeStart)
-    }, [rangeStart, rangeEnd])
+      // Use loopDuration when loop is enabled, otherwise use range
+      if (loop === 'on' && loopDuration) {
+        setDuration(loopDuration)
+      } else {
+        setDuration(rangeEnd - rangeStart)
+      }
+    }, [rangeStart, rangeEnd, loop, loopDuration])
 
     useEffect(() => {
       setSize(estimateSize({ format, duration, frameRate, pixelDensity }))
@@ -346,9 +353,10 @@ export function extractGIF(Component): ComponentType {
     useEffect(() => {
       if (!enabled) {
         setError('Select a frame on the canvas')
-      }
-      if (size > 300) {
+      } else if (size > 300) {
         setError('You can only add GIF under 300mb on canvas')
+      } else {
+        setError('') // clear error when conditions are satisfied
       }
     }, [enabled, size, setError])
 
@@ -396,15 +404,18 @@ export function Timeline(Component): ComponentType {
     const [rangeStart] = useQueryState('rangeStart')
     const [rangeEnd] = useQueryState('rangeEnd')
     const [loop] = useQueryState('loop')
+    const [loopDuration] = useQueryState('loopDuration')
 
     const [duration, setDuration] = useState(0)
 
-    // Update duration when range changes
+    // Update duration when range or loop changes
     useEffect(() => {
-      if (rangeStart !== undefined && rangeEnd !== undefined) {
+      if (loop === 'on' && loopDuration) {
+        setDuration(loopDuration)
+      } else if (rangeStart !== undefined && rangeEnd !== undefined) {
         setDuration(rangeEnd - rangeStart)
       }
-    }, [rangeStart, rangeEnd, loop])
+    }, [rangeStart, rangeEnd, loop, loopDuration])
 
     // Handle animation sequence
     useEffect(() => {
@@ -441,6 +452,8 @@ export function EstimatedSize(Component): ComponentType {
     const [pixelDensity] = useQueryState('pixelDensity')
     const [format] = useQueryState('format')
     const [destination] = useQueryState('destination')
+    const [loop] = useQueryState('loop')
+    const [loopDuration] = useQueryState('loopDuration')
 
     const [duration, setDuration] = useState(rangeEnd - rangeStart)
     const [size, setSize] = useState(0)
@@ -448,8 +461,12 @@ export function EstimatedSize(Component): ComponentType {
     const figmaPage = useUIStore((state: any) => state.figmaPage)
 
     useEffect(() => {
-      setDuration(rangeEnd - rangeStart)
-    }, [rangeStart, rangeEnd])
+      if (loop === 'on' && loopDuration) {
+        setDuration(loopDuration)
+      } else {
+        setDuration(rangeEnd - rangeStart)
+      }
+    }, [rangeStart, rangeEnd, loop, loopDuration])
 
     useEffect(() => {
       setSize(estimateSize({ format, duration, frameRate, pixelDensity }))
@@ -490,12 +507,18 @@ export function Duration(Component): ComponentType {
   return ({ ...props }: any) => {
     const [rangeStart] = useQueryState('rangeStart')
     const [rangeEnd] = useQueryState('rangeEnd')
+    const [loop] = useQueryState('loop')
+    const [loopDuration] = useQueryState('loopDuration')
 
     const [duration, setDuration] = useState(rangeEnd - rangeStart)
 
     useEffect(() => {
-      setDuration(rangeEnd - rangeStart)
-    }, [rangeEnd, rangeStart])
+      if (loop === 'on' && loopDuration) {
+        setDuration(loopDuration)
+      } else {
+        setDuration(rangeEnd - rangeStart)
+      }
+    }, [rangeEnd, rangeStart, loop, loopDuration])
 
     return <Component {...props} text={duration + 's'} />
   }
@@ -564,10 +587,12 @@ export function ToggleShare(Component): ComponentType {
         {...props}
         variant={share}
         onClickUrl={() => {
-          setShare('Url')
+          setShare('url')
+          props.onClickUrl?.()
         }}
         onClickCode={() => {
-          setShare('Code')
+          setShare('code')
+          props.onClickCode?.()
         }}
       />
     )
@@ -810,16 +835,23 @@ export function StatelessOverride(Component): ComponentType {
     const [rangeStart, setRangeStart] = useQueryState('rangeStart')
     const [rangeEnd, setRangeEnd] = useQueryState('rangeEnd')
 
-    // Set defaults for loop properties if they don't exist in the url preset
-    // This runs after preset loads, so it won't be overwritten
+    // Convert range to loop format, or set defaults if neither exist
     useEffect(() => {
-      if (loop === undefined || loop === null) {
+      // If range exists but loop doesn't, convert range to loop
+      if (range === 'enabled' && (loop === undefined || loop === null)) {
+        setLoop('on')
+        if (rangeEnd && (loopDuration === undefined || loopDuration === null)) {
+          setLoopDuration(rangeEnd)
+        }
+      }
+      // Set defaults if neither range nor loop exist
+      else if (loop === undefined || loop === null) {
         setLoop('on')
       }
       if (loopDuration === undefined || loopDuration === null) {
         setLoopDuration(10)
       }
-    }, [loop, loopDuration])
+    }, [loop, loopDuration, range, rangeEnd])
 
     // Sync range with loop state
     useEffect(() => {
@@ -867,6 +899,15 @@ export function LoadViewAfterStyleSheet(Component): ComponentType {
   }
 }
 
+// 🟢 On the top level component to connect figma message
+export function ConnectFigmaMessage(Component): ComponentType {
+  return (props: any) => {
+    useFigmaMessage()
+
+    return <Component {...props} />
+  }
+}
+
 export function WidthFillOnLoad(Component): ComponentType {
   // for overrides that doesn't have a parent but needs to fill the width of the parent on load
   return ({ style, ...props }: any) => {
@@ -885,6 +926,57 @@ export function createRectangle(Component): ComponentType {
             const ellipse = figma.createRectangle()
             ellipse.resize(300, 300)
           })
+        }}
+      />
+    )
+  }
+}
+
+// 🟢 Figma-specific URL Input - converts range to loop format
+export function FigmaUrlInput(Component): ComponentType {
+  return (props: any) => {
+    const setQueryValue = useURLQueryState()
+    const setUrlInput = useUIStore((state) => state.setUrlInput)
+    const [, setLoop] = useQueryState('loop')
+    const [, setLoopDuration] = useQueryState('loopDuration')
+
+    const [value, setValue] = useState('')
+    const [valid, setValid] = useState(true)
+
+    let variant = 'default'
+    if (value) {
+      if (valid) variant = 'valid'
+      else variant = 'invalid'
+    }
+
+    return (
+      <Component
+        {...props}
+        onChange={(e) => {
+          const inputValue = e.target.value
+          setValue(inputValue)
+
+          if (isValidUrl(inputValue)) {
+            setValid(true)
+
+            // Check if URL has range=enabled and convert to loop
+            const urlParams = new URLSearchParams(
+              inputValue.split('?')[1] || ''
+            )
+            const hasRange = urlParams.get('range') === 'enabled'
+
+            // Apply the URL first
+            setQueryValue(inputValue)
+            setUrlInput(inputValue)
+
+            // If range exists, convert to loop format with default duration
+            if (hasRange) {
+              setLoop('on')
+              setLoopDuration(10)
+            }
+          } else {
+            setValid(false)
+          }
         }}
       />
     )

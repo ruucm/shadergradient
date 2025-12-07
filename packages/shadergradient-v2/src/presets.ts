@@ -53,7 +53,7 @@ export const presets = {
     title: 'Pensive',
     color: 'white',
     props: {
-      range: 'enabled',
+      range: 'disabled',
       rangeStart: 0,
       rangeEnd: 40,
       frameRate: 10,
@@ -98,7 +98,7 @@ export const presets = {
     title: 'Mint',
     color: 'white',
     props: {
-      range: 'enabled',
+      range: 'disabled',
       rangeStart: 0,
       rangeEnd: 40,
       frameRate: 10,
@@ -143,7 +143,7 @@ export const presets = {
     title: 'Interstella',
     color: 'white',
     props: {
-      range: 'enabled',
+      range: 'disabled',
       rangeStart: 0,
       rangeEnd: 40,
       frameRate: 10,
@@ -188,7 +188,7 @@ export const presets = {
     title: 'Nighty night',
     color: 'white',
     props: {
-      range: 'enabled',
+      range: 'disabled',
       rangeStart: 0,
       rangeEnd: 40,
       frameRate: 10,
@@ -233,7 +233,7 @@ export const presets = {
     title: 'Viola orientalis',
     color: 'white',
     props: {
-      range: 'enabled',
+      range: 'disabled',
       rangeStart: 0,
       rangeEnd: 40,
       frameRate: 10,
@@ -277,7 +277,7 @@ export const presets = {
     title: 'Universe',
     color: 'white',
     props: {
-      range: 'enabled',
+      range: 'disabled',
       rangeStart: 0,
       rangeEnd: 40,
       frameRate: 10,
@@ -321,7 +321,7 @@ export const presets = {
     title: 'Sunset',
     color: 'white',
     props: {
-      range: 'enabled',
+      range: 'disabled',
       rangeStart: 0,
       rangeEnd: 40,
       frameRate: 10,
@@ -367,7 +367,7 @@ export const presets = {
     title: 'Mandarin',
     color: 'white',
     props: {
-      range: 'enabled',
+      range: 'disabled',
       rangeStart: 0,
       rangeEnd: 40,
       frameRate: 10,
@@ -413,7 +413,7 @@ export const presets = {
     title: 'Cotton Candy',
     color: 'white',
     props: {
-      range: 'enabled',
+      range: 'disabled',
       rangeStart: 0,
       rangeEnd: 40,
       frameRate: 10,

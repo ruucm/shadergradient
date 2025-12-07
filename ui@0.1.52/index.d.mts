@@ -113,13 +113,6 @@ declare namespace ShaderGradientStateless {
             displaySegmentedControl: boolean;
             hidden: (props: any) => boolean;
         };
-        shader: {
-            type: any;
-            options: string[];
-            optionTitles: string[];
-            displaySegmentedControl: boolean;
-            hidden: (props: any) => boolean;
-        };
         animate: {
             type: any;
             options: string[];

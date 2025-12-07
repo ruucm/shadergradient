@@ -1,5 +1,11 @@
 # ui
 
+## 0.1.56
+
+### Patch Changes
+
+- support easyView on web-customize controls
+
 ## 0.1.55
 
 ### Patch Changes

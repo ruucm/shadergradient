@@ -54,6 +54,7 @@ export default defineConfig(async (options) => {
       '@react-spring/three',
       '@react-three/fiber',
       '@react-three/drei',
+      'lamina',
       'three',
       // zustand need to be external
       // it is a dependency of @react-three/fiber

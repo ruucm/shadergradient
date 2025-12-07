@@ -40,6 +40,7 @@
     "concurrently": "^9.0.0",
     "framer": "^2.4.1",
     "globby": "^14.0.2",
+    "lamina": "1.1.22",
     "query-string": "^7.1.1",
     "react": "^18.3.1",
     "socket.io": "^4.7.5",

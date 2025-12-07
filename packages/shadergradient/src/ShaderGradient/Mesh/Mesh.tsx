@@ -2,6 +2,7 @@ import { Geometry } from './Geometry'
 import { MeshT } from '@/types'
 import { Materials } from './Materials'
 import * as shaders from '@/shaders'
+import { LaminaMaterial } from './LaminaMaterial'
 
 import { dToRArr, colorToRgb } from '@/utils'
 import { debug } from '@/utils/debug'
@@ -35,7 +36,33 @@ export function Mesh({
 
   shader,
 }: MeshT) {
-  const { vertex, fragment } = shaders[shader][type]
+  if (shader === 'lamina') {
+    return (
+      <mesh
+        name='shadergradient-mesh'
+        position={[positionX, positionY, positionZ]}
+        rotation={dToRArr([rotationX, rotationY, rotationZ])}
+      >
+        <Geometry type={type} />
+        <LaminaMaterial
+          animate={animate}
+          color1={color1}
+          color2={color2}
+          color3={color3}
+          uTime={uTime}
+          uSpeed={uSpeed}
+          uDensity={uDensity}
+          uStrength={uStrength}
+          reflection={reflection}
+        />
+      </mesh>
+    )
+  }
+
+  const shaderKey = shader && shaders[shader] ? shader : 'defaults'
+  const shaderSet = shaders[shaderKey] || shaders['defaults']
+  const shaderType = shaderSet[type] ? type : 'plane'
+  const { vertex, fragment } = shaderSet[shaderType]
 
   // Prepare uniforms based on shader type
   const baseUniforms = {

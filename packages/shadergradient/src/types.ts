@@ -1,4 +1,5 @@
 export type ShaderGradientType = 'plane' | 'waterPlane' | 'sphere'
+export type ShaderName = 'defaults' | 'positionMix' | 'cosmic' | 'glass' | 'lamina'
 
 export interface Position {
   positionX: number
@@ -42,7 +43,7 @@ export type MeshT = {
   color3?: string
   reflection?: number
   wireframe?: boolean
-  shader?: string
+  shader?: ShaderName
   rotSpringOption?: any
   posSpringOption?: any
 }

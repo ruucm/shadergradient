@@ -6,7 +6,7 @@
   "ui": "dist/ui.html",
   "editorType": [
     "figma",
-    "figjam"
+    "figjam", "slides", "buzz"
   ],
   "permissions": [
     "currentuser"

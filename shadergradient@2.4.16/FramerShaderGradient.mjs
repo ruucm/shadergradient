@@ -1,14 +1,14 @@
 import "./chunk-35NIH65G.mjs";
 import {
   propertyControls
-} from "./chunk-LOLFVWK5.mjs";
+} from "./chunk-LUIPXZ24.mjs";
 import {
   ShaderGradient
-} from "./chunk-U2JJADLQ.mjs";
+} from "./chunk-FYC6DA77.mjs";
 import "./chunk-BKMGN7IO.mjs";
-import "./chunk-77QPBQ5X.mjs";
+import "./chunk-LRTGQ6P6.mjs";
 import "./chunk-WBM42ICI.mjs";
-import "./chunk-FZNUZZPQ.mjs";
+import "./chunk-V62OMFTZ.mjs";
 import "./chunk-WGOL3MLC.mjs";
 import "./chunk-QWMUKHAS.mjs";
 import "./chunk-OJ2FJ367.mjs";
@@ -24,13 +24,13 @@ import "./chunk-N6TUE7XZ.mjs";
 import "./chunk-OUMQVT4Y.mjs";
 import "./chunk-4NRCS6EB.mjs";
 import "./chunk-X2NOPSAQ.mjs";
-import "./chunk-DLCNXJFL.mjs";
-import "./chunk-RESLVMGM.mjs";
-import "./chunk-2RDR3XDB.mjs";
+import "./chunk-DU7VAJFY.mjs";
+import "./chunk-4RN4GWPR.mjs";
+import "./chunk-EMPG24SX.mjs";
 import "./chunk-F5B5J54Z.mjs";
-import "./chunk-PNBW3JYP.mjs";
+import "./chunk-IGT2XWIL.mjs";
 import "./chunk-EQTKUIXJ.mjs";
-import "./chunk-WSYHEAYJ.mjs";
+import "./chunk-WOMYU2KH.mjs";
 import "./chunk-MSKNCSEN.mjs";
 import "./chunk-6A4LZ7FD.mjs";
 import "./chunk-NVTGOKBX.mjs";
@@ -60,18 +60,18 @@ import "./chunk-PBBG73XU.mjs";
 import "./chunk-6ZGZBJSV.mjs";
 import "./chunk-QRRZJ6IM.mjs";
 import {
+  formatFramerProps
+} from "./chunk-YDUVYCTZ.mjs";
+import "./chunk-BI5IV7LU.mjs";
+import "./chunk-XS23OVEI.mjs";
+import {
   ShaderGradientCanvas,
   useShaderGradientCanvasContext
-} from "./chunk-NVF6XVGZ.mjs";
+} from "./chunk-OVVMMFGI.mjs";
 import "./chunk-73SH6GTX.mjs";
 import "./chunk-RVPDO3VD.mjs";
 import "./chunk-BT6X4JN2.mjs";
-import "./chunk-WVCFTAYJ.mjs";
-import {
-  formatFramerProps
-} from "./chunk-F63IJTWN.mjs";
-import "./chunk-BI5IV7LU.mjs";
-import "./chunk-XS23OVEI.mjs";
+import "./chunk-JITLJLKU.mjs";
 import "./chunk-QMO7U63M.mjs";
 import {
   __objRest,
@@ -86,18 +86,21 @@ function FramerShaderGradient(_a) {
     position,
     rotation,
     cameraAngle,
-    noise
+    noise,
+    canvas
   } = _b, rest = __objRest(_b, [
     "position",
     "rotation",
     "cameraAngle",
-    "noise"
+    "noise",
+    "canvas"
   ]);
   const props = formatFramerProps(__spreadValues({
     position,
     rotation,
     cameraAngle,
-    noise
+    noise,
+    canvas
   }, rest));
   return /* @__PURE__ */ jsx(ShaderGradient, __spreadValues({}, props));
 }

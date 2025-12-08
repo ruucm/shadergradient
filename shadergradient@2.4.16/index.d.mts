@@ -14,9 +14,11 @@ type ShaderGradientCanvasProps = {
     lazyLoad?: boolean;
     threshold?: number;
     rootMargin?: string;
+    preserveDrawingBuffer?: boolean;
+    powerPreference?: WebGLPowerPreference;
 };
 declare const useShaderGradientCanvasContext: () => ShaderGradientCanvasContext;
-declare function ShaderGradientCanvas({ children, style, pixelDensity, fov, pointerEvents, className, envBasePath, lazyLoad, threshold, rootMargin, }: ShaderGradientCanvasProps): react_jsx_runtime.JSX.Element;
+declare function ShaderGradientCanvas({ children, style, pixelDensity, fov, pointerEvents, className, envBasePath, lazyLoad, threshold, rootMargin, preserveDrawingBuffer, powerPreference, }: ShaderGradientCanvasProps): react_jsx_runtime.JSX.Element;
 
 type ShaderGradientType = 'plane' | 'waterPlane' | 'sphere';
 interface Position {
@@ -1059,23 +1061,41 @@ declare const propertyControls: (ControlType: any, type?: string) => {
         defaultValue: number;
         hidden: (props: any) => boolean;
     };
-    pixelDensity: {
+    canvas: {
         type: any;
-        step: number;
-        min: number;
-        max: number;
-        displayStepper: boolean;
-        defaultValue: number;
+        title: string;
         hidden: (props: any) => boolean;
-    };
-    fov: {
-        type: any;
-        step: number;
-        min: number;
-        max: number;
-        displayStepper: boolean;
-        defaultValue: number;
-        hidden: (props: any) => boolean;
+        controls: {
+            pixelDensity: {
+                type: any;
+                step: number;
+                min: number;
+                max: number;
+                displayStepper: boolean;
+                defaultValue: number;
+            };
+            fov: {
+                type: any;
+                step: number;
+                min: number;
+                max: number;
+                displayStepper: boolean;
+                defaultValue: number;
+            };
+            preserveDrawingBuffer: {
+                type: any;
+                title: string;
+                defaultValue: boolean;
+            };
+            powerPreference: {
+                type: any;
+                title: string;
+                options: string[];
+                optionTitles: string[];
+                displaySegmentedControl: boolean;
+                defaultValue: string;
+            };
+        };
     };
     grain: {
         type: any;
@@ -1301,12 +1321,13 @@ declare const propertyControls: (ControlType: any, type?: string) => {
 };
 
 declare function formatUrlString(urlString: any): any;
-declare function formatFramerProps({ position, rotation, cameraAngle, noise, ...rest }: {
+declare function formatFramerProps({ position, rotation, cameraAngle, noise, canvas, ...rest }: {
     [x: string]: any;
     position: any;
     rotation: any;
     cameraAngle: any;
     noise: any;
+    canvas: any;
 }): {
     positionX: any;
     positionY: any;
@@ -1318,6 +1339,10 @@ declare function formatFramerProps({ position, rotation, cameraAngle, noise, ...
     cPolarAngle: any;
     uDensity: any;
     uStrength: any;
+    pixelDensity: any;
+    fov: any;
+    preserveDrawingBuffer: any;
+    powerPreference: any;
 };
 
 export { type EnvironmentPresetT, type GradientT, type LightTypeT, type LightsT, type MeshT, type Position, type Rotation, ShaderGradient, ShaderGradientCanvas, type ShaderGradientType, type animateT, formatFramerProps, formatUrlString, initialActivePreset, presets, presetsArray, propertyControls, type typeT, useShaderGradientCanvasContext };

@@ -190,42 +190,6 @@ declare namespace ShaderGradientStateless {
             defaultValue: number;
             hidden: (props: any) => boolean;
         };
-        canvas: {
-            type: any;
-            title: string;
-            hidden: (props: any) => boolean;
-            controls: {
-                pixelDensity: {
-                    type: any;
-                    step: number;
-                    min: number;
-                    max: number;
-                    displayStepper: boolean;
-                    defaultValue: number;
-                };
-                fov: {
-                    type: any;
-                    step: number;
-                    min: number;
-                    max: number;
-                    displayStepper: boolean;
-                    defaultValue: number;
-                };
-                preserveDrawingBuffer: {
-                    type: any;
-                    title: string;
-                    defaultValue: boolean;
-                };
-                powerPreference: {
-                    type: any;
-                    title: string;
-                    options: string[];
-                    optionTitles: string[];
-                    displaySegmentedControl: boolean;
-                    defaultValue: string;
-                };
-            };
-        };
         grain: {
             type: any;
             options: string[];
@@ -421,10 +385,6 @@ declare namespace ShaderGradientStateless {
             displaySegmentedControl: boolean;
             hidden: (props: any) => boolean;
         };
-        performantOnCanvas: {
-            type: any;
-            defaultValue: boolean;
-        };
         lazyLoad: {
             type: any;
             defaultValue: boolean;
@@ -446,6 +406,41 @@ declare namespace ShaderGradientStateless {
             title: string;
             description: string;
             hidden: (props: any) => boolean;
+        };
+        canvas: {
+            type: any;
+            title: string;
+            controls: {
+                pixelDensity: {
+                    type: any;
+                    step: number;
+                    min: number;
+                    max: number;
+                    displayStepper: boolean;
+                    defaultValue: number;
+                };
+                fov: {
+                    type: any;
+                    step: number;
+                    min: number;
+                    max: number;
+                    displayStepper: boolean;
+                    defaultValue: number;
+                };
+                preserveDrawingBuffer: {
+                    type: any;
+                    title: string;
+                    defaultValue: boolean;
+                };
+                powerPreference: {
+                    type: any;
+                    title: string;
+                    options: string[];
+                    optionTitles: string[];
+                    displaySegmentedControl: boolean;
+                    defaultValue: string;
+                };
+            };
         };
     };
 }

@@ -38,7 +38,7 @@ import {
   time,
   toggleSmartComp,
   withClickOutsideClosed
-} from "../chunk-C6E32C7E.mjs";
+} from "../chunk-55TP5RJ7.mjs";
 import "../chunk-425BLYMY.mjs";
 import "../chunk-AGDIGZ2U.mjs";
 import {
@@ -79,7 +79,7 @@ import {
   extractGIF,
   goBack,
   insertCanvasAsImage
-} from "../chunk-R37IRW4V.mjs";
+} from "../chunk-YMTAR47V.mjs";
 import "../chunk-U6EY3HY2.mjs";
 import "../chunk-VQME7MQ6.mjs";
 import "../chunk-D32OJ5QG.mjs";
@@ -98,7 +98,7 @@ import "../chunk-XMQWNMPM.mjs";
 import {
   AddToCanvas,
   updateTheme
-} from "../chunk-65LYU53B.mjs";
+} from "../chunk-YIJ6RRBP.mjs";
 import {
   CurrentPreset,
   HideBanner,
@@ -106,18 +106,18 @@ import {
   UrlInput,
   togglePreset,
   toggleUrl
-} from "../chunk-XTTDOVM2.mjs";
+} from "../chunk-NSY4I56T.mjs";
 import "../chunk-2ZZ6H7J7.mjs";
-import "../chunk-7HJET4GS.mjs";
-import "../chunk-SVJXNXO6.mjs";
-import "../chunk-LZ3NAHIF.mjs";
-import "../chunk-XRVFXRUU.mjs";
-import "../chunk-2WKA5MPG.mjs";
-import "../chunk-SWZXNUZB.mjs";
-import "../chunk-UHBSTCSG.mjs";
-import "../chunk-FYPBV3VR.mjs";
-import "../chunk-WDMOK4UQ.mjs";
-import "../chunk-TVSH5PTB.mjs";
+import "../chunk-63BBT6UD.mjs";
+import "../chunk-DHFZHJ7U.mjs";
+import "../chunk-NGIHRPS3.mjs";
+import "../chunk-GH7ENINX.mjs";
+import "../chunk-VB23XUCN.mjs";
+import "../chunk-T7EY325B.mjs";
+import "../chunk-NISWP6HK.mjs";
+import "../chunk-5PMJJY47.mjs";
+import "../chunk-F75U647E.mjs";
+import "../chunk-GK7IHWJR.mjs";
 import "../chunk-FJLC4ENQ.mjs";
 import "../chunk-NP5XZW6Z.mjs";
 import "../chunk-HXGKXP63.mjs";

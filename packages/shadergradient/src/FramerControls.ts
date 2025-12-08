@@ -371,7 +371,7 @@ export const propertyControls = (ControlType, type = '') => ({
       },
       preserveDrawingBuffer: {
         type: ControlType.Boolean,
-        title: 'Preserve Buffer',
+        title: 'Keep Buffer',
         defaultValue: false,
       },
       powerPreference: {

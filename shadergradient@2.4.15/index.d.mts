@@ -983,6 +983,7 @@ declare const presetsArray: ({
         wireframe: boolean;
     };
 })[];
+
 declare const propertyControls: (ControlType: any, type?: string) => {
     control: {
         type: any;

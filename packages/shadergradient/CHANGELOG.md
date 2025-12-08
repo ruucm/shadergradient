@@ -1,5 +1,11 @@
 # shadergradient
 
+## 2.4.18
+
+### Patch Changes
+
+- update FramerControl
+
 ## 2.4.17
 
 ### Patch Changes

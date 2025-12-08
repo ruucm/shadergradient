@@ -102,42 +102,6 @@ export const propertyControls = (ControlType, type = '') => ({
       props.control === 'query' ||
       props.activeTab !== 'Shape',
   },
-  canvas: {
-    type: ControlType.Object,
-    title: 'Canvas',
-    hidden: (props) => props.control === 'query' || props.activeTab !== 'Shape',
-    controls: {
-      pixelDensity: {
-        type: ControlType.Number,
-        step: 0.1,
-        min: 0,
-        max: 3,
-        displayStepper: true,
-        defaultValue: 1,
-      },
-      fov: {
-        type: ControlType.Number,
-        step: 1,
-        min: 10,
-        max: 180,
-        displayStepper: true,
-        defaultValue: 45,
-      },
-      preserveDrawingBuffer: {
-        type: ControlType.Boolean,
-        title: 'Preserve Buffer',
-        defaultValue: false,
-      },
-      powerPreference: {
-        type: ControlType.Enum,
-        title: 'Power Pref',
-        options: ['default', 'high-performance', 'low-power'],
-        optionTitles: ['Auto', 'High', 'Low'],
-        displaySegmentedControl: true,
-        defaultValue: 'low-power',
-      },
-    },
-  },
   // Effects
   grain: {
     type: ControlType.Enum,
@@ -363,10 +327,6 @@ export const propertyControls = (ControlType, type = '') => ({
     displaySegmentedControl: true,
     hidden: (props) => props.control === 'query',
   },
-  performantOnCanvas: {
-    type: ControlType.Boolean,
-    defaultValue: false,
-  },
   lazyLoad: {
     type: ControlType.Boolean,
     defaultValue: true,
@@ -388,5 +348,40 @@ export const propertyControls = (ControlType, type = '') => ({
     title: '↳ Root Margin',
     description: 'Offset before triggering (e.g., "100px", "-50px")',
     hidden: (props) => !props.lazyLoad,
+  },
+  canvas: {
+    type: ControlType.Object,
+    title: 'Canvas',
+    controls: {
+      pixelDensity: {
+        type: ControlType.Number,
+        step: 0.1,
+        min: 0,
+        max: 3,
+        displayStepper: true,
+        defaultValue: 1,
+      },
+      fov: {
+        type: ControlType.Number,
+        step: 1,
+        min: 10,
+        max: 180,
+        displayStepper: true,
+        defaultValue: 45,
+      },
+      preserveDrawingBuffer: {
+        type: ControlType.Boolean,
+        title: 'Preserve Buffer',
+        defaultValue: false,
+      },
+      powerPreference: {
+        type: ControlType.Enum,
+        title: 'Power Pref',
+        options: ['default', 'high-performance', 'low-power'],
+        optionTitles: ['Auto', 'High', 'Low'],
+        displaySegmentedControl: true,
+        defaultValue: 'low-power',
+      },
+    },
   },
 })

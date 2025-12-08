@@ -1,5 +1,11 @@
 # ui
 
+## 0.1.60
+
+### Patch Changes
+
+- fix TextAnimation
+
 ## 0.1.59
 
 ### Patch Changes

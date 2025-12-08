@@ -38,7 +38,7 @@ import {
   time,
   toggleSmartComp,
   withClickOutsideClosed
-} from "./chunk-W36LFHTH.mjs";
+} from "./chunk-ZI77JZJO.mjs";
 import "./chunk-425BLYMY.mjs";
 import "./chunk-AGDIGZ2U.mjs";
 import {
@@ -79,7 +79,7 @@ import {
   extractGIF,
   goBack,
   insertCanvasAsImage
-} from "./chunk-GXPV2CB2.mjs";
+} from "./chunk-XU6DW5UF.mjs";
 import "./chunk-U6EY3HY2.mjs";
 import "./chunk-VQME7MQ6.mjs";
 import "./chunk-D32OJ5QG.mjs";
@@ -141,7 +141,7 @@ import {
 import {
   ChangeButton3,
   ChangeColorButton
-} from "./chunk-V6TXA3AJ.mjs";
+} from "./chunk-FMIEXSY4.mjs";
 import "./chunk-3I3TPE7B.mjs";
 import {
   TextAnimation
@@ -174,7 +174,7 @@ import "./chunk-QNYMEATR.mjs";
 import {
   AddToCanvas,
   updateTheme
-} from "./chunk-G34NHO52.mjs";
+} from "./chunk-USJN4WRN.mjs";
 import {
   CurrentPreset,
   HideBanner,
@@ -182,29 +182,29 @@ import {
   UrlInput,
   togglePreset,
   toggleUrl
-} from "./chunk-SI5MKD33.mjs";
+} from "./chunk-LYGMMDA7.mjs";
 import "./chunk-2ZZ6H7J7.mjs";
-import "./chunk-5VZXOJ63.mjs";
+import "./chunk-KSH2NOTL.mjs";
 import {
   ShaderGradientStatelessCanvas
-} from "./chunk-RZK544SD.mjs";
+} from "./chunk-UKJX6KC2.mjs";
 import {
   ShaderGradientStateless
-} from "./chunk-INPZIR7J.mjs";
-import "./chunk-YWVE66HW.mjs";
-import "./chunk-JXGDOS3B.mjs";
-import "./chunk-INPCX7NG.mjs";
-import "./chunk-ZXJGO2KQ.mjs";
+} from "./chunk-K6KCJMZM.mjs";
+import "./chunk-EAIEWWHU.mjs";
+import "./chunk-JMQ7DBU5.mjs";
+import "./chunk-IZD6AACI.mjs";
+import "./chunk-3U3TIQUJ.mjs";
 import {
   useQueryState,
   useURLQueryState
-} from "./chunk-B72OUY4Z.mjs";
+} from "./chunk-2FTBD3PI.mjs";
 import {
   updateGradientState
-} from "./chunk-SKTC7ZLN.mjs";
+} from "./chunk-T2RIDETD.mjs";
 import {
   PRESETS
-} from "./chunk-52FKGRQ2.mjs";
+} from "./chunk-L3EHVM2K.mjs";
 import {
   useBillingInterval,
   useBillingIntervalStore,

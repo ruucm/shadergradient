@@ -14,6 +14,7 @@ export function TextAnimation({
   width = null,
   yBefore = 20,
   fontFamily = '"Lora", serif',
+  hiddenOpacity = 0,
 }) {
   const textStyles = {
     textAlign: 'left' as const,
@@ -21,6 +22,7 @@ export function TextAnimation({
     color: color,
     fontWeight: 500,
     fontFamily: fontFamily,
+    lineHeight: 1.2,
   }
 
   const letterContainerVariants = {
@@ -85,10 +87,11 @@ export function TextAnimation({
       <div
         style={{
           ...textStyles,
-          opacity: 0,
+          opacity: hiddenOpacity,
           pointerEvents: 'none',
           userSelect: 'none',
           whiteSpace: 'pre-wrap',
+          margin: 0,
         }}
       >
         {content}
@@ -106,9 +109,11 @@ export function TextAnimation({
           margin: 0,
           width: '100%',
           pointerEvents: 'none',
+          display: 'flex',
+          alignItems: 'flex-start',
         }}
       >
-        <div>
+        <div style={{ width: '100%' }}>
           {content.split(' ').map((word: string, wordI: number) => (
             <div
               key={`word-${word}-${wordI}`}
@@ -123,6 +128,7 @@ export function TextAnimation({
                     position: 'relative',
                     display: 'inline-block',
                     width: 'auto',
+                    verticalAlign: 'top',
                   }} // Position elements
                   variants={letterVariants}
                   // transition={{ duration: 0.5, ease: 'backInOut' }}
@@ -146,4 +152,5 @@ TextAnimation.propertyControls = {
   color: { type: ControlType.Color, defaultValue: '#ffffff' },
   fontSize: { type: ControlType.Number, defaultValue: 20 },
   fontFamily: { type: ControlType.String, defaultValue: 'Lora' },
+  hiddenOpacity: { type: ControlType.Number, defaultValue: 0, min: 0, max: 1 },
 }

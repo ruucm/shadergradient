@@ -10,7 +10,7 @@ import { useEffect, useRef } from 'react'
 // const figmaPluginSite =
 //   'https://thriving-instance-690163-108354a58.framer.app/figma-plugin' // 108354a58
 // const figmaPluginSite = 'https://shadergradient.co/figma-plugin'
-const figmaPluginSite = 'https://shadergradient-v2.framer.website/figma-plugin' // new figma plugin test
+const figmaPluginSite = 'https://shadergradient.co/figma-plugin' // new figma plugin test
 
 const App = () => {
   useShareMessages()

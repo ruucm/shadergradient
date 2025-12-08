@@ -1,5 +1,11 @@
 # shadergradient
 
+## 2.4.17
+
+### Patch Changes
+
+- preserveDrawingBuffer, powerPreference prop
+
 ## 2.4.16
 
 ### Patch Changes

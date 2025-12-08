@@ -1,5 +1,11 @@
 # shadergradient
 
+## 2.4.20
+
+### Patch Changes
+
+- fix preset title
+
 ## 2.4.19
 
 ### Patch Changes

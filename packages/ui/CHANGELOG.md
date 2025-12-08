@@ -1,5 +1,11 @@
 # ui
 
+## 0.1.63
+
+### Patch Changes
+
+- whitespace nowrap (TextAnimation)
+
 ## 0.1.62
 
 ### Patch Changes

@@ -230,7 +230,7 @@ export const presets = {
     },
   },
   violaOrientalis: {
-    title: 'Viola orientalis',
+    title: 'Viola',
     color: 'white',
     props: {
       range: 'disabled',

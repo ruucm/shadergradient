@@ -17,6 +17,10 @@
       "cache": false,
       "persistent": true
     },
+    "dev:email": {
+      "cache": false,
+      "persistent": true
+    },
     "dev:ui": {
       "cache": false,
       "persistent": true

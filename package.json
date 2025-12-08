@@ -5,6 +5,7 @@
     "build": "turbo run build",
     "dev": "turbo run dev --parallel",
     "dev:framer": "turbo run dev:framer --parallel",
+    "dev:email": "turbo run dev:email --parallel",
     "dev:ui": "turbo run dev:ui --parallel",
     "start": "PORT=8000 turbo run start --parallel",
     "lint": "turbo run lint",

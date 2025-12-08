@@ -1,0 +1,23 @@
+{
+  "name": "email-previews",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "dev:email": "email dev --dir ./emails --port 3005",
+    "build": "email build --dir ./emails",
+    "start": "email start",
+    "export": "email export --dir ./emails"
+  },
+  "dependencies": {
+    "@react-email/components": "1.0.1",
+    "react": "19.2.0",
+    "react-dom": "19.2.0",
+    "react-email": "5.0.6"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "typescript": "5.7.3"
+  }
+}

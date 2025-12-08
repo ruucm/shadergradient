@@ -15,6 +15,14 @@ export function TextAnimation({
   yBefore = 20,
   fontFamily = '"Lora", serif',
 }) {
+  const textStyles = {
+    textAlign: 'left' as const,
+    fontSize: fontSize,
+    color: color,
+    fontWeight: 500,
+    fontFamily: fontFamily,
+  }
+
   const letterContainerVariants = {
     before: { transition: { staggerChildren: 0.015 } },
     after: { transition: { staggerChildren: 0.015 } },
@@ -74,19 +82,29 @@ export function TextAnimation({
         width: width === 0 ? 'fit-content' : width,
       }}
     >
+      <div
+        style={{
+          ...textStyles,
+          position: 'absolute',
+          inset: 0,
+          opacity: 0,
+          pointerEvents: 'none',
+          userSelect: 'none',
+          whiteSpace: 'pre-wrap',
+        }}
+      >
+        {content}
+      </div>
       <motion.h1
         variants={letterContainerVariants}
         ref={ref}
         initial={isOnCanvas ? 'after' : 'before'}
         animate={isOnCanvas ? 'after' : controls}
+        aria-hidden
       >
         <div
           style={{
-            textAlign: 'left',
-            fontSize: fontSize,
-            color: color,
-            fontWeight: 500,
-            fontFamily: fontFamily,
+            ...textStyles,
           }}
         >
           {content.split(' ').map((word: string, wordI: number) => (

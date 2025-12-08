@@ -1,7 +1,7 @@
 import { ShaderGradient } from './ShaderGradient'
 import { ControlType } from 'framer'
 import { GradientT } from './types'
-import { propertyControls } from './presets'
+import { propertyControls } from './FramerControls'
 import { formatFramerProps } from './utils'
 
 type FramerShaderGradientProps = GradientT & {

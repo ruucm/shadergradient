@@ -90,7 +90,7 @@ export function TextAnimation({
           opacity: hiddenOpacity,
           pointerEvents: 'none',
           userSelect: 'none',
-          whiteSpace: 'pre-wrap',
+          whiteSpace: 'nowrap',
           margin: 0,
         }}
       >

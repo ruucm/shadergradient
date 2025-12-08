@@ -85,8 +85,6 @@ export function TextAnimation({
       <div
         style={{
           ...textStyles,
-          position: 'absolute',
-          inset: 0,
           opacity: 0,
           pointerEvents: 'none',
           userSelect: 'none',
@@ -101,12 +99,16 @@ export function TextAnimation({
         initial={isOnCanvas ? 'after' : 'before'}
         animate={isOnCanvas ? 'after' : controls}
         aria-hidden
+        style={{
+          ...textStyles,
+          position: 'absolute',
+          inset: 0,
+          margin: 0,
+          width: '100%',
+          pointerEvents: 'none',
+        }}
       >
-        <div
-          style={{
-            ...textStyles,
-          }}
-        >
+        <div>
           {content.split(' ').map((word: string, wordI: number) => (
             <div
               key={`word-${word}-${wordI}`}

@@ -23,6 +23,12 @@ type FramerShaderGradientProps = GradientT & {
     uDensity: number
     uStrength: number
   }
+  canvas?: {
+    pixelDensity?: number
+    fov?: number
+    preserveDrawingBuffer?: boolean
+    powerPreference?: WebGLPowerPreference | 'default'
+  }
 }
 
 export function FramerShaderGradient({
@@ -30,6 +36,7 @@ export function FramerShaderGradient({
   rotation,
   cameraAngle,
   noise,
+  canvas,
   ...rest
 }: FramerShaderGradientProps) {
   const props = formatFramerProps({
@@ -37,6 +44,7 @@ export function FramerShaderGradient({
     rotation,
     cameraAngle,
     noise,
+    canvas,
     ...rest,
   })
 

@@ -25,12 +25,24 @@ export function formatFramerProps({
   rotation,
   cameraAngle,
   noise,
+  canvas,
   ...rest
 }) {
-  const { positionX, positionY, positionZ } = position
-  const { rotationX, rotationY, rotationZ } = rotation
-  const { cAzimuthAngle, cPolarAngle } = cameraAngle
-  const { uDensity, uStrength } = noise
+  const { positionX, positionY, positionZ } = position || {}
+  const { rotationX, rotationY, rotationZ } = rotation || {}
+  const { cAzimuthAngle, cPolarAngle } = cameraAngle || {}
+  const { uDensity, uStrength } = noise || {}
+  const {
+    pixelDensity,
+    fov,
+    preserveDrawingBuffer,
+    powerPreference,
+  } = canvas || {}
+
+  const parsedPowerPreference =
+    powerPreference && powerPreference !== 'default'
+      ? powerPreference
+      : undefined
 
   return {
     positionX,
@@ -43,6 +55,10 @@ export function formatFramerProps({
     cPolarAngle,
     uDensity,
     uStrength,
+    pixelDensity,
+    fov,
+    preserveDrawingBuffer,
+    powerPreference: parsedPowerPreference,
     ...rest,
   }
 }

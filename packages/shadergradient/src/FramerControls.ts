@@ -102,23 +102,41 @@ export const propertyControls = (ControlType, type = '') => ({
       props.control === 'query' ||
       props.activeTab !== 'Shape',
   },
-  pixelDensity: {
-    type: ControlType.Number,
-    step: 0.1,
-    min: 0,
-    max: 3,
-    displayStepper: true,
-    defaultValue: 1,
+  canvas: {
+    type: ControlType.Object,
+    title: 'Canvas',
     hidden: (props) => props.control === 'query' || props.activeTab !== 'Shape',
-  },
-  fov: {
-    type: ControlType.Number,
-    step: 1,
-    min: 10,
-    max: 180,
-    displayStepper: true,
-    defaultValue: 45,
-    hidden: (props) => props.control === 'query' || props.activeTab !== 'Shape',
+    controls: {
+      pixelDensity: {
+        type: ControlType.Number,
+        step: 0.1,
+        min: 0,
+        max: 3,
+        displayStepper: true,
+        defaultValue: 1,
+      },
+      fov: {
+        type: ControlType.Number,
+        step: 1,
+        min: 10,
+        max: 180,
+        displayStepper: true,
+        defaultValue: 45,
+      },
+      preserveDrawingBuffer: {
+        type: ControlType.Boolean,
+        title: 'Preserve Buffer',
+        defaultValue: false,
+      },
+      powerPreference: {
+        type: ControlType.Enum,
+        title: 'Power Pref',
+        options: ['default', 'high-performance', 'low-power'],
+        optionTitles: ['Auto', 'High', 'Low'],
+        displaySegmentedControl: true,
+        defaultValue: 'low-power',
+      },
+    },
   },
   // Effects
   grain: {

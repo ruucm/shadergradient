@@ -19,6 +19,8 @@ type ShaderGradientCanvasProps = {
   lazyLoad?: boolean
   threshold?: number
   rootMargin?: string
+  preserveDrawingBuffer?: boolean
+  powerPreference?: WebGLPowerPreference
 }
 
 const Context = createContext<ShaderGradientCanvasContext>(
@@ -40,6 +42,8 @@ export function ShaderGradientCanvas({
   lazyLoad = true,
   threshold = 0.1,
   rootMargin = '0px',
+  preserveDrawingBuffer,
+  powerPreference,
 }: ShaderGradientCanvasProps) {
   const { isInView, containerRef } = useInView(lazyLoad, threshold, rootMargin)
 
@@ -60,7 +64,10 @@ export function ShaderGradientCanvas({
             style={{ pointerEvents }}
             resize={{ offsetSize: true }}
             className={className}
-            {...canvasProps(pixelDensity, fov)}
+            {...canvasProps(pixelDensity, fov, {
+              preserveDrawingBuffer,
+              powerPreference,
+            })}
           >
             {children}
           </Canvas>

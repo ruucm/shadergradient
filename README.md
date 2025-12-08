@@ -143,7 +143,7 @@ type GradientT = MeshT & {
 }
 ```
 
-`ShaderGradientCanvas` also accepts `pixelDensity`, `fov`, `envBasePath`, and lazy-load controls (`lazyLoad`, `threshold`, `rootMargin`).
+`ShaderGradientCanvas` also accepts `pixelDensity`, `fov`, `envBasePath`, GL overrides (`preserveDrawingBuffer`, `powerPreference`), and lazy-load controls (`lazyLoad`, `threshold`, `rootMargin`).
 
 # Examples
 

@@ -1,5 +1,11 @@
 # shadergradient
 
+## 2.4.19
+
+### Patch Changes
+
+- update control title
+
 ## 2.4.18
 
 ### Patch Changes

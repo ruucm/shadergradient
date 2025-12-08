@@ -1,6 +1,6 @@
 {
   "name": "@shadergradient/react",
-  "version": "2.4.18",
+  "version": "2.4.19",
   "main": "./dist/index.mjs",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.mts",

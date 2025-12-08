@@ -1,5 +1,11 @@
 # ui
 
+## 0.1.58
+
+### Patch Changes
+
+- update control title
+
 ## 0.1.57
 
 ### Patch Changes

@@ -118,7 +118,7 @@ export function TextAnimation({
             <div
               key={`word-${word}-${wordI}`}
               style={{
-                display: 'inline-block',
+                display: 'inline-flex',
               }}
             >
               {Array.from(word).map((letter, index) => (

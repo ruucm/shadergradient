@@ -1,5 +1,11 @@
 # ui
 
+## 0.1.59
+
+### Patch Changes
+
+- add hidden layer for TextAnimation
+
 ## 0.1.58
 
 ### Patch Changes

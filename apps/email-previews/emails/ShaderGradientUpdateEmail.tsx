@@ -29,16 +29,14 @@ export type ShaderGradientUpdateEmailProps = {
 
 const defaultProps: ShaderGradientUpdateEmailProps = {
   logoUrl:
-    'https://ruucm.github.io/shadergradient/ui@latest/assets/email/logo.png',
+    'https://ruucm.github.io/shadergradient/ui@latest/assets/email/sg-logo.png',
   headline: 'ShaderGradient got\nsmoother, lighter, and easier to use',
   introText:
     "We've been working on some improvements for ShaderGradient to make it smoother, lighter, and easier to use.\n\nToday, we're excited to share what's new.",
   performanceGifUrl:
-    'https://ruucm.github.io/shadergradient/ui@latest/assets/email/intro.gif',
-  //replace the gif to https://drive.google.com/file/d/1rkrSvE_tNQgoZo1ThFJz650f48vW5Qjh/view?usp=sharing
+    'https://ruucm.github.io/shadergradient/ui@latest/assets/email/perf.gif',
   figmaPluginGifUrl:
-    'https://ruucm.github.io/shadergradient/ui@latest/assets/email/figma.gif',
-  // replace the gif to https://drive.google.com/file/d/1yuns8lhwCQ4Dm1v_8U0BADk1UoJXgq-y/view?usp=sharing
+    'https://ruucm.github.io/shadergradient/ui@latest/assets/email/figma-plugin.gif',
   figmaPluginUrl:
     'https://www.figma.com/community/plugin/1203016883447870818/shadergradient',
   framerPluginUrl: 'https://www.framer.com/marketplace/plugins/shadergradient/',

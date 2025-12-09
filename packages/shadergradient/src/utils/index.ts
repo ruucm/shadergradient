@@ -63,4 +63,44 @@ export function formatFramerProps({
   }
 }
 
+type CanvasPropSources = {
+  queryPixelDensity?: number
+  queryFov?: number
+  queryPreserveDrawingBuffer?: boolean
+  queryPowerPreference?: WebGLPowerPreference
+  props: any
+  defaultPixelDensity?: number
+  defaultFov?: number
+}
+
+// Resolve canvas-related props by preferring query values, then flattened Framer props, then raw props
+export function mergeCanvasProps({
+  queryPixelDensity,
+  queryFov,
+  queryPreserveDrawingBuffer,
+  queryPowerPreference,
+  props,
+  defaultPixelDensity = 1,
+  defaultFov = 45,
+}: CanvasPropSources) {
+  const flattened = formatFramerProps(props)
+
+  return {
+    pixelDensity:
+      queryPixelDensity ??
+      flattened.pixelDensity ??
+      props.pixelDensity ??
+      defaultPixelDensity,
+    fov: queryFov ?? flattened.fov ?? props.fov ?? defaultFov,
+    preserveDrawingBuffer:
+      queryPreserveDrawingBuffer ??
+      flattened.preserveDrawingBuffer ??
+      props.preserveDrawingBuffer,
+    powerPreference:
+      queryPowerPreference ??
+      flattened.powerPreference ??
+      props.powerPreference,
+  }
+}
+
 export * from './platform'

@@ -46,7 +46,7 @@ export const Materials = ({
     }, {})
 
     // Material configuration based on shader type
-    const materialConfig = {
+    const materialConfig: THREE.MeshPhysicalMaterialParameters = {
       userData: uniformValues, // sync uniform and userData to update uniforms from outside (MeshPhysicalMaterial)
       metalness: shader === 'glass' ? 0.0 : 0.2,
       roughness:

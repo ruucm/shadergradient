@@ -1,5 +1,11 @@
 # ui
 
+## 0.1.64
+
+### Patch Changes
+
+- mergeCanvasProps
+
 ## 0.1.63
 
 ### Patch Changes

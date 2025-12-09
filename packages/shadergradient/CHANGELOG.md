@@ -1,5 +1,11 @@
 # shadergradient
 
+## 2.4.21
+
+### Patch Changes
+
+- mergeCanvasProps
+
 ## 2.4.20
 
 ### Patch Changes

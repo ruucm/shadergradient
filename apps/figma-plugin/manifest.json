@@ -12,6 +12,6 @@
   "permissions": [
     "currentuser"
   ],
-  "networkAccess": { "allowedDomains": ["*"] },
+  "networkAccess": { "allowedDomains": ["*"], "reasoning":"This plugin needs to access the internet to load the UI from the other domain, and some resources like hdr." },
   "documentAccess": "dynamic-page"
 }

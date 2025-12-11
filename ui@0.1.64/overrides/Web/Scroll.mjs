@@ -13,10 +13,10 @@ import {
   fpsCount,
   memoryUsage,
   wordHighlightText
-} from "../../chunk-BFWE2LZI.mjs";
+} from "../../chunk-GD6HMUGA.mjs";
 import "../../chunk-425BLYMY.mjs";
 import "../../chunk-AGDIGZ2U.mjs";
-import "../../chunk-FJLC4ENQ.mjs";
+import "../../chunk-R6GBIJ5D.mjs";
 import "../../chunk-NP5XZW6Z.mjs";
 import "../../chunk-HXGKXP63.mjs";
 export {

@@ -3,7 +3,7 @@ import "./chunk-JATPNCR2.mjs";
 import {
   Price,
   TogglePrice
-} from "./chunk-HQM3I5M3.mjs";
+} from "./chunk-GISSEJFZ.mjs";
 import {
   CenterCrop1,
   CenterCrop2,
@@ -19,7 +19,7 @@ import {
   fpsCount,
   memoryUsage,
   wordHighlightText
-} from "./chunk-BFWE2LZI.mjs";
+} from "./chunk-GD6HMUGA.mjs";
 import {
   ArrowLeft,
   ArrowRight,
@@ -38,7 +38,7 @@ import {
   time,
   toggleSmartComp,
   withClickOutsideClosed
-} from "./chunk-MIMQL7LY.mjs";
+} from "./chunk-SJZJCCP5.mjs";
 import "./chunk-425BLYMY.mjs";
 import "./chunk-AGDIGZ2U.mjs";
 import {
@@ -51,16 +51,19 @@ import {
   upgradingText,
   userEmail,
   userInfo
-} from "./chunk-VCUKBWBQ.mjs";
+} from "./chunk-J5ZWSB6U.mjs";
 import {
   ColorsTab,
   ConnectFigmaMessage,
   CopyBtn,
+  DestinationControl,
   Duration,
   EasyViewInfo,
   Error,
   EstimatedSize,
+  ExportLoadingOverlay,
   FigmaUrlInput,
+  FormatControl,
   HighlightButton,
   LoadViewAfterStyleSheet,
   MotionTab,
@@ -79,10 +82,10 @@ import {
   extractGIF,
   goBack,
   insertCanvasAsImage
-} from "./chunk-XT3PPKNI.mjs";
-import "./chunk-U6EY3HY2.mjs";
+} from "./chunk-5VPO3WLL.mjs";
+import "./chunk-UIHSQKCH.mjs";
 import "./chunk-VQME7MQ6.mjs";
-import "./chunk-D32OJ5QG.mjs";
+import "./chunk-3VGG4ZI2.mjs";
 import "./chunk-YFGZA6BU.mjs";
 import "./chunk-BGA6FIQU.mjs";
 import "./chunk-CK47F4LN.mjs";
@@ -91,10 +94,10 @@ import "./chunk-64EKMGYT.mjs";
 import "./chunk-BI4IT72G.mjs";
 import "./chunk-XKMCKCFY.mjs";
 import "./chunk-2WMPBKSG.mjs";
-import "./chunk-JAFGZMGM.mjs";
-import "./chunk-7OIUAODU.mjs";
-import "./chunk-57TWD6TY.mjs";
-import "./chunk-XMQWNMPM.mjs";
+import "./chunk-LSFLUJDF.mjs";
+import "./chunk-7DS5IN6Z.mjs";
+import "./chunk-O24SW53Z.mjs";
+import "./chunk-UMQJMRW4.mjs";
 import "./chunk-PQRWYNOC.mjs";
 import "./chunk-MMICMJ2O.mjs";
 import "./chunk-7PXGVEQA.mjs";
@@ -123,7 +126,7 @@ import {
 } from "./chunk-ZK6FQ3TL.mjs";
 import {
   ScrollableTextBox
-} from "./chunk-KQPWGD3Q.mjs";
+} from "./chunk-5VV6G3RV.mjs";
 import {
   SimpleSlider
 } from "./chunk-G2ZIPR5M.mjs";
@@ -134,7 +137,7 @@ import {
 import "./chunk-LSJHI6I5.mjs";
 import {
   SupabaseClient
-} from "./chunk-AYPM2UFB.mjs";
+} from "./chunk-ZQPHMFNB.mjs";
 import {
   TripleNumberInput
 } from "./chunk-SWYPZY5M.mjs";
@@ -174,7 +177,7 @@ import "./chunk-QNYMEATR.mjs";
 import {
   AddToCanvas,
   updateTheme
-} from "./chunk-ISYSCMWX.mjs";
+} from "./chunk-TGUBEWSX.mjs";
 import {
   CurrentPreset,
   HideBanner,
@@ -182,7 +185,7 @@ import {
   UrlInput,
   togglePreset,
   toggleUrl
-} from "./chunk-4J3C6BL3.mjs";
+} from "./chunk-QVE3FV54.mjs";
 import "./chunk-2ZZ6H7J7.mjs";
 import "./chunk-4QCA3AWF.mjs";
 import {
@@ -216,7 +219,7 @@ import {
   useSupabaseStore,
   useUIOverrideStore,
   useUIStore
-} from "./chunk-FJLC4ENQ.mjs";
+} from "./chunk-R6GBIJ5D.mjs";
 import "./chunk-NP5XZW6Z.mjs";
 import "./chunk-HXGKXP63.mjs";
 export {
@@ -238,12 +241,15 @@ export {
   CustomizeRadio,
   CustomizeRangeSlider,
   CustomizeSlider,
+  DestinationControl,
   DoubleNumberInput,
   Duration,
   EasyViewInfo,
   Error,
   EstimatedSize,
+  ExportLoadingOverlay,
   FigmaUrlInput,
+  FormatControl,
   Gap,
   HideBanner,
   HideGradientsOnMobile,

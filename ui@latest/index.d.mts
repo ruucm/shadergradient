@@ -19,6 +19,7 @@ type UIState = {
     error: string;
     figmaPage: string;
     easyView: boolean;
+    isExporting: boolean;
     setActivePreset: (by: number) => void;
     setInputMode: (mode: InputMode) => void;
     setMode: (mode: Mode) => void;
@@ -27,6 +28,7 @@ type UIState = {
     setFigmaPage: (page: string) => void;
     setLoadingPercentage: (percentage: number) => void;
     setEasyView: (easyView: boolean) => void;
+    setIsExporting: (isExporting: boolean) => void;
 };
 declare const useUIStore: zustand.UseBoundStore<zustand.StoreApi<UIState>>;
 interface ScrollableBoxState {
@@ -47,11 +49,15 @@ declare const useScrollableBoxStore: zustand.UseBoundStore<Omit<zustand.StoreApi
 type FigmaUser = {
     id?: string;
 } | null;
+type EditorType = 'figma' | 'slides' | 'buzz' | null;
 type FigmaState = {
     selection: number;
     user: FigmaUser;
     error: string;
     page: string;
+    editorType: EditorType;
+    nodeWidth: number;
+    nodeHeight: number;
 };
 type FigmaStore = {
     figma: FigmaState;
@@ -847,6 +853,9 @@ declare function ConnectFigmaMessage(Component: any): ComponentType;
 declare function WidthFillOnLoad(Component: any): ComponentType;
 declare function createRectangle(Component: any): ComponentType;
 declare function FigmaUrlInput(Component: any): ComponentType;
+declare function DestinationControl(Component: any): ComponentType;
+declare function FormatControl(Component: any): ComponentType;
+declare function ExportLoadingOverlay(Component: any): ComponentType;
 
 declare function userInfo(Component: any): ComponentType;
 declare function subscribeLink(Component: any): ComponentType;
@@ -858,4 +867,4 @@ declare function PriceFigma(Component: any): ComponentType;
 declare function PriceText(Component: any): ComponentType;
 declare function StartTrial(Component: any): ComponentType;
 
-export { AddToCanvas, ArrowLeft, ArrowRight, Button, CenterCrop1, CenterCrop2, ChangeButton3, ChangeColorButton, ColorInput, ColorsTab, ConnectFigmaMessage, CopyBtn, CurrentPreset, CustomizeColorInput, CustomizeNumberInput, CustomizeRadio, CustomizeRangeSlider, CustomizeSlider, DoubleNumberInput, Duration, EasyViewInfo, Error, EstimatedSize, FigmaUrlInput, Gap, HideBanner, HideGradientsOnMobile, HighlightButton, Icons, InitCustomize, InputTitle, LoadViewAfterStyleSheet, MainGradient, MotionTab, OpenGIFPage, PRESETS, PresetIndex, PresetTitle, Price, PriceFigma, PriceText, type Props$1 as Props, RangeSlider, ScrollableTextBox, SectionObserver, SectionText, ShaderGradientStateless, ShaderGradientStatelessCanvas, ShapeTab, ShowCopyContent, SimpleSlider, Slider, StartTrial, StatelessOverride, SupabaseClient, TabSwitcher, TailwindWrapper, TextAnimation, TextHover, Timeline, TimelineWrapper, TogglePrice, TogglePriceFigma, ToggleShare, TriggerSection, TripleNumberInput, UndoButton, UrlInput, ViewTab, WebEasyViewControl, WebEasyViewInfo, WebStatelessOverride, WidthFillOnLoad, WordGradient, WordGradientText, WordHighlight, WordHighlight2, createRectangle, extractGIF, fpsCount, goBack, insertCanvasAsImage, isUpgraded, memoryUsage, randomBtn, randomGradient, randomText, slider, sliderSmartComp, subscribeLink, textClipper, time, togglePreset, toggleSmartComp, toggleUrl, updateGradientState, updateTheme, upgradingText, useBillingInterval, useBillingIntervalStore, useFigma, useFigmaPluginStore, useFigmaStore, useQueryState, useScrollStore, useScrollableBoxStore, useSupabaseStore, useUIOverrideStore, useUIStore, useURLQueryState, userEmail, userInfo, withClickOutsideClosed, wordHighlightText };
+export { AddToCanvas, ArrowLeft, ArrowRight, Button, CenterCrop1, CenterCrop2, ChangeButton3, ChangeColorButton, ColorInput, ColorsTab, ConnectFigmaMessage, CopyBtn, CurrentPreset, CustomizeColorInput, CustomizeNumberInput, CustomizeRadio, CustomizeRangeSlider, CustomizeSlider, DestinationControl, DoubleNumberInput, Duration, EasyViewInfo, Error, EstimatedSize, ExportLoadingOverlay, FigmaUrlInput, FormatControl, Gap, HideBanner, HideGradientsOnMobile, HighlightButton, Icons, InitCustomize, InputTitle, LoadViewAfterStyleSheet, MainGradient, MotionTab, OpenGIFPage, PRESETS, PresetIndex, PresetTitle, Price, PriceFigma, PriceText, type Props$1 as Props, RangeSlider, ScrollableTextBox, SectionObserver, SectionText, ShaderGradientStateless, ShaderGradientStatelessCanvas, ShapeTab, ShowCopyContent, SimpleSlider, Slider, StartTrial, StatelessOverride, SupabaseClient, TabSwitcher, TailwindWrapper, TextAnimation, TextHover, Timeline, TimelineWrapper, TogglePrice, TogglePriceFigma, ToggleShare, TriggerSection, TripleNumberInput, UndoButton, UrlInput, ViewTab, WebEasyViewControl, WebEasyViewInfo, WebStatelessOverride, WidthFillOnLoad, WordGradient, WordGradientText, WordHighlight, WordHighlight2, createRectangle, extractGIF, fpsCount, goBack, insertCanvasAsImage, isUpgraded, memoryUsage, randomBtn, randomGradient, randomText, slider, sliderSmartComp, subscribeLink, textClipper, time, togglePreset, toggleSmartComp, toggleUrl, updateGradientState, updateTheme, upgradingText, useBillingInterval, useBillingIntervalStore, useFigma, useFigmaPluginStore, useFigmaStore, useQueryState, useScrollStore, useScrollableBoxStore, useSupabaseStore, useUIOverrideStore, useUIStore, useURLQueryState, userEmail, userInfo, withClickOutsideClosed, wordHighlightText };

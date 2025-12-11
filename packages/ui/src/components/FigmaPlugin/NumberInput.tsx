@@ -64,7 +64,12 @@ export const NumberInput = ({
         <input
           type='number'
           value={value}
-          onChange={(e) => setValue(parseFloat(e.target.value))}
+          onChange={(e) => {
+            const parsed = parseFloat(e.target.value)
+            if (!isNaN(parsed)) {
+              setValue(parsed)
+            }
+          }}
           className={
             'font-medium w-[24px] h-[26px] outline-none text-center bg-[#F2F2F2] rounded-md [&::-webkit-inner-spin-button]:appearance-none overflow-visible select-none ' +
             (mouseOverOn === label ? 'text-[#ff340a]' : 'text-[#000000]')

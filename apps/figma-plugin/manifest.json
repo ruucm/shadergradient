@@ -11,5 +11,7 @@
   ],
   "permissions": [
     "currentuser"
-  ]
+  ],
+  "networkAccess": { "allowedDomains": ["*"] },
+  "documentAccess": "dynamic-page"
 }

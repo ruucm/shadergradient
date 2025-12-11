@@ -30,11 +30,11 @@ export type ShaderGradientUpdateEmailProps = {
 const defaultProps: ShaderGradientUpdateEmailProps = {
   logoUrl:
     'https://ruucm.github.io/shadergradient/ui@latest/assets/email/sg-logo.png',
-  headline: 'ShaderGradient got\nsmoother, lighter, and easier to use',
+  headline: 'ShaderGradient got\nfaster and smoother',
   introText:
     "We've been working on some improvements for ShaderGradient to make it smoother, lighter, and easier to use.\n\nToday, we're excited to share what's new.",
   performanceGifUrl:
-    'https://ruucm.github.io/shadergradient/ui@latest/assets/email/perf.gif',
+    'https://ruucm.github.io/shadergradient/ui@latest/assets/email/perf-new.gif',
   figmaPluginGifUrl:
     'https://ruucm.github.io/shadergradient/ui@latest/assets/email/figma-plugin.gif',
   figmaPluginUrl:

@@ -14,6 +14,7 @@ type UIState = {
   error: string
   figmaPage: string
   easyView: boolean
+  isExporting: boolean
   setActivePreset: (by: number) => void
   setInputMode: (mode: InputMode) => void
   setMode: (mode: Mode) => void
@@ -22,6 +23,7 @@ type UIState = {
   setFigmaPage: (page: string) => void
   setLoadingPercentage: (percentage: number) => void
   setEasyView: (easyView: boolean) => void
+  setIsExporting: (isExporting: boolean) => void
 }
 
 export const useUIStore = create<UIState>()((set) => ({
@@ -33,6 +35,7 @@ export const useUIStore = create<UIState>()((set) => ({
   error: '',
   figmaPage: '',
   easyView: false,
+  isExporting: false,
   setActivePreset: (by) => set({ activePreset: by }),
   setInputMode: (mode) => set({ inputMode: mode }),
   setMode: (mode) => set({ mode }),
@@ -41,6 +44,7 @@ export const useUIStore = create<UIState>()((set) => ({
   setFigmaPage: (page) => set({ figmaPage: page }),
   setLoadingPercentage: (percentage) => set({ loadingPercentage: percentage }),
   setEasyView: (easyView) => set({ easyView }),
+  setIsExporting: (isExporting) => set({ isExporting }),
 }))
 
 interface ScrollableBoxState {
@@ -62,11 +66,15 @@ export const useScrollableBoxStore = create<ScrollableBoxState>()(
 )
 
 type FigmaUser = { id?: string } | null
+type EditorType = 'figma' | 'slides' | 'buzz' | null
 type FigmaState = {
   selection: number
   user: FigmaUser
   error: string
   page: string
+  editorType: EditorType
+  nodeWidth: number
+  nodeHeight: number
 }
 type FigmaStore = {
   figma: FigmaState
@@ -74,7 +82,15 @@ type FigmaStore = {
 }
 
 export const useFigmaStore = create<FigmaStore>((set) => ({
-  figma: { selection: 0, user: null, error: '', page: '' },
+  figma: {
+    selection: 0,
+    user: null,
+    error: '',
+    page: '',
+    editorType: null,
+    nodeWidth: 0,
+    nodeHeight: 0,
+  },
   setFigma: (payload) =>
     set((prev) => ({ figma: { ...prev.figma, ...payload } })),
 }))

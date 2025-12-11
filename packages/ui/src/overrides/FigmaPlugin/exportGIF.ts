@@ -3,10 +3,22 @@ import { loadImage, sleep } from './utils'
 // import { workerStrBlob } from '../lib/gif.js/workerStr'
 
 let stopped = false
-export async function exportGIF(option, callback, controller) {
+export async function exportGIF(
+  option,
+  callback,
+  controller
+): Promise<{ bytes: Uint8Array; originalStyle: string }> {
   stopped = false
-  const { rangeStart, rangeEnd, setAnimate, setUTime, frameRate, grain } =
-    option
+  const {
+    rangeStart,
+    rangeEnd,
+    setAnimate,
+    setUTime,
+    frameRate,
+    grain,
+    nodeWidth,
+    nodeHeight,
+  } = option
 
   const frameRateInterval = 1 / frameRate
   const delay = frameRateInterval * 1000
@@ -15,8 +27,28 @@ export async function exportGIF(option, callback, controller) {
   setUTime(rangeStart)
   const duration = rangeEnd - rangeStart // seconds
   const totalFrames = Math.ceil(duration * frameRate)
-  console.log('totalFrames', totalFrames)
-  console.log('duration', duration)
+
+  // Get canvas container for resizing
+  const canvasContainer = document.getElementById('gradientCanvas')
+  const originalStyle = canvasContainer?.style.cssText || ''
+
+  // Resize canvas to target size (off-screen during export)
+  if (
+    canvasContainer &&
+    nodeWidth &&
+    nodeHeight &&
+    nodeWidth > 0 &&
+    nodeHeight > 0
+  ) {
+    canvasContainer.style.position = 'fixed'
+    canvasContainer.style.top = '-9999px'
+    canvasContainer.style.left = '-9999px'
+    canvasContainer.style.width = nodeWidth + 'px'
+    canvasContainer.style.height = nodeHeight + 'px'
+
+    window.dispatchEvent(new Event('resize'))
+    await sleep(0.5)
+  }
 
   return new Promise(async (resolve, reject) => {
     const frames = new Array(totalFrames).fill(0).map((_, i) => i)
@@ -27,49 +59,32 @@ export async function exportGIF(option, callback, controller) {
       stopped = true
       setAnimate('on')
       callback(-1)
-      reject(new Error('Export was cancelled'))
+      reject({ error: new Error('Export was cancelled'), originalStyle })
     })
 
     try {
-      // Always use GIFEncoderFast
       const gif = GIFEncoderFast()
 
-      // We use for 'of' to loop with async await
       for (let i of frames) {
-        // Check if stopped before each frame
-        if (stopped) {
-          break
-        }
-        // a t value 0..1 to animate the frame
+        if (stopped) break
+
         const playhead = rangeStart + i / frameRate
-        // render target frame
         setUTime(playhead)
 
         const [imageData, width, height]: any = await getImage()
         const { data } = imageData
 
-        // Choose a pixel format: rgba4444, rgb444, rgb565
         const format = 'rgb444'
-
-        // If necessary, quantize your colors to a reduced palette
         const palette = quantize(data, 256, { format })
-
-        // Apply palette to RGBA data to get an indexed bitmap
         const index = applyPalette(data, palette, format)
 
-        // Write frame into GIF
         await gif.writeFrame(index, width, height, { palette, delay })
-        console.log('GIF Frame has written')
-
-        await sleep(0.01) // add a break to share UI state updates (setProgress)
+        await sleep(0.01)
         callback(i / (totalFrames - 1))
       }
 
       if (!stopped) {
-        // Finalize stream
         gif.finish()
-
-        // Get a direct typed array view into the buffer to avoid copying it
         const buffer = gif.bytesView()
 
         if (option.destination === 'localFile') {
@@ -79,14 +94,15 @@ export async function exportGIF(option, callback, controller) {
 
         const b64 = await base64_arraybuffer(buffer)
         const dataURL = 'data:image/gif;base64,' + b64
+        const bytes = await gifToUint8Array(dataURL)
 
-        resolve(gifToUint8Array(dataURL))
+        resolve({ bytes, originalStyle })
       }
     } catch (error) {
       console.error('Export error:', error)
       setAnimate('on')
       callback(-1)
-      reject(error)
+      reject({ error, originalStyle })
     } finally {
       if (stopped) {
         setAnimate('on')

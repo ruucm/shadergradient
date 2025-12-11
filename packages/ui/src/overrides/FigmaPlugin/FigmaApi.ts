@@ -12,7 +12,7 @@ type ArgFreeEventType =
 export interface PluginAPI {
   readonly apiVersion: '1.0.0'
   readonly command: string
-  readonly editorType: 'figma' | 'figjam'
+  readonly editorType: 'figma' | 'slides' | 'buzz'
   readonly pluginId?: string
   readonly widgetId?: string
 
@@ -1512,8 +1512,9 @@ interface ActiveUser extends User {
 }
 
 import { exportGIF } from './exportGIF'
-import { exportImage } from './exportImage'
+import { exportImage, restoreCanvas } from './exportImage'
 import { exportVideo } from './exportVideo'
+import { useUIStore } from '../../store'
 
 //@ts-ignore
 export const figma: PluginAPI = {}
@@ -1542,37 +1543,93 @@ export const postFigmaMessageForExport = async (
   callback,
   controller
 ) => {
-  if (option.destination === 'onCanvas') {
-    const bytes = await exportGIF(option, callback, controller)
+  const { setIsExporting } = useUIStore.getState()
+  setIsExporting(true)
+
+  let originalStyle = ''
+
+  try {
+    const supportsVideoOnCanvas =
+      option.editorType === 'slides' || option.editorType === 'buzz'
+
+    if (option.destination === 'onCanvas') {
+      if (supportsVideoOnCanvas && option.format === 'webm') {
+        // Slides and Buzz support video on canvas
+        const result = await exportVideo(option, callback, controller)
+        originalStyle = result.originalStyle
+        if (result.bytes) {
+          parent.postMessage(
+            {
+              pluginMessage: {
+                type: 'SNAPSHOT_VIDEO',
+                code: getCodeString(callback),
+                bytes: result.bytes,
+              },
+            },
+            '*'
+          )
+        }
+        callback(-1)
+      } else {
+        // Figma/FigJam only support GIF on canvas
+        const result = await exportGIF(option, callback, controller)
+        originalStyle = result.originalStyle
+        parent.postMessage(
+          {
+            pluginMessage: {
+              type: 'SNAPSHOT_GIF',
+              code: getCodeString(callback),
+              bytes: result.bytes,
+            },
+          },
+          '*'
+        )
+        callback(-1)
+      }
+    } else if (option.destination === 'localFile') {
+      if (option.format === 'gif') {
+        const result = await exportGIF(option, callback, controller)
+        originalStyle = result.originalStyle
+      } else if (option.format === 'webm') {
+        const result = await exportVideo(option, callback, controller)
+        originalStyle = result.originalStyle
+      }
+      callback(-1)
+    }
+  } finally {
+    setIsExporting(false)
+    // Restore canvas AFTER hiding loading overlay
+    restoreCanvas(originalStyle)
+  }
+}
+
+export const postFigmaMessageForSnapShot = async (
+  func,
+  nodeWidth?: number,
+  nodeHeight?: number
+) => {
+  const { setIsExporting } = useUIStore.getState()
+  setIsExporting(true)
+
+  let originalStyle = ''
+  try {
+    const result = await exportImage(nodeWidth, nodeHeight)
+    originalStyle = result.originalStyle
+
     parent.postMessage(
       {
         pluginMessage: {
-          type: 'SNAPSHOT_GIF',
-          code: getCodeString(callback),
-          bytes,
+          type: 'SNAPSHOT',
+          //@ts-ignore
+          code: getCodeString(func),
+          bytes: result.bytes,
         },
       },
       '*'
     )
-  } else if (option.destination === 'localFile') {
-    if (option.format === 'gif') await exportGIF(option, callback, controller)
-    else if (option.format === 'webm')
-      await exportVideo(option, callback, controller)
+  } finally {
+    setIsExporting(false)
+    // Restore canvas AFTER hiding loading overlay
+    restoreCanvas(originalStyle)
   }
-}
-
-export const postFigmaMessageForSnapShot = async (func) => {
-  const bytes = await exportImage()
-
-  parent.postMessage(
-    {
-      pluginMessage: {
-        type: 'SNAPSHOT',
-        //@ts-ignore
-        code: getCodeString(func),
-        bytes,
-      },
-    },
-    '*'
-  )
 }

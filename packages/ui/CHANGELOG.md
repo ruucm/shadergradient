@@ -1,5 +1,11 @@
 # ui
 
+## 0.1.65
+
+### Patch Changes
+
+- figma plugin updates
+
 ## 0.1.64
 
 ### Patch Changes

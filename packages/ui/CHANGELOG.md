@@ -1,5 +1,11 @@
 # ui
 
+## 0.1.66
+
+### Patch Changes
+
+- fix TailwindWrapper
+
 ## 0.1.65
 
 ### Patch Changes

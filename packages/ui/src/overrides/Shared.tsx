@@ -1,7 +1,7 @@
 import type { ComponentType } from 'react'
 import { useUIStore } from '@/store'
 import { parseUrlForControls, isValidUrl } from './utils'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, forwardRef } from 'react'
 import {
   PRESETS,
   useURLQueryState,
@@ -99,52 +99,51 @@ export function UrlInput(Component): ComponentType {
 const href = 'https://ruucm.github.io/shadergradient/ui@latest/styles.css'
 
 export function TailwindWrapper(Component): ComponentType {
-  return (props: any) => {
-    const tailwindLoaded = useTailwind(href)
+  return forwardRef((props, ref) => {
+    // State to track if the CSS has finished loading
+    const [isLoaded, setIsLoaded] = useState(false)
 
-    // Remove Framer badge
     useEffect(() => {
-      const badge = document.getElementById('__framer-badge-container')
-      if (badge) badge.remove()
+      // 1. Prevent duplicates: Check if the link tag already exists in the head
+      let link = document.querySelector(
+        `link[href="${href}"]`
+      ) as HTMLLinkElement
+
+      if (!link) {
+        link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = href
+        document.head.appendChild(link)
+      }
+
+      // 2. Define the event handler for successful loading
+      const handleLoad = () => setIsLoaded(true)
+
+      // 3. Check if the stylesheet is already loaded (e.g., from cache or another component)
+      // If 'sheet' exists, the browser has already parsed the CSS.
+      if (link.sheet) {
+        setIsLoaded(true)
+      } else {
+        // Otherwise, wait for the load event
+        link.addEventListener('load', handleLoad)
+        link.addEventListener('error', () => {
+          console.error(`Failed to load CSS: ${href}`)
+          // Optionally set loaded to true to show unstyled content as a fallback
+          setIsLoaded(true)
+        })
+      }
+
+      // Cleanup: Remove event listeners on unmount
+      // We do NOT remove the <link> tag itself to keep styles available for other components
+      return () => {
+        link.removeEventListener('load', handleLoad)
+      }
     }, [])
 
-    return (
-      <Component
-        {...props}
-        style={{
-          ...props.style,
-          opacity: tailwindLoaded ? 1 : 0,
-        }}
-      />
-    )
-  }
-}
+    // 4. Block rendering until the CSS is fully loaded
+    // This prevents the "Flash of Unstyled Content" (FOUC)
+    if (!isLoaded) return null
 
-function useTailwind(href: string) {
-  const [loaded, setLoaded] = useState(false)
-
-  useEffect(() => {
-    // Prevent duplicate loading
-    const existingLink = Array.from(
-      document.head.querySelectorAll('link')
-    ).find((link) => link.href === href)
-
-    if (!existingLink) {
-      const link = document.createElement('link')
-      link.rel = 'stylesheet'
-      link.href = href
-      document.head.appendChild(link)
-
-      setLoaded(true)
-
-      return () => {
-        document.head.removeChild(link)
-      }
-    } else {
-      // Already loaded
-      setLoaded(true)
-    }
-  }, [])
-
-  return loaded
+    return <Component ref={ref} {...props} />
+  })
 }

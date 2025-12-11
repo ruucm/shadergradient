@@ -65,9 +65,39 @@ export function updateResolution({ setWidth, setHeight, pixelDensity }) {
   setHeight(Math.round(height * pixelDensity))
 }
 
-export function estimateSize({ format, duration, frameRate, pixelDensity }) {
+export function estimateSize({
+  format,
+  duration,
+  frameRate,
+  nodeWidth,
+  nodeHeight,
+}: {
+  format: string
+  duration: number
+  frameRate: number
+  nodeWidth?: number
+  nodeHeight?: number
+}) {
+  // Base coefficient per MB for each format (calibrated for ~320x320 base size)
   const p = format === 'webm' ? 0.00745 : 0.149
-  const value = p * duration * frameRate * pixelDensity * pixelDensity
+  const baseSize = 320 * 320 // reference preview canvas size
+
+  // Use actual export dimensions or fall back to base size
+  const exportPixels =
+    nodeWidth && nodeHeight && nodeWidth > 0 && nodeHeight > 0
+      ? nodeWidth * nodeHeight
+      : baseSize
+
+  const rawScaleFactor = exportPixels / baseSize
+
+  // GIF uses LZW compression which is more efficient at larger sizes
+  // (more repeating patterns to find). Use power of 0.7 for non-linear scaling.
+  // WebM (h264) scales more linearly with resolution.
+  const scaleFactor =
+    format === 'gif' ? Math.pow(rawScaleFactor, 0.7) : rawScaleFactor
+
+  const value = p * duration * frameRate * scaleFactor
+
   return Math.round(value * 10) / 10 // round to at most 2 decimal places
 }
 
@@ -101,14 +131,27 @@ export function useFigmaMessage() {
         case 'SELECTION':
           console.log(
             '[useFigmaMessage] Selection count:',
-            msg.selection.length
+            msg.selection.length,
+            'Node size:',
+            msg.nodeWidth,
+            'x',
+            msg.nodeHeight
           )
-          setFigma({ selection: msg.selection.length })
+          setFigma({
+            selection: msg.selection.length,
+            nodeWidth: msg.nodeWidth || 0,
+            nodeHeight: msg.nodeHeight || 0,
+          })
           break
 
         case 'USER_INFO':
           console.log('[useFigmaMessage] User info received:', msg.user?.id)
           setFigma({ user: msg.user })
+          break
+
+        case 'EDITOR_TYPE':
+          console.log('[useFigmaMessage] Editor type received:', msg.editorType)
+          setFigma({ editorType: msg.editorType })
           break
 
         default:

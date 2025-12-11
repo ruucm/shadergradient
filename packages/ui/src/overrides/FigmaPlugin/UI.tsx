@@ -59,7 +59,12 @@ export function insertCanvasAsImage(Component): ComponentType {
           PointerEvent: enabled ? 'auto' : 'none',
         }}
         onClick={() => {
-          if (enabled) postFigmaMessageForSnapShot(() => void 0)
+          if (enabled)
+            postFigmaMessageForSnapShot(
+              () => void 0,
+              figma.nodeWidth,
+              figma.nodeHeight
+            )
           else setError('Please select a frame on the canvas') // move to the alert variant
         }}
       />
@@ -79,7 +84,6 @@ export function OpenGIFPage(Component): ComponentType {
 
     const [, setRangeStart] = useQueryState('rangeStart')
     const [, setRangeEnd] = useQueryState('rangeEnd')
-    const [, setPixelDensity] = useQueryState('pixelDensity')
     const [, setToggleAxis] = useQueryState('toggleAxis')
     const [, setZoomOut] = useQueryState('zoomOut')
     const [, setAnimate] = useQueryState('animate')
@@ -106,7 +110,6 @@ export function OpenGIFPage(Component): ComponentType {
           console.log('onClick GIF')
           setAnimate('on')
           setRange('enabled')
-          setPixelDensity(2)
           setToggleAxis(false)
           setZoomOut(false)
           setFigmaPage('gif')
@@ -200,14 +203,28 @@ export function extractGIF(Component): ComponentType {
 
     const [titleText, setTitleText] = useState('')
 
+    // Check if we're in Slides or Buzz (supports video on canvas)
+    const supportsVideoOnCanvas =
+      figma.editorType === 'slides' || figma.editorType === 'buzz'
+
     useEffect(() => {
-      const newTitleText = needSubscribe
-        ? 'Upgrade to Pro'
-        : destination === 'onCanvas'
-        ? 'Add GIF to canvas'
-        : 'Download'
+      let newTitleText = 'Download'
+
+      if (needSubscribe) {
+        newTitleText = 'Upgrade to Pro'
+      } else if (destination === 'onCanvas') {
+        if (supportsVideoOnCanvas && format === 'webm') {
+          newTitleText = 'Add video to canvas'
+        } else {
+          newTitleText = 'Add GIF to canvas'
+        }
+      } else {
+        // localFile
+        newTitleText = format === 'webm' ? 'Download video' : 'Download GIF'
+      }
+
       setTitleText(newTitleText)
-    }, [destination, needSubscribe])
+    }, [destination, needSubscribe, format, supportsVideoOnCanvas])
 
     const creditText = `(${trialLeft} days left)`
 
@@ -221,12 +238,29 @@ export function extractGIF(Component): ComponentType {
     }, [rangeStart, rangeEnd, loop, loopDuration])
 
     useEffect(() => {
-      setSize(estimateSize({ format, duration, frameRate, pixelDensity }))
+      setSize(
+        estimateSize({
+          format,
+          duration,
+          frameRate,
+          nodeWidth: figma.nodeWidth,
+          nodeHeight: figma.nodeHeight,
+        })
+      )
 
       setTimeout(() => {
         updateResolution({ setWidth, setHeight, pixelDensity })
       }, 100) // need a delay until the canvas dom mounted
-    }, [format, duration, pixelDensity, frameRate, loop, loopDuration])
+    }, [
+      format,
+      duration,
+      pixelDensity,
+      frameRate,
+      loop,
+      loopDuration,
+      figma.nodeWidth,
+      figma.nodeHeight,
+    ])
 
     // handle resize plugin
     useLayoutEffect(() => {
@@ -238,15 +272,24 @@ export function extractGIF(Component): ComponentType {
     }, [pixelDensity])
 
     const valid = animate === 'on' && range === 'enabled' && size < 300
+
+    // Use loopDuration when loop is enabled, otherwise use rangeEnd
+    const effectiveRangeEnd =
+      loop === 'on' && loopDuration ? loopDuration : rangeEnd
+    const effectiveRangeStart = loop === 'on' ? 0 : rangeStart
+
     const option = {
-      rangeStart,
-      rangeEnd,
+      rangeStart: effectiveRangeStart,
+      rangeEnd: effectiveRangeEnd,
       setAnimate,
       setUTime,
       frameRate,
       destination,
       format,
       grain,
+      editorType: figma.editorType,
+      nodeWidth: figma.nodeWidth,
+      nodeHeight: figma.nodeHeight,
     }
 
     // Function to update uTime based on elapsed time
@@ -455,6 +498,8 @@ export function EstimatedSize(Component): ComponentType {
     const [loop] = useQueryState('loop')
     const [loopDuration] = useQueryState('loopDuration')
 
+    const [figma] = useFigma()
+
     const [duration, setDuration] = useState(rangeEnd - rangeStart)
     const [size, setSize] = useState(0)
     const setError = useUIStore((state: any) => state.setError)
@@ -469,8 +514,16 @@ export function EstimatedSize(Component): ComponentType {
     }, [rangeStart, rangeEnd, loop, loopDuration])
 
     useEffect(() => {
-      setSize(estimateSize({ format, duration, frameRate, pixelDensity }))
-    }, [format, duration, pixelDensity, frameRate])
+      setSize(
+        estimateSize({
+          format,
+          duration,
+          frameRate,
+          nodeWidth: figma.nodeWidth,
+          nodeHeight: figma.nodeHeight,
+        })
+      )
+    }, [format, duration, frameRate, figma.nodeWidth, figma.nodeHeight])
 
     useEffect(() => {
       if (size > 300 && destination === 'onCanvas' && figmaPage === 'gif') {
@@ -977,6 +1030,86 @@ export function FigmaUrlInput(Component): ComponentType {
           } else {
             setValid(false)
           }
+        }}
+      />
+    )
+  }
+}
+
+// 🟢 Destination Control - connects Framer toggle to setDestination
+export function DestinationControl(Component): ComponentType {
+  return ({ style, ...props }: any) => {
+    const [destination, setDestination] = useQueryState('destination')
+
+    return (
+      <Component
+        {...props}
+        style={{ ...style, width: '100%' }}
+        variant={destination === 'onCanvas' ? 'onCanvas' : 'localFile'}
+        onTapOnCanvas={() => setDestination('onCanvas')}
+        onTapLocalFile={() => setDestination('localFile')}
+      />
+    )
+  }
+}
+
+// 🟢 Format Control - show/hide format control based on editor type and destination
+// Hidden when: Figma + onCanvas (only GIF is supported)
+// Visible when: localFile OR Slides/Buzz (both GIF and WebM available)
+// Also includes WidthFillOnLoad functionality
+export function FormatControl(Component): ComponentType {
+  return ({ style, ...props }: any) => {
+    const [figma] = useFigma()
+    const [destination] = useQueryState('destination')
+    const [format, setFormat] = useQueryState('format')
+
+    const supportsVideoOnCanvas =
+      figma.editorType === 'slides' || figma.editorType === 'buzz'
+
+    // Show format control when localFile OR in Slides/Buzz
+    const showFormatControl =
+      destination === 'localFile' || supportsVideoOnCanvas
+
+    // If WebM is selected but not available (Figma + onCanvas), switch to GIF
+    useEffect(() => {
+      if (format === 'webm' && !showFormatControl) {
+        setFormat('gif')
+      }
+    }, [destination, showFormatControl, format, setFormat])
+
+    // Default to WebM for Slides/Buzz when destination is onCanvas
+    useEffect(() => {
+      if (supportsVideoOnCanvas && destination === 'onCanvas') {
+        setFormat('webm')
+      }
+    }, [destination, supportsVideoOnCanvas, setFormat])
+
+    return (
+      <Component
+        {...props}
+        style={{
+          ...style,
+          display: showFormatControl ? 'flex' : 'none',
+          width: '100%',
+        }}
+      />
+    )
+  }
+}
+
+// 🟢 LOADING OVERLAY - Shows during export
+export function ExportLoadingOverlay(Component): ComponentType {
+  return (props: any) => {
+    const isExporting = useUIStore((state: any) => state.isExporting)
+
+    return (
+      <Component
+        {...props}
+        style={{
+          ...props.style,
+          display: isExporting ? 'flex' : 'none',
+          opacity: isExporting ? 1 : 0,
+          transition: 'opacity 0.3s ease-in-out',
         }}
       />
     )

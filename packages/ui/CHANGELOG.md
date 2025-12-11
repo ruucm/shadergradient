@@ -1,5 +1,11 @@
 # ui
 
+## 0.1.67
+
+### Patch Changes
+
+- fix NumberInput.tsx & figma plugin manifest
+
 ## 0.1.66
 
 ### Patch Changes

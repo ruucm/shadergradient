@@ -24,6 +24,13 @@ export type MeshT = {
   uDensity?: number
   uFrequency?: number
   uAmplitude?: number
+  uDistortion?: number
+  uNoiseScale?: number
+  uChromaticAberration?: number
+  uTransmission?: number
+  uRefraction?: number
+  uIridescenceStrength?: number
+  uFresnelPower?: number
   // Range controls
   range?: 'enabled' | 'disabled' | string
   rangeStart?: number

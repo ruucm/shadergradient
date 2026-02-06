@@ -32,6 +32,13 @@ export function Mesh({
   uStrength,
   uFrequency,
   uAmplitude,
+  uDistortion,
+  uNoiseScale,
+  uChromaticAberration,
+  uTransmission,
+  uRefraction,
+  uIridescenceStrength,
+  uFresnelPower,
 
   shader,
 }: MeshT) {
@@ -75,9 +82,26 @@ export function Mesh({
         }
       : {}
 
+  const transmissionUniforms =
+    shader === 'transmission'
+      ? {
+          uColor1: colorToRgb(color1),
+          uColor2: colorToRgb(color2),
+          uColor3: colorToRgb(color3),
+          uTransmission: uTransmission ?? 0.4,
+          uRefraction: uRefraction ?? 1.2,
+          uChromaticAberration: uChromaticAberration ?? 0.2,
+          uFresnelPower: uFresnelPower ?? 2.4,
+          uIridescenceStrength: uIridescenceStrength ?? 0.4,
+          uNoiseScale: uNoiseScale ?? 1.4,
+          uDistortion: uDistortion ?? 0.18,
+        }
+      : {}
+
   const uniforms = {
     ...baseUniforms,
     ...glassUniforms,
+    ...transmissionUniforms,
   }
 
   return (

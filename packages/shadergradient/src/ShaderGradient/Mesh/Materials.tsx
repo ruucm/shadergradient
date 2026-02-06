@@ -46,12 +46,14 @@ export const Materials = ({
     }, {})
 
     // Material configuration based on shader type
-    const materialConfig = {
+    const materialConfig: THREE.MeshPhysicalMaterialParameters = {
       userData: uniformValues, // sync uniform and userData to update uniforms from outside (MeshPhysicalMaterial)
-      metalness: shader === 'glass' ? 0.0 : 0.2,
+      metalness: shader === 'glass' || shader === 'transmission' ? 0.0 : 0.2,
       roughness:
         shader === 'glass'
           ? 0.1
+          : shader === 'transmission'
+          ? 0.08
           : 1 - (typeof reflection === 'number' ? reflection : 0.1),
       side: THREE.DoubleSide,
       onBeforeCompile: (shader) => {
@@ -76,6 +78,18 @@ export const Materials = ({
       materialConfig.clearcoatRoughness = 0.0
       materialConfig.ior = 1.5
       materialConfig.envMapIntensity = 1.0
+    }
+    if (shader === 'transmission') {
+      materialConfig.transparent = true
+      materialConfig.opacity = 0.4
+      materialConfig.transmission = 1.0
+      materialConfig.thickness = 0.9
+      materialConfig.clearcoat = 0.8
+      materialConfig.clearcoatRoughness = 0.05
+      materialConfig.ior = 1.25
+      materialConfig.attenuationColor = new THREE.Color(colors?.[0] ?? '#ffffff')
+      materialConfig.attenuationDistance = 1.4
+      materialConfig.envMapIntensity = 1.1
     }
 
     const material = new THREE.MeshPhysicalMaterial(materialConfig)

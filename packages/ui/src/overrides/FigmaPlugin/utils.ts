@@ -3,48 +3,65 @@ import { useDBTable } from './useDBTable'
 import { useEffect, useRef } from 'react'
 
 // ---------- AUTH RELATED -----------
-export async function signUpToSupabaseAuth(supabase: any, email: string) {
-  if (!supabase || !email) return
+export async function signInOrSignUp(
+  supabase: any,
+  email: string,
+  figmaUserId: string
+) {
+  if (!supabase || !email || !figmaUserId) return null
 
   try {
-    const { data, error } = await supabase.auth.signUp({
-      email,
-      password: crypto.randomUUID(),
-    })
+    // Try signIn first (for returning users)
+    const { data: signInData, error: signInError } =
+      await supabase.auth.signInWithPassword({
+        email,
+        password: figmaUserId,
+      })
 
-    if (error) {
-      if (error.message?.includes('already registered')) {
-        console.log(
-          '[signUpToSupabaseAuth] User already registered in Auth:',
-          email
-        )
-        return
-      }
-      console.error('[signUpToSupabaseAuth] Error:', error.message)
-      return
+    if (!signInError && signInData?.session) {
+      console.log(
+        '[signInOrSignUp] Signed in successfully:',
+        signInData.user?.id
+      )
+      return signInData
+    }
+
+    // If signIn fails, try signUp (for new users)
+    const { data: signUpData, error: signUpError } =
+      await supabase.auth.signUp({
+        email,
+        password: figmaUserId,
+      })
+
+    if (signUpError) {
+      console.error('[signInOrSignUp] SignUp error:', signUpError.message)
+      return null
     }
 
     console.log(
-      '[signUpToSupabaseAuth] User signed up in Auth:',
-      data?.user?.id
+      '[signInOrSignUp] Signed up successfully:',
+      signUpData?.user?.id
     )
+    return signUpData
   } catch (err) {
-    console.error('[signUpToSupabaseAuth] Unexpected error:', err)
+    console.error('[signInOrSignUp] Unexpected error:', err)
+    return null
   }
 }
 
-// Ensure existing DB user is also registered in Supabase Auth
+// Ensure existing DB user is also registered & signed in to Supabase Auth
 export function useEnsureAuthSignUp() {
   const [userDB] = useUserDB('auth-ensure-channel')
+  const [figma] = useFigma()
   const supabase = useSupabaseStore((state) => state.supabase)
   const calledRef = useRef(false)
 
   useEffect(() => {
-    if (userDB?.email && supabase && !calledRef.current) {
+    if (userDB?.email && figma.user?.id && supabase && !calledRef.current) {
       calledRef.current = true
-      signUpToSupabaseAuth(supabase, userDB.email)
+      signInOrSignUp(supabase, userDB.email, figma.user.id)
     }
-  }, [userDB?.email, supabase])
+  }, [userDB?.email, figma.user?.id, supabase])
 }
 
 // ---------- SUBSCRIPTION RELATED -----------

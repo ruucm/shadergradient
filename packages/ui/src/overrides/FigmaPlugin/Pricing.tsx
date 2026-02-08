@@ -20,7 +20,7 @@ import {
   useSubscription,
   useUserDB,
   useEnsureAuthSignUp,
-  signUpToSupabaseAuth,
+  signInOrSignUp,
 } from './utils'
 
 
@@ -173,14 +173,14 @@ export function StartTrial(Component): ComponentType {
       return (
         <Component
           {...props}
-          onSubmit={(email) => {
+          onSubmit={async (email) => {
             if (!figma_user_id) {
               console.error('[StartTrial] figma_user_id is missing')
               return
             }
+            // Register in Supabase Auth first (creates session for RLS)
+            await signInOrSignUp(supabase, email, figma_user_id)
             insertRow({ email, figma_user_id, trial_started_at: new Date() })
-            // Also register in Supabase Auth
-            signUpToSupabaseAuth(supabase, email)
             props?.onSubmit()
           }}
         />

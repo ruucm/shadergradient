@@ -1,5 +1,11 @@
 # ui
 
+## 0.1.69
+
+### Patch Changes
+
+- fix: signInOrSignUp
+
 ## 0.1.68
 
 ### Patch Changes

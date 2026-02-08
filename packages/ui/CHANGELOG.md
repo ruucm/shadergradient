@@ -1,5 +1,11 @@
 # ui
 
+## 0.1.68
+
+### Patch Changes
+
+- signUpToSupabaseAuth
+
 ## 0.1.67
 
 ### Patch Changes

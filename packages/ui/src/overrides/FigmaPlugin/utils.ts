@@ -1,6 +1,51 @@
-import { useFigma } from '@/store'
+import { useFigma, useSupabaseStore } from '@/store'
 import { useDBTable } from './useDBTable'
-import { useEffect } from 'react'
+import { useEffect, useRef } from 'react'
+
+// ---------- AUTH RELATED -----------
+export async function signUpToSupabaseAuth(supabase: any, email: string) {
+  if (!supabase || !email) return
+
+  try {
+    const { data, error } = await supabase.auth.signUp({
+      email,
+      password: crypto.randomUUID(),
+    })
+
+    if (error) {
+      if (error.message?.includes('already registered')) {
+        console.log(
+          '[signUpToSupabaseAuth] User already registered in Auth:',
+          email
+        )
+        return
+      }
+      console.error('[signUpToSupabaseAuth] Error:', error.message)
+      return
+    }
+
+    console.log(
+      '[signUpToSupabaseAuth] User signed up in Auth:',
+      data?.user?.id
+    )
+  } catch (err) {
+    console.error('[signUpToSupabaseAuth] Unexpected error:', err)
+  }
+}
+
+// Ensure existing DB user is also registered in Supabase Auth
+export function useEnsureAuthSignUp() {
+  const [userDB] = useUserDB('auth-ensure-channel')
+  const supabase = useSupabaseStore((state) => state.supabase)
+  const calledRef = useRef(false)
+
+  useEffect(() => {
+    if (userDB?.email && supabase && !calledRef.current) {
+      calledRef.current = true
+      signUpToSupabaseAuth(supabase, userDB.email)
+    }
+  }, [userDB?.email, supabase])
+}
 
 // ---------- SUBSCRIPTION RELATED -----------
 export function useUserDB(channel = 'sg-figma-hook') {

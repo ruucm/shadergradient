@@ -3,6 +3,7 @@ import { ComponentType } from 'react'
 import {
   useFigma,
   useBillingInterval,
+  useSupabaseStore,
 } from '../../store'
 
 import { useDBTable } from './useDBTable'
@@ -15,7 +16,12 @@ import {
 
 
 
-import { useSubscription, useUserDB } from './utils'
+import {
+  useSubscription,
+  useUserDB,
+  useEnsureAuthSignUp,
+  signUpToSupabaseAuth,
+} from './utils'
 
 
   
@@ -24,6 +30,8 @@ import { useSubscription, useUserDB } from './utils'
     return (props) => {
       const [subscription, subDBLoading] = useSubscription('userInfo-channel')
       const [userDB] = useUserDB('sg-info')
+      // Ensure existing DB user is registered in Supabase Auth
+      useEnsureAuthSignUp()
       console.log('[userInfo] subscription:', subscription)
       console.log('[userInfo] userDB:', userDB)
   
@@ -157,10 +165,11 @@ export function StartTrial(Component): ComponentType {
     return (props: any) => {
       const [figma] = useFigma()
       const figma_user_id = figma.user?.id
+      const supabase = useSupabaseStore((state) => state.supabase)
       const { insertRow } = useDBTable('users', 'sg-figma-t', {
         enabled: false, // No fetch needed, only use insert
       })
-  
+
       return (
         <Component
           {...props}
@@ -170,6 +179,8 @@ export function StartTrial(Component): ComponentType {
               return
             }
             insertRow({ email, figma_user_id, trial_started_at: new Date() })
+            // Also register in Supabase Auth
+            signUpToSupabaseAuth(supabase, email)
             props?.onSubmit()
           }}
         />

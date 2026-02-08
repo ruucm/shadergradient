@@ -4,14 +4,12 @@ import {
   getTrialLeft,
   loadImage,
   parseUrlToCode,
-  signInOrSignUp,
   sleep,
   updateResolution,
-  useEnsureAuthSignUp,
   useFigmaMessage,
   useSubscription,
   useUserDB
-} from "../../chunk-UJZU5UDY.mjs";
+} from "../../chunk-O24SW53Z.mjs";
 import "../../chunk-UMQJMRW4.mjs";
 import "../../chunk-R6GBIJ5D.mjs";
 import "../../chunk-NP5XZW6Z.mjs";
@@ -22,10 +20,8 @@ export {
   getTrialLeft,
   loadImage,
   parseUrlToCode,
-  signInOrSignUp,
   sleep,
   updateResolution,
-  useEnsureAuthSignUp,
   useFigmaMessage,
   useSubscription,
   useUserDB

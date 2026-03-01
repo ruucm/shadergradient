@@ -59,11 +59,14 @@ export function ShaderGradientCanvas({
       {(!lazyLoad || isInView) && (
         <Context.Provider value={contextValue}>
           <Canvas
-            id='gradientCanvas' // need id to get an image to Figma export
             key={pixelDensity + fov} // need to refresh the canvas when pixelDensity or fov changes
             style={{ pointerEvents }}
             resize={{ offsetSize: true }}
             className={className}
+            onCreated={({ gl }) => {
+              // need id to get an image to Figma export
+              gl.domElement.id = 'gradientCanvas'
+            }}
             {...canvasProps(pixelDensity, fov, {
               preserveDrawingBuffer,
               powerPreference,

@@ -26,6 +26,7 @@ type ShaderGradientCanvasProps = {
 const Context = createContext<ShaderGradientCanvasContext>(
   {} as ShaderGradientCanvasContext
 )
+const CanvasCompat = Canvas as unknown as React.ComponentType<any>
 
 export const useShaderGradientCanvasContext = () => {
   return useContext<ShaderGradientCanvasContext>(Context)
@@ -53,27 +54,23 @@ export function ShaderGradientCanvas({
   )
 
   useShaderChunkFix()
-
   return (
     <div ref={containerRef} style={{ width: '100%', height: '100%', ...style }}>
       {(!lazyLoad || isInView) && (
         <Context.Provider value={contextValue}>
-          <Canvas
+          <CanvasCompat
+            id='gradientCanvas' // need id to get an image to Figma export
             key={pixelDensity + fov} // need to refresh the canvas when pixelDensity or fov changes
             style={{ pointerEvents }}
             resize={{ offsetSize: true }}
             className={className}
-            onCreated={({ gl }) => {
-              // need id to get an image to Figma export
-              gl.domElement.id = 'gradientCanvas'
-            }}
             {...canvasProps(pixelDensity, fov, {
               preserveDrawingBuffer,
               powerPreference,
             })}
           >
             {children as any}
-          </Canvas>
+          </CanvasCompat>
         </Context.Provider>
       )}
     </div>

@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { Vector2, Vector3, Color, ColorRepresentation } from 'three'
-import { ReactThreeFiber, useThree } from '@react-three/fiber'
+import { ThreeElement, useThree } from '@react-three/fiber'
 import {
   LineGeometry,
   LineMaterial,
@@ -15,11 +15,8 @@ export type LineProps = {
   vertexColors?: Array<Color | [number, number, number]>
   lineWidth?: number
 } & Omit<LineMaterialParameters, 'vertexColors' | 'color'> &
-  Omit<ReactThreeFiber.Object3DNode<Line2, typeof Line2>, 'args'> &
-  Omit<
-    ReactThreeFiber.Object3DNode<LineMaterial, [LineMaterialParameters]>,
-    'color' | 'vertexColors' | 'args'
-  > & {
+  Omit<ThreeElement<typeof Line2>, 'args'> &
+  Omit<ThreeElement<typeof LineMaterial>, 'color' | 'vertexColors' | 'args'> & {
     color?: ColorRepresentation
   }
 

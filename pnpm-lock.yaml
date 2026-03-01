@@ -498,9 +498,6 @@ importers:
       concurrently:
         specifier: ^9.2.1
         version: 9.2.1
-      framer:
-        specifier: ^2.4.1
-        version: 2.4.1(framer-motion@12.23.26(@emotion/is-prop-valid@0.8.8)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
       globby:
         specifier: ^14.1.0
         version: 14.1.0
@@ -12077,16 +12074,6 @@ snapshots:
       react: 18.3.1
       react-dom: 19.2.3(react@18.3.1)
 
-  framer-motion@12.23.26(@emotion/is-prop-valid@0.8.8)(react-dom@19.2.3(react@19.2.3))(react@19.2.3):
-    dependencies:
-      motion-dom: 12.23.23
-      motion-utils: 12.23.6
-      tslib: 2.8.1
-    optionalDependencies:
-      '@emotion/is-prop-valid': 0.8.8
-      react: 19.2.3
-      react-dom: 19.2.3(react@19.2.3)
-
   framer-plugin@1.1.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
     dependencies:
       react: 18.3.1
@@ -12116,17 +12103,6 @@ snapshots:
       hsluv: 0.0.3
       react: 18.3.1
       react-dom: 19.2.3(react@18.3.1)
-
-  framer@2.4.1(framer-motion@12.23.26(@emotion/is-prop-valid@0.8.8)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react-dom@19.2.3(react@19.2.3))(react@19.2.3):
-    dependencies:
-      '@juggle/resize-observer': 3.4.0
-      eventemitter3: 3.1.2
-      fontfaceobserver: 2.3.0
-      framer-motion: 12.23.26(@emotion/is-prop-valid@0.8.8)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
-      hoist-non-react-statics: 3.3.2
-      hsluv: 0.0.3
-      react: 19.2.3
-      react-dom: 19.2.3(react@19.2.3)
 
   from2@2.3.0:
     dependencies:

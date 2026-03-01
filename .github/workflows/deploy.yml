@@ -55,5 +55,9 @@ jobs:
           git config --global user.name 'deploy'
           git config --global user.email 'deploy@users.noreply.github.com'
           git add .
+          if git diff --cached --quiet; then
+            echo "No changes to commit"
+            exit 0
+          fi
           git commit -m "Updated"
           git push --force

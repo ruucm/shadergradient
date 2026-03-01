@@ -69,7 +69,7 @@ export function ShaderGradientCanvas({
               powerPreference,
             })}
           >
-            {children}
+            {children as any}
           </Canvas>
         </Context.Provider>
       )}

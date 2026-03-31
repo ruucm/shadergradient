@@ -1,0 +1,3 @@
+[   62333ms] [WARNING] WARNING: Too many active WebGL contexts. Oldest context will be lost. @ webpack-internal:///(app-pages-browser)/../../node_modules/.pnpm/three@0.169.0/node_modules/three/build/three.module.js:29362
+[   62340ms] [WARNING] WARNING: Too many active WebGL contexts. Oldest context will be lost. @ webpack-internal:///(app-pages-browser)/../../node_modules/.pnpm/three@0.169.0/node_modules/three/build/three.module.js:29362
+[   62723ms] [WARNING] THREE.WebGLRenderer: WEBGL_lose_context extension not supported. @ webpack-internal:///(app-pages-browser)/../../node_modules/.pnpm/three@0.169.0/node_modules/three/build/three.module.js:1983

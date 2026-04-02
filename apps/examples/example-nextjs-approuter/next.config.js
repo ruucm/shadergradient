@@ -18,7 +18,11 @@ const nextConfig = {
   // },
   reactStrictMode: true, // Recommended for the `pages` directory, default in `app`.
   images: {},
+  transpilePackages: ['@shadergradient/react'],
   webpack(config, { isServer }) {
+    // Ensure webpack can resolve ESM-only packages with exports field
+    config.resolve.conditionNames = ['import', 'module', 'require', 'default']
+
     if (!isServer) {
       // We're in the browser build, so we can safely exclude the sharp module
       config.externals.push('sharp')

@@ -1,0 +1,24 @@
+// src/ShaderGradient/Axis/useCamera.tsx
+import * as React from "react";
+import { Raycaster, Camera } from "three";
+import { useThree, applyProps } from "@react-three/fiber";
+function useCamera(camera, props) {
+  const pointer = useThree((state) => state.pointer);
+  const [raycast] = React.useState(() => {
+    const raycaster = new Raycaster();
+    if (props) applyProps(raycaster, props, {});
+    return function(_, intersects) {
+      raycaster.setFromCamera(
+        pointer,
+        camera instanceof Camera ? camera : camera.current
+      );
+      const rc = this.constructor.prototype.raycast.bind(this);
+      if (rc) rc(raycaster, intersects);
+    };
+  });
+  return raycast;
+}
+
+export {
+  useCamera
+};

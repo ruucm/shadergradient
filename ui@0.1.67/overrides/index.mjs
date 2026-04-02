@@ -3,7 +3,7 @@ import "../chunk-JATPNCR2.mjs";
 import {
   Price,
   TogglePrice
-} from "../chunk-GISSEJFZ.mjs";
+} from "../chunk-PA6J5L3Z.mjs";
 import {
   CenterCrop1,
   CenterCrop2,
@@ -19,7 +19,7 @@ import {
   fpsCount,
   memoryUsage,
   wordHighlightText
-} from "../chunk-GD6HMUGA.mjs";
+} from "../chunk-6UBYBXED.mjs";
 import {
   ArrowLeft,
   ArrowRight,
@@ -38,7 +38,7 @@ import {
   time,
   toggleSmartComp,
   withClickOutsideClosed
-} from "../chunk-SJZJCCP5.mjs";
+} from "../chunk-WBZ5ILI3.mjs";
 import "../chunk-425BLYMY.mjs";
 import "../chunk-AGDIGZ2U.mjs";
 import {
@@ -51,7 +51,7 @@ import {
   upgradingText,
   userEmail,
   userInfo
-} from "../chunk-J5ZWSB6U.mjs";
+} from "../chunk-Z7Z6Q2BI.mjs";
 import {
   ColorsTab,
   ConnectFigmaMessage,
@@ -82,10 +82,10 @@ import {
   extractGIF,
   goBack,
   insertCanvasAsImage
-} from "../chunk-5VPO3WLL.mjs";
-import "../chunk-UIHSQKCH.mjs";
+} from "../chunk-UG3XKZUP.mjs";
+import "../chunk-Z33LBT62.mjs";
 import "../chunk-VQME7MQ6.mjs";
-import "../chunk-3VGG4ZI2.mjs";
+import "../chunk-KUEOFNRO.mjs";
 import "../chunk-YFGZA6BU.mjs";
 import "../chunk-BGA6FIQU.mjs";
 import "../chunk-CK47F4LN.mjs";
@@ -94,14 +94,14 @@ import "../chunk-64EKMGYT.mjs";
 import "../chunk-BI4IT72G.mjs";
 import "../chunk-XKMCKCFY.mjs";
 import "../chunk-2WMPBKSG.mjs";
-import "../chunk-LSFLUJDF.mjs";
-import "../chunk-7DS5IN6Z.mjs";
-import "../chunk-O24SW53Z.mjs";
-import "../chunk-UMQJMRW4.mjs";
+import "../chunk-HMQCGCVV.mjs";
+import "../chunk-6RYZ6QFC.mjs";
+import "../chunk-OEA2TGNC.mjs";
+import "../chunk-DOD4RXA3.mjs";
 import {
   AddToCanvas,
   updateTheme
-} from "../chunk-TGUBEWSX.mjs";
+} from "../chunk-2MD26VDR.mjs";
 import {
   CurrentPreset,
   HideBanner,
@@ -109,21 +109,21 @@ import {
   UrlInput,
   togglePreset,
   toggleUrl
-} from "../chunk-V3EAFMCM.mjs";
+} from "../chunk-RVCTZZOG.mjs";
 import "../chunk-2ZZ6H7J7.mjs";
-import "../chunk-4QCA3AWF.mjs";
-import "../chunk-EAFV6DTZ.mjs";
-import "../chunk-YNCXEE5A.mjs";
-import "../chunk-HLHO6DZG.mjs";
-import "../chunk-3TVNMPH3.mjs";
-import "../chunk-YDTEP3DZ.mjs";
-import "../chunk-MKH7JDZ4.mjs";
-import "../chunk-I5E26MJT.mjs";
-import "../chunk-UIXDPZLL.mjs";
-import "../chunk-6T37OWYT.mjs";
-import "../chunk-R6GBIJ5D.mjs";
-import "../chunk-NP5XZW6Z.mjs";
-import "../chunk-HXGKXP63.mjs";
+import "../chunk-KLHNPHIY.mjs";
+import "../chunk-IQHDBR3B.mjs";
+import "../chunk-WKZQT6XY.mjs";
+import "../chunk-RUKLYQNO.mjs";
+import "../chunk-WJB4TCVR.mjs";
+import "../chunk-FN3HXEFK.mjs";
+import "../chunk-GZUYEFR2.mjs";
+import "../chunk-IKNEA3HI.mjs";
+import "../chunk-RGHJXNDI.mjs";
+import "../chunk-CF66W5N3.mjs";
+import "../chunk-OG6O7WQ3.mjs";
+import "../chunk-R5A6UVEJ.mjs";
+import "../chunk-S4634TOL.mjs";
 export {
   AddToCanvas,
   ArrowLeft,

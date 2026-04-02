@@ -1,4 +1,4 @@
-import "../../../chunk-5BEQP2BQ.mjs";
+import "../../../chunk-CU5I7XXF.mjs";
 
 // src/ShaderGradient/Lights/Environment/environment-assets.ts
 var presetsObj = {

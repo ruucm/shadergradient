@@ -1,4 +1,4 @@
-import "../../chunk-5BEQP2BQ.mjs";
+import "../../chunk-CU5I7XXF.mjs";
 
 // src/shaders/base/vertex.glsl
 var vertex_default = "varying vec3 fragPos;\nuniform float uTime;\nuniform float uAmplitude;\n\nvoid main() {\n    // Calculate z-offset based on time and position\n    float zOffset = sin(position.x + uTime) * uAmplitude + cos(position.y + uTime) * uAmplitude;\n    \n    // Apply the offset to the vertex position\n    vec3 newPosition = vec3(position.x, position.y, position.z + zOffset);\n    \n    fragPos = newPosition;\n    gl_Position = projectionMatrix * modelViewMatrix * vec4(newPosition, 1.0);\n}";

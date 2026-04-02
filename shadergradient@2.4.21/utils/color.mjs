@@ -2,7 +2,7 @@ import {
   colorToRgb,
   formatColor
 } from "../chunk-BI5IV7LU.mjs";
-import "../chunk-5BEQP2BQ.mjs";
+import "../chunk-CU5I7XXF.mjs";
 export {
   colorToRgb,
   formatColor

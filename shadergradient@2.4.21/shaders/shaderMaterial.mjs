@@ -1,15 +1,11 @@
 import {
-  DoubleSide,
-  MeshPhysicalMaterial,
-  UniformsUtils
-} from "../chunk-BT6X4JN2.mjs";
-import {
   __spreadValues
-} from "../chunk-5BEQP2BQ.mjs";
+} from "../chunk-CU5I7XXF.mjs";
 
 // src/shaders/shaderMaterial.ts
+import * as THREE from "three";
 function shaderMaterial(uniforms, vertexShader, fragmentShader, onInit) {
-  return class extends MeshPhysicalMaterial {
+  return class extends THREE.MeshPhysicalMaterial {
     constructor() {
       const entries = Object.entries(uniforms);
       const colors = uniforms.colors;
@@ -28,7 +24,7 @@ function shaderMaterial(uniforms, vertexShader, fragmentShader, onInit) {
         uC3b: { value: formatColor(uC3 == null ? void 0 : uC3.b) }
       };
       const uniformValues = entries.reduce((acc, [name, value]) => {
-        const uniform = UniformsUtils.clone({ [name]: { value } });
+        const uniform = THREE.UniformsUtils.clone({ [name]: { value } });
         return __spreadValues(__spreadValues({}, acc), uniform);
       }, {});
       super({
@@ -36,7 +32,7 @@ function shaderMaterial(uniforms, vertexShader, fragmentShader, onInit) {
         // similar effects reducing -0.2 intensity of the ambient light
         userData: uniformValues,
         // sync uniform and userData to update uniforms from outside (MeshPhysicalMaterial)
-        side: DoubleSide,
+        side: THREE.DoubleSide,
         onBeforeCompile: (shader) => {
           shader.uniforms = __spreadValues(__spreadValues(__spreadValues({}, shader.uniforms), uniformValues), rgbColors);
           shader.vertexShader = vertexShader;

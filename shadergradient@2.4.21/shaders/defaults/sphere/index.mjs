@@ -1,8 +1,8 @@
 import {
   fragment_default,
   vertex_default
-} from "../../../chunk-5BVQK6OK.mjs";
-import "../../../chunk-5BEQP2BQ.mjs";
+} from "../../../chunk-TTX4EQ27.mjs";
+import "../../../chunk-CU5I7XXF.mjs";
 export {
   fragment_default as fragment,
   vertex_default as vertex

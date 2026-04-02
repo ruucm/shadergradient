@@ -1,19 +1,15 @@
 import {
   Line
-} from "../../chunk-7VDDK3RB.mjs";
-import "../../chunk-6A4LZ7FD.mjs";
-import "../../chunk-73SH6GTX.mjs";
-import {
-  CubicBezierCurve3,
-  Vector3
-} from "../../chunk-BT6X4JN2.mjs";
+} from "../../chunk-OBJ7URNE.mjs";
+import "../../chunk-M6YQJKKS.mjs";
 import {
   __objRest,
   __spreadValues
-} from "../../chunk-5BEQP2BQ.mjs";
+} from "../../chunk-CU5I7XXF.mjs";
 
 // src/ShaderGradient/Axis/CubicBezierLine.tsx
 import * as React from "react";
+import { CubicBezierCurve3, Vector3 } from "three";
 import { jsx } from "react/jsx-runtime";
 var CubicBezierLine = React.forwardRef(
   function CubicBezierLine2(_a, ref) {

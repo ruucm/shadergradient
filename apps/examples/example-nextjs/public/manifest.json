@@ -3,7 +3,7 @@
   "short_name": "R3F Next Starter",
   "icons": [
     {
-      "src": "/icons/favicon.ico",
+      "src": "/icons/apple-touch-icon.png",
       "sizes": "64x64 32x32 24x24 16x16",
       "type": "image/x-icon",
       "purpose": "any maskable"

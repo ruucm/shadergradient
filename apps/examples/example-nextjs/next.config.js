@@ -2,7 +2,11 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
   enabled: process.env.ANALYZE === 'true',
 })
 
-const withPWA = require('next-pwa')({
+/**
+ * A fork of 'next-pwa' that has app directory support
+ * @see https://github.com/shadowwalker/next-pwa/issues/424#issuecomment-1332258575
+ */
+const withPWA = require('@ducanh2912/next-pwa').default({
   dest: 'public',
   disable: process.env.NODE_ENV === 'development',
 })
@@ -12,12 +16,17 @@ const nextConfig = {
   // compiler: {
   //   styledComponents: true,
   // },
-  experimental: {
-    urlImports: ['https://cdn.skypack.dev', 'https://ruucm.github.io'],
-  },
-  images: {},
   reactStrictMode: true, // Recommended for the `pages` directory, default in `app`.
+  images: {},
+  transpilePackages: ['@shadergradient/react'],
   webpack(config, { isServer }) {
+    // Ensure webpack can resolve ESM-only packages with exports field
+    config.resolve.conditionNames = ['import', 'module', 'require', 'default']
+
+    if (!isServer) {
+      // We're in the browser build, so we can safely exclude the sharp module
+      config.externals.push('sharp')
+    }
     // audio support
     config.module.rules.push({
       test: /\.(ogg|mp3|wav|mpe?g)$/i,
@@ -46,14 +55,6 @@ const nextConfig = {
 
     return config
   },
-}
-
-// manage i18n
-if (process.env.EXPORT !== 'true') {
-  nextConfig.i18n = {
-    locales: ['en', 'jp'],
-    defaultLocale: 'en',
-  }
 }
 
 const KEYS_TO_OMIT = ['webpackDevMiddleware', 'configOrigin', 'target', 'analyticsId', 'webpack5', 'amp', 'assetPrefix']

@@ -1,7 +1,7 @@
 import {
   SimpleSlider
-} from "../../chunk-2J3W3LFY.mjs";
-import "../../chunk-S4634TOL.mjs";
+} from "../../chunk-G2ZIPR5M.mjs";
+import "../../chunk-HXGKXP63.mjs";
 export {
   SimpleSlider
 };

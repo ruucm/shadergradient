@@ -3,7 +3,7 @@ import "./chunk-JATPNCR2.mjs";
 import {
   Price,
   TogglePrice
-} from "./chunk-PA6J5L3Z.mjs";
+} from "./chunk-GISSEJFZ.mjs";
 import {
   CenterCrop1,
   CenterCrop2,
@@ -19,7 +19,7 @@ import {
   fpsCount,
   memoryUsage,
   wordHighlightText
-} from "./chunk-6UBYBXED.mjs";
+} from "./chunk-GD6HMUGA.mjs";
 import {
   ArrowLeft,
   ArrowRight,
@@ -38,7 +38,7 @@ import {
   time,
   toggleSmartComp,
   withClickOutsideClosed
-} from "./chunk-WBZ5ILI3.mjs";
+} from "./chunk-ZM6XJ2UJ.mjs";
 import "./chunk-425BLYMY.mjs";
 import "./chunk-AGDIGZ2U.mjs";
 import {
@@ -51,7 +51,7 @@ import {
   upgradingText,
   userEmail,
   userInfo
-} from "./chunk-Z7Z6Q2BI.mjs";
+} from "./chunk-J5ZWSB6U.mjs";
 import {
   ColorsTab,
   ConnectFigmaMessage,
@@ -82,10 +82,10 @@ import {
   extractGIF,
   goBack,
   insertCanvasAsImage
-} from "./chunk-UG3XKZUP.mjs";
-import "./chunk-Z33LBT62.mjs";
+} from "./chunk-CIUQTQHQ.mjs";
+import "./chunk-UIHSQKCH.mjs";
 import "./chunk-VQME7MQ6.mjs";
-import "./chunk-KUEOFNRO.mjs";
+import "./chunk-3VGG4ZI2.mjs";
 import "./chunk-YFGZA6BU.mjs";
 import "./chunk-BGA6FIQU.mjs";
 import "./chunk-CK47F4LN.mjs";
@@ -94,61 +94,61 @@ import "./chunk-64EKMGYT.mjs";
 import "./chunk-BI4IT72G.mjs";
 import "./chunk-XKMCKCFY.mjs";
 import "./chunk-2WMPBKSG.mjs";
-import "./chunk-HMQCGCVV.mjs";
-import "./chunk-6RYZ6QFC.mjs";
-import "./chunk-OEA2TGNC.mjs";
-import "./chunk-DOD4RXA3.mjs";
+import "./chunk-LSFLUJDF.mjs";
+import "./chunk-7DS5IN6Z.mjs";
+import "./chunk-O24SW53Z.mjs";
+import "./chunk-UMQJMRW4.mjs";
 import "./chunk-PQRWYNOC.mjs";
 import "./chunk-MMICMJ2O.mjs";
 import "./chunk-7PXGVEQA.mjs";
 import "./chunk-52ME4UGP.mjs";
 import {
   CustomizeColorInput
-} from "./chunk-ABRIGLF2.mjs";
+} from "./chunk-GAUTZI25.mjs";
 import {
   CustomizeRadio
 } from "./chunk-PVBM535U.mjs";
 import {
   CustomizeRangeSlider
-} from "./chunk-YPZENSPM.mjs";
+} from "./chunk-NP467S2G.mjs";
 import {
   CustomizeSlider
-} from "./chunk-6W7HGEHU.mjs";
+} from "./chunk-AOTIM5NS.mjs";
 import "./chunk-OHMYNLEK.mjs";
 import {
   CustomizeNumberInput
-} from "./chunk-ORTWRBP7.mjs";
+} from "./chunk-OUDGQEHL.mjs";
 import {
   Button
-} from "./chunk-IG5OJ2L2.mjs";
+} from "./chunk-X4SBI64H.mjs";
 import {
   Icons
 } from "./chunk-ZK6FQ3TL.mjs";
 import {
   ScrollableTextBox
-} from "./chunk-EVVL3GGC.mjs";
+} from "./chunk-5VV6G3RV.mjs";
 import {
   SimpleSlider
-} from "./chunk-2J3W3LFY.mjs";
-import "./chunk-KZX24Z3V.mjs";
+} from "./chunk-G2ZIPR5M.mjs";
+import "./chunk-VDGKXM7B.mjs";
 import {
   TriggerSection
 } from "./chunk-ODN7DQFH.mjs";
 import "./chunk-LSJHI6I5.mjs";
 import {
   SupabaseClient
-} from "./chunk-UVGAVNEK.mjs";
+} from "./chunk-ZQPHMFNB.mjs";
 import {
   TripleNumberInput
 } from "./chunk-QIDNC2OV.mjs";
 import {
   ChangeButton3,
   ChangeColorButton
-} from "./chunk-C3KHYOX5.mjs";
-import "./chunk-WFU3ESYT.mjs";
+} from "./chunk-4REPPUKI.mjs";
+import "./chunk-3I3TPE7B.mjs";
 import {
   TextAnimation
-} from "./chunk-MPZCSWVS.mjs";
+} from "./chunk-J3KEJBIZ.mjs";
 import {
   TextHover
 } from "./chunk-IK6DJNIF.mjs";
@@ -163,10 +163,10 @@ import {
 import "./chunk-Q4ROEIZI.mjs";
 import {
   RangeSlider
-} from "./chunk-LI6A3IED.mjs";
+} from "./chunk-IWS7MKAX.mjs";
 import {
   Slider
-} from "./chunk-RAX6MAJ2.mjs";
+} from "./chunk-R6AEDQIR.mjs";
 import "./chunk-2FOTMNF6.mjs";
 import {
   InputTitle
@@ -177,7 +177,7 @@ import "./chunk-QNYMEATR.mjs";
 import {
   AddToCanvas,
   updateTheme
-} from "./chunk-2MD26VDR.mjs";
+} from "./chunk-P3MIRSSZ.mjs";
 import {
   CurrentPreset,
   HideBanner,
@@ -185,29 +185,29 @@ import {
   UrlInput,
   togglePreset,
   toggleUrl
-} from "./chunk-RVCTZZOG.mjs";
+} from "./chunk-6IN5GKZH.mjs";
 import "./chunk-2ZZ6H7J7.mjs";
-import "./chunk-KLHNPHIY.mjs";
+import "./chunk-UKO5P6W2.mjs";
 import {
   ShaderGradientStatelessCanvas
-} from "./chunk-IQHDBR3B.mjs";
+} from "./chunk-QFBLAUK3.mjs";
 import {
   ShaderGradientStateless
-} from "./chunk-WKZQT6XY.mjs";
-import "./chunk-RUKLYQNO.mjs";
-import "./chunk-WJB4TCVR.mjs";
-import "./chunk-FN3HXEFK.mjs";
-import "./chunk-GZUYEFR2.mjs";
+} from "./chunk-LNAEO2XI.mjs";
+import "./chunk-AARHMDT6.mjs";
+import "./chunk-NWDE5KFL.mjs";
+import "./chunk-2XMMWF2K.mjs";
+import "./chunk-FQIOS3CS.mjs";
 import {
   useQueryState,
   useURLQueryState
-} from "./chunk-IKNEA3HI.mjs";
+} from "./chunk-OJLQDKOW.mjs";
 import {
   updateGradientState
-} from "./chunk-RGHJXNDI.mjs";
+} from "./chunk-LCP57CAN.mjs";
 import {
   PRESETS
-} from "./chunk-CF66W5N3.mjs";
+} from "./chunk-AOZMDXRK.mjs";
 import {
   useBillingInterval,
   useBillingIntervalStore,
@@ -219,9 +219,9 @@ import {
   useSupabaseStore,
   useUIOverrideStore,
   useUIStore
-} from "./chunk-OG6O7WQ3.mjs";
-import "./chunk-R5A6UVEJ.mjs";
-import "./chunk-S4634TOL.mjs";
+} from "./chunk-R6GBIJ5D.mjs";
+import "./chunk-NP5XZW6Z.mjs";
+import "./chunk-HXGKXP63.mjs";
 export {
   AddToCanvas,
   ArrowLeft,

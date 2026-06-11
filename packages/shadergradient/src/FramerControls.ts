@@ -15,8 +15,8 @@ export const propertyControls = (ControlType, type = '') => ({
   // Shape
   type: {
     type: ControlType.Enum,
-    options: ['plane', 'sphere', 'waterPlane'],
-    optionTitles: ['Plane', 'Sphere', 'Water'],
+    options: ['plane', 'sphere', 'waterPlane', 'torus'],
+    optionTitles: ['Plane', 'Sphere', 'Water', 'Torus'],
     displaySegmentedControl: true,
     hidden: (props) => props.control === 'query' || props.activeTab !== 'Shape',
   },

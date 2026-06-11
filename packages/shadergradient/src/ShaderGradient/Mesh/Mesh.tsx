@@ -35,7 +35,11 @@ export function Mesh({
 
   shader,
 }: MeshT) {
-  const { vertex, fragment } = shaders[shader][type]
+  // Fall back to the sphere variant for geometry types a shader family doesn't
+  // define (e.g. 'torus' on older families — both are closed surfaces displaced
+  // along their normals)
+  const variants = shaders[shader] ?? shaders.defaults
+  const { vertex, fragment } = variants[type] ?? variants.sphere
 
   // Prepare uniforms based on shader type
   const baseUniforms = {

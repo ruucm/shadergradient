@@ -48,7 +48,7 @@ export const Materials = ({
     // Material configuration based on shader type
     const materialConfig: THREE.MeshPhysicalMaterialParameters = {
       userData: uniformValues, // sync uniform and userData to update uniforms from outside (MeshPhysicalMaterial)
-      metalness: shader === 'glass' ? 0.0 : 0.2,
+      metalness: shader === 'glass' || shader === 'oilPaint' ? 0.0 : 0.2,
       roughness:
         shader === 'glass'
           ? 0.1
@@ -64,6 +64,13 @@ export const Materials = ({
         shader.fragmentShader = fragmentShader
       },
       // wireframe: true,
+    }
+
+    // Varnish sheen over the paint — enables the clearcoat pipeline; the
+    // oilPaint fragment shader overrides the exact clearcoat values locally
+    if (shader === 'oilPaint') {
+      materialConfig.clearcoat = 0.55
+      materialConfig.clearcoatRoughness = 0.35
     }
 
     // Add glass-specific material properties

@@ -3,5 +3,6 @@ import * as positionMix from './positionMix/index'
 import * as cosmic from './cosmic/index' // holographic, nebula, and aurora effects
 import * as glass from './glass/index' // glass, water, and transparent materials
 import * as impasto from './impasto/index' // textured oil-paint brush strokes
+import * as oilPaint from './oilPaint/index' // thick impasto paint daubs with bump relief
 
-export { defaults, positionMix, cosmic, glass, impasto }
+export { defaults, positionMix, cosmic, glass, impasto, oilPaint }

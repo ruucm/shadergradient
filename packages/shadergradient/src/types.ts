@@ -1,4 +1,4 @@
-export type ShaderGradientType = 'plane' | 'waterPlane' | 'sphere'
+export type ShaderGradientType = 'plane' | 'waterPlane' | 'sphere' | 'torus'
 
 export interface Position {
   positionX: number
@@ -12,7 +12,7 @@ export interface Rotation {
   rotationZ: number
 }
 
-export type typeT = 'plane' | 'sphere' | 'waterPlane'
+export type typeT = 'plane' | 'sphere' | 'waterPlane' | 'torus'
 export type animateT = 'on' | 'off'
 
 export type MeshT = {

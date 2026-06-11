@@ -14,6 +14,9 @@ export function Geometry({ type }: GeometryProps) {
       {type === 'waterPlane' && (
         <planeGeometry args={[10, 10, meshCount, meshCount]} />
       )}
+      {type === 'torus' && (
+        <torusGeometry args={[0.74, 0.45, meshCount / 2, meshCount]} />
+      )}
     </>
   )
 }

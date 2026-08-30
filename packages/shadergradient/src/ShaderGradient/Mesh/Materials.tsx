@@ -2,6 +2,7 @@ import React, { useEffect, useMemo, useRef } from 'react'
 import * as THREE from 'three'
 import { colorToRgb, formatColor } from '@/utils'
 import { useFrame } from '@react-three/fiber'
+import { advanceAnimationTime } from './animationTime'
 
 // Define the material component
 export const Materials = ({
@@ -18,7 +19,7 @@ export const Materials = ({
   onInit,
   shader,
 }) => {
-  const localClockRef = useRef(new THREE.Clock())
+  const elapsedTimeRef = useRef(0)
   const material = useMemo(() => {
     const entries = Object.entries(uniforms)
     const colors = uniforms.colors
@@ -97,56 +98,41 @@ export const Materials = ({
     }
   }, [material])
 
-  // Sync clock with animate/range changes similar to v1's useTimeAnimation
+  // Restart the animation whenever it is enabled.
   useEffect(() => {
     if (animate === 'on') {
-      localClockRef.current.start()
-    } else {
-      localClockRef.current.stop()
+      elapsedTimeRef.current = 0
     }
   }, [animate])
 
   // Animate uTime with useFrame (v1-like behavior)
-  useFrame(() => {
-    if (animate === 'on' && material.userData.uTime) {
-      let elapsed = localClockRef.current.getElapsedTime()
+  useFrame((_, delta) => {
+    if (animate !== 'on') return
 
-      // Handle loop functionality
-      if (loop === 'on' && Number.isFinite(loopDuration) && loopDuration > 0) {
-        // For seamless loops, we need to ensure the time wraps around smoothly
-        // The shader will handle the circular sampling to make it truly seamless
-        elapsed = elapsed % loopDuration
-
-        // Update loop uniforms
-        if (material.userData.uLoop) {
-          material.userData.uLoop.value = 1.0
-        }
-        if (material.userData.uLoopDuration) {
-          material.userData.uLoopDuration.value = loopDuration
-        }
-      } else {
-        // Disable loop in shader
-        if (material.userData.uLoop) {
-          material.userData.uLoop.value = 0.0
-        }
-
-        if (
-          range === 'enabled' &&
-          Number.isFinite(rangeStart) &&
-          Number.isFinite(rangeEnd) &&
-          rangeEnd > rangeStart
-        ) {
-          elapsed = (rangeStart as number) + elapsed
-          if (elapsed >= (rangeEnd as number)) {
-            elapsed = rangeStart as number
-            // restart the local clock to loop precisely from rangeStart
-            localClockRef.current.start()
-          }
-        }
-      }
-
-      material.userData.uTime.value = elapsed
+    // Keep time advancing while the uniform is temporarily unavailable.
+    if (!material.userData.uTime) {
+      elapsedTimeRef.current += delta
+      return
     }
+
+    const frame = advanceAnimationTime(elapsedTimeRef.current, delta, {
+      range,
+      rangeStart,
+      rangeEnd,
+      loop,
+      loopDuration,
+    })
+
+    elapsedTimeRef.current = frame.elapsedTime
+
+    if (material.userData.uLoop) {
+      material.userData.uLoop.value = frame.uLoop
+    }
+    if (frame.uLoopDuration !== undefined && material.userData.uLoopDuration) {
+      material.userData.uLoopDuration.value = frame.uLoopDuration
+    }
+
+    material.userData.uTime.value = frame.uTime
   })
 
   return <primitive attach='material' object={material} />

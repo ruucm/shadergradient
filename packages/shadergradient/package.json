@@ -18,6 +18,7 @@
   },
   "scripts": {
     "build": "tsup",
+    "test": "tsup --config tsup.test.config.ts && node .test-dist/animationTime.test.js",
     "dev": "tsup --config tsup.config.ts --watch",
     "dev:ui": "tsup --config tsup.config.ts",
     "dev:framer": "concurrently \"tsup --config tsup.framer.config.ts --watch\" \"pnpm ngrok\"",

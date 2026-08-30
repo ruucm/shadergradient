@@ -1,6 +1,5 @@
 import {
   BufferGeometry,
-  Clock,
   Float32BufferAttribute,
   LinearFilter,
   Mesh,
@@ -65,7 +64,7 @@ class EffectComposer {
 
     this.copyPass = new ShaderPass(CopyShader)
 
-    this.clock = new Clock()
+    this.previousFrameTime = undefined
   }
 
   swapBuffers() {
@@ -109,10 +108,15 @@ class EffectComposer {
   }
 
   render(deltaTime) {
-    // deltaTime value is in seconds
-
+    // React Three Fiber supplies deltaTime in seconds. Keep the original
+    // no-argument behavior for any callers that render the composer directly.
     if (deltaTime === undefined) {
-      deltaTime = this.clock.getDelta()
+      const currentTime = performance.now()
+      deltaTime =
+        this.previousFrameTime === undefined
+          ? 0
+          : (currentTime - this.previousFrameTime) / 1000
+      this.previousFrameTime = currentTime
     }
 
     const currentRenderTarget = this.renderer.getRenderTarget()

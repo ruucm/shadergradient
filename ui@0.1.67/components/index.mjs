@@ -44,7 +44,7 @@ import {
 import {
   ChangeButton3,
   ChangeColorButton
-} from "../chunk-3JRIFNCU.mjs";
+} from "../chunk-2JG7BMP6.mjs";
 import "../chunk-3I3TPE7B.mjs";
 import {
   TextAnimation
@@ -74,27 +74,27 @@ import {
 import "../chunk-XLY254CY.mjs";
 import "../chunk-B4GXHE46.mjs";
 import "../chunk-QNYMEATR.mjs";
-import "../chunk-BHVH74SJ.mjs";
+import "../chunk-CLAQCECQ.mjs";
 import {
   ShaderGradientStatelessCanvas
-} from "../chunk-OZ2R4CST.mjs";
+} from "../chunk-4FP56GGA.mjs";
 import {
   ShaderGradientStateless
-} from "../chunk-5RPEKSLZ.mjs";
-import "../chunk-4UU54SMZ.mjs";
-import "../chunk-KHKTTIEF.mjs";
-import "../chunk-KBJEBKIJ.mjs";
-import "../chunk-K6K5FOKU.mjs";
+} from "../chunk-LY2OBDZG.mjs";
+import "../chunk-CIWJL53J.mjs";
+import "../chunk-SVE4MZ3C.mjs";
+import "../chunk-Y6TXE7OE.mjs";
+import "../chunk-PW4APD34.mjs";
 import {
   useQueryState,
   useURLQueryState
-} from "../chunk-CRT42ZCX.mjs";
+} from "../chunk-DIBUJR3M.mjs";
 import {
   updateGradientState
-} from "../chunk-QWDO6QM6.mjs";
+} from "../chunk-AA4M65YM.mjs";
 import {
   PRESETS
-} from "../chunk-YUT2ESGW.mjs";
+} from "../chunk-XHQE6MVI.mjs";
 import "../chunk-R6GBIJ5D.mjs";
 import "../chunk-NP5XZW6Z.mjs";
 import "../chunk-HXGKXP63.mjs";

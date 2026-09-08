@@ -1,11 +1,5 @@
-packages:
-  - 'apps/*'
-  - 'packages/*'
 allowBuilds:
-  '@swc/core': true
   esbuild: true
-  framer: true
   unrs-resolver: true
-autoInstallPeers: true
 patchedDependencies:
   '@tresjs/core@4.3.6': patches/tres-core-4.3.6.patch

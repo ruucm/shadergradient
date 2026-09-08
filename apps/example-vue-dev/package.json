@@ -1,0 +1,27 @@
+{
+  "name": "example-vue-dev",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite --port 3005",
+    "build": "vue-tsc --noEmit && vite build",
+    "preview": "vite preview",
+    "lint": "eslint . --max-warnings 0"
+  },
+  "dependencies": {
+    "@shadergradient/vue": "workspace:*",
+    "@tresjs/core": "^4.3.6",
+    "three": "^0.169.0",
+    "vue": "^3.5.42"
+  },
+  "devDependencies": {
+    "@nuxt/eslint-config": "^1.17.0",
+    "eslint": "^10.10.0",
+    "@types/three": "^0.169.0",
+    "@vitejs/plugin-vue": "^6.0.8",
+    "typescript": "^5.9.3",
+    "vite": "^8.2.2",
+    "vue-tsc": "^3.3.11"
+  }
+}

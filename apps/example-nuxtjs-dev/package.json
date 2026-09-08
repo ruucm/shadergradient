@@ -1,0 +1,32 @@
+{
+  "name": "example-nuxtjs-dev",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": "^22.19.0 || ^24.11.0 || >=26.0.0"
+  },
+  "scripts": {
+    "dev": "nuxt dev --port 3006",
+    "build": "nuxt build",
+    "start": "node .output/server/index.mjs",
+    "preview": "nuxt preview --port 3006",
+    "postinstall": "nuxt prepare",
+    "typecheck": "nuxt typecheck",
+    "lint": "eslint . --max-warnings 0"
+  },
+  "dependencies": {
+    "@shadergradient/vue": "workspace:*",
+    "@tresjs/core": "^4.3.6",
+    "nuxt": "^4.5.2",
+    "three": "^0.169.0",
+    "vue": "^3.5.42"
+  },
+  "devDependencies": {
+    "@nuxt/eslint": "^1.17.0",
+    "@types/three": "^0.169.0",
+    "eslint": "^10.10.0",
+    "typescript": "^5.9.3",
+    "vue-tsc": "^3.3.11"
+  }
+}

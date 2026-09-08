@@ -1,0 +1,43 @@
+{
+  "name": "@shadergradient/vue",
+  "version": "0.1.0",
+  "type": "module",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "sideEffects": false,
+  "license": "MIT",
+  "files": [
+    "dist"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "lint": "eslint . --max-warnings 0",
+    "typecheck": "tsc --noEmit"
+  },
+  "peerDependencies": {
+    "@tresjs/core": "^4.3.0",
+    "three": "^0.169.0",
+    "vue": "^3.5.0"
+  },
+  "devDependencies": {
+    "@nuxt/eslint-config": "^1.17.0",
+    "eslint": "^10.4.0",
+    "@tresjs/core": "^4.3.0",
+    "@types/three": "^0.169.0",
+    "three": "^0.169.0",
+    "tsup": "^8.2.4",
+    "typescript": "5.7.3",
+    "vue": "^3.5.0"
+  },
+  "dependencies": {
+    "camera-controls": "2.9.0"
+  }
+}

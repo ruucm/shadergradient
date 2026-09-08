@@ -56,6 +56,13 @@ Need the stateless control surfaces? Pull them from the `@shadergradient/ui` pac
 
 No `next.config` aliases or `transpilePackages` entries are required when you stay on these combinations.
 
+## Vue 3 and Nuxt
+
+Use `ShaderGradient` inside `ShaderGradientCanvas` from `@shadergradient/vue`.
+See [installation and Vue/Nuxt usage](./packages/shadergradient-vue/README.md)
+for installation commands, component examples, SSR fallbacks, and supported
+dependency versions.
+
 # Packages
 
 - `@shadergradient/react`
@@ -64,6 +71,9 @@ No `next.config` aliases or `transpilePackages` entries are required when you st
 - `@shadergradient/ui`
   - Stateless UI/control components extracted from the core package for Framer/Figma usage.
   - Not published to npm; consumed as an ESM bundle (see `packages/ui`).
+- `@shadergradient/vue`
+  - Vue 3 renderer using TresJS, with an SSR-safe canvas for Nuxt usage.
+  - See [Vue setup and Nuxt usage](./packages/shadergradient-vue/README.md).
 - `shadergradient-old`
   - Legacy v1 package that bundled store + UI. Keep using this only if you rely on the old with-store build.
 
@@ -158,10 +168,13 @@ type GradientT = MeshT & {
 
 # Examples
 
+- [Development apps versus standalone starters](./apps/examples/README.md)
 - CRA Starter: [CodeSandbox](https://codesandbox.io/p/sandbox/github/ruucm/shadergradient/tree/main/apps/example-cra?file=%2Fsrc%2FApp.tsx)
 - Next.js Starter (App Router): [CodeSandbox](https://codesandbox.io/p/sandbox/github/ruucm/shadergradient/tree/main/apps/example-nextjs-approuter)
 - Next.js Starter: [CodeSandbox](https://codesandbox.io/p/sandbox/github/ruucm/shadergradient/tree/main/apps/example-nextjs)
 - Vite + React 19 Starter: [CodeSandbox](https://codesandbox.io/p/sandbox/github/ruucm/shadergradient/tree/main/apps/examples/example-vite-react)
+- [Vue + Vite Starter](./apps/examples/example-vite-vue/README.md)
+- [Nuxt Starter](./apps/examples/example-nuxtjs/README.md)
 
 Figma and Framer demos still use the UI package internally:
 
@@ -173,6 +186,9 @@ Figma and Framer demos still use the UI package internally:
 [![FEConf 2024 ShaderGradient](./assets/feconf.png)](https://www.youtube.com/watch?v=CSChpoiRTIY)
 
 # Contributing
+
+For Vue/Nuxt development, testing, and release notes, see the
+[Vue contributor guide](./CONTRIBUTING-VUE.md).
 
 ## Setup
 

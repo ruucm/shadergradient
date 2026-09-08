@@ -34,11 +34,15 @@ jobs:
           ref: pages
           path: pages
 
-      - uses: pnpm/action-setup@v2
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24.x
+
+      - uses: pnpm/action-setup@v4
         name: Install pnpm
         id: pnpm-install
         with:
-          version: 10.2.1
+          version: 11.25.0
           run_install: false
 
       - name: Generate Pages

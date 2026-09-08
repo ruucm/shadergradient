@@ -11,11 +11,15 @@
     "lint": "turbo run lint",
     "clean": "turbo run clean",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "prepare:e2e": "node tests/browser/prepare.mjs",
+    "test:e2e": "node tests/browser/prepare.mjs && playwright test",
     "changeset": "changeset add",
     "version-packages": "changeset version",
-    "release": "turbo run build --filter=@shadergradient/react && changeset publish"
+    "release": "turbo run build --filter=@shadergradient/react --filter=@shadergradient/vue && changeset publish"
   },
   "devDependencies": {
+    "@playwright/test": "^1.58.2",
+    "pngjs": "^7.0.0",
     "@changesets/cli": "^2.26.1",
     "eslint": "^7.32.0",
     "eslint-config-custom": "workspace:*",
@@ -24,10 +28,10 @@
     "turbo": "^2.1.2",
     "typescript": "5.7.3"
   },
-  "packageManager": "pnpm@10.12.4",
+  "packageManager": "pnpm@11.25.0",
   "engines": {
-    "node": ">=14.0.0",
-    "pnpm": ">=10.2.1"
+    "node": ">=22.13.0",
+    "pnpm": ">=11.25.0 <12"
   },
   "version": "0.0.1"
 }

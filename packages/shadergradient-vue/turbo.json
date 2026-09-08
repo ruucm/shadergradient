@@ -1,0 +1,15 @@
+{
+  "extends": ["//"],
+  "tasks": {
+    "build": {
+      "inputs": [
+        "$TURBO_DEFAULT$",
+        "../shadergradient/src/shaders/**",
+        "../shadergradient/src/presets.ts",
+        "../shadergradient/src/types.ts",
+        "../shadergradient/src/consts.ts",
+        "../shadergradient/src/ShaderGradient/PostProcessing/lib/pp/HalftoneShader.js"
+      ]
+    }
+  }
+}

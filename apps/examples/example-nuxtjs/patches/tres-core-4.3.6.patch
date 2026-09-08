@@ -1,0 +1,76 @@
+--- a/dist/tres.js
++++ b/dist/tres.js
+@@ -685,7 +685,7 @@
+     aspectRatio: s
+   };
+ }
+-const En = (e, t) => {
++const En = (e, t, owner) => {
+   const r = q(() => t.renderer.value.domElement), n = H([]), { x: o, y: l } = fr({ target: r });
+   let s = 0;
+   const { width: a, height: c, top: i, left: f } = pr(r), v = ({ x: g, y: T }) => {
+@@ -751,7 +751,7 @@
+   }, je = (g) => M(p, g), Be = (g) => M(E, g);
+   return r.value.addEventListener("pointerup", Oe), r.value.addEventListener("pointerdown", B), r.value.addEventListener("pointermove", m), r.value.addEventListener("pointerleave", je), r.value.addEventListener("dblclick", De), r.value.addEventListener("wheel", Be), K(() => {
+     r != null && r.value && (r.value.removeEventListener("pointerup", Oe), r.value.removeEventListener("pointerdown", B), r.value.removeEventListener("pointermove", m), r.value.removeEventListener("pointerleave", je), r.value.removeEventListener("dblclick", De), r.value.removeEventListener("wheel", Be));
+-  }), {
++  }, owner), {
+     intersects: n,
+     onClick: (g) => d.on(g).off,
+     onDblClick: (g) => y.on(g).off,
+@@ -770,7 +770,7 @@
+       r(t);
+   typeof e == "function" && e(t);
+ }
+-function Tn(e, t, r) {
++function Tn(e, t, r, owner) {
+   var x;
+   const n = H(), o = H();
+   e && (n.value = e), t && (o.value = t);
+@@ -807,7 +807,7 @@
+     onPointerMissed: y,
+     onWheel: p,
+     forceUpdate: h
+-  } = En(a, t);
++  } = En(a, t, owner);
+   d((m) => c("onPointerUp", m)), _((m) => c("onPointerDown", m)), i((m) => c("onClick", m)), f((m) => c("onDoubleClick", m)), v((m) => c("onContextMenu", m)), p((m) => c("onWheel", m));
+   let P = [];
+   u((m) => {
+@@ -913,6 +913,7 @@
+   rendererOptions: n,
+   emit: o
+ }) {
++  const owner = Ue();
+   const l = H(e), s = Cn(r, t), {
+     camera: a,
+     cameras: c,
+@@ -968,14 +969,18 @@
+     deregisterCamera: f,
+     loop: _n()
+   };
+-  ae("useTres", p), p.scene.value.__tres = {
++  if (owner) {
++    if (owner.provides === owner.parent?.provides) owner.provides = Object.create(owner.provides);
++    owner.provides.useTres = p;
++  }
++  p.scene.value.__tres = {
+     root: p
+   }, p.loop.register(() => {
+     a.value && u.frames.value > 0 && (y.value.render(e, a.value), o("render", p.renderer.value)), u.priority.value = 0, u.mode.value === "always" ? u.frames.value = 1 : u.frames.value = Math.max(0, u.frames.value - 1);
+   }, "render");
+   const { on: h, cancel: P } = bt(p);
+   p.loop.setReady(!1), p.loop.start(), h(() => {
+-    o("ready", p), p.loop.setReady(!0), Tn(e, p, o);
++    o("ready", p), p.loop.setReady(!0), owner?.scope.run(() => Tn(e, p, o, owner));
+   }), K(() => {
+     P(), p.loop.stop();
+   });
+@@ -1571,7 +1576,7 @@
+         emit: o
+       });
+       const { registerCamera: y, camera: p, cameras: h, deregisterCamera: P } = u.value;
+-      f(u.value);
++      queueMicrotask(() => { if (!c.isUnmounted) f(u.value); });
+       const C = () => {
+         const b = new we(
+           45,

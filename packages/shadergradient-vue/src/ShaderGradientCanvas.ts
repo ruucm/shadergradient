@@ -145,6 +145,7 @@ export const ShaderGradientCanvas = defineComponent({
                   outputColorSpace: LinearSRGBColorSpace,
                   toneMapping: NoToneMapping,
                   alpha: true,
+                  clearAlpha: 0,
                   antialias: true,
                   enableProvideBridge: true,
                   preserveDrawingBuffer: props.preserveDrawingBuffer,

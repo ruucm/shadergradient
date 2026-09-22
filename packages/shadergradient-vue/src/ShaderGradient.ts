@@ -15,8 +15,8 @@ import {
   watch,
   watchEffect,
 } from 'vue'
-import { HalftoneShader } from '../../shadergradient/src/ShaderGradient/PostProcessing/lib/pp/HalftoneShader.js'
-import { defaultEnvBasePath } from '../../shadergradient/src/consts'
+import { HalftoneShader } from '@shadergradient/react/src/ShaderGradient/PostProcessing/lib/pp/HalftoneShader.js'
+import { defaultEnvBasePath } from '@shadergradient/react/src/consts'
 import { canvasContext } from './ShaderGradientCanvas'
 import { createMaterial, updateMaterial } from './material'
 import type { ResolvedGradientProps } from './material'
@@ -202,7 +202,21 @@ export const ShaderGradient = defineComponent({
         controls.touches.three = CameraControls.ACTION.NONE
         let initialized = false
         const stop = watch(
-          () => [props.value, canvas.reducedMotion.value],
+          [
+            canvas.reducedMotion,
+            ...(
+              [
+                'type',
+                'enableTransition',
+                'smoothTime',
+                'cAzimuthAngle',
+                'cPolarAngle',
+                'cDistance',
+                'cameraZoom',
+                'zoomOut',
+              ] as const
+            ).map((key) => () => props.value[key]),
+          ],
           () => {
             const settings = props.value
             const transition =
@@ -238,7 +252,7 @@ export const ShaderGradient = defineComponent({
             )
             initialized = true
           },
-          { immediate: true, deep: true }
+          { immediate: true }
         )
         const onRest = () =>
           emit('cameraUpdate', {
@@ -264,15 +278,20 @@ export const ShaderGradient = defineComponent({
       { immediate: true }
     )
 
+    // computed() so these effects only rerun when the value changes, not on every prop change.
+    const lightType = computed(() => props.value.lightType)
+    const envPreset = computed(() => props.value.envPreset)
+    const grain = computed(() => props.value.grain)
+    const grainBlending = computed(() => props.value.grainBlending)
     watchEffect((cleanup) => {
-      if (props.value.lightType !== 'env') return
+      if (lightType.value !== 'env') return
       const scene = context.scene.value
       const previous = scene.environment
       let active = true
       let texture: THREE.DataTexture | undefined
       const basePath = canvas.envBasePath.value.replace(/\/?$/, '/')
       new RGBELoader().load(
-        `${basePath}${props.value.envPreset}.hdr`,
+        `${basePath}${envPreset.value}.hdr`,
         (loaded) => {
           if (!active) {
             loaded.dispose()
@@ -299,7 +318,7 @@ export const ShaderGradient = defineComponent({
     let composer: EffectComposer | undefined
     watchEffect((cleanup) => {
       const camera = context.camera.activeCamera.value
-      if (props.value.grain === 'off' || !camera) return
+      if (grain.value === 'off' || !camera) return
       if (!context.renderer.isInitialized.value) return
       const renderer = context.renderer.instance as THREE.WebGLRenderer
       const effect = new EffectComposer(renderer)
@@ -315,7 +334,7 @@ export const ShaderGradient = defineComponent({
         effect.setSize(width, height)
         grainPass.uniforms.width.value = width
         grainPass.uniforms.height.value = height
-        grainPass.uniforms.blending.value = props.value.grainBlending
+        grainPass.uniforms.blending.value = grainBlending.value
       })
       cleanup(() => {
         stop()

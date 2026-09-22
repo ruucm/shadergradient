@@ -1,4 +1,4 @@
-import { presets as sharedPresets } from '../../shadergradient/src/presets'
+import { presets as sharedPresets } from '@shadergradient/react/src/presets'
 import type { ShaderGradientProps } from './props'
 
 export const presets = sharedPresets as Record<

@@ -9,7 +9,7 @@ import {
 import type { IUniform } from 'three'
 import type { ExtractPropTypes } from 'vue'
 import type { gradientProps } from './props'
-import * as shaders from '../../shadergradient/src/shaders'
+import * as shaders from '@shadergradient/react/src/shaders'
 
 export type ResolvedGradientProps = ExtractPropTypes<typeof gradientProps>
 

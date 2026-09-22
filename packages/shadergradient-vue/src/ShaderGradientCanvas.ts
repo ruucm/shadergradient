@@ -14,7 +14,7 @@ import {
   watchEffect,
 } from 'vue'
 import type { InjectionKey, PropType, Ref } from 'vue'
-import { defaultEnvBasePath } from '../../shadergradient/src/consts'
+import { defaultEnvBasePath } from '@shadergradient/react/src/consts'
 
 export const canvasContext: InjectionKey<{
   envBasePath: Ref<string>

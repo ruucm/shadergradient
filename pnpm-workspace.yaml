@@ -1,9 +1,8 @@
 packages:
-  - 'apps/*'
-  - 'packages/*'
-allowBuilds:
-  '@swc/core': true
-  esbuild: true
-  framer: true
-  unrs-resolver: true
-autoInstallPeers: true
+  - "apps/*"
+  - "packages/*"
+onlyBuiltDependencies:
+  - '@swc/core'
+  - esbuild
+  - framer
+  - unrs-resolver

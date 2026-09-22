@@ -1,5 +1,5 @@
 import type { ExtractPublicPropTypes, PropType } from 'vue'
-import { presets } from '../../shadergradient/src/presets'
+import { presets } from '@shadergradient/react/src/presets'
 
 export type ShaderName = 'defaults' | 'positionMix' | 'cosmic' | 'glass'
 export type GradientType = 'plane' | 'sphere' | 'waterPlane'

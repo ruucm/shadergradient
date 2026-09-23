@@ -1,6 +1,6 @@
 import {
   socket_default
-} from "../../chunk-IXEL7LSF.mjs";
+} from "../../chunk-QNEMVRWY.mjs";
 import "../../chunk-5BEQP2BQ.mjs";
 export {
   socket_default as default

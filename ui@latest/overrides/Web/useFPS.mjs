@@ -1,7 +1,7 @@
 import {
   useFPS
 } from "../../chunk-425BLYMY.mjs";
-import "../../chunk-HXGKXP63.mjs";
+import "../../chunk-FGKRYVO6.mjs";
 export {
   useFPS
 };

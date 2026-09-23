@@ -1,7 +1,7 @@
 import {
   initLiveReload
-} from "../../chunk-2UADZWQU.mjs";
-import "../../chunk-IXEL7LSF.mjs";
+} from "../../chunk-4CSVAZ7H.mjs";
+import "../../chunk-QNEMVRWY.mjs";
 import {
   __async
 } from "../../chunk-5BEQP2BQ.mjs";
@@ -18,7 +18,7 @@ function useRealtimeComponent(originalComponent, componentName) {
   const updateCount = React.useRef(0);
   const updatedInstance = React.useRef(null);
   React.useLayoutEffect(() => {
-    const onRebuild = (event) => __async(this, null, function* () {
+    const onRebuild = (event) => __async(null, null, function* () {
       console.log(
         `[framer-live-esm] Build complete, refreshing ${componentName}`
       );

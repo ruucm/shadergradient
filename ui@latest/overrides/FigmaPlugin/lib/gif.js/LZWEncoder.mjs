@@ -1,4 +1,4 @@
-import "../../../../chunk-HXGKXP63.mjs";
+import "../../../../chunk-FGKRYVO6.mjs";
 
 // src/overrides/FigmaPlugin/lib/gif.js/LZWEncoder.js
 var exports = {};
